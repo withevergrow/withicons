@@ -1,0 +1,107 @@
+{
+  "name": "worried",
+  "category": "users",
+  "description": "A worried face with raised inner brows, a wavy mouth and a sweat drop, for anxiety, nerves and concern.",
+  "aliases": [
+    "anxious",
+    "nervous",
+    "worry",
+    "worried-face",
+    "anxious-face",
+    "nervous-face",
+    "concerned",
+    "uneasy",
+    "stressed",
+    "fearful",
+    "sweat-face",
+    "apprehensive"
+  ],
+  "tags": [
+    "face",
+    "emotion",
+    "mood",
+    "worried",
+    "anxious",
+    "nervous"
+  ],
+  "paths": [
+    {
+      "d": "M15.56 3.19 A9.5 9.5 0 1 0 21.35 10.31",
+      "plate": "K"
+    },
+    {
+      "d": "M7.75 9.5 L10.5 8",
+      "plate": "A"
+    },
+    {
+      "d": "M16.25 9.5 L13.5 8",
+      "plate": "A"
+    },
+    {
+      "d": "M9 12.5 V13",
+      "plate": "A"
+    },
+    {
+      "d": "M15 12.5 V13",
+      "plate": "A"
+    },
+    {
+      "d": "M8 17.25 Q10 15.5 12 17.25 T16 17.25",
+      "plate": "A"
+    },
+    {
+      "d": "M20 2.25 C21 3.5 21.5 4.5 21.5 5.5 A1.5 1.5 0 0 1 18.5 5.5 C18.5 4.5 19 3.5 20 2.25 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M15.56 3.19 A9.5 9.5 0 1 0 21.35 10.31 L21.08 9.35 A4 4 0 0 1 16.45 3.65 Z",
+    "M20 2.25 C21 3.5 21.5 4.5 21.5 5.5 A1.5 1.5 0 0 1 18.5 5.5 C18.5 4.5 19 3.5 20 2.25 Z"
+  ],
+  "cutouts": [
+    "M7.75 9.5 L10.5 8",
+    "M16.25 9.5 L13.5 8",
+    "M10 12.75 A1 1.25 0 1 1 8 12.75 A1 1.25 0 1 1 10 12.75 Z",
+    "M16 12.75 A1 1.25 0 1 1 14 12.75 A1 1.25 0 1 1 16 12.75 Z",
+    "M8 17.25 Q10 15.5 12 17.25 T16 17.25"
+  ],
+  "synonyms": [
+    "anxiety",
+    "stress",
+    "nerves",
+    "nervousness",
+    "scared",
+    "afraid",
+    "fear",
+    "panic",
+    "cold sweat",
+    "sweating",
+    "sweat drop",
+    "dental anxiety",
+    "dental fear",
+    "anxious patient",
+    "nervous patient",
+    "overwhelmed",
+    "distress",
+    "distressed",
+    "tense",
+    "jittery",
+    "jitters",
+    "awkward",
+    "uh oh",
+    "oh no",
+    "yikes",
+    "eek",
+    "concern",
+    "uncomfortable",
+    "mental health",
+    "emoticon",
+    "smiley",
+    "mood",
+    "emotion",
+    "feelings",
+    "worried emoji",
+    "anxous",
+    "nervus"
+  ]
+}

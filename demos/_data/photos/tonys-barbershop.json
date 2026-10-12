@@ -1,0 +1,252 @@
+{
+  "slug": "tonys-barbershop",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "unsplash",
+      "id": "BBGyxhtPpC0",
+      "page": "https://unsplash.com/photos/BBGyxhtPpC0",
+      "url": "https://images.unsplash.com/photo-1702865272115-5afdbae975af",
+      "photographer": "Redd Francisco",
+      "photographerUrl": "https://unsplash.com/@reddfrancisco",
+      "alt": "A quilted brown leather barber chair with white piping and chrome armrests in a dark teal barbershop, with a second chair, a wash basin and lit bottle shelves behind it.",
+      "colors": "espresso brown, brass amber, near-black teal",
+      "focal": "68% 70%",
+      "notes": "Landscape 3:2, wide low-angle shot. The chair sits low right. Bottles on the shelves are small and their labels are not legible. The pendant lamp glows at the top left, so put the headline at centre-left over the dark shelves or add a dark gradient overlay.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/tonys-barbershop/photo-1702865272115-5afdbae975af-1600.jpg"
+      }
+    },
+    {
+      "slot": "haircut",
+      "src": "pexels",
+      "id": "39559306",
+      "page": "https://www.pexels.com/photo/39559306/",
+      "url": "https://images.pexels.com/photos/39559306/pexels-photo-39559306.jpeg",
+      "photographer": "Brian Silva",
+      "photographerUrl": "https://www.pexels.com/@brian-silva-2158909901",
+      "alt": "Close-up of hands cutting dark hair with scissors and a black comb, seen from behind with a soft warm blur around the edges of the frame.",
+      "colors": "charcoal black, warm skin tone, amber blur",
+      "focal": "55% 40%",
+      "notes": "Landscape 3:2. No face, just hands and the back of a head, so it is safe to crop tight as a service-card image. Soft out-of-focus shoulder at the top left and a white collar at the bottom left, so crop towards the right and centre. The comb and scissors cross near the upper centre.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/tonys-barbershop/39559306-700.jpg"
+      }
+    },
+    {
+      "slot": "shave",
+      "src": "pexels",
+      "id": "8867486",
+      "page": "https://www.pexels.com/photo/8867486/",
+      "url": "https://images.pexels.com/photos/8867486/pexels-photo-8867486.jpeg",
+      "photographer": "Los Muertos Crew",
+      "photographerUrl": "https://www.pexels.com/@cristian-rojas",
+      "alt": "A barber in a white short-sleeved shirt holds a straight razor to the jaw of a reclining bearded client, a white towel across his chest and traces of shaving foam on his face.",
+      "colors": "white, warm skin tone, dark brown",
+      "focal": "50% 40%",
+      "notes": "Landscape 3:2. Razor and hands in the centre; the barber's face is cropped out at the top. The client lies back with his eyes closed and his face visible, so it reads as a relaxed shave rather than a portrait. Only light foam, no heavy lather. Works for the shave and hot-towel service card.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/tonys-barbershop/8867486-700.jpg"
+      }
+    },
+    {
+      "slot": "beard",
+      "src": "pexels",
+      "id": "5853394",
+      "page": "https://www.pexels.com/photo/5853394/",
+      "url": "https://images.pexels.com/photos/5853394/pexels-photo-5853394.jpeg",
+      "photographer": "alexandre saraiva carniato",
+      "photographerUrl": "https://www.pexels.com/@alexandre-saraiva-carniato-583650",
+      "alt": "Close-up of a barber trimming a ginger beard with thinning scissors and a comb while the client sits under a clear cape against a dark background.",
+      "colors": "ginger red, white, deep charcoal",
+      "focal": "50% 45%",
+      "notes": "Landscape 3:2. Dramatic dark backdrop with the beard and scissors lit; good for the beard-trim card, and the dark side margins take text.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/tonys-barbershop/5853394-700.jpg"
+      }
+    },
+    {
+      "slot": "products",
+      "src": "pexels",
+      "id": "3944792",
+      "page": "https://www.pexels.com/photo/3944792/",
+      "url": "https://images.pexels.com/photos/3944792/pexels-photo-3944792.jpeg",
+      "photographer": "Castorly Stock",
+      "photographerUrl": "https://www.pexels.com/@castorlystock",
+      "alt": "Angled flat lay of an open tin of pale-yellow balm beside a chrome safety razor and two wooden-handled brushes on a grey-blue woven mat.",
+      "colors": "slate blue-grey, butter yellow, brushed steel",
+      "focal": "65% 40%",
+      "notes": "Landscape. Unbranded, no readable labels, so it suits a product shelf or shop section without logo issues. The tin is upper right and the brush handle crosses the lower left. No beard-oil bottle in frame, so use it for the balm and shaving-kit cards.",
+      "width": 1200,
+      "height": 777,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/tonys-barbershop/3944792-1000.jpg"
+      }
+    },
+    {
+      "slot": "pole",
+      "src": "pexels",
+      "id": "9280243",
+      "page": "https://www.pexels.com/photo/9280243/",
+      "url": "https://images.pexels.com/photos/9280243/pexels-photo-9280243.jpeg",
+      "photographer": "Chris F",
+      "photographerUrl": "https://www.pexels.com/@chris-f-38966",
+      "alt": "A classic red, white and blue barber pole with chrome caps mounted on a red brick wall.",
+      "colors": "brick red, cobalt blue, white",
+      "focal": "50% 50%",
+      "notes": "Portrait 2:3. The pole runs top to bottom in the middle; crop to a tall card or a narrow column. The brick tone sits well beside the oxblood palette.",
+      "width": 1200,
+      "height": 1797,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/tonys-barbershop/9280243-800.jpg"
+      }
+    },
+    {
+      "slot": "tools",
+      "src": "pexels",
+      "id": "7697712",
+      "page": "https://www.pexels.com/photo/7697712/",
+      "url": "https://images.pexels.com/photos/7697712/pexels-photo-7697712.jpeg",
+      "photographer": "RDNE Stock project",
+      "photographerUrl": "https://www.pexels.com/@rdne",
+      "alt": "Barber tools laid out on a black towel: a red cordless clipper, a gold trimmer, scissors, a gold straight razor, a cream comb and a white-handled brush.",
+      "colors": "black, gold, signal red, cream",
+      "focal": "50% 50%",
+      "notes": "Landscape 3:2, shot from above at an angle. The clippers are upper left; the cream comb and white-handled brush sit lower right. No readable brand marks. Works as a tools or about-us image and crops well to a square.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/tonys-barbershop/7697712-700.jpg"
+      }
+    },
+    {
+      "slot": "towel",
+      "src": "pexels",
+      "id": "20405689",
+      "page": "https://www.pexels.com/photo/20405689/",
+      "url": "https://images.pexels.com/photos/20405689/pexels-photo-20405689.jpeg",
+      "photographer": "Mathias Reding",
+      "photographerUrl": "https://www.pexels.com/@matreding",
+      "alt": "A tattooed barber in a black T-shirt lays a white hot towel over a reclining client's face in a vintage-style barbershop with framed pictures and warm lamps behind.",
+      "colors": "warm amber, white, striped grey cape, brown",
+      "focal": "45% 50%",
+      "notes": "Landscape 3:2. The towel hides the client's face, so he is anonymous. The real hot-towel moment, so it fits the towel/steam service card and the hot-towel shave story. The barber's shirt shows only a cropped, unreadable yellow fragment at the top left.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/tonys-barbershop/20405689-1000.jpg"
+      }
+    },
+    {
+      "slot": "customer",
+      "src": "pexels",
+      "id": "7697324",
+      "page": "https://www.pexels.com/photo/7697324/",
+      "url": "https://images.pexels.com/photos/7697324/pexels-photo-7697324.jpeg",
+      "photographer": "RDNE Stock project",
+      "photographerUrl": "https://www.pexels.com/@rdne",
+      "alt": "A smiling man in a cream hat and peach shirt looks into a hand mirror in the barber chair while his barber stands behind him in a black apron.",
+      "colors": "peach, cream, warm wood, charcoal",
+      "focal": "65% 45%",
+      "notes": "Landscape 3:2. A happy, confident customer with the barber at his shoulder, so it suits the barbers and reviews sections. Medium shot with the face clearly visible, typical model-released stock, so use it as a scene, not as a named reviewer's portrait. The product bottles on the left counter are small and unreadable.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/tonys-barbershop/7697324-1000.jpg"
+      }
+    },
+    {
+      "slot": "exterior",
+      "src": "unsplash",
+      "id": "zj2CkHpoDPQ",
+      "page": "https://unsplash.com/photos/zj2CkHpoDPQ",
+      "url": "https://images.unsplash.com/photo-1757283213626-3178d3ab8800",
+      "photographer": "Haberdoedas",
+      "photographerUrl": "https://unsplash.com/@haberdoedas",
+      "alt": "A chrome-capped barber pole mounted on a grey rendered wall beside a white-painted brick pier and a black sign with white BARBERSHOP lettering above a dark shop window.",
+      "colors": "white, black, red and blue pole stripes",
+      "focal": "50% 25%",
+      "notes": "Portrait 3:4. Generic BARBERSHOP lettering with no brand name; the pole covers the last letter. The pole is upper right, so keep the top half when cropping. A tiny sticker sits at the bottom right of the window, so a crop from the top half avoids it. Good for a location or find-us card.",
+      "width": 1200,
+      "height": 1600,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/tonys-barbershop/photo-1757283213626-3178d3ab8800-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "37764947",
+      "page": "https://www.pexels.com/photo/37764947/",
+      "url": "https://images.pexels.com/photos/37764947/pexels-photo-37764947.jpeg",
+      "photographer": "wal_ 172619",
+      "photographerUrl": "https://www.pexels.com/@wal_-172619-2156618639",
+      "alt": "A vintage barbershop seen through a wooden doorway, with a row of green leather chairs with chrome frames on a black and white checkered floor.",
+      "colors": "racing green, chrome, black and white check, walnut",
+      "focal": "50% 55%",
+      "notes": "Landscape 3:2. Second hero candidate with a classic American shop feel. The wooden door frame on the left is a natural text margin.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/tonys-barbershop/37764947-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "4625626",
+      "page": "https://www.pexels.com/photo/4625626/",
+      "url": "https://images.pexels.com/photos/4625626/pexels-photo-4625626.jpeg",
+      "photographer": "Antoni Shkraba",
+      "photographerUrl": "https://www.pexels.com/@shkrabaanthony",
+      "alt": "A barber with tattooed forearms trims the back of a seated client's head with an electric clipper and a black guide comb, shot from behind with barbershop pendant lamps blurred above.",
+      "colors": "warm brown hair, charcoal cape, dark amber blur",
+      "focal": "60% 50%",
+      "notes": "Portrait 2:3. Sharp and professional, no face, no readable branding on the clipper. Stubble on the cape adds realism. Good for a tall side image or an about-the-craft card; a square crop around the fade (focal 60% 50%) also works as a haircut alternative.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/tonys-barbershop/4625626-700.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "q49oU8NeOHQ",
+      "page": "https://unsplash.com/photos/q49oU8NeOHQ",
+      "url": "https://images.unsplash.com/photo-1519500528352-2d1460418d41",
+      "photographer": "Tim Mossholder",
+      "photographerUrl": "https://unsplash.com/@timmossholder",
+      "alt": "An orange-handled shaving brush with a silvertip knot stands in front of a blurred red, white and blue barber pole, with warm lights out of focus behind.",
+      "colors": "orange, signal red, cobalt, warm bokeh",
+      "focal": "62% 50%",
+      "notes": "Landscape 3:2. Spare for lather, soap and brush. Blurred lettering (a cap sign reading DAPPER) sits at the far left, so for square or 4:3 crops keep the focal at 62% 50% and the lettering falls outside the crop; avoid showing the full landscape frame. Pole stripes fill the right side as texture.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/tonys-barbershop/photo-1519500528352-2d1460418d41-1000.jpg"
+      }
+    }
+  ]
+}

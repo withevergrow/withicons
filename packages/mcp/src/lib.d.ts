@@ -28,26 +28,56 @@ export declare class IconError extends Error {
 export type Confidence = 'high' | 'medium' | 'low'
 export type MatchKind = 'exact' | 'prefix' | 'stem' | 'typo' | 'similar' | 'phonetic' | 'concept'
 export interface SearchMatch { field: 'name' | 'alias' | 'synonym' | 'tag' | 'category' | 'description' | string; term: string; typo?: boolean; kind?: MatchKind }
+/** a snippet format for search results: any Format, or 'none' for names only (also accepted: 'names') */
+export type SearchFormat = Format | 'none'
+/** an exact match: what the query names (high) or a sound, direct match (medium); `results` holds only these */
 export interface SearchResult {
-  name: string; title: string; category: string; score: number
+  name: string; title: string; category: string
   confidence?: Confidence
-  /** set when confidence is low: a loosely related icon, not what the query names */
+  reason: string
+  /** ranking detail: left out with format 'none', which returns name, title, category, confidence, reason and url only */
+  score?: number; match?: SearchMatch
+  /** Which results carry code, in every format: each exact match in `results` has a snippet (in the format asked for,
+   *  default react), none of `additional` / `outside` has one, and with format 'none' no result has one (names, title,
+   *  category, confidence, reason and url only). get_icon / getIcon returns the code of the one you pick. */
+  snippet?: string
+  url: string
+}
+/** a similar icon, not an exact match (low confidence, or reached only through a related concept: "bread" -> bakery
+ *  icons). Short on purpose: no snippet, get_icon returns the code of the one that fits. */
+export interface AdditionalResult {
+  name: string; title: string; category: string; score?: number
+  confidence?: Confidence
+  /** set when confidence is low */
   weak?: true
-  reason: string; match: SearchMatch
-  snippet: string; url: string
+  reason: string; url: string
 }
 /** a strong match the category filter hid */
-export interface OutsideResult { name: string; title: string; category: string; score: number; confidence?: Confidence; url: string }
-export interface SearchResponse { query: string; style: string; count: number; results: SearchResult[]; suggestions: string[]
-  /** confidence of the top result, null when there is none */
+export interface OutsideResult { name: string; title: string; category: string; score?: number; confidence?: Confidence; url: string }
+export interface SearchResponse { query: string; style: string
+  /** the snippet format of the results ('none': no result carries a snippet) */
+  format: SearchFormat
+  /** the number of exact matches (results.length) */
+  count: number
+  /** exact matches only, best first */
+  results: SearchResult[]
+  /** true when no icon carries the query's words (count is 0): look at `additional`, or try another word */
+  noExactMatch?: true
+  /** up to 5 similar icons, apart from the matches: loosely related, use one only if it fits. Beside exact matches only
+   *  related-concept icons appear; low-confidence guesses are listed only when there is no exact match. */
+  additional?: AdditionalResult[]
+  /** names a typo away from the query (a missing, extra, wrong or swapped letter, or the start of a name): only when there
+   *  are neither matches nor additional results, and only names above a similarity floor, so often empty. */
+  suggestions: string[]
+  /** confidence of the top exact match, null when there is none */
   confidence: Confidence | null
   /** the query as the engine understood it, when the top result needed a spelling correction */
   didYouMean?: string
-  /** no results, or only low-confidence ones: where to browse instead */
+  /** no exact match: what to do next (use an additional result only if it fits, a simpler word, or where to browse) */
   hint?: string
   /** the best matches the category filter hid (only when the filtered results are weak) */
   outside?: OutsideResult[] }
-export declare function searchIcons(opts: { query: string; limit?: number; style?: string; category?: string; format?: Format | string }): SearchResponse
+export declare function searchIcons(opts: { query: string; limit?: number; style?: string; category?: string; format?: SearchFormat | string }): SearchResponse
 
 export interface ColorVariable { var: string; role: PaletteRole | null; label: string | null; default: string }
 export interface Palette { id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>> }
@@ -64,14 +94,29 @@ export interface AppliedPalette {
   /** roles / variables passed that change nothing here */
   ignored?: string[]
 }
+/** Brand colours: primary goes on the icon's largest colour part, secondary the next, tertiary the third (hex). */
+export interface Theme { primary: string; secondary?: string; tertiary?: string; ink?: string }
+/** where a theme's colours went on one icon in one style: the role each one landed on */
+export interface ThemeParts { primary?: PaletteRole | null; secondary?: PaletteRole; tertiary?: PaletteRole }
+export interface AppliedTheme {
+  theme: Theme; parts: ThemeParts
+  /** primary shows unmixed on most of what it paints (flat styles); false where gradients, tones or shading mix it */
+  exact: boolean; exactShare: number
+  /** the icon is drawn mostly in the ink, which the theme keeps as the style draws it: theme.ink colours it */
+  inkLeads?: true
+}
 export interface IconResponse {
   name: string; requested?: string; title: string; category: string; style: string; format: Format; size: number
   code: string; url: string
   appliedPalette?: AppliedPalette
+  appliedTheme?: AppliedTheme
   /** style-wide palette variables and their defaults (palette styles only) */
   palette?: Record<string, string>
   /** multi-colour styles only: this icon's colour variables and its palette ids */
-  colors?: { note: string; variables: ColorVariable[]; palettes: number; suggestions?: { id: string; name: string; tags: string[] }[]; hint?: string }
+  colors?: { note: string; variables: ColorVariable[]
+    /** the colour role that paints the largest visible part (measured on the render) and every role's share of the drawn icon */
+    mainRole: PaletteRole; roleAreas: Partial<Record<PaletteRole, number>>
+    palettes: number; suggestions?: { id: string; name: string; tags: string[] }[]; hint?: string }
   notes?: string[]
   /** colours that change nothing in this style, and the roles it uses */
   warnings?: string[]
@@ -82,6 +127,8 @@ export declare function getIcon(opts: {
   /** id (or name) of one of the icon's palettes */
   palette?: string
   colors?: PaletteColors
+  /** brand colours put on this icon's own parts ("#hex" = { primary }); not with palette */
+  theme?: string | Theme
   /** false: leave out colors.suggestions (default true) */
   includePalettes?: boolean
 }): IconResponse
@@ -90,8 +137,9 @@ export interface PalettesResponse {
   name: string; requested?: string; auto: boolean; count: number; total: number
   roles: Record<PaletteRole, string>; multiColourStyles: string[]
   style?: string; variables?: ColorVariable[]
-  /** with a style: the role that paints most of the icon body (set it for a brand colour); 'ink' for one-colour styles */
-  mainRole?: PaletteRole; mainRoleShare?: number; mainRoleNote?: string
+  /** with a style: the colour role that paints the largest visible part (measured on the render); 'ink' for one-colour
+   *  styles; mainRoleShare is its share of the drawn icon, roleAreas every role's share */
+  mainRole?: PaletteRole; mainRoleShare?: number; mainRoleNote?: string; roleAreas?: Partial<Record<PaletteRole, number>>
   palettes: (Palette & { vars?: Record<string, string>; css?: string })[]
   howTo: string; note?: string
 }
@@ -100,10 +148,33 @@ export declare function applyColors(name: string, style: string, opts: { palette
 export declare function colorWarning(name: string, style: string, applied: AppliedPalette | null): string | null
 export declare function colorVars(name: string, style: string): ColorVariable[]
 /** One note / warning per colour for a whole command (several icons or styles) instead of one per icon. */
-export declare function colorSummary(entries: { name: string; style: string; applied: AppliedPalette | null }[],
+export declare function colorSummary(entries: { name: string; style: string; applied: AppliedPalette | null; theme?: { theme: Theme; parts: ThemeParts; exact: boolean; inkLeads?: true } }[],
   opts?: { keys?: string[]; palette?: boolean; label?: (key: string) => string }): { notes: string[]; warnings: string[] }
-/** The colour role covering the largest visible area of the icon body in a style, with its share of the drawn area. */
+/** The hue role (c1-c4, accent) painting the largest visible area in a real render; else tint / shadow / edge / shine; else the ink. */
 export declare function mainRole(name: string, style: string): { role: PaletteRole; share: number | null }
+/** Each role's share of the icon's drawn area in a style, largest first. */
+export declare function roleAreas(name: string, style: string): Partial<Record<PaletteRole, number>>
+export declare const THEME_KEYS: ('primary' | 'secondary' | 'tertiary' | 'ink')[]
+/** "#hex" or a theme object -> clean #rrggbb values (IconError code invalid_theme / invalid_color); partial: primary optional */
+export declare function checkTheme(theme: string | Partial<Theme>, opts?: { partial?: boolean; what?: string }): Theme
+/** A theme resolved onto one icon in one style: the role colours to apply, where each brand colour went, and exactness. */
+export declare function themeColors(name: string, style: string, theme: string | Theme, opts?: { shades?: Partial<Record<PaletteRole, string>> }):
+  { colors: Record<string, string>; parts: ThemeParts; exact: boolean; exactShare: number; inkLeads?: true; theme: Theme }
+/** Another icon's palette on an icon that lacks it, matched by part size: { colors, parts: { <icon role>: <donor role> } } */
+export declare function borrowColors(name: string, style: string, donor: string, palette: string):
+  { colors: Record<string, string>; parts: Partial<Record<PaletteRole, PaletteRole>>; from: string; palette: string }
+/** A style's colour roles as its rendered icons paint them (empty roles: one colour, the ink). */
+export interface StyleColours {
+  icons: number
+  roles: { role: PaletteRole; label: string | null; vars: string[]; icons: number; paints: 'solid' | 'tone' | 'gradient'; as: 'fill' | 'stroke' | 'fill and stroke'; opacity?: number }[]
+  inkFollowsColor: boolean
+  /** a theme's primary shows unmixed on most of what it paints */
+  exact: boolean; exactShare: number | null
+  summary: string
+}
+export declare function styleColours(style: string): StyleColours | null
+/** styles a brand hex shows exactly in (flat) and the ones that shade it */
+export declare function brandExactness(): { exact: string[]; shaded: string[] }
 /** Removes the @withicons/motion part classes (wm-a, wm-k, wm-deco, …) from SVG markup, for files. */
 export declare function stripMotion(svg: string): string
 export declare function multiColourStyles(name: string): string[]
@@ -147,7 +218,9 @@ export declare function listStyles(): { name: string; title: string; kind: strin
   minSize: 16 | 32 | 48
   /** how to use it on a dark background */
   onDark: string
-  palette?: boolean; vars?: Record<string, string> }[]
+  palette?: boolean; vars?: Record<string, string>
+  /** the roles the style's icons really paint, and whether a brand hex shows exactly */
+  colours?: StyleColours }[]
 export declare function listCategories(): { total: number; categories: { name: string; count: number; examples: string[] }[] }
 export declare function listCategories(category: string): { category: string; count: number; icons: { name: string; title: string; description: string }[] }
 export declare function info(): { version: string; icons: number; styles: string[]; groups: { id: string; title: string; styles: string[] }[]; uses: StyleUse[]; paletteStyles: string[]; formats: Format[]; site: string; animated: number; palettes: number }
@@ -176,13 +249,22 @@ export declare function styleUses(): StyleUse[]
 export declare function styleInfo(style: string, icon?: string): StyleInfo
 export declare function duoPresets(): DuoPreset[]
 export declare function stylePalette(style: string, id?: string): { style: string; id: string; name: string; tags: string[]; colors: Partial<Record<PaletteRole, string>>; vars: Record<string, string>; css: string; /** for the CLI: --colors "<flags>" */ flags: string }
-export declare function recommendStyles(opts?: { for?: string; use?: string; icon?: string; limit?: number }): {
+/** compact: true -> per style only { style, group, suits, react, webComponent } (+ exactColours), shorter notes, no palettes,
+ *  packages, presets, downloads, groups. */
+export interface CompactStyle { style: string; group: string; suits: string; react: string; webComponent: string; exactColours?: boolean }
+export declare function recommendStyles(opts?: { for?: string; use?: string; icon?: string; limit?: number; compact?: boolean }): {
   query: string | null; matched: boolean; uses: StyleUse[]
-  festivals?: { festival: string; styles: string[]; category: string }[]
+  /** the festivals the text names (or every festival for use "festive"); `named` lists the festival names found in the text */
+  festivals?: { festival: string; styles: string[]; category: string; named?: string[] }[]
+  /** festivals named in the text that no style is drawn for (Eid, Easter, Hanukkah ...) */
+  otherFestivals?: string[]
   avatars?: { category: 'avatars'; paletteTag: 'true-to-life' }
-  recommendations: StyleInfo[]
-  hint?: string; allUses?: StyleUse[]; groups?: StyleGroup[]
-  notes: string[]; downloads: { style: string; all: string }
+  /** with several festivals named, ranked by how many each style covers; with "exact brand colours", flat styles first */
+  recommendations: (StyleInfo & { exactColours?: boolean })[] | CompactStyle[]
+  /** how to apply the style palettes (once; the entries carry stylePalettes), not in compact */
+  stylePalettesHow?: string
+  hint?: string; allUses?: (StyleUse | { id: string; title: string })[]; groups?: StyleGroup[]
+  notes: string[]; downloads?: { style: string; all: string }
 }
 
 export declare function snippet(name: string, style?: string, format?: Format | string, opts?: { size?: number; color?: string; strokeWidth?: number; flat?: boolean }): string
@@ -196,3 +278,44 @@ export declare function checkStyle(style?: string): string
 export declare function checkFormat(format?: string): Format
 export declare function data(): unknown
 export declare function motionData(): { icons: Record<string, unknown>; presets: string[]; effects: string[]; css: string[]; cdn: string[]; source: string }
+
+// ---- preview_icons: look before you choose
+export interface PreviewOptions {
+  /** icons, one row each (names or aliases, 1-24) */
+  names: string[]
+  /** styles, one column each (1-6, default ['line']); one style makes a gallery */
+  styles?: string[]
+  /** icon size in px, 12-256 (default 64) */
+  size?: number
+  /** 'light' (default), 'dark' (outlines drawn light) or a hex colour such as '#fde68a' */
+  background?: string
+  /** write icon and style names on the sheet (default true) */
+  labels?: boolean
+  /** one style only: icons per row (1-12; default balanced, at most 6) */
+  columns?: number
+  /** palette id (list_palettes), applied to the icons that have it */
+  palette?: string
+  /** role -> colour, for a brand preview */
+  colors?: PaletteColors
+}
+export interface PreviewSheet {
+  /** one self-contained SVG: no external references, colours baked in, labels drawn as paths, ids unique to this sheet */
+  svg: string
+  width: number; height: number
+  /** 'matrix': rows = icons, columns = styles. 'grid': one style, icons left to right then top to bottom */
+  layout: 'matrix' | 'grid'
+  rows: number; columns: number; cells: number
+  /** canonical icon names in order, the styles, the icon size, the page colour and the outline ink used */
+  icons: string[]; styles: string[]; size: number; background: string; ink: string
+  aliases?: Record<string, string>
+  /** tile size, gap and margin in px */
+  grid: { cell: number; gap: number; margin: number }
+  /** how to read the picture */
+  reading: string
+  /** sizes under a style's minSize, a dark background, colours that change nothing, an oversized sheet */
+  notes: string[]; warnings: string[]
+}
+export declare const PREVIEW_LIMITS: Readonly<{ names: 24; styles: 6; minSize: 12; maxSize: 256; defaultSize: 64; columns: 12; side: 4096 }>
+/** The preview_icons sheet as SVG. Throws IconError (unknown_icon, unknown_style, too_many_icons, too_many_styles, invalid_size,
+ *  invalid_background, invalid_columns, sheet_too_large). The MCP tool adds the PNG (local server) and the saved file (out_dir). */
+export declare function previewSheet(opts: PreviewOptions): PreviewSheet

@@ -1,0 +1,73 @@
+{
+  "name": "crayon",
+  "category": "education",
+  "description": "A wax crayon with a blunt tip and a paper wrapper, for colouring, kids’ art and drawing.",
+  "aliases": [
+    "crayons",
+    "wax-crayon",
+    "coloring",
+    "colouring",
+    "color-crayon",
+    "colour-crayon",
+    "oil-pastel",
+    "drawing-crayon",
+    "coloring-crayon"
+  ],
+  "tags": [
+    "crayon",
+    "colouring",
+    "wax",
+    "school",
+    "kids"
+  ],
+  "paths": [
+    {
+      "d": "M13.06 15.89 L7.58 17.83 A1 1 0 0 1 6.17 16.42 L8.11 10.94 L14.47 4.58 A1.5 1.5 0 0 1 16.6 4.58 L19.42 7.4 A1.5 1.5 0 0 1 19.42 9.53 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.18 13.77 L10.23 8.82",
+      "plate": "A"
+    },
+    {
+      "d": "M18.01 10.94 L13.06 5.99",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M13.06 15.89 L7.58 17.83 A1 1 0 0 1 6.17 16.42 L8.11 10.94 L14.47 4.58 A1.5 1.5 0 0 1 16.6 4.58 L19.42 7.4 A1.5 1.5 0 0 1 19.42 9.53 Z"
+  ],
+  "cutouts": [
+    "M15.18 13.77 L10.23 8.82",
+    "M18.01 10.94 L13.06 5.99"
+  ],
+  "synonyms": [
+    "coloring book",
+    "colouring book",
+    "colouring in",
+    "coloring in",
+    "coloring page",
+    "colouring page",
+    "child art",
+    "children art",
+    "kids drawing",
+    "scribble",
+    "draw",
+    "art class",
+    "arts and crafts",
+    "craft",
+    "crafts",
+    "school supplies",
+    "back to school",
+    "art supplies",
+    "kids art",
+    "pastel crayon",
+    "kindergarten",
+    "nursery",
+    "creativity",
+    "creative",
+    "crayola",
+    "crayn",
+    "creyon"
+  ]
+}

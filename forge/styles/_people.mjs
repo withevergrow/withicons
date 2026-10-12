@@ -9,7 +9,7 @@ import { parsePath, pointInRing } from '../kernel/geom.mjs'
 
 export const PEOPLE = ['man', 'woman', 'person', 'boy', 'girl', 'baby', 'teen', 'older-man', 'older-woman', 'man-beard',
   'man-afro', 'man-bald', 'man-turban', 'man-cap', 'woman-curly', 'woman-braids', 'woman-bun', 'woman-bob',
-  'person-glasses', 'person-headphones']
+  'person-glasses', 'person-headphones', 'woman-hijab', 'person-wheelchair']
 const SET = new Set(PEOPLE.map(p => 'avatar-' + p))
 export const isPerson = icon => SET.has(typeof icon === 'string' ? icon : String(icon?.name || ''))
 
@@ -28,7 +28,7 @@ export const HAIR = { black: '#2A2120', dark: '#43291D', brown: '#6E4428', aubur
 export const CLOTH = { blue: '#3F7FE0', coral: '#F06B55', teal: '#22A495', yellow: '#F4BE36', pink: '#F27BA5', mint: '#6FD3B6',
   navy: '#2F4170', lilac: '#A78BE8', green: '#4FB463', orange: '#F28A2E', red: '#E0483F', grey: '#8F99A8', purple: '#8A66DE',
   saffron: '#F29A2E' }
-// skin index, hair colour, clothing colour, headwear colour (turban, cap: c2 is the headwear for those, hair goes ink)
+// skin index, hair colour, clothing colour, headwear colour (turban, cap, hijab: c2 is the headwear for those, hair goes ink)
 const P = {
   man: [0, 'dark', 'blue'], woman: [0, 'brown', 'coral'], person: [2, 'black', 'teal'], boy: [4, 'black', 'yellow'],
   girl: [1, 'ginger', 'pink'], baby: [2, 'brown', 'mint'], teen: [5, 'black', 'purple'], 'older-man': [1, 'grey', 'navy'],
@@ -36,6 +36,7 @@ const P = {
   'man-bald': [3, 'dark', 'red'], 'man-turban': [4, 'black', 'navy', 'saffron'], 'man-cap': [1, 'brown', 'grey', 'red'],
   'woman-curly': [1, 'auburn', 'teal'], 'woman-braids': [5, 'black', 'yellow'], 'woman-bun': [0, 'blonde', 'purple'],
   'woman-bob': [6, 'black', 'coral'], 'person-glasses': [3, 'brown', 'navy'], 'person-headphones': [4, 'dark', 'teal'],
+  'woman-hijab': [3, 'black', 'lilac', 'teal'], 'person-wheelchair': [1, 'brown', 'blue'],
 }
 const hex = (r, g, b) => '#' + [r, g, b].map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, '0')).join('').toUpperCase()
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16))
@@ -74,13 +75,16 @@ export function adapt(t, mode = 'flat') {
 }
 
 // which skeleton fill is what. Fill 0 is always the face; clothing sits low (top edge at y >= 17.5).
-// Per-icon exceptions: the bald man's side fills are ears (skin), the headphones' side fills are ear cups (gear),
-// the cap and the turban are headwear (wear).
+// Per-icon exceptions: the bald man's side fills are ears (skin), the headphones' side fills are ear cups (gear), so are
+// the wheelchair's wheel, hub and frame,
+// the cap, the turban and the hijab are headwear (wear).
 const EXCEPT = {
   'avatar-man-bald': { 2: 'skin', 3: 'skin' },
   'avatar-person-headphones': { 1: 'hair', 2: 'gear', 3: 'gear' },
   'avatar-man-cap': { 1: 'wear', 2: 'wear' },
   'avatar-man-turban': { 1: 'wear' },
+  'avatar-woman-hijab': { 1: 'wear' },
+  'avatar-person-wheelchair': { 3: 'gear', 4: 'gear' },
 }
 const cache = new Map()
 const fillD = f => typeof f === 'string' ? f : f.d

@@ -1,0 +1,290 @@
+{
+  "slug": "rosas-bakery",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "29380155",
+      "page": "https://www.pexels.com/photo/29380155/",
+      "url": "https://images.pexels.com/photos/29380155/pexels-photo-29380155.jpeg",
+      "photographer": "Valeria Boltneva",
+      "photographerUrl": "https://www.pexels.com/@valeriya",
+      "alt": "A long wooden bakery counter in front of shelves of fresh loaves, rolls and pastries, with round loaves mounted on small plaques along the wall above.",
+      "colors": "warm wood brown, soft grey wall, golden crust",
+      "focal": "50% 60%",
+      "notes": "Wide and calm. Round loaves on dark plaques run across the top, open shelves of loaves and pastries sit in the middle and a dark glass front fills the bottom edge, so put a dark-brown gradient on the left or bottom for text rather than relying on empty wall. Holds up at 16:9 and 21:9 when kept at 50% 60%.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/rosas-bakery/29380155-1600.jpg"
+      }
+    },
+    {
+      "slot": "bread",
+      "src": "pexels",
+      "id": "30826792",
+      "page": "https://www.pexels.com/photo/30826792/",
+      "url": "https://images.pexels.com/photos/30826792/pexels-photo-30826792.jpeg",
+      "photographer": "Magda Ehlers",
+      "photographerUrl": "https://www.pexels.com/@magda-ehlers-pexels",
+      "alt": "Round scored sourdough loaves standing in brown paper bags in a big wooden basket lined with burlap, with more loaves on wooden shelves behind.",
+      "colors": "crust gold, kraft-paper brown, pale wood",
+      "focal": "50% 55%",
+      "notes": "Sharp, warm and tactile; the paper bags give it a corner-bakery feel. Works as a 4:3 card or a wide strip at 50% 60%. The top shelf row is soft background. No lettering.",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/rosas-bakery/30826792-600.jpg"
+      }
+    },
+    {
+      "slot": "croissants",
+      "src": "pexels",
+      "id": "16192282",
+      "page": "https://www.pexels.com/photo/16192282/",
+      "url": "https://images.pexels.com/photos/16192282/pexels-photo-16192282.jpeg",
+      "photographer": "Wijs (Wise)",
+      "photographerUrl": "https://www.pexels.com/@wijs-wise-136435282",
+      "alt": "Golden, flaky butter croissants piled in a black woven basket.",
+      "colors": "golden amber, black, orange",
+      "focal": "50% 55%",
+      "notes": "Sharp laminated layers, warm and natural. The black basket gives strong contrast on a cream page; a landscape crop works best.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/rosas-bakery/16192282-600.jpg"
+      }
+    },
+    {
+      "slot": "cake",
+      "src": "unsplash",
+      "id": "ibVD6ZZCwKY",
+      "page": "https://unsplash.com/photos/a-close-up-of-a-cake-with-cherries-on-top-ibVD6ZZCwKY",
+      "url": "https://images.unsplash.com/photo-1692623615620-b48b8dba0fc8",
+      "photographer": "Paulina Kaminska",
+      "photographerUrl": "https://unsplash.com/@paulinaka",
+      "alt": "A tall white buttercream layer cake with piped ruffles around the top and glossy red cherries on top, against a pale blue background.",
+      "colors": "cream white, cherry red, pale blue",
+      "focal": "50% 45%",
+      "notes": "Retro cherry-on-top look that matches the tomato-red palette. Pale blue negative space above the cake takes a label or stamp badge.",
+      "width": 1200,
+      "height": 890,
+      "orientation": "landscape",
+      "local": {
+        "400": "_img/rosas-bakery/photo-1692623615620-b48b8dba0fc8-400.jpg"
+      }
+    },
+    {
+      "slot": "cupcakes",
+      "src": "pexels",
+      "id": "9045540",
+      "page": "https://www.pexels.com/photo/9045540/",
+      "url": "https://images.pexels.com/photos/9045540/pexels-photo-9045540.jpeg",
+      "photographer": "Candice Pickering",
+      "photographerUrl": "https://www.pexels.com/@pickering",
+      "alt": "Chocolate and vanilla cupcakes with swirled frosting in paper cases on a rustic wooden board.",
+      "colors": "cream, chocolate brown, warm wood",
+      "focal": "50% 55%",
+      "notes": "Classic bakery-counter cupcakes with a soft shallow depth of field; works at 4:3 and as a square.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/rosas-bakery/9045540-600.jpg"
+      }
+    },
+    {
+      "slot": "cookies",
+      "src": "pexels",
+      "id": "20558711",
+      "page": "https://www.pexels.com/photo/20558711/",
+      "url": "https://images.pexels.com/photos/20558711/pexels-photo-20558711.jpeg",
+      "photographer": "Meryem Şahin",
+      "photographerUrl": "https://www.pexels.com/@bigparadox",
+      "alt": "Chocolate chip cookies on a parchment-lined baking tray, one broken open to show the melted chocolate inside.",
+      "colors": "golden tan, dark chocolate, warm grey",
+      "focal": "50% 50%",
+      "notes": "Portrait, top-down with a bitten-open cookie as the focal point; the pale grey tray suits a light card.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/rosas-bakery/20558711-600.jpg"
+      }
+    },
+    {
+      "slot": "pie",
+      "src": "pexels",
+      "id": "6163264",
+      "page": "https://www.pexels.com/photo/6163264/",
+      "url": "https://images.pexels.com/photos/6163264/pexels-photo-6163264.jpeg",
+      "photographer": "Maksim Goncharenok",
+      "photographerUrl": "https://www.pexels.com/@maksgelatin",
+      "alt": "A lattice-topped fruit pie of dark cherries and diced apple dusted with powdered sugar on a white plate, with an apple just visible behind it.",
+      "colors": "berry red, flaky gold, white",
+      "focal": "50% 65%",
+      "notes": "Portrait, bright and clean; the red fruit echoes the tomato-red accent. Crop to the pie for a square.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/rosas-bakery/6163264-600.jpg"
+      }
+    },
+    {
+      "slot": "baker",
+      "src": "unsplash",
+      "id": "5CRzqqWzEKQ",
+      "page": "https://unsplash.com/photos/a-person-kneading-dough-on-top-of-a-wooden-table-5CRzqqWzEKQ",
+      "url": "https://images.unsplash.com/photo-1649675602217-416a4fafcecb",
+      "photographer": "DDP",
+      "photographerUrl": "https://unsplash.com/@moino007",
+      "alt": "A baker in a white jacket shapes a round of dough with flour-dusted hands on a floured wooden table.",
+      "colors": "flour white, pale wood, soft grey",
+      "focal": "50% 60%",
+      "notes": "Honest hands-at-work shot for the Rosa's story section; no faces, bright and airy. Landscape crops cleanly.",
+      "width": 1200,
+      "height": 820,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/rosas-bakery/photo-1649675602217-416a4fafcecb-1000.jpg"
+      }
+    },
+    {
+      "slot": "baguette",
+      "src": "pexels",
+      "id": "9180199",
+      "page": "https://www.pexels.com/photo/9180199/",
+      "url": "https://images.pexels.com/photos/9180199/pexels-photo-9180199.jpeg",
+      "photographer": "Inna Rabotyagina",
+      "photographerUrl": "https://www.pexels.com/@inna-rabotyagina-51317378",
+      "alt": "Tall wicker baskets stacked with crusty baguettes beside a burnt-orange wall and a marble counter in a bakery.",
+      "colors": "burnt orange, baguette gold, marble white",
+      "focal": "50% 35%",
+      "notes": "Portrait with a vintage shopfront feel; the orange wall sits close to the retro palette. Keep the crop on the upper two thirds.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/rosas-bakery/9180199-600.jpg"
+      }
+    },
+    {
+      "slot": "donuts",
+      "src": "pexels",
+      "id": "590771",
+      "page": "https://www.pexels.com/photo/590771/",
+      "url": "https://images.pexels.com/photos/590771/pexels-photo-590771.jpeg",
+      "photographer": "Ana Lourenco",
+      "photographerUrl": "https://www.pexels.com/@blackphant",
+      "alt": "Rows of iced donuts with chocolate sprinkles in pink, pistachio-green and chocolate glazes on a metal tray.",
+      "colors": "pink, pistachio green, chocolate brown",
+      "focal": "50% 50%",
+      "notes": "Saturated old-fashioned diner donuts, sharp and tightly framed; best as a wide strip or tile.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/rosas-bakery/590771-1000.jpg"
+      }
+    },
+    {
+      "slot": "display",
+      "src": "pexels",
+      "id": "30681620",
+      "page": "https://www.pexels.com/photo/30681620/",
+      "url": "https://images.pexels.com/photos/30681620/pexels-photo-30681620.jpeg",
+      "photographer": "Nati",
+      "photographerUrl": "https://www.pexels.com/@nati-87264186",
+      "alt": "Low view through a glass bakery case at silver trays of powdered-sugar puff pastries, strawberry and berry tartlets and cream-filled buns.",
+      "colors": "golden pastry, strawberry red, steel silver",
+      "focal": "40% 55%",
+      "notes": "Old-world pastry case with no price tags or lettering anywhere in frame. The dark soft blur top-left takes a caption. Landscape; the sharpest pastries sit left of centre, so keep object-position at about 40% horizontally.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/rosas-bakery/30681620-600.jpg"
+      }
+    },
+    {
+      "slot": "wedding",
+      "src": "pexels",
+      "id": "30445121",
+      "page": "https://www.pexels.com/photo/30445121/",
+      "url": "https://images.pexels.com/photos/30445121/pexels-photo-30445121.jpeg",
+      "photographer": "Nishess Shakya",
+      "photographerUrl": "https://www.pexels.com/@nshakya",
+      "alt": "A three-tier white wedding cake ringed with red sugar roses and silver beading, with a cluster of roses on top, on a lace-covered table in a warmly lit banquet hall with blurred guests behind.",
+      "colors": "ivory white, rose red, warm banquet gold",
+      "focal": "58% 50%",
+      "notes": "Landscape, bright and clean, no cake-topper lettering. The red roses match the tomato-red palette. Guests and red chair bows are only soft blur in the background (no identifiable faces). Square crops at 58% 50% keep the whole cake.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/rosas-bakery/30445121-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "14520462",
+      "page": "https://www.pexels.com/photo/14520462/",
+      "url": "https://images.pexels.com/photos/14520462/pexels-photo-14520462.jpeg",
+      "photographer": "Kevin Nesh",
+      "photographerUrl": "https://www.pexels.com/@kevin-nesh-2588991",
+      "alt": "Close-up of oat-topped loaves and floured round breads on a wooden bakery shelf, sharp in front and softly blurred behind.",
+      "colors": "toasted crust, oat gold, dark wood",
+      "focal": "40% 50%",
+      "notes": "Texture shot at 4:3 with a strong diagonal shelf edge; sharpest on the left. Good as a tile or a section background behind a dark overlay. No lettering.",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/rosas-bakery/14520462-600.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "unsplash",
+      "id": "Q7b7nURc0YE",
+      "page": "https://unsplash.com/photos/a-bunch-of-breads-that-are-on-a-table-Q7b7nURc0YE",
+      "url": "https://images.unsplash.com/photo-1725297952102-ab28892a31ab",
+      "photographer": "Eric Prouzet",
+      "photographerUrl": "https://unsplash.com/@eprouzet",
+      "alt": "Close-up of golden, flour-dusted loaves and rolls of bread piled together on a rustic cloth.",
+      "colors": "golden crust, tan, warm brown",
+      "focal": "50% 50%",
+      "notes": "Texture and detail shot: warm crust close-up that works as a section background behind a dark overlay or as a tile.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/rosas-bakery/photo-1725297952102-ab28892a31ab-600.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "pexels",
+      "id": "14007233",
+      "page": "https://www.pexels.com/photo/14007233/",
+      "url": "https://images.pexels.com/photos/14007233/pexels-photo-14007233.jpeg",
+      "photographer": "Vinícius Caricatte",
+      "photographerUrl": "https://www.pexels.com/@caricatte",
+      "alt": "Fresh crusty rolls tucked into brown paper bags on a wooden counter beside a vintage red-and-steel slicer.",
+      "colors": "slicer red, kraft-paper brown, crust gold",
+      "focal": "62% 55%",
+      "notes": "Old-school corner-shop mood: the red enamel slicer echoes the tomato-red palette and the kraft bags suit the paper-bag packaging look. No lettering. Landscape 3:2; keep the bags (right of centre) in frame.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/rosas-bakery/14007233-1000.jpg"
+      }
+    }
+  ]
+}

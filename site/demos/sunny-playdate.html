@@ -1,0 +1,2036 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sunny Day Playdate (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: You are invited to a Sunny Day Playdate for ages 1 to 4 and their grown-ups: Wednesday 21 October, 10 am to noon, in the Reyes backyard. Bubbles, blocks, a picnic blanket and a plain-language plan for the morning.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --paper:#fffcf3; --cream:#fff8e6;
+  --butter:#fff0b3; --butter-soft:#fff8d6; --butter-deep:#f0cd57; --sun:#ffc93c; --sun-deep:#e0a20f;
+  --sky:#dcefff; --sky-deep:#8fc6f0; --sky-ink:#245f9c;
+  --blush:#ffe3e9; --blush-deep:#f4a9bc; --rose-ink:#a83c5a;
+  --mint:#d9f4e4; --mint-deep:#8fd1aa; --mint-ink:#256b49;
+  --lilac:#ece5fc; --lilac-deep:#bfaeea; --lilac-ink:#5b42a3;
+  --peach:#ffe6d3; --peach-deep:#f4b891;
+  --ink:#2b3552; --ink-soft:#56617c; --hair:rgba(43,53,82,.16);
+  --head:"Baloo 2","Nunito",system-ui,sans-serif;
+  --body:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --gutter:clamp(16px,4vw,32px); --maxw:1160px;
+  --k:1; /* icon-size scale: boxes that hold icons follow the kit's Size slider (Upgraded and Full only) */
+  color:var(--ink);
+
+  /* with icons: tune the page's own style (kawaii) and its recommended companions to the sunny pastel brand */
+  --with-kawaii-fill-1:#f7a1b7; --with-kawaii-fill-2:#ffb98a; --with-kawaii-fill-3:#ffd75e;
+  --with-kawaii-fill-4:#8fd8ab; --with-kawaii-fill-5:#8cc6f2; --with-kawaii-fill-6:#bba8ee;
+  --with-kawaii-accent:#f77fa0; --with-kawaii-blush:#ff9db7; --with-kawaii-sparkle:#ffc93c; --with-kawaii-c4:#8fd8ab;
+  --with-plush-c1:#f58f86; --with-plush-c2:#ffd15c; --with-plush-c3:#7cb7ee; --with-plush-c4:#7fcaa0;
+  --with-plush-accent:#f7a1c0; --with-plush-tint:#fff3d0; --with-plush-ink:#4a3350;
+  /* pastel and clay keep each icon's own colours (a sun stays golden, an apple red): only the ink is matched to the page */
+  --with-pastel-ink:#34487a;
+  --with-sticker-lemon:#ffd75e; --with-sticker-mint:#8fe0b5; --with-sticker-sky:#8cc6f2; --with-sticker-bubblegum:#f7a1c0;
+  --with-sticker-grape:#bba8ee; --with-sticker-peach:#ffb98a; --with-sticker-ink:#2b3552; --with-sticker-shadow:#2b3552;
+  --with-clay-ink:#2b3552;
+  --with-anime-c1:#6fb8ef; --with-anime-c2:#f9a8c5; --with-anime-c3:#ffd15c; --with-anime-c4:#8fd8ab;
+  --with-anime-accent:#f77f9d; --with-anime-ink:#2b3552; --with-anime-shadow:#3b4f8f;
+  --with-bento-c1:#4a9be0; --with-bento-c3:#8fd8ab; --with-bento-c4:#ffd15c; --with-bento-accent:#f58fae;
+  --with-bento-ink:#2b3552; --with-bento-shadow:#2d6aa8; --with-bento-tint:#eaf4ff;
+}
+
+/* ---------- base ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html[data-level="1"],html[data-level="2"]{--k:var(--kit-scale,1)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(60px + 32px*var(--k));-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--sky-ink);text-underline-offset:3px}
+a:hover{color:var(--ink)}
+h1,h2,h3,h4,p,ul,ol,figure,address{margin:0}
+ul,ol{padding:0;list-style:none}
+address{font-style:normal}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:3px solid var(--sky-ink);outline-offset:3px;border-radius:10px}
+.wrap{width:min(100% - 2*var(--gutter),var(--maxw));margin-inline:auto}
+.skip{position:absolute;left:-999px;top:8px;z-index:100;background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px}
+.skip:focus{left:12px}
+.dot{opacity:.5;margin:0 4px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+h2{font:800 clamp(32px,5vw,54px)/1.04 var(--head);letter-spacing:-.005em}
+h3{font:700 clamp(21px,2.4vw,26px)/1.18 var(--head)}
+.card{background:#fff;border-radius:34px;padding:clamp(20px,3vw,34px);box-shadow:0 7px 0 rgba(43,53,82,.1)}
+.linkbtn{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;font-weight:800;color:var(--sky-ink);text-decoration:underline;text-underline-offset:4px}
+.fine{font-size:14.5px;color:var(--ink-soft);display:flex;gap:8px;align-items:flex-start;margin-top:16px}
+.fine>[data-ico]{margin-top:1px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;background:#fff;color:var(--ink);font:700 17px/1.1 var(--head);text-decoration:none;text-align:center;box-shadow:inset 0 0 0 2.5px var(--ink),0 4px 0 rgba(43,53,82,.2);transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-2px);color:var(--ink);box-shadow:inset 0 0 0 2.5px var(--ink),0 6px 0 rgba(43,53,82,.22)}
+.btn:active{transform:translateY(3px);box-shadow:inset 0 0 0 2.5px var(--ink),0 1px 0 rgba(43,53,82,.22)}
+.btn.primary{background:var(--sun);box-shadow:inset 0 0 0 2.5px var(--ink),0 5px 0 var(--ink)}
+.btn.primary:hover{background:#ffd45f;box-shadow:inset 0 0 0 2.5px var(--ink),0 7px 0 var(--ink)}
+.btn.primary:active{box-shadow:inset 0 0 0 2.5px var(--ink),0 1px 0 var(--ink)}
+.btn.ghost{background:transparent;box-shadow:inset 0 0 0 2.5px var(--ink)}
+.btn.small{min-height:46px;padding:0 18px;font-size:16px}
+.btn.big{min-height:62px;font-size:21px;width:100%}
+.round{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2.5px var(--ink),0 4px 0 rgba(43,53,82,.2);transition:transform .15s,box-shadow .15s;flex:none}
+.round:hover{transform:translateY(-2px)}
+.round:active{transform:translateY(3px);box-shadow:inset 0 0 0 2.5px var(--ink),0 1px 0 rgba(43,53,82,.2)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn-col{display:grid;gap:12px;width:100%}
+
+/* ---------- announcement + header ---------- */
+.announce{display:flex;gap:10px;justify-content:center;align-items:center;padding:9px var(--gutter);background:var(--sky);font:700 15px/1.3 var(--body);text-align:center}
+.announce [data-ico]{flex:none}
+.announce p{text-align:center;margin:0}
+.site-head{position:sticky;top:0;z-index:60;background:rgba(255,252,243,.93);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-bottom:3px solid var(--butter)}
+.head-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:74px;flex-wrap:wrap}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);min-height:48px}
+.brand:hover{color:var(--ink)}
+.brand-mark{display:grid;place-items:center;width:calc(54px*var(--k));height:calc(54px*var(--k));flex:none;border-radius:50%;background:var(--butter);box-shadow:0 3px 0 var(--butter-deep)}
+.brand-name{font:800 22px/1 var(--head)}
+.brand-name em{font-style:normal;color:var(--sky-ink)}
+.nav-toggle{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px 0 14px;border-radius:999px;background:#fff;font-weight:800;box-shadow:inset 0 0 0 2px var(--hair)}
+.site-nav{display:none;width:100%;flex-direction:column;gap:6px;padding:4px 0 16px}
+.site-nav.open{display:flex}
+.site-nav a:not(.btn){display:flex;align-items:center;min-height:48px;padding:0 16px;border-radius:16px;text-decoration:none;font-weight:800;color:var(--ink)}
+.site-nav a:not(.btn):hover{background:var(--butter-soft)}
+.site-nav .btn{margin-top:6px}
+@media(min-width:1080px){
+  .nav-toggle{display:none}
+  .site-nav{display:flex;flex-direction:row;width:auto;align-items:center;padding:0;gap:0}
+  .site-nav a:not(.btn){padding:0 13px;font-size:15.5px}
+  .site-nav .btn{margin:0 0 0 10px}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding:clamp(28px,5vw,64px) 0 calc(44px + clamp(40px,5vw,72px));background:radial-gradient(720px 440px at 94% 6%,#ffe69a 0,transparent 62%),radial-gradient(620px 440px at 0% 100%,#d9edff 0,transparent 60%),var(--butter-soft)}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(224,162,15,.3) 1.6px,transparent 1.8px);background-size:30px 30px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 80%);mask-image:linear-gradient(180deg,#000,transparent 80%);pointer-events:none}
+.hero-grid{position:relative;z-index:2;display:grid;gap:44px;align-items:center}
+@media(min-width:920px){.hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px}}
+.kicker{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 20px 8px 10px;border-radius:999px;background:#fff;font:800 15px/1.25 var(--body);box-shadow:0 4px 0 var(--butter-deep)}
+h1{font:800 clamp(52px,9.4vw,104px)/1 var(--head);letter-spacing:-.012em;margin:20px 0 14px}
+h1 .mark{background:linear-gradient(transparent 62%,var(--sun) 62% 88%,transparent 88%);padding:0 .06em;margin:0 -.06em}
+h1 .blue{color:var(--sky-ink);display:inline-block}
+.hero-lede{font-size:clamp(18px,2.2vw,22px);line-height:1.55;max-width:36ch;color:var(--ink)}
+.facts{display:grid;gap:10px;margin:28px 0 28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,calc(96px*var(--k))),1fr))}
+.fact{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:14px 8px;background:#fff;border-radius:26px;box-shadow:0 6px 0 var(--butter-deep)}
+@media(min-width:640px){.facts{gap:12px;margin:30px 0 28px;grid-template-columns:repeat(3,minmax(0,1fr))}.fact{padding:16px 10px;gap:8px;border-radius:28px}}
+.fact-art{display:grid;place-items:center;flex:none;min-width:calc(76px*var(--k));min-height:calc(76px*var(--k))}
+.fact-txt{display:flex;flex-direction:column;align-items:center;line-height:1.25}
+.fact-txt b{font:700 16px/1.15 var(--head)}
+.fact-txt span{font-size:13px;color:var(--ink-soft)}
+@media(min-width:640px){.fact-txt b{font-size:19px}.fact-txt span{font-size:14.5px}}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px}
+.hero-hosts{margin-top:22px;display:flex;gap:10px;align-items:flex-start;font-size:15.5px;color:var(--ink-soft);max-width:44ch}
+.hero-hosts>[data-ico]{margin-top:2px}
+.arch{position:relative;justify-self:center;width:min(100%,500px)}
+.arch-frame{aspect-ratio:4/5;border-radius:999px 999px 40px 40px;overflow:hidden;border:8px solid #fff;background:var(--butter);box-shadow:0 10px 0 var(--butter-deep),0 34px 50px -24px rgba(43,53,82,.35)}
+.arch-frame img{width:100%;height:100%;object-fit:cover}
+.sticker{position:absolute;display:flex;align-items:center;gap:12px;background:#fff;border-radius:30px;padding:10px 18px 10px 10px;box-shadow:0 5px 0 var(--butter-deep),0 16px 30px -12px rgba(43,53,82,.35)}
+.st-weather{top:5%;right:-8px;flex-direction:column;gap:2px;padding:12px 16px 10px;text-align:center}
+.st-count{left:-8px;bottom:11%}
+.st-cap{display:flex;flex-direction:column;line-height:1.25;font-size:14px}
+.st-cap b{font:700 17px/1.15 var(--head)}
+.st-weather .st-cap a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:-10px -8px -12px;padding:0 8px;font-size:13px;font-weight:800}
+.photo-credit{margin-top:22px;text-align:center;font-size:12.5px;color:var(--ink-soft)}
+.float{position:absolute;z-index:1;pointer-events:none}
+.f-sun{top:18px;right:3%}
+.arch .float{z-index:3}
+.arch .f-cloud{top:calc(-24px - 20px*(var(--k) - 1));left:-12px}
+.arch .f-balloon{right:-36px;bottom:104px}
+.arch .f-flower{left:-40px;bottom:calc(-24px - 30px*(var(--k) - 1))}
+@media(max-width:919px){.f-cloud,.f-balloon,.f-flower{display:none}.f-sun{top:8px;right:-18px;opacity:.9}}
+
+/* ---------- sections ---------- */
+.sec{position:relative;margin-top:-44px;border-radius:44px 44px 0 0;padding:calc(44px + clamp(36px,5vw,64px)) 0 clamp(56px,7vw,92px);box-shadow:0 -14px 28px -18px rgba(43,53,82,.16)}
+.sec.paper{background:var(--paper)} .sec.sky{background:var(--sky)} .sec.mint{background:var(--mint)}
+.sec.blush{background:var(--blush)} .sec.butter{background:var(--butter)}
+.sec-head{display:grid;gap:20px 26px;grid-template-columns:auto minmax(0,1fr);align-items:center;margin-bottom:clamp(28px,4vw,46px)}
+@media(max-width:620px){.sec-head{grid-template-columns:1fr}}
+.sec-ico{position:relative;display:grid;place-items:center;width:calc(108px*var(--k));height:calc(108px*var(--k));max-width:100%;border-radius:36px;background:var(--c,#fff);box-shadow:0 7px 0 var(--cd,var(--butter-deep))}
+.sec-spark{position:absolute;top:calc(-14px*var(--k));right:calc(-14px*var(--k));pointer-events:none}
+.eyebrow{font:800 14px/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+.lede{margin-top:12px;font-size:clamp(17px,2vw,19.5px);color:var(--ink-soft);max-width:62ch}
+
+/* ---------- picture schedule ---------- */
+.chart{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media(min-width:640px){.chart{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1040px){.chart{grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}}
+.step{position:relative}
+.s1{--tc:var(--butter);--td:var(--butter-deep)} .s2{--tc:var(--mint);--td:var(--mint-deep)} .s3{--tc:var(--sky);--td:var(--sky-deep)}
+.s4{--tc:var(--blush);--td:var(--blush-deep)} .s5{--tc:var(--lilac);--td:var(--lilac-deep)} .s6{--tc:var(--peach);--td:var(--peach-deep)}
+.tile{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;height:100%;min-height:228px;padding:20px 8px 18px;border-radius:32px;background:var(--tc);text-align:center;box-shadow:0 8px 0 var(--td);transition:transform .2s,box-shadow .2s}
+.tile:hover{transform:translateY(-3px);box-shadow:0 11px 0 var(--td)}
+.tile[aria-pressed="true"]{outline:4px solid var(--ink);outline-offset:4px;transform:translateY(-3px)}
+.tile:focus-visible{outline:4px solid var(--sky-ink);outline-offset:6px}
+.tile-no{position:absolute;top:12px;left:12px;width:32px;height:32px;border-radius:50%;background:#fff;font:800 16px/32px var(--head);text-align:center}
+.tile-art{position:relative;display:grid;place-items:center;width:calc(108px*var(--k));max-width:100%;aspect-ratio:1/1;margin-top:6px;border-radius:50%;background:rgba(255,255,255,.72)}
+.bub{position:absolute}
+.bub.b1{top:-6px;right:-10px} .bub.b2{bottom:4px;left:-8px}
+.soap{display:block;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff 0 9%,rgba(255,255,255,.15) 12% 46%,rgba(140,198,242,.28) 70%,rgba(247,161,192,.4) 100%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.95),inset -3px -4px 7px rgba(187,168,238,.55),inset 3px 3px 7px rgba(140,210,240,.5),0 0 0 1.5px rgba(36,95,156,.38)}
+.soap.s1{width:calc(30px*var(--k));height:calc(30px*var(--k))}
+.soap.s2{width:calc(20px*var(--k));height:calc(20px*var(--k))}
+.tile-time{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font:800 24px/1 var(--head)}
+.tile-name{font:800 16.5px/1.2 var(--body);padding:0 4px}
+@media(min-width:1040px){.step:not(:last-child)::after{content:"";position:absolute;top:calc(26px + 54px*var(--k));right:-16px;width:16px;border-top:4px dotted var(--ink-soft);opacity:.45}}
+
+.stage{margin-top:34px;border-radius:42px;padding:clamp(18px,3vw,36px);background:var(--c);box-shadow:0 10px 0 var(--cd);transition:background .3s,box-shadow .3s}
+.stage[data-step="1"]{--c:var(--butter);--cd:var(--butter-deep)} .stage[data-step="2"]{--c:var(--mint);--cd:var(--mint-deep)}
+.stage[data-step="3"]{--c:var(--sky);--cd:var(--sky-deep)} .stage[data-step="4"]{--c:var(--blush);--cd:var(--blush-deep)}
+.stage[data-step="5"]{--c:var(--lilac);--cd:var(--lilac-deep)} .stage[data-step="6"]{--c:var(--peach);--cd:var(--peach-deep)}
+.stage-bar{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.stage-clock{display:grid;place-items:center;flex:none;width:calc(92px*var(--k));height:calc(92px*var(--k));border-radius:50%;background:#fff}
+.stage-head{flex:1;min-width:200px}
+.stage-when{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:15px}
+.stage-when b{font:800 19px/1 var(--head)}
+.stage-of{background:#fff;border-radius:999px;padding:3px 12px;font-weight:800;font-size:13px}
+#stage-title{margin-top:6px;font:800 clamp(26px,3.6vw,40px)/1.08 var(--head)}
+.stage-nav{display:flex;gap:12px;flex:none}
+@media(max-width:640px){.stage-nav{width:100%;justify-content:flex-end}.stage-clock{width:calc(84px*var(--k));height:calc(84px*var(--k))}}
+.stage-panels{margin-top:24px}
+.stage-panel{display:grid;gap:24px;animation:rise .4s ease both}
+.stage-panel[hidden]{display:none}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(min-width:860px){.stage-panel{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:center;gap:36px}}
+.stage-media{aspect-ratio:1/1;border-radius:32px;overflow:hidden;border:6px solid #fff;background:#fff}
+.stage-media img{width:100%;height:100%;object-fit:cover}
+.stage-media.mosaic{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;border:0;background:transparent;overflow:visible;border-radius:0}
+.mosaic figure{position:relative;overflow:hidden;border-radius:24px;border:5px solid #fff;background:#fff}
+.mosaic .m-a{grid-row:1/3}
+.mosaic figcaption{position:absolute;left:8px;bottom:8px;background:#fff;border-radius:999px;padding:2px 12px;font:800 13px/1.4 var(--body)}
+.mosaic img{width:100%;height:100%;object-fit:cover}
+.stage-lede{font-size:clamp(18px,2vw,21px);line-height:1.55}
+.duo-lists{display:grid;gap:14px;margin-top:20px}
+@media(min-width:560px){.duo-lists{grid-template-columns:1fr 1fr}}
+.duo-lists>div{background:rgba(255,255,255,.78);border-radius:26px;padding:16px 18px 14px}
+.duo-lists h4{display:flex;align-items:center;gap:10px;font:800 19px/1.1 var(--head);margin-bottom:8px}
+.duo-lists li{position:relative;padding-left:22px;margin:7px 0;font-size:16px;line-height:1.45}
+.duo-lists li::before{content:"";position:absolute;left:2px;top:.55em;width:10px;height:10px;border-radius:50%;background:var(--cd)}
+.chart-foot{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 22px;border-radius:30px;background:var(--butter-soft);box-shadow:inset 0 0 0 2px var(--butter)}
+.chart-foot p{display:flex;gap:12px;align-items:center;max-width:56ch}
+
+/* ---------- weather ---------- */
+.wx{display:grid;gap:22px}
+@media(min-width:980px){.wx{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:start}}
+.wx-top{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.wx-live{display:grid;place-items:center;flex:none;width:calc(140px*var(--k));height:calc(140px*var(--k));max-width:100%;border-radius:42px;background:var(--sky);transition:background .3s}
+.wx[data-wx="sunny"] .wx-live{background:var(--butter)}
+.wx[data-wx="rain"] .wx-live{background:var(--lilac)}
+.wx-label{font:800 13.5px/1.2 var(--body);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
+.wx-sum{font:800 clamp(28px,4vw,40px)/1.08 var(--head);margin-top:6px}
+.wx-sub{margin-top:6px;color:var(--ink-soft);max-width:34ch}
+.wx-hours{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
+.wx-hours li{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px 12px;border-radius:26px;background:var(--cream)}
+.wx-hours li>span:first-child{font-weight:800;font-size:14px;color:var(--ink-soft)}
+.wx-hours b{font:800 24px/1 var(--head)}
+.wx-now{display:flex;flex-direction:column}
+.wx-meta{display:grid;gap:12px;margin-top:22px}
+@media(min-width:560px){.wx-meta{grid-template-columns:1fr 1fr}}
+.meta{display:flex;align-items:center;gap:14px;padding:12px 16px 12px 12px;border-radius:28px;background:var(--mint)}
+.meta:nth-child(2){background:var(--sky)}
+.meta-txt{display:flex;flex-direction:column;line-height:1.3}
+.meta-txt b{font:800 17px/1.2 var(--head)}
+.meta-txt small{font-size:14px;color:var(--ink-soft);margin-top:2px}
+.wx-pick{border:0;margin:0;padding:0;min-width:0}
+.wx-pick legend{font:800 14px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px;padding:0}
+.pick-row{display:grid;gap:10px;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:560px){.pick-row{grid-template-columns:1fr}}
+.pick{display:block;position:relative;cursor:pointer}
+.pick input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.pick>span{display:flex;align-items:center;justify-content:center;gap:8px;min-height:62px;padding:8px 10px;border-radius:22px;background:var(--cream);box-shadow:inset 0 0 0 2.5px var(--hair);font:800 16px/1.15 var(--body);text-align:center;transition:background .2s,box-shadow .2s}
+.pick:hover>span{background:var(--butter-soft)}
+.pick input:checked+span{background:var(--sky);box-shadow:inset 0 0 0 3px var(--ink)}
+.pick input:focus-visible+span{outline:3px solid var(--sky-ink);outline-offset:3px}
+.verdict{margin-top:22px;padding:20px 22px 22px;border-radius:30px;background:var(--butter-soft);box-shadow:inset 0 0 0 2px var(--butter)}
+.wx[data-wx="rain"] .verdict{background:var(--lilac);box-shadow:inset 0 0 0 2px var(--lilac-deep)}
+.verdict p{margin-top:8px}
+.dress{margin-top:16px;display:grid;gap:10px}
+.dress li{display:flex;align-items:center;gap:14px;font-weight:700;line-height:1.35}
+
+/* ---------- what to bring ---------- */
+.bring-grid{display:grid;gap:24px}
+.pack-mini{display:none}
+@media(max-width:979px){
+  .pack-mini{position:sticky;top:max(84px,calc(54px*var(--k) + 14px));z-index:5;display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:6px 20px 6px 8px;border-radius:999px;background:#fff;box-shadow:0 5px 0 var(--mint-deep),0 14px 24px -14px rgba(43,53,82,.35);font:800 18px/1.2 var(--head)}
+  .pack-mini span.pm-txt{display:flex;flex-direction:column}
+  .pack-mini small{font:700 13.5px/1.2 var(--body);color:var(--ink-soft)}
+}
+@media(min-width:980px){.bring-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,.9fr);align-items:start;gap:34px}}
+.check-list{display:grid;gap:14px}
+.check{position:relative;display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:center;gap:14px;min-height:92px;padding:12px 20px 12px 14px;border-radius:32px;background:#fff;cursor:pointer;box-shadow:0 6px 0 var(--mint-deep);transition:transform .15s,box-shadow .15s}
+.check:hover{transform:translateY(-2px);box-shadow:0 8px 0 var(--mint-deep)}
+.check input{position:absolute;left:14px;top:50%;width:44px;height:44px;margin:-22px 0 0;opacity:0;cursor:pointer}
+.box{display:grid;place-items:center;width:calc(46px*var(--k));height:calc(46px*var(--k));border-radius:15px;background:#fff;box-shadow:inset 0 0 0 3px var(--ink);transition:background .15s}
+.box>[data-ico]{opacity:0;transform:scale(.4);transition:opacity .15s,transform .2s cubic-bezier(.3,1.6,.5,1)}
+.check input:checked+.box{background:var(--sun)}
+.check input:checked+.box>[data-ico]{opacity:1;transform:none}
+.check input:focus-visible+.box{outline:3px solid var(--sky-ink);outline-offset:3px}
+.check input:checked~.check-text b{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--ink-soft);opacity:.75}
+.check-art{display:grid;place-items:center;width:calc(68px*var(--k));height:calc(68px*var(--k));border-radius:24px;background:var(--c)}
+.check-text{display:flex;flex-direction:column;line-height:1.35}
+.check-text b{font:800 20px/1.15 var(--head)}
+.check-text small{font-size:15px;color:var(--ink-soft);margin-top:3px}
+@media(max-width:520px){.check{gap:10px;padding:10px 14px 10px 10px}.check-art{width:calc(56px*var(--k));height:calc(56px*var(--k));border-radius:20px}.check-text b{font-size:18px}.check-text small{font-size:14px}}
+.bring-side{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+@media(min-width:980px){.bring-side{position:sticky;top:104px}}
+.pack-ring{display:grid;place-items:center}
+.bring-side h3{font-size:28px}
+.bring-side p{color:var(--ink-soft);max-width:30ch}
+.covered{margin-top:12px;width:100%;text-align:left;background:var(--mint);border-radius:28px;padding:2px 20px 14px}
+.covered summary{display:flex;align-items:center;gap:10px;min-height:56px;cursor:pointer;list-style:none;font:800 19px/1.1 var(--head)}
+.covered summary::-webkit-details-marker{display:none}
+.covered .cv-chev{margin-left:auto;transition:transform .25s}
+.covered[open] .cv-chev{transform:rotate(180deg)}
+.covered li{display:flex;gap:10px;align-items:center;margin:8px 0;font-size:15.5px;font-weight:600}
+
+/* ---------- snacks ---------- */
+.callout{display:flex;gap:18px;align-items:center;padding:18px 24px 18px 18px;border-radius:32px;background:#fff;box-shadow:0 6px 0 var(--blush-deep);margin-bottom:30px}
+.callout p{max-width:80ch}
+.callout>[data-ico]{flex:none}
+.filters{margin-bottom:26px}
+.flt-h{font:800 14px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 20px;border-radius:999px;background:#fff;font:800 16px/1 var(--body);box-shadow:inset 0 0 0 2.5px var(--hair);transition:background .15s,color .15s,transform .15s}
+.chip [data-ico]{margin-left:-6px}
+.chip:hover{transform:translateY(-1px);background:var(--butter-soft)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
+.flt-out{margin-top:14px;font-weight:800}
+.snack-grid{display:grid;gap:16px}
+@media(min-width:660px){.snack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(min-width:1040px){.snack-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.snack{display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:32px;background:#fff;box-shadow:0 6px 0 rgba(43,53,82,.1);transition:opacity .25s,transform .25s}
+.snack-art{display:grid;place-items:center;width:100%;min-height:calc(116px*var(--k));border-radius:24px;background:var(--c)}
+.snack h3{font-size:20px}
+.snack p{font-size:15px;color:var(--ink-soft);margin-top:6px;line-height:1.45}
+.snack .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tag{display:inline-block;padding:3px 11px;border-radius:999px;background:var(--cream);font:800 12.5px/1.5 var(--body);color:var(--ink)}
+.tag.ok{background:var(--mint);color:var(--mint-ink)}
+.tag.warn{background:var(--butter);color:#6e4a00}
+.snack.off{transform:scale(.985);background:rgba(255,255,255,.55);box-shadow:0 6px 0 rgba(43,53,82,.05)}
+.snack.off .snack-art,.snack.off h3,.snack.off .snack-body>p:not(.why):not(.tags){opacity:.5}
+.snack.off h3{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--rose-ink)}
+.snack .why{font-weight:800;color:var(--rose-ink);margin-top:10px}
+
+/* ---------- grown-ups ---------- */
+.gu-grid{display:grid;gap:28px}
+@media(min-width:980px){.gu-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,.85fr);align-items:start;gap:38px}}
+.gu-tools{display:flex;gap:10px;margin-bottom:16px}
+.panels{display:grid;gap:14px}
+.panel{border-radius:34px;background:var(--c);box-shadow:0 6px 0 var(--cd);overflow:hidden}
+.panel summary{display:flex;align-items:center;gap:16px;min-height:88px;padding:12px 18px 12px 14px;cursor:pointer;list-style:none}
+.panel summary::-webkit-details-marker,.faq summary::-webkit-details-marker{display:none}
+.p-ico{display:grid;place-items:center;flex:none;width:calc(64px*var(--k));height:calc(64px*var(--k));border-radius:24px;background:rgba(255,255,255,.82)}
+.p-title{display:flex;flex-direction:column;flex:1;min-width:0;line-height:1.25}
+.p-title b{font:800 21px/1.15 var(--head)}
+.p-title small{font-size:15px;color:var(--ink-soft);margin-top:2px}
+.p-chev{display:grid;place-items:center;width:max(46px,calc(28px*var(--k) + 14px));height:max(46px,calc(28px*var(--k) + 14px));border-radius:50%;background:#fff;flex:none;transition:transform .25s}
+.panel[open] .p-chev,.faq details[open] .p-chev{transform:rotate(180deg)}
+.panel-body{padding:2px 26px 24px}
+.panel-body p{margin-top:10px;max-width:62ch}
+.nap-helper{margin-top:18px;padding:16px 18px 18px;border-radius:26px;background:rgba(255,255,255,.82)}
+.nap-q{font:800 17px/1.2 var(--head);margin:0 0 12px!important}
+.nap-out{margin-top:14px!important;font-weight:700;min-height:3.3em}
+.gu-side{display:grid;gap:20px}
+@media(min-width:980px){.gu-side{position:sticky;top:104px}}
+.gu-photo{border-radius:36px;overflow:hidden;border:6px solid #fff;box-shadow:0 8px 0 var(--lilac-deep);aspect-ratio:3/2.3;background:#fff}
+.gu-photo img{width:100%;height:100%;object-fit:cover}
+.gu-coffee{display:flex;gap:18px;align-items:center;background:var(--lilac)}
+.gu-coffee>[data-ico]{flex:none}
+
+/* ---------- find us ---------- */
+.find-grid{display:grid;gap:30px}
+@media(min-width:980px){.find-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:42px}}
+.mapcard{position:relative;border-radius:38px;overflow:hidden;border:6px solid #fff;background:#e9f6e4;box-shadow:0 9px 0 var(--butter-deep)}
+.map-art{display:block;width:100%;height:auto;max-width:none;font-family:var(--body)}
+.map-art .m-lbl{font-weight:800}
+.mapcard figcaption{position:absolute;left:14px;bottom:12px;background:rgba(255,255,255,.94);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.pin{position:absolute;transform:translate(-50%,-90%);filter:drop-shadow(0 4px 3px rgba(43,53,82,.28))}
+.p1{left:46.9%;top:71%} .p2{left:55.8%;top:57%} .p3{left:55.8%;top:40.5%}
+.directions{display:grid;gap:20px}
+.addr{background:#fff;border-radius:28px;padding:16px 22px;font-size:17px;line-height:1.4;box-shadow:0 6px 0 var(--butter-deep)}
+.addr b{display:block;font:800 23px/1.15 var(--head)}
+.fict{color:var(--ink-soft);font-size:14px}
+.dirs{display:grid;gap:14px}
+.dirs li{display:flex;gap:14px;align-items:flex-start}
+.dir-no{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;font:800 18px/1 var(--head)}
+.dir-txt{display:flex;flex-direction:column;line-height:1.4}
+.dir-txt b{font:800 19px/1.2 var(--head)}
+.dir-txt span{color:var(--ink-soft);font-size:15.5px}
+.bus{display:flex;gap:12px;align-items:center;font-weight:700}
+
+/* ---------- rsvp ---------- */
+.rsvp-grid{display:grid;gap:24px}
+@media(min-width:1000px){.rsvp-grid{grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);align-items:start;gap:30px}}
+.fr-count{margin-top:6px;color:var(--ink-soft)}
+.avatars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:20px 0}
+@media(min-width:440px){.avatars{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.avatars li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;padding:10px 4px 8px;border-radius:24px;background:var(--cream);line-height:1.2}
+.avatars b{font:800 15px/1.2 var(--head);margin-top:2px}
+.avatars small{color:var(--ink-soft);font-size:13px;font-weight:700}
+.avatars li:not(.more) small::before{content:"age "}
+.more-dot{display:grid;place-items:center;width:60px;height:60px;border-radius:50%;background:var(--butter);font:800 20px/1 var(--head)}
+.avatars li.you{background:var(--butter);box-shadow:inset 0 0 0 3px var(--ink)}
+.spots{display:flex;align-items:center;gap:16px;padding:14px 18px 14px 14px;border-radius:28px;background:var(--mint)}
+.spots p{display:flex;flex-direction:column;line-height:1.3}
+.spots b{font:800 21px/1.1 var(--head)}
+.spots span{font-size:14.5px;color:var(--ink-soft)}
+.friends-photo{margin-top:22px;border-radius:30px;overflow:hidden;aspect-ratio:1/1;border:5px solid #fff;box-shadow:0 6px 0 var(--blush-deep)}
+.friends-photo img{width:100%;height:100%;object-fit:cover}
+.rsvp-form{display:grid;gap:26px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{display:flex;align-items:center;gap:10px;font:800 22px/1.1 var(--head);padding:0;margin-bottom:14px}
+legend small{font:600 14px/1.3 var(--body);color:var(--ink-soft)}
+.field{display:grid;gap:7px;align-content:start}
+fieldset>.field+.field,fieldset>.field-row+.field,fieldset>.chips+.err,fieldset>.err+.field{margin-top:16px}
+.field-row{display:grid;gap:16px}
+@media(min-width:560px){.field-row{grid-template-columns:1.25fr 1fr}}
+.field>label,.lbl{font-weight:800;font-size:16px}
+.req{color:var(--rose-ink)}
+.hint{font-size:14px;color:var(--ink-soft)}
+input[type="text"],select,textarea{width:100%;min-height:56px;padding:12px 16px;border-radius:20px;border:2.5px solid var(--hair);background:#fff;font-size:17px;transition:border-color .15s,box-shadow .15s}
+textarea{min-height:104px;resize:vertical}
+input[type="text"]:focus,select:focus,textarea:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 4px var(--butter)}
+input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="true"]{border-color:var(--rose-ink);background:#fff6f8}
+.err{color:var(--rose-ink);font-weight:800;font-size:14.5px}
+.err[hidden]{display:none}
+.stepper{display:inline-flex;align-items:center;gap:18px}
+.stepper output{min-width:2ch;text-align:center;font:800 30px/1 var(--head)}
+.chip-check{position:relative;cursor:pointer}
+.chip-check input{position:absolute;opacity:0;inset:0;margin:0;width:100%;height:100%;cursor:pointer}
+.chip-check span{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;background:var(--cream);box-shadow:inset 0 0 0 2.5px var(--hair);font-weight:800;transition:background .15s,color .15s}
+.chip-check:hover span{background:var(--butter-soft)}
+.chip-check input:checked+span{background:var(--ink);color:#fff;box-shadow:none}
+.chip-check input:focus-visible+span{outline:3px solid var(--sky-ink);outline-offset:3px}
+.consent{display:flex;gap:14px;align-items:flex-start;min-height:44px;font-weight:600;font-size:16px;cursor:pointer}
+.consent input{width:32px;height:32px;margin:0;flex:none;accent-color:var(--ink)}
+.rsvp-done{text-align:center;display:grid;gap:16px;justify-items:center;padding:14px 0 6px}
+.rsvp-done[hidden]{display:none}
+.rsvp-done:focus{outline:none}
+.late-note{display:flex;gap:12px;align-items:flex-start;margin:0 0 24px;padding:14px 18px;border-radius:24px;background:var(--butter-soft);box-shadow:inset 0 0 0 2px var(--butter);font-weight:700;line-height:1.45}
+.late-note>[data-ico]{margin-top:1px}
+.rsvp-past{display:grid;gap:14px;justify-items:start;padding:6px 0}
+.rsvp-past h3{font:800 clamp(28px,4vw,38px)/1.1 var(--head)}
+.rsvp-past p{max-width:50ch}
+.rsvp-done h3{font:800 clamp(30px,4.2vw,42px)/1.1 var(--head)}
+.rsvp-done p{max-width:46ch}
+.done-av{display:grid;place-items:center}
+.done-allergy{background:var(--butter-soft);border-radius:22px;padding:10px 18px;font-weight:700}
+.rsvp-done .btn-row{justify-content:center}
+
+/* ---------- faq ---------- */
+.faq{display:grid;gap:12px}
+@media(min-width:980px){.faq{grid-template-columns:1fr 1fr;align-items:start;gap:14px 20px}}
+.faq details{background:var(--cream);border-radius:28px;box-shadow:inset 0 0 0 2.5px var(--butter)}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:72px;padding:10px 14px 10px 24px;list-style:none;cursor:pointer;font:800 19px/1.25 var(--head)}
+.faq details p{padding:0 24px 22px;max-width:62ch}
+
+/* ---------- sign-off, credits, footer ---------- */
+.signoff{position:relative;margin-top:-44px;border-radius:44px 44px 0 0;padding:calc(44px + clamp(36px,5vw,64px)) 0 calc(44px + clamp(40px,6vw,72px));background:var(--butter);overflow:hidden;box-shadow:0 -14px 28px -18px rgba(43,53,82,.16)}
+.so-in{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.so-in{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+.so-copy h2{font-size:clamp(42px,6.6vw,76px);line-height:1}
+.so-copy>p{margin-top:16px;font-size:19.5px;max-width:48ch}
+.so-copy .eyebrow{margin-bottom:12px}
+.so-copy .sig{margin-top:22px;font:800 32px/1.2 var(--head);color:var(--sky-ink)}
+.hosts{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.hosts li{display:flex;gap:12px;align-items:center;background:#fff;border-radius:999px;padding:8px 24px 8px 10px;box-shadow:0 5px 0 var(--butter-deep)}
+.hosts li>span:last-child{display:flex;flex-direction:column;line-height:1.25}
+.hosts a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;font-size:15px}
+.so-art{position:relative;height:calc(410px*min(var(--k),1.4));max-width:500px;width:100%;justify-self:center}
+.so-art::before{content:"";position:absolute;inset:6% 4% 4%;border-radius:50%;background:radial-gradient(circle at 50% 45%,#fff 0,rgba(255,255,255,.75) 55%,rgba(255,255,255,0) 72%)}
+.so-art>span{position:absolute}
+/* big icons (Size slider above about 1.3x): the sign-off art flows instead of overlapping */
+html[data-big="1"] .so-art{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:0;height:auto;padding:24px 0}
+html[data-big="1"] .so-art>span{position:static;transform:none!important}
+.so-a{top:0;right:2%} .so-b{bottom:0;left:26%} .so-c{top:20%;left:2%} .so-d{bottom:9%;right:0}
+@media(max-width:899px){.so-art{height:calc(290px*min(var(--k),1.4));max-width:360px}.so-a{transform:scale(.8);transform-origin:top right}.so-b{transform:scale(.85)}.so-c{transform:scale(.85)}.so-d{transform:scale(.8);transform-origin:bottom right}}
+.credits{position:relative;margin-top:-44px;border-radius:44px 44px 0 0;background:var(--paper);padding:calc(44px + 56px) 0 calc(44px + 44px);font-size:15px;box-shadow:0 -14px 28px -18px rgba(43,53,82,.16)}
+.credits h2{font-size:32px;margin-bottom:16px}
+.credits ul{display:grid;gap:7px;margin-bottom:20px}
+.credits li{position:relative;padding-left:20px;line-height:1.5}
+.credits li::before{content:"";position:absolute;left:3px;top:.62em;width:8px;height:8px;border-radius:50%;background:var(--sun)}
+.credits p{color:var(--ink-soft);margin-top:8px}
+.credits a{position:relative}
+.credits a::after{content:"";position:absolute;inset:-12px -3px}
+.site-foot{position:relative;margin-top:-44px;border-radius:44px 44px 0 0;background:var(--ink);color:#e9edf7;padding:calc(44px + 44px) 0 96px}
+.foot-in{display:grid;gap:12px}
+.foot-brand{display:flex;gap:12px;align-items:center;font:800 25px/1 var(--head);color:#fff}
+.foot-brand [data-ico]{color:#fff}
+.site-foot a{color:#ffe08a}
+.foot-small{font-size:14px;opacity:.85}
+.foot-links{display:flex;gap:6px 22px;flex-wrap:wrap;margin-top:6px;font-weight:700}
+.foot-links a{display:inline-flex;align-items:center;min-height:44px}
+.page-toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);z-index:70;max-width:calc(100vw - 32px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;font-weight:800;text-align:center;box-shadow:0 10px 30px rgba(43,53,82,.35)}
+.page-toast[hidden]{display:none}
+
+
+/* ---------- mobile refinements ---------- */
+.kicker{align-items:center}
+.kicker-txt{display:inline}
+.kicker-txt b{font-weight:800}
+@media(max-width:520px){
+  .kicker{border-radius:26px;padding:8px 16px 8px 10px;align-items:center}
+  .kicker-txt b{display:block}
+  .kicker-txt .dot{display:none}
+  .brand-name{font-size:19px}
+  .brand-mark{width:46px;height:46px}
+  .brand-mark [data-ico]{transform:scale(.85)}
+  .nav-toggle{padding:0 14px 0 10px}
+  .snack{flex-direction:row;align-items:center;gap:14px;padding:14px}
+  .snack-art{width:calc(92px*var(--k));min-height:calc(92px*var(--k));max-width:48%;flex:none;border-radius:22px}
+  .snack-body{min-width:0}
+  .snack h3{font-size:18.5px}
+  .pick-row{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pick>span{flex-direction:column;gap:4px;min-height:84px;font-size:14px;padding:8px 4px}
+}
+@media(max-width:919px){.f-sun{display:none}}
+@media(min-width:560px) and (max-width:859px){.stage-media{aspect-ratio:16/10}}
+@media(max-width:999px){.form-card{order:-1}}
+@media(max-width:640px){.map-art{width:128%}.map-art .m-st{font-size:19px}.map-art .m-no{font-size:17px}.map-art .m-av{font-size:16px}.p1{left:60%!important}.p2,.p3{left:71.4%!important}}
+
+/* ---------- levels ---------- */
+html[data-level="0"] .kit-live{border-radius:24%;background:var(--cream);box-shadow:inset 0 0 0 2px var(--hair);font-family:var(--head);font-weight:800;color:var(--ink);text-align:center}
+html[data-level="0"] .fact-art .kit-live{border-radius:20px;background:var(--butter-soft)}
+html[data-level="0"] .so-in{grid-template-columns:minmax(0,1fr);width:min(100% - 2*var(--gutter),760px);margin-left:max(var(--gutter),calc((100% - var(--maxw))/2));margin-right:auto}
+html[data-level="0"] .hero-dots{opacity:.5}
+@media(max-width:520px){.hero-cta .btn{width:100%}.btn-row .btn{flex:1 1 100%}.callout{flex-direction:column;align-items:flex-start}}
+
+/* ---------- print: the fridge chart ---------- */
+@media print{
+  body.printing-chart .announce,body.printing-chart .site-head,body.printing-chart .hero,body.printing-chart main>section:not(#plan),
+  body.printing-chart .credits,body.printing-chart .site-foot,body.printing-chart .chart-foot,body.printing-chart .stage,body.printing-chart .page-toast,body.printing-chart .signoff{display:none!important}
+  body.printing-chart .sec{margin:0;padding:24px 0;box-shadow:none;border-radius:0}
+  body.printing-chart .chart{grid-template-columns:repeat(2,1fr)}
+  body.printing-chart .tile{min-height:250px;box-shadow:none;border:3px solid var(--ink)}
+  body.printing-chart .step::after{display:none}
+  body.printing-chart .tile{outline:none!important;transform:none!important}
+  body.printing-chart *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+
+/* ---------- small states ---------- */
+[hidden]{display:none!important}
+.round[disabled]{opacity:.35;cursor:default;transform:none;box-shadow:inset 0 0 0 2.5px var(--ink)}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Sunny Day Playdate is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<a class="skip" href="#main">Skip to the plan</a>
+
+<div class="announce" role="note">
+  <span data-ico="bell" data-size="20">🔔</span>
+  <p class="ann-open">RSVP by <b>Friday 16 October</b> <span class="dot" aria-hidden="true">&middot;</span> <b id="spots-left">5</b> of 14 family spots left</p>
+  <p class="ann-late" hidden>RSVPs closed on Friday 16 October, but text Lucia on <b>555-0142</b> if you would still like to join us.</p>
+  <p class="ann-past" hidden>This playdate has happened. <b>Thank you</b> to every family who came!</p>
+</div>
+
+<header class="site-head" id="top">
+  <div class="wrap head-in">
+    <a class="brand" href="#top" aria-label="Sunny Day Playdate, back to the top">
+      <span class="brand-mark"><span data-ico="sun" data-size="34" data-motion="hover">☀️</span></span>
+      <span class="brand-name">Sunny Day <em>Playdate</em></span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span data-ico="menu" data-size="24">☰</span><span>Menu</span>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Sections of this invitation">
+      <a href="#plan">The plan</a>
+      <a href="#weather">Weather</a>
+      <a href="#bring">What to bring</a>
+      <a href="#snacks">Snacks</a>
+      <a href="#grownups">Grown-ups</a>
+      <a href="#find">Find us</a>
+      <a class="btn small primary" id="nav-rsvp" href="#rsvp">RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-dots" aria-hidden="true"></div>
+  <span class="float f-sun" data-min-level="2" aria-hidden="true"><span data-ico="sun" data-size="104" data-motion="loop"></span></span>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker"><span data-ico="party-popper" data-size="28">🎉</span><span class="kicker-txt"><b id="kick-b">You&rsquo;re invited</b><span class="dot" aria-hidden="true">&middot;</span>ages 1 to 4 and their grown-ups</span></p>
+      <h1 id="h1"><span class="mark">Sunny Day</span> <span class="blue">Playdate</span></h1>
+      <p class="hero-lede">Two easy hours of bubbles, building blocks and a picnic blanket in the Reyes backyard. Shoes off, sun hats on, and no rushing anywhere.</p>
+
+      <ul class="facts">
+        <li class="fact">
+          <span class="fact-art fact-date"><span data-live="calendar-date" data-p-day="21" data-p-month="OCT" data-size="76" data-label="Wednesday 21 October">21 Oct</span></span>
+          <span class="fact-txt"><b>Wednesday</b><span>21 October 2026</span></span>
+        </li>
+        <li class="fact">
+          <span class="fact-art fact-time"><span data-live="clock-time" data-p-time="10:00" data-size="76" data-label="10 o&rsquo;clock">10:00</span></span>
+          <span class="fact-txt"><b>10 am to noon</b><span>Drop in any time before 10:20</span></span>
+        </li>
+        <li class="fact">
+          <span class="fact-art"><span data-ico="map-pin" data-size="68" data-label="Map pin">📍</span></span>
+          <span class="fact-txt"><b>27 Wren Street</b><span>Blue side gate, then the backyard</span></span>
+        </li>
+      </ul>
+
+      <div class="hero-cta">
+        <a class="btn primary" id="cta-save" href="#rsvp"><span data-ico="calendar-check" data-size="24">✅</span> Save our spot</a>
+        <button class="btn" id="cta-cal" type="button" data-add-cal><span data-ico="calendar-plus" data-size="24">📆</span> Add to calendar</button>
+        <a class="btn primary" id="cta-next" href="sms:555-0142" hidden><span data-ico="message-circle" data-size="24">💬</span> Text Lucia about the next one</a>
+      </div>
+      <p class="hero-hosts"><span data-ico="heart" data-size="20">💛</span> Hosted by Lucia Reyes &amp; Priya Shah. Babies in arms and older siblings are welcome too.</p>
+    </div>
+
+    <figure class="arch">
+      <span class="float f-cloud" data-min-level="2" aria-hidden="true"><span data-ico="cloud" data-size="84"></span></span>
+      <span class="float f-balloon" data-min-level="2" aria-hidden="true"><span data-ico="balloon" data-size="76" data-motion="hover"></span></span>
+      <span class="float f-flower" data-min-level="2" aria-hidden="true"><span data-ico="flower" data-size="68" data-motion="hover"></span></span>
+      <div class="arch-frame">
+        <img src="_img/sunny-playdate/photo-1507250671672-b76f9dde4188-1600.jpg" width="1200" height="800" fetchpriority="high" decoding="async" style="object-position:84% 40%" alt="A smiling toddler in a turquoise striped dress claps her hands while standing in sunlit tall green grass.">
+      </div>
+      <div class="sticker st-weather" aria-label="Forecast preview">
+        <span id="hero-wx" data-live="weather" data-p-condition="partly" data-p-temperature="64" data-p-unit="degree" data-size="92" data-label="Partly sunny, 64 degrees">⛅ 64°</span>
+        <span class="st-cap"><b>Forecast</b><a href="#weather">See the weather plan</a></span>
+      </div>
+      <div class="sticker st-count">
+        <span id="count-ring" data-live="timer-ring" data-p-left="10" data-p-total="30" data-size="68" data-label="10 days to go">10</span>
+        <span class="st-cap"><b id="count-title">10 days to go</b><span id="count-sub">Gates open at 10 am</span></span>
+      </div>
+      <figcaption class="photo-credit">Photo: <a href="https://unsplash.com/@patrickian4?utm_source=withicons_demos&amp;utm_medium=referral">Patrick Fore</a> on <a href="https://unsplash.com/photos/toddler-with-teal-dress-on-green-grass-field-during-daytime-T2S4CatGdfQ?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ OUR MORNING (picture schedule) ============ -->
+<section class="sec paper" id="plan" aria-labelledby="plan-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:var(--butter);--cd:var(--butter-deep)"><span data-ico="clock" data-size="60">🕙</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow">Our morning</p>
+        <h2 id="plan-h">The plan, in pictures</h2>
+        <p class="lede">Same order every time, so little ones always know what comes next. Tap a picture to see what happens, and what grown-ups can do while it does.</p>
+      </div>
+    </header>
+
+    <ol class="chart" id="chart">
+      <li class="step s1">
+        <button class="tile" type="button" data-go="1" aria-pressed="true" aria-controls="stage">
+          <span class="tile-no" aria-hidden="true">1</span>
+          <span class="tile-art"><span data-ico="door-open" data-size="76" data-motion="hover">🚪</span></span>
+          <span class="tile-time"><span data-live="clock-time" data-p-time="10:00" data-size="30" data-min-level="2"></span>10:00</span>
+          <span class="tile-name">Hello &amp; shoes off</span>
+        </button>
+      </li>
+      <li class="step s2">
+        <button class="tile" type="button" data-go="2" aria-pressed="false" aria-controls="stage">
+          <span class="tile-no" aria-hidden="true">2</span>
+          <span class="tile-art"><span data-ico="puzzle-piece" data-size="76" data-motion="hover">🧩</span></span>
+          <span class="tile-time"><span data-live="clock-time" data-p-time="10:15" data-size="30" data-min-level="2"></span>10:15</span>
+          <span class="tile-name">Free play</span>
+        </button>
+      </li>
+      <li class="step s3">
+        <button class="tile" type="button" data-go="3" aria-pressed="false" aria-controls="stage">
+          <span class="tile-no" aria-hidden="true">3</span>
+          <span class="tile-art bubbles">
+            <span data-ico="sparkles" data-size="68" data-motion="hover">🫧</span>
+            <span class="bub b1" data-min-level="2" aria-hidden="true"><span class="soap s1"></span></span>
+            <span class="bub b2" data-min-level="2" aria-hidden="true"><span class="soap s2"></span></span>
+          </span>
+          <span class="tile-time"><span data-live="clock-time" data-p-time="10:50" data-size="30" data-min-level="2"></span>10:50</span>
+          <span class="tile-name">Bubble time</span>
+        </button>
+      </li>
+      <li class="step s4">
+        <button class="tile" type="button" data-go="4" aria-pressed="false" aria-controls="stage">
+          <span class="tile-no" aria-hidden="true">4</span>
+          <span class="tile-art"><span data-ico="apple" data-size="76" data-motion="hover">🍎</span></span>
+          <span class="tile-time"><span data-live="clock-time" data-p-time="11:10" data-size="30" data-min-level="2"></span>11:10</span>
+          <span class="tile-name">Snack on the blanket</span>
+        </button>
+      </li>
+      <li class="step s5">
+        <button class="tile" type="button" data-go="5" aria-pressed="false" aria-controls="stage">
+          <span class="tile-no" aria-hidden="true">5</span>
+          <span class="tile-art"><span data-ico="book-open" data-size="76" data-motion="hover">📖</span></span>
+          <span class="tile-time"><span data-live="clock-time" data-p-time="11:35" data-size="30" data-min-level="2"></span>11:35</span>
+          <span class="tile-name">Story circle</span>
+        </button>
+      </li>
+      <li class="step s6">
+        <button class="tile" type="button" data-go="6" aria-pressed="false" aria-controls="stage">
+          <span class="tile-no" aria-hidden="true">6</span>
+          <span class="tile-art"><span data-ico="hand" data-size="76" data-motion="hover">👋</span></span>
+          <span class="tile-time"><span data-live="clock-time" data-p-time="11:50" data-size="30" data-min-level="2"></span>11:50</span>
+          <span class="tile-name">Wave goodbye</span>
+        </button>
+      </li>
+    </ol>
+
+    <div class="stage" id="stage" data-step="1">
+      <p class="sr-only" id="stage-live" aria-live="polite"></p>
+      <div class="stage-bar">
+        <span class="stage-clock"><span id="stage-clock" data-live="clock-time" data-p-time="10:00" data-size="72" data-label="10 o&rsquo;clock">10:00</span></span>
+        <div class="stage-head">
+          <p class="stage-when"><b id="stage-when">10:00 to 10:15</b> <span id="stage-dur">15 minutes</span> <span class="stage-of" id="stage-of">Step 1 of 6</span></p>
+          <h3 id="stage-title">Hello and shoes off</h3>
+        </div>
+        <div class="stage-nav">
+          <button class="round" type="button" id="step-prev" aria-label="Previous step"><span data-ico="chevron-left" data-size="26">←</span></button>
+          <button class="round" type="button" id="step-next" aria-label="Next step"><span data-ico="chevron-right" data-size="26">→</span></button>
+        </div>
+      </div>
+
+      <div class="stage-panels">
+        <!-- 1 -->
+        <article class="stage-panel" data-step="1" data-title="Hello and shoes off" data-time="10:00" data-when="10:00 to 10:15" data-dur="15 minutes">
+          <figure class="stage-media">
+            <img src="_img/sunny-playdate/10024455-1000.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:50% 58%" alt="A girl in a white dress arranges a pastel garden party table with flowers, teddy bears, pink cups, paper pom-poms and bunting in front of a pale blue wooden house.">
+          </figure>
+          <div class="stage-body">
+            <p class="stage-lede">The gate opens at 10:00. Shoes and socks come off on the porch mat (there is a labeled shoe rack), and little hands get a splash at the garden sink before anyone heads for the lawn.</p>
+            <div class="duo-lists">
+              <div>
+                <h4><span data-ico="smile" data-size="28">😊</span> For little ones</h4>
+                <ul>
+                  <li>Pick a name sticker: stars, moons and dinosaurs</li>
+                  <li>Wave hello to the bunting</li>
+                  <li>First stop: the splashy water table</li>
+                </ul>
+              </div>
+              <div>
+                <h4><span data-ico="coffee" data-size="28">☕</span> For grown-ups</h4>
+                <ul>
+                  <li>Park strollers under the green awning</li>
+                  <li>Bags go on the bench by the back door</li>
+                  <li>Tell us about any allergy you have not mentioned yet</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- 2 -->
+        <article class="stage-panel" data-step="2" data-title="Free play, three stations" data-time="10:15" data-when="10:15 to 10:50" data-dur="35 minutes">
+          <div class="stage-media mosaic">
+            <figure class="m-a">
+              <img src="_img/sunny-playdate/15091661-700.jpg" width="1200" height="1500" loading="lazy" decoding="async" style="object-position:50% 60%" alt="A toddler with twisted braids sits barefoot in warm sand holding a toy dinosaur among colorful wooden shape-sorter pieces.">
+              <figcaption>Sand tray</figcaption>
+            </figure>
+            <figure class="m-b">
+              <img src="_img/sunny-playdate/7269700-700.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:45% 62%" alt="A red-haired toddler builds a row of natural wooden blocks and towers on a pale floor beside a wooden toy train.">
+              <figcaption>Block table</figcaption>
+            </figure>
+            <figure class="m-c">
+              <img src="_img/sunny-playdate/40103784-700.jpg" width="1200" height="801" loading="lazy" decoding="async" style="object-position:50% 55%" alt="Overhead view of a toddler reaching out to paint on a white floor splashed with bright paints, brushes and paint pots.">
+              <figcaption>Paint mat</figcaption>
+            </figure>
+          </div>
+          <div class="stage-body">
+            <p class="stage-lede">No timetable and no pressure. Wander between a sand tray with scoops and a toy dinosaur, a low table of wooden blocks and a little train, and a washable paint mat spread out on the grass.</p>
+            <div class="duo-lists">
+              <div>
+                <h4><span data-ico="smile" data-size="28">😊</span> For little ones</h4>
+                <ul>
+                  <li>Scoop, pour and bury the dinosaur</li>
+                  <li>Build the tallest tower (knocking it down counts)</li>
+                  <li>Paint with brushes, hands or toes</li>
+                </ul>
+              </div>
+              <div>
+                <h4><span data-ico="coffee" data-size="28">☕</span> For grown-ups</h4>
+                <ul>
+                  <li>Stay within arm&rsquo;s reach at the sand tray</li>
+                  <li>Coffee, tea and lemon water are on the porch</li>
+                  <li>Smocks are on the hooks, so paint is welcome</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- 3 -->
+        <article class="stage-panel" data-step="3" data-title="Bubble time" data-time="10:50" data-when="10:50 to 11:10" data-dur="20 minutes">
+          <figure class="stage-media">
+            <img src="_img/sunny-playdate/photo-1754423840139-a1a0265327f8-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:50% 45%" alt="A small boy in a striped shirt, seen from the side, reaches toward dozens of soap bubbles floating in a shady park.">
+          </figure>
+          <div class="stage-body">
+            <p class="stage-lede">Priya brings out the big wands and a bucket of the good bubble mix. Little ones chase, stomp and pop; a quieter bubble corner is set up for anyone who would rather watch.</p>
+            <div class="duo-lists">
+              <div>
+                <h4><span data-ico="smile" data-size="28">😊</span> For little ones</h4>
+                <ul>
+                  <li>Chase the giant bubbles across the lawn</li>
+                  <li>Pop them with a finger, a foot or a nose</li>
+                  <li>Blow your own with the little wands</li>
+                </ul>
+              </div>
+              <div>
+                <h4><span data-ico="coffee" data-size="28">☕</span> For grown-ups</h4>
+                <ul>
+                  <li>Bubble mix is tear-free, but keep it off faces</li>
+                  <li>Wipes for sticky hands are at the bench</li>
+                  <li>Great moment for photos (ask before sharing!)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- 4 -->
+        <article class="stage-panel" data-step="4" data-title="Snack on the blanket" data-time="11:10" data-when="11:10 to 11:35" data-dur="25 minutes">
+          <figure class="stage-media">
+            <img src="_img/sunny-playdate/5119630-1000.jpg" width="1200" height="1553" loading="lazy" decoding="async" style="object-position:50% 50%" alt="Two smiling girls sit with their arms around each other on a pastel striped picnic blanket beside a wicker basket of snacks, with a white sun hat on the lawn.">
+          </figure>
+          <div class="stage-body">
+            <p class="stage-lede">Everyone sits on the big striped blankets. Small plates, small cups, and every dish is nut-free with its ingredients written on a card in front of it.</p>
+            <div class="duo-lists">
+              <div>
+                <h4><span data-ico="smile" data-size="28">😊</span> For little ones</h4>
+                <ul>
+                  <li>Wash hands (again), then pick a plate</li>
+                  <li>Try one new thing, or none at all</li>
+                  <li>Clink water cups and say &ldquo;cheers&rdquo;</li>
+                </ul>
+              </div>
+              <div>
+                <h4><span data-ico="coffee" data-size="28">☕</span> For grown-ups</h4>
+                <ul>
+                  <li>Read the allergy cards before serving</li>
+                  <li>Quarter grapes and anything round</li>
+                  <li>Shared snacks go on the long table</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- 5 -->
+        <article class="stage-panel" data-step="5" data-title="Story circle" data-time="11:35" data-when="11:35 to 11:50" data-dur="15 minutes">
+          <figure class="stage-media">
+            <img src="_img/sunny-playdate/4966471-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:50% 50%" alt="Two children seen from behind sit side by side on a gray quilted blanket on sunlit grass, each holding an open picture book.">
+          </figure>
+          <div class="stage-body">
+            <p class="stage-lede">A quiet reset on the grass. Lucia reads two short picture books with actions and animal noises, then we sing one song together before the goodbyes.</p>
+            <div class="duo-lists">
+              <div>
+                <h4><span data-ico="smile" data-size="28">😊</span> For little ones</h4>
+                <ul>
+                  <li>Sit on a mat, a lap or a tummy (sprawling is allowed)</li>
+                  <li>Make the sounds: moo, splash, whoosh</li>
+                  <li>Sing along to &ldquo;The Wheels on the Bus&rdquo;</li>
+                </ul>
+              </div>
+              <div>
+                <h4><span data-ico="coffee" data-size="28">☕</span> For grown-ups</h4>
+                <ul>
+                  <li>A little rest for you too</li>
+                  <li>Phones away if you can</li>
+                  <li>A sleepy one can snooze in the shade tent</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+        <!-- 6 -->
+        <article class="stage-panel" data-step="6" data-title="Wave goodbye" data-time="11:50" data-when="11:50 to 12:00" data-dur="10 minutes">
+          <figure class="stage-media">
+            <img src="_img/sunny-playdate/photo-1647627611823-d08fa901678e-1000.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:50% 82%" alt="Three small children seen from behind sitting together in golden meadow grass in front of a backlit tree canopy.">
+          </figure>
+          <div class="stage-body">
+            <p class="stage-lede">One last round of bubbles, name stickers go home as souvenirs, and everyone gets a high five at the gate. There is no rush: the last family out usually stays for a chat.</p>
+            <div class="duo-lists">
+              <div>
+                <h4><span data-ico="smile" data-size="28">😊</span> For little ones</h4>
+                <ul>
+                  <li>Wave to every friend by name</li>
+                  <li>Choose a sunflower seed packet to plant at home</li>
+                  <li>High five at the blue gate</li>
+                </ul>
+              </div>
+              <div>
+                <h4><span data-ico="coffee" data-size="28">☕</span> For grown-ups</h4>
+                <ul>
+                  <li>Collect your bags and any wet clothes</li>
+                  <li>Say yes or no to the photo-sharing sheet</li>
+                  <li>Vote on the next playdate (first Wednesday of November?)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="chart-foot">
+      <p><span data-ico="printer" data-size="26">🖨️</span> Want the picture chart for the fridge? It prints on one page, big enough for little eyes.</p>
+      <button class="btn" type="button" id="print-chart"><span data-ico="printer" data-size="22">🖨️</span> Print the chart</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WEATHER ============ -->
+<section class="sec sky" id="weather" aria-labelledby="wx-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:#fff;--cd:var(--sky-deep)"><span data-ico="cloud-sun" data-size="60">⛅</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow">Sunshine check</p>
+        <h2 id="wx-h">Will it be a sunny day?</h2>
+        <p class="lede">We are planning for sun and ready for showers. Try each kind of day to see what we would do, and what to put in the bag.</p>
+      </div>
+    </header>
+
+    <div class="wx">
+      <div class="card wx-now">
+        <div class="wx-top">
+          <span class="wx-live" id="wx-live" data-live="weather" data-p-condition="partly" data-p-temperature="64" data-p-unit="degree" data-size="132" data-label="Partly sunny, 64 degrees">⛅ 64°</span>
+          <div>
+            <p class="wx-label">Wednesday 21 October, 10 am</p>
+            <p class="wx-sum" id="wx-sum">Partly sunny, 64°F</p>
+            <p class="wx-sub" id="wx-sub">A light breeze and shady corners under the maple.</p>
+          </div>
+        </div>
+        <ul class="wx-hours" id="wx-hours" aria-label="Hour by hour">
+          <li><span>10 am</span><span data-ico="cloud-sun" data-size="44">⛅</span><b>62°</b></li>
+          <li><span>11 am</span><span data-ico="cloud-sun" data-size="44">⛅</span><b>64°</b></li>
+          <li><span>12 pm</span><span data-ico="sun" data-size="44">☀️</span><b>66°</b></li>
+        </ul>
+        <div class="wx-meta">
+          <div class="meta">
+            <span id="wx-uv" data-live="uv-index" data-p-index="3" data-size="72" data-label="UV index 3">UV 3</span>
+            <span class="meta-txt"><b id="wx-uv-t">UV index 3: moderate</b><small id="wx-uv-n">Hats on, and sunscreen before you arrive.</small></span>
+          </div>
+          <div class="meta">
+            <span data-ico="wind" data-size="56">💨</span>
+            <span class="meta-txt"><b id="wx-wind">Light breeze, 8 mph</b><small id="wx-wind-n">Bubbles will drift nicely across the lawn.</small></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card wx-plan">
+        <fieldset class="wx-pick">
+          <legend>Try a different kind of day</legend>
+          <div class="pick-row">
+            <label class="pick"><input type="radio" name="wxs" value="sunny"><span><span data-ico="sun" data-size="30">☀️</span> Sunny</span></label>
+            <label class="pick"><input type="radio" name="wxs" value="partly" checked><span><span data-ico="cloud-sun" data-size="30">⛅</span> Partly sunny</span></label>
+            <label class="pick"><input type="radio" name="wxs" value="rain"><span><span data-ico="cloud-rain" data-size="30">🌧️</span> Showers</span></label>
+          </div>
+        </fieldset>
+        <div class="verdict" aria-live="polite">
+          <h3 id="wx-plan-h">Plan A: the whole backyard</h3>
+          <p id="wx-plan-p">Everything happens on the lawn. The snack blankets go under the big maple, where it is shady, and the bubble corner sits upwind.</p>
+          <ul class="dress" id="wx-dress">
+            <li><span data-ico="shield-check" data-size="32">🧴</span><span>Sunscreen on before you arrive, and a hat for sunny patches</span></li>
+            <li><span data-ico="shirt" data-size="32">👕</span><span>Light layers, easy to peel off or add</span></li>
+            <li><span data-ico="droplet" data-size="32">💧</span><span>A full water bottle; we top up at the garden tap</span></li>
+          </ul>
+        </div>
+        <p class="fine"><span data-ico="info-circle" data-size="20">ℹ️</span> A preview of what is typical for 21 October on Wren Street. The real forecast and a go or no-go text come at 8:30 am on the day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT TO BRING ============ -->
+<section class="sec mint" id="bring" aria-labelledby="bring-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:#fff;--cd:var(--mint-deep)"><span data-ico="backpack" data-size="60">🎒</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow">What to bring</p>
+        <h2 id="bring-h">Pack the bag, tick the box</h2>
+        <p class="lede">Eight small things, nothing fancy. Tick them off as you pack; we remember your ticks on this phone, even if you close the page.</p>
+      </div>
+    </header>
+
+    <div class="bring-grid">
+      <div class="bring-main">
+      <div class="pack-mini" aria-hidden="true">
+        <span id="pack-ring-mini" data-live="progress-ring" data-p-value="0" data-size="52">0%</span>
+        <span class="pm-txt"><span id="pack-mini-count">0 of 8 packed</span><small>Saved on this phone as you tick</small></span>
+      </div>
+      <ul class="check-list" id="bring-list">
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="water" data-name="Water bottle">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--sky)"><span data-ico="droplet" data-size="44" data-motion="hover">💧</span></span>
+            <span class="check-text"><b>Water bottle</b><small>Labeled, with a spill-proof lid. We top up at the garden tap.</small></span>
+          </label>
+        </li>
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="clothes" data-name="Change of clothes">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--lilac)"><span data-ico="shirt" data-size="44" data-motion="hover">👕</span></span>
+            <span class="check-text"><b>Change of clothes</b><small>Top, bottoms and socks in a bag. Paint and bubble mix both wash out, just not on the ride home.</small></span>
+          </label>
+        </li>
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="hat" data-name="Sun hat">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--butter)"><span data-ico="sun" data-size="44" data-motion="hover">👒</span></span>
+            <span class="check-text"><b>Sun hat</b><small>Wide brim or flap style. We keep a few small spares in case one gets forgotten.</small></span>
+          </label>
+        </li>
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="snack" data-name="One snack to share">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--blush)"><span data-ico="apple" data-size="44" data-motion="hover">🍎</span></span>
+            <span class="check-text"><b>One snack to share</b><small>Nut-free and cut small. Peek at the snack list below so every allergy is covered.</small></span>
+          </label>
+        </li>
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="sunscreen" data-name="Sunscreen, put on at home">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--peach)"><span data-ico="shield-check" data-size="44" data-motion="hover">🧴</span></span>
+            <span class="check-text"><b>Sunscreen, put on at home</b><small>Please apply before you arrive. A bottle lives by the gate for top-ups.</small></span>
+          </label>
+        </li>
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="comfort" data-name="A comfort friend">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--blush)"><span data-ico="teddy-bear" data-size="44" data-motion="hover" data-sample>🧸</span></span>
+            <span class="check-text"><b>A comfort friend</b><small>A lovey, a blankie or a favorite digger for the quiet moments.</small></span>
+          </label>
+        </li>
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="diapers" data-name="Diapers or pull-ups and wipes">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--sky)"><span data-ico="baby" data-size="44" data-motion="hover">👶</span></span>
+            <span class="check-text"><b>Diapers or pull-ups and wipes</b><small>The changing station has a mat and a bin. The supplies are yours to bring.</small></span>
+          </label>
+        </li>
+        <li>
+          <label class="check">
+            <input type="checkbox" name="bring" value="phone" data-name="Phone on silent">
+            <span class="box" aria-hidden="true"><span data-ico="check" data-size="26">✓</span></span>
+            <span class="check-art" style="--c:var(--lilac)"><span data-ico="bell-off" data-size="44" data-motion="hover">🔕</span></span>
+            <span class="check-text"><b>Phone on silent</b><small>Pictures of the little ones stay among friends. Please ask before posting.</small></span>
+          </label>
+        </li>
+      </ul>
+      </div>
+
+      <aside class="card bring-side" aria-label="Packing progress">
+        <span class="pack-ring" id="pack-ring" data-live="progress-ring" data-p-value="0" data-size="132" data-label="0 percent packed">0%</span>
+        <h3 id="pack-count">0 of 8 packed</h3>
+        <p id="pack-note">Nothing yet. Start with the water bottle.</p>
+        <div class="btn-col">
+          <button class="btn" type="button" id="copy-list"><span data-ico="copy" data-size="22">📋</span> Copy my list</button>
+          <button class="btn ghost" type="button" id="reset-list"><span data-ico="refresh" data-size="22">↺</span> Start over</button>
+        </div>
+        <details class="covered" id="covered" open>
+          <summary><span data-ico="hand-heart" data-size="30">🤲</span> We have these covered <span class="cv-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="22">▾</span></span></summary>
+          <ul>
+            <li><span data-ico="check" data-size="20">✓</span> Picnic blankets and a shade sail</li>
+            <li><span data-ico="check" data-size="20">✓</span> Bubble mix and wands</li>
+            <li><span data-ico="check" data-size="20">✓</span> Paint smocks and face wipes</li>
+            <li><span data-ico="check" data-size="20">✓</span> Cups and water refills</li>
+            <li><span data-ico="check" data-size="20">✓</span> Name stickers for everyone</li>
+          </ul>
+        </details>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SNACKS ============ -->
+<section class="sec blush" id="snacks" aria-labelledby="snacks-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:#fff;--cd:var(--blush-deep)"><span data-ico="apple" data-size="60">🍎</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow">Snack table</p>
+        <h2 id="snacks-h">Allergy-aware, always nut-free</h2>
+        <p class="lede">Every dish is made without peanuts and tree nuts, and each has its ingredients on a card. Tell us what your little one avoids to see what is safe on the blanket.</p>
+      </div>
+    </header>
+
+    <div class="callout">
+      <span data-ico="shield-check" data-size="48" data-label="Safety">🛡️</span>
+      <p><b>A peanut-free and tree-nut-free yard.</b> Please pack your shared snack without nuts or nut oils, and read the label for &ldquo;may contain&rdquo;. If your child has an allergy we do not list, mention it in the RSVP and we will make a safe plate.</p>
+    </div>
+
+    <div class="filters">
+      <p class="flt-h" id="flt-h">Show snacks that are free of:</p>
+      <div class="chips" role="group" aria-labelledby="flt-h">
+        <button class="chip" type="button" data-flt="dairy" aria-pressed="false"><span data-ico="cup-soda" data-size="24">🥛</span> Dairy</button>
+        <button class="chip" type="button" data-flt="gluten" aria-pressed="false"><span data-ico="cookie" data-size="24">🌾</span> Gluten</button>
+        <button class="chip" type="button" data-flt="egg" aria-pressed="false"><span data-ico="egg" data-size="24">🥚</span> Egg</button>
+        <button class="chip" type="button" data-flt="sesame" aria-pressed="false"><span data-ico="sprout" data-size="24">🌱</span> Sesame</button>
+        <button class="chip" type="button" data-flt="vegan" aria-pressed="false"><span data-ico="leaf" data-size="24">🥬</span> Vegan only</button>
+      </div>
+      <p class="flt-out" id="flt-out" aria-live="polite">All 8 snacks are showing.</p>
+    </div>
+
+    <ul class="snack-grid" id="snack-grid">
+      <li class="snack" data-contains="" data-vegan="1">
+        <span class="snack-art" style="--c:var(--blush)"><span data-ico="apple" data-size="60" data-motion="hover">🍎</span></span>
+        <div class="snack-body">
+          <h3>Apple and pear slices</h3>
+          <p>Thin slices, skin off for the under-twos.</p>
+          <p class="tags"><span class="tag ok">No top allergens</span><span class="tag">Vegan</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+      <li class="snack" data-contains="" data-vegan="1">
+        <span class="snack-art" style="--c:var(--butter)"><span data-ico="cookie" data-size="60" data-motion="hover">🍪</span></span>
+        <div class="snack-body">
+          <h3>Banana oat bites</h3>
+          <p>Mashed banana, gluten-free oats and cinnamon, baked soft.</p>
+          <p class="tags"><span class="tag ok">No top allergens</span><span class="tag">Vegan</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+      <li class="snack" data-contains="dairy" data-vegan="">
+        <span class="snack-art" style="--c:var(--butter)"><span data-ico="pizza" data-size="60" data-motion="hover">🧀</span></span>
+        <div class="snack-body">
+          <h3>Cheddar cubes and rice crackers</h3>
+          <p>Mild cheddar in tiny cubes, with plain rice crackers.</p>
+          <p class="tags"><span class="tag warn">Contains dairy</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+      <li class="snack" data-contains="sesame" data-vegan="1">
+        <span class="snack-art" style="--c:var(--mint)"><span data-ico="salad" data-size="60" data-motion="hover">🥗</span></span>
+        <div class="snack-body">
+          <h3>Cucumber coins and mild hummus</h3>
+          <p>Soft cucumber rounds with a smooth chickpea dip.</p>
+          <p class="tags"><span class="tag warn">Contains sesame</span><span class="tag">Vegan</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+      <li class="snack" data-contains="dairy,egg,gluten" data-vegan="">
+        <span class="snack-art" style="--c:var(--peach)"><span data-ico="donut" data-size="60" data-motion="hover">🧁</span></span>
+        <div class="snack-body">
+          <h3>Spinach and cheese mini muffins</h3>
+          <p>Savory and soft, from Priya&rsquo;s own recipe.</p>
+          <p class="tags"><span class="tag warn">Contains dairy</span><span class="tag warn">Egg</span><span class="tag warn">Gluten</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+      <li class="snack" data-contains="egg" data-vegan="">
+        <span class="snack-art" style="--c:var(--butter)"><span data-ico="egg" data-size="60" data-motion="hover">🥚</span></span>
+        <div class="snack-body">
+          <h3>Egg and zucchini bites</h3>
+          <p>Dairy-free, soft and cut into little fingers.</p>
+          <p class="tags"><span class="tag warn">Contains egg</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+      <li class="snack" data-contains="dairy" data-vegan="">
+        <span class="snack-art" style="--c:var(--lilac)"><span data-ico="ice-cream" data-size="60" data-motion="hover">🍦</span></span>
+        <div class="snack-body">
+          <h3>Berry yogurt pops</h3>
+          <p>Frozen in tiny paper cups and served last.</p>
+          <p class="tags"><span class="tag warn">Contains dairy</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+      <li class="snack" data-contains="" data-vegan="1">
+        <span class="snack-art" style="--c:var(--sky)"><span data-ico="cup-soda" data-size="60" data-motion="hover">🥤</span></span>
+        <div class="snack-body">
+          <h3>Water and oat milk</h3>
+          <p>Small cups only, with certified gluten-free oat milk. No juice.</p>
+          <p class="tags"><span class="tag ok">No top allergens</span><span class="tag">Vegan</span></p>
+          <p class="why" hidden></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ GROWN-UPS ============ -->
+<section class="sec paper" id="grownups" aria-labelledby="gu-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:var(--lilac);--cd:var(--lilac-deep)"><span data-ico="coffee" data-size="60">☕</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow">Grown-ups&rsquo; corner</p>
+        <h2 id="gu-h">The practical bits</h2>
+        <p class="lede">Tucked away so the plan stays simple. Open whatever you need, or open everything at once.</p>
+      </div>
+    </header>
+
+    <div class="gu-grid">
+      <div class="gu-main">
+        <div class="gu-tools">
+          <button class="btn small" type="button" id="gu-open">Open all</button>
+          <button class="btn small ghost" type="button" id="gu-close">Close all</button>
+        </div>
+        <div class="panels" id="panels">
+
+          <details class="panel" style="--c:var(--lilac);--cd:var(--lilac-deep)" open>
+            <summary>
+              <span class="p-ico"><span data-ico="bed" data-size="44">😴</span></span>
+              <span class="p-title"><b>Nap windows</b><small>10 to 12 sits between the morning and lunchtime naps</small></span>
+              <span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="28">▾</span></span>
+            </summary>
+            <div class="panel-body">
+              <p>We picked 10 to 12 on purpose: it falls between the morning and lunchtime naps for most one to three-year-olds. A pop-up shade tent with a soft mat and a white-noise speaker waits under the maple for catnaps, and story circle stays short and quiet.</p>
+              <div class="nap-helper">
+                <p class="nap-q" id="nap-q">When does your little one usually nap?</p>
+                <div class="chips" role="group" aria-labelledby="nap-q">
+                  <button class="chip" type="button" data-nap="early" aria-pressed="false">Before 10</button>
+                  <button class="chip" type="button" data-nap="mid" aria-pressed="false">Around 12 to 1</button>
+                  <button class="chip" type="button" data-nap="late" aria-pressed="false">After 2</button>
+                  <button class="chip" type="button" data-nap="none" aria-pressed="false">No more naps</button>
+                </div>
+                <p class="nap-out" id="nap-out" aria-live="polite">Pick one and we will tell you how the morning fits.</p>
+              </div>
+            </div>
+          </details>
+
+          <details class="panel" style="--c:var(--sky);--cd:var(--sky-deep)">
+            <summary>
+              <span class="p-ico"><span data-ico="parking" data-size="44">🅿️</span></span>
+              <span class="p-title"><b>Stroller parking</b><small>Under the green awning, behind the blue gate</small></span>
+              <span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="28">▾</span></span>
+            </summary>
+            <div class="panel-body">
+              <p>Strollers, wagons and balance bikes park on the flat side path under the green awning, out of the way of the lawn. You do not need to fold anything. A basket by the gate holds sun shades and rain covers, and we label every wheel with a name sticker so the right one goes home.</p>
+            </div>
+          </details>
+
+          <details class="panel" style="--c:var(--mint);--cd:var(--mint-deep)">
+            <summary>
+              <span class="p-ico"><span data-ico="baby" data-size="44">🚼</span></span>
+              <span class="p-title"><b>Changing station</b><small>Back porch, with a quieter spot in the hall</small></span>
+              <span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="28">▾</span></span>
+            </summary>
+            <div class="panel-body">
+              <p>There is a padded changing mat, a lidded bin and a stack of wipes on the back porch, and a second flat surface in the downstairs hall if you would like more privacy. Bring your own diapers or pull-ups; we keep two emergency packs in sizes 3 and 4.</p>
+            </div>
+          </details>
+
+          <details class="panel" style="--c:var(--blush);--cd:var(--blush-deep)">
+            <summary>
+              <span class="p-ico"><span data-ico="toilet" data-size="44">🚻</span></span>
+              <span class="p-title"><b>Bathroom</b><small>Just inside the back door, toddler-ready</small></span>
+              <span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="28">▾</span></span>
+            </summary>
+            <div class="panel-body">
+              <p>The downstairs bathroom has a step stool, a child-size toilet seat and a low sink. There is also a potty on the porch for the very newly trained. Accidents happen at every playdate, and nobody here will blink; that is what the spare clothes are for.</p>
+            </div>
+          </details>
+
+          <details class="panel" style="--c:var(--butter);--cd:var(--butter-deep)">
+            <summary>
+              <span class="p-ico"><span data-ico="umbrella" data-size="44">☔</span></span>
+              <span class="p-title"><b>Rain plan</b><small>Drizzle moves us under cover; storms move us a week</small></span>
+              <span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="28">▾</span></span>
+            </summary>
+            <div class="panel-body">
+              <p><b>Light rain:</b> play moves to the covered porch and the heated garage studio, with the same three stations and a rug. Bubbles stay outside under the awning.</p>
+              <p><b>Heavy rain, thunder or under 45&deg;F:</b> we text everyone by 8:30 am and move to <b>Wednesday 28 October</b>, same time, same blue gate.</p>
+            </div>
+          </details>
+
+          <details class="panel" style="--c:var(--lilac);--cd:var(--lilac-deep)">
+            <summary>
+              <span class="p-ico"><span data-ico="shield-check" data-size="44">🛡️</span></span>
+              <span class="p-title"><b>Safety in the yard</b><small>Fenced, latched and first-aid ready</small></span>
+              <span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="28">▾</span></span>
+            </summary>
+            <div class="panel-body">
+              <p>The yard is fully fenced and the blue gate has a high latch. Lucia and Priya both hold current pediatric first-aid certificates, and a kit lives on the porch shelf. The fire pit is covered and the hose is rolled away. A grown-up stays with each little one at all times.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <aside class="gu-side">
+        <figure class="gu-photo">
+          <img src="_img/sunny-playdate/33578681-1000.jpg" width="1200" height="783" loading="lazy" decoding="async" style="object-position:45% 50%" alt="A toddler in a white polo shirt toddles toward the camera holding a colorful ring toy while two smiling women sit chatting on a white blanket in a sunlit park behind him.">
+        </figure>
+        <div class="card gu-coffee">
+          <span data-ico="coffee" data-size="52" data-motion="hover">☕</span>
+          <p><b>Coffee is on the house.</b> Tea, decaf and lemon water too, on the porch from 9:45 until the last grown-up leaves.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIND US ============ -->
+<section class="sec butter" id="find" aria-labelledby="find-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:#fff;--cd:var(--butter-deep)"><span data-ico="map" data-size="60">🗺️</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow">Find us</p>
+        <h2 id="find-h">Easy to find, easy to park</h2>
+        <p class="lede">Look for the pastel bunting over the blue side gate. Three stops from the street to the lawn.</p>
+      </div>
+    </header>
+
+    <div class="find-grid">
+      <figure class="mapcard">
+        <svg class="map-art" viewBox="0 0 640 420" role="img" aria-label="Sketch map: Wren Street runs left to right, 3rd Avenue crosses on the right, and number 27 sits on the north side with its backyard behind it.">
+          <rect width="640" height="420" fill="#e9f6e4"/>
+          <!-- park -->
+          <rect x="530" y="0" width="110" height="250" fill="#cfeacb"/>
+          <circle cx="570" cy="60" r="22" fill="#a9d9a6"/><circle cx="604" cy="120" r="26" fill="#a9d9a6"/><circle cx="566" cy="190" r="20" fill="#a9d9a6"/>
+          <text class="m-lbl m-av" x="552" y="228" font-size="15" font-weight="800" fill="#2c7a54" opacity=".8">Alder Park</text>
+          <!-- roads -->
+          <rect x="0" y="252" width="640" height="62" fill="#fffdf4"/>
+          <rect x="468" y="0" width="58" height="420" fill="#fffdf4"/>
+          <path d="M0 283H640" stroke="#e2d6a8" stroke-width="3" stroke-dasharray="14 12"/>
+          <path d="M497 0V420" stroke="#e2d6a8" stroke-width="3" stroke-dasharray="14 12"/>
+          <text class="m-lbl m-st" x="22" y="304" font-size="14" font-weight="800" fill="#7a6d3b" letter-spacing="2">WREN STREET</text>
+          <text class="m-lbl m-st" transform="translate(487 396) rotate(-90)" font-size="14" font-weight="800" fill="#7a6d3b" letter-spacing="2">3RD AVENUE</text>
+          <!-- backyards -->
+          <rect x="30" y="40" width="96" height="124" rx="14" fill="#d6efd2"/>
+          <rect x="136" y="40" width="96" height="124" rx="14" fill="#d6efd2"/>
+          <rect x="246" y="30" width="104" height="134" rx="16" fill="#b8e6b0" stroke="#4aa46a" stroke-width="3" stroke-dasharray="9 7"/>
+          <rect x="364" y="40" width="96" height="124" rx="14" fill="#d6efd2"/>
+          <text class="m-lbl m-bk" x="257" y="72" font-size="13.5" font-weight="800" fill="#256b49">The backyard</text>
+          <!-- bunting -->
+          <path d="M252 86 Q298 108 344 86" fill="none" stroke="#f4a9bc" stroke-width="3"/>
+          <path d="M262 92l7 14 7-9zM282 99l7 14 7-10zM304 100l7 14 7-10zM326 96l7 14 7-10z" fill="#ffc93c"/>
+          <!-- houses -->
+          <rect x="30" y="176" width="96" height="62" rx="12" fill="#ffe1e7"/>
+          <rect x="136" y="176" width="96" height="62" rx="12" fill="#dcefff"/>
+          <rect x="246" y="176" width="104" height="62" rx="12" fill="#fff0b3" stroke="#e0a20f" stroke-width="3"/>
+          <rect x="364" y="176" width="96" height="62" rx="12" fill="#ece5fc"/>
+          <text class="m-lbl m-no" x="52" y="214" font-size="14" font-weight="800" fill="#6b5b6e">No. 23</text>
+          <text class="m-lbl m-no" x="158" y="214" font-size="14" font-weight="800" fill="#4a6682">No. 25</text>
+          <text class="m-lbl m-no" x="274" y="214" font-size="15" font-weight="800" fill="#7a5a00">No. 27</text>
+          <text class="m-lbl m-no" x="386" y="214" font-size="14" font-weight="800" fill="#5b4a8a">No. 29</text>
+          <!-- side path and blue gate -->
+          <rect x="351" y="164" width="12" height="76" fill="#f4eed4"/>
+          <rect x="349" y="160" width="16" height="9" rx="3" fill="#4a97e0"/>
+          <!-- awning -->
+          <rect x="352" y="206" width="10" height="28" rx="3" fill="#7fcaa0"/>
+          <!-- south side -->
+          <rect x="30" y="334" width="96" height="62" rx="12" fill="#ffe6d3"/>
+          <rect x="136" y="334" width="96" height="62" rx="12" fill="#d9f4e4"/>
+          <rect x="246" y="334" width="104" height="62" rx="12" fill="#ffe1e7"/>
+          <rect x="364" y="334" width="96" height="62" rx="12" fill="#dcefff"/>
+          <!-- parked cars -->
+          <rect x="252" y="257" width="96" height="20" rx="8" fill="none" stroke="#6fb88a" stroke-width="2.5" stroke-dasharray="7 6"/>
+          <rect x="46" y="259" width="38" height="18" rx="8" fill="#8cc6f2"/>
+          <rect x="92" y="259" width="38" height="18" rx="8" fill="#f4a9bc"/>
+          <rect x="160" y="259" width="38" height="18" rx="8" fill="#ffd75e"/>
+          <!-- bus stop -->
+          <rect x="432" y="258" width="26" height="14" rx="5" fill="#2d6aa8"/>
+        </svg>
+        <span class="pin p1"><span data-live="map-pin-number" data-p-param-label="1" data-size="46" data-label="Stop 1: park on Wren Street">1</span></span>
+        <span class="pin p2"><span data-live="map-pin-number" data-p-param-label="2" data-size="46" data-label="Stop 2: stroller parking">2</span></span>
+        <span class="pin p3"><span data-live="map-pin-number" data-p-param-label="3" data-size="46" data-label="Stop 3: the blue gate">3</span></span>
+        <figcaption>A sketch, not to scale. North is up.</figcaption>
+      </figure>
+
+      <div class="directions">
+        <address class="addr">
+          <b>The Reyes backyard</b>
+          27 Wren Street, Alder Park <span class="fict">(fictional address)</span>
+        </address>
+        <ol class="dirs">
+          <li>
+            <span class="dir-no" aria-hidden="true">1</span>
+            <span class="dir-txt"><b>Park on Wren Street</b><span>The even-numbered (north) curb has room for six cars. 3rd Avenue is free until 3 pm on weekdays.</span></span>
+          </li>
+          <li>
+            <span class="dir-no" aria-hidden="true">2</span>
+            <span class="dir-txt"><b>Roll up to the awning</b><span>Strollers and wagons park on the side path, no folding needed.</span></span>
+          </li>
+          <li>
+            <span class="dir-no" aria-hidden="true">3</span>
+            <span class="dir-txt"><b>Through the blue gate</b><span>The latch is high on purpose. Close it behind you and follow the bunting.</span></span>
+          </li>
+        </ol>
+        <p class="bus"><span data-ico="bus" data-size="32">🚌</span> <span>By bus: Route 14 stops at Wren and 3rd, a two-minute walk.</span></p>
+        <div class="btn-row">
+          <button class="btn" type="button" id="copy-addr"><span data-ico="copy" data-size="22">📋</span> Copy address</button>
+          <a class="btn ghost" href="sms:555-0142"><span data-ico="message-circle" data-size="22">💬</span> Text Lucia</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section class="sec blush" id="rsvp" aria-labelledby="rsvp-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:#fff;--cd:var(--blush-deep)"><span data-ico="send" data-size="60">💌</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow" id="rsvp-eyebrow">RSVP by Friday 16 October</p>
+        <h2 id="rsvp-h">Save a spot for your little one</h2>
+        <p class="lede" id="rsvp-lede">Tell us who is coming and any allergies, so the snack table is set up safely. It takes about a minute.</p>
+      </div>
+    </header>
+
+    <div class="rsvp-grid">
+      <aside class="card friends" aria-labelledby="fr-h">
+        <h3 id="fr-h"><span id="fr-title">Friends coming</span></h3>
+        <p class="fr-count"><b id="fam-count">9</b> families <span id="fr-verb">so far</span>, <b id="kid-count">12</b> little ones</p>
+        <ul class="avatars" id="avatars">
+          <li><span data-ico="avatar-girl" data-size="60">👧</span><b>Mina</b><small>2</small></li>
+          <li><span data-ico="avatar-boy" data-size="60">👦</span><b>Theo</b><small>3</small></li>
+          <li><span data-ico="avatar-baby" data-size="60">👶</span><b>Ollie</b><small>1</small></li>
+          <li><span data-ico="avatar-bunny" data-size="60">🐰</span><b>Zara</b><small>4</small></li>
+          <li><span data-ico="avatar-dino" data-size="60">🦖</span><b>Kai</b><small>2</small></li>
+          <li><span data-ico="avatar-bear" data-size="60">🐻</span><b>Noor</b><small>3</small></li>
+          <li class="more"><span class="more-dot">+6</span><b>more</b><small>coming</small></li>
+        </ul>
+        <div class="spots" id="spots-card">
+          <span id="spots-ring" data-live="progress-ring" data-p-value="64" data-size="92" data-label="64 percent of family spots taken">64%</span>
+          <p><b id="spots-txt">5 spots left</b><span><span id="spots-pct">64</span>% of the 14 family spots are taken, so it never gets crowded.</span></p>
+        </div>
+        <figure class="friends-photo">
+          <img src="_img/sunny-playdate/29562280-800.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:50% 55%" alt="Two babies in soft green and pale printed outfits sit back to back on a grassy slope under tall trees, both smiling and looking off to the side.">
+        </figure>
+      </aside>
+
+      <div class="card form-card">
+        <p class="late-note" id="late-note" hidden><span data-ico="info-circle" data-size="24">ℹ️</span><span>RSVPs closed on Friday 16 October. You can still send this form, then text Lucia on 555-0142 and she will confirm if there is room.</span></p>
+        <form id="rsvp-form" class="rsvp-form" action="#" novalidate>
+          <fieldset>
+            <legend><span data-ico="user" data-size="28">🧑</span> About you</legend>
+            <div class="field">
+              <label for="f-parent">Your name <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-parent" name="parent" type="text" autocomplete="name" required aria-describedby="e-parent">
+              <p class="err" id="e-parent" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-contact">Email or mobile number <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-contact" name="contact" type="text" autocomplete="email" inputmode="email" required aria-describedby="h-contact e-contact">
+              <p class="hint" id="h-contact">We only use it to send the weather text on the morning.</p>
+              <p class="err" id="e-contact" hidden></p>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span data-ico="baby" data-size="28">👶</span> About your little one</legend>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-child">First name <span class="req" aria-hidden="true">*</span></label>
+                <input id="f-child" name="child" type="text" autocomplete="off" required aria-describedby="e-child">
+                <p class="err" id="e-child" hidden></p>
+              </div>
+              <div class="field">
+                <label for="f-age">Age <span class="req" aria-hidden="true">*</span></label>
+                <select id="f-age" name="age" required aria-describedby="e-age">
+                  <option value="">Choose&hellip;</option>
+                  <option value="under 1">Under 1</option>
+                  <option value="1">1 year</option>
+                  <option value="2">2 years</option>
+                  <option value="3">3 years</option>
+                  <option value="4">4 years</option>
+                  <option value="5 or older">5 or older (a sibling)</option>
+                </select>
+                <p class="err" id="e-age" hidden></p>
+              </div>
+            </div>
+            <div class="field">
+              <span class="lbl" id="gu-lbl">Grown-ups coming <span class="req" aria-hidden="true">*</span></span>
+              <div class="stepper" role="group" aria-labelledby="gu-lbl">
+                <button class="round" type="button" id="gu-minus" aria-label="One fewer grown-up"><span data-ico="minus" data-size="24">−</span></button>
+                <output id="f-gu" aria-live="polite">1</output>
+                <button class="round" type="button" id="gu-plus" aria-label="One more grown-up"><span data-ico="plus" data-size="24">+</span></button>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="allergies" aria-describedby="e-allergy">
+            <legend><span data-ico="shield-check" data-size="28">🛡️</span> Allergies <span class="req" aria-hidden="true">*</span> <small>tick all that apply</small></legend>
+            <div class="chips">
+              <label class="chip-check"><input type="checkbox" name="allergy" value="none"><span>None</span></label>
+              <label class="chip-check"><input type="checkbox" name="allergy" value="peanut"><span>Peanut</span></label>
+              <label class="chip-check"><input type="checkbox" name="allergy" value="tree nuts"><span>Tree nuts</span></label>
+              <label class="chip-check"><input type="checkbox" name="allergy" value="dairy"><span>Dairy</span></label>
+              <label class="chip-check"><input type="checkbox" name="allergy" value="egg"><span>Egg</span></label>
+              <label class="chip-check"><input type="checkbox" name="allergy" value="gluten"><span>Gluten</span></label>
+              <label class="chip-check"><input type="checkbox" name="allergy" value="sesame"><span>Sesame</span></label>
+              <label class="chip-check"><input type="checkbox" name="allergy" value="other"><span>Something else</span></label>
+            </div>
+            <p class="err" id="e-allergy" hidden></p>
+            <div class="field" id="allergy-more" hidden>
+              <label for="f-notes">Tell us a little more <span class="req" aria-hidden="true" id="notes-req">*</span></label>
+              <textarea id="f-notes" name="notes" rows="3" placeholder="For example: how serious it is, what to avoid, and what helps" aria-describedby="e-notes"></textarea>
+              <p class="err" id="e-notes" hidden></p>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="f-bring">What would you like to bring to share?</label>
+            <select id="f-bring" name="bring">
+              <option value="">Surprise us (nut-free, please)</option>
+              <option>Fruit: melon, berries or clementines</option>
+              <option>Something savory: crackers, veg sticks or dips</option>
+              <option>Baked bites (nut-free)</option>
+              <option>Nothing, thank you. I will help on the day</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="consent">
+              <input type="checkbox" id="f-ok" name="ok" aria-describedby="e-ok">
+              <span>I understand this is a relaxed playdate and a grown-up stays with each little one. <span class="req" aria-hidden="true">*</span></span>
+            </label>
+            <p class="err" id="e-ok" hidden></p>
+          </div>
+
+          <button class="btn primary big" type="submit"><span data-ico="send" data-size="26">💌</span> Save our spot</button>
+        </form>
+
+        <div class="rsvp-done" id="rsvp-done" hidden tabindex="-1" role="region" aria-labelledby="done-h">
+          <span class="done-av" id="done-av" data-live="avatar-initials" data-p-initials="M" data-p-status="online" data-size="104" data-label="Your little one">M</span>
+          <h3 id="done-h">You are in!</h3>
+          <p id="done-p"></p>
+          <p id="done-allergy" class="done-allergy" hidden></p>
+          <div class="btn-row">
+            <button class="btn primary" type="button" data-add-cal><span data-ico="calendar-plus" data-size="24">📆</span> Add to calendar</button>
+            <a class="btn" href="#bring"><span data-ico="backpack" data-size="24">🎒</span> What to bring</a>
+          </div>
+          <button class="linkbtn" type="button" id="rsvp-edit">Change my answers</button>
+        </div>
+
+        <div class="rsvp-past" id="rsvp-past" hidden>
+          <span data-ico="heart" data-size="64" data-motion="hover">💛</span>
+          <h3>Thank you for coming!</h3>
+          <p>The playdate happened on Wednesday 21 October. We are planning the next one for the first Wednesday of November, so text Lucia on 555-0142 and she will add you to the list.</p>
+          <div class="btn-row"><a class="btn primary" href="sms:555-0142"><span data-ico="message-circle" data-size="24">💬</span> Text Lucia</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUICK ANSWERS ============ -->
+<section class="sec paper" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="sec-ico" style="--c:var(--sky);--cd:var(--sky-deep)"><span data-ico="help-circle" data-size="60">❓</span><span class="sec-spark" data-min-level="2" aria-hidden="true"><span data-ico="sparkles" data-size="30"></span></span></span>
+      <div>
+        <p class="eyebrow">Quick answers</p>
+        <h2 id="faq-h">Good to know</h2>
+      </div>
+    </header>
+    <div class="faq">
+      <details>
+        <summary><span>Do I stay, or can I drop off?</span><span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="24">▾</span></span></summary>
+        <p>A grown-up stays with each little one. It is a playdate, not a drop-off, and toddlers feel braver with you nearby.</p>
+      </details>
+      <details>
+        <summary><span>Can older siblings come?</span><span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="24">▾</span></span></summary>
+        <p>Yes, up to age 6, as long as they are happy to play gently around the little ones. Add them in the RSVP and we will bring extra name stickers.</p>
+      </details>
+      <details>
+        <summary><span>What if my child is unwell?</span><span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="24">▾</span></span></summary>
+        <p>Please stay home if there has been a fever, a new cough or a tummy upset in the last 24 hours. Text Lucia and we will save you a spot at the next one.</p>
+      </details>
+      <details>
+        <summary><span>Can I arrive late or leave early?</span><span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="28">▾</span></span></summary>
+        <p>Come when you can and go when you need to. After 10:20 the gate stays latched while the little ones play, so text Lucia and she will let you in.</p>
+      </details>
+      <details>
+        <summary><span>Are there pets?</span><span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="24">▾</span></span></summary>
+        <p>Bruno the beagle lives here, but he spends the whole morning indoors with a chew toy, so allergies and nervous toddlers stay safe.</p>
+      </details>
+      <details>
+        <summary><span>May I take photos?</span><span class="p-chev" aria-hidden="true"><span data-ico="chevron-down" data-size="24">▾</span></span></summary>
+        <p>Please do. We only ask that you post pictures of your own child, and check with other families before sharing anything with their little one in it.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGN-OFF ============ -->
+<section class="signoff" aria-labelledby="so-h">
+  <div class="wrap so-in">
+    <div class="so-copy">
+      <p class="eyebrow" id="so-eyebrow">Wednesday 21 October, 10 am</p>
+      <h2 id="so-h">See you on the blanket!</h2>
+      <p id="so-p">We cannot wait to watch the little ones meet, chase bubbles and wear their snacks. Bring your coffee mood and leave the rushing at the gate.</p>
+      <p class="sig">With love, Lucia &amp; Priya</p>
+      <ul class="hosts">
+        <li><span data-ico="avatar-woman-curly" data-size="64">👩</span><span><b>Lucia Reyes</b><a href="sms:555-0142">Text 555-0142</a></span></li>
+        <li><span data-ico="avatar-woman-braids" data-size="64">👩</span><span><b>Priya Shah</b><a href="sms:555-0177">Text 555-0177</a></span></li>
+      </ul>
+    </div>
+    <div class="so-art" data-min-level="1" aria-hidden="true">
+      <span class="so-a"><span data-ico="sun" data-size="176" data-motion="inview"></span></span>
+      <span class="so-b"><span data-ico="teddy-bear" data-size="184"></span></span>
+      <span class="so-c"><span data-ico="balloon" data-size="132" data-motion="hover"></span></span>
+      <span class="so-d" data-min-level="2"><span data-ico="rainbow" data-size="124"></span></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ CREDITS + FOOTER ============ -->
+<section class="credits" id="credits" aria-labelledby="cred-h">
+  <div class="wrap">
+    <h2 id="cred-h">Photo credits</h2>
+    <ul>
+      <li>Toddler clapping in the grass (page top): Photo by <a href="https://unsplash.com/@patrickian4?utm_source=withicons_demos&amp;utm_medium=referral">Patrick Fore</a> on <a href="https://unsplash.com/photos/toddler-with-teal-dress-on-green-grass-field-during-daytime-T2S4CatGdfQ?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Garden party table with bunting (step 1): Photo by <a href="https://www.pexels.com/@ron-lach">Ron Lach</a> on <a href="https://www.pexels.com/photo/10024455/">Pexels</a></li>
+      <li>Sand tray (step 2): Photo by <a href="https://www.pexels.com/@daniel-duarte-270529097">Daniel Duarte</a> on <a href="https://www.pexels.com/photo/15091661/">Pexels</a></li>
+      <li>Block table (step 2): Photo by <a href="https://www.pexels.com/@karola-g">Karola G</a> on <a href="https://www.pexels.com/photo/7269700/">Pexels</a></li>
+      <li>Paint mat (step 2): Photo by <a href="https://www.pexels.com/@caleboquendo">Caleb Oquendo</a> on <a href="https://www.pexels.com/photo/40103784/">Pexels</a></li>
+      <li>Bubble time (step 3): Photo by <a href="https://unsplash.com/@ifakhter?utm_source=withicons_demos&amp;utm_medium=referral">Ifrah Akhter</a> on <a href="https://unsplash.com/photos/a-young-boy-plays-with-bubbles-outdoors-qojqVPsfAiE?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Picnic blanket (step 4): Photo by <a href="https://www.pexels.com/@anntarazevich">Anna Tarazevich</a> on <a href="https://www.pexels.com/photo/5119630/">Pexels</a></li>
+      <li>Story circle (step 5): Photo by <a href="https://www.pexels.com/@karola-g">Karola G</a> on <a href="https://www.pexels.com/photo/4966471/">Pexels</a></li>
+      <li>Wave goodbye in the meadow (step 6): Photo by <a href="https://unsplash.com/@ohlmanphotography?utm_source=withicons_demos&amp;utm_medium=referral">Laura Ohlman</a> on <a href="https://unsplash.com/photos/three-children-are-sitting-in-a-field-of-tall-grass-sW6TRpgZLMw?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Grown-ups chatting on a blanket (grown-ups&rsquo; corner): Photo by <a href="https://www.pexels.com/@rafael-oliveira-2149835472">Rafael Oliveira</a> on <a href="https://www.pexels.com/photo/33578681/">Pexels</a></li>
+      <li>Two babies back to back (friends coming): Photo by <a href="https://www.pexels.com/@rebornfilmes">Alexander Mass</a> on <a href="https://www.pexels.com/photo/29562280/">Pexels</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT. Typefaces: Baloo 2 and Nunito, from Google Fonts.</p>
+    <p>Demo page made with with icons. Names, places and products are fictional.</p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand"><span data-ico="sun" data-size="32">☀️</span> Sunny Day Playdate</p>
+    <p>Wednesday 21 October 2026, 10 am to noon, at the Reyes backyard, 27 Wren Street. Hosted by Lucia Reyes &amp; Priya Shah.</p>
+    <p class="foot-small">Demo page made with with icons. Names, places and products are fictional. Phone numbers are not real.</p>
+    <p class="foot-links"><a href="#top">Back to the top</a> <a href="#rsvp">RSVP</a> <a href="https://withicons.com">withicons.com</a></p>
+  </div>
+</footer>
+
+<div class="page-toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="_kit/demo-kit.js" data-style="kawaii" data-recommend="kawaii,plush,pastel,sticker,clay,anime,bento,duo" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict';
+  var doc = document, root = doc.documentElement;
+  root.classList.add('js');
+  var $ = function (s, r) { return (r || doc).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || doc).querySelectorAll(s)); };
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+  };
+  var sess = {
+    get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var plural = function (n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); };
+  var list = function (a) { return a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1]; };
+
+  /* the kit's Size slider: flag big sizes so art that cannot overlap can reflow */
+  doc.addEventListener('DOMContentLoaded', function () {
+    if (!window.WithKit) return;
+    var sync = function (st) { root.setAttribute('data-big', st && st.scale > 1.3 ? '1' : '0'); };
+    window.WithKit.on(sync); sync(window.WithKit.state());
+  });
+
+  /* Basic level: make the emoji fallbacks as big as the icon slot they stand in for */
+  function fit(scope) {
+    $$('[data-ico]', scope).forEach(function (el) { var s = parseFloat(el.dataset.size) || 24; el.style.fontSize = Math.round(s * 0.74) + 'px'; });
+    $$('[data-live]', scope).forEach(function (el) { var s = parseFloat(el.dataset.size) || 48; el.style.fontSize = Math.max(13, Math.round(s * 0.27)) + 'px'; });
+  }
+  fit(doc);
+  /* build an icon slot from script (the kit upgrades it as it is inserted) */
+  function slot(name, size, emoji) {
+    var s = doc.createElement('span');
+    s.setAttribute('data-ico', name); s.setAttribute('data-size', size); s.textContent = emoji;
+    return s;
+  }
+
+  /* Live icons: works before and after the kit has upgraded the slot */
+  function setLive(el, params, fallback) {
+    if (!el) return;
+    if (window.WithKit && el._kit) window.WithKit.setLive(el, params);
+    else Object.keys(params).forEach(function (k) { el.dataset['p' + k.replace(/(^|-)(\w)/g, function (m, a, c) { return c.toUpperCase(); })] = params[k]; });
+    if (fallback != null) { var fb = el.querySelector('.kit-fb'); if (fb) fb.textContent = fallback; else el.textContent = fallback; }
+  }
+  function setLabel(el, text) {
+    if (!el) return;
+    el.dataset.label = text; el.setAttribute('aria-label', text);
+    if (el._kit && el._kit.wi) el._kit.wi.setAttribute('label', text);
+  }
+
+  /* never write to a node that might not exist */
+  function setText(sel, v) { var el = $(sel); if (el) el.textContent = v; }
+  function setHidden(sel, h) { var el = $(sel); if (el) el.hidden = !!h; }
+  /* replace one live icon by another kind (before or after the kit has upgraded it) */
+  function swapLive(el, name, params, text, label) {
+    if (!el || !el.parentNode) return el;
+    var n = doc.createElement('span'), parent = el.parentNode;
+    n.id = el.id; n.className = el.className.replace(/\bkit-live\b/, '').trim();
+    n.setAttribute('data-live', name); n.setAttribute('data-size', el.getAttribute('data-size') || '48');
+    Object.keys(params).forEach(function (k) { n.setAttribute('data-p-' + k, params[k]); });
+    n.setAttribute('data-label', label); n.textContent = text;
+    parent.replaceChild(n, el); fit(parent);
+    if (window.WithKit) window.WithKit.refresh(parent);
+    return n;
+  }
+  var toastEl = $('#toast'), toastT = 0;
+  function toast(msg) { toastEl.textContent = msg; toastEl.hidden = false; clearTimeout(toastT); toastT = setTimeout(function () { toastEl.hidden = true; }, 2800); }
+  function copyText(text, msg) {
+    function fallback() {
+      var ta = doc.createElement('textarea'), ok = false; ta.value = text; ta.style.cssText = 'position:fixed;opacity:0'; doc.body.appendChild(ta); ta.select();
+      try { ok = doc.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      toast(ok ? msg : 'Copy did not work here. Long-press to copy instead.');
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { toast(msg); }, fallback); else fallback();
+  }
+
+  /* ---------- mobile nav ---------- */
+  var navBtn = $('#nav-toggle'), nav = $('#site-nav');
+  function closeNav() { nav.classList.remove('open'); navBtn.setAttribute('aria-expanded', 'false'); }
+  navBtn.addEventListener('click', function () { navBtn.setAttribute('aria-expanded', String(nav.classList.toggle('open'))); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) closeNav(); });
+  doc.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeNav(); });
+
+  /* ---------- countdown to 21 Oct 2026, 10:00 (local time) ---------- */
+  var START = new Date(2026, 9, 21, 10, 0, 0), END = new Date(2026, 9, 21, 12, 0, 0), DEADLINE = new Date(2026, 9, 16, 23, 59, 0);
+  function dayStart(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  /* phase: open (before the RSVP deadline), late (deadline passed, still worth a text) or past (the playdate is over) */
+  var phase = 'open';
+  function countdown() {
+    var now = new Date(), days = Math.round((dayStart(START) - dayStart(now)) / 864e5), title, sub, left = 0, mode = 'ring';
+    phase = now >= END ? 'past' : now > DEADLINE ? 'late' : 'open';
+    if (now >= END) { title = 'Thanks for coming!'; sub = 'See you at the next playdate'; mode = 'done'; }
+    else if (now >= START) { title = 'Happening now'; sub = 'Come on in through the blue gate'; mode = 'now'; }
+    else if (days <= 0) { title = 'Today is the day'; sub = 'Gates open at 10 am'; mode = 'today'; }
+    else { title = days === 1 ? '1 day to go' : days + ' days to go'; sub = 'Gates open at 10 am'; left = Math.min(days, 99); }
+    var ring = $('#count-ring');
+    if (mode === 'ring') { setLive(ring, { left: left, total: Math.max(30, left) }, String(left)); setLabel(ring, title); }
+    else if (mode === 'done') swapLive(ring, 'step-number', { step: 1, done: 'true' }, '\u2713', 'The playdate is done');
+    else {
+      var hh = now.getHours(), mm = now.getMinutes(), t = mode === 'now' ? (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm : '10:00';
+      swapLive(ring, 'clock-time', { time: t }, t, mode === 'now' ? 'Happening now' : 'Gates open at 10 am');
+    }
+    setText('#count-title', title); setText('#count-sub', sub);
+    root.setAttribute('data-phase', phase);
+    setHidden('.ann-open', phase !== 'open'); setHidden('.ann-late', phase !== 'late'); setHidden('.ann-past', phase !== 'past');
+  }
+  countdown();
+
+  /* ---------- add to calendar (.ics) ---------- */
+  function ics(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
+  function fold(line) {
+    var out = [], cur = '', bytes = 0, enc = new TextEncoder();
+    Array.from(line).forEach(function (ch) {
+      var b = enc.encode(ch).length;
+      if (bytes + b > (out.length ? 74 : 75)) { out.push(cur); cur = ch; bytes = b; } else { cur += ch; bytes += b; }
+    });
+    out.push(cur); return out.join('\r\n ');
+  }
+  function buildIcs() {
+    var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    var lines = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Sunny Day Playdate//with icons demo//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:sunny-day-playdate-20261021@demo.invalid', 'DTSTAMP:' + stamp,
+      'DTSTART:20261021T100000', 'DTEND:20261021T120000',
+      'SUMMARY:' + ics('Sunny Day Playdate'),
+      'LOCATION:' + ics('The Reyes backyard, 27 Wren Street, Alder Park (fictional address)'),
+      'DESCRIPTION:' + ics('Ages 1 to 4 and their grown-ups, hosted by Lucia Reyes and Priya Shah.\nShoes off at the porch mat. Bring a water bottle, a change of clothes, a sun hat and one nut-free snack to share.\nRain plan: porch and garage studio. Heavy rain moves us to Wednesday 28 October.\nQuestions: text Lucia on 555-0142.'),
+      'BEGIN:VALARM', 'TRIGGER:-PT1H', 'ACTION:DISPLAY', 'DESCRIPTION:Sunny Day Playdate starts in one hour', 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ];
+    return lines.map(fold).join('\r\n') + '\r\n';
+  }
+  function downloadIcs() {
+    var blob = new Blob([buildIcs()], { type: 'text/calendar;charset=utf-8' }), url = URL.createObjectURL(blob), a = doc.createElement('a');
+    a.href = url; a.download = 'sunny-day-playdate.ics'; doc.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 2000); toast('Calendar file downloaded. Open it to save the date.');
+  }
+  $$('[data-add-cal]').forEach(function (b) { b.addEventListener('click', downloadIcs); });
+  window.sunnyPlaydate = { ics: buildIcs };
+
+  /* ---------- the picture schedule ---------- */
+  var tiles = $$('.tile'), stage = $('#stage'), panels = $$('.stage-panel'), cur = 1;
+  function warm(n) { var p = panels[n - 1]; if (p) $$('img', p).forEach(function (i) { if (i.loading !== 'eager') i.loading = 'eager'; }); }
+  function showStep(n, fromUser, first) {
+    n = Math.max(1, Math.min(panels.length, n)); cur = n;
+    if (!first) warm(n + 1);
+    tiles.forEach(function (t) { t.setAttribute('aria-pressed', String(+t.dataset.go === n)); });
+    panels.forEach(function (p) { p.hidden = +p.dataset.step !== n; });
+    var p = panels[n - 1];
+    stage.dataset.step = n;
+    $('#stage-title').textContent = p.dataset.title; $('#stage-when').textContent = p.dataset.when;
+    $('#stage-dur').textContent = p.dataset.dur; $('#stage-of').textContent = 'Step ' + n + ' of ' + panels.length;
+    var clock = $('#stage-clock'); setLive(clock, { time: p.dataset.time }, p.dataset.time); setLabel(clock, p.dataset.when);
+    $('#stage-live').textContent = 'Step ' + n + ' of ' + panels.length + ': ' + p.dataset.title + ', ' + p.dataset.when;
+    $('#step-prev').disabled = n === 1; $('#step-next').disabled = n === panels.length;
+    if (fromUser && stage.getBoundingClientRect().top > window.innerHeight - 180) stage.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
+  tiles.forEach(function (t) {
+    t.addEventListener('click', function () { showStep(+t.dataset.go, true); });
+    ['pointerenter', 'focus'].forEach(function (ev) { t.addEventListener(ev, function () { warm(+t.dataset.go); }); });
+  });
+  $('#step-prev').addEventListener('click', function () { showStep(cur - 1); });
+  $('#step-next').addEventListener('click', function () { showStep(cur + 1); });
+  showStep(1, false, true);
+  window.addEventListener('load', function () { (window.requestIdleCallback || function (f) { setTimeout(f, 1500); })(function () { warm(2); }); });
+  $('#print-chart').addEventListener('click', function () {
+    doc.body.classList.add('printing-chart');
+    var done = function () { doc.body.classList.remove('printing-chart'); window.removeEventListener('afterprint', done); };
+    window.addEventListener('afterprint', done);
+    setTimeout(function () { window.print(); }, 60);
+  });
+
+  /* ---------- weather check ---------- */
+  var WX = {
+    sunny: { cond: 'sunny', temp: 68, emoji: '☀️', sum: 'Sunny and mild, 68°F', sub: 'Bright all morning with a light breeze.',
+      hours: [['10 am', 'sun', '☀️', 65], ['11 am', 'sun', '☀️', 67], ['12 pm', 'sun', '☀️', 68]],
+      uv: 5, uvT: 'UV index 5: moderate to high', uvN: 'Sunscreen on before you arrive, and hats on all morning.', wind: 'Light breeze, 6 mph', windN: 'Bubbles will drift slowly and last longer.',
+      plan: 'Plan A: the whole backyard', planP: 'Everything happens on the lawn. We put up the big shade sail over the snack blankets and keep the water table running for hot little hands.',
+      dress: [['shield-check', '🧴', 'Sunscreen on before you arrive, and a hat all morning'], ['shirt', '👕', 'Light layers, easy to peel off'], ['droplet', '💧', 'A full water bottle; we top up at the garden tap']] },
+    partly: { cond: 'partly', temp: 64, emoji: '⛅', sum: 'Partly sunny, 64°F', sub: 'A light breeze and shady corners under the maple.',
+      hours: [['10 am', 'cloud-sun', '⛅', 62], ['11 am', 'cloud-sun', '⛅', 64], ['12 pm', 'sun', '☀️', 66]],
+      uv: 3, uvT: 'UV index 3: moderate', uvN: 'Hats on, and sunscreen before you arrive.', wind: 'Light breeze, 8 mph', windN: 'Bubbles will drift nicely across the lawn.',
+      plan: 'Plan A: the whole backyard', planP: 'Everything happens on the lawn. The snack blankets go under the big maple, where it is shady, and the bubble corner sits upwind.',
+      dress: [['shield-check', '🧴', 'Sunscreen on before you arrive, and a hat for sunny patches'], ['shirt', '👕', 'Light layers, easy to peel off or add'], ['droplet', '💧', 'A full water bottle; we top up at the garden tap']] },
+    rain: { cond: 'rain', temp: 57, emoji: '🌧️', sum: 'Light showers, 57°F', sub: 'Drizzle on and off, with a few dry spells.',
+      hours: [['10 am', 'cloud-rain', '🌧️', 56], ['11 am', 'cloud-rain', '🌧️', 57], ['12 pm', 'cloud', '☁️', 58]],
+      uv: 1, uvT: 'UV index 1: low', uvN: 'Hats are optional, but rain jackets are not.', wind: 'Breezy, 12 mph', windN: 'Bubbles will zoom away. That is half the fun.',
+      plan: 'Plan B: porch and garage studio', planP: 'Free play moves to the covered porch and the heated garage studio, with the same three stations and a rug. Bubbles stay outside under the awning, and snack is on blankets indoors.',
+      dress: [['umbrella', '☔', 'Rain jackets and boots; puddles outside the awning are welcome'], ['shirt', '👕', 'Spare socks and a full change of clothes'], ['droplets', '💦', 'A towel for the car seat on the way home']] }
+  };
+  function applyWx(key) {
+    var w = WX[key]; if (!w) return;
+    $('.wx').dataset.wx = key;
+    [$('#wx-live'), $('#hero-wx')].forEach(function (el) { setLive(el, { condition: w.cond, temperature: w.temp }, w.emoji + ' ' + w.temp + '°'); setLabel(el, w.sum); });
+    $('#wx-sum').textContent = w.sum; $('#wx-sub').textContent = w.sub;
+    var hours = $('#wx-hours');
+    hours.textContent = '';
+    w.hours.forEach(function (h) {
+      var li = doc.createElement('li'), t = doc.createElement('span'), b = doc.createElement('b');
+      t.textContent = h[0]; b.textContent = h[3] + '°';
+      li.appendChild(t); li.appendChild(slot(h[1], 44, h[2])); li.appendChild(b); hours.appendChild(li);
+    });
+    fit(hours);
+    var uv = $('#wx-uv'); setLive(uv, { index: w.uv }, 'UV ' + w.uv); setLabel(uv, w.uvT);
+    $('#wx-uv-t').textContent = w.uvT; $('#wx-uv-n').textContent = w.uvN; $('#wx-wind').textContent = w.wind; $('#wx-wind-n').textContent = w.windN;
+    $('#wx-plan-h').textContent = w.plan; $('#wx-plan-p').textContent = w.planP;
+    var dress = $('#wx-dress');
+    dress.textContent = '';
+    w.dress.forEach(function (d) {
+      var li = doc.createElement('li'), t = doc.createElement('span');
+      t.textContent = d[2]; li.appendChild(slot(d[0], 32, d[1])); li.appendChild(t); dress.appendChild(li);
+    });
+    fit(dress);
+  }
+  $$('input[name="wxs"]').forEach(function (r) { r.addEventListener('change', function () { if (r.checked) applyWx(r.value); }); });
+  var wxStart = $('input[name="wxs"]:checked'); applyWx(wxStart ? wxStart.value : 'partly');
+
+  /* ---------- what to bring (ticks are remembered) ---------- */
+  var PACK_KEY = 'sunny-playdate:packed', boxes = $$('input[name="bring"]');
+  function savePacked() { store.set(PACK_KEY, JSON.stringify(boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; }))); }
+  function updatePacked(celebrate) {
+    var n = boxes.filter(function (b) { return b.checked; }).length, total = boxes.length, pct = Math.round(n / total * 100), left = total - n;
+    var ring = $('#pack-ring'); setLive(ring, { value: pct }, pct + '%'); setLabel(ring, pct + ' percent packed');
+    setLive($('#pack-ring-mini'), { value: pct }, pct + '%');
+    setText('#pack-count', n + ' of ' + total + ' packed'); setText('#pack-mini-count', n + ' of ' + total + ' packed');
+    setText('#pack-note', n === 0 ? 'Nothing yet. Start with the water bottle.' : left === 0 ? 'All packed. See you at the blue gate!' : left <= 2 ? plural(left, 'thing') + ' left. You are nearly there.' : left + ' to go. ' + (n <= 2 ? 'Good start.' : 'Keep going.'));
+    if (celebrate && left === 0) toast('All packed. See you on Wednesday!');
+  }
+  try { (JSON.parse(store.get(PACK_KEY) || '[]') || []).forEach(function (v) { var b = boxes.filter(function (x) { return x.value === v; })[0]; if (b) b.checked = true; }); } catch (e) {}
+  updatePacked(false);
+  boxes.forEach(function (b) { b.addEventListener('change', function () { savePacked(); updatePacked(true); }); });
+  var covered = $('#covered'), narrow = window.matchMedia ? matchMedia('(max-width:979px)') : null;
+  function syncCovered() { if (covered && narrow) covered.open = !narrow.matches; }
+  syncCovered(); if (narrow) { if (narrow.addEventListener) narrow.addEventListener('change', syncCovered); else if (narrow.addListener) narrow.addListener(syncCovered); }
+  $('#reset-list').addEventListener('click', function () { boxes.forEach(function (b) { b.checked = false; }); savePacked(); updatePacked(false); toast('List cleared. Fresh start!'); });
+  $('#copy-list').addEventListener('click', function () {
+    var text = 'Sunny Day Playdate: what to bring\n' + boxes.map(function (b) { return (b.checked ? '[x] ' : '[ ] ') + b.dataset.name; }).join('\n') + '\nWednesday 21 October, 10 am to noon, 27 Wren Street.';
+    copyText(text, 'List copied. Paste it into your notes.');
+  });
+
+  /* ---------- snack filter ---------- */
+  var flt = {}, snacks = $$('.snack');
+  function applyFilter() {
+    var keys = Object.keys(flt).filter(function (k) { return flt[k]; }), shown = 0;
+    snacks.forEach(function (s) {
+      var contains = s.dataset.contains ? s.dataset.contains.split(',') : [], vegan = s.dataset.vegan === '1', bad = [], notVegan = false;
+      keys.forEach(function (k) { if (k === 'vegan') { if (!vegan) notVegan = true; } else if (contains.indexOf(k) > -1) bad.push(k); });
+      var allergenHit = bad.length > 0;
+      if (notVegan) { var animal = contains.filter(function (c) { return c === 'dairy' || c === 'egg'; }); (animal.length ? animal : ['animal products']).forEach(function (a) { if (bad.indexOf(a) < 0) bad.push(a); }); }
+      s.classList.toggle('off', bad.length > 0);
+      var why = $('.why', s); why.hidden = !bad.length; why.textContent = bad.length ? (allergenHit ? 'Not for you: contains ' : 'Not vegan: contains ') + list(bad) : '';
+      if (!bad.length) shown++;
+    });
+    var names = keys.map(function (k) { return k === 'vegan' ? 'vegan' : k + '-free'; });
+    $('#flt-out').textContent = !keys.length ? 'All ' + snacks.length + ' snacks are showing.' :
+      shown ? shown + ' of ' + snacks.length + ' snacks are ' + list(names) + '.' : 'Nothing matches all of those yet. Mention it in the RSVP and we will make a safe plate.';
+  }
+  $$('[data-flt]').forEach(function (b) {
+    b.addEventListener('click', function () { var k = b.dataset.flt; flt[k] = !flt[k]; b.setAttribute('aria-pressed', String(!!flt[k])); applyFilter(); });
+  });
+
+  /* ---------- grown-ups' panels + nap helper ---------- */
+  var dets = $$('#panels details');
+  $('#gu-open').addEventListener('click', function () { dets.forEach(function (d) { d.open = true; }); });
+  $('#gu-close').addEventListener('click', function () { dets.forEach(function (d) { d.open = false; }); });
+  var NAP = {
+    early: 'A nap before 10 means a happy, rested start. Arrive at 10:00 and you will catch the whole plan.',
+    mid: 'We wrap up at noon, so the ride home usually becomes the nap. Pack a cozy blanket for the car seat; the shade tent is free if they need a catnap during story time.',
+    late: 'Perfect timing. A morning of fresh air and bubbles tends to make afternoon naps long and easy.',
+    none: 'Wonderful, then they are ready to run all morning. Bring a water bottle and a snack to share.'
+  };
+  $$('[data-nap]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('[data-nap]').forEach(function (o) { o.setAttribute('aria-pressed', String(o === b)); });
+      $('#nap-out').textContent = NAP[b.dataset.nap];
+    });
+  });
+
+  /* ---------- map ---------- */
+  $('#copy-addr').addEventListener('click', function () { copyText('The Reyes backyard, 27 Wren Street, Alder Park (fictional address)', 'Address copied'); });
+
+  /* ---------- RSVP ---------- */
+  var form = $('#rsvp-form'), done = $('#rsvp-done'), avatars = $('#avatars'), BASE = { fam: 9, kids: 12, max: 14 };
+  var RSVP_KEY = 'sunny-playdate:rsvp', rsvp = null, guests = 1;
+  var FIELD = { parent: 'f-parent', contact: 'f-contact', child: 'f-child', age: 'f-age', notes: 'f-notes', ok: 'f-ok' };
+  var allergyBoxes = $$('input[name="allergy"]');
+  function initials(name) { return name.trim().split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2).toUpperCase() || '?'; }
+  function setGuests(n) { guests = Math.max(1, Math.min(4, n)); $('#f-gu').textContent = guests; }
+  $('#gu-minus').addEventListener('click', function () { setGuests(guests - 1); });
+  $('#gu-plus').addEventListener('click', function () { setGuests(guests + 1); });
+  function setErr(key, msg) {
+    var e = $('#e-' + key), input = FIELD[key] && $('#' + FIELD[key]);
+    if (!e) return;
+    if (msg) { e.textContent = msg; e.hidden = false; e.setAttribute('role', 'alert'); if (input) input.setAttribute('aria-invalid', 'true'); }
+    else { e.textContent = ''; e.hidden = true; e.removeAttribute('role'); if (input) input.removeAttribute('aria-invalid'); }
+  }
+  function syncAllergyMore() {
+    var any = allergyBoxes.some(function (o) { return o.checked && o.value !== 'none'; });
+    var other = allergyBoxes.filter(function (o) { return o.value === 'other'; })[0].checked;
+    $('#allergy-more').hidden = !any; $('#notes-req').hidden = !other;
+  }
+  allergyBoxes.forEach(function (b) {
+    b.addEventListener('change', function () {
+      if (b.checked) allergyBoxes.forEach(function (o) { if (b.value === 'none' ? o !== b : o.value === 'none') o.checked = false; });
+      syncAllergyMore(); setErr('allergy', ''); setErr('notes', '');
+    });
+  });
+  ['parent', 'contact', 'child', 'age', 'notes'].forEach(function (k) {
+    var el = $('#' + FIELD[k]); el.addEventListener('input', function () { setErr(k, ''); }); el.addEventListener('change', function () { setErr(k, ''); });
+  });
+  $('#f-ok').addEventListener('change', function () { setErr('ok', ''); });
+
+  function read() {
+    var f = form.elements;
+    return {
+      parent: f.parent.value.trim(), contact: f.contact.value.trim(), child: f.child.value.trim(), age: f.age.value, guests: guests,
+      allergies: allergyBoxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; }),
+      notes: f.notes.value.trim(), bring: f.bring.value
+    };
+  }
+  function validate(r) {
+    var errs = [], c = r.contact, digits = c.replace(/\D/g, '');
+    if (r.parent.length < 2) errs.push(['parent', 'Please tell us your name.']);
+    if (!c) errs.push(['contact', 'Please add an email or mobile number so we can send the weather call.']);
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c) && !(/^[\d\s().+-]+$/.test(c) && digits.length >= 7 && digits.length <= 15)) errs.push(['contact', 'That does not look like an email or phone number. Try name@example.com or 555-0123.']);
+    if (!r.child) errs.push(['child', 'Please add your little one\u2019s first name.']);
+    if (!r.age) errs.push(['age', 'Please choose an age.']);
+    if (!r.allergies.length) errs.push(['allergy', 'Please tick None, or every allergy that applies.']);
+    if (r.allergies.indexOf('other') > -1 && !r.notes) errs.push(['notes', 'Please tell us a little about it so we can plan a safe plate.']);
+    if (!$('#f-ok').checked) errs.push(['ok', 'Please tick this so we know the plan works for you.']);
+    return errs;
+  }
+  function renderRsvp() {
+    var fams = BASE.fam + (rsvp ? 1 : 0), kids = BASE.kids + (rsvp ? 1 : 0), left = BASE.max - fams, pct = Math.round(fams / BASE.max * 100);
+    setText('#fam-count', fams); setText('#kid-count', kids); setText('#spots-left', left); setText('#spots-pct', pct);
+    setText('#spots-txt', left === 1 ? '1 spot left' : left + ' spots left');
+    var ring = $('#spots-ring'); setLive(ring, { value: pct }, pct + '%'); setLabel(ring, pct + ' percent of family spots taken');
+    var you = $('.you', avatars);
+    if (!rsvp) { if (you) you.remove(); return; }
+    var ini = initials(rsvp.child);
+    if (!you) {
+      you = doc.createElement('li'); you.className = 'you';
+      you.innerHTML = '<span class="you-av" data-live="avatar-initials" data-p-initials="' + esc(ini) + '" data-p-status="online" data-size="60">' + esc(ini) + '</span><b></b><small></small>';
+      avatars.insertBefore(you, avatars.firstChild); fit(you);
+    }
+    var av = $('.you-av', you); setLive(av, { initials: ini }, ini); setLabel(av, rsvp.child + ' (you)');
+    $('b', you).textContent = rsvp.child; $('small', you).textContent = rsvp.age;
+  }
+  function showDone(fromUser) {
+    var r = rsvp, al = r.allergies.filter(function (a) { return a !== 'none'; }), late = phase !== 'open';
+    form.hidden = true; done.hidden = false; setHidden('#late-note', true);
+    var av = $('#done-av'); setLive(av, { initials: initials(r.child) }, initials(r.child)); setLabel(av, r.child);
+    setText('#done-h', late ? 'Thanks, ' + r.parent.split(/\s+/)[0] + '!' : 'You\u2019re in, ' + r.child + '!');
+    setText('#done-p', late
+      ? 'We have your request for ' + r.child + ' (age ' + r.age + ') and ' + plural(r.guests, 'grown-up') + ' on Wednesday 21 October. RSVPs have closed, so Lucia will text ' + r.contact + ' to confirm if there is room.'
+      : 'We saved a spot for ' + r.child + ' (age ' + r.age + ') and ' + plural(r.guests, 'grown-up') + ' on Wednesday 21 October, 10 am to noon. The weather call goes to ' + r.contact + ' at 8:30 am on the day.');
+    var note = $('#done-allergy'), named = al.filter(function (a) { return a !== 'other'; }), extra = al.indexOf('other') > -1;
+    note.hidden = false;
+    note.textContent = al.length ? 'Noted: ' + (named.length ? list(named) + (extra ? ', plus the details you wrote down' : '') : 'the details you wrote down') + '. The snack table will flag it, and we will make a safe plate if needed.' : 'No allergies noted. Lovely, that makes the snack table simple.';
+    if (fromUser) {
+      /* the form was taller than the screen: bring the answer to the reader, and focus with it */
+      done.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
+      done.focus({ preventScroll: true });
+    }
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var r = read(), errs = validate(r);
+    ['parent', 'contact', 'child', 'age', 'allergy', 'notes', 'ok'].forEach(function (k) { setErr(k, ''); });
+    if (errs.length) {
+      errs.forEach(function (x) { setErr(x[0], x[1]); });
+      var first = errs[0][0], target = first === 'allergy' ? $('input[name="allergy"]') : $('#' + FIELD[first]);
+      if (target) target.focus();
+      return;
+    }
+    rsvp = r; sess.set(RSVP_KEY, JSON.stringify(r));
+    renderRsvp(); showDone(true); toast(phase === 'open' ? 'Spot saved for ' + r.child + '!' : 'Request sent for ' + r.child + '!');
+  });
+  $('#rsvp-edit').addEventListener('click', function () { done.hidden = true; form.hidden = false; setHidden('#late-note', phase !== 'late'); $('#f-parent').focus(); });
+  try {
+    var saved = JSON.parse(sess.get(RSVP_KEY) || 'null');
+    if (saved && saved.child) {
+      var f = form.elements;
+      f.parent.value = saved.parent; f.contact.value = saved.contact; f.child.value = saved.child; f.age.value = saved.age; f.notes.value = saved.notes || ''; f.bring.value = saved.bring || '';
+      setGuests(saved.guests || 1);
+      allergyBoxes.forEach(function (b) { b.checked = saved.allergies.indexOf(b.value) > -1; });
+      $('#f-ok').checked = true; syncAllergyMore(); rsvp = saved; renderRsvp(); showDone(false);
+    }
+  } catch (e) {}
+
+  /* ---------- the page after the deadline, and after the playdate ---------- */
+  function applyPhase() {
+    var late = phase === 'late', past = phase === 'past';
+    setHidden('#late-note', !late);
+    setText('#kick-b', past ? 'Thank you for coming' : 'You\u2019re invited');
+    setHidden('#cta-save', past); setHidden('#cta-cal', past); setHidden('#cta-next', !past);
+    setText('#nav-rsvp', past ? 'Next playdate' : 'RSVP');
+    if (late) setText('#rsvp-eyebrow', 'RSVPs closed Friday 16 October');
+    if (past) {
+      setText('#rsvp-eyebrow', 'The playdate is done'); setText('#rsvp-h', 'Come to the next one');
+      setText('#rsvp-lede', 'Sunny Day Playdate happened on Wednesday 21 October. Here is who came, and how to join us next time.');
+      setText('#fr-title', 'Who came'); setText('#fr-verb', 'came'); setText('.avatars .more small', 'came'); setHidden('#spots-card', true);
+      form.hidden = true; done.hidden = true; setHidden('#rsvp-past', false);
+      setText('#so-eyebrow', 'Thank you'); setText('#so-h', 'Until next time!');
+      setText('#so-p', 'It was a joy to watch the little ones meet, chase bubbles and wear their snacks. The next playdate is planned for the first Wednesday of November.');
+    }
+  }
+  applyPhase();
+})();
+</script>
+</body>
+</html>

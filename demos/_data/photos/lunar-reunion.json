@@ -1,0 +1,227 @@
+{
+  "slug": "lunar-reunion",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "37272344",
+      "page": "https://www.pexels.com/photo/37272344/",
+      "url": "https://images.pexels.com/photos/37272344/pexels-photo-37272344.jpeg",
+      "photographer": "Heru Dharma",
+      "photographerUrl": "https://www.pexels.com/@heru-dharma-2148751843",
+      "alt": "Rows of glowing red Chinese lanterns lighting up a night festival.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1600": "_img/lunar-reunion/37272344-1600.jpg"
+      }
+    },
+    {
+      "slot": "lanterns",
+      "src": "pexels",
+      "id": "5982949",
+      "page": "https://www.pexels.com/photo/5982949/",
+      "url": "https://images.pexels.com/photos/5982949/pexels-photo-5982949.jpeg",
+      "photographer": "Hong Zhu",
+      "photographerUrl": "https://www.pexels.com/@hong-zhu-3920372",
+      "alt": "Close-up of red Chinese lanterns with gold symbols hanging outdoors.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/lunar-reunion/5982949-600.jpg"
+      }
+    },
+    {
+      "slot": "dumplings",
+      "src": "pexels",
+      "id": "34912738",
+      "page": "https://www.pexels.com/photo/34912738/",
+      "url": "https://images.pexels.com/photos/34912738/pexels-photo-34912738.jpeg",
+      "photographer": "Noam K Lna",
+      "photographerUrl": "https://www.pexels.com/@noam-k-lna-626381151",
+      "alt": "Steamed dumplings garnished with scallions on a dark plate.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 878,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/lunar-reunion/34912738-700.jpg"
+      }
+    },
+    {
+      "slot": "fish",
+      "src": "pexels",
+      "id": "11830203",
+      "page": "https://www.pexels.com/photo/11830203/",
+      "url": "https://images.pexels.com/photos/11830203/pexels-photo-11830203.jpeg",
+      "photographer": "Jankao",
+      "photographerUrl": "https://www.pexels.com/@jankao-11830203",
+      "alt": "A steamed fish dish garnished with herbs, served with rice.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 798,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/lunar-reunion/11830203-700.jpg"
+      }
+    },
+    {
+      "slot": "envelopes",
+      "src": "unsplash",
+      "id": "u9FHVwGBV5I",
+      "page": "https://unsplash.com/photos/u9FHVwGBV5I",
+      "url": "https://images.unsplash.com/photo-1516842584751-c6558640efb2",
+      "photographer": "CHUTTERSNAP",
+      "photographerUrl": "https://unsplash.com/@chuttersnap",
+      "alt": "Chinese red envelopes.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/lunar-reunion/photo-1516842584751-c6558640efb2-1000.jpg"
+      }
+    },
+    {
+      "slot": "liondance",
+      "src": "pexels",
+      "id": "30711027",
+      "page": "https://www.pexels.com/photo/30711027/",
+      "url": "https://images.pexels.com/photos/30711027/pexels-photo-30711027.jpeg",
+      "photographer": "Tuan Vy",
+      "photographerUrl": "https://www.pexels.com/@tuan-vy-903011268",
+      "alt": "Lion dance in red and yellow costumes at a cultural festival with traditional lanterns.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/lunar-reunion/30711027-1000.jpg"
+      }
+    },
+    {
+      "slot": "fireworks",
+      "src": "unsplash",
+      "id": "rrBxNM6pgl4",
+      "page": "https://unsplash.com/photos/fireworks-are-lit-up-in-the-night-sky-rrBxNM6pgl4",
+      "url": "https://images.unsplash.com/photo-1729194292689-be924899456d",
+      "photographer": "Iuliu Illes",
+      "photographerUrl": "https://unsplash.com/@illes_cristi",
+      "alt": "Fireworks lighting up the night sky.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/lunar-reunion/photo-1729194292689-be924899456d-600.jpg"
+      }
+    },
+    {
+      "slot": "mahjong",
+      "src": "pexels",
+      "id": "13712532",
+      "page": "https://www.pexels.com/photo/13712532/",
+      "url": "https://images.pexels.com/photos/13712532/pexels-photo-13712532.jpeg",
+      "photographer": "Jimbear",
+      "photographerUrl": "https://www.pexels.com/@jimbear-13712532",
+      "alt": "Colourful mahjong tiles with varied designs on green felt.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/lunar-reunion/13712532-600.jpg"
+      }
+    },
+    {
+      "slot": "family",
+      "src": "pexels",
+      "id": "7363743",
+      "page": "https://www.pexels.com/photo/7363743/",
+      "url": "https://images.pexels.com/photos/7363743/pexels-photo-7363743.jpeg",
+      "photographer": "Angela Roma",
+      "photographerUrl": "https://www.pexels.com/@angela-roma",
+      "alt": "Family gathering around a table enjoying a traditional Lunar New Year meal.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/lunar-reunion/7363743-1000.jpg"
+      }
+    },
+    {
+      "slot": "blossom",
+      "src": "unsplash",
+      "id": "NBicygNxy2Q",
+      "page": "https://unsplash.com/photos/the-branches-of-a-tree-with-white-flowers-against-a-blue-sky-NBicygNxy2Q",
+      "url": "https://images.unsplash.com/photo-1707541124067-4878d84b9e47",
+      "photographer": "Kanae Kanesaki",
+      "photographerUrl": "https://unsplash.com/@ziro1005",
+      "alt": "Plum blossom branches with white flowers against a blue sky.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/lunar-reunion/photo-1707541124067-4878d84b9e47-600.jpg"
+      }
+    },
+    {
+      "slot": "spare1",
+      "src": "pexels",
+      "id": "14512855",
+      "page": "https://www.pexels.com/photo/14512855/",
+      "url": "https://images.pexels.com/photos/14512855/pexels-photo-14512855.jpeg",
+      "photographer": "Suki Lee",
+      "photographerUrl": "https://www.pexels.com/@suki-lee-110686949",
+      "alt": "Red Chinese lanterns hanging on a traditional building facade.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape"
+    },
+    {
+      "slot": "spare2",
+      "src": "pexels",
+      "id": "20883079",
+      "page": "https://www.pexels.com/photo/20883079/",
+      "url": "https://images.pexels.com/photos/20883079/pexels-photo-20883079.jpeg",
+      "photographer": "Tizzy",
+      "photographerUrl": "https://www.pexels.com/@tizzy-20883079",
+      "alt": "Mahjong set on an outdoor bamboo table.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait"
+    }
+  ]
+}

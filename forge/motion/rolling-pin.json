@@ -1,0 +1,9 @@
+{
+  "name": "rolling-pin",
+  "intent": "rolls back and forth as if flattening dough on the counter",
+  "loop": { "preset": "nudge", "origin": [12, 12], "dir": 45, "amount": 0.8, "duration": 1.8 },
+  "hover": { "preset": "nudge", "origin": [12, 12], "dir": 45, "amount": 1.2, "duration": 0.8 },
+  "deco": "breathe",
+  "alt": [ { "preset": "rock", "amount": 0.6 }, { "preset": "wiggle", "amount": 0.7 }, { "preset": "spin-once" } ],
+  "swap": [ { "to": "rolling-pin@solid", "effect": "scale" }, { "to": "cookie", "effect": "fade" }, { "to": "croissant", "effect": "slide-up" } ]
+}

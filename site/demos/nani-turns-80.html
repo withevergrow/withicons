@@ -1,0 +1,1616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nani Rosa Turns 80 (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: You are invited to a surprise lunch for Nani Rosa's 80th birthday: Sunday 22 November 2026 at The Garden Room, Fennel &amp; Fig. Arrive by 12:00, she arrives at 12:30. RSVP, leave a memory, add it to your calendar.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#f7f0e1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%82%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+<style>
+/* ───────── tokens: cream paper, rose, sage, butter, faded gold ───────── */
+:root{
+  --paper:#f7f0e1;--paper-2:#efe3ca;--paper-3:#e2d1ae;--card:#fffaf0;--white:#fffdf7;
+  --ink:#33231e;--ink-2:#594339;--ink-3:#6b5649;
+  --rose:#b83f5b;--rose-deep:#8e2a45;--rose-soft:#f4c5cf;--rose-wash:#fbe5e8;
+  --sage:#7b966f;--sage-deep:#41593c;--sage-soft:#d9e4cd;
+  --butter:#f4dc8f;--butter-soft:#fbf0c9;--gold:#b08a3e;--gold-deep:#745716;--wood:#8b6b49;
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --hand:'Caveat','Segoe Script','Bradley Hand',cursive;
+  --shadow-s:0 1px 1px rgba(70,45,25,.14),0 6px 14px -6px rgba(70,45,25,.3);
+  --shadow-m:0 1px 2px rgba(70,45,25,.16),0 18px 34px -14px rgba(70,45,25,.42);
+  color:var(--ink);
+  /* coquette is this page's own style: blush, rose, cream and faded gold */
+  --with-coquette-c1:#f4bcc8;--with-coquette-c2:#e58ea4;--with-coquette-c3:#b83f5b;--with-coquette-c4:#fbebdc;
+  --with-coquette-accent:#b08a3e;--with-coquette-edge:#fffaf0;--with-coquette-ink:#6a2a3c;
+  --with-coquette-shadow:#8e2a45;--with-coquette-tint:#fde6dc;--with-coquette-shine:#ffffff;
+  /* the other recommended palette styles, pulled toward the same album */
+  --with-pastel-c1:#f4c3cd;--with-pastel-c2:#f4c3cd;--with-pastel-c3:#f6df9a;--with-pastel-c4:#c3d9b6;
+  --with-pastel-accent:#eba6b6;--with-pastel-edge:#d98fa1;--with-pastel-ink:#8a4457;--with-pastel-shadow:#cf8396;--with-pastel-tint:#fbe9ec;
+  --with-valentine-c1:#f08aa0;--with-valentine-c2:#c8344f;--with-valentine-c3:#8b4a36;--with-valentine-c4:#fff3e3;
+  --with-valentine-accent:#7ba56c;--with-valentine-edge:#f3a3b6;--with-valentine-ink:#6a1b3a;--with-valentine-shadow:#a3163f;--with-valentine-tint:#f4d98a;
+  --with-soft3d-c1:#cf5a72;--with-soft3d-c2:#fbf3e6;--with-soft3d-c3:#6b5649;--with-soft3d-c4:#e7d6b6;
+  --with-soft3d-accent:#d9a441;--with-soft3d-edge:#fff8ee;--with-soft3d-ink:#33231e;--with-soft3d-shadow:#4a2a2c;--with-soft3d-tint:#f6d6dc;
+  --with-luxe-c1:#8e2a45;--with-luxe-c2:#c9a24a;--with-luxe-c3:#5a1d30;--with-luxe-c4:#7b4a12;
+  --with-luxe-accent:#e1b45a;--with-luxe-edge:#f3c9d2;--with-luxe-ink:#2a0d16;--with-luxe-shadow:#2a0d16;--with-luxe-tint:#fff0cf;
+}
+
+/* ───────── base ───────── */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;font:400 1.1875rem/1.65 var(--serif);color:var(--ink);background-color:var(--paper);
+  background-image:
+    radial-gradient(900px 520px at 8% -6%,rgba(255,255,255,.7),transparent 62%),
+    radial-gradient(800px 520px at 100% 18%,rgba(214,170,100,.16),transparent 62%),
+    radial-gradient(900px 600px at 0% 62%,rgba(226,160,170,.13),transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .3  0 0 0 0 .16  0 0 0 .1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{display:block;max-width:100%}
+a{color:var(--rose-deep);text-underline-offset:.18em;text-decoration-thickness:.08em}
+a:hover{color:var(--ink)}
+p{margin:0 0 1em}
+h1,h2,h3,h4{margin:0;font-family:var(--serif);color:var(--ink)}
+h2{font:600 clamp(2.05rem,4.8vw,3.35rem)/1.08 var(--serif);letter-spacing:-.015em}
+h2 em{font-style:italic;font-weight:400;color:var(--rose-deep)}
+h3{font:600 1.3rem/1.25 var(--serif)}
+ul,ol{margin:0;padding:0;list-style:none}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+.hand{font-family:var(--hand);font-weight:700}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip:focus{position:fixed;z-index:100;left:12px;top:12px;width:auto;height:auto;clip:auto;padding:12px 18px;background:var(--white);color:var(--ink);border-radius:10px;box-shadow:var(--shadow-m);font-weight:600}
+section[id],[id].anchor{scroll-margin-top:84px}
+.sec{padding:clamp(60px,8.5vw,112px) 0;position:relative}
+.sec.alt{background:linear-gradient(180deg,rgba(239,227,202,.78),rgba(239,227,202,.55));border-block:1px dashed var(--paper-3)}
+.sec-head{max-width:46rem;margin:0 0 clamp(30px,4vw,52px)}
+.sec-head.center{margin-inline:auto;text-align:center}
+.sec-head .sub{margin:.9em 0 0;font-size:1.22rem;color:var(--ink-2)}
+.kicker{display:inline-flex;align-items:center;gap:10px;font:700 clamp(1.55rem,3vw,2rem)/1 var(--hand);color:var(--rose-deep);transform:rotate(-1.5deg);margin:0 0 .35em}
+.kicker [data-ico]{color:var(--gold)}
+
+/* icon slots: emoji fallbacks sized like their icon, plain styles tinted */
+.i-rose{color:var(--rose-deep)}.i-sage{color:var(--sage-deep)}.i-gold{color:var(--gold-deep)}.i-ink{color:var(--ink)}
+.badge{--k:min(var(--kit-scale,1),1.5);display:inline-grid;place-items:center;flex:none;align-self:start;width:calc(68px*var(--k));height:calc(68px*var(--k));border-radius:50%;background:var(--rose-wash);border:2px solid var(--rose-soft);color:var(--rose-deep)}
+.badge.sage{background:var(--sage-soft);border-color:#b9cfa9;color:var(--sage-deep)}
+.badge.butter{background:var(--butter-soft);border-color:#ead8a0;color:var(--gold-deep)}
+.badge.sm{width:calc(52px*var(--k));height:calc(52px*var(--k))}
+
+/* ───────── buttons ───────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:12px 26px;border-radius:999px;border:2px solid transparent;font:600 1.08rem/1.1 var(--serif);text-decoration:none;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease;-webkit-tap-highlight-color:transparent}
+.btn-primary{background:var(--rose-deep);color:#fff8ee;box-shadow:0 3px 0 #5d1a2d,var(--shadow-s)}
+.btn-primary:hover{background:#7a2039;color:#fff;transform:translateY(-1px)}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 1px 0 #5d1a2d}
+.btn-ghost{background:rgba(255,250,240,.75);color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:var(--butter-soft);color:var(--ink)}
+.btn-quiet{background:transparent;color:var(--rose-deep);border-color:var(--rose-soft);min-height:48px;padding-inline:20px}
+.btn-quiet:hover{background:var(--rose-wash);color:var(--rose-deep)}
+.btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+
+/* ───────── shared album pieces: polaroid, tape, notes ───────── */
+.polaroid{position:relative;margin:0;background:var(--white);padding:12px 12px 6px;border-radius:3px;box-shadow:var(--shadow-m);transform:rotate(var(--r,0deg));transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
+.polaroid .ph{aspect-ratio:var(--ar,1/1);overflow:hidden;background:var(--paper-2);position:relative}
+.polaroid .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,235,200,.16),rgba(150,90,60,.1));mix-blend-mode:multiply;pointer-events:none}
+.polaroid img{width:100%;height:100%;object-fit:cover;object-position:var(--fp,50% 50%);filter:sepia(.16) saturate(1.06) contrast(1.02)}
+.polaroid figcaption{font:700 1.65rem/1.05 var(--hand);text-align:center;padding:11px 6px 8px;color:var(--ink)}
+.polaroid:hover{transform:rotate(0deg) translateY(-4px) scale(1.01);box-shadow:0 2px 3px rgba(70,45,25,.18),0 26px 40px -16px rgba(70,45,25,.5)}
+.tape{position:absolute;z-index:3;width:104px;height:30px;left:50%;top:-15px;margin-left:-52px;transform:rotate(var(--tr,-3deg));
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.34) 0 7px,rgba(255,255,255,0) 7px 14px),rgba(244,220,143,.88);
+  box-shadow:0 1px 2px rgba(70,45,25,.2);clip-path:polygon(0 0,100% 0,97% 25%,100% 50%,97% 75%,100% 100%,0 100%,3% 75%,0 50%,3% 25%)}
+.tape.rose{background:repeating-linear-gradient(135deg,rgba(255,255,255,.3) 0 7px,rgba(255,255,255,0) 7px 14px),rgba(236,160,176,.85)}
+.tape.sage{background:repeating-linear-gradient(135deg,rgba(255,255,255,.3) 0 7px,rgba(255,255,255,0) 7px 14px),rgba(168,196,150,.88)}
+.tape.l{left:-26px;top:10px;margin:0;transform:rotate(-40deg)}
+.tape.r{left:auto;right:-26px;top:10px;margin:0;transform:rotate(40deg)}
+.paper-card{position:relative;background:var(--card);border:1px solid #eadcc0;border-radius:6px;box-shadow:var(--shadow-s);padding:clamp(22px,3vw,34px)}
+.paper-card.lined{background-image:repeating-linear-gradient(180deg,transparent 0 31px,rgba(184,63,91,.13) 31px 32px);background-position:0 12px}
+.dots{height:0;border-top:2px dotted var(--paper-3);margin:0}
+.orn{display:flex;align-items:center;justify-content:center;gap:18px;color:var(--gold);padding:6px 0 0;margin:0 auto}
+main>.orn{padding:30px 0 6px}
+.orn::before,.orn::after{content:"";height:0;width:min(180px,24vw);border-top:2px dotted var(--paper-3)}
+.orn [data-ico]{color:var(--gold)}
+
+/* ───────── announcement + header ───────── */
+.shh{background:var(--ink);color:#fbf0dc;font-size:1rem;line-height:1.4}
+.shh .wrap{display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 0;text-align:left}
+.shh p{margin:0}
+.shh strong{color:var(--butter);font-weight:600}
+.shh [data-ico]{color:var(--butter);flex:none}
+.top{position:relative;z-index:40;background:rgba(247,240,225,.94);border-bottom:1px dashed var(--paper-3)}
+.top .bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 18px;min-height:68px;padding-block:8px}
+.brand{display:inline-flex;align-items:center;gap:10px;font:700 1.3rem/1 var(--serif);color:var(--ink);text-decoration:none}
+.brand em{font-weight:400;color:var(--rose-deep)}
+.brand [data-ico]{color:var(--rose-deep)}
+.top nav{order:3;flex:1 1 100%;min-width:0}
+.top nav ul{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-inline:-6px;padding-inline:6px}
+.top nav ul::-webkit-scrollbar{display:none}
+.top nav a{display:inline-flex;align-items:center;min-height:44px;padding:6px 14px;border-radius:999px;font:600 1rem/1 var(--serif);color:var(--ink-2);text-decoration:none;white-space:nowrap}
+.top nav a:hover{background:var(--butter-soft);color:var(--ink)}
+.top nav a[aria-current="true"]{background:var(--rose-wash);color:var(--rose-deep)}
+.top .btn{min-height:46px;padding:8px 20px;font-size:1rem}
+@media(min-width:1120px){
+  .top{position:sticky;top:0;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .top .bar{flex-wrap:nowrap}
+  .top nav{order:0;flex:1 1 auto;display:flex;justify-content:center}
+  .top nav ul{overflow:visible;margin:0;padding:0}
+}
+
+/* ───────── hero: a polaroid pile on the album page ───────── */
+.hero{position:relative;padding:clamp(28px,4vw,56px) 0 clamp(54px,7vw,100px);overflow:hidden}
+.hero-grid{display:grid;gap:clamp(38px,6vw,64px);align-items:center}
+@media(min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr)}}
+.hero h1{margin:.1em 0 .2em;font:600 clamp(3.1rem,min(8vw,12.5vh),6.1rem)/.94 var(--serif);letter-spacing:-.028em}
+.hero h1 .h1-a{display:block}
+.hero h1 .h1-b{display:block;font-style:italic;font-weight:400;color:var(--rose-deep)}
+.eighty{display:inline-block;font-style:normal;font-weight:700;font-size:1.5em;letter-spacing:-.05em;color:var(--rose);text-shadow:4px 4px 0 var(--butter);transform:rotate(-3deg);margin-left:.08em;line-height:.9}
+.lede{font-size:clamp(1.25rem,2.3vw,1.5rem);line-height:1.5;color:var(--ink-2);max-width:34rem;margin:0 0 1.3em}
+.facts{margin:0 0 26px;max-width:36rem}
+.facts li{display:flex;gap:16px;align-items:center;padding:14px 0;border-top:2px dotted var(--paper-3)}
+.facts li:last-child{border-bottom:2px dotted var(--paper-3)}
+.facts b{display:block;font-size:1.28rem;line-height:1.25}
+.facts span.s{display:block;color:var(--ink-2);font-size:1.06rem;line-height:1.4}
+.facts [data-ico]{color:var(--rose-deep)}
+.count{display:flex;align-items:center;gap:16px;margin-top:26px;padding:14px 20px 14px 14px;max-width:34rem;background:var(--butter-soft);border:1px solid #ecdca4;border-radius:18px;box-shadow:var(--shadow-s)}
+.count .n{font:700 2.1rem/1 var(--serif);color:var(--rose-deep)}
+.count .t{font-size:1.06rem;line-height:1.35;color:var(--ink-2)}
+.count .t b{display:block;font-size:1.2rem;color:var(--ink)}
+.hero-art{position:relative;min-height:470px;display:grid;place-items:center;padding:20px 0 40px}
+.hero-art .pol-main{width:min(440px,84%);--ar:1/1.1;z-index:2}
+.hero-art .pol-flowers{position:absolute;left:-1%;bottom:112px;width:min(210px,42%);--ar:1/1;z-index:3}
+@media(max-width:520px){.hero-art .pol-flowers{left:-3%;width:42%;bottom:104px}}
+.hero-art .pol-flowers figcaption{font-size:1.4rem}
+.hero-art .pol-main figcaption{text-align:center}
+.photo-credit{position:absolute;right:2%;bottom:6px;margin:0;font-size:.92rem;color:var(--ink-3);z-index:4}
+.photo-credit a{color:var(--ink-3)}
+/* decorative flourishes never grow past 1.2x, even when the visitor sets the size slider to 1.8x */
+.flt{position:absolute;z-index:4;pointer-events:none;transform:scale(calc(min(var(--kit-scale,1),1.2) / var(--kit-scale,1)));transform-origin:var(--fo,top right)}
+.flt.b1{right:3%;top:22px;color:var(--rose)}.flt.b2{left:2%;top:0;color:var(--gold);--fo:top left}.flt.sp{right:-1%;bottom:26%;color:var(--gold);--fo:bottom right}
+.hero::before{content:"";position:absolute;inset:auto -10% -40px -10%;height:90px;background:radial-gradient(60% 100% at 50% 100%,rgba(184,63,91,.07),transparent)}
+.flt.ck{right:8%;top:-74px;color:var(--rose);--fo:bottom right}
+html[data-level="0"] .flt{display:none}
+/* laptop screens (about 650 to 780px tall): date, place and the RSVP button must land in the first screen */
+@media(min-width:960px) and (max-height:780px){
+  .hero{padding-top:18px}
+  .hero .kicker{display:none}
+  .hero h1{margin:0 0 .1em}
+  .lede{font-size:1.2rem;margin-bottom:14px}
+  .facts{display:grid;grid-template-columns:1fr 1fr;column-gap:22px;max-width:none;margin-bottom:16px}
+  .facts li{padding:10px 0;gap:12px;border-bottom:2px dotted var(--paper-3)}
+  .hero-art{min-height:0;padding:0}
+  .hero-art .pol-main{width:min(440px,84%,calc((100vh - 250px) / 1.1))}
+}
+
+/* ───────── forms (shared) ───────── */
+.fld{display:grid;gap:6px;margin:0 0 18px}
+.fld>label,.lab,legend{font:600 1.1rem/1.3 var(--serif);color:var(--ink);padding:0}
+.opt-note{font-weight:400;color:var(--ink-3);font-size:.98rem}
+input[type=text],input[type=email],input[type=tel],input[type=number],select,textarea{width:100%;min-height:54px;padding:12px 15px;font:400 1.12rem/1.4 var(--serif);color:var(--ink);background:#fffdf8;border:2px solid #d4c29e;border-radius:12px;transition:border-color .2s,box-shadow .2s}
+textarea{min-height:140px;resize:vertical}
+input:hover,select:hover,textarea:hover{border-color:var(--wood)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rose-deep);box-shadow:0 0 0 4px rgba(184,63,91,.2)}
+::placeholder{color:#76645a;opacity:1}
+.hint{font-size:.98rem;color:var(--ink-3);margin:0}
+.err{margin:2px 0 0;font-weight:600;font-size:1rem;color:#a3122d;display:flex;gap:8px;align-items:center}
+.err[hidden]{display:none}
+[aria-invalid="true"]{border-color:#a3122d!important}
+fieldset{border:0;margin:0 0 20px;padding:0;min-width:0}
+legend{margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:8px 18px;border:2px solid #d4c29e;border-radius:999px;background:var(--card);font:600 1.02rem/1.1 var(--serif);color:var(--ink-2);transition:background .2s,border-color .2s}
+.chip input:checked+span{background:var(--sage-soft);border-color:var(--sage-deep);color:var(--sage-deep)}
+.chip input:focus-visible+span{outline:3px solid var(--gold);outline-offset:2px}
+.chip input:checked+span::before{content:"\2713";font-weight:700}
+.opt{display:flex;gap:14px;align-items:flex-start;padding:12px 16px;margin:0 0 10px;border:2px solid #d4c29e;border-radius:14px;background:var(--card);cursor:pointer;line-height:1.35}
+.opt:has(input:checked){border-color:var(--rose-deep);background:var(--rose-wash)}
+.opt input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--rose-deep)}
+.opt b{display:block;font-weight:600}
+.opt small{display:block;color:var(--ink-3);font-size:.98rem}
+.check{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px;cursor:pointer;line-height:1.4}
+.check input{width:24px;height:24px;margin:1px 0 0;flex:none;accent-color:var(--rose-deep)}
+
+/* ───────── the secret plan ───────── */
+.timecards{display:grid;gap:18px;margin-bottom:clamp(40px,5vw,70px)}
+@media(min-width:900px){.timecards{grid-template-columns:1fr auto 1fr;align-items:center;gap:26px}}
+.tc{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 22px;align-items:center;padding:clamp(24px,3vw,34px);border-radius:10px;box-shadow:var(--shadow-m)}
+.tc::after{content:"";position:absolute;inset:9px;border:2px dashed currentColor;border-radius:6px;opacity:.28;pointer-events:none}
+.tc .who{grid-column:1/-1;font:700 1.9rem/1 var(--hand);margin-bottom:6px}
+.tc .when{font:700 clamp(2.5rem,5.4vw,3.6rem)/1 var(--serif);letter-spacing:-.02em;color:var(--ink)}
+.tc .what{font-size:1.2rem;font-weight:600;line-height:1.25;color:var(--ink)}
+.tc p{grid-column:1/-1;margin:.7em 0 0;font-size:1.1rem;color:var(--ink-2)}
+.tc-you{background:var(--white);color:var(--sage-deep);border:2px solid var(--sage)}
+.tc-nani{background:var(--rose-wash);color:var(--rose-deep);border:2px solid var(--rose)}
+.tc-mid{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:var(--gold-deep);font:700 1.7rem/1.05 var(--hand)}
+.tc-mid .ar{display:flex;align-items:center;gap:6px}
+.tc-mid .line{width:70px;border-top:3px dotted var(--gold)}
+@media(max-width:899px){.tc-mid{flex-direction:row;justify-content:center;gap:12px}.tc-mid .ar{display:none}}
+.plan-grid{display:grid;gap:clamp(34px,5vw,64px)}
+@media(min-width:960px){.plan-grid{grid-template-columns:1.1fr .9fr;align-items:start}}
+.steps li{--k:min(var(--kit-scale,1),1.5);position:relative;display:grid;grid-template-columns:calc(68px*var(--k)) 1fr;gap:0 20px;padding-bottom:30px}
+.steps li::before{content:"";position:absolute;left:calc(33px*var(--k));top:calc(72px*var(--k));bottom:6px;border-left:3px dotted var(--paper-3)}
+.steps li:last-child{padding-bottom:0}.steps li:last-child::before{display:none}
+.steps .tm{display:block;font:700 1.3rem/1 var(--serif);color:var(--rose-deep);margin:6px 0 4px}
+.steps h3{margin-bottom:4px}
+.steps p{margin:0;color:var(--ink-2);font-size:1.12rem}
+.rules{background:var(--butter-soft);border:1px solid #ecdca4;transform:rotate(1.2deg);box-shadow:var(--shadow-m);position:relative;border-radius:4px;padding:clamp(26px,3.2vw,38px) clamp(22px,3vw,34px) clamp(22px,3vw,30px)}
+.rules h3{font:700 2.05rem/1 var(--hand);color:var(--rose-deep);margin-bottom:14px}
+.rules li{display:grid;grid-template-columns:minmax(48px,auto) 1fr;gap:14px;padding:12px 0;border-top:2px dotted rgba(116,87,22,.28);font-size:1.12rem;line-height:1.45}
+.rules li b{font-weight:600}
+.rules li [data-ico]{color:var(--rose-deep);margin-top:2px}
+.rules .help{margin:14px 0 0;font-size:1.02rem;color:var(--ink-2)}
+.rules .help a{font-weight:600}
+
+/* ───────── the day ───────── */
+.day-grid{display:grid;gap:clamp(30px,5vw,60px)}
+@media(min-width:960px){.day-grid{grid-template-columns:1.2fr .8fr;align-items:start}}
+.sched li{display:grid;grid-template-columns:4.7rem minmax(56px,auto) 1fr;gap:6px 16px;align-items:start;padding:20px 0;border-top:2px dotted var(--paper-3)}
+.sched li:last-child{border-bottom:2px dotted var(--paper-3)}
+.sched .t{font:700 1.4rem/1.2 var(--serif);color:var(--rose-deep);padding-top:2px}
+.sched h3{font-size:1.25rem;margin-bottom:2px}
+.sched p{margin:0;color:var(--ink-2);font-size:1.12rem}
+.sched [data-ico]{color:var(--rose-deep)}
+.sched li.big .t{color:var(--rose)}
+.sched li.big h3{font-size:1.45rem}
+.stack{display:grid;gap:22px}
+.glance{display:grid;gap:16px}
+.g-row{display:flex;gap:18px;align-items:center}
+.g-row b{display:block;font-size:1.25rem;line-height:1.25}
+.g-row span.s{display:block;color:var(--ink-2);font-size:1.05rem;line-height:1.4}
+.g-row [data-ico]{color:var(--rose-deep)}
+.dress h3{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.dress h3 [data-ico]{color:var(--rose-deep)}
+.swatches{display:flex;gap:10px;margin:14px 0 0}
+.swatches i{width:38px;height:38px;border-radius:50%;border:3px solid var(--white);box-shadow:var(--shadow-s)}
+
+/* ───────── her story: a clothesline of five pages ───────── */
+.years{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 6px}
+.yr{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:6px 20px 6px 8px;border:2px solid #d4c29e;border-radius:999px;background:var(--card);font:700 1.15rem/1 var(--serif);color:var(--ink-2);cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.yr:hover{border-color:var(--rose-deep);transform:translateY(-1px)}
+.yr .ic{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--rose-wash);color:var(--rose-deep)}
+.yr[aria-current="true"]{background:var(--rose-deep);border-color:var(--rose-deep);color:#fff8ee}
+.yr[aria-current="true"] .ic{background:#fffaf0}
+.strip{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:max(20px,calc((100vw - 1160px)/2));padding:34px 0 36px;scrollbar-width:thin;scrollbar-color:var(--paper-3) transparent;-webkit-overflow-scrolling:touch}
+.strip:focus-visible{outline-offset:-4px}
+.track{position:relative;display:flex;gap:30px;width:max-content;padding:0 max(20px,calc((100vw - 1160px)/2)) 0}
+.track::before{content:"";position:absolute;left:0;right:0;top:14px;height:0;border-top:3px solid #a58762;border-radius:50%;box-shadow:0 5px 5px -4px rgba(70,45,25,.35)}
+.page{position:relative;flex:0 0 min(310px,80vw);scroll-snap-align:start;padding-top:22px}
+.page::before{content:"";position:absolute;z-index:4;top:2px;left:50%;width:16px;height:40px;margin-left:-8px;border-radius:4px;background:linear-gradient(90deg,#dcbb85,#b98e55 60%,#a07a47);box-shadow:0 3px 4px rgba(70,45,25,.3)}
+.page::after{content:"";position:absolute;z-index:5;top:17px;left:50%;width:16px;height:2px;margin-left:-8px;background:rgba(70,45,25,.35)}
+.page .polaroid{--ar:4/4.6;padding-top:14px}
+.page .polaroid figcaption{min-height:5rem;display:grid;place-items:center}
+.page .yrn{font:700 3.3rem/1 var(--serif);color:var(--rose);margin:22px 0 2px;letter-spacing:-.03em}
+.page h3{font-size:1.5rem;margin-bottom:6px}
+.page p{margin:0;font-size:1.12rem;line-height:1.55;color:var(--ink-2)}
+.page .where{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:1rem;font-weight:600;color:var(--sage-deep)}
+.strip-ctl{display:flex;align-items:center;justify-content:center;gap:16px}
+.rnd{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:50%;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer;transition:background .2s,transform .2s}
+.rnd:hover:not(:disabled){background:var(--butter-soft);transform:scale(1.05)}
+.rnd:disabled{opacity:.35;cursor:default}
+.strip-ctl .pg{min-width:9ch;text-align:center;font:700 1.5rem/1 var(--hand);color:var(--ink-2)}
+
+/* ───────── her table: the menu ───────── */
+.menu-grid{display:grid;gap:clamp(34px,5vw,64px);align-items:start}
+@media(min-width:960px){.menu-grid{grid-template-columns:1.2fr .8fr}}
+.menu-card{position:relative;background:var(--white);border:1px solid #eadcc0;box-shadow:var(--shadow-m);border-radius:4px;padding:clamp(30px,4.4vw,54px) clamp(22px,4vw,48px)}
+.menu-card::before{content:"";position:absolute;inset:11px;border:2px solid var(--rose-soft);border-radius:2px;pointer-events:none}
+.menu-card .m-title{text-align:center;margin-bottom:6px}
+.menu-card .m-title .hand{font-size:1.9rem;color:var(--rose-deep);display:block;line-height:1}
+.menu-card .m-title h3{font:600 clamp(1.7rem,3vw,2.2rem)/1.1 var(--serif)}
+.menu-card .m-title p{margin:6px 0 0;color:var(--ink-3);font-size:1rem;letter-spacing:.04em}
+.course{display:flex;align-items:center;justify-content:center;gap:12px;margin:34px 0 8px;font:700 .98rem/1 var(--serif);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep)}
+.course::before,.course::after{content:"";flex:1;max-width:80px;border-top:2px dotted #cdb585}
+.dish{display:grid;grid-template-columns:minmax(56px,auto) 1fr;gap:0 16px;align-items:start;padding:14px 0;border-bottom:1px dotted #d8c8a6}
+.dish:last-child{border-bottom:0}
+.dish>[data-ico]{color:var(--rose-deep);margin-top:3px}
+.dish b{display:block;font:600 1.26rem/1.3 var(--serif)}
+.dish p{margin:2px 0 0;font-size:1.1rem;color:var(--ink-2);line-height:1.5}
+.tgs{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:8px}
+.tg{display:inline-block;padding:2px 12px;border-radius:999px;border:1.5px solid var(--sage-deep);background:rgba(217,228,205,.4);color:var(--sage-deep);font:700 1rem/1.45 var(--serif);text-align:center}
+.tg.nut{border-color:var(--rose-deep);background:var(--rose-wash);color:var(--rose-deep)}
+.m-key{max-width:34rem;margin:20px auto 0;padding:12px 18px;border:2px dashed #d9c07f;border-radius:12px;background:var(--butter-soft);font-size:1.05rem;line-height:1.45;color:var(--ink-2);text-align:center}
+.m-key b{color:var(--ink)}
+.fav{display:inline-flex;align-items:center;gap:6px;font:700 1.25rem/1 var(--hand);color:var(--rose-deep)}
+.fav [data-ico]{color:var(--rose)}
+.menu-side{display:grid;gap:34px;justify-items:center}
+@media(min-width:960px) and (min-height:820px){.menu-side{position:sticky;top:96px}}
+.menu-side .polaroid{width:min(430px,100%);--ar:5/4}
+.note-sq{width:min(430px,100%);transform:rotate(-1deg)}
+
+/* ───────── no gifts: the recipe card ───────── */
+.gift-grid{display:grid;gap:clamp(34px,5vw,64px);align-items:center}
+@media(min-width:960px){.gift-grid{grid-template-columns:1.15fr .85fr}}
+.rcard{position:relative;background:#fffdf7;border:1px solid #e6d5b3;border-top:5px solid var(--rose);box-shadow:var(--shadow-m);border-radius:4px;padding:clamp(28px,4vw,46px) clamp(22px,4vw,46px) clamp(28px,4vw,46px) clamp(64px,9vw,92px);background-image:repeating-linear-gradient(180deg,transparent 0 35px,rgba(110,150,190,.13) 35px 36px);background-position:0 8px}
+.rcard::before{content:"";position:absolute;left:clamp(44px,6.4vw,66px);top:0;bottom:0;border-left:2px solid rgba(184,63,91,.3)}
+.rcard>*:not(.tape){position:relative}
+.rcard h2{font-size:clamp(2.2rem,5vw,3.4rem);margin:0 0 4px}
+.rcard .lead{font:700 1.9rem/1.15 var(--hand);color:var(--rose-deep);margin:0 0 20px}
+.ways{display:grid;gap:4px;margin:0 0 18px}
+.ways li{display:grid;grid-template-columns:minmax(50px,auto) 1fr;gap:14px;align-items:start;padding:10px 0}
+.ways b{display:block;font-size:1.2rem;line-height:1.3}
+.ways span.d{display:block;color:var(--ink-2);font-size:1.08rem;line-height:1.5}
+.ways [data-ico]{color:var(--rose-deep);margin-top:2px}
+.rcard .alt{margin:6px 0 0;padding-top:16px;border-top:2px dotted rgba(70,45,25,.2);font-size:1.06rem;color:var(--ink-2)}
+.gift-art{display:grid;justify-items:center}
+.gift-art .polaroid{width:min(420px,100%);--ar:4/3.2}
+
+/* ───────── memory wall ───────── */
+.wall-grid{display:grid;gap:clamp(30px,4vw,48px);align-items:start}
+@media(min-width:1000px){.wall-grid{grid-template-columns:390px minmax(0,1fr)}}
+@media(min-width:1000px) and (min-height:1000px){.wall-form{position:sticky;top:90px}}
+.wall-form{background:var(--white);border:1px solid #eadcc0;border-radius:6px;box-shadow:var(--shadow-m);padding:clamp(22px,3vw,30px);position:relative}
+.wall-form h3{font:700 2rem/1 var(--hand);color:var(--rose-deep);margin-bottom:14px}
+.cnt{display:flex;justify-content:space-between;gap:10px;font-size:.98rem;color:var(--ink-3)}
+.stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stamp{position:relative}
+.stamp input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.stamp .bx{display:grid;justify-items:center;gap:2px;padding:10px 4px 8px;border:2px solid #d4c29e;border-radius:14px;background:var(--card);font-size:.95rem;font-weight:600;color:var(--ink-2);transition:border-color .2s,background .2s}
+.stamp input:checked+.bx{border-color:var(--rose-deep);background:var(--rose-wash);color:var(--rose-deep)}
+.stamp input:focus-visible+.bx{outline:3px solid var(--gold);outline-offset:2px}
+.stamp [data-ico]{color:var(--rose-deep)}
+.hues{display:flex;gap:12px}
+.hue{position:relative;width:46px;height:46px}
+.hue input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.hue i{display:block;width:100%;height:100%;border-radius:50%;border:3px solid var(--white);box-shadow:0 0 0 2px #d4c29e,var(--shadow-s);background:var(--c)}
+.hue input:checked+i{box-shadow:0 0 0 3px var(--rose-deep),var(--shadow-s)}
+.hue input:focus-visible+i{outline:3px solid var(--gold);outline-offset:3px}
+.wall-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-bottom:26px}
+.wall-count{display:flex;align-items:center;gap:12px;font:600 1.3rem/1.2 var(--serif)}
+.wall-count [data-ico],.wall-count [data-live]{color:var(--rose-deep)}
+.filt{display:flex;flex-wrap:wrap;gap:8px}
+.filt button{min-height:46px;padding:6px 18px;border-radius:999px;border:2px solid #d4c29e;background:var(--card);font:600 1.02rem/1 var(--serif);color:var(--ink-2);cursor:pointer}
+.filt button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fbf0dc}
+.wall{columns:2 260px;column-gap:26px;padding-top:12px}
+.note{position:relative;break-inside:avoid;margin:0 0 28px;padding:34px 22px 16px;background:var(--bg,#fbf0c9);border-radius:3px;box-shadow:var(--shadow-s);transform:rotate(var(--r,0deg))}
+.note::before{content:"";position:absolute;top:7px;left:50%;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffa3b0,#b83f5b 62%,#7a1f36);box-shadow:0 4px 5px rgba(70,45,25,.35)}
+.note.c-blush{--bg:#fbe0e5}.note.c-sage{--bg:#e3edd8}.note.c-paper{--bg:#fffdf7}.note.c-butter{--bg:#fbf0c9}
+.note .st{position:absolute;right:10px;top:10px;color:var(--rose-deep)}
+.note blockquote{margin:0 0 6px;padding-right:34px;font:700 1.6rem/1.2 var(--hand);color:var(--ink);overflow-wrap:anywhere}
+.note .by{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:2px dotted rgba(70,45,25,.22);font-size:1.02rem;line-height:1.25;overflow-wrap:anywhere}
+.note .by>div{min-width:0}
+.note .by [data-ico],.note .by [data-live]{flex:none}
+.note .by b{display:block;font-weight:600}
+.note .by span.rel{color:var(--ink-2);font-size:.95rem}
+.note .by [data-ico],.note .by [data-live]{color:var(--rose-deep)}
+.note .rm{margin-left:auto;flex:none;min-height:44px;min-width:44px;border:0;background:transparent;color:var(--ink-3);cursor:pointer;font:inherit;font-size:.92rem;text-decoration:underline}
+.note.new{animation:pinIn .75s cubic-bezier(.2,1.25,.3,1) both}
+@keyframes pinIn{from{opacity:0;transform:translateY(-46px) rotate(calc(var(--r,0deg) - 9deg)) scale(.92)}to{opacity:1;transform:rotate(var(--r,0deg))}}
+.wall-empty{padding:36px;text-align:center;color:var(--ink-3);border:2px dashed #d4c29e;border-radius:14px}
+
+/* ───────── getting there ───────── */
+.where-grid{display:grid;gap:clamp(30px,5vw,56px)}
+@media(min-width:960px){.where-grid{grid-template-columns:1.1fr .9fr;align-items:start}}
+.hero-grid>*,.plan-grid>*,.day-grid>*,.menu-grid>*,.gift-grid>*,.wall-grid>*,.where-grid>*,.rsvp-grid>*,.from>*{min-width:0}
+.map{position:relative;aspect-ratio:5/4;border-radius:14px;overflow:hidden;background:#efe6cf;border:2px solid #d9c9a5;box-shadow:var(--shadow-m)}
+.map::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(139,107,73,.07) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(139,107,73,.07) 0 1px,transparent 1px 28px)}
+.map .road{position:absolute;background:#fffaf0;box-shadow:0 0 0 2px #dccdab}
+.map .r-orchard{left:-3%;right:-3%;top:42%;height:34px}
+.map .r-pear{top:-3%;bottom:-3%;left:60%;width:30px}
+.map .r-mill{left:-4%;width:46%;top:80%;height:22px;transform:rotate(-14deg);transform-origin:left center}
+.map .blk{position:absolute;border-radius:10px;background:#e4d5b4;border:2px solid #d3c19a}
+.map .b-fnf{left:68%;top:7%;width:27%;height:27%;background:var(--rose-soft);border-color:var(--rose)}
+.map .b-park{left:5%;top:60%;width:34%;height:31%;background:#cddcbf;border-color:#a9c093;border-radius:50% 40% 46% 38%}
+.map .b-car{left:68%;top:58%;width:27%;height:32%;background:#dfe0d6;border-color:#bcbdb0}
+.map .b-one{left:5%;top:8%;width:25%;height:26%}.map .b-two{left:34%;top:8%;width:22%;height:26%}
+.map .lbl{position:absolute;font:700 1.2rem/1 var(--hand);color:var(--ink-2);white-space:nowrap}
+.map .l-orch{left:69%;top:calc(42% + 8px)}
+.map .l-post{left:35.5%;top:15%;font-size:1.08rem;line-height:1.05;white-space:normal;width:19%;text-align:center}
+.map .l-pear{left:calc(60% + 2px);top:62%;transform:rotate(-90deg);transform-origin:left top;margin-top:0}
+.map .l-fnf{left:70%;top:11%;font-size:1.25rem;color:var(--rose-deep);white-space:normal;width:24%;line-height:1.05}
+.map .l-park{left:11%;top:72%}
+.map .l-p{left:72%;top:63%;font:700 2.2rem/1 var(--serif);color:#8f9087}
+.map .l-p2{left:70%;top:80%;font-size:1.05rem}
+.map .route{position:absolute;border:0;border-top:4px dotted var(--rose)}
+.map .rt-h{left:24%;width:36%;top:calc(42% + 15px)}
+.map .rt-v{left:calc(60% + 13px);top:25%;height:calc(17% + 17px);border-top:0;border-left:4px dotted var(--rose);width:0}
+.map .pin{position:absolute;transform:translate(-50%,-92%);filter:drop-shadow(0 3px 2px rgba(70,45,25,.3))}
+.map .pin-1{left:66%;top:24%}.map .pin-2{left:84%;top:77%}.map .pin-3{left:24%;top:calc(42% + 14px)}
+.map .north{position:absolute;right:10px;top:8px;display:flex;align-items:center;gap:6px;font:700 1.15rem/1 var(--hand);color:var(--ink-3)}
+.map-cap{margin:10px 0 0;font-size:.98rem;color:var(--ink-3)}
+.dirs li{display:grid;grid-template-columns:minmax(48px,auto) 1fr;gap:16px;padding:16px 0;border-top:2px dotted var(--paper-3)}
+.dirs li:last-child{border-bottom:2px dotted var(--paper-3)}
+.dirs b{display:block;font-size:1.2rem;line-height:1.3}
+.dirs span.d{display:block;color:var(--ink-2);font-size:1.12rem;line-height:1.5}
+.addr{margin:22px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+.addr address{font-style:normal;font-weight:600;font-size:1.12rem;line-height:1.4}
+.acc-head{margin:clamp(54px,7vw,90px) 0 26px}
+.acc-grid{display:grid;gap:18px}
+@media(min-width:640px){.acc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.acc-grid{grid-template-columns:repeat(3,1fr)}}
+.acc{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:22px 20px;background:var(--card);border:1px solid #eadcc0;border-radius:14px;box-shadow:var(--shadow-s)}
+.acc h3{font-size:1.2rem;margin-bottom:4px}
+.acc p{margin:0;font-size:1.1rem;color:var(--ink-2);line-height:1.5}
+
+/* ───────── RSVP ───────── */
+.rsvp-grid{display:grid;gap:clamp(34px,5vw,60px);align-items:start}
+@media(min-width:1000px){.rsvp-grid{grid-template-columns:.78fr 1.22fr}}
+.rsvp-side{display:grid;gap:34px;justify-items:center}
+@media(min-width:1000px) and (min-height:780px){.rsvp-side{position:sticky;top:96px}}
+.rsvp-side .polaroid{width:min(340px,86%);--ar:4/4.7}
+.seats{display:flex;align-items:center;gap:18px;width:100%;max-width:430px;padding:16px 20px;background:var(--sage-soft);border:1px solid #b9cfa9;border-radius:16px}
+.seats .t{font-size:1.1rem;line-height:1.35;color:var(--ink-2)}
+.seats .t b{display:block;font-size:1.3rem;color:var(--sage-deep)}
+.seats [data-live],.seats [data-ico]{color:var(--sage-deep)}
+.rsvp-form{background:var(--white);border:1px solid #eadcc0;border-radius:6px;box-shadow:var(--shadow-m);padding:clamp(24px,4vw,44px)}
+.rsvp-form h3{font:700 clamp(1.9rem,3.2vw,2.5rem)/1.1 var(--hand);color:var(--rose-deep);margin-bottom:6px}
+.rsvp-form .intro{color:var(--ink-2);margin-bottom:26px}
+.two{display:grid;gap:0 20px}
+@media(min-width:640px){.two{grid-template-columns:1fr 1fr}}
+.stepper{display:inline-grid;grid-template-columns:54px 84px 54px;align-items:center;border:2px solid #d4c29e;border-radius:14px;overflow:hidden;background:#fffdf8;width:max-content}
+.stepper button{min-height:54px;border:0;background:var(--card);color:var(--ink);cursor:pointer;display:grid;place-items:center;font:700 1.6rem/1 var(--serif)}
+.stepper button:hover{background:var(--butter-soft)}
+.stepper input{border:0;border-radius:0;text-align:center;font-weight:700;font-size:1.3rem;min-height:54px;padding:0;-moz-appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.reveal{margin:0 0 20px;padding:18px;background:var(--butter-soft);border:1px solid #ecdca4;border-radius:12px}
+.reveal[hidden]{display:none}
+.form-end{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;margin-top:26px}
+.form-end .hint{flex:1 1 220px}
+.rsvp-done{text-align:center;scroll-margin-top:16px}
+@media(min-width:1120px){.rsvp-done{scroll-margin-top:96px}}
+.rsvp-done[hidden]{display:none}
+.rsvp-done:focus{outline:none}
+.done-h{font:700 2rem/1.1 var(--hand);color:var(--rose-deep);margin:0 0 6px}
+.place{position:relative;max-width:440px;margin:6px auto 20px;padding:26px 26px 22px;background:var(--white);border:2px solid var(--gold);border-radius:8px;box-shadow:var(--shadow-m);transform:rotate(-1deg)}
+.place::before{content:"";position:absolute;inset:8px;border:1px dashed #d9c07f;border-radius:4px;pointer-events:none}
+.place .hand{font-size:1.7rem;color:var(--rose-deep);display:block;line-height:1}
+.place .nm{font:700 clamp(2.4rem,6vw,3.2rem)/1.05 var(--hand);color:var(--ink);margin:6px 0 4px;word-break:break-word}
+.place .meta{display:flex;justify-content:center;align-items:center;gap:20px;margin:14px 0 4px;flex-wrap:wrap;color:var(--ink-2)}
+.place .meta b{display:block;font-size:1.25rem;color:var(--ink)}
+.place .meta [data-live],.place .meta [data-ico]{color:var(--rose-deep)}
+.done-list{max-width:34rem;margin:0 auto 22px;text-align:left}
+.done-list li{display:grid;grid-template-columns:minmax(36px,auto) 1fr;gap:12px;padding:8px 0;font-size:1.1rem;line-height:1.45}
+.done-list [data-ico]{color:var(--sage-deep);margin-top:2px}
+.cal-opt{display:inline-flex;align-items:flex-start;gap:10px;margin:0 0 14px;font-size:1.02rem;line-height:1.35;color:var(--ink-2);cursor:pointer;text-align:left}
+.cal-opt input{width:22px;height:22px;flex:none;margin:0;accent-color:var(--rose-deep)}
+.hero-dis{margin:14px 0 0;max-width:36rem}
+
+/* ───────── FAQ ───────── */
+.faq{max-width:52rem;margin-inline:auto}
+.faq details{border-top:2px dotted var(--paper-3)}
+.faq details:last-child{border-bottom:2px dotted var(--paper-3)}
+.faq summary{display:flex;align-items:center;gap:16px;min-height:72px;padding:12px 4px;cursor:pointer;list-style:none;font:600 1.28rem/1.3 var(--serif)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";margin-left:auto;padding-left:12px;font:400 2.2rem/1 var(--serif);color:var(--rose-deep)}
+.faq details[open] summary::after{content:"\2013"}
+.faq summary:hover{color:var(--rose-deep)}
+.faq summary [data-ico]{color:var(--rose-deep)}
+.faq .ans{padding:0 8px 24px 68px;color:var(--ink-2);font-size:1.12rem;line-height:1.6}
+.faq .ans p:last-child{margin:0}
+@media(max-width:560px){.faq .ans{padding-left:8px}}
+
+/* ───────── from us ───────── */
+.from{display:grid;gap:clamp(34px,5vw,64px);align-items:center}
+@media(min-width:900px){.from{grid-template-columns:.78fr 1.22fr}}
+.from .polaroid{width:min(380px,88%);--ar:1/1.12;margin-inline:auto}
+.letter{position:relative;background:var(--white);padding:clamp(28px,4vw,50px);border:1px solid #eadcc0;border-radius:4px;box-shadow:var(--shadow-m);transform:rotate(.5deg)}
+.letter p{font:700 1.65rem/1.3 var(--hand);color:var(--ink);margin:0 0 .7em}
+.letter .contact{margin:22px 0 0;padding-top:18px;border-top:2px dotted var(--paper-3);font:400 1.08rem/1.55 var(--serif);color:var(--ink-2)}
+.letter .contact a{font-weight:600;white-space:nowrap}
+.sign{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px}
+.sign li{text-align:center;font-size:1rem;line-height:1.25}
+.sign b{display:block;font:700 1.5rem/1 var(--hand);color:var(--rose-deep);margin-top:6px}
+.sign span{color:var(--ink-3);font-size:.92rem}
+.sign [data-ico]{margin-inline:auto;display:flex}
+@media(max-width:520px){.sign{grid-template-columns:repeat(2,1fr);gap:18px 10px}}
+
+/* ───────── credits + footer + toast ───────── */
+.credits{padding:clamp(52px,6vw,76px) 0 10px;border-top:2px dotted var(--paper-3);font-size:1rem;color:var(--ink-2)}
+.credits h2{font-size:1.9rem;margin-bottom:14px}
+.credits ul{columns:2 340px;column-gap:40px}
+.credits li{break-inside:avoid;margin:0 0 .6em;line-height:1.5}
+.credits a{color:var(--ink-2);font-weight:600}
+.credits .fine{margin-top:20px;max-width:56rem}
+.pg-foot{padding:34px 0 96px;text-align:center;color:var(--ink-2);font-size:1rem}
+.pg-foot .brand{margin-bottom:10px}
+.pg-foot p{margin:0 auto .5em;max-width:46rem}
+.toast{position:fixed;z-index:90;top:16px;left:50%;max-width:min(460px,calc(100vw - 28px));padding:14px 20px;background:var(--ink);color:#fbf0dc;border-radius:14px;box-shadow:var(--shadow-m);font-size:1.05rem;line-height:1.35;display:flex;align-items:center;gap:12px;transform:translate(-50%,-30px);opacity:0;pointer-events:none;transition:transform .35s cubic-bezier(.2,.9,.3,1.2),opacity .25s}
+.toast.on{transform:translate(-50%,0);opacity:1}
+@media(min-width:1120px){.toast{top:84px}}
+.toast [data-ico]{color:var(--butter);flex:none}
+/* small screens: the header does not stick below 1120px, so a guest deep in the page keeps a way to reply */
+.rsvp-fab{position:fixed;z-index:60;left:14px;bottom:max(14px,env(safe-area-inset-bottom));display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:8px 20px 8px 16px;border-radius:999px;background:var(--rose-deep);color:#fff8ee;font:600 1.05rem/1 var(--serif);text-decoration:none;box-shadow:0 3px 0 #5d1a2d,var(--shadow-m);transition:transform .3s cubic-bezier(.2,.9,.3,1.2),opacity .25s,visibility .25s,background-color .2s}
+.rsvp-fab:hover{background:#7a2039;color:#fff}
+.rsvp-fab.off{opacity:0;visibility:hidden;transform:translateY(18px);pointer-events:none}
+@media(min-width:1120px){.rsvp-fab{display:none}}
+
+/* ───────── levels + small screens ───────── */
+html[data-level="0"] .badge{background:transparent;border-color:transparent}
+/* Basic: the schedule's emoji sit in one fixed, centred column so every title lines up, and the pale champagne glasses keep an edge on cream */
+html[data-level="0"] .sched li{grid-template-columns:4.7rem 56px 1fr}
+html[data-level="0"] .sched [data-ico]{display:block;width:56px;text-align:center;font-size:40px!important;line-height:1.25;filter:drop-shadow(0 0 1px rgba(51,35,30,.6))}
+html[data-level="0"] .page::before,html[data-level="0"] .tape{opacity:.9}
+@media(max-width:640px){
+  body{font-size:1.0625rem}
+  .shh .wrap{align-items:flex-start;font-size:.98rem}
+  .hero-art{min-height:400px}
+  .sched li{grid-template-columns:3.9rem minmax(44px,auto) 1fr;gap:4px 12px}
+  html[data-level="0"] .sched li{grid-template-columns:3.9rem 52px 1fr}
+  html[data-level="0"] .sched [data-ico]{width:52px;font-size:38px!important}
+  .sched .t{font-size:1.2rem}
+  .steps li{grid-template-columns:calc(56px*var(--k)) 1fr;gap:0 14px}
+  .steps li::before{left:calc(27px*var(--k))}
+  .badge{width:calc(56px*var(--k));height:calc(56px*var(--k))}
+  .tc{grid-template-columns:1fr}
+  .rules li{grid-template-columns:minmax(38px,auto) 1fr}
+  .dish{grid-template-columns:minmax(40px,auto) 1fr;gap:0 12px}
+  .page{flex-basis:80vw}
+  .btn{width:100%}
+  .btn-row{flex-direction:column;align-items:stretch}
+  .top .btn{width:auto;min-height:44px;padding:6px 16px}
+  .brand{font-size:1.12rem;gap:8px}
+  .stepper{grid-template-columns:54px 70px 54px}
+  .map{aspect-ratio:1/1.05}
+  .map .lbl{font-size:1rem}
+  .map .l-post{font-size:.95rem}
+  .map .l-fnf{font-size:1.05rem}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body id="top">
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Nani Rosa Turns 80 is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<a class="sr skip" href="#main">Skip to the invitation</a>
+
+<div class="shh" role="note">
+  <div class="wrap">
+    <span data-ico="lock-keyhole" data-size="24">🤫</span>
+    <p><strong>Shhh, it's a surprise.</strong> Please don't post, tag or text about it until Nani has blown out her candles.</p>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top"><span data-ico="cake" data-size="32" data-motion="hover" data-sample>🎂</span> <span>Nani Rosa <em>turns 80</em></span></a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#plan">The plan</a></li>
+        <li><a href="#day">The day</a></li>
+        <li><a href="#story">Her story</a></li>
+        <li><a href="#table">Her table</a></li>
+        <li><a href="#wall">Memory wall</a></li>
+        <li><a href="#getting-there">Getting there</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary" href="#rsvp"><span data-ico="send" data-size="20">✉️</span> RSVP</a>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ═════════ HERO ═════════ -->
+<section class="hero" id="hero" aria-labelledby="h1">
+  <span class="flt b1" aria-hidden="true"><span data-ico="balloon" data-size="84" data-min-level="2" data-motion="loop"></span></span>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker"><span data-ico="sparkles" data-size="30" data-min-level="1"></span> Shhh&hellip; it's a surprise</p>
+      <h1 id="h1"><span class="h1-a">Nani Rosa</span><span class="h1-b">turns <b class="eighty">80</b></span></h1>
+      <p class="lede">A surprise lunch for the woman who fed us all. Come for the soup, stay for the stories, and please, please keep it quiet.</p>
+      <ul class="facts">
+        <li>
+          <span class="dt">
+            <span data-ico="calendar" data-size="64" data-max-level="1">📅</span>
+            <span data-live="calendar-date" data-p-day="22" data-p-month="NOV" data-size="76" data-min-level="2" data-label="Sunday 22 November 2026">22</span>
+          </span>
+          <div><b>Sunday 22 November 2026</b><span class="s">Arrive by 12:00 &middot; Nani arrives 12:30 &middot; Done by 16:30</span></div>
+        </li>
+        <li>
+          <span class="badge sm"><span data-ico="map-pin" data-size="30" data-motion="hover">📍</span></span>
+          <div><b>The Garden Room at Fennel &amp; Fig</b><span class="s">6 Orchard Walk &middot; come in by the side gate on Pear Street</span></div>
+        </li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#rsvp"><span data-ico="heart" data-size="22" data-motion="hover">❤️</span> RSVP by 8 November</a>
+        <button class="btn btn-ghost" type="button" data-cal><span data-ico="calendar-plus" data-size="22">📅</span> Add to calendar</button>
+      </div>
+      <label class="cal-opt hero-dis"><input type="checkbox" id="h-disguise" checked> <span>Title the calendar event &ldquo;Lunch at Fennel &amp; Fig&rdquo;, so Nani won&rsquo;t spot it</span></label>
+      <div class="count" id="countdown" role="timer" aria-label="Time until the surprise">
+        <span data-ico="hourglass" data-size="56" data-max-level="1">⏳</span>
+        <span id="count-ring" data-live="timer-ring" data-p-left="42" data-p-total="60" data-size="76" data-min-level="2" data-label="42 days to go">42</span>
+        <div class="t"><b id="count-main">42 days to go</b><span id="count-sub">Nani walks in at 12:30 on Sunday 22 November.</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <span class="flt b2" aria-hidden="true"><span data-ico="heart-balloon" data-size="64" data-min-level="2"></span></span>
+      <span class="flt ck" aria-hidden="true"><span data-ico="cake" data-size="140" data-min-level="2" data-motion="inview"></span></span>
+      <figure class="polaroid pol-main" style="--r:-2.5deg;--fp:46% 40%">
+        <span class="tape"></span>
+        <div class="ph"><img src="_img/nani-turns-80/photo-1616286608358-0e1b143f7d2f-1000.jpg" width="1200" height="800" alt="Nani Rosa laughing warmly, grey hair swept back, in a soft grey cardigan and floral top"></div>
+        <figcaption>Mid-laugh, as usual</figcaption>
+      </figure>
+      <figure class="polaroid pol-flowers" style="--r:5deg;--fp:50% 38%">
+        <span class="tape rose" style="--tr:6deg"></span>
+        <div class="ph"><img src="_img/nani-turns-80/34463054-600.jpg" width="1200" height="800" alt="A bouquet of pink carnations, white freesia and baby's breath in a glass vase on a weathered green table" loading="lazy" decoding="async"></div>
+        <figcaption>Her carnations</figcaption>
+      </figure>
+      <span class="flt sp" aria-hidden="true"><span data-ico="sparkles" data-size="48" data-min-level="2" data-motion="hover"></span></span>
+      <p class="photo-credit">Photos: <a href="#credits">credits</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ THE PLAN ═════════ -->
+<section class="sec alt" id="plan" aria-labelledby="plan-h">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="kicker"><span data-ico="lock-keyhole" data-size="28" data-min-level="1"></span> The secret plan</p>
+      <h2 id="plan-h">Be here by 12:00. <em>She walks in at 12:30.</em></h2>
+      <p class="sub">Nani believes she is going to a quiet early-birthday lunch with Isa. Everyone else is hiding in the Garden Room. This is how we pull it off.</p>
+    </div>
+
+    <div class="timecards">
+      <article class="tc tc-you">
+        <p class="who">You</p>
+        <span class="clk">
+          <span data-ico="clock" data-size="92" data-max-level="1">🕛</span>
+          <span data-live="clock-time" data-p-time="12:00" data-size="96" data-min-level="2" data-label="12 o'clock">12:00</span>
+        </span>
+        <div><span class="when">12:00</span><span class="what" style="display:block">Arrive by noon</span></div>
+        <p>Coats off, phones on silent, find a seat. The garden gate shuts at 12:20.</p>
+      </article>
+      <div class="tc-mid" aria-label="Thirty minutes between your arrival and hers">
+        <span data-ico="hourglass" data-size="44">⏳</span>
+        <span>30 minutes<br>to hide</span>
+        <span class="ar" aria-hidden="true"><span class="line"></span><span data-ico="arrow-right" data-size="30">&rarr;</span></span>
+      </div>
+      <article class="tc tc-nani">
+        <p class="who">Nani</p>
+        <span class="clk">
+          <span data-ico="clock" data-size="92" data-max-level="1">🕧</span>
+          <span data-live="clock-time" data-p-time="12:30" data-size="96" data-min-level="2" data-label="Half past twelve">12:30</span>
+        </span>
+        <div><span class="when">12:30</span><span class="what" style="display:block">She walks in</span></div>
+        <p>She thinks it's soup for two. It is not. Everyone she has ever fed is waiting.</p>
+      </article>
+    </div>
+
+    <div class="plan-grid">
+      <ol class="steps" aria-label="How the half hour goes">
+        <li>
+          <span class="badge"><span data-ico="door-open" data-size="44">🚪</span></span>
+          <div><span class="tm">12:00</span><h3>Everyone's in</h3><p>Come through the side gate on Pear Street. Noor hands out place cards and a glass of elderflower fizz at the door.</p></div>
+        </li>
+        <li>
+          <span class="badge sage"><span data-ico="volume-off" data-size="44">🤫</span></span>
+          <div><span class="tm">12:20</span><h3>Gate closes, voices drop</h3><p>From here on it's whispers only. Latecomers wait at the gate with Mateo and slip in during the toast.</p></div>
+        </li>
+        <li>
+          <span class="badge butter"><span data-ico="smartphone" data-size="44">📱</span></span>
+          <div><span class="tm">12:28</span><h3>"Two minutes"</h3><p>Kit, posted at the bay window, texts Isa. Everyone stands, lights go down, and nobody giggles (Uncle Ben, this means you).</p></div>
+        </li>
+        <li>
+          <span class="badge"><span data-ico="party-popper" data-size="44" data-motion="hover">🎉</span></span>
+          <div><span class="tm">12:30</span><h3>Surprise!</h3><p>Nani walks in expecting soup for two. Wait for Isa's nod, then all together: "Happy birthday, Nani!"</p></div>
+        </li>
+      </ol>
+
+      <aside class="rules" aria-labelledby="rules-h">
+        <span class="tape" style="--tr:2deg"></span>
+        <h3 id="rules-h">The secret-keeper's rules</h3>
+        <ul>
+          <li><span data-ico="lock-keyhole" data-size="40">🔒</span><span><b>Keep it off the internet.</b> No posts, tags or "can't wait!" texts. Nani's friend Dolores reads everything.</span></li>
+          <li><span data-ico="car" data-size="40">🚗</span><span><b>Park on Pear Street</b> or in the Tannery car park, never on Orchard Walk. That's Nani's side of the road.</span></li>
+          <li><span data-ico="door-open" data-size="40">🚪</span><span><b>Use the side gate,</b> not the front door. Look for the wisteria.</span></li>
+          <li><span data-ico="phone-off" data-size="40">📵</span><span><b>If she phones,</b> you're just finishing the shopping. Don't mention Sunday at all.</span></li>
+          <li><span data-ico="alarm-clock" data-size="40">⏰</span><span><b>Running late?</b> Text Mateo on 555-0147. He'll let you in quietly during the toast.</span></li>
+        </ul>
+        <p class="help">Questions about the plan? Ask Isa on <a href="tel:+15555550142">555-0142</a>. Not Nani!</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ THE DAY ═════════ -->
+<section class="sec" id="day" aria-labelledby="day-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="calendar-days" data-size="28" data-min-level="1"></span> Sunday 22 November</p>
+      <h2 id="day-h">The day, <em>hour by hour</em></h2>
+      <p class="sub">Four hours, four small courses, no rushing. Nani will want to talk to every single person, so we've left room for that.</p>
+    </div>
+    <div class="day-grid">
+      <ol class="sched">
+        <li class="big"><span class="t">12:00</span><span data-ico="party-popper" data-size="56">🎉</span><div><h3>Arrive, hide, surprise!</h3><p>Be through the gate by 12:00; Nani walks in at 12:30. The half hour in between is laid out in <a href="#plan">the secret plan</a>.</p></div></li>
+        <li><span class="t">12:45</span><span data-ico="champagne-toast" data-size="52">🥂</span><div><h3>A toast, and the first glass</h3><p>Noor says a few words. Nani says many more.</p></div></li>
+        <li><span class="t">13:15</span><span data-ico="utensils" data-size="52">🍽️</span><div><h3>Lunch, served family-style</h3><p>Four small courses, passed around the table the way she always did it. Menu below.</p></div></li>
+        <li><span class="t">14:45</span><span data-ico="cake" data-size="52">🎂</span><div><h3>Memories, then cake</h3><p>Isa reads a few notes from the memory wall, then the pink cake arrives. Eight candles, for safety.</p></div></li>
+        <li><span class="t">15:30</span><span data-ico="camera" data-size="52">📷</span><div><h3>Tea, coffee and the family photograph</h3><p>Everyone squeezes in. Tall people at the back, please. Nani sits at the front, in charge.</p></div></li>
+        <li><span class="t">16:30</span><span data-ico="home" data-size="52">🏠</span><div><h3>Goodbyes</h3><p>Isa drives Nani home with a bag of leftovers she didn't ask for. Everyone else: the washing-up is done.</p></div></li>
+      </ol>
+
+      <div class="stack">
+        <div class="paper-card glance">
+          <div class="g-row">
+            <span class="dt">
+              <span data-ico="calendar" data-size="60" data-max-level="1">📅</span>
+              <span data-live="calendar-date" data-p-day="22" data-p-month="NOV" data-size="72" data-min-level="2" data-label="Sunday 22 November">22</span>
+            </span>
+            <div><b>Sunday 22 November 2026</b><span class="s">Doors 12:00 &middot; Nani 12:30 &middot; Finish 16:30</span></div>
+          </div>
+          <div class="dots"></div>
+          <div class="g-row">
+            <span class="badge sm"><span data-ico="map-pin" data-size="30">📍</span></span>
+            <div><b>The Garden Room</b><span class="s">Fennel &amp; Fig, 6 Orchard Walk, behind the old post office</span></div>
+          </div>
+          <div class="dots"></div>
+          <div class="g-row">
+            <span class="wx">
+              <span data-ico="cloud-sun" data-size="60" data-max-level="1">⛅</span>
+              <span data-live="weather" data-p-condition="partly" data-p-temperature="11" data-p-unit="celsius" data-size="72" data-min-level="2" data-label="Typically 11 degrees Celsius and partly sunny">11&deg;</span>
+            </span>
+            <div><b>Typically 11&deg; and bright</b><span class="s">Late-November midday on this coast. The gate path is outdoors, so bring a cardigan.</span></div>
+          </div>
+        </div>
+        <div class="paper-card dress">
+          <h3><span data-ico="flower" data-size="34">🌸</span> What to wear</h3>
+          <p style="margin:0">Your Sunday best, worn softly. Nani's favourite colour is rose, and she says black is for funerals and bin bags. Pastels, florals and a cardigan are perfect.</p>
+          <div class="swatches" aria-hidden="true"><i style="background:#e58ea4"></i><i style="background:#f4dc8f"></i><i style="background:#9db58f"></i><i style="background:#fbebdc"></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="orn" aria-hidden="true" data-min-level="2"><span data-ico="flower" data-size="32"></span><span data-ico="heart" data-size="28" data-motion="hover"></span><span data-ico="flower" data-size="32"></span></div>
+
+<!-- ═════════ HER STORY ═════════ -->
+<section class="sec alt" id="story" aria-labelledby="story-h">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="kicker"><span data-ico="book-open" data-size="28" data-min-level="1"></span> From the biscuit tin</p>
+      <h2 id="story-h">Eighty years, <em>five pages</em></h2>
+      <p class="sub">Isa found these in a shortbread tin last spring. Tap a year, or slide the line of washing sideways.</p>
+    </div>
+    <div class="years" role="group" aria-label="Jump to a year">
+      <button class="yr" type="button" data-go="0" aria-current="true"><span class="ic"><span data-ico="baby" data-size="26">👶</span></span> 1946</button>
+      <button class="yr" type="button" data-go="1"><span class="ic"><span data-ico="ring-box" data-size="26">💍</span></span> 1968</button>
+      <button class="yr" type="button" data-go="2"><span class="ic"><span data-ico="chef-hat" data-size="26">👩‍🍳</span></span> 1981</button>
+      <button class="yr" type="button" data-go="3"><span class="ic"><span data-ico="users-round" data-size="26">👪</span></span> 1999</button>
+      <button class="yr" type="button" data-go="4"><span class="ic"><span data-ico="cake" data-size="26">🎂</span></span> 2026</button>
+    </div>
+  </div>
+
+  <div class="strip" id="strip" tabindex="0" role="region" aria-label="Rosa's life, 1946 to 2026. Scroll sideways to see all five pages.">
+    <ol class="track">
+      <li class="page" data-year="1946">
+        <figure class="polaroid" style="--r:-2deg;--fp:50% 50%">
+          <div class="ph"><img src="_img/nani-turns-80/8848784-700.jpg" width="1200" height="800" alt="Two hands lift old snapshots from a vintage album: a black-and-white portrait of a baby and a faded colour photo of a toddler" loading="lazy" decoding="async"></div>
+          <figcaption>Six weeks old, in a borrowed gown</figcaption>
+        </figure>
+        <div class="yrn">1946</div>
+        <h3>A very small Rosa</h3>
+        <p>Born at the Port Alder cottage hospital in a November gale, the third of five. Her mother said she arrived laughing, and nobody has ever proved otherwise.</p>
+        <p class="where"><span data-ico="map-pin" data-size="22">📍</span> Port Alder</p>
+      </li>
+      <li class="page" data-year="1968">
+        <figure class="polaroid" style="--r:1.6deg;--fp:50% 50%">
+          <div class="ph"><img src="_img/nani-turns-80/6274899-700.jpg" width="1200" height="800" alt="Open vintage photo albums and loose black-and-white family portraits scattered across a table" loading="lazy" decoding="async"></div>
+          <figcaption>The whole family, squeezed in</figcaption>
+        </figure>
+        <div class="yrn">1968</div>
+        <h3>The lace-curtain dress</h3>
+        <p>She married Tomas on a rainy Saturday in a dress she sewed from her mother's curtains. They danced in the registry office car park because the hall had flooded.</p>
+        <p class="where"><span data-ico="heart-pair" data-size="22">💕</span> Registry office, Port Alder</p>
+      </li>
+      <li class="page" data-year="1981">
+        <figure class="polaroid" style="--r:-1.2deg;--fp:45% 42%">
+          <div class="ph"><img src="_img/nani-turns-80/5585241-700.jpg" width="1200" height="1800" alt="An older woman's hands knitting a grey ribbed piece beside a ball of grey yarn" loading="lazy" decoding="async"></div>
+          <figcaption>Soup first, knitting second</figcaption>
+        </figure>
+        <div class="yrn">1981</div>
+        <h3>Rosa's Table opens</h3>
+        <p>Six stools, one soup of the day, one price, no menu. She ran the lunch counter behind the old post office for thirty-one years and taught half the street to knit between orders.</p>
+        <p class="where"><span data-ico="soup" data-size="22">🍲</span> Orchard Walk</p>
+      </li>
+      <li class="page" data-year="1999">
+        <figure class="polaroid" style="--r:2deg;--fp:55% 42%">
+          <div class="ph"><img src="_img/nani-turns-80/8507666-700.jpg" width="1200" height="801" alt="Three generations of a family smiling at one long wooden table laden with bowls of salad and fruit" loading="lazy" decoding="async"></div>
+          <figcaption>Sunday, again</figcaption>
+        </figure>
+        <div class="yrn">1999</div>
+        <h3>The table gets longer</h3>
+        <p>Isa arrives in 1999, then Mateo (2002), Noor (2006) and, last of all, Kit (2011). Sunday lunch for fourteen becomes the law of the family, and nobody is excused.</p>
+        <p class="where"><span data-ico="users" data-size="22">👥</span> Her kitchen table</p>
+      </li>
+      <li class="page" data-year="2026">
+        <figure class="polaroid" style="--r:-1.8deg;--fp:45% 42%">
+          <div class="ph"><img src="_img/nani-turns-80/photo-1593100126453-19b562a800c1-700.jpg" width="1200" height="803" alt="An elderly woman with white hair and glasses hugged and kissed on the cheek by a young child, in a warm golden glow" loading="lazy" decoding="async"></div>
+          <figcaption>Her favourite thing, ever</figcaption>
+        </figure>
+        <div class="yrn">2026</div>
+        <h3>Eighty, and first to hug</h3>
+        <p>Still the first to hug and the last to leave, still calling everyone "my heart". She says she's only seventy-nineteen. We're taking her word for it, and feeding her anyway.</p>
+        <p class="where"><span data-ico="heart" data-size="22">❤️</span> Sunday 22 November</p>
+      </li>
+    </ol>
+  </div>
+  <div class="wrap">
+    <div class="strip-ctl">
+      <button class="rnd" id="s-prev" type="button" aria-label="Previous page"><span data-ico="arrow-left" data-size="26">&larr;</span></button>
+      <span class="pg" id="s-pg" aria-live="polite">Page 1 of 5</span>
+      <button class="rnd" id="s-next" type="button" aria-label="Next page"><span data-ico="arrow-right" data-size="26">&rarr;</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ HER TABLE ═════════ -->
+<section class="sec" id="table" aria-labelledby="table-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="chef-hat" data-size="28" data-min-level="1"></span> Cooked by Marta, remembered by Rosa</p>
+      <h2 id="table-h">Her table, <em>her favourites</em></h2>
+      <p class="sub">Chef Marta Quill at Fennel &amp; Fig has rebuilt Nani's Sunday table from memory, notes and one very stained index card.</p>
+    </div>
+    <div class="menu-grid">
+      <article class="menu-card" aria-label="Lunch menu">
+        <div class="m-title">
+          <span class="hand">Sunday 22 November</span>
+          <h3>Rosa's Table, served family-style</h3>
+          <p>Four small courses, passed around</p>
+        </div>
+        <p class="m-key"><b>Every dish is marked:</b> Vegetarian, Vegan, Gluten-free or Contains nuts. Allergies or a special diet? Tell us in your reply and the kitchen will plate around you.</p>
+
+        <h4 class="course">To begin</h4>
+        <div class="dish"><span data-ico="soup" data-size="52">🍲</span><div><b>Thursday soup</b><p>Slow-simmered tomato and basil with a swirl of cream. She made it every Thursday for thirty-one years.</p><div class="tgs"><span class="tg">Vegetarian</span><span class="tg">Gluten-free (skip the roll)</span><span class="fav"><span data-ico="heart" data-size="20">❤️</span> Nani's pick</span></div></div></div>
+        <div class="dish"><span data-ico="chef-hat" data-size="52">🥖</span><div><b>Rosa's Table rolls</b><p>Soft, salted and still warm, with butter from the farm up the road.</p><div class="tgs"><span class="tg">Vegetarian</span></div></div></div>
+
+        <h4 class="course">The main event</h4>
+        <div class="dish"><span data-ico="utensils" data-size="52">🍗</span><div><b>The Sunday chicken</b><p>Saffron chicken on rice with toasted almonds and sultanas, served straight from the pot.</p><div class="tgs"><span class="tg">Gluten-free</span><span class="tg nut">Contains nuts</span><span class="fav"><span data-ico="heart" data-size="20">❤️</span> Nani's pick</span></div></div></div>
+        <div class="dish"><span data-ico="fish" data-size="52">🐟</span><div><b>Sea bream with fennel and figs</b><p>Baked whole with lemon and bay, from the same pier she bought fish from in 1968.</p><div class="tgs"><span class="tg">Gluten-free</span></div></div></div>
+        <div class="dish"><span data-ico="salad" data-size="52">🥗</span><div><b>Spring greens, lemon and almonds</b><p>Plus saffron chickpeas and spinach on the same rice, for everyone who'd rather skip the bird.</p><div class="tgs"><span class="tg">Vegan</span><span class="tg">Gluten-free</span><span class="tg nut">Contains nuts</span></div></div></div>
+
+        <h4 class="course">Something sweet</h4>
+        <div class="dish"><span data-ico="cake" data-size="52">🍰</span><div><b>Rosa's lemon drizzle</b><p>Her actual 1981 recipe, copied from a splattered card. Isa baked a test one. It is correct.</p><div class="tgs"><span class="tg">Vegetarian</span><span class="fav"><span data-ico="heart" data-size="20">❤️</span> Nani's pick</span></div></div></div>
+        <div class="dish"><span data-ico="cookie" data-size="52">🍪</span><div><b>Almond biscuits and the pink cake</b><p>Rose-and-raspberry sponge with eight candles, because Marta says eighty is a fire hazard.</p><div class="tgs"><span class="tg">Vegetarian</span><span class="tg nut">Contains nuts</span></div></div></div>
+
+        <h4 class="course">To sip</h4>
+        <div class="dish"><span data-ico="champagne-toast" data-size="52">🥂</span><div><b>Prosecco for the toast</b><p>Elderflower fizz for everyone who'd prefer it, poured from the same jug.</p></div></div>
+        <div class="dish"><span data-ico="coffee" data-size="52">☕</span><div><b>Tea, coffee and one small sherry</b><p>The sherry is Nani's, and it is one glass. Doctor's orders, Isa's enforcement.</p></div></div>
+      </article>
+
+      <div class="menu-side">
+        <figure class="polaroid" style="--r:2deg;--fp:50% 50%">
+          <span class="tape sage" style="--tr:-4deg"></span>
+          <div class="ph"><img src="_img/nani-turns-80/8086980-1000.jpg" width="1200" height="800" alt="Overhead view of a round white table set with gold-rimmed floral china, tea cups, small cakes and a vase of purple lilac while hands pour tea" loading="lazy" decoding="async"></div>
+          <figcaption>Tea at 15:30, on the gold-rimmed china</figcaption>
+        </figure>
+        <div class="paper-card lined note-sq">
+          <p class="hand" style="font-size:1.75rem;line-height:1.25;margin:0 0 10px">Rosa's rule: nobody leaves the table hungry.</p>
+          <p style="margin:0;font-size:1.06rem;color:var(--ink-2)">(And nobody leaves without a tub of leftovers. Bring a container, or accept the margarine tub.)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="orn" aria-hidden="true" data-min-level="2"><span data-ico="sparkles" data-size="30"></span><span data-ico="cake" data-size="34" data-motion="hover"></span><span data-ico="sparkles" data-size="30"></span></div>
+
+<!-- ═════════ NO GIFTS ═════════ -->
+<section class="sec alt" id="gifts" aria-labelledby="gifts-h">
+  <div class="wrap gift-grid">
+    <div class="rcard">
+      <span class="tape rose" style="--tr:-2deg"></span>
+      <p class="kicker"><span data-ico="gift" data-size="30" data-min-level="1"></span> About presents</p>
+      <h2 id="gifts-h">No gifts, <em>please.</em></h2>
+      <p class="lead">Bring a recipe card or a story instead.</p>
+      <ul class="ways">
+        <li><span data-ico="notebook-pen" data-size="42">📝</span><div><b>A recipe card</b><span class="d">Write down one thing she taught you to make (or fix, or say). Blank cards are on every table. Kit is binding them into a family cookbook, <em>Rosa's Table, 2026</em>.</span></div></li>
+        <li><span data-ico="message-square-text" data-size="42">💬</span><div><b>A story</b><span class="d">Pin one to the memory wall below, or tell it out loud at 14:45. Two minutes, no notes, tears allowed.</span></div></li>
+        <li><span data-ico="images" data-size="42">🖼️</span><div><b>A photograph</b><span class="d">Slip a copy of a favourite picture into the album by the door. We'll scan them all and hand back the originals.</span></div></li>
+      </ul>
+      <p class="alt"><span data-ico="hand-heart" data-size="26" style="vertical-align:-6px;margin-right:8px">💝</span>If you'd still like to give something, there is a donation box for the Port Alder Community Kitchen by the guest book. Nani would approve.</p>
+    </div>
+    <div class="gift-art">
+      <figure class="polaroid" style="--r:2.2deg;--fp:50% 50%">
+        <span class="tape" style="--tr:3deg"></span>
+        <div class="ph"><img src="_img/nani-turns-80/photo-1534768654272-e97681c3a2c7-1000.jpg" width="1200" height="800" alt="In a dark sepia photograph, a baby's tiny hand rests on an older woman's wrinkled, ringed hand" loading="lazy" decoding="async"></div>
+        <figcaption>The best things get passed down by hand</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ MEMORY WALL ═════════ -->
+<section class="sec" id="wall" aria-labelledby="wall-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="pin" data-size="28" data-min-level="1"></span> Leave a memory</p>
+      <h2 id="wall-h">The memory <em>wall</em></h2>
+      <p class="sub">Write one memory of Nani. It pins up instantly, and Isa will read a few aloud at 14:45. Be as soppy as you like.</p>
+    </div>
+    <div class="wall-grid">
+      <form class="wall-form" id="wall-form" action="#" novalidate>
+        <span class="tape sage" style="--tr:-2deg"></span>
+        <h3>Pin a memory</h3>
+        <div class="fld">
+          <label for="w-name">Your name</label>
+          <input id="w-name" name="name" type="text" autocomplete="given-name" maxlength="40" placeholder="e.g. Dolores" required>
+          <p class="err" id="w-name-e" hidden></p>
+        </div>
+        <div class="fld">
+          <label for="w-rel">How do you know her?</label>
+          <select id="w-rel" name="rel">
+            <option value="Granddaughter|f">Granddaughter</option>
+            <option value="Grandson|f">Grandson</option>
+            <option value="Daughter or son|f">Daughter or son</option>
+            <option value="Family|f">Family</option>
+            <option value="Friend|g" selected>Friend</option>
+            <option value="Neighbour|g">Neighbour</option>
+            <option value="Old customer|g">Old customer at Rosa's Table</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label for="w-text">Your memory</label>
+          <textarea id="w-text" name="text" maxlength="280" placeholder="The time she&hellip;" required aria-describedby="w-count"></textarea>
+          <div class="cnt"><span class="err" id="w-text-e" hidden></span><span id="w-count" style="margin-left:auto">0 / 280</span></div>
+        </div>
+        <fieldset>
+          <legend>Pin it with a stamp</legend>
+          <div class="stamps">
+            <label class="stamp"><input type="radio" name="stamp" value="heart" checked><span class="bx"><span data-ico="heart" data-size="34">❤️</span>Heart</span></label>
+            <label class="stamp"><input type="radio" name="stamp" value="flower"><span class="bx"><span data-ico="flower" data-size="34">🌸</span>Blossom</span></label>
+            <label class="stamp"><input type="radio" name="stamp" value="cake"><span class="bx"><span data-ico="cake" data-size="34">🎂</span>Cake</span></label>
+            <label class="stamp"><input type="radio" name="stamp" value="soup"><span class="bx"><span data-ico="soup" data-size="34">🍲</span>Soup</span></label>
+            <label class="stamp"><input type="radio" name="stamp" value="coffee"><span class="bx"><span data-ico="coffee" data-size="34">☕</span>Tea</span></label>
+            <label class="stamp"><input type="radio" name="stamp" value="sparkles"><span class="bx"><span data-ico="sparkles" data-size="34">✨</span>Sparkle</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Paper</legend>
+          <div class="hues">
+            <label class="hue"><input type="radio" name="hue" value="butter" checked aria-label="Butter yellow"><i style="--c:#fbf0c9"></i></label>
+            <label class="hue"><input type="radio" name="hue" value="blush" aria-label="Blush pink"><i style="--c:#fbe0e5"></i></label>
+            <label class="hue"><input type="radio" name="hue" value="sage" aria-label="Sage green"><i style="--c:#e3edd8"></i></label>
+            <label class="hue"><input type="radio" name="hue" value="paper" aria-label="Plain cream"><i style="--c:#fffdf7"></i></label>
+          </div>
+        </fieldset>
+        <button class="btn btn-primary" type="submit" style="width:100%"><span data-ico="pin" data-size="22">📌</span> Pin it to the wall</button>
+        <p class="hint" style="margin-top:12px">Notes are kept in this browser for your visit, so you can come back and take yours down.</p>
+      </form>
+
+      <div>
+        <div class="wall-bar">
+          <p class="wall-count" id="wall-count-p">
+            <span data-ico="message-circle-more" data-size="40" data-max-level="1">💬</span>
+            <span id="wall-live" data-live="chat-count" data-p-count="6" data-size="48" data-min-level="2" data-label="6 memories on the wall">6</span>
+            <span id="wall-count-t">6 memories on the wall</span>
+          </p>
+          <div class="filt" role="group" aria-label="Filter memories">
+            <button type="button" data-f="all" aria-pressed="true">Everyone</button>
+            <button type="button" data-f="f" aria-pressed="false">Family</button>
+            <button type="button" data-f="g" aria-pressed="false">Friends</button>
+          </div>
+        </div>
+        <div class="wall" id="wall-notes" aria-live="polite"></div>
+        <noscript><p class="wall-empty">The memory wall shows notes with JavaScript switched on.</p></noscript>
+        <p class="wall-empty" id="wall-empty" hidden>Nothing here yet. Be the first to pin one up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="orn" aria-hidden="true" data-min-level="2"><span data-ico="rose" data-size="32"></span><span data-ico="heart-pair" data-size="32" data-motion="hover"></span><span data-ico="rose" data-size="32"></span></div>
+
+<!-- ═════════ GETTING THERE ═════════ -->
+<section class="sec alt" id="getting-there" aria-labelledby="where-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker"><span data-ico="route" data-size="28" data-min-level="1"></span> Getting there</p>
+      <h2 id="where-h">Find the <em>side gate</em></h2>
+      <p class="sub">The Garden Room is at the back of Fennel &amp; Fig, 6 Orchard Walk, in what used to be the post office. Nani knows the front. You'll be using the back.</p>
+    </div>
+    <div class="where-grid">
+      <div>
+        <div class="map" role="img" aria-label="Sketch map: the Garden Room's side gate is on Pear Street, just north of Orchard Walk. The Tannery car park is south-east, and the number 14 bus stops on Orchard Walk to the west.">
+          <span class="road r-orchard"></span><span class="road r-pear"></span>
+          <span class="blk b-one"></span><span class="blk b-two"></span>
+          <span class="blk b-fnf"></span><span class="blk b-park"></span><span class="blk b-car"></span>
+          <span class="route rt-h"></span><span class="route rt-v"></span>
+          <span class="lbl l-orch">Orchard Walk</span><span class="lbl l-post">Old post office</span><span class="lbl l-pear">Pear Street</span>
+          <span class="lbl l-fnf">Fennel &amp; Fig</span><span class="lbl l-park">Tannery Green</span>
+          <span class="lbl l-p">P</span><span class="lbl l-p2">Tannery car park</span>
+          <span class="north" aria-hidden="true"><span data-ico="compass" data-size="28" data-min-level="1"></span> N</span>
+          <span class="pin pin-1"><span data-ico="map-pin" data-size="46" data-max-level="1">📍</span><span data-live="map-pin-number" data-p-param-label="1" data-size="52" data-min-level="2" data-label="Pin 1: the side gate">1</span></span>
+          <span class="pin pin-2"><span data-ico="parking" data-size="46" data-max-level="1">🅿️</span><span data-live="map-pin-number" data-p-param-label="2" data-size="52" data-min-level="2" data-label="Pin 2: the car park">2</span></span>
+          <span class="pin pin-3"><span data-ico="bus" data-size="46" data-max-level="1">🚌</span><span data-live="map-pin-number" data-p-param-label="3" data-size="52" data-min-level="2" data-label="Pin 3: the bus stop">3</span></span>
+        </div>
+        <p class="map-cap">Not to scale. Dotted line: the walk from the bus stop to the gate.</p>
+      </div>
+      <div>
+        <ul class="dirs">
+          <li><span data-ico="door-open" data-size="40">🚪</span><div><b>1. The side gate on Pear Street</b><span class="d">The one with the wisteria. Step-free, with a wide automatic door and a level path to the room.</span></div></li>
+          <li><span data-ico="parking" data-size="40">🅿️</span><div><b>2. Tannery car park</b><span class="d">Free on Sundays, two minutes' walk. Four blue-badge bays right by the gate: tell us in the RSVP and we'll save one.</span></div></li>
+          <li><span data-ico="bus" data-size="40">🚌</span><div><b>3. Bus 14 to Orchard Walk</b><span class="d">Every 20 minutes on Sundays. Get off at the post box, then walk along Orchard Walk to Pear Street and turn left.</span></div></li>
+        </ul>
+        <div class="addr">
+          <address><span data-ico="map-pin" data-size="24" style="vertical-align:-6px;margin-right:6px">📍</span>The Garden Room at Fennel &amp; Fig<br>6 Orchard Walk, Port Alder PA4 2RN</address>
+          <button class="btn btn-quiet" type="button" id="copy-addr"><span data-ico="copy" data-size="22">📋</span> Copy address</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-head">
+      <p class="kicker"><span data-ico="accessibility" data-size="28" data-min-level="1"></span> Access for everyone</p>
+      <h2 style="font-size:clamp(1.8rem,3.6vw,2.5rem)">Comfortable, <em>from gate to cake</em></h2>
+    </div>
+    <div class="acc-grid">
+      <div class="acc"><span class="badge sm sage"><span data-ico="accessibility" data-size="30">♿</span></span><div><h3>Step-free all the way</h3><p>A level path from the gate, a wide automatic door, and no steps to the Garden Room or the toilets.</p></div></div>
+      <div class="acc"><span class="badge sm sage"><span data-ico="toilet" data-size="30">🚻</span></span><div><h3>Accessible toilet</h3><p>Next to the room, with a grab rail and an alarm cord. Ten paces from Nani's table.</p></div></div>
+      <div class="acc"><span class="badge sm sage"><span data-ico="sofa" data-size="30">🛋️</span></span><div><h3>Proper seating</h3><p>Chairs with backs and arms at every table, cushions on request, and nobody stands for the toast unless they want to.</p></div></div>
+      <div class="acc"><span class="badge sm sage"><span data-ico="headphones" data-size="30">🎧</span></span><div><h3>Hearing loop</h3><p>Covers the top table and the speeches. Switch your hearing aid to T and you won't miss a word.</p></div></div>
+      <div class="acc"><span class="badge sm sage"><span data-ico="glasses" data-size="30">👓</span></span><div><h3>Large-print everything</h3><p>Menus and recipe cards in a type size even Nani approves of. Ask for a magnifier at the door.</p></div></div>
+      <div class="acc"><span class="badge sm sage"><span data-ico="bell-off" data-size="30">🔕</span></span><div><h3>A quiet corner</h3><p>A calm table by the window, with a view of the garden, for anyone who needs a breather. Assistance dogs are very welcome.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ RSVP ═════════ -->
+<section class="sec" id="rsvp" aria-labelledby="rsvp-h">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="kicker"><span data-ico="love-letter" data-size="30" data-min-level="1"></span> The favour of a reply</p>
+      <h2 id="rsvp-h">Count me in, <em>by 8 November</em></h2>
+      <p class="sub">Tell us who's coming, what you eat, and whether you'll bring a memory. It takes two minutes, and Marta needs the numbers.</p>
+    </div>
+    <div class="rsvp-grid">
+      <div class="rsvp-side">
+        <figure class="polaroid" style="--r:-3deg;--fp:50% 42%">
+          <span class="tape rose" style="--tr:-4deg"></span>
+          <div class="ph"><img src="_img/nani-turns-80/photo-1694043325785-d841a964257f-700.jpg" width="1200" height="1800" alt="A small pink tiered birthday cake with piped frosting, sprinkles and tall unlit candles on a wooden board" loading="lazy" decoding="async"></div>
+          <figcaption>Pink, tall and (so far) unlit</figcaption>
+        </figure>
+        <div class="seats" role="status">
+          <span data-ico="users" data-size="50" data-max-level="1">👥</span>
+          <span id="seats-live" data-live="progress-ring" data-p-value="65" data-size="76" data-min-level="2" data-label="65 percent of seats confirmed">65</span>
+          <div class="t"><b id="seats-n">34 of 52 seats confirmed</b><span id="seats-s">18 still to answer. That means you, Uncle Ben.</span></div>
+        </div>
+      </div>
+
+      <div>
+        <form class="rsvp-form" id="rsvp-form" action="#" novalidate>
+          <h3>Your reply</h3>
+          <p class="intro">Everything here goes only to Isa and Mateo. Nobody sees your answers, least of all Nani.</p>
+          <div class="two">
+            <div class="fld">
+              <label for="r-name">Your name</label>
+              <input id="r-name" name="name" type="text" autocomplete="name" maxlength="60" placeholder="e.g. Dolores Whitlock" required>
+              <p class="err" id="r-name-e" hidden></p>
+            </div>
+            <div class="fld">
+              <label for="r-contact">Email or phone</label>
+              <input id="r-contact" name="contact" type="text" autocomplete="email" maxlength="80" placeholder="dolores@example.com" required>
+              <p class="err" id="r-contact-e" hidden></p>
+            </div>
+          </div>
+          <div class="fld">
+            <span class="lab" id="r-count-l">How many places? <span class="opt-note">(including you)</span></span>
+            <div class="stepper" role="group" aria-labelledby="r-count-l">
+              <button type="button" id="r-minus" aria-label="One fewer place"><span data-ico="minus" data-size="22" data-fixed-style="line">&minus;</span></button>
+              <input id="r-count" name="count" type="number" inputmode="numeric" min="1" max="8" value="1" aria-label="Number of places">
+              <button type="button" id="r-plus" aria-label="One more place"><span data-ico="plus" data-size="22" data-fixed-style="line">+</span></button>
+            </div>
+          </div>
+          <fieldset>
+            <legend>Anything the kitchen should know? <span class="opt-note">(tick any)</span></legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="diet" value="Vegetarian"><span>Vegetarian</span></label>
+              <label class="chip"><input type="checkbox" name="diet" value="Vegan"><span>Vegan</span></label>
+              <label class="chip"><input type="checkbox" name="diet" value="Gluten-free"><span>Gluten-free</span></label>
+              <label class="chip"><input type="checkbox" name="diet" value="Nut allergy"><span>Nut allergy</span></label>
+              <label class="chip"><input type="checkbox" name="diet" value="Dairy-free"><span>Dairy-free</span></label>
+              <label class="chip"><input type="checkbox" name="diet" value="No fish"><span>No fish</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Any access needs? <span class="opt-note">(tick any)</span></legend>
+            <div class="chips">
+              <label class="chip"><input type="checkbox" name="access" value="Blue-badge bay"><span>Blue-badge bay</span></label>
+              <label class="chip"><input type="checkbox" name="access" value="Seat near the door"><span>Seat near the door</span></label>
+              <label class="chip"><input type="checkbox" name="access" value="Hearing-loop seat"><span>Hearing-loop seat</span></label>
+              <label class="chip"><input type="checkbox" name="access" value="Large print"><span>Large print</span></label>
+              <label class="chip"><input type="checkbox" name="access" value="High chair"><span>High chair</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Can you share a memory?</legend>
+            <label class="opt"><input type="radio" name="mem" value="wall" checked><span><b>I'll write one for the wall</b><small>Add it here and we'll pin it up for you</small></span></label>
+            <label class="opt"><input type="radio" name="mem" value="speak"><span><b>I'd like to tell one at lunch</b><small>Two minutes, at 14:45</small></span></label>
+            <label class="opt"><input type="radio" name="mem" value="card"><span><b>I'll bring a recipe card</b><small>Something she taught you to make</small></span></label>
+            <label class="opt"><input type="radio" name="mem" value="none"><span><b>Just here to hug her</b><small>Also a perfectly good answer</small></span></label>
+          </fieldset>
+          <div class="reveal" id="r-mem-box">
+            <div class="fld" style="margin:0">
+              <label for="r-mem">Your memory <span class="opt-note">(optional, we'll pin it to the wall)</span></label>
+              <textarea id="r-mem" name="memtext" maxlength="280" placeholder="The time she&hellip;" style="min-height:110px"></textarea>
+              <p class="err" id="r-mem-e" hidden></p>
+            </div>
+          </div>
+          <label class="check"><input type="checkbox" name="early" value="yes"><span>I can come early to help set up at 11:00 <span class="opt-note">(there will be tea)</span></span></label>
+          <div class="fld">
+            <label for="r-note">Anything else for the hosts? <span class="opt-note">(optional)</span></label>
+            <textarea id="r-note" name="note" maxlength="300" placeholder="A dog, a wheelchair, a cousin arriving by tractor&hellip;" style="min-height:90px"></textarea>
+          </div>
+          <label class="check"><input type="checkbox" name="secret" id="r-secret" required><span><b>I promise to keep the secret</b> until Nani has blown out her candles.</span></label>
+          <p class="err" id="r-secret-e" hidden></p>
+          <div class="form-end">
+            <button class="btn btn-primary" type="submit"><span data-ico="heart" data-size="22">❤️</span> Count me in</button>
+            <p class="hint">Need to change your reply later? Come back to this page, or call Isa on 555-0142.</p>
+          </div>
+        </form>
+
+        <div class="rsvp-done" id="rsvp-done" hidden tabindex="-1" role="region" aria-labelledby="d-thanks" aria-live="polite">
+          <div class="place">
+            <span class="hand">Your place is set</span>
+            <div class="nm" id="d-name">Guest</div>
+            <div class="meta">
+              <div><span data-ico="ticket" data-size="46" data-max-level="1">🎟️</span><span id="d-table-live" data-live="ticket-number" data-p-number="3" data-size="64" data-min-level="2" data-label="Table 3">3</span><b id="d-table">Table 3</b>with Nani's old friends</div>
+              <div><span data-ico="users" data-size="44">👥</span><b id="d-party">1 place</b>reserved</div>
+            </div>
+          </div>
+          <h3 class="done-h" id="d-thanks">Thank you, <span id="d-first">friend</span>!</h3>
+          <ul class="done-list" id="d-list">
+            <li><span data-ico="clock" data-size="26">🕛</span><span><b>Arrive by 12:00.</b> Side gate on Pear Street. Nani walks in at 12:30.</span></li>
+            <li><span data-ico="lock-keyhole" data-size="26">🔒</span><span><b>Mum's the word.</b> No posts, tags or texts until the candles are out.</span></li>
+          </ul>
+          <label class="cal-opt"><input type="checkbox" id="d-disguise" checked> <span>Title the calendar event &ldquo;Lunch at Fennel &amp; Fig&rdquo;, in case Nani sees my calendar</span></label>
+          <div class="btn-row" style="justify-content:center">
+            <button class="btn btn-primary" type="button" data-cal><span data-ico="calendar-plus" data-size="22">📅</span> Add to calendar</button>
+            <button class="btn btn-quiet" type="button" id="d-edit"><span data-ico="pencil" data-size="22">✏️</span> Change my reply</button>
+            <button class="btn btn-quiet" type="button" id="d-share"><span data-ico="share-2" data-size="22">🔗</span> Copy the invite link</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FAQ ═════════ -->
+<section class="sec alt" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="kicker"><span data-ico="help-circle" data-size="28" data-min-level="1"></span> Little questions</p>
+      <h2 id="faq-h">Things people <em>have asked</em></h2>
+    </div>
+    <div class="faq">
+      <details open><summary><span data-ico="alarm-clock" data-size="34">⏰</span> What if I'm late, or Nani is early?</summary><div class="ans"><p>If you're not through the gate by 12:20, text Mateo on 555-0147 and wait by the wisteria. He'll slip you in during the toast. If Nani is early, Kit spots the car from the bay window and heads out to stall her in the car park with a very long story about parking.</p></div></details>
+      <details><summary><span data-ico="baby" data-size="34">👶</span> Can I bring my children?</summary><div class="ans"><p>Please do. All ages are welcome, and there's a colouring table, two high chairs and a box of Nani's buttons to sort. Tell us how many in the RSVP so Marta can plan small portions.</p></div></details>
+      <details><summary><span data-ico="car" data-size="34">🚗</span> Where do I park?</summary><div class="ans"><p>On Pear Street or in the Tannery car park (free on Sundays). Never on Orchard Walk: Nani lives two streets away and takes that road to the shops. Four blue-badge bays are held by the gate.</p></div></details>
+      <details><summary><span data-ico="users" data-size="34">👥</span> Can I bring a plus-one?</summary><div class="ans"><p>Of course. Just raise the number of places in the RSVP and add their name in the note. If they've never met Nani, they will have by 12:35.</p></div></details>
+      <details><summary><span data-ico="video-call" data-size="34">📹</span> I can't travel. Can I join from home?</summary><div class="ans"><p>Yes. Kit will hold up a tablet during the toast at 12:45 and again for the cake. Write "video call" in the "Anything else for the hosts?" box of the RSVP and we'll send a private link on the Friday before.</p></div></details>
+      <details><summary><span data-ico="microphone" data-size="34">🎤</span> Will there be speeches?</summary><div class="ans"><p>Short ones, and only from volunteers. Noor opens at 12:45 and Isa reads from the memory wall at 14:45. If you'd like two minutes of your own, say so in the RSVP.</p></div></details>
+      <details><summary><span data-ico="gift" data-size="34">🎁</span> I've already bought her something!</summary><div class="ans"><p>Then she'll love it. Hand it to Isa quietly at the door and it goes home with Nani after lunch, so she doesn't have to carry it to the table.</p></div></details>
+      <details><summary><span data-ico="calendar-x" data-size="34">❌</span> What if I need to cancel?</summary><div class="ans"><p>Come back to the RSVP and change your reply, or call Isa on 555-0142 by Sunday 15 November. After that Marta has already ordered the fish.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ FROM US ═════════ -->
+<section class="sec" id="from-us" aria-labelledby="from-h">
+  <div class="wrap">
+    <div class="from">
+      <figure class="polaroid" style="--r:-2.2deg;--fp:49% 38%">
+        <span class="tape sage" style="--tr:-3deg"></span>
+        <div class="ph"><img src="_img/nani-turns-80/photo-1719037108848-685e9e599827-800.jpg" width="1200" height="791" alt="A serene elderly woman with white hair, a blue-grey wool coat and a patterned scarf, smiling gently against golden autumn light" loading="lazy" decoding="async"></div>
+        <figcaption>Autumn, the way we like it</figcaption>
+      </figure>
+      <div class="letter">
+        <span class="tape rose" style="--tr:2deg"></span>
+        <h2 id="from-h" class="sr">A note from the grandchildren</h2>
+        <p>Dear all of you,</p>
+        <p>Nani has fed every one of us at some point: at her counter, at her kitchen table, over the phone while we were meant to be revising.</p>
+        <p>For her 80th we'd like to put her at the head of a table for once, and let somebody else do the washing-up. Come hungry. Bring a story. Keep the secret.</p>
+        <p>With all our love,</p>
+        <ul class="sign">
+          <li><span data-ico="avatar-girl" data-size="76" data-label="Isa">👧</span><b>Isa</b><span>organiser-in-chief</span></li>
+          <li><span data-ico="avatar-boy" data-size="76" data-label="Mateo">👦</span><b>Mateo</b><span>gate duty</span></li>
+          <li><span data-ico="avatar-woman-bob" data-size="76" data-label="Noor">👩</span><b>Noor</b><span>place cards, toast</span></li>
+          <li><span data-ico="avatar-teen" data-size="76" data-label="Kit">🧑</span><b>Kit</b><span>window watch, cookbook</span></li>
+        </ul>
+        <p class="contact"><span data-ico="phone" data-size="22" style="vertical-align:-5px;margin-right:6px">📞</span>Questions before the day? Isa <a href="tel:+15555550142">555-0142</a><br><span data-ico="phone-call" data-size="22" style="vertical-align:-5px;margin-right:6px">📲</span>On the day: Mateo <a href="tel:+15555550147">555-0147</a><br><span data-ico="mail" data-size="22" style="vertical-align:-5px;margin-right:6px">✉️</span><a href="mailto:rosa80@example.com">rosa80@example.com</a> &mdash; and not a word to Nani.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="orn" aria-hidden="true"><span data-ico="flower" data-size="34">❀</span><span data-ico="heart" data-size="30" data-motion="hover">♥</span><span data-ico="flower" data-size="34">❀</span></div>
+</main>
+
+<!-- ═════════ CREDITS + FOOTER ═════════ -->
+<section class="credits" id="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <ul>
+      <li>Nani laughing (hero): Photo by <a href="https://unsplash.com/@tatizanon">Tatiana Zanon</a> on <a href="https://unsplash.com/photos/MMhazsT2wtM?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Carnation bouquet (hero): Photo by <a href="https://www.pexels.com/@cileklipalet">bet&uuml;l nur ak&yuml;rek</a> on <a href="https://www.pexels.com/photo/34463054/">Pexels</a></li>
+      <li>Baby photograph, 1946: Photo by <a href="https://www.pexels.com/@cottonbro">cottonbro studio</a> on <a href="https://www.pexels.com/photo/8848784/">Pexels</a></li>
+      <li>Family portraits, 1968: Photo by <a href="https://www.pexels.com/@thiago-jose-amaral-3362454">Thiago Jos&eacute; Amaral</a> on <a href="https://www.pexels.com/photo/6274899/">Pexels</a></li>
+      <li>Knitting hands, 1981: Photo by <a href="https://www.pexels.com/@cottonbro">cottonbro studio</a> on <a href="https://www.pexels.com/photo/5585241/">Pexels</a></li>
+      <li>Family lunch, 1999: Photo by <a href="https://www.pexels.com/@kampus">Kampus Production</a> on <a href="https://www.pexels.com/photo/8507666/">Pexels</a></li>
+      <li>Grandmother and child, 2026: Photo by <a href="https://unsplash.com/@minigirl">Ekaterina Shakharova</a> on <a href="https://unsplash.com/photos/L4nwL3195U0?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Afternoon tea table: Photo by <a href="https://www.pexels.com/@yaroslav-shuraev">Yaroslav Shuraev</a> on <a href="https://www.pexels.com/photo/8086980/">Pexels</a></li>
+      <li>Hands, old and new (gifts): Photo by <a href="https://unsplash.com/@rodlong">Rod Long</a> on <a href="https://unsplash.com/photos/y0OAmd_COUM?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Pink birthday cake (RSVP): Photo by <a href="https://unsplash.com/@mpadb">Shaylyn</a> on <a href="https://unsplash.com/photos/2O4va26lBEI?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Autumn portrait (sign-off): Photo by <a href="https://unsplash.com/@raymondpetrik">Raymond Petrik</a> on <a href="https://unsplash.com/photos/M3MZ3NRpvPk?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+    </ul>
+    <p class="fine">Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT. Type: Fraunces and Caveat from Google Fonts. The people, places and events on this page are fictional.</p>
+  </div>
+</section>
+
+<footer class="pg-foot">
+  <div class="wrap">
+    <a class="brand" href="#top"><span data-ico="cake" data-size="30">🎂</span> <span>Nani Rosa <em>turns 80</em></span></a>
+    <p>Sunday 22 November 2026 &middot; The Garden Room at Fennel &amp; Fig, 6 Orchard Walk &middot; Arrive by 12:00</p>
+    <p>Demo page made with <a href="https://withicons.com">with icons</a>. Names, places and products are fictional.</p>
+  </div>
+</footer>
+
+<a class="rsvp-fab" id="rsvp-fab" href="#rsvp"><span data-ico="send" data-size="22">✉️</span> RSVP</a>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span data-ico="check-circle" data-size="24">✅</span><span id="toast-t"></span></div>
+
+<script src="_kit/demo-kit.js" data-style="coquette" data-recommend="coquette,pastel,valentine,soft3d,sketch,engrave,luxe,line" data-level="2" defer></script>
+<script>
+/* Nani Rosa turns 80: page behaviour. Vanilla JS, no network, nothing leaves the page. */
+(function () {
+  'use strict'
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  var store = {
+    get: function (k) { try { return JSON.parse(sessionStorage.getItem(k)) } catch (e) { return null } },
+    set: function (k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)) } catch (e) {} },
+    del: function (k) { try { sessionStorage.removeItem(k) } catch (e) {} }
+  }
+
+  /* Basic level: emoji fallbacks are sized like the icon that replaces them */
+  function fit(root) {
+    $$('[data-ico],[data-live]', root).concat(root && root.matches && root.matches('[data-ico],[data-live]') ? [root] : []).forEach(function (el) {
+      var s = parseFloat(el.getAttribute('data-size')) || 24
+      el.style.fontSize = Math.round(s * 0.78) + 'px'
+    })
+  }
+  fit(document)
+
+  var live = function (el, p) { if (el && window.WithKit && el._kit) window.WithKit.setLive(el, p) }
+
+  /* toast */
+  var toastT = 0
+  function toast(msg) {
+    var t = $('#toast'); $('#toast-t').textContent = msg
+    t.classList.add('on'); clearTimeout(toastT)
+    toastT = setTimeout(function () { t.classList.remove('on') }, 3600)
+  }
+
+  /* copy to clipboard, with a fallback for file:// pages */
+  function copy(text, okMsg) {
+    function done() { toast(okMsg) }
+    function fallback() {
+      var ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0'
+      document.body.appendChild(ta); ta.select()
+      try { document.execCommand('copy'); done() } catch (e) { toast('Copy failed. Select the text and copy it by hand.') }
+      document.body.removeChild(ta)
+    }
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback); else fallback()
+  }
+
+  /* ─────────── countdown to 12:30 on Sunday 22 November 2026 (viewer's local time) ─────────── */
+  var DOORS = new Date(2026, 10, 22, 12, 0, 0), NANI = new Date(2026, 10, 22, 12, 30, 0), END = new Date(2026, 10, 22, 16, 30, 0)
+  function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's') }
+  function renderCountdown(now) {
+    var main, sub, left, total, label
+    var ms = NANI - now, d = Math.floor(ms / 864e5), h = Math.floor((ms % 864e5) / 36e5), m = Math.floor((ms % 36e5) / 6e4)
+    if (now >= END) {
+      main = 'Nani is 80!'; sub = 'Thank you for coming. Photos and the recipe book will follow.'; left = 80; total = 99; label = 'Nani is 80'
+    } else if (now >= NANI) {
+      main = 'Surprise! She\u2019s here.'; sub = 'The lunch is under way. Go and give her a hug.'; left = 0; total = 30; label = 'The surprise has happened'
+    } else if (now >= DOORS) {
+      main = 'Hush, she\u2019s nearly here'; sub = plural(Math.max(1, Math.ceil(ms / 6e4)), 'minute') + ' until Nani walks in at 12:30.'; left = Math.max(1, Math.ceil(ms / 6e4)); total = 30; label = left + ' minutes until the surprise'
+    } else if (d >= 1) {
+      main = plural(d, 'day') + ' to go'; sub = (h || m ? 'and ' + [h ? plural(h, 'hour') : '', m ? plural(m, 'minute') : ''].filter(Boolean).join(', ') + '. ' : '') + 'Nani walks in at 12:30 on Sunday 22 November.'
+      left = Math.min(d, 99); total = Math.min(99, Math.max(60, d)); label = main
+    } else if (ms >= 36e5) {
+      main = plural(h, 'hour') + ' to go'; sub = 'and ' + plural(m, 'minute') + '. Arrive by 12:00, side gate on Pear Street.'; left = h; total = 24; label = main
+    } else {
+      main = plural(Math.max(1, Math.ceil(ms / 6e4)), 'minute') + ' to go'; sub = 'Doors open at 12:00. Be quiet, be kind, be early.'; left = Math.max(1, Math.ceil(ms / 6e4)); total = 60; label = main
+    }
+    $('#count-main').textContent = main; $('#count-sub').textContent = sub
+    var ring = $('#count-ring')
+    ring.setAttribute('data-p-left', left); ring.setAttribute('data-p-total', total); ring.setAttribute('data-label', label)
+    live(ring, { left: left, total: total, label: label })
+  }
+
+  /* ─────────── her story: the clothesline strip ───────────
+     `sel` is the page the guest means (chips, arrows, counter). Pages near the end cannot always be scrolled to
+     the left edge, so the highlight never depends on where the track happens to rest. */
+  var strip = $('#strip'), pages = $$('.page', strip), chips = $$('.yr'), prev = $('#s-prev'), next = $('#s-next'), pg = $('#s-pg')
+  var LAST = pages.length - 1, sel = 0, auto = false, autoT = 0, settleT = 0
+  function padL() { return pages[0].offsetLeft }
+  function maxX() { return Math.max(0, strip.scrollWidth - strip.clientWidth) }
+  function pageX(i) { return Math.min(Math.max(0, pages[i].offsetLeft - padL()), maxX()) }
+  function inView(i) {
+    var l = pages[i].offsetLeft, r = l + pages[i].offsetWidth, x = strip.scrollLeft
+    return l >= x + 4 && r <= x + strip.clientWidth - 4
+  }
+  function paint() {
+    chips.forEach(function (c, i) { c.setAttribute('aria-current', i === sel ? 'true' : 'false') })
+    pg.textContent = 'Page ' + (sel + 1) + ' of ' + pages.length
+    prev.disabled = sel === 0; next.disabled = sel === LAST
+  }
+  /* chips always bring their page to the edge (or as near as the track allows); arrows only scroll when the next page is not already fully in view */
+  function select(i, step) {
+    sel = Math.max(0, Math.min(LAST, i)); clearTimeout(settleT); paint()
+    if (step && inView(sel)) return
+    var to = pageX(sel)
+    if (Math.abs(strip.scrollLeft - to) < 2) return
+    auto = true; clearTimeout(autoT); autoT = setTimeout(function () { auto = false }, reduce ? 120 : 800)
+    strip.scrollTo({ left: to, behavior: reduce ? 'auto' : 'smooth' })
+  }
+  /* a guest's own swipe: the first page whose left edge is at or past the scroll position; the last page only when the track is at its end */
+  function derive() {
+    var x = strip.scrollLeft, m = maxX()
+    if (m > 0 && x >= m - 4) return LAST
+    for (var i = 0; i <= LAST; i++) if (pages[i].offsetLeft - padL() >= x - 4) return i
+    return LAST
+  }
+  strip.addEventListener('scroll', function () {
+    if (auto) return                                       // our own scrollTo, not the guest
+    clearTimeout(settleT); settleT = setTimeout(function () { sel = derive(); paint() }, 90)
+  }, { passive: true })
+  ;['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (ev) { strip.addEventListener(ev, function () { auto = false }, { passive: true }) })
+  if ('onscrollend' in window) strip.addEventListener('scrollend', function () { auto = false })
+  chips.forEach(function (c) { c.addEventListener('click', function () { select(+c.getAttribute('data-go'), false) }) })
+  prev.addEventListener('click', function () { select(sel - 1, true) })
+  next.addEventListener('click', function () { select(sel + 1, true) })
+  window.addEventListener('resize', function () { if (!inView(sel)) strip.scrollTo({ left: pageX(sel), behavior: 'auto' }); paint() })
+  paint()
+
+  /* ─────────── the memory wall ─────────── */
+  var STAMPS = { heart: ['heart', '❤️'], flower: ['flower', '🌸'], cake: ['cake', '🎂'], soup: ['soup', '🍲'], coffee: ['coffee', '☕'], sparkles: ['sparkles', '✨'] }
+  var SEED = [
+    { id: 's1', name: 'Isa', rel: 'Granddaughter', g: 'f', stamp: 'cake', hue: 'butter', rot: -2.2, text: 'Nani taught me to crack an egg one-handed when I was seven. I still can\u2019t do it as fast as she does. Every single time I hear: \u201cSlow hands, fast heart.\u201d' },
+    { id: 's2', name: 'Dolores', rel: 'Friend since 1971', g: 'g', stamp: 'coffee', hue: 'paper', rot: 1.4, text: 'Fifty-five years of Tuesday tea. She still cheats at gin rummy and I still let her win. Don\u2019t tell her. (Don\u2019t tell her about the party either.)' },
+    { id: 's3', name: 'Mateo', rel: 'Grandson', g: 'f', stamp: 'soup', hue: 'blush', rot: -1, text: 'She posted me fourteen pairs of wool socks at university with a note: \u201cEat something green.\u201d I wore every sock. I ate the green.' },
+    { id: 's4', name: 'Noor', rel: 'Granddaughter', g: 'f', stamp: 'heart', hue: 'sage', rot: 2, text: 'I failed my driving test twice. Nani sat in the passenger seat and knitted. Third time I passed. She says the scarf was a coincidence.' },
+    { id: 's5', name: 'Mr Abara', rel: 'Next-door neighbour', g: 'g', stamp: 'flower', hue: 'butter', rot: -1.6, text: 'Her lemon drizzle got me through the winter of 2009. I still have the tin. Rosa, I will never return the tin.' },
+    { id: 's6', name: 'Kit', rel: 'Grandchild', g: 'f', stamp: 'sparkles', hue: 'blush', rot: 1.1, text: 'She calls everyone \u201cmy heart\u201d: the postman, the plumber, me. Somehow it always sounds like you\u2019re the only one.' }
+  ]
+  var wallEl = $('#wall-notes'), own = store.get('nani80-wall') || [], filter = 'all'
+  function initials(name) {
+    var w = String(name).replace(/[^A-Za-z\u00C0-\u024F ]/g, ' ').trim().split(/\s+/).filter(Boolean)
+    if (!w.length) return '?'
+    return (w.length > 1 ? w[0][0] + w[1][0] : w[0][0]).toUpperCase()
+  }
+  function noteEl(n, fresh) {
+    var a = document.createElement('article'), st = STAMPS[n.stamp] || STAMPS.heart, ini = initials(n.name)
+    a.className = 'note c-' + n.hue + (fresh ? ' new' : '')
+    a.style.setProperty('--r', n.rot + 'deg'); a.setAttribute('data-g', n.g); a.setAttribute('data-id', n.id)
+    a.innerHTML =
+      '<span class="st"><span data-ico=' + '"' + st[0] + '"' + ' data-size="30">' + st[1] + '</span></span>' +
+      '<blockquote>' + esc(n.text) + '</blockquote>' +
+      '<div class="by">' +
+        '<span data-ico="user-round" data-size="40" data-max-level="1">👤</span>' +
+        '<span data-live="avatar-initials" data-p-initials="' + esc(ini) + '" data-size="44" data-min-level="2" data-label="' + esc(n.name) + '">' + esc(ini) + '</span>' +
+        '<div><b>' + esc(n.name) + '</b><span class="rel">' + esc(n.rel) + '</span></div>' +
+        (n.own ? '<button type="button" class="rm" aria-label="Take down my note">Take it down</button>' : '') +
+      '</div>'
+    fit(a)
+    return a
+  }
+  function applyFilter() {
+    var shown = 0
+    $$('.note', wallEl).forEach(function (el) { var ok = filter === 'all' || el.getAttribute('data-g') === filter; el.style.display = ok ? '' : 'none'; if (ok) shown++ })
+    $('#wall-empty').hidden = shown > 0
+  }
+  function updateCount() {
+    var n = $$('.note', wallEl).length, t = n + (n === 1 ? ' memory' : ' memories') + ' on the wall'
+    $('#wall-count-t').textContent = t
+    var lv = $('#wall-live'); if (lv) { live(lv, { count: n, label: t }); lv.setAttribute('data-p-count', n); lv.setAttribute('data-label', t) }
+  }
+  function pin(n, fresh) {
+    var el = noteEl(n, fresh)
+    wallEl.insertBefore(el, fresh ? wallEl.firstChild : null)
+    return el
+  }
+  own.forEach(function (n) { n.own = true; pin(n, false) })   // newest first, leading the wall
+  SEED.forEach(function (n) { pin(n, false) })
+  updateCount(); applyFilter()
+
+  $$('.filt button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      filter = b.getAttribute('data-f')
+      $$('.filt button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false') })
+      applyFilter()
+    })
+  })
+  function ownHas(id) { return !!id && own.some(function (n) { return n.id === id }) }
+  function dropOwn(id) {
+    own = own.filter(function (n) { return n.id !== id }); store.set('nani80-wall', own)
+    var el = $('.note[data-id="' + id + '"]', wallEl); if (el) el.remove()
+  }
+  wallEl.addEventListener('click', function (e) {
+    var rm = e.target.closest && e.target.closest('.rm'); if (!rm) return
+    dropOwn(rm.closest('.note').getAttribute('data-id')); updateCount(); applyFilter(); toast('Taken down. You can always pin another.')
+  })
+
+  function addNote(name, relVal, text, stamp, hue) {
+    var parts = String(relVal).split('|')
+    var n = { id: 'u' + Date.now() + Math.floor(Math.random() * 99), name: name, rel: parts[0], g: parts[1] || 'g', text: text, stamp: stamp, hue: hue, rot: Math.round((Math.random() * 5 - 2.5) * 10) / 10, own: true }
+    own.unshift({ id: n.id, name: n.name, rel: n.rel, g: n.g, text: n.text, stamp: n.stamp, hue: n.hue, rot: n.rot })
+    store.set('nani80-wall', own)
+    var el = pin(n, true); updateCount(); applyFilter()
+    return el
+  }
+  function setErr(input, errEl, msg) {
+    if (msg) { errEl.textContent = msg; errEl.hidden = false; input.setAttribute('aria-invalid', 'true'); input.setAttribute('aria-describedby', errEl.id) }
+    else { errEl.hidden = true; errEl.textContent = ''; input.removeAttribute('aria-invalid') }
+    return !msg
+  }
+  var wForm = $('#wall-form'), wText = $('#w-text'), wName = $('#w-name')
+  wText.addEventListener('input', function () { $('#w-count').textContent = wText.value.length + ' / 280'; if (wText.getAttribute('aria-invalid')) setErr(wText, $('#w-text-e'), wText.value.trim().length < 12 ? 'Add a little more, at least a sentence.' : '') })
+  wName.addEventListener('input', function () { if (wName.getAttribute('aria-invalid')) setErr(wName, $('#w-name-e'), wName.value.trim().length < 2 ? 'Please add your name.' : '') })
+  wForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var name = wName.value.trim(), text = wText.value.trim().replace(/\s+/g, ' ')
+    var a = setErr(wName, $('#w-name-e'), name.length < 2 ? 'Please add your name so Nani knows who to hug.' : '')
+    var b = setErr(wText, $('#w-text-e'), text.length < 12 ? 'Add a little more, at least a sentence.' : '')
+    if (!a) { wName.focus(); return }
+    if (!b) { wText.focus(); return }
+    var el = addNote(name, $('#w-rel').value, text, wForm.stamp.value, wForm.hue.value)
+    wForm.reset(); $('#w-count').textContent = '0 / 280'
+    if (filter !== 'all') { filter = 'all'; $$('.filt button').forEach(function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-f') === 'all' ? 'true' : 'false') }); applyFilter() }
+    var r = el.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight) el.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' })
+    toast('Pinned! Your memory is on the wall.')
+  })
+
+  /* ─────────── add to calendar (.ics) ─────────── */
+  function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n') }
+  function fold(line) { var out = [], s = line; while (s.length > 74) { out.push(s.slice(0, 74)); s = ' ' + s.slice(74) } out.push(s); return out.join('\r\n') }
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function buildICS(disguise) {
+    var n = new Date(), stamp = n.getUTCFullYear() + pad(n.getUTCMonth() + 1) + pad(n.getUTCDate()) + 'T' + pad(n.getUTCHours()) + pad(n.getUTCMinutes()) + pad(n.getUTCSeconds()) + 'Z'
+    /* disguised, nothing in the event (title, notes, alarms, file name, ids) mentions Nani, the surprise or the secret */
+    var title = disguise ? 'Lunch at Fennel & Fig' : 'Nani Rosa\u2019s 80th (SURPRISE!)'
+    var desc = disguise
+      ? 'Lunch at Fennel & Fig.\nArrive by 12:00 at the side gate on Pear Street. Park on Pear Street or in the Tannery car park.\nQuestions: Isa 555-0142, or Mateo on the day 555-0147.'
+      : 'Surprise lunch for Nani Rosa\u2019s 80th birthday.\nARRIVE BY 12:00. Nani walks in at 12:30.\nSide gate on Pear Street. Park on Pear Street or in the Tannery car park, never on Orchard Walk.\nNo posts, tags or texts about it until the candles are out.\nQuestions: Isa 555-0142, Mateo (on the day) 555-0147.'
+    var alarmDay = disguise ? 'Tomorrow: lunch at Fennel & Fig. Arrive by 12:00.' : 'Tomorrow: the secret lunch. Arrive by 12:00.'
+    var alarmLeave = 'Leave soon. Arrive by 12:00, side gate on Pear Street.'
+    var L = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//with icons demo//Invitation//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:' + (disguise ? 'lunch-fennel-fig' : 'nani-rosa-80') + '-20261122@demo.invalid', 'DTSTAMP:' + stamp,
+      'DTSTART:20261122T120000', 'DTEND:20261122T163000',
+      'SUMMARY:' + icsEsc(title),
+      'LOCATION:' + icsEsc('The Garden Room at Fennel & Fig, 6 Orchard Walk, Port Alder PA4 2RN'),
+      'DESCRIPTION:' + icsEsc(desc),
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(alarmDay), 'END:VALARM',
+      'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(alarmLeave), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ]
+    return L.map(fold).join('\r\n') + '\r\n'
+  }
+  /* the disguise tick-box lives twice (under the hero button, and in the thank-you panel): one setting, kept in step */
+  var disBoxes = $$('#h-disguise, #d-disguise')
+  disBoxes.forEach(function (b) { b.addEventListener('change', function () { disBoxes.forEach(function (o) { o.checked = b.checked }) }) })
+  function downloadICS() {
+    var dis = $('#h-disguise').checked
+    var blob = new Blob([buildICS(dis)], { type: 'text/calendar;charset=utf-8' }), url = URL.createObjectURL(blob)
+    var a = document.createElement('a'); a.href = url; a.download = dis ? 'lunch-at-fennel-and-fig.ics' : 'nani-rosa-80-surprise-lunch.ics'; document.body.appendChild(a); a.click(); a.remove()
+    setTimeout(function () { URL.revokeObjectURL(url) }, 4000)
+    toast(dis ? 'Saved. The event is titled \u201cLunch at Fennel & Fig\u201d to keep the secret.' : 'Calendar file saved. It starts at 12:00, when you arrive.')
+  }
+  $$('[data-cal]').forEach(function (b) { b.addEventListener('click', downloadICS) })
+
+  /* ─────────── RSVP ─────────── */
+  var INVITED = 52, BASE = 34, rsvpNote = null            // rsvpNote: id of the guest's own wall note pinned from this form
+  var TABLES = ['The Soup Table', 'The Lemon Drizzle Table', 'The Carnation Table', 'The Knitting Table', 'The Biscuit Tin Table']
+  var rForm = $('#rsvp-form'), done = $('#rsvp-done'), cnt = $('#r-count')
+  function clampCount() { var v = parseInt(cnt.value, 10); if (!(v >= 1)) v = 1; if (v > 8) v = 8; cnt.value = v; return v }
+  $('#r-minus').addEventListener('click', function () { cnt.value = clampCount() - 1; clampCount() })
+  $('#r-plus').addEventListener('click', function () { cnt.value = clampCount() + 1; clampCount() })
+  cnt.addEventListener('change', clampCount)
+  $$('input[name="mem"]', rForm).forEach(function (r) { r.addEventListener('change', function () { $('#r-mem-box').hidden = rForm.mem.value !== 'wall' }) })
+  function updateSeats(ownCount) {
+    var c = BASE + ownCount, pct = Math.round(100 * c / INVITED), left = INVITED - c
+    $('#seats-n').textContent = c + ' of ' + INVITED + ' seats confirmed'
+    $('#seats-s').textContent = left > 0 ? left + ' still to answer.' + (ownCount ? ' You\u2019re not one of them.' : ' That means you, Uncle Ben.') : 'Every seat is spoken for!'
+    var lv = $('#seats-live'); live(lv, { value: pct, label: pct + ' percent of seats confirmed' }); lv.setAttribute('data-p-value', pct)
+  }
+  function hash(s) { var h = 7; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h }
+  function showDone(r) {
+    var first = r.name.split(/\s+/)[0], t = 2 + (hash(r.name.toLowerCase()) % TABLES.length)
+    $('#d-name').textContent = r.name; $('#d-first').textContent = first
+    $('#d-party').textContent = r.count + (r.count === 1 ? ' place' : ' places')
+    $('#d-table').textContent = 'Table ' + t + ' \u00B7 ' + TABLES[t - 2]
+    var tl = $('#d-table-live'); live(tl, { number: t, label: 'Table ' + t }); tl.setAttribute('data-p-number', t)
+    var list = $('#d-list'); $$('.x', list).forEach(function (x) { x.remove() })
+    var extra = []
+    if (r.diet.length) extra.push('Marta has noted: ' + r.diet.join(', ') + '.')
+    if (r.access.length) extra.push('We\u2019ve noted: ' + r.access.join(', ') + '.')
+    if (r.pinned) extra.push('Your memory is pinned to the wall. Go and find it.')
+    else if (r.mem === 'speak') extra.push('You\u2019re pencilled in for two minutes at 14:45.')
+    else if (r.mem === 'card') extra.push('Blank recipe cards are on every table, or bring your own.')
+    if (r.early) extra.push('See you at 11:00 for set-up. There will be tea.')
+    extra.forEach(function (x) {
+      var li = document.createElement('li'); li.className = 'x'
+      li.innerHTML = '<span data-ico="check-circle" data-size="26">✅</span><span>' + esc(x) + '</span>'; fit(li); list.appendChild(li)
+    })
+    rForm.hidden = true; done.hidden = false
+    updateSeats(r.count)
+  }
+  rForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var name = $('#r-name').value.trim(), contact = $('#r-contact').value.trim()
+    var okName = setErr($('#r-name'), $('#r-name-e'), name.length < 2 ? 'Please tell us your name.' : '')
+    var okC = setErr($('#r-contact'), $('#r-contact-e'), !(/^\S+@\S+\.\S+$/.test(contact) || /^[\d\s()+\-]{7,}$/.test(contact)) ? 'Add an email address or a phone number we can reach you on.' : '')
+    var mt = $('#r-mem').value.trim().replace(/\s+/g, ' ')
+    var okM = setErr($('#r-mem'), $('#r-mem-e'), rForm.mem.value === 'wall' && mt.length > 0 && mt.length < 12 ? 'Add a little more, at least a sentence (or clear the box and skip it).' : '')
+    var okS = setErr($('#r-secret'), $('#r-secret-e'), !$('#r-secret').checked ? 'Please promise, or Dolores will find out.' : '')
+    if (!okName) { $('#r-name').focus(); return }
+    if (!okC) { $('#r-contact').focus(); return }
+    if (!okM) { $('#r-mem').focus(); return }
+    if (!okS) { $('#r-secret').focus(); return }
+    var r = {
+      name: name, contact: contact, count: clampCount(),
+      diet: $$('input[name="diet"]:checked', rForm).map(function (x) { return x.value }),
+      access: $$('input[name="access"]:checked', rForm).map(function (x) { return x.value }),
+      mem: rForm.mem.value, early: rForm.early.checked, pinned: false
+    }
+    if (r.mem === 'wall' && mt.length >= 12) {
+      if (rsvpNote) dropOwn(rsvpNote)                         // replying again replaces the old note instead of pinning a second copy
+      var nel = addNote(name.split(/\s+/)[0] + (name.split(/\s+/)[1] ? ' ' + name.split(/\s+/)[1][0] + '.' : ''), 'Guest at the lunch|g', mt, 'heart', 'butter')
+      rsvpNote = nel.getAttribute('data-id'); $('#r-mem').value = ''
+    }
+    r.pinned = ownHas(rsvpNote); r.noteId = r.pinned ? rsvpNote : null
+    store.set('nani80-rsvp', r)
+    showDone(r)
+    /* the thank-you panel is the reward: bring its top into view (below the sticky header) rather than centring it */
+    done.focus({ preventScroll: true }); done.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' })
+  })
+  ;['r-name', 'r-contact', 'r-mem'].forEach(function (id) { $('#' + id).addEventListener('input', function () { if (this.getAttribute('aria-invalid')) this.removeAttribute('aria-invalid'), $('#' + id + '-e').hidden = true }) })
+  $('#r-secret').addEventListener('change', function () { if (this.checked) { this.removeAttribute('aria-invalid'); $('#r-secret-e').hidden = true } })
+  $('#d-edit').addEventListener('click', function () { done.hidden = true; rForm.hidden = false; store.del('nani80-rsvp'); updateSeats(0); $('#r-name').focus() })
+  $('#d-share').addEventListener('click', function () { copy(location.href.split('#')[0], 'Invitation link copied. Send it to a cousin, but not to Nani!') })
+  $('#copy-addr').addEventListener('click', function () { copy('The Garden Room at Fennel & Fig, 6 Orchard Walk, Port Alder PA4 2RN', 'Address copied.') })
+
+  /* ─────────── nav: highlight the section you're in; the hero and the unlisted sections clear it ─────────── */
+  if ('IntersectionObserver' in window) {
+    var links = {}; $$('.top nav a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a })
+    var band = {}, secs = $$('main > section[id]')
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) { band[en.target.id] = en.isIntersecting })
+      var hit = null
+      secs.forEach(function (sc) { if (band[sc.id]) hit = sc.id })   // lowest section under the reading line wins
+      if (hit === null) return                                         // a gap between sections: keep what we had
+      Object.keys(links).forEach(function (k) { if (k === hit) links[k].setAttribute('aria-current', 'true'); else links[k].removeAttribute('aria-current') })
+    }, { rootMargin: '-35% 0px -60% 0px' })
+    secs.forEach(function (sc) { io.observe(sc) })
+  }
+
+  /* ─────────── small screens: a floating RSVP pill (the header only sticks from 1120px), hidden while the form is on screen ─────────── */
+  if ('IntersectionObserver' in window && $('#rsvp-fab')) {
+    var fab = $('#rsvp-fab')
+    new IntersectionObserver(function (ents) { fab.classList.toggle('off', ents[0].isIntersecting) }, { threshold: 0 }).observe($('#rsvp'))
+  }
+
+  /* ─────────── boot: once the kit is up ─────────── */
+  window.addEventListener('DOMContentLoaded', function () {
+    var tick = function () { renderCountdown(new Date()) }
+    tick(); setInterval(tick, 30000)
+    var saved = store.get('nani80-rsvp')
+    if (saved && saved.name) { rsvpNote = ownHas(saved.noteId) ? saved.noteId : null; showDone(saved) } else updateSeats(0)
+  })
+})()
+</script>
+</body>
+</html>

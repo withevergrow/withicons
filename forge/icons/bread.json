@@ -1,0 +1,84 @@
+{
+  "name": "bread",
+  "category": "food",
+  "description": "A domed loaf of bread with a scored crust for bakeries, sourdough, and breakfast.",
+  "aliases": [
+    "loaf",
+    "bread-loaf",
+    "loaf-of-bread",
+    "sourdough",
+    "sourdough-loaf",
+    "bakery-bread",
+    "artisan-bread",
+    "white-bread",
+    "brown-bread",
+    "rye-bread",
+    "wholemeal-bread",
+    "boule"
+  ],
+  "tags": [
+    "food",
+    "bakery",
+    "baking",
+    "breakfast",
+    "staple"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 20 H19.5 A2 2 0 0 0 21.5 18 V13.5 C21.5 8 17.5 4.5 12 4.5 C6.5 4.5 2.5 8 2.5 13.5 V18 A2 2 0 0 0 4.5 20 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 13.5 L8.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M11 13 L13 9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 13.5 L17.5 10",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 20 H19.5 A2 2 0 0 0 21.5 18 V13.5 C21.5 8 17.5 4.5 12 4.5 C6.5 4.5 2.5 8 2.5 13.5 V18 A2 2 0 0 0 4.5 20 Z"
+  ],
+  "cutouts": [
+    "M6.5 13.5 L8.5 10",
+    "M11 13 L13 9.5",
+    "M15.5 13.5 L17.5 10"
+  ],
+  "synonyms": [
+    "bakery",
+    "baker",
+    "bakers",
+    "bake",
+    "baking",
+    "baked",
+    "fresh bread",
+    "homemade bread",
+    "crusty bread",
+    "crust",
+    "bread shop",
+    "boulangerie",
+    "panaderia",
+    "carbs",
+    "carbohydrates",
+    "gluten",
+    "wheat bread",
+    "whole grain",
+    "multigrain",
+    "sandwich loaf",
+    "tin loaf",
+    "farmhouse loaf",
+    "bloomer",
+    "batard",
+    "bread dough",
+    "breakfast",
+    "loaves",
+    "breads",
+    "bred",
+    "braed"
+  ]
+}

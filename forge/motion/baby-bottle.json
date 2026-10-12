@@ -1,0 +1,41 @@
+{
+  "name": "baby-bottle",
+  "intent": "tips softly as if feeding, gets a quick shake to mix on hover",
+  "loop": {
+    "preset": "sway",
+    "origin": [12, 21],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7,
+    "duration": 0.6
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [12, 21],
+      "amount": 0.8
+    },
+    {
+      "preset": "jelly",
+      "origin": [12, 21],
+      "amount": 0.8
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "baby",
+      "effect": "fade"
+    },
+    {
+      "to": "baby-bottle@solid",
+      "effect": "scale"
+    }
+  ]
+}

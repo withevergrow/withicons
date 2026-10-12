@@ -10,6 +10,11 @@ import { webcrypto } from 'node:crypto'
 import { WebStandardStreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js'
 import { createServer, VERSION } from './server.mjs'
 import { IconError, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, data, animateIcon, listMotion, listPalettes, PALETTE_ROLES, recommendStyles } from './lib.mjs'
+import { useHostedRenderer } from './export-tool.mjs'
+import { initResvg } from './resvg-wasm.mjs'
+
+// export_icon's PNG-based files: @resvg/resvg-wasm (resvg.wasm next to this bundle), compiled on the first PNG export
+useHostedRenderer(initResvg)
 
 const CORS = {
   'access-control-allow-origin': '*',
@@ -122,8 +127,8 @@ export async function handler(event = {}) {
     if ((m = p.match(/^\/api\/palettes\/([^/]+)$/))) return reply(200, listPalettes({ name: decodeURIComponent(m[1]), style: qs.get('style') || undefined, tag: qs.get('tag') || undefined, limit: qs.get('limit') ? +qs.get('limit') : undefined }), cached(86400))
     if ((m = p.match(/^\/api\/resolve\/([^/]+)$/))) return reply(200, resolveIcon(decodeURIComponent(m[1])), cached(3600))
     if (p === '/api/styles') return reply(200, { styles: listStyles() }, cached(3600))
-    // "which style for X": /api/recommend?for=diwali+sale+banner (or ?use=ai), optional &icon=diya&limit=4
-    if (p === '/api/recommend') return reply(200, recommendStyles({ for: (qs.get('for') || qs.get('q') || '').slice(0, 300), use: qs.get('use') || undefined, icon: qs.get('icon') || undefined, limit: qs.get('limit') ? +qs.get('limit') : undefined }), cached(3600))
+    // "which style for X": /api/recommend?for=diwali+sale+banner (or ?use=ai), optional &icon=diya&limit=4&compact=1 (the short form)
+    if (p === '/api/recommend') return reply(200, recommendStyles({ for: (qs.get('for') || qs.get('q') || '').slice(0, 300), use: qs.get('use') || undefined, icon: qs.get('icon') || undefined, limit: qs.get('limit') ? +qs.get('limit') : undefined, compact: /^(1|true|yes)$/i.test(qs.get('compact') || '') }), cached(3600))
     if (p === '/api/categories') return reply(200, listCategories(), cached(3600))
     if ((m = p.match(/^\/api\/categories\/([^/]+)$/))) return reply(200, listCategories(decodeURIComponent(m[1])), cached(3600))
     return reply(404, { error: `Not found: ${p}` })

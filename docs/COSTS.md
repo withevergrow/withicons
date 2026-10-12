@@ -153,7 +153,7 @@ ChatGPT browsing to time out on their first search. The fixes, in `infra/site.ya
 | post-deploy cache warm (`scripts/deploy.mjs`) | after each deploy: invalidates `/api/*` if the Lambda code changed, waits for the invalidation, then GETs the top 150 `/api/search?q=` queries through CloudFront | 150 requests per deploy: **$0** |
 | optional: provisioned concurrency (not in the template) | 1 always-initialised instance, no cold start ever for the first concurrent request | **~$9/month** for 1 x 1 GB arm64 (not free-tier); needs a published version + alias, the Function URL on the alias, and `deploy.mjs` publishing a version per deploy. Only worth it if keep-warm is not enough. |
 
-The warm step and the WAF: the per-IP rule (`WafRateLimitPer5Min`, default 200) counts every `/api/*` request,
+The warm step and the WAF: the per-IP rule (`WafRateLimitPer5Min`, default 1000) counts every `/api/*` request,
 cache hits included. One warm run sends at most 180 (`--warm-limit`, default 150) at concurrency 6 (reserved
 concurrency is 10) and stops at the first 429. Two deploys inside 5 minutes from the same CI runner can rate-limit
 that runner's warm, nothing else. `--skip-warm` turns it off, `--warm-only` re-warms without deploying.

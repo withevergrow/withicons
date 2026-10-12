@@ -1,0 +1,433 @@
+{
+  "name": "wheat",
+  "palettes": [
+    {
+      "id": "ripe-wheat",
+      "name": "Ripe wheat",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#3A2606",
+        "c1": "#E8B84A",
+        "c2": "#B88A2E",
+        "c3": "#FFE29A",
+        "c4": "#7A5A1E",
+        "tint": "#FAF1DB",
+        "accent": "#FFE29A",
+        "shadow": "#796026",
+        "shine": "#F8EAC9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "summer-field",
+      "name": "Summer field",
+      "tags": [
+        "true-to-life",
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#33260A",
+        "c1": "#F2C14E",
+        "c2": "#8DA34A",
+        "c3": "#FFE9A8",
+        "c4": "#5E7A2E",
+        "tint": "#FCF3DC",
+        "accent": "#8DA34A",
+        "shadow": "#7E6429",
+        "shine": "#FBECCA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-wheat",
+      "name": "Green wheat",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#1E2E0E",
+        "c1": "#9CC45A",
+        "c2": "#5E8C34",
+        "c3": "#D8EDA8",
+        "c4": "#3E5E22",
+        "tint": "#EBF3DE",
+        "accent": "#E8D36A",
+        "shadow": "#51662F",
+        "shine": "#E1EDCE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "barley",
+      "name": "Barley",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#3A2A12",
+        "c1": "#D9B97A",
+        "c2": "#A88A52",
+        "c3": "#F3E3BC",
+        "c4": "#6E5A34",
+        "tint": "#F7F1E4",
+        "accent": "#F3E3BC",
+        "shadow": "#71603F",
+        "shine": "#F4EAD7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rye",
+      "name": "Rye",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1E10",
+        "c1": "#B8955E",
+        "c2": "#7E8C5A",
+        "c3": "#E3D1A8",
+        "c4": "#5A4A2E",
+        "tint": "#F1EADF",
+        "accent": "#9A7FA8",
+        "shadow": "#604D31",
+        "shine": "#EADFCF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "harvest-gold",
+      "name": "Harvest gold",
+      "tags": [
+        "seasonal",
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#331A04",
+        "c1": "#E3A12F",
+        "c2": "#9C5E1E",
+        "c3": "#FFD27A",
+        "c4": "#6B3A12",
+        "tint": "#F9ECD5",
+        "accent": "#C8462E",
+        "shadow": "#765418",
+        "shine": "#F7E3C1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "organic-field",
+      "name": "Organic field",
+      "tags": [
+        "nature",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#24301A",
+        "c1": "#D6B866",
+        "c2": "#6E8C3A",
+        "c3": "#F2E6B8",
+        "c4": "#3E5A26",
+        "tint": "#F7F1E0",
+        "accent": "#6E8C3A",
+        "shadow": "#6F6035",
+        "shine": "#F3EAD1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "flour-sack",
+      "name": "Flour sack",
+      "tags": [
+        "vintage",
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3024",
+        "c1": "#EDE3CF",
+        "c2": "#B8A27E",
+        "c3": "#FFFFFF",
+        "c4": "#8C7A5E",
+        "tint": "#FBF9F5",
+        "accent": "#C9A05E",
+        "shadow": "#7B766C",
+        "shine": "#FAF7F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "farmhouse",
+      "name": "Farmhouse",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E1F12",
+        "c1": "#D8A85A",
+        "c2": "#9C3B2E",
+        "c3": "#F3E2C0",
+        "c4": "#4E6B4A",
+        "tint": "#F7EEDE",
+        "accent": "#9C3B2E",
+        "shadow": "#70572F",
+        "shine": "#F3E5CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "golden-hour",
+      "name": "Golden hour",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#3A140A",
+        "c1": "#FFB347",
+        "c2": "#E8693A",
+        "c3": "#FFE0A0",
+        "c4": "#9C3A5E",
+        "tint": "#FFF0DA",
+        "accent": "#E8693A",
+        "shadow": "#855D25",
+        "shine": "#FFE8C8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-meadow",
+      "name": "Pastel meadow",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3A3A24",
+        "c1": "#F7E3A1",
+        "c2": "#BFD9A8",
+        "c3": "#FFF7DC",
+        "c4": "#E8C9E3",
+        "tint": "#FDF9EC",
+        "accent": "#E8C9E3",
+        "shadow": "#807654",
+        "shine": "#FDF7E3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sky-and-grain",
+      "name": "Sky & grain",
+      "tags": [
+        "vivid",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#10284A",
+        "c1": "#FFD23F",
+        "c2": "#2F7FD9",
+        "c3": "#FFF0B3",
+        "c4": "#1D4E9C",
+        "tint": "#FFF6D9",
+        "accent": "#2F7FD9",
+        "shadow": "#856D21",
+        "shine": "#FFF2C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "thanksgiving",
+      "name": "Thanksgiving",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2B1406",
+        "c1": "#C8762E",
+        "c2": "#7A2E1A",
+        "c3": "#F2C56E",
+        "c4": "#5E6B2E",
+        "tint": "#F4E4D5",
+        "accent": "#E05A2B",
+        "shadow": "#683D18",
+        "shine": "#EFD6C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seventies-harvest",
+      "name": "70s harvest",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2B1408",
+        "c1": "#E9A23B",
+        "c2": "#8E3B2E",
+        "c3": "#F4D58D",
+        "c4": "#3D7068",
+        "tint": "#FBECD8",
+        "accent": "#3D7068",
+        "shadow": "#79541F",
+        "shine": "#F8E3C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "bread-brand",
+      "name": "Bread brand",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#2A1A06",
+        "c1": "#E6A93A",
+        "c2": "#1F4E8C",
+        "c3": "#FFF2D6",
+        "c4": "#8C5A1E",
+        "tint": "#FAEED8",
+        "accent": "#1F4E8C",
+        "shadow": "#78581E",
+        "shine": "#F8E5C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "allergen-label",
+      "name": "Allergen label",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFC400",
+        "c2": "#2B2B2B",
+        "c3": "#FFFFFF",
+        "c4": "#0050EF",
+        "tint": "#FFF3CC",
+        "accent": "#0050EF",
+        "shadow": "#856600",
+        "shine": "#FFEDB3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-grain",
+      "name": "Y2K grain",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2350",
+        "c1": "#FFE98F",
+        "c2": "#C9BEFF",
+        "c3": "#FF9EE8",
+        "c4": "#8FF0FF",
+        "tint": "#FFFBE9",
+        "accent": "#FF9EE8",
+        "shadow": "#85794A",
+        "shine": "#FFF8DD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-field",
+      "name": "Neon field",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#FFE13D",
+        "c1": "#1A1608",
+        "c2": "#7CFF6B",
+        "c3": "#FFB13D",
+        "c4": "#3DF2FF",
+        "tint": "#D1D0CE",
+        "accent": "#7CFF6B",
+        "shadow": "#0E0B04",
+        "shine": "#BAB9B5",
+        "edge": "#050403"
+      }
+    },
+    {
+      "id": "dopamine-brights",
+      "name": "Dopamine brights",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A1033",
+        "c1": "#FFD23F",
+        "c2": "#FF5DA2",
+        "c3": "#3DDCFF",
+        "c4": "#7CFF6B",
+        "tint": "#FFF6D9",
+        "accent": "#FF5DA2",
+        "shadow": "#856D21",
+        "shine": "#FFF2C5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "luxe-gold",
+      "name": "Luxe gold",
+      "tags": [
+        "luxe",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#14100A",
+        "c1": "#D4AF37",
+        "c2": "#2A2418",
+        "c3": "#F5E6B8",
+        "c4": "#8C6D1F",
+        "tint": "#F6EFD7",
+        "accent": "#F5E6B8",
+        "shadow": "#6E5B1D",
+        "shine": "#F2E7C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-ramp",
+      "name": "Gold ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#332304",
+        "c1": "#DDAA3A",
+        "c2": "#9C7414",
+        "c3": "#F5DFA6",
+        "c4": "#FBF1D6",
+        "tint": "#F8EED8",
+        "accent": "#F5DFA6",
+        "shadow": "#73581E",
+        "shine": "#F5E6C4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greyscale",
+      "name": "Greyscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#B5B5B5",
+        "c2": "#5E5E5E",
+        "c3": "#E8E8E8",
+        "c4": "#8A8A8A",
+        "tint": "#F0F0F0",
+        "accent": "#5E5E5E",
+        "shadow": "#5E5E5E",
+        "shine": "#E9E9E9",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

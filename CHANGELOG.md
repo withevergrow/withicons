@@ -6,6 +6,45 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+Result of an agent evaluation: five agents built pitch decks with the MCP and reported what stopped them
+([docs/MCP-AGENT-EVAL.md](docs/MCP-AGENT-EVAL.md) has the findings and what is still open).
+
+### Added
+- 16 icons (750 in all), each with motion, palettes and default colours in 19 colourful styles: bakery (`bread`, `baguette`,
+  `croissant`, `wheat`, `oven`, `rolling-pin`), day care and dental (`playground`, `crayon`, `stroller`, `baby-bottle`,
+  `dental-chair`, `tooth-crown`, `worried`), `mosque`, and the avatars `avatar-woman-hijab` and `avatar-person-wheelchair`
+  (true-to-life skin-tone palettes).
+- MCP: `preview_icons`, a tenth tool: one labelled picture of up to 24 icons in up to 6 styles (rows are icons, columns are
+  styles; light, dark or hex background; `size` 12-256). A PNG on the local server (and a file in `out_dir`), one self-contained
+  SVG sheet on the hosted server; `previewSheet()` in `@withicons/mcp/lib`.
+- MCP and CLI: brand colours across a set. `theme` (`"#hex"` or `{ primary, secondary?, tertiary?, ink? }`) on `get_icon` and
+  `export_icon` puts them on each icon's own parts by size in any style; `per_icon` colours individual icons; CLI `--theme`,
+  `--per-icon`. `export_icon` returns a `colorReport` per icon and style (colours that changed nothing, where a theme landed,
+  which parts a borrowed palette coloured).
+- MCP: `list_styles` gives every style a `colours` entry read from the rendered icons (its roles, variables, whether each is
+  solid, a tone or a gradient, and whether a brand hex shows exactly). The server instructions and tool descriptions are
+  generated from it: duo is a 20% `c1` tone plus an accent, and its `tint` role paints nothing.
+- MCP: `search_icons` `format: "none"` (names only), `recommend_styles` `compact: true` (also `/api/recommend?compact=1`), and a
+  "Making slides and docs" recipe in the server instructions (PNG 512 px, one call, which `pptx` format is for what).
+- Hosted MCP: `export_icon` makes PNG, PNG sets, ICO, favicon packs, PowerPoint, Word and animated SVG (`@resvg/resvg-wasm`, the
+  same output as the local server and the CLI). `gif`, `apng`, `pptx-animated` and `pptx-sheet` still answer with the CLI command.
+
+### Changed
+- `search_icons` (MCP), `searchIcons` (`@withicons/mcp/lib`, `/api/search`) and `withicons search` keep `results` for exact matches
+  only (what the query names, or a direct match such as a spelling fix). When no icon carries the words they say `noExactMatch`
+  and offer up to five similar icons apart, in `additional` (loosely related, no snippet), instead of padding `results` with
+  low-confidence matches. A word the engine only reached through a related concept ("bread" -> bakery icons, before `bread`
+  existed) counts as similar, not exact. Beside real matches, low-confidence guesses are not listed.
+- `@withicons/search` 1.6: multi-word queries are read as phrases (the head word first; "to", "of" and "-based" carry nothing; a
+  word in another sense no longer ranks first: "children playing", "shop counter", "nature-based day care").
+- `suggestions` (no match), `resolve_icon.nearest` and the `get_icon` "Did you mean" keep only names near the spelling or the
+  meaning ("nervous" no longer suggests angry and arrow-left).
+- `list_palettes` `mainRole` is measured on the rendered icon (it was wrong for `suite` and the avatars).
+- `recommend_styles`: "exact brand colours" ranks flat styles first and says gradient styles cannot match a hex; a prompt naming
+  several festivals is ranked by how many each style covers.
+- Hosted API and `/mcp`: the per-IP rate limit (`WafRateLimitPer5Min`) now defaults to 1000 requests per 5 minutes (was 200). The
+  live limit changes when the CloudFormation stack is updated.
+
 ## 0.4.0 - 2026-10-09
 
 ### Added

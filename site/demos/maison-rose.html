@@ -1,0 +1,1536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maison Rose (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Maison Rose makes quiet botanical skincare in batches of 800: a three-question skin quiz, an AM/PM routine builder, refillable glass and a sample with every order. A fictional demo shop made with with icons.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#5b1b2d">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ───────────── tokens ───────────── */
+:root{
+  --ivory:#f8f2ea;--ivory-2:#f0e4d8;--paper:#fffaf4;--blush:#ecd6ce;--rose:#c58c88;--rose-deep:#9e4f5a;
+  --wine:#5b1b2d;--wine-deep:#3b0f1d;--champ:#cdaa6a;--champ-deep:#6e5120;
+  --ink:#2d1b20;--muted:#6a5256;--hair:rgba(91,27,45,.18);
+  --serif:'Cormorant Garamond','Cormorant',Georgia,'Times New Roman',serif;
+  --sans:'Manrope',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --ease:cubic-bezier(.22,.7,.2,1);
+  --gut:clamp(16px,4vw,56px);
+  color:var(--wine);
+  font-variant-numeric:lining-nums;
+  /* icon palettes tuned to the brand (default style first, then the recommended ones) */
+  --with-luxe-c1:#7d2a40;--with-luxe-c2:#c98b86;--with-luxe-c3:#4b1626;--with-luxe-c4:#a57b3b;--with-luxe-accent:#d4b06c;
+  --with-luxe-edge:#f5dfd7;--with-luxe-ink:#3b0f1d;--with-luxe-shadow:#2a0a14;--with-luxe-shine:#fff;--with-luxe-tint:#f8e9df;
+  --with-glass-accent:#c4707a;--with-glass-back:#e3b9b4;--with-glass-c1:#e7a8a6;--with-glass-c2:#b94f66;--with-glass-c3:#e6c58f;--with-glass-c4:#d99a7a;
+  --with-glass-etch:#5b1b2d;--with-glass-pane:#fbeeea;--with-glass-shadow:#7a2b3d;
+  --with-soft3d-accent:#c9a566;--with-soft3d-c1:#b94f66;--with-soft3d-c2:#f8efe8;--with-soft3d-c3:#4a2530;--with-soft3d-c4:#d9c3b8;
+  --with-soft3d-edge:#fff8f0;--with-soft3d-ink:#3b1a24;--with-soft3d-shadow:#2a1520;--with-soft3d-tint:#f2d3cc;
+  --with-chrome-accent:#c58c88;--with-chrome-c4:#d8bfb0;--with-chrome-edge:#fff4ef;--with-chrome-tint:#efe0dc;
+  --with-coquette-c1:#f2c7c7;--with-coquette-c2:#e39aa4;--with-coquette-c3:#b94f66;--with-coquette-c4:#fbeee4;--with-coquette-accent:#c9a566;
+  --with-coquette-ink:#6b2236;--with-coquette-shadow:#8a3548;--with-coquette-tint:#fbe4e3;
+  --with-clay-c1:#a8405a;--with-clay-c2:#e0a193;--with-clay-c3:#6b2236;--with-clay-c4:#cfa86a;--with-clay-accent:#c9a566;
+  --with-clay-ink:#4a1626;--with-clay-shadow:#3b0f1d;--with-clay-tint:#f5dcd6;
+  --with-duo:#e8c7c1;--with-duo-accent:#b8893f;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+section[id],main[id]{scroll-margin-top:84px}
+body{margin:0;background:var(--ivory);color:var(--ink);font:400 16px/1.65 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--wine);outline-offset:3px;border-radius:4px}
+.dark :focus-visible,.hdr--dark :focus-visible{outline-color:var(--champ)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:100%;max-width:1360px;margin-inline:auto;padding-inline:var(--gut)}
+.band{padding-block:clamp(72px,10vw,150px)}
+[hidden]{display:none!important}
+
+/* ───────────── type ───────────── */
+.eyebrow{font:600 11.5px/1.2 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--champ-deep);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;opacity:.7;flex:none}
+.h2{font:500 clamp(2.7rem,6.4vw,5.8rem)/.96 var(--serif);letter-spacing:-.025em;color:var(--wine);text-wrap:balance}
+.h2 em,.em{font-style:italic;font-weight:400;color:var(--rose-deep)}
+.lead{font-size:clamp(1.02rem,1.3vw,1.16rem);color:var(--muted);max-width:48ch}
+.sect-head{display:grid;gap:22px;margin-bottom:clamp(36px,5vw,64px);max-width:980px}
+.sect-head .lead{max-width:56ch}
+
+/* ───────────── buttons ───────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 30px;border-radius:999px;border:1px solid var(--wine);background:var(--wine);color:var(--ivory);font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:background .5s var(--ease),color .5s var(--ease),border-color .5s var(--ease),transform .5s var(--ease);white-space:nowrap}
+.btn:hover{background:var(--wine-deep);border-color:var(--wine-deep)}
+.btn:active{transform:scale(.98)}
+.btn--ghost{background:transparent;color:var(--wine)}
+.btn--ghost:hover{background:var(--wine);color:var(--ivory)}
+.btn--sm{min-height:44px;padding:0 20px;font-size:11px;letter-spacing:.14em}
+.btn--block{width:100%}
+.btn--light{background:var(--ivory);color:var(--wine);border-color:var(--ivory)}
+.btn--light:hover{background:var(--blush);color:var(--wine-deep);border-color:var(--blush)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.link{font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:6px;color:var(--wine);display:inline-flex;align-items:center;gap:8px;min-height:44px;align-items:center}
+.iconbtn{display:inline-grid;place-items:center;width:44px;height:44px;border:0;background:transparent;border-radius:50%;color:var(--wine);position:relative}
+.iconbtn:hover{background:rgba(91,27,45,.07)}
+.medal{display:inline-grid;place-items:center;flex:none;border-radius:50%;background:var(--blush);color:var(--wine)}
+.medal--lg{width:76px;height:76px}.medal--md{width:56px;height:56px}.medal--sm{width:44px;height:44px}
+.medal--paper{background:var(--paper);box-shadow:inset 0 0 0 1px var(--hair)}
+
+/* ───────────── reveal (slow fades) ───────────── */
+.js .rv{opacity:0;transform:translateY(26px);transition:opacity 1.3s var(--ease),transform 1.3s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.seal svg{animation:none!important}.card__media img{transition:none!important}}
+
+/* ───────────── kit fallbacks (Basic level) ───────────── */
+.kit-fb{font-size:var(--fbs,1em)}
+html[data-level="0"] .kit-ico,html[data-level="0"] .kit-live{min-width:0!important;min-height:0!important}
+.kit-live .kit-fb{font-family:var(--serif)}
+.hdr__cart .kit-fb{font:600 13px/1 var(--sans)}
+
+/* ───────────── announcement bar ───────────── */
+.annc{background:var(--wine);color:var(--ivory);font-size:12.5px;letter-spacing:.04em}
+.annc__in{display:flex;align-items:center;justify-content:center;gap:24px;min-height:40px;padding:6px var(--gut);text-align:center}
+.annc p{display:flex;align-items:center;gap:8px;color:inherit}
+.annc__l,.annc__r{display:none!important;opacity:.86}
+.annc b{color:var(--champ);font-weight:700}
+.annc__bar{width:96px;height:3px;background:rgba(248,242,234,.22);border-radius:3px;overflow:hidden;display:inline-block;flex:none}
+.annc__bar i{display:block;height:100%;width:0;background:var(--champ);transition:width .9s var(--ease)}
+.annc .kit-ico{color:var(--champ)}
+@media(min-width:900px){.annc__in{justify-content:space-between}.annc__l,.annc__r{display:flex!important;flex:1 1 0}.annc__r{justify-content:flex-end}.annc__c{flex:none}}
+
+/* ───────────── header ───────────── */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(248,242,234,.93);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid transparent;transition:border-color .4s,box-shadow .4s}
+.hdr.is-stuck{border-color:var(--hair)}
+.hdr__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;min-height:72px;padding-inline:var(--gut);max-width:1360px;margin-inline:auto;gap:12px}
+.hdr__l{display:flex;align-items:center}
+.hdr__r{display:flex;align-items:center;justify-content:flex-end;gap:2px}
+.hdr__menu{display:inline-grid}
+.logo{text-decoration:none;text-align:center;display:grid;gap:2px;color:var(--wine)}
+.logo b{font:600 clamp(1.18rem,3.4vw,1.55rem)/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;margin-right:-.34em}
+.logo small{font:600 8.5px/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;color:var(--champ-deep);margin-right:-.34em}
+.nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--ivory);border-bottom:1px solid var(--hair);padding:12px var(--gut) 20px;box-shadow:0 24px 40px -28px rgba(59,15,29,.35)}
+.nav.open{display:grid}
+.nav a{padding:13px 2px;border-bottom:1px solid var(--hair);text-decoration:none;font:500 1.7rem/1.1 var(--serif);color:var(--wine);min-height:44px;display:flex;align-items:center}
+.nav a:last-child{border-bottom:0}
+.hdr__cart{display:inline-grid;place-items:center;min-width:44px;min-height:44px;border:0;background:transparent;color:var(--wine);border-radius:999px;padding:0 4px;font:600 13px/1 var(--sans)}
+.hdr__cart:hover{background:rgba(91,27,45,.07)}
+.hdr__only-d{display:none}
+@media(min-width:1000px){
+  .hdr__menu{display:none}
+  .nav{display:flex!important;position:static;background:none;border:0;padding:0;box-shadow:none;gap:clamp(14px,2vw,30px)}
+  .nav a{font:600 11.5px/1 var(--sans);letter-spacing:.15em;text-transform:uppercase;border:0;padding:8px 0;position:relative;min-height:44px;white-space:nowrap}
+  .nav a::after{content:"";position:absolute;left:0;right:100%;bottom:10px;height:1px;background:var(--wine);transition:right .6s var(--ease)}
+  .nav a:hover::after{right:0}
+  .hdr__only-d{display:inline-grid}
+}
+
+/* ───────────── hero ───────────── */
+.hero{position:relative;overflow:hidden}
+.hero__media{position:relative;aspect-ratio:5/6;max-height:78vh;width:100%}
+.hero__media img{width:100%;height:100%;object-fit:cover;object-position:68% 50%}
+.hero__media::after{content:"";position:absolute;inset:auto 0 0 0;height:46%;background:linear-gradient(to top,var(--ivory),rgba(248,242,234,0))}
+.hero__copy{position:relative;z-index:2;display:grid;gap:26px;justify-items:start;margin-top:-72px;padding-bottom:56px}
+.hero h1{font:400 clamp(5.2rem,27vw,7.6rem)/.8 var(--serif);letter-spacing:-.035em;color:var(--wine);margin-left:-.04em;padding-bottom:.16em}
+.hero h1 span,.hero h1 em{display:block}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--rose-deep);margin-left:.5em}
+.hero__cta{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center}
+.hero__facts{display:grid;gap:14px;margin-top:10px;font-size:14px;color:var(--ink)}
+.hero__facts li{display:flex;align-items:center;gap:12px}
+.hero__facts b{font-weight:600}
+.hero__card,.seal{display:none}
+.credit{font-size:10.5px;letter-spacing:.06em;color:var(--muted);text-decoration:none}
+.credit:hover{text-decoration:underline}
+.hero__credit{position:absolute;right:12px;top:12px;z-index:3;background:rgba(248,242,234,.78);padding:2px 8px;border-radius:999px;backdrop-filter:blur(4px)}
+@media(min-width:900px){
+  .hero{min-height:min(calc(100svh - 112px),900px);display:grid;align-items:center}
+  .hero__media{position:absolute;inset:0 0 0 36%;width:auto;aspect-ratio:auto;max-height:none}
+  .hero__media::after{inset:0 auto 0 0;width:38%;height:auto;background:linear-gradient(to right,var(--ivory),rgba(248,242,234,0))}
+  .hero__copy{margin-top:0;padding-block:64px;max-width:min(760px,62%)}
+  .hero h1{font-size:clamp(7.5rem,15.4vw,15rem)}
+  .hero__facts{grid-auto-flow:column;gap:30px;margin-top:20px;font-size:13.5px}
+  .hero__card{display:grid;position:absolute;z-index:3;right:max(var(--gut),calc((100vw - 1360px) / 2 + var(--gut)));bottom:84px;width:296px;gap:12px;padding:18px;background:rgba(255,250,244,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.7);box-shadow:0 30px 60px -30px rgba(59,15,29,.5)}
+  .seal{display:block;position:absolute;z-index:3;left:calc(36% + 70px);top:72px;width:140px;height:140px}
+  .hero__credit{right:max(var(--gut),calc((100vw - 1360px) / 2 + var(--gut)));top:18px}
+}
+@media(min-width:900px) and (max-width:1199px){.hero__card{width:250px;bottom:40px}.hero__copy{max-width:min(620px,64%)}}
+.hero .wrap{position:relative;z-index:2}
+.hero__card .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.hero__card h3{font:500 1.5rem/1.1 var(--serif);color:var(--wine)}
+.hero__card p{font-size:13px;color:var(--muted)}
+.seal{border-radius:50%;background:var(--ivory);box-shadow:0 0 0 1px var(--hair)}
+.seal svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 40s linear infinite}
+.seal svg text{font:600 10.4px var(--sans);letter-spacing:.27em;text-transform:uppercase;fill:var(--wine)}
+.seal .core{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.seal .core .kit-ico{position:static;margin:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ───────────── trust strip ───────────── */
+.trust{background:var(--ivory-2);border-block:1px solid var(--hair)}
+.trust ul{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 14px;padding-block:34px}
+.trust li{display:grid;gap:10px;justify-items:center;text-align:center;font-size:13px;color:var(--muted);line-height:1.4}
+.trust b{display:block;font:500 1.2rem/1.15 var(--serif);color:var(--wine)}
+@media(min-width:760px){.trust ul{grid-template-columns:repeat(5,1fr);gap:20px}}
+.trust li:last-child{grid-column:1/-1}
+@media(min-width:760px){.trust li:last-child{grid-column:auto}}
+
+/* ───────────── manifesto ───────────── */
+.manifesto__grid{display:grid;gap:44px;grid-template-columns:minmax(0,1fr)}
+.manifesto__text{font:400 clamp(2rem,4.9vw,4.5rem)/1.08 var(--serif);letter-spacing:-.02em;color:var(--wine);max-width:19em;text-wrap:balance}
+.manifesto__text em{color:var(--rose-deep)}
+.stats{display:grid;gap:26px;margin-top:8px}
+.stat{display:flex;align-items:center;gap:20px;padding-top:22px;border-top:1px solid var(--hair)}
+.stat p{font-size:14.5px;color:var(--muted);max-width:26ch}
+.stat p b{display:block;font:500 1.45rem/1.1 var(--serif);color:var(--wine);margin-bottom:2px}
+.stat .kit-live{color:var(--wine)}
+html[data-level="0"] .stat .kit-live .kit-fb{font-size:3.2rem;line-height:1;color:var(--wine);min-width:96px;text-align:center}
+@media(min-width:900px){.stats{grid-template-columns:repeat(3,1fr);gap:40px}}
+.manifesto__orn{position:absolute;right:var(--gut);top:calc(clamp(72px,10vw,150px) - 30px);color:var(--rose)}
+
+/* ───────────── quiz ───────────── */
+.quiz{background:var(--blush);position:relative}
+.quiz__grid{display:grid;gap:40px;grid-template-columns:minmax(0,1fr)}
+.quiz__card{background:var(--paper);padding:clamp(20px,3.2vw,40px);box-shadow:0 40px 70px -50px rgba(59,15,29,.55);position:relative;min-height:440px}
+.qsteps{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.qsteps li{display:flex;align-items:center;gap:10px;font:600 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.qsteps li::after{content:"";width:clamp(18px,5vw,46px);height:1px;background:var(--hair)}
+.qsteps li:last-child::after{display:none}
+.qsteps li[aria-current=step]{color:var(--wine)}
+.qsteps .t{display:none}
+@media(min-width:520px){.qsteps .t{display:inline}}
+.qsteps .kit-live{flex:none}
+html[data-level="0"] .qsteps .kit-live .kit-fb{font:600 13px var(--sans);width:30px;height:30px;border-radius:50%;border:1px solid var(--hair);display:inline-grid;place-items:center}
+html[data-level="0"] .qsteps li[aria-current=step] .kit-live .kit-fb{background:var(--wine);color:var(--ivory);border-color:var(--wine)}
+.qsteps .kit-live{color:var(--wine)}
+.qq{border:0;padding:0;margin:0;min-width:0}
+.qq legend{font:500 clamp(1.7rem,3.4vw,2.5rem)/1.1 var(--serif);color:var(--wine);margin-bottom:22px;padding:0;text-wrap:balance}
+.opts{display:grid;gap:10px;grid-template-columns:1fr}
+@media(min-width:560px){.opts{grid-template-columns:repeat(2,1fr)}.opts--3{grid-template-columns:1fr}}
+.opt{display:flex;align-items:center;gap:14px;padding:12px 16px 12px 12px;min-height:76px;border:1px solid var(--hair);background:transparent;cursor:pointer;transition:border-color .4s,background .4s,transform .4s var(--ease);position:relative}
+.opt:hover{border-color:var(--wine);transform:translateY(-1px)}
+.opt.is-on{border-color:var(--wine);background:var(--ivory);box-shadow:inset 0 0 0 1px var(--wine)}
+.opt:focus-within{outline:2px solid var(--wine);outline-offset:2px}
+.opt b{display:block;font:600 14.5px/1.3 var(--sans);color:var(--ink)}
+.opt small{display:block;font-size:12.5px;line-height:1.4;color:var(--muted);margin-top:2px}
+.opt .medal{width:56px;height:56px;background:var(--blush)}
+.qnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.qhint{font-size:13px;color:var(--muted)}
+.qres{display:grid;gap:22px}
+.qres h3{font:500 clamp(2.2rem,5vw,3.6rem)/1 var(--serif);color:var(--wine);letter-spacing:-.02em}
+.qres h3 em{color:var(--rose-deep)}
+.qres .why{color:var(--muted);max-width:56ch}
+.rsteps{display:grid;border-top:1px solid var(--hair)}
+.rsteps li{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--hair)}
+.rsteps .thumb{width:56px;height:56px;border-radius:50%;overflow:hidden;background:var(--blush);display:grid;place-items:center;flex:none}
+.rsteps .thumb img{width:100%;height:100%;object-fit:cover}
+.rsteps small{display:block;font:600 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ-deep);margin-bottom:5px}
+.rsteps b{font:500 1.28rem/1.15 var(--serif);color:var(--wine)}
+.rsteps span.p{font-weight:600;font-size:14px}
+.rtotal{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap}
+.rtotal b{font:500 2rem/1 var(--serif);color:var(--wine)}
+.rtotal span{font-size:13px;color:var(--muted)}
+.qres .btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.quiz__photo{position:relative;display:flex;flex-direction:column;min-height:420px;overflow:hidden;background:#e8d6c0;margin:0}
+.quiz__photo img{flex:1 1 0;height:0;min-height:230px;width:100%;object-fit:cover;object-position:95% 50%}
+.quiz__photo blockquote{position:relative;margin:0;padding:24px clamp(22px,3vw,34px) 44px;font:italic 400 clamp(1.55rem,2.3vw,2rem)/1.14 var(--serif);color:var(--wine)}
+.quiz__photo blockquote small{display:block;margin-top:14px;font:600 11px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--champ-deep)}
+.quiz__photo .credit{position:absolute;left:clamp(22px,3vw,34px);bottom:14px;color:var(--ink)}
+@media(min-width:1000px){.quiz__grid{grid-template-columns:7fr 4fr;align-items:stretch;gap:28px}.quiz__photo{min-height:100%}}
+
+/* ───────────── shop ───────────── */
+.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;border-block:1px solid var(--hair);padding:14px 0;margin-bottom:34px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 18px 0 8px;border:1px solid var(--hair);border-radius:999px;background:transparent;font:600 12.5px/1 var(--sans);letter-spacing:.03em;color:var(--ink);transition:background .4s,border-color .4s}
+.chip:hover{border-color:var(--wine)}
+.chip[aria-pressed=true]{background:var(--blush);border-color:var(--wine);color:var(--wine-deep)}
+.chip small{color:var(--muted);font-weight:500}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.field{position:relative;display:flex;align-items:center}
+.field .kit-ico{position:absolute;left:12px;pointer-events:none;color:var(--muted)}
+.field input,.field select,.sel{min-height:44px;border:1px solid var(--hair);background:var(--paper);border-radius:999px;font:500 14px/1 var(--sans);color:var(--ink);padding:0 18px;width:100%}
+.field input{padding-left:42px;min-width:0}
+.sel{width:auto;padding-right:36px;appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--wine) 50%),linear-gradient(135deg,var(--wine) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.field input::placeholder{color:#76615f}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 12px}
+@media(min-width:760px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:64px 28px}.grid>.card:nth-child(3n+2){margin-top:64px}}
+.card{display:flex;flex-direction:column;gap:14px;min-width:0}
+.card__media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--blush)}
+.card__media img{width:100%;height:100%;object-fit:cover;transition:transform 1.8s var(--ease)}
+.card:hover .card__media img{transform:scale(1.045)}
+.card__tag{position:absolute;top:8px;left:8px;z-index:2;line-height:0}
+.card__tag .kit-fb{font:700 10px/1 var(--sans);letter-spacing:.16em;background:var(--wine);color:var(--ivory);padding:7px 10px}
+.card__wish{position:absolute;top:8px;right:8px;z-index:2;width:44px;height:44px;border-radius:50%;background:rgba(255,250,244,.9);border:0;display:grid;place-items:center;color:var(--wine);transition:background .4s,transform .4s var(--ease)}
+.card__wish:hover{transform:scale(1.06)}
+.card__wish[aria-pressed=true]{background:var(--wine);color:var(--ivory)}
+.card__body{display:flex;flex-direction:column;gap:7px;flex:1}
+.card__cat{font:600 10.5px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ-deep)}
+.card__name{font:500 clamp(1.3rem,2.2vw,1.65rem)/1.08 var(--serif);color:var(--wine)}
+.card__sub{font-size:13.5px;line-height:1.5;color:var(--muted)}
+.card__meta{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted)}
+.card__meta b{color:var(--ink);font-weight:600}
+.card__meta .kit-ico{color:var(--champ-deep)}
+.sizes{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.size{min-height:44px;padding:0 13px;border:1px solid var(--hair);background:transparent;border-radius:999px;font:600 12px/1 var(--sans);color:var(--ink);transition:border-color .3s,background .3s}
+.size:hover{border-color:var(--wine)}
+.size[aria-checked=true]{background:var(--blush);border-color:var(--wine);color:var(--wine-deep)}
+.size .sw{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.card__buy{display:grid;gap:10px;margin-top:auto;padding-top:8px}
+.price{font:500 1.7rem/1 var(--serif);color:var(--wine);display:flex;align-items:baseline;gap:8px}
+.price small{font:500 12px var(--sans);color:var(--muted)}
+.ess{margin-top:clamp(56px,8vw,110px)}
+.ess h3{font:500 clamp(1.9rem,3.6vw,2.8rem)/1.05 var(--serif);color:var(--wine);margin-bottom:8px}
+.ess__grid{display:grid;gap:14px;grid-template-columns:1fr;margin-top:26px}
+@media(min-width:620px){.ess__grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.ess__grid{grid-template-columns:repeat(4,1fr)}}
+.ecard{display:flex;flex-direction:column;gap:14px;padding:22px;background:var(--paper);border:1px solid var(--hair)}
+.ecard .medal{align-self:flex-start}
+.ecard .price{font:500 1.7rem/1 var(--serif);color:var(--wine);margin-top:auto;padding-top:6px}
+.ecard .price small{font:500 12px var(--sans);color:var(--muted)}
+.ecard .medal{width:84px;height:84px}
+.ecard h4{font:500 1.45rem/1.1 var(--serif);color:var(--wine)}
+.ecard p{font-size:13.5px;color:var(--muted);line-height:1.5}
+.empty{padding:60px 0;text-align:center;color:var(--muted);display:grid;gap:12px;justify-items:center}
+
+/* ───────────── ingredient spotlight ───────────── */
+.dark{background:var(--wine-deep);color:var(--ivory)}
+.dark .h2{color:var(--ivory)}.dark .h2 em{color:#e6b4ab}
+.dark .eyebrow{color:var(--champ)}
+.dark .lead{color:rgba(248,242,234,.78)}
+.spot__grid{display:grid;gap:56px;grid-template-columns:minmax(0,1fr)}
+.collage{position:relative;padding:0 8% 24% 0}
+.collage .big{aspect-ratio:4/5;overflow:hidden;border-radius:999px 999px 4px 4px}
+.collage img{width:100%;height:100%;object-fit:cover}
+.collage .small{position:absolute;right:0;bottom:0;width:56%;aspect-ratio:3/2;overflow:hidden;border:8px solid var(--wine-deep)}
+.collage figcaption{position:absolute;left:0;bottom:0;max-width:38%;font:italic 400 1.05rem/1.25 var(--serif);color:rgba(248,242,234,.8)}
+.collage .credit{color:rgba(248,242,234,.7)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 26px}
+.tab{display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:4px 20px 4px 4px;border:1px solid rgba(248,242,234,.28);border-radius:999px;background:transparent;color:var(--ivory);font:600 13px/1 var(--sans);letter-spacing:.03em;transition:background .4s,color .4s,border-color .4s}
+.tab:hover{border-color:var(--ivory)}
+.tab[aria-selected=true]{background:var(--ivory);color:var(--wine-deep);border-color:var(--ivory)}
+.tab .medal{width:48px;height:48px;background:var(--blush)}
+.ing{display:grid;gap:26px;min-height:420px}
+.ing h3{font:500 clamp(2.4rem,5vw,4rem)/1 var(--serif);letter-spacing:-.02em}
+.ing h3 em{color:#e6b4ab}
+.ing .about{color:rgba(248,242,234,.84);max-width:54ch;font-size:1.04rem}
+.benefits{display:grid;gap:14px;border-top:1px solid rgba(248,242,234,.2);padding-top:22px}
+.benefits li{display:flex;gap:16px;align-items:center}
+.benefits b{display:block;font:500 1.3rem/1.15 var(--serif)}
+.benefits span.d{font-size:13.5px;color:rgba(248,242,234,.72);line-height:1.5;display:block}
+.ing__meta{display:flex;flex-wrap:wrap;gap:20px 36px;align-items:center}
+.ring-box{display:flex;gap:16px;align-items:center}
+.ring-box .medal{width:92px;height:92px;background:var(--ivory)}
+.ring-box small{font-size:12.5px;color:rgba(248,242,234,.78);max-width:22ch;display:block;line-height:1.4}
+html[data-level="0"] .ring-box .kit-live .kit-fb{font:500 1.9rem/1 var(--serif);color:var(--wine)}
+.found{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.found small{font:600 10.5px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ);width:100%}
+.found a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border:1px solid rgba(248,242,234,.3);border-radius:999px;font-size:13px;text-decoration:none;color:var(--ivory)}
+.found a:hover{background:var(--ivory);color:var(--wine-deep)}
+@media(min-width:960px){.spot__grid{grid-template-columns:5fr 7fr;align-items:start;gap:clamp(56px,7vw,110px)}.collage{position:sticky;top:110px}}
+
+/* ───────────── routine builder ───────────── */
+.rb{background:var(--ivory-2)}
+.rb__grid{display:grid;gap:44px;grid-template-columns:minmax(0,1fr)}
+.rb__media{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:999px 999px 4px 4px;background:var(--blush);max-width:520px;width:100%}
+.rb__media img{width:100%;height:100%;object-fit:cover;object-position:45% 40%}
+.rb__chip{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:14px;align-items:center;background:rgba(255,250,244,.92);backdrop-filter:blur(12px);padding:10px 20px 10px 12px;border-radius:999px;box-shadow:0 20px 40px -20px rgba(59,15,29,.5);white-space:nowrap;font-size:13px;color:var(--muted)}
+.rb__chip b{display:block;color:var(--wine);font:500 1.15rem/1.1 var(--serif)}
+.rb__credit{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(248,242,234,.8);padding:2px 8px;border-radius:999px}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--hair);border-radius:999px;background:var(--paper);margin-block:6px 22px}
+.seg button{min-height:48px;padding:0 24px 0 12px;border:0;border-radius:999px;background:transparent;display:inline-flex;align-items:center;gap:10px;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);transition:background .4s,color .4s}
+.seg button[aria-pressed=true]{background:var(--blush);color:var(--wine-deep);box-shadow:inset 0 0 0 1px var(--wine)}
+.rsteps2{display:grid;border-top:1px solid var(--hair)}
+.rstep{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:center;transition:opacity .5s}
+.rstep.off{opacity:.45}
+.rstep__n{width:44px;display:grid;place-items:center;color:var(--wine)}
+html[data-level="0"] .rstep__n .kit-fb{font:600 15px var(--sans);width:34px;height:34px;border-radius:50%;border:1px solid var(--wine);display:inline-grid!important;place-items:center}
+.rstep__main{display:grid;gap:8px;min-width:0}
+.rstep__top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rstep__top .medal{width:56px;height:56px;background:var(--paper)}
+.rstep__side{display:flex;align-items:center;justify-content:space-between;gap:14px;grid-column:2}
+@media(min-width:620px){.rstep__side{grid-column:auto;flex-direction:column;align-items:flex-end;gap:2px}}
+.rstep h4{font:500 1.4rem/1.1 var(--serif);color:var(--wine)}
+.rstep h4 small{display:block;font:600 10.5px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ-deep);margin-bottom:3px}
+.rstep__pick{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rstep__pick .t{font:600 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ-deep)}
+.rstep__pick .sel{min-height:44px;max-width:100%;font-size:13.5px;border-radius:2px;background-color:var(--paper)}
+.rstep .pr{font-weight:600;font-size:14px;white-space:nowrap}
+.tog{display:inline-flex;align-items:center;gap:9px;min-height:44px;font-size:13px;color:var(--muted);cursor:pointer;margin-left:auto}
+.tog input{appearance:none;-webkit-appearance:none;width:42px;height:24px;border-radius:999px;background:#cdbab3;position:relative;transition:background .4s;cursor:pointer;margin:0;flex:none}
+.tog input::after{content:"";position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:transform .4s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,.25)}
+.tog input:checked{background:var(--wine)}
+.tog input:checked::after{transform:translateX(18px)}
+.tog input:focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+.rb__sum{display:grid;gap:16px;padding:24px;background:var(--paper);margin-top:26px;box-shadow:0 30px 50px -40px rgba(59,15,29,.5)}
+.rb__sum .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;flex-wrap:wrap}
+.rb__sum .row b{font:500 2.1rem/1 var(--serif);color:var(--wine)}
+.rb__sum .row span{font-size:13px;color:var(--muted)}
+.rb__tip{display:flex;gap:14px;align-items:center;font-size:13.5px;color:var(--muted)}
+.rb__tip .kit-live{flex:none;color:var(--wine)}
+html[data-level="0"] .rb__tip .kit-live .kit-fb{font:700 12px/1 var(--sans);letter-spacing:.08em;border:1px solid var(--hair);border-radius:999px;padding:9px 12px;white-space:nowrap}
+html[data-level="0"] .rb__chip .kit-live .kit-fb{font-size:2rem}
+@media(min-width:960px){.rb__grid{grid-template-columns:5fr 7fr;gap:clamp(48px,7vw,110px);align-items:start}.rb__media{position:sticky;top:110px}}
+@media(min-width:620px){.rstep{grid-template-columns:auto 1fr auto}}
+
+/* ───────────── refill ───────────── */
+.refill__grid{display:grid;gap:48px;grid-template-columns:minmax(0,1fr)}
+.refill__photo{position:relative;aspect-ratio:1/1.04;overflow:hidden;background:var(--blush);margin:0}
+.refill__photo img{width:100%;height:100%;object-fit:cover;object-position:72% 55%}
+.refill__photo .badge{position:absolute;left:18px;top:18px;display:flex;align-items:center;gap:12px;background:rgba(255,250,244,.92);padding:8px 18px 8px 8px;font-size:13px;color:var(--muted)}
+.refill__photo .badge b{display:block;font:500 1.2rem/1.1 var(--serif);color:var(--wine)}
+.refill__photo .credit{position:absolute;right:12px;bottom:10px;background:rgba(248,242,234,.8);padding:2px 8px;border-radius:999px}
+.how{display:grid;gap:0;margin:8px 0 8px;border-top:1px solid var(--hair)}
+.how li{display:grid;grid-template-columns:auto auto 1fr;gap:16px;align-items:center;padding:16px 0;border-bottom:1px solid var(--hair)}
+.how b{display:block;font:500 1.35rem/1.15 var(--serif);color:var(--wine)}
+.how span.d{font-size:13.5px;color:var(--muted);display:block;line-height:1.5}
+.how .kit-live{color:var(--wine)}
+html[data-level="0"] .how .kit-live .kit-fb{font:600 15px var(--sans);width:34px;height:34px;border-radius:50%;border:1px solid var(--wine);display:inline-grid;place-items:center}
+.plan{display:grid;gap:18px;padding:clamp(20px,3vw,32px);border:1px solid var(--wine);background:var(--paper)}
+.plan__row{display:grid;gap:8px}
+.plan label.t,.plan .t{font:600 10.5px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ-deep)}
+.plan .sel{width:100%;border-radius:2px}
+.plan .sizes{margin-top:0}
+.plan__out{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--hair)}
+.plan__out p{font-size:14px;color:var(--muted);flex:1 1 200px}
+.plan__out p b{color:var(--wine);font-weight:600}
+  .plan__out .kit-live{color:var(--wine)}
+.plan__save{display:flex;gap:16px;align-items:center}
+html[data-level="0"] .plan__out .kit-live .kit-fb{font:500 1.35rem/1.1 var(--serif);border:1px solid var(--wine);padding:10px 14px;min-width:84px;text-align:center}
+html[data-level="0"] .refill__photo .badge .kit-live .kit-fb{font:700 12px/1 var(--sans);letter-spacing:.06em;background:var(--wine);color:var(--ivory);padding:8px 11px;border-radius:999px}
+.plan__save b{font:500 2rem/1 var(--serif);color:var(--wine)}
+@media(min-width:1000px){.refill__grid{grid-template-columns:6fr 6fr;gap:clamp(48px,6vw,96px);align-items:start}.refill__photo{position:sticky;top:110px}}
+
+/* ───────────── reviews ───────────── */
+.reviews{background:var(--paper);border-block:1px solid var(--hair)}
+.rv__grid{display:grid;gap:44px;grid-template-columns:minmax(0,1fr)}
+.sum{display:grid;gap:20px;align-content:start}
+.sum__top{display:flex;gap:18px;align-items:center}
+.sum__top b{font:500 4.6rem/.9 var(--serif);color:var(--wine);letter-spacing:-.03em}
+.sum__top .kit-live{color:var(--wine)}
+html[data-level="0"] .sum__top .kit-live .kit-fb{font:500 1.5rem/1 var(--serif);color:var(--champ-deep);letter-spacing:.1em}
+.sum p.s{font-size:14px;color:var(--muted)}
+.dist{display:grid;gap:8px}
+.dist li{display:grid;grid-template-columns:34px 1fr 38px;gap:10px;align-items:center;font-size:12.5px;color:var(--muted)}
+.dist .bar{height:5px;background:var(--blush);border-radius:5px;overflow:hidden}
+.dist .bar i{display:block;height:100%;background:var(--wine);width:0;transition:width 1.4s var(--ease)}
+.rv__chips{display:flex;flex-wrap:wrap;gap:8px}
+.rcards{display:grid;gap:18px}
+.rcard{display:grid;gap:12px;padding:24px;background:var(--ivory);border:1px solid var(--hair);align-content:start}
+.rcard__top{display:flex;gap:14px;align-items:center}
+.rcard__top .who{flex:1;min-width:0;font-size:13px;color:var(--muted);line-height:1.35}
+.rcard__top .who b{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:14.5px;font-weight:600}
+.rcard__top .who b .kit-ico{color:var(--champ-deep)}
+.rcard .stars{color:var(--wine);margin:-4px -2px -4px 0;flex:none}
+html[data-level="0"] .rcard__top>.kit-live:first-child .kit-fb{width:48px;height:48px;border-radius:50%;background:var(--blush);display:inline-grid;place-items:center;font:600 14px var(--sans);color:var(--wine)}
+html[data-level="0"] .rcard .stars .kit-fb{font:600 15px var(--sans);color:var(--champ-deep);letter-spacing:.06em}
+.rcard h4{font:500 1.5rem/1.12 var(--serif);color:var(--wine)}
+.rcard p.txt{font-size:14.5px;color:var(--ink);line-height:1.65}
+.rcard__foot{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);flex-wrap:wrap;margin-top:4px}
+.rcard__foot a{color:var(--wine);font-weight:600;text-underline-offset:3px}
+.helpful{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--hair);border-radius:999px;background:transparent;font-size:12.5px;font-weight:600;color:var(--ink)}
+.helpful[aria-pressed=true]{background:var(--blush);border-color:var(--wine);color:var(--wine-deep)}
+@media(min-width:760px){.rcards{grid-template-columns:repeat(2,1fr);gap:20px}}
+@media(min-width:1100px){.rv__grid{grid-template-columns:4fr 8fr;gap:clamp(40px,5vw,84px);align-items:start}.sum{position:sticky;top:110px}}
+
+/* ───────────── newsletter ───────────── */
+.news{background:var(--blush);text-align:center;position:relative;overflow:hidden}
+.news .wrap{display:grid;gap:22px;justify-items:center}
+.news h2{max-width:11em}
+.news form{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;width:min(560px,100%)}
+.news .field{flex:1 1 280px}
+.news .field input{background:var(--paper);border-radius:999px;min-height:52px}
+.news .msg{font-size:14px;min-height:22px}
+.news .msg.err{color:#8e1f3a;font-weight:600}
+.news .ok{display:grid;gap:14px;justify-items:center;padding:28px;background:var(--paper);width:min(560px,100%)}
+.news .ok b{font:500 2rem/1 var(--serif);color:var(--wine)}
+.code{display:inline-flex;align-items:center;gap:12px;padding:6px 8px 6px 18px;border:1px dashed var(--wine);font:700 14px/1 var(--sans);letter-spacing:.2em;color:var(--wine)}
+.news .fine{font-size:12px;color:var(--muted);max-width:50ch}
+.news__orn{position:absolute;opacity:.9;pointer-events:none;display:none}
+@media(min-width:900px){.news__orn{display:block}}
+.news__orn--l{left:4%;top:18%}.news__orn--r{right:4%;bottom:14%}
+
+/* ───────────── credits + footer ───────────── */
+#credits{background:var(--ivory);padding:56px 0 8px}
+#credits h2{font:500 1.9rem/1.1 var(--serif);color:var(--wine);margin-bottom:12px}
+#credits ul{font-size:12.5px;color:var(--muted);columns:1;column-gap:48px}
+@media(min-width:900px){#credits ul{columns:2}}
+#credits li{break-inside:avoid;padding:3px 0}
+#credits a{color:var(--wine)}
+#credits p{font-size:12.5px;color:var(--muted);margin-top:14px}
+.foot{background:var(--wine-deep);color:rgba(248,242,234,.82);padding:72px 0 96px;font-size:14px}
+.foot a{text-decoration:none;color:inherit}
+.foot a:hover{color:#fff;text-decoration:underline}
+.foot__grid{display:grid;gap:40px;grid-template-columns:1fr}
+.foot h3{font:600 11px/1.2 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--champ);margin-bottom:16px}
+.foot ul{display:grid;gap:2px}
+.foot li a{display:inline-flex;min-height:36px;align-items:center}
+.foot .logo{color:var(--ivory);text-align:left;justify-items:start;margin-bottom:18px}
+.foot .logo b,.foot .logo small{margin-right:0}
+.foot .logo small{color:var(--champ)}
+.foot address{font-style:normal;display:grid;gap:10px}
+.foot address p{display:flex;gap:12px;align-items:flex-start;line-height:1.5}
+.foot address .kit-ico{color:var(--champ);margin-top:2px}
+.certs{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(248,242,234,.18)}
+.certs li{display:flex;gap:10px;align-items:center;font-size:12.5px;line-height:1.35}
+.certs .kit-ico{color:var(--champ)}
+.certs small{display:block;color:rgba(248,242,234,.6);font-size:11px}
+.foot__bar{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center;margin-top:32px;padding-top:24px;border-top:1px solid rgba(248,242,234,.18);font-size:12.5px;color:rgba(248,242,234,.65)}
+.pay{display:flex;gap:14px;align-items:center;color:var(--champ)}
+@media(min-width:760px){.foot__grid{grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px}.certs{grid-template-columns:repeat(4,1fr)}}
+
+/* ───────────── cart drawer ───────────── */
+.scrim{position:fixed;inset:0;background:rgba(36,9,18,.5);opacity:0;pointer-events:none;transition:opacity .6s var(--ease);z-index:90}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;height:100dvh;width:min(480px,100%);background:var(--ivory);z-index:91;display:flex;flex-direction:column;transform:translateX(102%);transition:transform .7s var(--ease),visibility 0s .7s;box-shadow:-30px 0 60px -30px rgba(36,9,18,.5);visibility:hidden}
+.drawer.on{transform:none;visibility:visible;transition:transform .7s var(--ease),visibility 0s}
+.drawer__head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px 10px 24px;border-bottom:1px solid var(--hair)}
+.drawer__head h2{font:500 2rem/1 var(--serif);color:var(--wine)}
+.drawer__head h2 small{font:500 14px var(--sans);color:var(--muted);margin-left:8px}
+.goal{padding:14px 24px 16px;background:var(--ivory-2);border-bottom:1px solid var(--hair);display:grid;gap:12px}
+.goal p{font-size:13.5px;line-height:1.45;color:var(--ink)}
+.goal p b{color:var(--wine)}
+.goal__bar{position:relative;height:6px;background:rgba(91,27,45,.14);border-radius:6px;margin:6px 18px 26px 0}
+.goal__bar i{position:absolute;left:0;top:0;bottom:0;border-radius:6px;background:linear-gradient(90deg,var(--rose),var(--wine));width:0;transition:width .9s var(--ease)}
+.goal__tick{position:absolute;top:50%;transform:translate(-50%,-50%);display:grid;justify-items:center;gap:4px}
+.goal__tick .dot{width:30px;height:30px;border-radius:50%;background:var(--paper);display:grid;place-items:center;box-shadow:0 0 0 1px var(--hair);color:var(--muted);transition:background .5s,color .5s}
+.goal__tick.on .dot{background:var(--wine);color:var(--ivory)}
+.goal__tick span.l{position:absolute;top:34px;white-space:nowrap;font:600 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.goal__tick.on span.l{color:var(--wine)}
+.drawer__body{flex:1;overflow:auto;padding:6px 24px;overscroll-behavior:contain}
+.crow{display:grid;grid-template-columns:72px 1fr auto;gap:14px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:start}
+.crow .thumb{width:72px;height:88px;background:var(--blush);display:grid;place-items:center;overflow:hidden}
+.crow .thumb img{width:100%;height:100%;object-fit:cover}
+.crow h3{font:500 1.2rem/1.15 var(--serif);color:var(--wine)}
+.crow small{display:block;font-size:12.5px;color:var(--muted);margin-top:3px}
+.crow .pr{font-weight:600;font-size:14px;text-align:right}
+.crow .end{display:grid;justify-items:end;gap:2px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--hair);border-radius:999px;margin-top:10px}
+.qty button{width:44px;height:44px;border:0;background:transparent;border-radius:50%;display:grid;place-items:center;color:var(--wine)}
+.qty button:hover{background:rgba(91,27,45,.07)}
+.qty output{min-width:22px;text-align:center;font-weight:600;font-size:14px}
+.crow .rm{margin-top:4px;width:44px;height:44px;border:0;background:transparent;border-radius:50%;display:grid;place-items:center;color:var(--muted);justify-self:end}
+.crow .rm:hover{color:var(--wine);background:rgba(91,27,45,.07)}
+.crow--free .thumb{background:var(--paper);box-shadow:inset 0 0 0 1px var(--hair)}
+.crow--free .pr{color:var(--champ-deep)}
+.cempty{display:grid;gap:14px;justify-items:center;text-align:center;padding:48px 10px;color:var(--muted)}
+.cempty h3{font:500 1.9rem/1.1 var(--serif);color:var(--wine)}
+.pick{margin:16px 0;padding:16px;border:1px dashed var(--wine);display:grid;gap:10px;background:var(--paper)}
+.pick legend,.pick .t{font:600 10.5px/1.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ-deep);padding:0 4px}
+.pick label{display:flex;align-items:center;gap:12px;min-height:44px;font-size:13.5px;cursor:pointer}
+.pick input{accent-color:var(--wine);width:18px;height:18px}
+.drawer__foot{padding:14px 24px 74px;border-top:1px solid var(--hair);background:var(--paper);display:grid;gap:8px}
+.promo{display:flex;gap:8px}
+.promo input{flex:1;min-width:0;min-height:44px;border:1px solid var(--hair);padding:0 14px;font:500 14px var(--sans);background:var(--ivory);border-radius:2px;text-transform:uppercase;letter-spacing:.08em}
+.promo input::placeholder{text-transform:none;letter-spacing:0}
+.pmsg{font-size:12.5px;color:var(--muted)}
+.pmsg:empty{display:none}
+.pmsg.err{color:#8e1f3a;font-weight:600}.pmsg.ok{color:#2f6b43;font-weight:600}
+.sumrow{display:flex;justify-content:space-between;font-size:14px;color:var(--muted)}
+.sumrow.tot{font:500 1.8rem/1 var(--serif);color:var(--wine);padding-top:4px}
+.sumrow.tot span:first-child{font:600 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;align-self:center}
+.done{padding:48px 24px;display:grid;gap:16px;justify-items:center;text-align:center;flex:1;align-content:center}
+.done h3{font:500 2.4rem/1.05 var(--serif);color:var(--wine)}
+.done p{color:var(--muted);max-width:34ch}
+.done .kit-live{color:var(--wine)}
+html[data-level="0"] .done .kit-live .kit-fb{font:500 3rem/1 var(--serif);color:var(--wine)}
+.toast{position:fixed;left:16px;bottom:16px;z-index:95;max-width:min(380px,calc(100vw - 32px));background:var(--wine-deep);color:var(--ivory);padding:14px 18px 14px 16px;display:flex;gap:12px;align-items:center;font-size:13.5px;line-height:1.4;box-shadow:0 24px 50px -20px rgba(36,9,18,.6);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.toast.on{opacity:1;transform:none}
+.toast .kit-ico{color:var(--champ)}
+body.lock{overflow:hidden}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.hero__copy>*{animation:rise 1.5s var(--ease) both}
+.hero__copy>*:nth-child(2){animation-delay:.12s}.hero__copy>*:nth-child(3){animation-delay:.26s}.hero__copy>*:nth-child(4){animation-delay:.4s}.hero__copy>*:nth-child(5){animation-delay:.52s}
+.ing.swap{animation:rise .9s var(--ease)}
+@media (prefers-reduced-motion:reduce){.hero__copy>*,.ing.swap{animation:none}}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Maison Rose is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<a class="sr" href="#main">Skip to content</a>
+
+<div class="annc" role="region" aria-label="Offers">
+  <div class="annc__in">
+    <p class="annc__l"><span data-ico="gift" data-size="16" data-fixed-style="line">🎁</span> A complimentary sample with every order</p>
+    <p class="annc__c" id="annc-msg" aria-live="polite"><span id="annc-t">Free shipping over $75 &middot; <b>$75.00</b> to go</span> <span class="annc__bar" aria-hidden="true"><i id="annc-fill"></i></span></p>
+    <p class="annc__r"><span data-ico="refresh" data-size="16" data-fixed-style="line">↻</span> 30-day returns, even when opened</p>
+  </div>
+</div>
+
+<header class="hdr" id="top">
+  <div class="hdr__in">
+    <div class="hdr__l">
+      <button class="iconbtn hdr__menu" id="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav"><span data-ico="menu" data-size="24" data-fixed-style="line">☰</span></button>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="#shop">Shop</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#routine">Routine</a>
+        <a href="#ingredients">Ingredients</a>
+        <a href="#refill">Refills</a>
+        <a href="#reviews">Reviews</a>
+      </nav>
+    </div>
+    <a class="logo" href="#top" aria-label="Maison Rose, back to top"><b>Maison Rose</b><small>Botanical skincare</small></a>
+    <div class="hdr__r">
+      <button class="iconbtn hdr__only-d" type="button" data-act="search" aria-label="Search the shop"><span data-ico="search" data-size="24" data-fixed-style="line">🔍</span></button>
+      <button class="iconbtn hdr__only-d" type="button" data-act="account" aria-label="Account"><span data-ico="user" data-size="24" data-fixed-style="line">👤</span></button>
+      <button class="iconbtn hdr__only-d" type="button" id="wish-btn" aria-label="Saved items (0)"><span data-ico="heart" data-size="24" data-fixed-style="line">♡</span></button>
+      <button class="hdr__cart" type="button" id="cart-toggle" aria-label="Open bag (0 items)" aria-haspopup="dialog" aria-controls="drawer"><span data-live="cart-count" data-p-count="0" data-size="38" id="cart-badge" data-label="Bag, 0 items">Bag (0)</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ═════ hero ═════ -->
+<section class="hero" aria-labelledby="hero-h">
+  <div class="hero__media">
+    <img src="_img/maison-rose/4041386-1600.jpg" width="1200" height="800" alt="An amber glass dropper bottle with a black cap stands on a small round wooden plate among pale pink rose petals on a white marble surface." fetchpriority="high" decoding="async">
+    <a class="credit hero__credit" href="https://www.pexels.com/photo/4041386/" target="_blank" rel="noopener">Photo: Karola G / Pexels</a>
+  </div>
+  <div class="wrap">
+    <div class="hero__copy">
+      <p class="eyebrow">Small-batch botanical skincare <span data-ico="sparkles" data-size="22" data-min-level="2" data-motion="loop">✨</span></p>
+      <h1 id="hero-h"><span>Skin,</span><em>slowly.</em></h1>
+      <p class="lead">Quiet formulas, cold-blended by hand in batches of 800 and rested for 21 days before they reach you. Fewer steps, kinder ingredients, a ritual you will actually keep.</p>
+      <div class="hero__cta">
+        <a class="btn" href="#quiz">Find your ritual <span data-ico="arrow-right" data-size="18" data-fixed-style="line">→</span></a>
+        <a class="link" href="#shop">Shop best-sellers</a>
+      </div>
+      <ul class="hero__facts">
+        <li><span data-ico="leaf" data-size="34" data-motion="hover">🌿</span><span><b>98%</b> natural origin</span></li>
+        <li><span data-ico="recycle" data-size="34" data-motion="hover">♻️</span><span><b>Refillable</b> glass, 20% less</span></li>
+        <li><span data-ico="gift" data-size="34" data-motion="hover">🎁</span><span><b>A sample</b> in every order</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 140 140"><defs><path id="sealp" d="M70,70 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><text><textPath href="#sealp">Small batch · Botanical · Refillable ·</textPath></text></svg>
+    <span class="core"><span data-ico="rose" data-size="54" data-sample data-motion="hover">🌹</span></span>
+  </div>
+  <aside class="hero__card" aria-label="Featured product">
+    <p class="card__cat">Best-seller · Facial oil</p>
+    <div class="row"><h3>Rosehip Facial Oil</h3><span class="price" style="font-size:1.4rem">$52</span></div>
+    <p>Cold-pressed rosehip and camellia in amber glass. Four drops over your cream, every night.</p>
+    <button class="btn btn--sm btn--block" type="button" data-quick="oil"><span data-ico="shopping-bag" data-size="18" data-fixed-style="line">🛍️</span> Add 30 ml to bag</button>
+  </aside>
+</section>
+
+<!-- ═════ trust strip ═════ -->
+<section class="trust" aria-label="What goes into every bottle">
+  <div class="wrap">
+    <ul>
+      <li class="rv"><span class="medal medal--md" aria-hidden="true"><span data-ico="rabbit" data-size="40" data-motion="hover">🐰</span></span><span><b>Cruelty-free</b>formulas, always</span></li>
+      <li class="rv" style="--d:.08s"><span class="medal medal--md" aria-hidden="true"><span data-ico="sprout" data-size="40" data-motion="hover">🌱</span></span><span><b>100% vegan</b>no beeswax, no lanolin</span></li>
+      <li class="rv" style="--d:.16s"><span class="medal medal--md" aria-hidden="true"><span data-ico="recycle" data-size="40" data-motion="hover">♻️</span></span><span><b>Refillable</b>amber and frosted glass</span></li>
+      <li class="rv" style="--d:.24s"><span class="medal medal--md" aria-hidden="true"><span data-ico="shield-check" data-size="40" data-motion="hover">🛡️</span></span><span><b>Dermatologist-tested</b>on sensitive skin</span></li>
+      <li class="rv" style="--d:.32s"><span class="medal medal--md" aria-hidden="true"><span data-ico="package" data-size="40" data-motion="hover">📦</span></span><span><b>Plastic-free</b>shipping, every box</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═════ manifesto ═════ -->
+<section class="band manifesto" id="maison" aria-labelledby="maison-h" style="position:relative">
+  <span class="manifesto__orn" data-min-level="2" aria-hidden="true"><span data-ico="flower" data-size="88" data-motion="inview">🌸</span></span>
+  <div class="wrap manifesto__grid">
+    <p class="eyebrow rv">№ 00 &mdash; The maison</p>
+    <h2 class="manifesto__text rv" id="maison-h">We make fewer things, in smaller batches, and we make them <em>slowly</em>. Every formula is cold-blended by hand in a rose-garden atelier in New York&rsquo;s Hudson Valley, then rested for three weeks before it ever meets your skin.</h2>
+    <ul class="stats">
+      <li class="stat rv">
+        <span data-live="progress-ring" data-p-value="98" data-size="96" data-label="98 percent natural-origin ingredients">98%</span>
+        <p><b>Natural-origin</b>ingredients, by weight, across the whole range.</p>
+      </li>
+      <li class="stat rv" style="--d:.12s">
+        <span data-live="timer-ring" data-p-left="21" data-p-total="30" data-size="96" data-label="21 days of resting">21</span>
+        <p><b>Days of resting</b>in cool glass before a batch is filled and signed.</p>
+      </li>
+      <li class="stat rv" style="--d:.24s">
+        <span data-live="ticket-number" data-p-number="800" data-size="96" data-label="800 bottles per batch">800</span>
+        <p><b>Bottles per batch</b>numbered by hand. Yours carries its batch on the base.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═════ quiz ═════ -->
+<section class="band quiz" id="quiz" aria-labelledby="quiz-h">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="eyebrow">№ 01 &mdash; Skin consult &middot; 40 seconds</p>
+      <h2 class="h2" id="quiz-h">What does your skin <em>want</em>?</h2>
+      <p class="lead">Three questions, no email wall. We will suggest a routine built from the range, ready to add to your bag in one tap.</p>
+    </div>
+    <div class="quiz__grid">
+      <div class="quiz__card rv" id="quiz-card">
+        <ol class="qsteps" id="qsteps" aria-label="Quiz progress">
+          <li aria-current="step"><span data-live="step-number" data-p-step="1" data-size="36" data-label="Step 1">1</span><span class="t">Skin type</span></li>
+          <li><span data-live="step-number" data-p-step="2" data-size="36" data-label="Step 2">2</span><span class="t">Main concern</span></li>
+          <li><span data-live="step-number" data-p-step="3" data-size="36" data-label="Step 3">3</span><span class="t">Your time</span></li>
+        </ol>
+        <div id="qbody" aria-live="polite"></div>
+      </div>
+      <figure class="quiz__photo rv" style="--d:.15s">
+        <img src="_img/maison-rose/6801176-1000.jpg" width="1200" height="675" alt="A small white dropper bottle with a black cap sits on a white block with a thin gold tray against a flat warm beige backdrop." loading="lazy" decoding="async">
+        <blockquote>A good routine is the one you will still be doing in March.<small>Imogen Hale, head formulator</small></blockquote>
+        <a class="credit" href="https://www.pexels.com/photo/6801176/" target="_blank" rel="noopener">Photo: Artem Podrez / Pexels</a>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ shop ═════ -->
+<section class="band" id="shop" aria-labelledby="shop-h">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="eyebrow">№ 02 &mdash; The range</p>
+      <h2 class="h2" id="shop-h">The <em>best-sellers</em>, quietly loved</h2>
+      <p class="lead">Nine things we would take to a desert island. Pick a size, add to your bag, and every order arrives with a sample.</p>
+    </div>
+    <div class="controls rv">
+      <div class="chips" role="group" aria-label="Filter products" id="chips">
+        <button class="chip" type="button" data-cat="all" aria-pressed="true"><span data-ico="sparkles" data-size="28">✨</span> All <small data-n="all"></small></button>
+        <button class="chip" type="button" data-cat="skin" aria-pressed="false"><span data-ico="droplet" data-size="28">💧</span> Skincare <small data-n="skin"></small></button>
+        <button class="chip" type="button" data-cat="scent" aria-pressed="false"><span data-ico="flower" data-size="28">🌸</span> Lips &amp; scent <small data-n="scent"></small></button>
+        <button class="chip" type="button" data-cat="home" aria-pressed="false"><span data-ico="bath" data-size="28">🛁</span> Body &amp; home <small data-n="home"></small></button>
+        <button class="chip" type="button" data-cat="sets" aria-pressed="false"><span data-ico="gift" data-size="28">🎁</span> Sets &amp; tools <small data-n="sets"></small></button>
+      </div>
+      <div class="tools">
+        <div class="field"><span data-ico="search" data-size="20" data-fixed-style="line">🔍</span><input id="q" type="search" placeholder="Search the range" aria-label="Search the range" autocomplete="off"></div>
+        <label class="sr" for="sort">Sort products</label>
+        <select class="sel" id="sort"><option value="feat">Featured</option><option value="rate">Top rated</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select>
+      </div>
+    </div>
+    <p class="sr" id="grid-status" role="status"></p>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden><span data-ico="search" data-size="64">🔍</span><p>Nothing in the range matches that yet. Try &ldquo;rose&rdquo; or &ldquo;serum&rdquo;.</p><button class="btn btn--ghost btn--sm" type="button" id="reset">Clear filters</button></div>
+
+    <div class="ess" id="essentials">
+      <div class="sect-head" style="margin-bottom:0">
+        <p class="eyebrow">The daily essentials</p>
+        <h3>Four small things that make the <em class="em">rest</em> work</h3>
+        <p class="lead">The quiet supporting cast of every ritual. They also anchor the routine builder below.</p>
+      </div>
+      <div class="ess__grid" id="ess"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ ingredient spotlight ═════ -->
+<section class="band dark" id="ingredients" aria-labelledby="ing-h">
+  <div class="wrap spot__grid">
+    <figure class="collage rv">
+      <div class="big"><img src="_img/maison-rose/6823263-900.jpg" width="1200" height="1800" alt="From above, a clear glass bottle packed with dried red rosebuds on pale veined marble, with more buds scattered from its neck." style="object-position:50% 55%" loading="lazy" decoding="async"></div>
+      <div class="small"><img src="_img/maison-rose/photo-1538340794916-c941f42976f2-700.jpg" width="1200" height="800" alt="A single coral-pink rose in full bloom on a thin stem against a soft pale grey background." style="object-position:55% 40%" loading="lazy" decoding="async"></div>
+      <figcaption>Rosebuds dried in the atelier loft, Damask petals distilled at dawn.</figcaption>
+    </figure>
+    <div class="spot__txt">
+      <div class="sect-head rv">
+        <p class="eyebrow">№ 03 &mdash; Ingredient spotlight</p>
+        <h2 class="h2" id="ing-h">Six ingredients we would not <em>make without</em></h2>
+        <p class="lead">Every formula is short enough to read. Pick one to see what it does, how much is in the bottle, and where you will find it.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Ingredients" id="tabs"></div>
+      <div class="ing" id="ing" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ routine builder ═════ -->
+<section class="band rb" id="routine" aria-labelledby="rb-h">
+  <div class="wrap rb__grid">
+    <div class="rb__media rv">
+      <img src="_img/maison-rose/4960142-900.jpg" width="1200" height="1800" alt="A woman wrapped in a grey towel with a white towel on her head, seen mostly from behind, touches her face at a bathroom mirror, with dried flowers beside it." loading="lazy" decoding="async">
+      <a class="credit rb__credit" href="https://www.pexels.com/photo/4960142/" target="_blank" rel="noopener">Photo: Karola G / Pexels</a>
+      <div class="rb__chip" aria-live="polite">
+        <span data-live="clock-time" id="rb-clock" data-p-time="07:00" data-size="60" data-label="7:00 am">🕖</span>
+        <span><b id="rb-when-t">Morning</b><span id="rb-when-s">7:00 am &middot; about 3 min</span></span>
+      </div>
+    </div>
+    <div class="rb__ui">
+      <div class="sect-head rv" style="margin-bottom:0">
+        <p class="eyebrow">№ 04 &mdash; Routine builder</p>
+        <h2 class="h2" id="rb-h">Build your <em id="rb-em">morning</em></h2>
+        <p class="lead">Switch steps on or off, swap a product, and add the whole routine to your bag at once.</p>
+      </div>
+      <div class="seg" role="group" aria-label="Time of day">
+        <button type="button" data-t="am" aria-pressed="true"><span data-ico="sun" data-size="30">☀️</span> Morning</button>
+        <button type="button" data-t="pm" aria-pressed="false"><span data-ico="moon" data-size="30">🌙</span> Evening</button>
+      </div>
+      <ol class="rsteps2" id="rb-steps"></ol>
+      <div class="rb__sum">
+        <div class="row">
+          <div><span id="rb-label">Your morning routine</span><br><b id="rb-total">$0</b></div>
+          <span id="rb-meta">5 steps &middot; about 4 minutes</span>
+        </div>
+        <div class="rb__tip">
+          <span data-live="uv-index" id="rb-uv" data-p-index="6" data-size="60" data-label="UV index 6, high">☀️ UV 6</span>
+          <span data-live="weather" id="rb-wx" data-p-condition="night" data-p-temperature="14" data-size="60" data-label="14 degrees tonight" hidden>🌙 14°</span>
+          <p id="rb-tip">UV is high today. Skip nothing, and finish with SPF, even on grey mornings.</p>
+        </div>
+        <button class="btn btn--block" type="button" id="rb-add"><span data-ico="shopping-bag" data-size="18" data-fixed-style="line">🛍️</span> <span id="rb-add-t">Add morning routine to bag</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ refill programme ═════ -->
+<section class="band" id="refill" aria-labelledby="refill-h">
+  <div class="wrap refill__grid">
+    <figure class="refill__photo rv">
+      <img src="_img/maison-rose/35884499-1200.jpg" width="1200" height="800" alt="A spa treatment table covered in white towelling with a rolled white towel and a small wooden tray holding a dark candle and a reed diffuser." loading="lazy" decoding="async">
+      <div class="badge"><span data-live="percent-badge" data-p-value="20" data-p-sign="minus" data-size="60" data-label="20 percent less per refill">-20%</span><span><b>20% less</b>on every refill</span></div>
+      <a class="credit" href="https://www.pexels.com/photo/35884499/" target="_blank" rel="noopener">Photo: Marine Fougère / Pexels</a>
+    </figure>
+    <div class="refill__txt">
+      <div class="sect-head rv" style="margin-bottom:18px">
+        <p class="eyebrow">№ 05 &mdash; The refill programme</p>
+        <h2 class="h2" id="refill-h">Keep the glass. <em>Refill</em> the ritual.</h2>
+        <p class="lead">Our jars and bottles are made to last for years. When one runs out, pour in a refill and send the pouch home.</p>
+      </div>
+      <ol class="how rv">
+        <li><span data-live="step-number" data-p-step="1" data-size="36" data-label="Step 1">1</span><span class="medal medal--md" aria-hidden="true"><span data-ico="package" data-size="38">📦</span></span><span><b>Order a refill pouch</b><span class="d">About 20% less than a new bottle, shipped in a flat, plastic-free mailer.</span></span></li>
+        <li><span data-live="step-number" data-p-step="2" data-size="36" data-label="Step 2">2</span><span class="medal medal--md" aria-hidden="true"><span data-ico="refresh" data-size="38">🔄</span></span><span><b>Pour, twenty seconds</b><span class="d">Tear the corner, fill your glass, wipe the rim. No tools, no mess.</span></span></li>
+        <li><span data-live="step-number" data-p-step="3" data-size="36" data-label="Step 3">3</span><span class="medal medal--md" aria-hidden="true"><span data-ico="recycle" data-size="38">♻️</span></span><span><b>Send the pouch back</b><span class="d">Drop it in the prepaid mailer. We sterilise and reuse it, or recycle it.</span></span></li>
+      </ol>
+      <form class="plan rv" id="plan" novalidate>
+        <div class="plan__row"><label class="t" for="plan-p">Choose your first refill</label>
+          <select class="sel" id="plan-p"></select></div>
+        <div class="plan__row"><span class="t" id="plan-c-l">Deliver every</span>
+          <div class="sizes" role="radiogroup" aria-labelledby="plan-c-l" id="plan-c"></div></div>
+        <div class="plan__out">
+          <span data-live="calendar-date" id="plan-cal" data-p-day="12" data-p-month="JAN" data-size="72" data-label="First refill ships 12 January">Jan 12</span>
+          <p id="plan-txt"></p>
+        </div>
+        <button class="btn btn--block" type="submit"><span data-ico="repeat" data-size="18" data-fixed-style="line">🔁</span> Add refill plan to bag</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ reviews ═════ -->
+<section class="band reviews" id="reviews" aria-labelledby="rv-h">
+  <div class="wrap rv__grid">
+    <div class="sum rv">
+      <p class="eyebrow">№ 06 &mdash; Reviews</p>
+      <h2 class="h2" id="rv-h" style="font-size:clamp(2.6rem,5vw,4.4rem)">Kind <em>words</em></h2>
+      <div class="sum__top"><b>4.8</b><span data-live="rating-stars" data-p-rating="5" data-size="104" data-label="4.8 out of 5">★★★★★</span></div>
+      <p class="s"><strong>1,461 verified reviews</strong> from people who bought and kept using the range.</p>
+      <ul class="dist" aria-label="Rating breakdown">
+        <li><span>5 ★</span><span class="bar"><i data-w="84"></i></span><span>84%</span></li>
+        <li><span>4 ★</span><span class="bar"><i data-w="12"></i></span><span>12%</span></li>
+        <li><span>3 ★</span><span class="bar"><i data-w="3"></i></span><span>3%</span></li>
+        <li><span>2 ★</span><span class="bar"><i data-w="1"></i></span><span>1%</span></li>
+        <li><span>1 ★</span><span class="bar"><i data-w="0"></i></span><span>0%</span></li>
+      </ul>
+      <p class="s"><span data-ico="badge-check" data-size="22" style="vertical-align:-6px;color:var(--champ-deep)">✔️</span> Only customers with a completed order can review. Reviews shown are fictional demo content.</p>
+    </div>
+    <div>
+      <div class="rv__chips rv" role="group" aria-label="Filter reviews by skin type" id="rv-chips" style="margin-bottom:22px">
+        <button class="chip" type="button" data-s="all" aria-pressed="true"><span data-ico="smile" data-size="28">🙂</span> All skin</button>
+        <button class="chip" type="button" data-s="Dry" aria-pressed="false"><span data-ico="wind" data-size="28">🍃</span> Dry</button>
+        <button class="chip" type="button" data-s="Oily" aria-pressed="false"><span data-ico="droplet" data-size="28">💧</span> Oily</button>
+        <button class="chip" type="button" data-s="Combination" aria-pressed="false"><span data-ico="sun-moon" data-size="28">🌓</span> Combination</button>
+        <button class="chip" type="button" data-s="Sensitive" aria-pressed="false"><span data-ico="rose" data-size="28">🌹</span> Sensitive</button>
+      </div>
+      <div class="rcards" id="rcards"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ newsletter ═════ -->
+<section class="band news" id="letters" aria-labelledby="news-h">
+  <span class="news__orn news__orn--l" data-min-level="2" aria-hidden="true"><span data-ico="rose" data-size="96" data-motion="inview">🌹</span></span>
+  <span class="news__orn news__orn--r" data-min-level="2" aria-hidden="true"><span data-ico="flower" data-size="96">🌸</span></span>
+  <div class="wrap">
+    <p class="eyebrow">Slow letters</p>
+    <h2 class="h2" id="news-h">One letter a month. <em>No noise.</em></h2>
+    <p class="lead" style="margin-inline:auto">Seasonal rituals, notes from the garden and first access to each batch. Join, and take 10% off your first order.</p>
+    <form id="news-form" novalidate>
+      <label class="sr" for="news-email">Email address</label>
+      <div class="field"><span data-ico="mail" data-size="20" data-fixed-style="line">✉️</span><input id="news-email" type="email" placeholder="you@example.com" autocomplete="email" required aria-describedby="news-msg"></div>
+      <button class="btn" type="submit"><span data-ico="send" data-size="18" data-fixed-style="line">📨</span> Join the letters</button>
+    </form>
+    <p class="msg" id="news-msg" role="status"></p>
+    <div class="ok" id="news-ok" hidden>
+      <span class="medal medal--md" aria-hidden="true"><span data-ico="badge-check" data-size="40">✔️</span></span>
+      <b>Welcome to the maison.</b>
+      <p>Your first letter lands on the first Sunday of next month. Meanwhile, here is 10% off your first order.</p>
+      <span class="code"><span id="code-t">FIRSTROSE</span><button class="btn btn--sm btn--ghost" type="button" id="code-copy"><span data-ico="copy" data-size="18" data-fixed-style="line">📋</span> Copy</button></span>
+    </div>
+    <p class="fine">We write once a month and never share your address. Unsubscribe in one click. This demo form does not send anything.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ═════ photo credits ═════ -->
+<section id="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <ul>
+      <li>Hero and Rosehip Facial Oil bottle on petals: Photo by <a href="https://www.pexels.com/@karola-g" target="_blank" rel="noopener">Karola G</a> on <a href="https://www.pexels.com/photo/4041386/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Skin quiz backdrop, dropper on beige: Photo by <a href="https://www.pexels.com/@artempodrez" target="_blank" rel="noopener">Artem Podrez</a> on <a href="https://www.pexels.com/photo/6801176/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Plum Night Serum: Photo by <a href="https://www.pexels.com/@polina-kovaleva" target="_blank" rel="noopener">Polina Kovaleva</a> on <a href="https://www.pexels.com/photo/8101534/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Peony Barrier Cream: Photo by <a href="https://www.pexels.com/@karola-g" target="_blank" rel="noopener">Karola G</a> on <a href="https://www.pexels.com/photo/7321497/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Rose Clay Mask: Photo by <a href="https://www.pexels.com/@vie-studio" target="_blank" rel="noopener">Vie Studio</a> on <a href="https://www.pexels.com/photo/6167443/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Rosehip Facial Oil card: Photo by <a href="https://unsplash.com/@elchan?utm_source=withicons_demos&amp;utm_medium=referral" target="_blank" rel="noopener">Denise Chan</a> on <a href="https://unsplash.com/photos/a-bottle-of-essential-oil-sitting-on-a-cloth-JpnqiMBf7zQ?utm_source=withicons_demos&amp;utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></li>
+      <li>Eau de Rose No. 4: Photo by <a href="https://unsplash.com/@siora18?utm_source=withicons_demos&amp;utm_medium=referral" target="_blank" rel="noopener">Siora Photography</a> on <a href="https://unsplash.com/photos/glass-perfume-bottle-LkT5-JCePUY?utm_source=withicons_demos&amp;utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></li>
+      <li>Velvet Lip Colour: Photo by <a href="https://www.pexels.com/@ds-stories" target="_blank" rel="noopener">DS stories</a> on <a href="https://www.pexels.com/photo/7256145/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Evening Bath Salts: Photo by <a href="https://www.pexels.com/@ekaterina-bolovtsova" target="_blank" rel="noopener">Katrin Bolovtsova</a> on <a href="https://www.pexels.com/photo/6766263/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Soft Brush Set: Photo by <a href="https://www.pexels.com/@rdne" target="_blank" rel="noopener">RDNE Stock project</a> on <a href="https://www.pexels.com/photo/8580708/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Starter Trio: Photo by <a href="https://www.pexels.com/@karola-g" target="_blank" rel="noopener">Karola G</a> on <a href="https://www.pexels.com/photo/4735904/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Ingredient spotlight, rosebuds in glass: Photo by <a href="https://www.pexels.com/@shkrabaanthony" target="_blank" rel="noopener">Antoni Shkraba</a> on <a href="https://www.pexels.com/photo/6823263/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Ingredient spotlight, coral rose: Photo by <a href="https://unsplash.com/@pawel_czerwinski?utm_source=withicons_demos&amp;utm_medium=referral" target="_blank" rel="noopener">Pawel Czerwinski</a> on <a href="https://unsplash.com/photos/macro-photography-of-pink-rose-flower-Y-AQQ7xaGnI?utm_source=withicons_demos&amp;utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></li>
+      <li>Routine builder, evening at the mirror: Photo by <a href="https://www.pexels.com/@karola-g" target="_blank" rel="noopener">Karola G</a> on <a href="https://www.pexels.com/photo/4960142/" target="_blank" rel="noopener">Pexels</a></li>
+      <li>Refill programme, treatment table: Photo by <a href="https://www.pexels.com/@marine-fougere-2159237528" target="_blank" rel="noopener">Marine Fougère</a> on <a href="https://www.pexels.com/photo/35884499/" target="_blank" rel="noopener">Pexels</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com" target="_blank" rel="noopener">with icons</a> (withicons.com), MIT. Maison Rose is a fictional demo shop: its people, products, reviews, prices and claims are invented.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__grid">
+      <div>
+        <a class="logo" href="#top" aria-label="Maison Rose, back to top"><b>Maison Rose</b><small>Botanical skincare</small></a>
+        <address>
+          <p><span data-ico="map-pin" data-size="22" data-fixed-style="line">📍</span><span>The atelier, 41 Linden Mill Road<br>Hudson, NY 12534</span></p>
+          <p><span data-ico="phone" data-size="22" data-fixed-style="line">📞</span><a href="tel:+15185550142">(518) 555-0142</a></p>
+          <p><span data-ico="mail" data-size="22" data-fixed-style="line">✉️</span><a href="mailto:hello@maisonrose.example">hello@maisonrose.example</a></p>
+          <p><span data-ico="clock" data-size="22" data-fixed-style="line">🕐</span><span>Atelier shop, Thu to Sun, 11 am to 5 pm</span></p>
+        </address>
+      </div>
+      <nav aria-label="Shop"><h3>Shop</h3><ul><li><a href="#shop">Best-sellers</a></li><li><a href="#essentials">Daily essentials</a></li><li><a href="#routine">Routine builder</a></li><li><a href="#refill">Refill plans</a></li></ul></nav>
+      <nav aria-label="The maison"><h3>The maison</h3><ul><li><a href="#maison">Our story</a></li><li><a href="#ingredients">Ingredients</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#letters">Slow letters</a></li></ul></nav>
+      <nav aria-label="Help"><h3>Help</h3><ul><li><a href="#quiz">Skin consult</a></li><li><a href="mailto:hello@maisonrose.example">Email us</a></li><li><a href="tel:+15185550142">Call the atelier</a></li><li><a href="#top">Back to top</a></li></ul></nav>
+    </div>
+    <ul class="certs" aria-label="Brand claims">
+      <li><span data-ico="rabbit" data-size="30" data-fixed-style="line">🐰</span><span>Cruelty-free<small>demo claim</small></span></li>
+      <li><span data-ico="sprout" data-size="30" data-fixed-style="line">🌱</span><span>100% vegan formulas<small>demo claim</small></span></li>
+      <li><span data-ico="shield-check" data-size="30" data-fixed-style="line">🛡️</span><span>Dermatologist-tested<small>demo claim</small></span></li>
+      <li><span data-ico="truck" data-size="30" data-fixed-style="line">🚚</span><span>Carbon-neutral shipping<small>demo claim</small></span></li>
+    </ul>
+    <div class="foot__bar">
+      <span>&copy; 2026 Maison Rose. Demo page made with with icons. Names, places and products are fictional.</span>
+      <span class="pay" aria-label="Payment methods shown for illustration"><span data-ico="credit-card" data-size="26" data-fixed-style="line">💳</span><span data-ico="wallet" data-size="26" data-fixed-style="line">👛</span><span data-ico="lock" data-size="26" data-fixed-style="line">🔒</span></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═════ bag drawer ═════ -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-h" aria-hidden="true" tabindex="-1">
+  <div class="drawer__head">
+    <h2 id="drawer-h">Your bag <small id="drawer-n">0 items</small></h2>
+    <button class="iconbtn" type="button" id="drawer-x" aria-label="Close bag"><span data-ico="close" data-size="24" data-fixed-style="line">✕</span></button>
+  </div>
+  <div id="cart-main" style="display:flex;flex-direction:column;flex:1;min-height:0">
+    <div class="goal">
+      <p id="goal-msg"></p>
+      <div class="goal__bar" aria-hidden="true">
+        <i id="goal-fill"></i>
+        <span class="goal__tick" id="tick-sample" style="left:66.67%"><span class="dot"><span data-ico="gift" data-size="18" data-fixed-style="line">🎁</span></span><span class="l" style="left:50%;transform:translateX(-50%)">Sample</span></span>
+        <span class="goal__tick" id="tick-ship" style="left:100%"><span class="dot"><span data-ico="truck" data-size="18" data-fixed-style="line">🚚</span></span><span class="l" style="right:-14px">Free shipping</span></span>
+      </div>
+    </div>
+    <div class="drawer__body" id="cart-body"></div>
+    <div class="drawer__foot" id="cart-foot">
+      <form class="promo" id="promo" novalidate><label class="sr" for="promo-i">Promo code</label><input id="promo-i" placeholder="Promo code" autocomplete="off"><button class="btn btn--ghost btn--sm" type="submit">Apply</button></form>
+      <p class="pmsg" id="pmsg" role="status"></p>
+      <div class="sumrow"><span>Subtotal</span><span id="s-sub">$0.00</span></div>
+      <div class="sumrow" id="s-disc-row" hidden><span>Welcome 10% off</span><span id="s-disc">-$0.00</span></div>
+      <div class="sumrow"><span>Shipping</span><span id="s-ship">$6.50</span></div>
+      <div class="sumrow tot"><span>Total</span><span id="s-tot">$0.00</span></div>
+      <button class="btn btn--block" type="button" id="checkout"><span data-ico="lock" data-size="18" data-fixed-style="line">🔒</span> Checkout</button>
+    </div>
+  </div>
+  <div class="done" id="done" hidden>
+    <span data-live="ticket-number" id="order-no" data-p-number="418" data-p-hash="true" data-size="104" data-label="Order number 418">#418</span>
+    <h3>Thank you. Your bag is being packed.</h3>
+    <p>This is a demo checkout, so nothing was charged and nothing will ship. In a real order your sample would be tucked in last.</p>
+    <button class="btn btn--ghost" type="button" id="done-x">Keep browsing</button>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"><span data-ico="check-circle" data-size="22" data-fixed-style="line">✓</span><span id="toast-t"></span></div>
+
+<script src="_kit/demo-kit.js" data-style="luxe" data-recommend="luxe,glass,soft3d,line,duo,chrome,coquette,clay" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var money = function (n) { return '$' + (n % 1 ? n.toFixed(2) : n); };
+  var money2 = function (n) { return '$' + n.toFixed(2); };
+  var PX = function (id, w) { return '_img/maison-rose/' + id + '-' + w + '.jpg'; }; // self-hosted copies (demos/_tools/localize-photos.mjs)
+  var UN = PX;
+  var store = { get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} } };
+  document.documentElement.classList.add('js');
+
+  /* ───────── live-icon helpers (work before and after the kit has booted) ───────── */
+  function setLive(el, params, fb, label) {
+    if (!el) return;
+    Object.keys(params).forEach(function (k) { el.setAttribute('data-p-' + k.replace(/[A-Z]/g, function (c) { return '-' + c.toLowerCase(); }), params[k]); });
+    if (fb != null) { var f = el.querySelector('.kit-fb'); if (f) f.textContent = fb; else el.textContent = fb; }
+    if (label != null) {
+      el.setAttribute('data-label', label);
+      if (el.getAttribute('role') === 'img') el.setAttribute('aria-label', label);
+      var w = el.querySelector('with-live-icon'); if (w) w.setAttribute('label', label);
+    }
+    if (window.WithKit && el._kit) window.WithKit.setLive(el, params);
+  }
+  var slot = function (name, size, emoji, mo) { return `<span data-ico="${name}" data-size="${size}"${mo ? ' data-motion="hover"' : ''}>${emoji}</span>`; };
+  var fbSize = function (root) { $$('[data-ico]', root).forEach(function (el) { if (!el.style.getPropertyValue('--fbs')) el.style.setProperty('--fbs', ((parseFloat(el.getAttribute('data-size')) || 24) * 0.78) + 'px'); }); };
+
+  /* ───────── toast ───────── */
+  var toastT, toastEl = $('#toast'), toastTx = $('#toast-t');
+  function toast(msg) { toastTx.textContent = msg; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 3200); }
+
+  /* ───────── data ───────── */
+  var P = [
+    { id: 'nightserum', name: 'Plum Night Serum', cat: 'skin', kind: 'Treat', type: 'Overnight serum', rate: 4.8, n: 312, tag: 'BEST',
+      sub: 'Peptides, bakuchiol and three weights of hyaluronic acid. Two drops after toner and you wake up looking rested.',
+      img: PX(8101534, 800), pos: '50% 55%', w: 1200, h: 1598, alt: 'A plum-burgundy glass serum bottle with a white dropper laid across its open neck, balanced on a frosted glass jar with a bamboo lid.',
+      sizes: [{ l: '15 ml', p: 64 }, { l: '30 ml', p: 98 }, { l: 'Refill 30 ml', p: 78, refill: 1 }], icon: 'pipette', emoji: '🧪' },
+    { id: 'cream', name: 'Peony Barrier Cream', cat: 'skin', kind: 'Moisturise', type: 'Barrier cream', rate: 4.9, n: 418, tag: 'BEST',
+      sub: 'A cushiony cream with ceramides and squalane that holds moisture for a full day. Fragrance-free.',
+      img: PX(7321497, 800), pos: '45% 62%', w: 1200, h: 1800, alt: 'A hand dips two fingers into an open pink jar of white face cream on a pale surface.',
+      sizes: [{ l: '30 ml', p: 58 }, { l: '50 ml', p: 82 }, { l: 'Refill 50 ml', p: 66, refill: 1 }], icon: 'droplets', emoji: '💦' },
+    { id: 'mask', name: 'Rose Clay Mask', cat: 'skin', kind: 'Treat weekly', type: 'Clay mask', rate: 4.7, n: 167,
+      sub: 'Pink and French green clay with rosewater. Ten minutes, twice a week, and it rinses clean.',
+      img: PX(6167443, 800), pos: '72% 40%', w: 1200, h: 800, alt: 'An open glass jar of grey-brown clay face mask on white marble beside its upturned black lid.',
+      sizes: [{ l: '50 g', p: 42 }, { l: '100 g', p: 68 }], icon: 'sparkles', emoji: '✨' },
+    { id: 'oil', name: 'Rosehip Facial Oil', cat: 'skin', kind: 'Nourish', type: 'Facial oil', rate: 4.8, n: 143, tag: 'NEW',
+      sub: 'Cold-pressed rosehip and camellia in amber glass. Press four drops over your cream at night.',
+      img: UN('photo-1671493235081-5842463637cd', 800), pos: '62% 45%', w: 1200, h: 800, alt: 'A small amber glass bottle with a black cap lies on its side on a textured cream gauze cloth.',
+      sizes: [{ l: '30 ml', p: 52 }, { l: '50 ml', p: 78 }, { l: 'Refill 50 ml', p: 62, refill: 1 }], icon: 'leaf', emoji: '🌿' },
+    { id: 'edp', name: 'Eau de Rose No. 4', cat: 'scent', kind: 'Fragrance', type: 'Eau de parfum', rate: 4.9, n: 96,
+      sub: 'Damask rose, pink pepper and cedar. A soft, powdery rose that sits close to the skin.',
+      img: UN('photo-1543422655-ac1c6ca993ed', 800), pos: '96% 50%', w: 1200, h: 800, alt: 'A faceted glass perfume bottle with a rose-gold cap and blush liquid rests on soft, crumpled pink-white fabric.',
+      sizes: [{ l: '30 ml', p: 96 }, { l: '50 ml', p: 128 }], icon: 'flower', emoji: '🌸' },
+    { id: 'lip', name: 'Velvet Lip Colour', cat: 'scent', kind: 'Colour', type: 'Soft-matte lipstick', rate: 4.6, n: 88,
+      sub: 'A soft-matte colour with a balm centre. Four shades, each named for a path in the atelier garden.',
+      img: PX(7256145, 800), pos: '50% 38%', w: 1200, h: 1800, alt: 'A fan of six lipsticks in black cases, in shades from pale pink and nude to coral and bright red, on a soft pink surface.',
+      sizes: [{ l: 'Nude Petal', p: 34, sw: '#d9a999' }, { l: 'Dusty Rose', p: 34, sw: '#b9626f' }, { l: 'Coral Bloom', p: 34, sw: '#d9684f' }, { l: 'Garnet', p: 34, sw: '#8a1c2f' }], shades: 1, icon: 'heart', emoji: '💄' },
+    { id: 'salts', name: 'Evening Bath Salts', cat: 'home', kind: 'Body & home', type: 'Magnesium bath salts', rate: 4.8, n: 201,
+      sub: 'Magnesium salts with lavender and rose geranium. Lovely beside the amber candle, burned down in its refillable glass.',
+      img: PX(6766263, 800), pos: '36% 50%', w: 1200, h: 1800, alt: 'A lit candle in a glass jar glows beside a kraft-paper box, a bowl of white bath salts and two glass tubes of pink salts on a linen cloth.',
+      sizes: [{ l: '250 g', p: 38 }, { l: '500 g', p: 62 }], icon: 'bath', emoji: '🛁' },
+    { id: 'brushes', name: 'Soft Brush Set', cat: 'sets', kind: 'Tools', type: 'Vegan brushes', rate: 4.7, n: 64, tag: 'NEW',
+      sub: 'Synthetic, cruelty-free bristles in champagne-gold handles. For mask, powder and blush.',
+      img: PX(8580708, 800), pos: '45% 38%', w: 1200, h: 1800, alt: 'A bunch of makeup brushes with gold and white handles stands in a gold wire holder on a bright white vanity.',
+      sizes: [{ l: '3-piece', p: 54 }, { l: '5-piece', p: 78 }], icon: 'paintbrush', emoji: '🖌️' },
+    { id: 'trio', name: 'The Starter Trio', cat: 'sets', kind: 'Set', type: 'Cleanser, cream and balm', rate: 4.9, n: 275, tag: 'BEST',
+      sub: 'Cleansing milk, barrier cream and a petal balm: the three steps most people keep. Save 15%.',
+      img: PX(4735904, 800), pos: '55% 62%', w: 1200, h: 1800, alt: 'A jar of peach-pink face cream with a white lid sits beside a peach tube and a tall cream pump bottle with a gold collar on pale marble.',
+      sizes: [{ l: 'Travel sizes', p: 48 }, { l: 'Full sizes', p: 98 }], icon: 'gift', emoji: '🎁' },
+    /* daily essentials: no photo, an icon tile instead */
+    { id: 'milk', ess: 1, name: 'Soft Rose Cleansing Milk', cat: 'skin', kind: 'Cleanse', type: 'Cleansing milk', rate: 4.8, n: 354,
+      sub: 'Melts the day off without a squeaky finish. Oat, rosewater, no foaming agents.',
+      sizes: [{ l: '150 ml', p: 32 }, { l: '250 ml', p: 48 }], icon: 'droplet', emoji: '💧' },
+    { id: 'toner', ess: 1, name: 'Damask Rosewater Toner', cat: 'skin', kind: 'Tone', type: 'Toner', rate: 4.9, n: 289,
+      sub: 'Our rosewater, hyaluronic acid and nothing that stings. Press in with clean hands.',
+      sizes: [{ l: '100 ml', p: 28 }, { l: '200 ml', p: 44 }, { l: 'Refill 200 ml', p: 34, refill: 1 }], icon: 'rose', emoji: '🌹' },
+    { id: 'dayserum', ess: 1, name: 'Morning Light Serum', cat: 'skin', kind: 'Treat', type: 'Vitamin C serum', rate: 4.7, n: 176,
+      sub: 'A stable vitamin C with rosehip, for a brighter, more even morning face.',
+      sizes: [{ l: '30 ml', p: 62 }], icon: 'sunrise', emoji: '🌅' },
+    { id: 'spf', ess: 1, name: 'Sheer Day Veil SPF 30', cat: 'skin', kind: 'Protect', type: 'Mineral sunscreen', rate: 4.6, n: 131,
+      sub: 'A sheer mineral veil with no white cast. Wear it over cream, every morning.',
+      sizes: [{ l: '50 ml', p: 44 }], icon: 'sun', emoji: '☀️' }
+  ];
+  var PB = {}; P.forEach(function (p) { PB[p.id] = p; });
+  var pick = {}; // chosen size index per product
+  var sizeOf = function (id) { var p = PB[id]; return p.sizes[pick[id] || 0]; };
+  var CATS = { all: 'All', skin: 'Skincare', scent: 'Lips & scent', home: 'Body & home', sets: 'Sets & tools' };
+
+  /* ───────── reveal on scroll ───────── */
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -5% 0px' }) : null;
+  var pending = [];
+  function sweep() { pending = pending.filter(function (el) { if (el.classList.contains('in')) return false; if (el.getBoundingClientRect().top < innerHeight - 24) { el.classList.add('in'); return false; } return true; }); }
+  var sweepT = 0; addEventListener('scroll', function () { if (!sweepT) sweepT = requestAnimationFrame(function () { sweepT = 0; sweep(); }); }, { passive: true });
+  function reveal(root) { $$('.rv:not(.in)', root).forEach(function (el) { pending.push(el); if (io) io.observe(el); else el.classList.add('in'); }); }
+  var dist = $('.dist');
+  if (dist && io) { var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { $$('i[data-w]', dist).forEach(function (i) { i.style.width = i.getAttribute('data-w') + '%'; }); io2.disconnect(); } }); }, { threshold: 0.3 }); io2.observe(dist); }
+  else $$('.dist i[data-w]').forEach(function (i) { i.style.width = i.getAttribute('data-w') + '%'; });
+
+  /* ───────── in-page links: smooth scroll without touching the URL hash (the demo bar keeps its state there) ───────── */
+  var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function scrollToEl(t) { if (t.id === 'top') scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' }); else t.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' }); }
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented) return;
+    var a = e.target.closest('a[href^="#"]'); if (!a || a.hasAttribute('data-find')) return;
+    var id = a.getAttribute('href').slice(1), t = id && document.getElementById(id); if (!t) return;
+    e.preventDefault(); scrollToEl(t);
+  });
+
+  /* ───────── header ───────── */
+  var hdr = $('.hdr'), nav = $('#nav'), mbtn = $('#menu-btn');
+  addEventListener('scroll', function () { hdr.classList.toggle('is-stuck', scrollY > 8); }, { passive: true });
+  function navOpen(o) { nav.classList.toggle('open', o); mbtn.setAttribute('aria-expanded', o); }
+  mbtn.addEventListener('click', function () { navOpen(!nav.classList.contains('open')); });
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) navOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { navOpen(false); mbtn.focus(); } });
+  $('[data-act="search"]').addEventListener('click', function () { scrollToEl($('#shop')); setTimeout(function () { $('#q').focus({ preventScroll: true }); }, 500); });
+  $('[data-act="account"]').addEventListener('click', function () { toast('Accounts are switched off in this demo.'); });
+
+  /* ───────── shop grid ───────── */
+  var state = { cat: 'all', q: '', sort: 'feat' };
+  var wish = {};
+  var perUnit = function (s) { var m = /^(?:Refill )?(\d+)\s*(ml|g)$/.exec(s.l); return m ? '$' + (s.p / +m[1]).toFixed(2) + ' / ' + m[2] : ''; };
+  function sizeBtns(p) {
+    return p.sizes.map(function (s, i) {
+      return '<button class="size" type="button" role="radio" aria-checked="' + (i === (pick[p.id] || 0)) + '" data-i="' + i + '">' + (s.sw ? '<span class="sw" style="background:' + s.sw + '"></span>' : '') + esc(s.l) + '</button>';
+    }).join('');
+  }
+  function cardHTML(p) {
+    var s = sizeOf(p.id);
+    return '<article class="card rv" data-id="' + p.id + '" id="p-' + p.id + '">' +
+      '<div class="card__media"><img src="' + p.img + '" width="' + p.w + '" height="' + p.h + '" alt="' + esc(p.alt) + '" style="object-position:' + p.pos + '" loading="lazy" decoding="async">' +
+      (p.tag ? '<span class="card__tag"><span data-live="ribbon-label" data-p-text="' + p.tag + '" data-size="44" data-label="' + (p.tag === 'BEST' ? 'Best-seller' : 'New') + '">' + p.tag + '</span></span>' : '') +
+      '<button class="card__wish" type="button" aria-pressed="' + !!wish[p.id] + '" aria-label="Save ' + esc(p.name) + '"><span data-ico="heart" data-size="24" data-fixed-style="line">' + (wish[p.id] ? '♥' : '♡') + '</span></button></div>' +
+      '<div class="card__body"><p class="card__cat">' + esc(p.kind) + ' &middot; ' + esc(p.type) + '</p><h3 class="card__name">' + esc(p.name) + '</h3>' +
+      '<p class="card__sub">' + esc(p.sub) + '</p>' +
+      '<p class="card__meta"><span data-ico="star" data-size="16" data-fixed-style="line">★</span><b>' + p.rate.toFixed(1) + '</b> (' + p.n + ' reviews)</p>' +
+      '<div class="sizes" role="radiogroup" aria-label="' + (p.shades ? 'Shade' : 'Size') + ' for ' + esc(p.name) + '">' + sizeBtns(p) + '</div>' +
+      '<div class="card__buy"><p class="price"><span class="pv">' + money(s.p) + '</span><small class="pu">' + perUnit(s) + '</small></p>' +
+      '<button class="btn btn--sm btn--block" type="button" data-add><span data-ico="shopping-bag" data-size="18" data-fixed-style="line">🛍️</span> Add to bag</button></div></div></article>';
+  }
+  function ecardHTML(p) {
+    var s = sizeOf(p.id);
+    return '<article class="ecard rv" data-id="' + p.id + '" id="p-' + p.id + '"><span class="medal medal--lg" aria-hidden="true">' + slot(p.icon, 56, p.emoji, 1) + '</span>' +
+      '<div><p class="card__cat">' + esc(p.kind) + '</p><h4>' + esc(p.name) + '</h4></div><p>' + esc(p.sub) + '</p>' +
+      '<div class="sizes" role="radiogroup" aria-label="Size for ' + esc(p.name) + '">' + sizeBtns(p) + '</div>' +
+      '<p class="price"><span class="pv">' + money(s.p) + '</span><small class="pu">' + perUnit(s) + '</small></p>' +
+      '<button class="btn btn--sm btn--block" type="button" data-add><span data-ico="shopping-bag" data-size="18" data-fixed-style="line">🛍️</span> Add to bag</button></article>';
+  }
+  function visible() {
+    var q = state.q.trim().toLowerCase();
+    var list = P.filter(function (p) { return !p.ess && (state.cat === 'all' || p.cat === state.cat) && (!q || (p.name + ' ' + p.type + ' ' + p.kind + ' ' + p.sub).toLowerCase().indexOf(q) > -1); });
+    if (state.sort === 'rate') list.sort(function (a, b) { return b.rate - a.rate || b.n - a.n; });
+    if (state.sort === 'low') list.sort(function (a, b) { return a.sizes[0].p - b.sizes[0].p; });
+    if (state.sort === 'high') list.sort(function (a, b) { return b.sizes[0].p - a.sizes[0].p; });
+    return list;
+  }
+  function renderGrid() {
+    var list = visible(), g = $('#grid');
+    g.innerHTML = list.map(cardHTML).join('');
+    fbSize(g); reveal(g);
+    $('#empty').hidden = list.length > 0; g.hidden = !list.length;
+    $('#grid-status').textContent = list.length + (list.length === 1 ? ' product' : ' products') + ' shown';
+    $$('#chips .chip').forEach(function (c) { c.setAttribute('aria-pressed', c.getAttribute('data-cat') === state.cat); });
+    $$('[data-n]', $('#chips')).forEach(function (s) { var c = s.getAttribute('data-n'); s.textContent = P.filter(function (p) { return !p.ess && (c === 'all' || p.cat === c); }).length; });
+  }
+  $('#chips').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (!b) return; state.cat = b.getAttribute('data-cat'); renderGrid(); });
+  $('#q').addEventListener('input', function (e) { state.q = e.target.value; renderGrid(); });
+  $('#sort').addEventListener('change', function (e) { state.sort = e.target.value; renderGrid(); });
+  $('#reset').addEventListener('click', function () { state = { cat: 'all', q: '', sort: 'feat' }; $('#q').value = ''; $('#sort').value = 'feat'; renderGrid(); });
+  $('#ess').innerHTML = P.filter(function (p) { return p.ess; }).map(ecardHTML).join('');
+  fbSize($('#ess')); renderGrid();
+
+  /* size pick, add, save, quick-add (one delegated listener) */
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('.size');
+    if (t && t.closest('[data-id]')) {
+      var root = t.closest('[data-id]'), id = root.getAttribute('data-id'), i = +t.getAttribute('data-i');
+      pick[id] = i; $$('.size', root).forEach(function (b) { b.setAttribute('aria-checked', b === t); });
+      var s = sizeOf(id); $('.pv', root).textContent = money(s.p); $('.pu', root).textContent = perUnit(s);
+      return;
+    }
+    var add = e.target.closest('[data-add]');
+    if (add && add.closest('[data-id]')) { var id2 = add.closest('[data-id]').getAttribute('data-id'); addItem(id2, pick[id2] || 0, 1); return; }
+    var w = e.target.closest('.card__wish');
+    if (w) {
+      var id3 = w.closest('[data-id]').getAttribute('data-id'), on = !wish[id3]; wish[id3] = on; if (!on) delete wish[id3];
+      w.setAttribute('aria-pressed', on); w.querySelector('.kit-fb').textContent = on ? '♥' : '♡';
+      var n = Object.keys(wish).length; $('#wish-btn').setAttribute('aria-label', 'Saved items (' + n + ')');
+      toast(on ? 'Saved ' + PB[id3].name + ' to your list.' : 'Removed from your list.'); return;
+    }
+    var q = e.target.closest('[data-quick]');
+    if (q) { var id4 = q.getAttribute('data-quick'); addItem(id4, pick[id4] || 0, 1); return; }
+    var f = e.target.closest('[data-find]');
+    if (f) { e.preventDefault(); gotoProduct(f.getAttribute('data-find')); }
+  });
+  $('#wish-btn').addEventListener('click', function () { var k = Object.keys(wish); toast(k.length ? 'Saved: ' + k.map(function (i) { return PB[i].name; }).join(', ') + '.' : 'Nothing saved yet. Tap a heart on any product.'); });
+  function gotoProduct(id) {
+    var el = $('#p-' + id);
+    if (!el) { state = { cat: 'all', q: '', sort: 'feat' }; $('#q').value = ''; renderGrid(); el = $('#p-' + id); }
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.style.outline = '2px solid var(--wine)'; el.style.outlineOffset = '10px';
+    setTimeout(function () { el.style.outline = ''; el.style.outlineOffset = ''; }, 2200);
+  }
+
+  /* ───────── bag ───────── */
+  var cart = [], promoOn = false, sampleChoice = 0;
+  var SAMPLES = [{ n: 'Rosewater Mist, 10 ml', i: 'droplets', e: '💦' }, { n: 'Plum Night Serum, 5 ml', i: 'pipette', e: '🧪' }, { n: 'Rose Clay Mask, 10 g', i: 'sparkles', e: '✨' }];
+  var FREE_SHIP = 75, SAMPLE_AT = 50, SHIP = 6.5;
+  try { var saved = JSON.parse(store.get('mr-cart') || 'null'); if (saved && Array.isArray(saved.items)) { cart = saved.items.filter(function (l) { return PB[l.id] && PB[l.id].sizes[l.si]; }); promoOn = !!saved.promo; sampleChoice = saved.sample || 0; } } catch (e) {}
+  var drawer = $('#drawer'), scrim = $('#scrim'), lastFocus = null;
+  function addItem(id, si, qty, plan, quiet) {
+    var l = cart.filter(function (c) { return c.id === id && c.si === si && (c.plan || '') === (plan || ''); })[0];
+    if (l) l.qty += qty; else cart.push({ id: id, si: si, qty: qty, plan: plan || '' });
+    syncCart();
+    if (!quiet) { openCart(); }
+  }
+  function totals() {
+    var sub = cart.reduce(function (a, l) { return a + PB[l.id].sizes[l.si].p * l.qty; }, 0);
+    var disc = promoOn ? Math.round(sub * 0.1 * 100) / 100 : 0;
+    var ship = !cart.length ? 0 : (sub >= FREE_SHIP ? 0 : SHIP);
+    return { sub: sub, disc: disc, ship: ship, tot: sub - disc + ship, count: cart.reduce(function (a, l) { return a + l.qty; }, 0) };
+  }
+  function rowHTML(l) {
+    var p = PB[l.id], s = p.sizes[l.si], k = l.id + '|' + l.si + '|' + l.plan;
+    var thumb = p.img ? '<img src="' + p.img.replace(/w=\d+/, 'w=240') + '" width="144" height="176" alt="" loading="lazy" decoding="async" style="object-position:' + p.pos + '">' : slot(p.icon, 40, p.emoji);
+    return '<div class="crow" data-k="' + esc(k) + '"><div class="thumb">' + thumb + '</div><div><h3>' + esc(p.name) + '</h3><small>' + esc(s.l) + (l.plan ? ' &middot; ' + esc(l.plan) : '') + '</small>' +
+      '<div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity of ' + esc(p.name) + '"><span data-ico="minus" data-size="18" data-fixed-style="line">−</span></button><output aria-live="polite">' + l.qty + '</output><button type="button" data-q="1" aria-label="Increase quantity of ' + esc(p.name) + '"><span data-ico="plus" data-size="18" data-fixed-style="line">+</span></button></div></div>' +
+      '<div class="end"><p class="pr">' + money2(s.p * l.qty) + '</p><button class="rm" type="button" data-rm aria-label="Remove ' + esc(p.name) + '"><span data-ico="trash-2" data-size="20" data-fixed-style="line">🗑️</span></button></div></div>';
+  }
+  function syncCart() {
+    var t = totals(), body = $('#cart-body');
+    // header + announcement
+    var badge = $('#cart-badge');
+    setLive(badge, { count: t.count }, 'Bag (' + t.count + ')', 'Bag, ' + t.count + (t.count === 1 ? ' item' : ' items'));
+    $('#cart-toggle').setAttribute('aria-label', 'Open bag (' + t.count + (t.count === 1 ? ' item)' : ' items)'));
+    var left = Math.max(0, FREE_SHIP - t.sub);
+    $('#annc-t').innerHTML = left > 0 ? 'Free shipping over $75 &middot; <b>' + money2(left) + '</b> to go' : '<b>Free shipping unlocked</b> on this order';
+    $('#annc-fill').style.width = Math.min(100, t.sub / FREE_SHIP * 100) + '%';
+    // goal
+    var pct = Math.min(100, t.sub / FREE_SHIP * 100); $('#goal-fill').style.width = pct + '%';
+    $('#tick-sample').classList.toggle('on', t.sub >= SAMPLE_AT); $('#tick-ship').classList.toggle('on', t.sub >= FREE_SHIP);
+    var g;
+    if (!cart.length) g = 'Add <b>$75</b> for free shipping. Every order includes a sample, and <b>$50</b> unlocks a deluxe one.';
+    else if (t.sub < SAMPLE_AT) g = '<b>' + money2(SAMPLE_AT - t.sub) + '</b> more unlocks a deluxe sample, <b>' + money2(left) + '</b> for free shipping.';
+    else if (t.sub < FREE_SHIP) g = 'Deluxe sample unlocked: choose one below. <b>' + money2(left) + '</b> more for free shipping.';
+    else g = 'Free shipping and a deluxe sample are yours.';
+    $('#goal-msg').innerHTML = g;
+    // body
+    $('#drawer-n').textContent = t.count + (t.count === 1 ? ' item' : ' items');
+    if (!cart.length) {
+      body.innerHTML = '<div class="cempty"><span data-ico="package-open" data-size="80">📦</span><h3>Your bag is empty</h3><p>Take the skin quiz, or add something from the best-sellers. A sample is waiting for every order.</p><a class="btn btn--ghost btn--sm" href="#quiz" data-close>Find your ritual</a></div>';
+    } else {
+      var pickBox = '';
+      if (t.sub >= SAMPLE_AT) {
+        pickBox = '<fieldset class="pick"><legend>Choose your deluxe sample</legend>' + SAMPLES.map(function (s, i) { return '<label><input type="radio" name="smp" value="' + i + '"' + (i === sampleChoice ? ' checked' : '') + '>' + slot(s.i, 32, s.e) + ' ' + s.n + '</label>'; }).join('') + '</fieldset>';
+      }
+      var sampleRow = '<div class="crow crow--free"><div class="thumb"><span data-ico="gift" data-size="40">🎁</span></div><div><h3>' + (t.sub >= SAMPLE_AT ? 'Deluxe sample' : 'Complimentary sample') + '</h3><small>' + (t.sub >= SAMPLE_AT ? SAMPLES[sampleChoice].n : 'Rosewater Mist, 2 ml') + '</small></div><div class="end"><p class="pr">Free</p></div></div>';
+      body.innerHTML = cart.map(rowHTML).join('') + pickBox + sampleRow;
+    }
+    fbSize(body);
+    // totals
+    $('#s-sub').textContent = money2(t.sub); $('#s-disc-row').hidden = !promoOn; $('#s-disc').textContent = '-' + money2(t.disc);
+    $('#s-ship').textContent = !cart.length ? '$0.00' : (t.ship ? money2(t.ship) : 'Free'); $('#s-tot').textContent = money2(t.tot);
+    $('#checkout').disabled = !cart.length;
+    store.set('mr-cart', JSON.stringify({ items: cart, promo: promoOn, sample: sampleChoice }));
+  }
+  $('#cart-body').addEventListener('click', function (e) {
+    if (e.target.closest('[data-close]')) { closeCart(); return; }
+    var row = e.target.closest('.crow[data-k]'); if (!row) return;
+    var k = row.getAttribute('data-k').split('|'), l = cart.filter(function (c) { return c.id === k[0] && String(c.si) === k[1] && c.plan === (k[2] || ''); })[0]; if (!l) return;
+    var q = e.target.closest('[data-q]');
+    if (q) { l.qty = Math.max(1, l.qty + +q.getAttribute('data-q')); }
+    else if (e.target.closest('[data-rm]')) { cart.splice(cart.indexOf(l), 1); }
+    else return;
+    syncCart();
+  });
+  $('#cart-body').addEventListener('change', function (e) { if (e.target.name === 'smp') { sampleChoice = +e.target.value; syncCart(); } });
+  $('#promo').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('#promo-i').value.trim().toUpperCase(), m = $('#pmsg');
+    m.className = 'pmsg';
+    if (!v) { m.textContent = 'Enter a code first.'; m.classList.add('err'); return; }
+    if (v === 'FIRSTROSE') { promoOn = true; m.textContent = 'FIRSTROSE applied: 10% off.'; m.classList.add('ok'); syncCart(); }
+    else { promoOn = false; m.textContent = 'We do not recognise that code.'; m.classList.add('err'); syncCart(); }
+  });
+  $('#checkout').addEventListener('click', function () {
+    if (!cart.length) { toast('Your bag is empty.'); return; }
+    var no = 400 + (Date.now() % 500);
+    setLive($('#order-no'), { number: no }, '#' + no, 'Order number ' + no);
+    $('#cart-main').hidden = true; $('#done').hidden = false;
+    cart = []; promoOn = false; syncCart(); $('#drawer-x').focus();
+  });
+  $('#done-x').addEventListener('click', closeCart);
+  function focusables() { return $$('button:not([disabled]),a[href],input:not([disabled]),select,[tabindex]:not([tabindex="-1"])', drawer).filter(function (el) { return el.getClientRects().length; }); }
+  function openCart() {
+    $('#cart-main').hidden = false; $('#done').hidden = true;
+    lastFocus = document.activeElement;
+    drawer.classList.add('on'); scrim.classList.add('on'); drawer.setAttribute('aria-hidden', 'false'); document.body.classList.add('lock');
+    setTimeout(function () { $('#drawer-x').focus(); }, 60);
+  }
+  function closeCart() {
+    drawer.classList.remove('on'); scrim.classList.remove('on'); drawer.setAttribute('aria-hidden', 'true'); document.body.classList.remove('lock');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  $('#cart-toggle').addEventListener('click', openCart);
+  $('#drawer-x').addEventListener('click', closeCart);
+  scrim.addEventListener('click', closeCart);
+  document.addEventListener('keydown', function (e) {
+    if (!drawer.classList.contains('on')) return;
+    if (e.key === 'Escape') { closeCart(); return; }
+    if (e.key === 'Tab') { var f = focusables(); if (!f.length) return; var a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } }
+  });
+
+  /* ───────── skin quiz ───────── */
+  var QZ = [
+    { key: 'type', q: 'How does your skin feel by midday?', opts: [
+      { v: 'dry', t: 'Tight and dry', s: 'Better after moisturiser', i: 'wind', e: '🍃' },
+      { v: 'oily', t: 'Shiny in the T-zone', s: 'Pores, blotting paper', i: 'droplet', e: '💧' },
+      { v: 'combo', t: 'Mostly comfortable', s: 'A little shine, a little dry', i: 'sun-moon', e: '🌓' },
+      { v: 'sens', t: 'Easily flushed or stinging', s: 'New products make it react', i: 'flame', e: '🔥' }] },
+    { key: 'concern', q: 'What would you most like to change?', opts: [
+      { v: 'dull', t: 'Dullness', s: 'Tired, uneven glow', i: 'sparkles', e: '✨' },
+      { v: 'lines', t: 'Fine lines', s: 'Around eyes and forehead', i: 'hourglass', e: '⏳' },
+      { v: 'break', t: 'Breakouts and pores', s: 'Congestion, rough texture', i: 'scan-face', e: '🔎' },
+      { v: 'red', t: 'Redness', s: 'Flushing and patchiness', i: 'rose', e: '🌹' },
+      { v: 'dehyd', t: 'Dehydration', s: 'Looks fine, feels papery', i: 'droplets', e: '💦' }] },
+    { key: 'time', q: 'How much time can you give it?', cls: 'opts--3', opts: [
+      { v: 'three', t: 'Two minutes', s: 'Three steps, morning or night', i: 'timer', e: '⏱️' },
+      { v: 'five', t: 'A proper ritual', s: 'Five steps and a little ceremony', i: 'flower', e: '🌸' },
+      { v: 'pm', t: 'Evenings only', s: 'One calm routine before bed', i: 'moon', e: '🌙' }] }
+  ];
+  var qs = { step: 0, ans: {}, done: false };
+  var stepEls = $$('#qsteps li');
+  function qSteps() {
+    stepEls.forEach(function (li, i) {
+      var done = qs.done || i < qs.step, live = $('[data-live]', li);
+      li.setAttribute('aria-current', !qs.done && i === qs.step ? 'step' : 'false');
+      if (!qs.done && i === qs.step) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+      setLive(live, { done: done }, done ? '✓' : String(i + 1), 'Step ' + (i + 1) + (done ? ' complete' : ''));
+    });
+  }
+  function qRender() {
+    var body = $('#qbody'), Q = QZ[qs.step], cur = qs.ans[Q.key];
+    body.innerHTML = '<form id="qform" novalidate><fieldset class="qq"><legend>' + Q.q + '</legend><div class="opts ' + (Q.cls || '') + '">' +
+      Q.opts.map(function (o) {
+        return '<label class="opt' + (cur === o.v ? ' is-on' : '') + '"><input class="sr" type="radio" name="' + Q.key + '" value="' + o.v + '"' + (cur === o.v ? ' checked' : '') + '><span class="medal">' + slot(o.i, 40, o.e, 1) + '</span><span><b>' + o.t + '</b><small>' + o.s + '</small></span></label>';
+      }).join('') + '</div></fieldset><div class="qnav"><button class="btn btn--ghost btn--sm" type="button" id="qback"' + (qs.step ? '' : ' style="visibility:hidden"') + '><span data-ico="arrow-left" data-size="18" data-fixed-style="line">←</span> Back</button>' +
+      '<span class="qhint">Question ' + (qs.step + 1) + ' of 3</span>' +
+      '<button class="btn btn--sm" type="submit" id="qnext"' + (cur ? '' : ' disabled') + '>' + (qs.step === 2 ? 'See my ritual' : 'Continue') + ' <span data-ico="arrow-right" data-size="18" data-fixed-style="line">→</span></button></div></form>';
+    fbSize(body); qSteps();
+  }
+  $('#qbody').addEventListener('change', function (e) {
+    if (e.target.type !== 'radio') return;
+    qs.ans[e.target.name] = e.target.value;
+    $$('.opt', $('#qbody')).forEach(function (l) { l.classList.toggle('is-on', $('input', l).checked); });
+    $('#qnext').disabled = false;
+  });
+  $('#qbody').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!qs.ans[QZ[qs.step].key]) return;
+    if (qs.step < 2) { qs.step++; qRender(); } else { qs.done = true; qResult(); }
+  });
+  $('#qbody').addEventListener('click', function (e) {
+    if (e.target.closest('#qback')) { qs.step = Math.max(0, qs.step - 1); qRender(); }
+    else if (e.target.closest('#qredo')) { qs = { step: 0, ans: {}, done: false }; qRender(); }
+    else if (e.target.closest('#qadd')) { qs.rec.forEach(function (r) { addItem(r.id, r.si, 1, '', true); }); syncCart(); openCart(); }
+    else if (e.target.closest('#qbuild')) { builderPreset(qs.rec.map(function (r) { return r.id; }), qs.ans.time); scrollToEl($('#routine')); toast('Your quiz picks are loaded in the routine builder.'); }
+  });
+  var HERO = { dull: 'dayserum', lines: 'nightserum', break: 'mask', red: 'toner', dehyd: 'nightserum' };
+  var RNAME = { dull: ['The', 'Glow', 'Ritual'], lines: ['The', 'Midnight', 'Ritual'], break: ['The', 'Clarity', 'Ritual'], red: ['The', 'Calm', 'Ritual'], dehyd: ['The', 'Dew', 'Ritual'] };
+  var WHY = {
+    dull: 'Vitamin C and rosehip lift tired, uneven skin, while a gentle milk and a barrier cream keep the skin calm so the glow lasts.',
+    lines: 'Peptides and bakuchiol work while you sleep to soften the look of fine lines, with a cushioning cream to hold moisture in.',
+    break: 'Rose clay clears congestion without stripping, and a cushioning cream keeps skin comfortable. Use the mask twice a week, not daily.',
+    red: 'Damask rosewater and a ceramide-rich cream calm flushing and rebuild comfort. Nothing here is scented beyond the rose itself.',
+    dehyd: 'Three weights of hyaluronic acid replenish water, and the squalane in the cream keeps it from escaping overnight.'
+  };
+  var ROLE = { milk: 'Cleanse', toner: 'Tone', dayserum: 'Treat', nightserum: 'Treat', mask: 'Treat weekly', oil: 'Nourish', cream: 'Moisturise', spf: 'Protect' };
+  function recommend(a) {
+    var hero = HERO[a.concern], ids;
+    if (a.time === 'pm') { if (hero === 'dayserum') hero = 'nightserum'; ids = ['milk', hero, 'cream']; if (a.type === 'dry' && hero !== 'oil') ids.push('oil'); }
+    else if (a.time === 'three') ids = ['milk', hero, 'cream'];
+    else { if (hero === 'toner') hero = 'oil'; ids = ['milk', 'toner', hero, 'cream', a.type === 'dry' ? 'oil' : 'spf']; }
+    ids = ids.filter(function (v, i) { return ids.indexOf(v) === i; });
+    return ids.map(function (id) { return { id: id, si: 0 }; });
+  }
+  function qResult() {
+    qs.rec = recommend(qs.ans);
+    var a = qs.ans, nm = RNAME[a.concern], tot = qs.rec.reduce(function (s, r) { return s + PB[r.id].sizes[r.si].p; }, 0);
+    var typeW = { dry: 'dry', oily: 'oily', combo: 'combination', sens: 'sensitive' }[a.type], timeW = { three: 'three-step', five: 'five-step', pm: 'evening' }[a.time];
+    $('#qbody').innerHTML = '<div class="qres"><p class="eyebrow">Your ritual</p><h3>' + nm[0] + ' <em>' + nm[1] + '</em> ' + nm[2] + '</h3>' +
+      '<p class="why">Chosen for ' + typeW + ' skin, as a ' + timeW + ' routine. ' + WHY[a.concern] + '</p>' +
+      '<ol class="rsteps">' + qs.rec.map(function (r) {
+        var p = PB[r.id], th = slot(p.icon, 38, p.emoji);
+        return '<li><span class="thumb">' + th + '</span><span><small>' + ROLE[r.id] + '</small><b>' + esc(p.name) + '</b></span><span class="p">' + money(p.sizes[r.si].p) + '</span></li>';
+      }).join('') + '</ol>' +
+      '<div class="rtotal"><b>' + money(tot) + '</b><span>' + qs.rec.length + ' steps, smallest sizes. A sample comes with it.</span></div>' +
+      '<div class="btns"><button class="btn" type="button" id="qadd"><span data-ico="shopping-bag" data-size="18" data-fixed-style="line">🛍️</span> Add routine to bag</button>' +
+      '<button class="btn btn--ghost" type="button" id="qbuild">Tweak in the builder</button><button class="link" type="button" id="qredo" style="background:none;border-left:0;border-right:0;border-top:0">Retake</button></div></div>';
+    fbSize($('#qbody')); qSteps();
+  }
+  qRender();
+
+  /* ───────── ingredient spotlight ───────── */
+  var ING = [
+    { id: 'rose', n: 'Damask rose', em: 'rose', i: 'rose', e: '🌹', pct: 12, pl: 'rosewater in the toner', found: ['toner', 'cream', 'mask', 'edp'],
+      about: 'Distilled at dawn from petals grown in our own garden. The rosewater is the base of the toner and the soul of the range: calming, lightly astringent and softly scented.',
+      b: [['heart', '❤️', 'Calms redness', 'Polyphenols that quiet flushing after sun, wind or a new product.'], ['droplets', '💦', 'Holds moisture', 'Water-binding sugars carried straight to the surface of the skin.'], ['sparkles', '✨', 'Softens dullness', 'A gentle tone that leaves skin rested rather than polished.']] },
+    { id: 'bak', n: 'Bakuchiol', em: 'bakuchiol', i: 'sprout', e: '🌱', pct: 1, pl: 'in the night serum', found: ['nightserum'],
+      about: 'A plant-derived alternative to retinol, pressed from babchi seeds. It supports the look of firmness overnight without the sting, peeling or sun sensitivity.',
+      b: [['hourglass', '⏳', 'Softens fine lines', 'Supports collagen-looking firmness with consistent use.'], ['moon', '🌙', 'Works overnight', 'Stable in a bottle, kind on a pillow, gentle enough for every night.'], ['shield-check', '🛡️', 'Sun-safe', 'Unlike retinol it does not make skin more sensitive to light.']] },
+    { id: 'squ', n: 'Squalane', em: 'squalane', i: 'droplet', e: '💧', pct: 8, pl: 'in the barrier cream', found: ['cream', 'oil'],
+      about: 'Made from olives, it looks and feels like the skin’s own lipids. Weightless, never greasy, and it keeps water in while the rest of the formula works.',
+      b: [['shield-check', '🛡️', 'Supports the barrier', 'Mimics natural lipids so skin feels cushioned, not coated.'], ['wind', '🍃', 'Weightless finish', 'Sinks in within a minute. Sits well under SPF and make-up.'], ['leaf', '🍃', 'Plant-derived', 'Sourced from olives, never from sharks.']] },
+    { id: 'hya', n: 'Hyaluronic acid', em: 'hyaluronic acid', i: 'droplets', e: '💦', pct: 2, pl: 'across three weights', found: ['nightserum', 'toner'],
+      about: 'Three molecular weights in one bottle: small ones that sink in, larger ones that cushion the surface. Skin looks plump and feels drink-of-water comfortable.',
+      b: [['droplets', '💦', 'Replenishes water', 'Holds many times its weight in water, right where skin needs it.'], ['sparkles', '✨', 'Plumps the look', 'Smooths the surface so fine lines look softer within minutes.'], ['check-circle', '✔️', 'Suits everyone', 'Fragrance-free and kind to oily, dry and sensitive skin alike.']] },
+    { id: 'hip', n: 'Rosehip', em: 'rosehip', i: 'leaf', e: '🌿', pct: 15, pl: 'cold-pressed oil', found: ['oil', 'dayserum'],
+      about: 'Cold-pressed from the hips left on our roses after the petals are picked. Rich in fatty acids and natural vitamin A precursors, it softens texture and fades the look of marks.',
+      b: [['sun', '☀️', 'Brightens', 'Supports an even-looking tone and a soft, healthy glow.'], ['heart', '❤️', 'Soothes', 'Essential fatty acids help dry, tight skin feel comfortable again.'], ['recycle', '♻️', 'Zero waste', 'Made from hips that would otherwise be composted.']] },
+    { id: 'clay', n: 'Rose clay', em: 'rose clay', i: 'layers', e: '🧱', pct: 20, pl: 'in the mask', found: ['mask'],
+      about: 'Pink and French green clay, sun-dried and milled finely. It lifts excess oil and congestion, then rinses clean, leaving skin matte but never tight.',
+      b: [['scan-face', '🔎', 'Clears pores', 'Absorbs oil and debris without stripping the skin.'], ['gem', '💎', 'Mineral-rich', 'Naturally rich in silica, iron and magnesium.'], ['timer', '⏱️', 'Ten minutes', 'Twice a week, rinsed before it fully dries.']] }
+  ];
+  var ingI = 0;
+  function renderTabs() {
+    $('#tabs').innerHTML = ING.map(function (g, i) {
+      return '<button class="tab" type="button" role="tab" id="tab-' + g.id + '" aria-selected="' + (i === ingI) + '" aria-controls="ing" tabindex="' + (i === ingI ? 0 : -1) + '" data-i="' + i + '"><span class="medal">' + slot(g.i, 36, g.e, 1) + '</span>' + g.n + '</button>';
+    }).join('');
+    fbSize($('#tabs'));
+  }
+  function renderIng(anim) {
+    var g = ING[ingI], el = $('#ing');
+    el.setAttribute('aria-labelledby', 'tab-' + g.id);
+    el.innerHTML = '<h3>' + g.n.replace(g.n, '<em>' + g.n + '</em>') + '</h3><p class="about">' + g.about + '</p>' +
+      '<ul class="benefits">' + g.b.map(function (b) { return '<li><span class="medal medal--md">' + slot(b[0], 38, b[1]) + '</span><span><b>' + b[2] + '</b><span class="d">' + b[3] + '</span></span></li>'; }).join('') + '</ul>' +
+      '<div class="ing__meta"><div class="ring-box"><span class="medal"><span data-live="progress-ring" data-p-value="' + g.pct + '" data-size="76" data-label="' + g.pct + ' percent ' + g.pl + '">' + g.pct + '%</span></span><small>' + g.pct + '% ' + g.pl + '</small></div>' +
+      '<div class="found"><small>Found in</small>' + g.found.map(function (id) { return '<a href="#p-' + id + '" data-find="' + id + '">' + PB[id].name + '</a>'; }).join('') + '</div></div>';
+    fbSize(el);
+    if (anim) { el.classList.remove('swap'); void el.offsetWidth; el.classList.add('swap'); }
+  }
+  $('#tabs').addEventListener('click', function (e) { var b = e.target.closest('.tab'); if (!b) return; ingI = +b.getAttribute('data-i'); renderTabs(); renderIng(true); });
+  $('#tabs').addEventListener('keydown', function (e) {
+    var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (!d) return;
+    e.preventDefault(); ingI = (ingI + d + ING.length) % ING.length; renderTabs(); renderIng(true); $('#tab-' + ING[ingI].id).focus();
+  });
+  renderTabs(); renderIng(false);
+
+  /* ───────── routine builder ───────── */
+  var RB = {
+    am: [{ r: 'Cleanse', s: 60, i: 'droplet', e: '💧', o: ['milk'] }, { r: 'Tone', s: 20, i: 'flower', e: '🌸', o: ['toner'] }, { r: 'Treat', s: 30, i: 'flask-conical', e: '🧪', o: ['dayserum', 'oil'] }, { r: 'Moisturise', s: 30, i: 'droplets', e: '💦', o: ['cream'] }, { r: 'Protect', s: 30, i: 'sun', e: '☀️', o: ['spf'] }],
+    pm: [{ r: 'Cleanse', s: 60, i: 'droplet', e: '💧', o: ['milk'] }, { r: 'Tone', s: 20, i: 'flower', e: '🌸', o: ['toner'] }, { r: 'Treat', s: 30, i: 'flask-conical', e: '🧪', o: ['nightserum', 'oil'] }, { r: 'Moisturise', s: 30, i: 'droplets', e: '💦', o: ['cream'] }, { r: 'Mask, twice a week', s: 600, i: 'sparkles', e: '✨', o: ['mask'], off: 1 }]
+  };
+  var rb = { t: 'am', on: [], ch: [] };
+  function rbReset(t) { rb.t = t; rb.on = RB[t].map(function (s) { return !s.off; }); rb.ch = RB[t].map(function () { return 0; }); }
+  rbReset('am');
+  function rbRender() {
+    var steps = RB[rb.t], ol = $('#rb-steps');
+    ol.innerHTML = steps.map(function (s, i) {
+      var id = s.o[rb.ch[i]], p = PB[id], sel = s.o.length > 1 ? '<label class="t" for="rbs-' + i + '">Swap</label><select class="sel" id="rbs-' + i + '" data-i="' + i + '">' + s.o.map(function (o, j) { return '<option value="' + j + '"' + (j === rb.ch[i] ? ' selected' : '') + '>' + PB[o].name + '</option>'; }).join('') + '</select>' : '';
+      var mins = s.s >= 120 ? Math.round(s.s / 60) + ' min' : s.s + ' sec';
+      return '<li class="rstep' + (rb.on[i] ? '' : ' off') + '" data-i="' + i + '"><span class="rstep__n"><span data-live="step-number" data-p-step="' + (i + 1) + '" data-size="40" data-label="Step ' + (i + 1) + '">' + (i + 1) + '</span></span>' +
+        '<div class="rstep__main"><div class="rstep__top"><span class="medal">' + slot(s.i, 38, s.e) + '</span><h4><small>' + s.r + ' &middot; ' + mins + '</small>' + esc(p.name) + '</h4></div>' + (sel ? '<div class="rstep__pick">' + sel + '</div>' : '') + '</div>' +
+        '<div class="rstep__side"><span class="pr">' + money(p.sizes[0].p) + '</span><label class="tog"><input type="checkbox" data-i="' + i + '"' + (rb.on[i] ? ' checked' : '') + '> Include</label></div></li>';
+    }).join('');
+    fbSize(ol); rbSum();
+  }
+  function rbSum() {
+    var steps = RB[rb.t], tot = 0, sec = 0, n = 0;
+    steps.forEach(function (s, i) { if (rb.on[i]) { tot += PB[s.o[rb.ch[i]]].sizes[0].p; sec += s.s; n++; } });
+    var mins = Math.max(1, Math.round(sec / 60)), am = rb.t === 'am';
+    $('#rb-total').textContent = money(tot);
+    $('#rb-meta').textContent = n + (n === 1 ? ' step' : ' steps') + ' · about ' + mins + (mins === 1 ? ' minute' : ' minutes');
+    $('#rb-label').textContent = 'Your ' + (am ? 'morning' : 'evening') + ' routine';
+    $('#rb-add').disabled = !n;
+    $('#rb-add-t').textContent = 'Add ' + (am ? 'morning' : 'evening') + ' routine to bag';
+    $('#rb-when-s').textContent = (am ? '7:00 am' : '9:00 pm') + ' · about ' + mins + ' min';
+  }
+  function rbTime() {
+    var am = rb.t === 'am';
+    $$('.seg button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-t') === rb.t); });
+    $('#rb-em').textContent = am ? 'morning' : 'evening'; $('#rb-when-t').textContent = am ? 'Morning' : 'Evening';
+    setLive($('#rb-clock'), { time: am ? '07:00' : '21:00' }, am ? '🕖' : '🕘', am ? '7:00 am' : '9:00 pm');
+    $('#rb-uv').hidden = !am; $('#rb-wx').hidden = am;
+    $('#rb-tip').textContent = am ? 'UV is high today. Skip nothing, and finish with SPF, even on grey mornings.' : 'It is cooler tonight, and skin repairs while you sleep. Treat, seal and let the pillow do the rest.';
+  }
+  $('.seg').addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b || b.getAttribute('data-t') === rb.t) return; rbReset(b.getAttribute('data-t')); rbTime(); rbRender(); });
+  $('#rb-steps').addEventListener('change', function (e) {
+    var i = +e.target.getAttribute('data-i');
+    if (e.target.type === 'checkbox') { rb.on[i] = e.target.checked; $$('.rstep', $('#rb-steps'))[i].classList.toggle('off', !e.target.checked); rbSum(); }
+    else if (e.target.tagName === 'SELECT') { rb.ch[i] = +e.target.value; var f = document.activeElement && document.activeElement.id; rbRender(); var x = f && document.getElementById(f); if (x) x.focus(); }
+  });
+  $('#rb-add').addEventListener('click', function () {
+    var c = 0; RB[rb.t].forEach(function (s, i) { if (rb.on[i]) { addItem(s.o[rb.ch[i]], 0, 1, '', true); c++; } });
+    syncCart(); openCart(); toast(c + (c === 1 ? ' step' : ' steps') + ' added to your bag.');
+  });
+  function builderPreset(ids, time) {
+    var t = (time === 'pm' || ids.indexOf('nightserum') > -1 && ids.indexOf('dayserum') < 0 || ids.indexOf('mask') > -1 && time !== 'five') ? 'pm' : 'am';
+    rbReset(t);
+    RB[t].forEach(function (s, i) { var j = -1; s.o.forEach(function (o, k) { if (ids.indexOf(o) > -1 && j < 0) j = k; }); rb.on[i] = j > -1; if (j > -1) rb.ch[i] = j; });
+    rbTime(); rbRender();
+  }
+  rbTime(); rbRender();
+
+  /* ───────── refill plan ───────── */
+  var REF = ['cream', 'nightserum', 'oil', 'toner'], plan = { id: 'cream', mo: 3 };
+  var MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  function refIdx(id) { var r = -1; PB[id].sizes.forEach(function (s, i) { if (s.refill) r = i; }); return r; }
+  function planRender() {
+    var p = PB[plan.id], ri = refIdx(plan.id), rs = p.sizes[ri], full = p.sizes[ri - 1];
+    $('#plan-c').innerHTML = [2, 3, 4, 6].map(function (m) { return '<button class="size" type="button" role="radio" aria-checked="' + (m === plan.mo) + '" data-m="' + m + '">' + m + ' months</button>'; }).join('');
+    var d = new Date(); d.setDate(d.getDate() + 3); while (d.getDay() !== 2) d.setDate(d.getDate() + 1);
+    var save = full.p - rs.p, yr = Math.round(save * 12 / plan.mo);
+    setLive($('#plan-cal'), { day: d.getDate(), month: MON[d.getMonth()] }, MON[d.getMonth()].charAt(0) + MON[d.getMonth()].slice(1).toLowerCase() + ' ' + d.getDate(), 'First refill ships ' + d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
+    $('#plan-txt').innerHTML = 'First refill ships <b>' + d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) + '</b>, then every <b>' + plan.mo + ' months</b>. ' + money(rs.p) + ' a refill: you save <b>' + money(save) + '</b> each time, about <b>' + money(yr) + '</b> a year. Skip or cancel any time.';
+    plan.when = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+  $('#plan-p').innerHTML = REF.map(function (id) { var rs = PB[id].sizes[refIdx(id)]; return '<option value="' + id + '">' + PB[id].name + ', ' + rs.l.toLowerCase() + ' &middot; ' + money(rs.p) + '</option>'; }).join('');
+  $('#plan-p').addEventListener('change', function (e) { plan.id = e.target.value; planRender(); });
+  $('#plan-c').addEventListener('click', function (e) { var b = e.target.closest('.size'); if (!b) return; plan.mo = +b.getAttribute('data-m'); planRender(); });
+  $('#plan').addEventListener('submit', function (e) { e.preventDefault(); addItem(plan.id, refIdx(plan.id), 1, 'Every ' + plan.mo + ' months, from ' + plan.when); });
+  planRender();
+
+  /* ───────── reviews ───────── */
+  var RV = [
+    { n: 'Amelia R.', in: 'AR', sk: 'Dry', r: 5, p: 'cream', t: 'The first cream that has not pilled under sunscreen', b: 'My cheeks stopped feeling tight by noon within a week. It sinks in fast, there is no scent at all, and the jar is gorgeous enough to leave on the bathroom shelf.', age: '34', h: 41 },
+    { n: 'Priya N.', in: 'PN', sk: 'Combination', r: 5, p: 'nightserum', t: 'Three weeks in, my forehead looks rested', b: 'I use two drops, not the whole dropper. The lines between my brows are softer and I have had no flaking, which is what happened every time I tried retinol.', age: '41', h: 36 },
+    { n: 'Camille D.', in: 'CD', sk: 'Sensitive', r: 4.5, p: 'toner', t: 'Calms my cheeks after the gym', b: 'I keep it in the fridge and press it in with my hands. Nothing stings, the rose is gentle rather than perfumy. Half a star off only because I wish the bottle were bigger.', age: '29', h: 27 },
+    { n: 'Jo W.', in: 'JW', sk: 'Oily', r: 4.5, p: 'mask', t: 'Pores look smaller, skin does not feel stripped', b: 'Twice a week, ten minutes, rinse with a warm cloth. My T-zone stays matte until the afternoon. It does dry fast on a hot day, so I mist it halfway through.', age: '26', h: 19 },
+    { n: 'Hannah B.', in: 'HB', sk: 'Combination', r: 5, p: 'trio', t: 'Bought it as a gift, then bought myself one', b: 'My mum has used the cleansing milk every night since March. The box is beautiful and the travel sizes are exactly right for a weekend away.', age: '38', h: 33 },
+    { n: 'Marcus T.', in: 'MT', sk: 'Dry', r: 5, p: 'oil', t: 'Bought for my partner, ended up stealing it', b: 'Four drops pressed over cream at night and my winter patches have disappeared. It smells faintly of fresh rosehips, nothing more. The amber bottle looks very good next to the basin.', age: '44', h: 22 },
+    { n: 'Sofia L.', in: 'SL', sk: 'Sensitive', r: 4, p: 'edp', t: 'A soft, powdery rose that does not shout', b: 'Sits close to the skin, no headache, lots of compliments. It fades by lunch on me, so I keep the 30 ml in my bag and reapply.', age: '31', h: 14 },
+    { n: 'Ines K.', in: 'IK', sk: 'Oily', r: 5, p: 'cream', t: 'The refill took twenty seconds', b: 'Saved sixteen dollars and nothing went in the bin. The pouch goes back in the prepaid mailer. Easy enough that I set it to repeat every three months.', age: '36', h: 38, refill: 1 }
+  ];
+  var rvF = 'all', liked = {};
+  function rvRender() {
+    var list = RV.filter(function (r) { return rvF === 'all' || r.sk === rvF; }), box = $('#rcards');
+    box.innerHTML = list.map(function (r, i) {
+      var idx = RV.indexOf(r), likes = r.h + (liked[idx] ? 1 : 0);
+      return '<article class="rcard rv" style="--d:' + (i % 2) * 0.1 + 's"><div class="rcard__top"><span data-live="avatar-initials" data-p-initials="' + r.in + '" data-p-shape="circle" data-p-status="none" data-size="52" data-label="' + esc(r.n) + '">' + r.in + '</span>' +
+        '<div class="who"><b>' + esc(r.n) + ' <span data-ico="badge-check" data-size="18" title="Verified buyer">✔️</span></b>' + r.sk + ' skin &middot; ' + r.age + '</div>' +
+        '<span class="stars" data-live="rating-stars" data-p-rating="' + r.r + '" data-size="68" data-label="' + r.r + ' out of 5">' + '★'.repeat(Math.floor(r.r)) + (r.r % 1 ? '½' : '') + ' ' + r.r.toFixed(1) + '</span></div>' +
+        '<h4>' + esc(r.t) + '</h4><p class="txt">' + esc(r.b) + '</p>' +
+        '<div class="rcard__foot"><span>' + (r.refill ? 'Refill pouch, ' : '') + 'on <a href="#p-' + r.p + '" data-find="' + r.p + '">' + esc(PB[r.p].name) + '</a></span>' +
+        '<button class="helpful" type="button" aria-pressed="' + !!liked[idx] + '" data-like="' + idx + '"><span data-ico="thumbs-up" data-size="20" data-fixed-style="line">👍</span> Helpful (' + likes + ')</button></div></article>';
+    }).join('');
+    fbSize(box); reveal(box);
+  }
+  $('#rv-chips').addEventListener('click', function (e) { var b = e.target.closest('.chip'); if (!b) return; rvF = b.getAttribute('data-s'); $$('.chip', $('#rv-chips')).forEach(function (c) { c.setAttribute('aria-pressed', c === b); }); rvRender(); });
+  $('#rcards').addEventListener('click', function (e) { var b = e.target.closest('[data-like]'); if (!b) return; var i = b.getAttribute('data-like'); liked[i] = !liked[i]; rvRender(); });
+  rvRender();
+
+  /* ───────── newsletter ───────── */
+  $('#news-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('#news-email').value.trim(), m = $('#news-msg');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { m.textContent = 'That email does not look right. Try name@example.com.'; m.className = 'msg err'; $('#news-email').setAttribute('aria-invalid', 'true'); $('#news-email').focus(); return; }
+    $('#news-email').removeAttribute('aria-invalid'); m.textContent = '';
+    $('#news-form').hidden = true; $('#news-ok').hidden = false;
+  });
+  $('#code-copy').addEventListener('click', function () {
+    var c = 'FIRSTROSE', done = function () { toast('Code copied. Paste it in your bag.'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(c).then(done, done); else done();
+  });
+
+  /* init */
+  $$('[data-ico]').forEach(function (el) { if (!el.style.getPropertyValue('--fbs')) el.style.setProperty('--fbs', ((parseFloat(el.getAttribute('data-size')) || 24) * 0.78) + 'px'); });
+  reveal(document);
+  syncCart();
+})();
+</script>
+</body>
+</html>

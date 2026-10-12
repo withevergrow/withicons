@@ -1,0 +1,41 @@
+{
+  "name": "playground",
+  "intent": "hops like a child at play, then wobbles with glee on hover",
+  "loop": {
+    "preset": "bounce",
+    "origin": [12, 21],
+    "amount": 0.3,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [12, 21],
+    "amount": 0.9
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "tada",
+      "origin": [12, 21],
+      "amount": 0.7
+    },
+    {
+      "preset": "sway",
+      "origin": [6, 21],
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "school",
+      "effect": "fade"
+    },
+    {
+      "to": "playground@solid",
+      "effect": "scale"
+    }
+  ]
+}

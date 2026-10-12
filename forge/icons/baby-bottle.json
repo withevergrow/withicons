@@ -1,0 +1,83 @@
+{
+  "name": "baby-bottle",
+  "category": "food",
+  "description": "A baby feeding bottle with a teat and measuring marks, for infant feeding, milk and formula.",
+  "aliases": [
+    "feeding-bottle",
+    "milk-bottle",
+    "nursing-bottle",
+    "bottle-feeding",
+    "baby-feeding",
+    "baby-milk",
+    "infant-formula",
+    "baby-formula",
+    "feeder",
+    "baby-bottles"
+  ],
+  "tags": [
+    "baby",
+    "bottle",
+    "milk",
+    "feeding",
+    "infant"
+  ],
+  "paths": [
+    {
+      "d": "M8 9.5 V19 A2 2 0 0 0 10 21 H14 A2 2 0 0 0 16 19 V9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 6.5 H16 A1 1 0 0 1 17 7.5 V8.5 A1 1 0 0 1 16 9.5 H8 A1 1 0 0 1 7 8.5 V7.5 A1 1 0 0 1 8 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 6.5 C10.75 6 11 4.75 11 3.75 A1 1 0 0 1 13 3.75 C13 4.75 13.25 6 14.5 6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 13 H10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8 17 H10.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 9.5 V19 A2 2 0 0 0 10 21 H14 A2 2 0 0 0 16 19 V9.5 Z",
+    "M8 6.5 H16 A1 1 0 0 1 17 7.5 V8.5 A1 1 0 0 1 16 9.5 H8 A1 1 0 0 1 7 8.5 V7.5 A1 1 0 0 1 8 6.5 Z",
+    "M9.5 6.5 C10.75 6 11 4.75 11 3.75 A1 1 0 0 1 13 3.75 C13 4.75 13.25 6 14.5 6.5 Z"
+  ],
+  "cutouts": [
+    "M8 13 H10.5",
+    "M8 17 H10.5",
+    "M7 9.5 H17"
+  ],
+  "synonyms": [
+    "bottle",
+    "milk",
+    "formula",
+    "formula milk",
+    "breast milk",
+    "feeding",
+    "feeding time",
+    "feed baby",
+    "bottle feed",
+    "night feed",
+    "teat",
+    "nipple",
+    "infant",
+    "newborn",
+    "baby",
+    "baby food",
+    "nursing",
+    "pumping",
+    "sippy cup",
+    "nursery",
+    "parenting",
+    "maternity",
+    "nutrition",
+    "baby botle",
+    "feeding botle"
+  ]
+}

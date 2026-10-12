@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whisker &amp; Wag (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional shop, made to show the with icons library: Whisker &amp; Wag is an independent pet supply shop: treats, toys, beds and harnesses for dogs, cats and the small fluffy ones. Free local delivery over $40, subscribe and save 10%. A fictional demo page.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#fff6e2;--paper:#fffdf6;--ink:#2d2342;--muted:#5c5270;
+  --sun:#ffc93c;--sun-l:#fff0b8;--tom:#e9442f;--tom-d:#c22f1c;--tom-l:#ffe0d9;
+  --mint:#2fbf93;--mint-d:#13785a;--mint-l:#d4f5e8;--sky:#4fb3f0;--sky-d:#17689b;--sky-l:#d9efff;--plum:#6b3fa0;--plum-l:#ebdcff;
+  --head:'Lilita One','Fredoka',ui-rounded,system-ui,sans-serif;--body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --pop:cubic-bezier(.34,1.56,.64,1);--r:22px;--sh:4px 4px 0 var(--ink);
+  --ks:var(--kit-scale,1);
+  --with-sticker-lemon:#ffc93c;--with-sticker-mint:#2fbf93;--with-sticker-sky:#4fb3f0;--with-sticker-peach:#e9442f;--with-sticker-bubblegum:#ff8fa8;--with-sticker-grape:#6b3fa0;
+  --with-plush-c1:#e9442f;--with-plush-c2:#ffc93c;--with-plush-c3:#4fb3f0;--with-plush-c4:#2fbf93;--with-plush-accent:#ff8fa8;--with-plush-ink:#4a2a2a;--with-plush-edge:#fff9ef;
+  --with-kawaii-fill-1:#e9442f;--with-kawaii-fill-2:#ff9a3d;--with-kawaii-fill-3:#ffc93c;--with-kawaii-fill-4:#2fbf93;--with-kawaii-fill-5:#4fb3f0;--with-kawaii-accent:#e9442f;
+  --with-clay-c1:#ffc93c;--with-clay-c2:#e9442f;--with-clay-c3:#2fbf93;--with-clay-c4:#4fb3f0;--with-clay-ink:#2d2342;--with-clay-accent:#ff8fa8;
+  --with-pastel-c1:#ffe08a;--with-pastel-c2:#ffb3a5;--with-pastel-c3:#b6ecd8;--with-pastel-c4:#bfe3f7;--with-pastel-accent:#ffb3a5;--with-pastel-ink:#5b4a7a;
+  --with-brutal-c1:#ffc93c;--with-brutal-c2:#e9442f;--with-brutal-c3:#4fb3f0;--with-brutal-c4:#2fbf93;--with-brutal-accent:#ff8fa8;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:120px;-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font:500 1.0625rem/1.55 var(--body);overflow-x:clip;
+  background-image:radial-gradient(circle at 1px 1px,rgba(45,35,66,.07) 1.5px,transparent 0);background-size:26px 26px}
+img{display:block;max-width:100%;height:auto}
+[hidden]{display:none!important}
+h1,h2,h3,h4{font-family:var(--head);font-weight:400;line-height:1.05;letter-spacing:.005em;margin:0}
+p{margin:0}ul{margin:0;padding:0;list-style:none}
+a{color:var(--sky-d);text-underline-offset:3px}
+button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer}
+:focus-visible{outline:3px solid var(--plum);outline-offset:3px;border-radius:10px}
+.wrap{width:min(1200px,100% - 36px);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;z-index:300}.skip:focus{top:12px}
+.sec{padding:clamp(54px,7vw,92px) 0;position:relative}
+.sec-head{max-width:720px;margin:0 auto clamp(26px,4vw,42px);text-align:center}
+.sec-head h2{font-size:clamp(2.1rem,5.4vw,3.5rem);margin:14px 0 10px;text-wrap:balance}
+.sec-head p{color:var(--muted);font-size:1.1rem}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:5px 15px 5px 8px;background:var(--sun);border:2.5px solid var(--ink);border-radius:999px;font:800 .78rem var(--body);letter-spacing:.09em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink);transform:rotate(-2deg)}
+.coin{--cs:44px;display:inline-grid;place-items:center;flex:none;width:calc(var(--cs)*var(--ks));height:calc(var(--cs)*var(--ks));border-radius:50%;background:#fff;border:2.5px solid var(--ink)}
+html[data-level="0"]{--ks:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:10px 24px;border:3px solid var(--ink);border-radius:999px;font:400 1.15rem var(--head);letter-spacing:.02em;background:var(--sun);color:var(--ink);box-shadow:var(--sh);text-decoration:none;transition:transform .18s var(--pop),box-shadow .18s}
+.btn:hover{transform:translate(-2px,-3px);box-shadow:6px 7px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn-red{background:var(--tom);color:#fff}.btn-mint{background:var(--mint);color:var(--ink)}.btn-white{background:#fff}
+.btn-sm{min-height:44px;padding:6px 16px;font-size:1rem}
+.btn[disabled]{opacity:.55;pointer-events:none}
+.card{background:#fff;border:3px solid var(--ink);border-radius:var(--r);box-shadow:var(--sh)}
+@keyframes pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.5) rotate(-8deg)}70%{transform:scale(.92)}100%{transform:scale(1)}}
+@keyframes drive{0%{transform:translateX(-12%)}100%{transform:translateX(100%)}}
+@keyframes road{to{background-position:-48px 0}}
+@keyframes slide{to{transform:translateX(-50%)}}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-12px) rotate(var(--r,0deg))}}
+.bumped{animation:bump .5s var(--pop)}
+.reveal.in{animation:pop .6s var(--pop) both}
+
+/* announcement + header */
+.announce{background:var(--ink);color:#fff;font:700 .88rem var(--body);overflow:hidden}
+.announce .wrap{display:flex;justify-content:center;gap:8px 30px;flex-wrap:wrap;padding:8px 0}
+.announce p{display:inline-flex;align-items:center;gap:8px}
+.site-head{position:sticky;top:0;z-index:70;background:rgba(255,246,226,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:3px solid var(--ink)}
+.head-row{display:flex;align-items:center;gap:10px;min-height:70px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);margin-right:auto}
+.logo .coin{--cs:48px;background:var(--sun);box-shadow:3px 3px 0 var(--ink)}
+.logo b{white-space:nowrap;display:block;font:400 1.6rem/1 var(--head)}
+.logo small{display:block;font:800 .66rem var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--tom-d);margin-top:3px}
+.nav a{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:6px 14px;border-radius:999px;font:400 1.05rem var(--head);color:var(--ink);text-decoration:none;white-space:nowrap;border:2.5px solid transparent}
+.nav a:hover{background:var(--sun-l);border-color:var(--ink)}
+.nav-d{display:none;gap:2px}
+.nav-m{display:flex;overflow-x:auto;scrollbar-width:none;padding-bottom:8px;border-top:2px dashed rgba(45,35,66,.22)}
+@media(min-width:900px){.nav-d{display:flex}.nav-m{display:none}}
+.icon-btn{--bs:48px;position:relative;display:inline-grid;place-items:center;width:calc(var(--bs)*var(--ks));height:calc(var(--bs)*var(--ks));border:2.5px solid var(--ink);border-radius:50%;background:#fff;box-shadow:3px 3px 0 var(--ink);transition:transform .15s var(--pop)}
+.icon-btn:hover{transform:translate(-1px,-2px)}
+.icon-btn .n{position:absolute;top:-8px;right:-8px;min-width:22px;height:22px;padding:0 5px;border-radius:99px;background:var(--tom);color:#fff;border:2px solid var(--ink);font:800 .72rem/18px var(--body);text-align:center}
+.cart-btn{width:auto;min-width:calc(48px*var(--ks));padding:0 14px 0 8px;gap:4px;border-radius:999px;background:var(--mint-l);display:inline-flex;align-items:center}
+.cart-btn .t{font:800 .88rem var(--body)}
+
+@media(max-width:520px){.logo small{display:none}.logo b{font-size:1.35rem}}
+
+/* hero */
+.hero{padding:clamp(34px,5vw,64px) 0 clamp(80px,9vw,120px);background:var(--sun);border-bottom:3px solid var(--ink);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 1.5px 1.5px,rgba(45,35,66,.16) 1.6px,transparent 0);background-size:22px 22px;-webkit-mask-image:linear-gradient(100deg,#000 0,transparent 55%);mask-image:linear-gradient(100deg,#000 0,transparent 55%)}
+.hero .wrap{display:grid;gap:44px;position:relative;align-items:center}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.05fr .95fr}}
+.hero h1{font-size:clamp(3rem,8.4vw,6rem);line-height:.98;text-wrap:balance;margin:18px 0 18px}
+.hero h1 .hl{background:var(--tom);color:#fff;padding:0 .18em;border:3px solid var(--ink);border-radius:18px;display:inline-block;transform:rotate(-2deg);box-shadow:var(--sh)}
+.hero .lede{font-size:1.2rem;max-width:34em;font-weight:600}
+.hero .cta{display:flex;flex-wrap:wrap;gap:14px;margin:26px 0 20px}
+.hero .proof{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-weight:700}
+.hero .proof .stars{background:#fff;border:2.5px solid var(--ink);border-radius:18px;padding:2px 12px 2px 2px;display:flex;align-items:center;gap:8px;box-shadow:3px 3px 0 var(--ink)}
+.hero-photo{position:relative;margin-bottom:26px}
+.blob{position:relative;border:4px solid var(--ink);border-radius:46% 54% 42% 58%/52% 44% 56% 48%;overflow:hidden;box-shadow:8px 8px 0 var(--ink);aspect-ratio:1/1;background:var(--mint-l)}
+.blob img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.credit-mini{position:absolute;left:10px;bottom:-26px;font:700 .72rem var(--body);color:var(--ink)}
+.credit-mini a{color:inherit}
+.stk{position:absolute;z-index:3;filter:drop-shadow(3px 4px 0 rgba(45,35,66,.9))}
+.stk.a{top:-24px;right:0;transform:rotate(10deg)}
+.stk.b{bottom:4%;left:-4%;transform:rotate(-8deg)}
+.stk.c{top:40%;right:-3%}
+.float{position:absolute;pointer-events:none;z-index:1}
+.float.f1{left:1%;top:6%;--r:-12deg}.float.f2{left:47%;bottom:16%}.float.f3{right:48%;top:5%;--r:14deg}
+.wave{position:absolute;left:0;right:0;bottom:-2px;height:46px;background:var(--cream);clip-path:polygon(0 100%,0 40%,6% 20%,14% 45%,22% 15%,30% 45%,38% 18%,46% 46%,54% 16%,62% 45%,70% 20%,78% 46%,86% 18%,94% 44%,100% 24%,100% 100%)}
+
+@media(max-width:899px){.float.f1{left:auto;right:6%;top:3%}}
+/* trust strip */
+.trust{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:-30px;position:relative;z-index:4}
+.trust li{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:3px solid var(--ink);border-radius:var(--r);box-shadow:var(--sh)}
+.trust b{display:block;font:400 1.15rem var(--head)}.trust span.s{font-size:.9rem;color:var(--muted);line-height:1.3;display:block}
+.trust li:nth-child(1) .coin{background:var(--sky-l)}.trust li:nth-child(2) .coin{background:var(--mint-l)}.trust li:nth-child(3) .coin{background:var(--tom-l)}.trust li:nth-child(4) .coin{background:var(--plum-l)}
+
+/* picker + shop */
+.picker{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:22px}
+.pick{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:128px;padding:14px 18px 12px;background:#fff;border:3px solid var(--ink);border-radius:26px;box-shadow:var(--sh);font:400 1.15rem var(--head);transition:transform .2s var(--pop),background .2s}
+.pick small{font:700 .78rem var(--body);color:var(--muted)}
+.pick:hover{transform:translateY(-4px) rotate(-1.5deg)}
+.pick[aria-pressed="true"]{background:var(--sun);transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-bottom:26px}
+.subtog{position:relative;display:inline-flex;align-items:center;gap:12px;padding:8px 16px 8px 10px;background:var(--mint-l);border:3px solid var(--ink);border-radius:999px;font:800 .95rem var(--body);cursor:pointer;user-select:none;min-height:48px}
+.subtog .sw{width:52px;height:30px;border-radius:99px;background:#fff;border:2.5px solid var(--ink);position:relative;flex:none;transition:background .2s}
+.subtog .sw::after{content:"";position:absolute;top:2px;left:2px;width:21px;height:21px;border-radius:50%;background:var(--ink);transition:transform .25s var(--pop)}
+.subtog input{position:absolute;opacity:0;width:1px;height:1px}
+.subtog:has(input:checked) .sw{background:var(--mint)}.subtog:has(input:checked) .sw::after{transform:translateX(22px)}
+.subtog:has(input:focus-visible){outline:3px solid var(--plum);outline-offset:3px}
+.sortsel{display:flex;align-items:center;gap:8px;font-weight:800}
+.sortsel select{min-height:44px;padding:6px 12px;border:2.5px solid var(--ink);border-radius:14px;background:#fff;font-weight:700}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.prod{display:flex;flex-direction:column;overflow:hidden;transition:transform .2s var(--pop),box-shadow .2s;animation:pop .45s var(--pop) both}
+.prod:hover{transform:translate(-2px,-4px);box-shadow:7px 9px 0 var(--ink)}
+.p-art{position:relative;display:grid;place-items:center;aspect-ratio:1/.78;border-bottom:3px solid var(--ink);background:var(--bg,var(--sun-l));overflow:hidden}
+.p-art::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 1.5px 1.5px,rgba(45,35,66,.13) 1.5px,transparent 0);background-size:16px 16px}
+.p-art>span{position:relative}
+.p-badge{position:absolute;top:10px;left:10px;font:800 .7rem var(--body);letter-spacing:.08em;text-transform:uppercase;background:var(--tom);color:#fff;border:2px solid var(--ink);border-radius:99px;padding:3px 10px;transform:rotate(-4deg)}
+.heart{position:absolute;top:8px;right:8px;--bs:44px}
+.heart[aria-pressed="true"]{background:var(--tom-l)}
+.p-body{display:flex;flex-direction:column;gap:6px;padding:14px 16px 16px;flex:1}
+.p-body h3{font-size:1.35rem}
+.p-body .d{font-size:.92rem;color:var(--muted);line-height:1.35}
+.p-rate{display:flex;align-items:center;gap:6px;font:800 .86rem var(--body)}.p-rate span.c{color:var(--muted);font-weight:600}
+.p-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:8px}
+.price{font:400 1.7rem var(--head);line-height:1}.price s{font:600 .85rem var(--body);color:var(--muted);margin-left:6px}.price small{display:block;font:700 .72rem var(--body);color:var(--mint-d);letter-spacing:.04em;margin-top:3px}
+.empty{grid-column:1/-1;text-align:center;padding:30px}
+
+/* subscribe band */
+.band{background:var(--ink);color:#fff;border-block:3px solid var(--ink)}
+.band .wrap{display:grid;gap:30px;align-items:center}
+@media(min-width:860px){.band .wrap{grid-template-columns:1.1fr 1fr}}
+.band h2{font-size:clamp(2.2rem,5vw,3.4rem);color:var(--sun)}
+.band p{color:#e6dff5;margin-top:12px;max-width:34em}
+.steps{display:grid;gap:12px}
+.steps li{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.08);border:2px dashed rgba(255,255,255,.35);border-radius:20px;padding:12px 16px}
+.steps b{display:block;font:400 1.15rem var(--head);color:var(--sun-l)}.steps span.s{font-size:.9rem;color:#d5ccea}
+.steps .coin{--cs:52px;background:var(--sun)}
+
+/* aisles mosaic */
+.mosaic{display:grid;gap:16px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:760px){.mosaic{grid-template-columns:repeat(4,1fr);grid-auto-rows:190px}.m-big{grid-column:span 2;grid-row:span 2}.m-tall{grid-row:span 2}.m-wide{grid-column:span 2}}
+.tile{position:relative;display:block;min-height:170px;overflow:hidden;border:3px solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);background:var(--sky-l);color:#fff;text-decoration:none;transition:transform .2s var(--pop)}
+.tile:hover{transform:translate(-2px,-4px) rotate(-.6deg)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.tile:hover img{transform:scale(1.05)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,rgba(45,35,66,.78))}
+.tile .lab{position:absolute;left:12px;bottom:12px;right:12px;z-index:2;display:flex;align-items:center;gap:10px;font:400 1.3rem var(--head)}
+.tile .lab .coin{--cs:42px;color:var(--ink)}
+.tile .lab small{display:block;font:700 .78rem var(--body);opacity:.92}
+
+/* quiz */
+.quiz{display:grid;overflow:hidden}
+@media(min-width:860px){.quiz{grid-template-columns:1.2fr .8fr}}
+.q-main{padding:clamp(20px,4vw,38px)}
+.q-side{background:var(--plum-l);border-top:3px solid var(--ink);padding:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px}
+@media(min-width:860px){.q-side{border-top:0;border-left:3px solid var(--ink)}}
+.q-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.q-bar{flex:1;height:14px;border:2.5px solid var(--ink);border-radius:99px;background:#fff;overflow:hidden}.q-bar i{display:block;height:100%;width:33%;background:var(--tom);transition:width .4s var(--pop)}
+.q-main h3{font-size:1.9rem;margin-bottom:16px}
+.opts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.opt{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 10px;background:var(--cream);border:3px solid var(--ink);border-radius:20px;font:400 1.1rem var(--head);box-shadow:3px 3px 0 var(--ink);transition:transform .18s var(--pop),background .15s}
+.opt small{font:600 .8rem var(--body);color:var(--muted)}
+.opt:hover{background:var(--sun-l);transform:translateY(-3px)}
+.opt:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.q-res{display:flex;flex-direction:column;gap:10px}
+.q-res .r-art{display:grid;place-items:center;height:150px;border:3px solid var(--ink);border-radius:20px;background:var(--sun-l)}
+.back{background:none;border:0;text-decoration:underline;font-weight:800;min-height:44px;padding:0 6px}
+
+/* adoption */
+.adopt{background:var(--mint);border-block:3px solid var(--ink)}
+.adopt .wrap{display:grid;gap:34px;align-items:center}
+@media(min-width:900px){.adopt .wrap{grid-template-columns:.8fr 1.2fr}}
+.polaroid{background:#fff;border:3px solid var(--ink);border-radius:10px;padding:12px 12px 16px;box-shadow:8px 8px 0 var(--ink);transform:rotate(-3deg);max-width:420px;margin-inline:auto;position:relative}
+.polaroid img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 70%;border:2px solid var(--ink)}
+.polaroid figcaption{font:400 1.2rem var(--head);padding-top:10px;text-align:center}
+.adopt h2{font-size:clamp(2.2rem,5vw,3.5rem);margin:14px 0}
+.when{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:20px 0}
+.count{display:flex;gap:10px}
+.count div{min-width:70px;padding:8px 10px;background:#fff;border:3px solid var(--ink);border-radius:18px;text-align:center;box-shadow:3px 3px 0 var(--ink)}
+.count b{display:block;font:400 2rem/1 var(--head)}.count span{font:800 .68rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.perks{display:grid;gap:10px;margin:18px 0 22px}
+.perks li{display:flex;gap:12px;align-items:center;font-weight:700}
+.walkpic{margin-top:22px;border:3px solid var(--ink);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);max-width:520px;background:#fff}
+.walkpic img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.walkpic figcaption{padding:8px 14px;font-weight:700;font-size:.9rem}
+
+/* delivery road */
+.road{position:relative;height:104px;border-radius:var(--r);border:3px solid var(--ink);background:var(--sky-l);overflow:hidden}
+.road .lane{position:absolute;left:0;right:0;bottom:0;height:34px;background:var(--ink)}
+.road .lane::before{content:"";position:absolute;left:0;right:0;top:15px;height:4px;background:repeating-linear-gradient(90deg,#fff 0 24px,transparent 24px 48px);animation:road .8s linear infinite}
+.road .truck{position:absolute;bottom:14px;left:0;width:100%;animation:drive 9s linear infinite}
+.road .truck>span{display:inline-block}
+.road .cloud{position:absolute;top:8px}.road .home{position:absolute;right:16px;bottom:34px}
+.road-cap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;margin-top:14px;font-weight:700}
+.road-cap span{display:inline-flex;gap:8px;align-items:center}
+
+/* reviews */
+.rev-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.rev{padding:22px;display:flex;flex-direction:column;gap:12px;position:relative}
+.rev:nth-child(odd){transform:rotate(-.8deg)}.rev:nth-child(even){transform:rotate(.8deg)}
+.rev q{quotes:none;font-size:1.05rem;line-height:1.5}
+.rev .who{display:flex;align-items:center;gap:12px;margin-top:auto;font-weight:800}.rev .who small{display:block;font-weight:600;color:var(--muted)}
+.rev .who .coin{background:var(--sun-l)}
+
+/* newsletter */
+.news{background:var(--tom);color:#fff;border-block:3px solid var(--ink)}
+.news .wrap{display:grid;gap:26px;align-items:center}
+@media(min-width:860px){.news .wrap{grid-template-columns:1fr 1fr}}
+.news h2{font-size:clamp(2.2rem,5vw,3.4rem)}
+.news form{display:grid;gap:12px}
+.fld{display:flex;align-items:center;gap:10px;background:#fff;border:3px solid var(--ink);border-radius:999px;padding:0 10px 0 16px;min-height:54px;color:var(--ink)}
+.fld input{flex:1;min-width:0;border:0;background:none;outline:0;font-weight:600;min-height:48px}
+.fld:focus-within{outline:3px solid var(--sun);outline-offset:3px}
+.pets{display:flex;gap:10px;flex-wrap:wrap;border:0;margin:0;padding:0}
+.pets legend{font-weight:800;margin-bottom:8px;padding:0}
+.pets label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:4px 14px 4px 10px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:999px;font-weight:800;cursor:pointer}
+.pets input{accent-color:var(--tom);width:18px;height:18px}
+.err{color:var(--sun-l);font-weight:800;min-height:1.2em}
+.thanks{display:flex;gap:14px;align-items:center;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:var(--r);padding:18px;box-shadow:var(--sh)}
+
+/* cart drawer */
+.scrim{position:fixed;inset:0;background:rgba(45,35,66,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:90}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--paper);border-left:4px solid var(--ink);z-index:100;display:flex;flex-direction:column;transform:translateX(105%);visibility:hidden;transition:transform .35s var(--pop),visibility 0s .35s}
+.drawer.on{transform:none;visibility:visible;transition:transform .35s var(--pop)}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:3px solid var(--ink);background:var(--sun)}
+.dr-head h2{font-size:1.7rem;display:flex;gap:10px;align-items:center}
+.dr-ship{padding:22px 18px 14px;border-bottom:2px dashed rgba(45,35,66,.3);font-weight:700;font-size:.92rem}
+.meter{height:16px;border:2.5px solid var(--ink);border-radius:99px;background:#fff;margin-top:10px;position:relative}
+.meter i{display:block;height:100%;width:0;background:var(--mint);border-radius:99px;transition:width .5s var(--pop)}
+.meter .tr{position:absolute;top:-24px;left:0;transition:left .5s var(--pop);transform:translateX(-50%)}
+.dr-list{flex:1;overflow:auto;padding:10px 18px}
+.line{display:grid;grid-template-columns:62px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:2px dashed rgba(45,35,66,.2)}
+.line .t{display:grid;place-items:center;width:62px;height:62px;background:var(--bg,var(--sun-l));border:2.5px solid var(--ink);border-radius:16px}
+.line b{display:block;font:400 1.1rem var(--head)}.line small{color:var(--muted);font-weight:600}
+.qty{display:inline-flex;align-items:center;gap:4px;margin-top:6px}
+.qty button{display:inline-grid;place-items:center;width:44px;height:44px;border:2.5px solid var(--ink);border-radius:50%;background:#fff}
+.qty output{min-width:24px;text-align:center;font-weight:800}
+.dr-foot{padding:16px 18px 76px;border-top:3px solid var(--ink);background:#fff}
+.tot{display:flex;justify-content:space-between;font-weight:700;margin-bottom:6px}.tot.big{font:400 1.5rem var(--head)}
+.dr-empty{text-align:center;padding:40px 10px;color:var(--muted)}
+.toast{position:fixed;left:18px;bottom:96px;z-index:120;display:flex;align-items:center;gap:10px;background:var(--ink);color:#fff;padding:10px 18px 10px 12px;border-radius:99px;font-weight:700;transform:translateY(30px);opacity:0;transition:.3s var(--pop);pointer-events:none;max-width:calc(100% - 36px)}
+.toast.on{transform:none;opacity:1}
+
+/* footer */
+#credits{padding:40px 0 30px;border-top:3px solid var(--ink);background:var(--paper)}
+#credits h2{font-size:1.8rem;margin-bottom:10px}#credits ul{display:grid;gap:4px;font-size:.88rem;color:var(--muted)}
+footer{background:var(--ink);color:#d9d0ee;padding:44px 0 96px}
+footer .cols{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+footer h3{color:var(--sun);font-size:1.25rem;margin-bottom:10px}footer li{margin:6px 0;display:flex;gap:8px;align-items:center}footer a{color:#fff}
+footer .fine{margin-top:30px;padding-top:18px;border-top:1px dashed rgba(255,255,255,.3);font-size:.86rem}
+html[data-level="0"] .card,html[data-level="0"] .btn,html[data-level="0"] .pick,html[data-level="0"] .tile{box-shadow:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Whisker &amp; Wag is a fictional shop, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<a class="skip" href="#shop">Skip to the shop</a>
+
+<div class="announce" role="region" aria-label="Shop news">
+  <div class="wrap">
+    <p><span data-ico="truck" data-size="22" data-motion="loop">🚚</span> Free local delivery over $40</p>
+    <p><span data-ico="repeat" data-size="22" data-motion="hover">🔁</span> Subscribe &amp; save 10%</p>
+    <p><span data-ico="paw-print" data-size="22" data-motion="hover">🐾</span> Adoption day every Saturday</p>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap">
+    <div class="head-row">
+      <a class="logo" href="#top" aria-label="Whisker &amp; Wag, home">
+        <span class="coin"><span data-ico="paw-print" data-size="30" data-sample data-motion="hover">🐾</span></span>
+        <span><b>Whisker &amp; Wag</b><small>Pet supply since 2016</small></span>
+      </a>
+      <nav class="nav nav-d" aria-label="Main">
+        <a href="#shop"><span data-ico="shopping-bag" data-size="20" data-motion="hover">🛍️</span> Shop</a>
+        <a href="#finder"><span data-ico="search" data-size="20" data-motion="hover">🔍</span> Treat finder</a>
+        <a href="#adopt"><span data-ico="heart" data-size="20" data-motion="hover">❤️</span> Adoption day</a>
+        <a href="#reviews"><span data-ico="star" data-size="20" data-motion="hover">⭐</span> Reviews</a>
+      </nav>
+      <button class="icon-btn" id="wish-btn" type="button" aria-label="Wishlist: 0 favourites"><span data-ico="heart" data-size="26" data-motion="hover">🤍</span><span class="n" id="wish-n" hidden>0</span></button>
+      <button class="icon-btn cart-btn" id="cart-toggle" type="button" aria-label="Open cart"><span data-live="cart-count" data-p-count="0" data-size="34" id="cart-badge" data-label="0 items in your cart">🛒 0</span><span class="t" id="cart-total">$0</span></button>
+    </div>
+    <nav class="nav nav-m" aria-label="Sections">
+      <a href="#shop"><span data-ico="shopping-bag" data-size="20">🛍️</span> Shop</a>
+      <a href="#finder"><span data-ico="search" data-size="20">🔍</span> Treat finder</a>
+      <a href="#adopt"><span data-ico="heart" data-size="20">❤️</span> Adoption day</a>
+      <a href="#reviews"><span data-ico="star" data-size="20">⭐</span> Reviews</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" aria-labelledby="hero-h">
+  <span class="float f1" data-min-level="2"><span data-ico="paw-print" data-size="58" data-motion="loop">🐾</span></span>
+  <span class="float f3" data-min-level="2"><span data-ico="sparkles" data-size="40" data-motion="loop">✨</span></span>
+  <div class="wrap">
+    <div>
+      <span class="chip"><span data-ico="sparkles" data-size="20" data-motion="hover">🐕</span> Independent &amp; tail-wagging since 2016</span>
+      <h1 id="hero-h">Good stuff for <span class="hl">good</span> pets.</h1>
+      <p class="lede">Crunchy treats, squeaky toys, cloud-soft beds and harnesses that actually fit. Picked, sniff-tested and delivered by the small team on Maple Street, for dogs, cats and the small fluffy ones.</p>
+      <div class="cta">
+        <a class="btn btn-red" href="#shop"><span data-ico="shopping-bag" data-size="24" data-motion="hover">🛍️</span> Shop all treats &amp; toys</a>
+        <a class="btn btn-white" href="#finder"><span data-ico="search" data-size="24" data-motion="hover">🔍</span> Find the right treat</a>
+      </div>
+      <div class="proof">
+        <span class="stars"><span data-live="rating-stars" data-p-rating="4.5" data-size="70" data-label="4.5 out of 5 stars" data-motion="inview">★★★★½</span><b>4.8 from 2,140 reviews</b></span>
+        <span>Free delivery over $40 in Maple County</span>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="blob"><img src="_img/whisker-and-wag/8081421-1000.jpg" width="1000" height="800" alt="A cream goldendoodle puppy bounds across a sunny green field."></div>
+      <span class="stk a" data-min-level="1"><span data-live="sale-sticker" data-p-text="-10%" data-size="96" data-label="10 percent off with subscribe and save">-10%</span></span>
+      <span class="stk b" data-min-level="2"><span data-ico="bell-ring" data-size="64" data-motion="loop" data-label="Ringing bell">🔔</span></span>
+      <span class="stk c" data-min-level="2"><span data-ico="heart" data-size="60" data-motion="loop" data-label="Beating heart">❤️</span></span>
+      <p class="credit-mini">Photo by <a href="https://www.pexels.com/@skyler-ewing-266953">Skyler Ewing</a> on <a href="https://www.pexels.com/photo/8081421/">Pexels</a></p>
+    </div>
+  </div>
+  <div class="wave" aria-hidden="true"></div>
+</section>
+
+<div class="wrap">
+  <ul class="trust">
+    <li><span class="coin"><span data-ico="truck" data-size="30" data-motion="hover">🚚</span></span><div><b>Free local delivery</b><span class="s">Over $40, usually next day</span></div></li>
+    <li><span class="coin"><span data-ico="repeat" data-size="30" data-motion="hover">🔁</span></span><div><b>Subscribe &amp; save 10%</b><span class="s">Skip or pause any time</span></div></li>
+    <li><span class="coin"><span data-ico="shield-check" data-size="30" data-motion="hover">🛡️</span></span><div><b>Sniff-tested</b><span class="s">Made with real ingredients</span></div></li>
+    <li><span class="coin"><span data-ico="hand-heart" data-size="30" data-motion="hover">🤝</span></span><div><b>Gives back</b><span class="s">1% to Maple County Shelter</span></div></li>
+  </ul>
+</div>
+
+<section class="sec" id="shop" aria-labelledby="shop-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="chip"><span data-ico="paw-print" data-size="20" data-motion="hover">🐾</span> The shop</span>
+      <h2 id="shop-h">Who are we shopping for?</h2>
+      <p>Pick a pet and the shelves rearrange. Everything here has been chewed, batted or napped on by our own crew first.</p>
+    </div>
+    <div class="picker" role="group" aria-label="Pet type">
+      <button class="pick" type="button" data-pet="all" aria-pressed="true"><span data-ico="paw-print" data-size="44" data-motion="hover">🐾</span>All pets<small>12 products</small></button>
+      <button class="pick" type="button" data-pet="dog" aria-pressed="false"><span data-ico="dog" data-size="44" data-motion="hover">🐶</span>Dogs<small id="n-dog">6 products</small></button>
+      <button class="pick" type="button" data-pet="cat" aria-pressed="false"><span data-ico="cat" data-size="44" data-motion="hover">🐱</span>Cats<small id="n-cat">3 products</small></button>
+      <button class="pick" type="button" data-pet="small" aria-pressed="false"><span data-ico="rabbit" data-size="44" data-motion="hover">🐰</span>Small pets<small id="n-small">3 products</small></button>
+    </div>
+    <div class="toolbar">
+      <label class="subtog"><input type="checkbox" id="sub"><span class="sw" aria-hidden="true"></span><span data-ico="repeat" data-size="24" data-motion="hover">🔁</span> Subscribe &amp; save 10%</label>
+      <div class="sortsel"><span data-ico="sparkles" data-size="20">✨</span><label for="sort">Sort by</label>
+        <select id="sort"><option value="pop">Most loved</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="rate">Top rated</option></select></div>
+    </div>
+    <p class="sr" id="shop-status" role="status" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="band sec" aria-labelledby="sub-h">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="chip"><span data-ico="repeat" data-size="20" data-motion="loop">🔁</span> Subscribe &amp; save</span>
+      <h2 id="sub-h" style="margin-top:14px">Never run out of the good stuff.</h2>
+      <p>Choose how often, we deliver before the bag runs low. Ten percent off every box, free delivery from the first one, and you can skip, swap or pause with one tap. Flip the switch on any product above to see your price.</p>
+      <p style="margin-top:18px"><button class="btn" type="button" id="sub-cta"><span data-ico="sparkles" data-size="24" data-motion="hover">✨</span> Turn on subscribe &amp; save</button></p>
+    </div>
+    <ol class="steps" aria-label="How it works">
+      <li class="reveal"><span class="coin"><span data-live="step-number" data-p-step="1" data-size="40" data-label="Step 1">1</span></span><div><b>Fill your box</b><span class="s">Treats, toys, a new bed. Anything on the shelf.</span></div></li>
+      <li class="reveal"><span class="coin"><span data-live="step-number" data-p-step="2" data-size="40" data-label="Step 2">2</span></span><div><b>Pick a rhythm</b><span class="s">Every 2, 4 or 6 weeks. Change it whenever.</span></div></li>
+      <li class="reveal"><span class="coin"><span data-live="step-number" data-p-step="3" data-p-done="true" data-size="40" data-label="Step 3, done">3</span></span><div><b>Wag at the door</b><span class="s">We drop it off, you take the credit.</span></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="aisles" aria-labelledby="aisle-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="chip"><span data-ico="store" data-size="20" data-motion="hover">🏪</span> Browse the aisles</span>
+      <h2 id="aisle-h">Everything from nose to tail</h2>
+      <p>Tap an aisle to jump to the products. Real pets, real shelves, real mess.</p>
+    </div>
+    <div class="mosaic">
+      <a class="tile m-big" href="#shop" data-jump="dog"><img src="_img/whisker-and-wag/25786020-1000.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="A black-and-white dog lying in lush green grass." style="object-position:50% 35%"><span class="lab"><span class="coin"><span data-ico="dog" data-size="30" data-motion="hover">🐶</span></span><span>Dogs<small>Treats, toys, harnesses, beds</small></span></span></a>
+      <a class="tile m-tall" href="#shop" data-jump="cat"><img src="_img/whisker-and-wag/35765312-600.jpg" width="600" height="900" loading="lazy" decoding="async" alt="Close-up of a tabby cat looking straight at the camera." style="object-position:50% 40%"><span class="lab"><span class="coin"><span data-ico="cat" data-size="30" data-motion="hover">🐱</span></span><span>Cats</span></span></a>
+      <a class="tile" href="#shop" data-jump="small"><img src="_img/whisker-and-wag/19613749-600.jpg" width="600" height="450" loading="lazy" decoding="async" alt="A domestic rabbit sitting on grass." style="object-position:50% 40%"><span class="lab"><span class="coin"><span data-ico="rabbit" data-size="30" data-motion="hover">🐰</span></span><span>Small pets</span></span></a>
+      <a class="tile" href="#shop" data-jump="dog"><img src="_img/whisker-and-wag/8121154-600.jpg" width="600" height="750" loading="lazy" decoding="async" alt="Bone-shaped dog treats arranged on brown paper, seen from above." style="object-position:50% 50%"><span class="lab"><span class="coin"><span data-ico="cookie" data-size="30" data-motion="hover">🍪</span></span><span>Treats</span></span></a>
+      <a class="tile m-wide" href="#shop" data-jump="dog"><img src="_img/whisker-and-wag/14084426-1000.jpg" width="1000" height="667" loading="lazy" decoding="async" alt="Two golden retrievers playing with a plush toy on grass." style="object-position:50% 40%"><span class="lab"><span class="coin"><span data-ico="tennis" data-size="30" data-motion="hover">🎾</span></span><span>Toys<small>Squeak, fetch, tug</small></span></span></a>
+      <a class="tile" href="#shop" data-jump="cat"><img src="_img/whisker-and-wag/photo-1541188495357-ad2dc89487f4-600.jpg" width="600" height="400" loading="lazy" decoding="async" alt="An orange tabby cat sleeping on a white pet bed." style="object-position:40% 50%"><span class="lab"><span class="coin"><span data-ico="bed" data-size="30" data-motion="hover">🛏️</span></span><span>Beds</span></span></a>
+      <a class="tile" href="#shop" data-jump="dog"><img src="_img/whisker-and-wag/photo-1546687813-3fcc1c363a07-600.jpg" width="600" height="400" loading="lazy" decoding="async" alt="A tan leather collar on a white dog figurine in a studio shot." style="object-position:50% 50%"><span class="lab"><span class="coin"><span data-ico="tag" data-size="30" data-motion="hover">🏷️</span></span><span>Collars</span></span></a>
+      <a class="tile m-wide" href="#shop" data-jump="all"><img src="_img/whisker-and-wag/photo-1746483966755-273b467b24fa-600.jpg" width="600" height="400" loading="lazy" decoding="async" alt="A French bulldog puppy standing by its food bowl at breakfast time." style="object-position:50% 50%"><span class="lab"><span class="coin"><span data-ico="droplets" data-size="30" data-motion="hover">💧</span></span><span>Bowls</span></span></a>
+      <a class="tile m-wide" href="#shop" data-jump="dog"><img src="_img/whisker-and-wag/6131580-600.jpg" width="600" height="900" loading="lazy" decoding="async" alt="A groomer blow-drying a Yorkshire Terrier." style="object-position:50% 30%"><span class="lab"><span class="coin"><span data-ico="bath" data-size="30" data-motion="hover">🛁</span></span><span>Grooming</span></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="finder" aria-labelledby="find-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="chip"><span data-ico="lightbulb" data-size="20" data-motion="hover">💡</span> Treat finder</span>
+      <h2 id="find-h">Three questions, one perfect treat</h2>
+      <p>Tell us about your dog and we will pick the biscuit. No email needed.</p>
+    </div>
+    <div class="card quiz reveal">
+      <div class="q-main" id="quiz" aria-live="polite"></div>
+      <div class="q-side">
+        <span data-ico="dog" data-size="110" data-motion="loop" data-label="A dog, wagging">🐕</span>
+        <b style="font:400 1.5rem var(--head)">Fussy eaters welcome</b>
+        <p style="color:var(--muted);font-weight:600">Every treat on this page is baked in small batches in Maple County, with no fillers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="adopt sec" id="adopt" aria-labelledby="adopt-h">
+  <div class="wrap">
+    <figure class="polaroid reveal">
+      <img src="_img/whisker-and-wag/6568943-600.jpg" width="600" height="900" loading="lazy" decoding="async" alt="A woman kneels to hug a dog wearing a Take Me Home sign.">
+      <figcaption>Meet your new best friend</figcaption>
+      <span style="position:absolute;top:-22px;right:-14px"><span data-ico="heart" data-size="56" data-motion="loop" data-min-level="2" data-label="Beating heart">❤️</span></span>
+    </figure>
+    <div class="reveal">
+      <span class="chip"><span data-ico="home" data-size="20" data-motion="hover">🏠</span> Adoption day</span>
+      <h2 id="adopt-h">Saturday is for wagging tails.</h2>
+      <p style="font-size:1.15rem;font-weight:600;max-width:36em">Every Saturday, Maple County Shelter parks its adoptable dogs, cats and bunnies in our back garden. Come and say hello, take a walk, and bring home a friend. We bring the treats.</p>
+      <div class="when">
+        <span data-live="calendar-date" data-p-day="17" data-p-month="OCT" data-size="84" id="ad-cal" data-label="Next adoption day">Sat</span>
+        <span data-live="clock-time" data-p-time="10:00" data-size="70" data-label="10 am">10am</span>
+        <div>
+          <p style="font-weight:800" id="ad-when">Next adoption day</p>
+          <div class="count" id="count" aria-live="off"><div><b id="c-d">0</b><span>days</span></div><div><b id="c-h">0</b><span>hours</span></div><div><b id="c-m">0</b><span>mins</span></div><div><b id="c-s">0</b><span>secs</span></div></div>
+        </div>
+      </div>
+      <ul class="perks">
+        <li><span data-ico="map-pin" data-size="28" data-motion="hover">📍</span> 48 Maple Street, back garden (gate on Elm Lane)</li>
+        <li><span data-ico="clock" data-size="28" data-motion="hover">🕙</span> 10 am to 2 pm, rain or shine</li>
+        <li><span data-ico="gift" data-size="28" data-motion="hover">🎁</span> Free starter kit with every adoption</li>
+        <li><span data-ico="award" data-size="28" data-motion="hover">🏅</span> 40 animals homed in 2025 so far</li>
+      </ul>
+      <button class="btn btn-white" type="button" id="ics"><span data-ico="calendar" data-size="24" data-motion="hover">📅</span> Add to calendar</button>
+      <figure class="walkpic"><img src="_img/whisker-and-wag/photo-1494947665470-20322015e3a8-1000.jpg" width="1000" height="667" loading="lazy" decoding="async" alt="Four dogs on leashes walking together in a park."><figcaption>Saturday walk-and-wag around the park, every week at noon.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="del-h">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="chip"><span data-ico="truck" data-size="20" data-motion="hover">🚚</span> Delivery</span>
+      <h2 id="del-h">Out the door in a wag</h2>
+      <p>Order by 3 pm and our little van is at your door the next morning. Free over $40.</p>
+    </div>
+    <div class="road" aria-hidden="true">
+      <span class="cloud" style="left:12%"><span data-ico="cloud" data-size="40" data-motion="loop">☁️</span></span>
+      <span class="cloud" style="left:58%;top:16px"><span data-ico="sun" data-size="40" data-motion="loop">☀️</span></span>
+      <span class="home"><span data-ico="home" data-size="64">🏠</span></span>
+      <div class="lane"></div>
+      <div class="truck"><span data-ico="truck" data-size="64" data-motion="loop">🚚</span></div>
+    </div>
+    <div class="road-cap">
+      <span><span data-ico="package" data-size="26" data-motion="hover">📦</span> Packed by hand</span>
+      <span><span data-ico="timer" data-size="26" data-motion="hover">⏱️</span> Next-morning delivery</span>
+      <span><span data-ico="map-pin" data-size="26" data-motion="hover">📍</span> Maple County &amp; neighbours</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="reviews" aria-labelledby="rev-h" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="chip"><span data-ico="star" data-size="20" data-motion="hover">⭐</span> Reviews</span>
+      <h2 id="rev-h">Tails, tummies and testimonials</h2>
+    </div>
+    <div class="rev-grid">
+      <article class="card rev reveal"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="5 out of 5 stars" data-motion="inview">★★★★★</span><q>Biscuit used to walk away from every treat. The pumpkin oat ones vanish in under a second. Subscribed on the spot.</q><div class="who"><span class="coin"><span data-ico="avatar-woman-bun" data-size="34">🙂</span></span><div>Priya N.<small>with Biscuit, beagle</small></div></div></article>
+      <article class="card rev reveal"><span data-live="rating-stars" data-p-rating="4.5" data-size="64" data-label="4.5 out of 5 stars" data-motion="inview">★★★★½</span><q>The cave bed is a hit. Our cat Mochi hasn't slept anywhere else in three weeks, and it survived the washing machine.</q><div class="who"><span class="coin"><span data-ico="avatar-man-beard" data-size="34">🙂</span></span><div>Daniel R.<small>with Mochi, tabby</small></div></div></article>
+      <article class="card rev reveal"><span data-live="rating-stars" data-p-rating="5" data-size="64" data-label="5 out of 5 stars" data-motion="inview">★★★★★</span><q>Ordered at lunch, the hay pillow arrived next morning with a hand-written note. Our guinea pigs are thrilled.</q><div class="who"><span class="coin"><span data-ico="avatar-girl" data-size="34">🙂</span></span><div>Maya T.<small>with Pip &amp; Pepper, guinea pigs</small></div></div></article>
+      <article class="card rev reveal"><span data-live="rating-stars" data-p-rating="4" data-size="64" data-label="4 out of 5 stars" data-motion="inview">★★★★</span><q>Harness fit our big hairy lad first time. Staff measured over a video call. Would give five if the red was a bit redder!</q><div class="who"><span class="coin"><span data-ico="avatar-man-cap" data-size="34">🙂</span></span><div>Tomás G.<small>with Bruno, Newfoundland</small></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="news sec" aria-labelledby="news-h">
+  <div class="wrap">
+    <div class="reveal">
+      <h2 id="news-h">Join the pack</h2>
+      <p style="margin-top:12px;font-size:1.1rem;max-width:30em">One cheerful email a month: new arrivals, adoption stars of the week and 10% off your first order.</p>
+    </div>
+    <div class="reveal">
+      <form id="news-form" action="#" novalidate>
+        <div class="fld"><span data-ico="mail" data-size="26" data-motion="hover">✉️</span><label class="sr" for="nl-email">Email address</label><input id="nl-email" type="email" placeholder="you@example.com" autocomplete="email" required><button class="btn btn-sm" type="submit"><span data-ico="send" data-size="20" data-motion="hover">➤</span> Sign up</button></div>
+        <fieldset class="pets"><legend>Who is it for?</legend>
+          <label><input type="checkbox" name="pet" value="dog"><span data-ico="dog" data-size="24">🐶</span> Dog</label>
+          <label><input type="checkbox" name="pet" value="cat"><span data-ico="cat" data-size="24">🐱</span> Cat</label>
+          <label><input type="checkbox" name="pet" value="small"><span data-ico="rabbit" data-size="24">🐰</span> Small pet</label>
+        </fieldset>
+        <p class="err" id="nl-err" role="alert"></p>
+      </form>
+      <div class="thanks" id="nl-ok" hidden><span data-ico="party-popper" data-size="56" data-motion="loop">🎉</span><div><b style="font:400 1.4rem var(--head)">You are in the pack!</b><p id="nl-msg">Check your inbox for your 10% code.</p></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart" aria-hidden="true">
+  <div class="dr-head"><h2><span data-ico="shopping-cart" data-size="32" data-motion="hover">🛒</span> Your cart</h2><button class="icon-btn" id="dr-close" type="button" aria-label="Close cart" style="--bs:44px"><span data-ico="close" data-size="22" data-motion="hover">✕</span></button></div>
+  <div class="dr-ship"><span id="ship-msg">Add $40.00 more for free delivery</span><div class="meter"><span class="tr" id="ship-tr"><span data-ico="truck" data-size="30" data-motion="loop" data-min-level="2">🚚</span></span><i id="ship-bar"></i></div></div>
+  <div class="dr-list" id="dr-list"></div>
+  <div class="dr-foot">
+    <div class="tot"><span>Subtotal</span><span id="t-sub">$0.00</span></div>
+    <div class="tot" id="t-save-row" hidden><span>Subscribe &amp; save</span><span id="t-save" style="color:var(--mint-d)">-$0.00</span></div>
+    <div class="tot"><span>Delivery</span><span id="t-del">$4.95</span></div>
+    <div class="tot big"><span>Total</span><span id="t-tot">$0.00</span></div>
+    <button class="btn btn-red" id="checkout" type="button" style="width:100%;margin-top:10px"><span data-ico="check" data-size="24" data-motion="hover">✔</span> Checkout</button>
+    <p id="co-msg" role="status" style="margin-top:10px;font-weight:700;color:var(--mint-d)"></p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<section id="credits" aria-labelledby="cred-h">
+  <div class="wrap">
+    <h2 id="cred-h">Photo credits</h2>
+    <ul>
+      <li>Hero: puppy bounding across a field: Photo by <a href="https://www.pexels.com/@skyler-ewing-266953">Skyler Ewing</a> on <a href="https://www.pexels.com/photo/8081421/">Pexels</a></li>
+      <li>Dogs aisle: Photo by <a href="https://www.pexels.com/@gy1610-25786020">gy1610</a> on <a href="https://www.pexels.com/photo/25786020/">Pexels</a></li>
+      <li>Cats aisle: Photo by <a href="https://www.pexels.com/@foto-panda-29725457">Foto Panda</a> on <a href="https://www.pexels.com/photo/35765312/">Pexels</a></li>
+      <li>Treats aisle: Photo by <a href="https://www.pexels.com/@rubenstein111rebello">Rubenstein Rebello</a> on <a href="https://www.pexels.com/photo/8121154/">Pexels</a></li>
+      <li>Toys aisle: Photo by <a href="https://www.pexels.com/@barnabas-davoti-31615494">Barnabas Davoti</a> on <a href="https://www.pexels.com/photo/14084426/">Pexels</a></li>
+      <li>Beds aisle: Photo by <a href="https://unsplash.com/@a_cvetanovic?utm_source=withicons_demos&utm_medium=referral">Aleksandar Cvetanovic</a> on <a href="https://unsplash.com/photos/A7nK49HCqSI?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Collars aisle: Photo by <a href="https://unsplash.com/@ryanwaring?utm_source=withicons_demos&utm_medium=referral">Ryan Waring</a> on <a href="https://unsplash.com/photos/ZZOO5BRdZlw?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Bowls aisle: Photo by <a href="https://unsplash.com/@_karsten?utm_source=withicons_demos&utm_medium=referral">Karsten Winegeart</a> on <a href="https://unsplash.com/photos/UcvniPaMR_A?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Small pets aisle: Photo by <a href="https://www.pexels.com/@wwarby">wwarby</a> on <a href="https://www.pexels.com/photo/19613749/">Pexels</a></li>
+      <li>Grooming aisle: Photo by <a href="https://www.pexels.com/@tima-miroshnichenko">Tima Miroshnichenko</a> on <a href="https://www.pexels.com/photo/6131580/">Pexels</a></li>
+      <li>Saturday walk: Photo by <a href="https://unsplash.com/@mnelson?utm_source=withicons_demos&utm_medium=referral">Matt Nelson</a> on <a href="https://unsplash.com/photos/aI3EBLvcyu4?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Adoption day: Photo by <a href="https://www.pexels.com/@cottonbro">cottonbro studio</a> on <a href="https://www.pexels.com/photo/6568943/">Pexels</a></li>
+      <li>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT.</li>
+      <li>Demo page made with with icons. Names, places and products are fictional.</li>
+    </ul>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div><h3>Whisker &amp; Wag</h3><p>48 Maple Street, Maple County<br>Open daily 9 to 6, Saturdays 9 to 5</p></div>
+      <div><h3>Say hello</h3><ul><li><span data-ico="phone" data-size="22" data-motion="hover">📞</span> 555-0142</li><li><span data-ico="mail" data-size="22" data-motion="hover">✉️</span> woof@whiskerandwag.example</li><li><span data-ico="clock" data-size="22">🕙</span> Replies within a day</li></ul></div>
+      <div><h3>Shop</h3><ul><li><span data-ico="dog" data-size="22">🐶</span> Dogs</li><li><span data-ico="cat" data-size="22">🐱</span> Cats</li><li><span data-ico="rabbit" data-size="22">🐰</span> Small pets</li></ul></div>
+      <div><h3>Open</h3><span data-live="clock-time" data-p-time="09:00" data-size="64" data-label="Opens at 9 am">9am</span></div>
+    </div>
+    <p class="fine"><span data-ico="paw-print" data-size="20" data-motion="hover">🐾</span> Demo page made with with icons. Names, places and products are fictional.</p>
+  </div>
+</footer>
+
+<script src="_kit/demo-kit.js" data-style="sticker" data-recommend="sticker,plush,kawaii,clay,pastel,brutal,soft3d,duo" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  document.documentElement.classList.add('js')
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  var money = function (n) { return '$' + n.toFixed(2) }
+  var fit = function (root) { $$('[data-ico]', root).forEach(function (h) { if (!h.style.fontSize) h.style.fontSize = Math.round((parseFloat(h.dataset.size) || 24) * 0.7) + 'px' }) }
+  var kit = function (el) { fit(el); if (window.WithKit && el) WithKit.refresh(el) }
+  var ico = function (name, size, emoji, motion, extra) { return '<span data-' + 'ico="' + name + '" data-size="' + size + '"' + (motion ? ' data-motion="' + motion + '"' : '') + (extra || '') + '>' + emoji + '</span>' }
+  function setLive(el, params, fallback) {
+    if (!el) return
+    Object.keys(params).forEach(function (k) { el.dataset['p' + k.charAt(0).toUpperCase() + k.slice(1)] = params[k] })
+    if (window.WithKit && el._kit) WithKit.setLive(el, params)
+    var fb = el.querySelector('.kit-fb')
+    if (fallback != null) { if (fb) fb.textContent = fallback; else if (!el._kit) el.textContent = fallback }
+    if (params.label != null) el.setAttribute('aria-label', params.label)
+  }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches
+  // briefly play an icon's loop motion (feedback), then return to what it was
+  function play(el, ms) {
+    if (reduce || !el) return
+    var wi = el.querySelector('with-icon'); if (!wi) return
+    var prev = wi.getAttribute('motion'); wi.setAttribute('motion', 'loop')
+    setTimeout(function () { if (prev) wi.setAttribute('motion', prev); else wi.removeAttribute('motion') }, ms || 900)
+  }
+  var bump = function (el) { if (!el || reduce) return; el.classList.remove('bumped'); void el.offsetWidth; el.classList.add('bumped') }
+  var toastT
+  function toast(html) { var t = $('#toast'); t.innerHTML = html; kit(t); t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('on') }, 2600) }
+
+  /* ---- catalogue ---- */
+  var P = [
+    { id: 'peanut', n: 'Crunchy Peanut Bites', d: 'Oven-baked biscuits, 300 g bag. Peanut butter, oats, nothing else.', pets: ['dog'], price: 8.5, r: 4.8, c: 412, ic: 'cookie', em: '🍪', bg: '#fff0b8', badge: 'Best seller', pop: 98 },
+    { id: 'pumpkin', n: 'Pumpkin Oat Biscuits', d: 'Gentle on sensitive tummies. Pumpkin, oat flour and a little cinnamon.', pets: ['dog'], price: 9.25, r: 4.9, c: 268, ic: 'leaf', em: '🎃', bg: '#ffd9a8', badge: 'Gentle', pop: 90 },
+    { id: 'nibbles', n: 'Soft Training Nibbles', d: 'Pea-sized, soft and smelly in the best way. 200 treats per pouch.', pets: ['dog'], price: 7.75, r: 4.7, c: 331, ic: 'sparkles', em: '✨', bg: '#d4f5e8', pop: 85 },
+    { id: 'fetch', n: 'Bouncy Fetch Set', d: 'Three tennis balls and a launcher scoop that saves your shoulders.', pets: ['dog'], price: 12, r: 4.6, c: 187, ic: 'tennis', em: '🎾', bg: '#d9efff', pop: 70 },
+    { id: 'harness', n: 'Trail Day Harness', d: 'Padded, reflective and adjustable in four places. S to XL.', pets: ['dog'], price: 28, r: 4.4, c: 154, ic: 'shield-check', em: '🛡️', bg: '#ffe0d9', badge: 'New', pop: 75 },
+    { id: 'donut', n: 'Cloud Nine Donut Bed', d: 'Plush, bolstered and machine-washable. Medium fits up to 20 kg.', pets: ['dog'], price: 46, r: 4.9, c: 203, ic: 'bed', em: '🛏️', bg: '#ebdcff', pop: 80 },
+    { id: 'tuna', n: 'Tuna Tickle Crunchies', d: 'Crispy fish bites cats actually come running for. 100 g.', pets: ['cat'], price: 7.5, r: 4.8, c: 295, ic: 'fish', em: '🐟', bg: '#d9efff', badge: 'Cat fave', pop: 92 },
+    { id: 'wand', n: 'Feather Zoom Wand', d: 'Detachable feathers, a bell and a springy arm for serious pouncing.', pets: ['cat'], price: 9, r: 4.5, c: 176, ic: 'bird', em: '🪶', bg: '#ffd9a8', pop: 72 },
+    { id: 'cave', n: 'Cosy Cave Bed', d: 'A felt hideaway with a squishy cushion. Folds flat for washing.', pets: ['cat'], price: 34, r: 4.7, c: 142, ic: 'home', em: '🏠', bg: '#ebdcff', pop: 78 },
+    { id: 'hay', n: 'Timothy Hay Pillow', d: 'Fresh-cut hay in a nibble-safe pillow. Rabbits, guinea pigs, chinchillas.', pets: ['small'], price: 11, r: 4.9, c: 121, ic: 'leaf', em: '🌿', bg: '#d4f5e8', pop: 74 },
+    { id: 'carrot', n: 'Carrot Crunch Chews', d: 'Dried carrot and apple wood rings that keep teeth trim.', pets: ['small'], price: 6.5, r: 4.6, c: 98, ic: 'rabbit', em: '🥕', bg: '#ffe0d9', badge: 'Sale', pop: 68 },
+    { id: 'blocks', n: 'Cherry Wood Chew Blocks', d: 'Safe, untreated wood to gnaw, stack and shove off the table.', pets: ['small'], price: 8, r: 4.4, c: 77, ic: 'blocks', em: '🧱', bg: '#fff0b8', pop: 60 }
+  ]
+  var byId = {}; P.forEach(function (p) { byId[p.id] = p })
+  var pet = 'all', sort = 'pop', sub = false, wish = {}, cart = {}
+  var DISC = 0.9, FREE = 40, SHIP = 4.95
+  var unit = function (p) { return sub ? Math.round(p.price * DISC * 100) / 100 : p.price }
+
+  function cardHTML(p, i) {
+    var on = !!wish[p.id], u = unit(p)
+    return '<article class="card prod" style="animation-delay:' + Math.min(i, 8) * 45 + 'ms" data-id="' + p.id + '">' +
+      '<div class="p-art" style="--bg:' + p.bg + '">' + (p.badge ? '<span class="p-badge">' + p.badge + '</span>' : '') +
+      '<button class="icon-btn heart" type="button" data-wish="' + p.id + '" aria-pressed="' + on + '" aria-label="Save ' + esc(p.n) + ' to wishlist">' + ico('heart', 24, on ? '❤️' : '🤍', 'hover') + '</button>' +
+      ico('' + p.ic, 96, p.em, 'hover', ' data-label="' + esc(p.n) + '"') + '</div>' +
+      '<div class="p-body"><h3>' + esc(p.n) + '</h3><p class="d">' + esc(p.d) + '</p>' +
+      '<div class="p-rate">' + ico('star', 22, '⭐', 'inview') + '<span>' + p.r.toFixed(1) + '</span><span class="c">(' + p.c + ')</span></div>' +
+      '<div class="p-foot"><div class="price">' + money(u) + (sub ? '<s>' + money(p.price) + '</s><small>Every 4 weeks</small>' : '') + '</div>' +
+      '<button class="btn btn-sm btn-red" type="button" data-add="' + p.id + '" aria-label="Add ' + esc(p.n) + ' to cart">' + ico('shopping-cart', 22, '🛒', 'hover') + ' Add</button></div></div></article>'
+  }
+  function renderGrid() {
+    var list = P.filter(function (p) { return pet === 'all' || p.pets.indexOf(pet) > -1 })
+    list.sort(function (a, b) { return sort === 'low' ? a.price - b.price : sort === 'high' ? b.price - a.price : sort === 'rate' ? b.r - a.r : b.pop - a.pop })
+    var g = $('#grid')
+    g.innerHTML = list.map(cardHTML).join('') || '<p class="empty">Nothing here yet.</p>'
+    kit(g)
+    $('#shop-status').textContent = list.length + ' products shown' + (sub ? ', with subscribe and save prices' : '')
+  }
+  function setPet(v) {
+    pet = v
+    $$('.pick').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.pet === v)) })
+    renderGrid()
+  }
+  $$('.pick').forEach(function (b) { b.addEventListener('click', function () { setPet(b.dataset.pet); play(b, 800) }) })
+  $$('[data-jump]').forEach(function (a) { a.addEventListener('click', function () { setPet(a.dataset.jump) }) })
+  $('#sort').addEventListener('change', function (e) { sort = e.target.value; renderGrid() })
+  $('#sub').addEventListener('change', function (e) { sub = e.target.checked; renderGrid(); renderCart(); play(e.target.closest('.subtog'), 1000); toast(sub ? ico('repeat', 24, '🔁', 'loop') + ' Subscribe and save is on: 10% off' : 'Back to one-off prices') })
+  $('#sub-cta').addEventListener('click', function () { var s = $('#sub'); if (!s.checked) { s.checked = true; s.dispatchEvent(new Event('change')) } $('#shop').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }) })
+
+  /* ---- wishlist hearts + add to cart ---- */
+  function wishCount() { return Object.keys(wish).filter(function (k) { return wish[k] }).length }
+  document.addEventListener('click', function (e) {
+    var h = e.target.closest('[data-wish]')
+    if (h) {
+      var id = h.dataset.wish; wish[id] = !wish[id]
+      h.setAttribute('aria-pressed', String(!!wish[id]))
+      var slot = h.firstElementChild
+      if (slot && !slot.querySelector('with-icon')) slot.textContent = wish[id] ? '❤️' : '🤍'
+      play(h, 1100); bump(h)
+      var n = wishCount(), nb = $('#wish-n')
+      nb.hidden = n === 0; nb.textContent = n; $('#wish-btn').setAttribute('aria-label', 'Wishlist: ' + n + (n === 1 ? ' favourite' : ' favourites'))
+      bump($('#wish-btn'))
+      if (wish[id]) toast(ico('heart', 24, '❤️', 'loop') + ' Saved ' + esc(byId[id].n))
+      return
+    }
+    var a = e.target.closest('[data-add]')
+    if (a) addToCart(a.dataset.add, a)
+  })
+  function addToCart(id, btn) {
+    cart[id] = (cart[id] || 0) + 1
+    renderCart()
+    if (!btn) return
+    btn.disabled = true
+    btn.innerHTML = ico('loader', 22, '⏳', 'loop') + ' Adding'; kit(btn)
+    setTimeout(function () {
+      btn.innerHTML = ico('check', 22, '✔', 'once') + ' Added'; kit(btn)
+      bump($('#cart-toggle')); play($('#cart-toggle'), 900)
+      toast(ico('shopping-cart', 24, '🛒', 'loop') + ' ' + esc(byId[id].n) + ' is in your cart')
+      setTimeout(function () { btn.innerHTML = ico('shopping-cart', 22, '🛒', 'hover') + ' Add'; btn.disabled = false; kit(btn) }, 1100)
+    }, 650)
+  }
+
+  /* ---- cart ---- */
+  function totals() {
+    var raw = 0, n = 0
+    Object.keys(cart).forEach(function (id) { raw += byId[id].price * cart[id]; n += cart[id] })
+    var save = sub ? raw * (1 - DISC) : 0, after = raw - save
+    var ship = n === 0 ? 0 : after >= FREE ? 0 : SHIP
+    return { raw: raw, n: n, save: save, after: after, ship: ship, tot: after + ship }
+  }
+  function renderCart() {
+    var T = totals(), list = $('#dr-list'), ids = Object.keys(cart)
+    list.innerHTML = ids.length ? ids.map(function (id) {
+      var p = byId[id], u = unit(p)
+      return '<div class="line"><span class="t" style="--bg:' + p.bg + '">' + ico(p.ic, 36, p.em) + '</span><div><b>' + esc(p.n) + '</b><small>' + money(u) + ' each' + (sub ? ' · every 4 weeks' : '') + '</small>' +
+        '<div class="qty"><button type="button" data-q="-1" data-id="' + id + '" aria-label="Fewer ' + esc(p.n) + '">' + ico('minus', 20, '−', 'hover') + '</button><output>' + cart[id] + '</output><button type="button" data-q="1" data-id="' + id + '" aria-label="More ' + esc(p.n) + '">' + ico('plus', 20, '+', 'hover') + '</button></div></div>' +
+        '<div style="text-align:right"><b>' + money(u * cart[id]) + '</b><br><button type="button" class="back" data-rm="' + id + '" aria-label="Remove ' + esc(p.n) + '">' + ico('trash', 18, '🗑️', 'hover') + '</button></div></div>'
+    }).join('') : '<div class="dr-empty">' + ico('paw-print', 72, '🐾', 'loop') + '<p style="margin-top:10px"><b>Nothing here yet.</b><br>Your pets are waiting patiently.</p></div>'
+    kit(list)
+    var pct = Math.min(100, T.after / FREE * 100)
+    $('#ship-bar').style.width = pct + '%'; $('#ship-tr').style.left = Math.max(4, Math.min(96, pct)) + '%'
+    $('#ship-msg').textContent = T.n === 0 ? 'Add ' + money(FREE) + ' for free delivery' : T.after >= FREE ? 'Free delivery unlocked, hooray!' : 'Add ' + money(FREE - T.after) + ' more for free delivery'
+    $('#t-sub').textContent = money(T.raw); $('#t-save-row').hidden = !sub || !T.n; $('#t-save').textContent = '-' + money(T.save)
+    $('#t-del').textContent = T.n === 0 ? '$0.00' : T.ship ? money(T.ship) : 'Free'; $('#t-tot').textContent = money(T.tot)
+    $('#cart-total').textContent = '$' + (T.tot % 1 ? T.tot.toFixed(2) : T.tot)
+    $('#checkout').disabled = T.n === 0
+    var lbl = T.n + (T.n === 1 ? ' item' : ' items') + ' in your cart'
+    setLive($('#cart-badge'), { count: T.n, label: lbl }, '🛒 ' + T.n)
+    $('#cart-toggle').setAttribute('aria-label', 'Open cart, ' + lbl)
+  }
+  var lastFocus
+  function drawer(open) {
+    var d = $('#drawer'); d.classList.toggle('on', open); $('#scrim').classList.toggle('on', open); d.setAttribute('aria-hidden', String(!open))
+    if (open) { lastFocus = document.activeElement; $('#dr-close').focus() } else if (lastFocus) lastFocus.focus()
+  }
+  $('#cart-toggle').addEventListener('click', function () { drawer(true) })
+  $('#dr-close').addEventListener('click', function () { drawer(false) })
+  $('#scrim').addEventListener('click', function () { drawer(false) })
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && $('#drawer').classList.contains('on')) drawer(false) })
+  $('#wish-btn').addEventListener('click', function () {
+    var n = wishCount(); toast(n ? ico('heart', 24, '❤️', 'loop') + ' ' + n + (n === 1 ? ' favourite' : ' favourites') + ' saved' : ico('heart', 24, '🤍', 'hover') + ' Tap a heart to save a favourite')
+  })
+  $('#dr-list').addEventListener('click', function (e) {
+    var q = e.target.closest('[data-q]'), r = e.target.closest('[data-rm]')
+    if (q) { var id = q.dataset.id; cart[id] += +q.dataset.q; if (cart[id] <= 0) delete cart[id]; renderCart() }
+    if (r) { delete cart[r.dataset.rm]; renderCart() }
+  })
+  $('#checkout').addEventListener('click', function () {
+    var T = totals(); cart = {}; renderCart()
+    $('#co-msg').textContent = 'Thank you! Order W&W-4821 for ' + money(T.tot) + ' is on its way. (This is a demo, nothing was charged.)'
+    toast(ico('party-popper', 24, '🎉', 'loop') + ' Order placed. Wag wag!')
+  })
+
+  /* ---- treat finder quiz ---- */
+  var Q = [
+    { k: 'size', q: 'How big is your dog?', o: [['dog', '🐕', 'Small', 'under 10 kg', 40], ['dog', '🐕‍🦺', 'Medium', '10 to 25 kg', 54], ['dog', '🦮', 'Large', 'over 25 kg', 70]] },
+    { k: 'age', q: 'How old are they?', o: [['baby', '🐶', 'Puppy', 'under 1 year'], ['paw-print', '🐕', 'Adult', '1 to 7 years'], ['heart', '🐩', 'Senior', '8 years and up']] },
+    { k: 'tummy', q: 'How is their tummy?', o: [['smile', '😋', 'Iron stomach', 'eats anything'], ['heart-pulse', '🤢', 'Sensitive', 'needs gentle food']] }
+  ]
+  var qs = 0, ans = {}
+  function renderQuiz() {
+    var el = $('#quiz'), pct = Math.round((qs / Q.length) * 100)
+    if (qs < Q.length) {
+      var s = Q[qs]
+      el.innerHTML = '<div class="q-top"><span data-live="step-number" data-p-step="' + (qs + 1) + '" data-size="48" data-label="Question ' + (qs + 1) + ' of 3">' + (qs + 1) + '</span><div class="q-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '" aria-label="Quiz progress"><i style="width:' + Math.max(8, pct) + '%"></i></div></div>' +
+        '<h3>' + s.q + '</h3><div class="opts">' + s.o.map(function (o, i) { return '<button class="opt" type="button" data-i="' + i + '">' + ico(o[0], o[4] || 54, o[1], 'hover') + o[2] + '<small>' + o[3] + '</small></button>' }).join('') + '</div>' +
+        (qs ? '<button class="back" type="button" id="q-back">Back</button>' : '')
+    } else {
+      var r = ans.tummy === 1 || ans.age === 2 ? byId.pumpkin : ans.age === 0 ? byId.nibbles : byId.peanut
+      var size = ['small', 'medium', 'large'][ans.size], age = ['a puppy', 'an adult', 'a senior'][ans.age]
+      var why = ans.tummy === 1 ? 'Gentle pumpkin and oats are kind to sensitive tummies.' : ans.age === 2 ? 'Soft, easy to chew and easy to digest for senior teeth.' : ans.age === 0 ? 'Tiny, soft nibbles are perfect for training sessions.' : 'A crunchy classic that keeps adult teeth busy.'
+      var serve = ans.size === 0 ? 'Break one in half' : ans.size === 1 ? 'Two a day is plenty' : 'Up to four a day'
+      el.innerHTML = '<div class="q-res"><span class="chip">' + ico('award', 20, '🏅', 'once') + ' Your match</span><div class="r-art" style="background:' + r.bg + '">' + ico(r.ic, 100, r.em, 'loop') + '</div>' +
+        '<h3 style="margin:0">' + esc(r.n) + '</h3><p>For a ' + size + ' dog who is ' + age + (ans.tummy === 1 ? ' with a sensitive tummy' : '') + '. ' + why + ' ' + serve + '.</p>' +
+        '<p class="price">' + money(unit(r)) + '</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-red btn-sm" type="button" id="q-add">' + ico('shopping-cart', 22, '🛒', 'hover') + ' Add to cart</button><button class="back" type="button" id="q-again">Start again</button></div></div>'
+      el.dataset.rec = r.id
+    }
+    kit(el)
+  }
+  $('#quiz').addEventListener('click', function (e) {
+    var o = e.target.closest('.opt'), b = e.target.closest('#q-back'), ag = e.target.closest('#q-again'), ad = e.target.closest('#q-add')
+    if (o) { ans[Q[qs].k] = +o.dataset.i; qs++; renderQuiz() }
+    else if (b) { qs = Math.max(0, qs - 1); renderQuiz() }
+    else if (ag) { qs = 0; ans = {}; renderQuiz() }
+    else if (ad) addToCart($('#quiz').dataset.rec, ad)
+  })
+  renderQuiz()
+
+  /* ---- adoption day countdown + .ics ---- */
+  var MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
+  var MONF = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  var target, live = false
+  function nextSat(now) {
+    var d = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0, 0)
+    d.setDate(d.getDate() + ((6 - d.getDay() + 7) % 7))
+    if (now >= new Date(d.getFullYear(), d.getMonth(), d.getDate(), 14, 0, 0)) d.setDate(d.getDate() + 7)
+    return d
+  }
+  function tick() {
+    var now = new Date()
+    if (!target || now >= new Date(target.getFullYear(), target.getMonth(), target.getDate(), 14)) {
+      target = nextSat(now)
+      setLive($('#ad-cal'), { day: target.getDate(), month: MON[target.getMonth()], label: 'Saturday ' + MONF[target.getMonth()] + ' ' + target.getDate() }, 'Sat ' + target.getDate())
+    }
+    live = now >= target
+    var ms = Math.max(0, target - now), s = Math.floor(ms / 1000)
+    $('#c-d').textContent = Math.floor(s / 86400); $('#c-h').textContent = Math.floor(s % 86400 / 3600); $('#c-m').textContent = Math.floor(s % 3600 / 60); $('#c-s').textContent = s % 60
+    $('#ad-when').textContent = live ? 'Happening right now. Come on down!' : 'Next adoption day: Saturday ' + MONF[target.getMonth()] + ' ' + target.getDate()
+  }
+  tick(); setInterval(tick, 1000)
+  $('#ics').addEventListener('click', function () {
+    var p = function (n) { return String(n).padStart(2, '0') }, d = target || nextSat(new Date()), ymd = d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate())
+    var ics = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Whisker and Wag//Demo//EN', 'BEGIN:VEVENT', 'UID:adoption-' + ymd + '@whiskerandwag.example', 'DTSTAMP:' + ymd + 'T080000', 'DTSTART:' + ymd + 'T100000', 'DTEND:' + ymd + 'T140000',
+      'SUMMARY:Adoption day at Whisker & Wag', 'LOCATION:48 Maple Street\\, Maple County', 'DESCRIPTION:Meet adoptable dogs\\, cats and bunnies from Maple County Shelter. Free starter kit with every adoption.', 'END:VEVENT', 'END:VCALENDAR'].join('\r\n')
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })); a.download = 'adoption-day-' + ymd + '.ics'
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove() }, 500)
+    toast(ico('calendar', 24, '📅', 'loop') + ' Calendar file downloaded')
+  })
+
+  /* ---- newsletter ---- */
+  $('#news-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var v = $('#nl-email').value.trim(), err = $('#nl-err')
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(v)) { err.textContent = 'Please enter a valid email address, like you@example.com.'; $('#nl-email').focus(); return }
+    var pets = $$('input[name=pet]:checked').map(function (c) { return c.value })
+    err.textContent = ''; $('#news-form').hidden = true; $('#nl-ok').hidden = false
+    $('#nl-msg').textContent = 'We will send your 10% code to ' + v + (pets.length ? ' along with ideas for your ' + pets.join(' and ') + '.' : '.')
+    kit($('#nl-ok'))
+  })
+
+  /* ---- reveal on scroll ---- */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target) } }) }, { rootMargin: '0px 0px -8% 0px' })
+    $$('.reveal').forEach(function (n) { io.observe(n) })
+  } else $$('.reveal').forEach(function (n) { n.classList.add('in') })
+
+  renderGrid(); renderCart()
+})()
+</script>
+</body></html>

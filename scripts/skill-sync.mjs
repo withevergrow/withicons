@@ -178,9 +178,16 @@ const downloadsBody = `Every style as one zip: \`https://withicons.com/downloads
 
 // packages/mcp/src/style-guide.mjs: the same data for the MCP server (bundled into the stdio, lib and Lambda builds)
 const pick = (o, ks) => Object.fromEntries(ks.filter(k => o && o[k] != null).map(k => [k, o[k]]))
+// what recommend_styles adds to its notes when a use matches (the MCP tool names, so it lives here, not in site.js)
+const USE_NOTES = {
+  slides: "Slides and documents: make the whole set in one call, export_icon({ names: [...], style, format: 'png', size: 512, colors: { ... } }) " +
+    '(transparent background; out_dir saves them on the local server, the hosted server returns them inline), and embed the PNG, not SVG ' +
+    '(pptxgenjs addImage, python-pptx add_picture): 512 px stays crisp from 0.5 to 3 in. For an exact brand hex use solid or line with color; ' +
+    'gradient and shadow styles (suite, clay, glass ...) shade the colours you give.',
+}
 const guide = {
   groups: STYLE_GROUPS.map(g => ({ id: g.id, title: g.title, blurb: g.blurb || '', styles: g.styles.filter(s => styleNames.has(s)) })).filter(g => g.styles.length),
-  uses: usesList,
+  uses: usesList.map(u => USE_NOTES[u.id] ? { ...u, note: USE_NOTES[u.id] } : u),
   featured: FEATURED.filter(s => styleNames.has(s)),
   styles: Object.fromEntries([...styleNames].map(n => [n, {
     ...pick(INFO[n] || {}, ['title', 'plain', 'good', 'who']),

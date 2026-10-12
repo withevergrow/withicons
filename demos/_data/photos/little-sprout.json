@@ -1,0 +1,344 @@
+{
+  "slug": "little-sprout",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "7301166",
+      "page": "https://www.pexels.com/photo/7301166/",
+      "url": "https://images.pexels.com/photos/7301166/pexels-photo-7301166.jpeg",
+      "photographer": "Ksenia Chernaya",
+      "photographerUrl": "https://www.pexels.com/@kseniachernaya",
+      "alt": "A small child in a yellow top kneels on a white bedroom floor, building a tower from colourful wooden blocks with a few toys scattered around.",
+      "colors": "white, soft grey, yellow",
+      "focal": "48% 58%",
+      "notes": "Hero. Wide, bright and very calm: the white wall and floor leave a huge clean area for the headline above and to either side of the child. Use full width, anchor the crop low (object-position 48% 58%) so the child and block tower stay in view; text on the top-left or centre-top. Small, faceless-ish figure, warm and joyful without being cheesy.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/7301166-200.jpg",
+        "300": "_img/little-sprout/7301166-300.jpg",
+        "600": "_img/little-sprout/7301166-600.jpg",
+        "1000": "_img/little-sprout/7301166-1000.jpg",
+        "1600": "_img/little-sprout/7301166-1600.jpg"
+      }
+    },
+    {
+      "slot": "blocks",
+      "src": "unsplash",
+      "id": "RcxR1aLw8X0",
+      "page": "https://unsplash.com/photos/RcxR1aLw8X0",
+      "url": "https://images.unsplash.com/photo-1575364289437-fb1479d52732",
+      "photographer": "Michał Bożek",
+      "photographerUrl": "https://unsplash.com/@bozu",
+      "alt": "Colourful wooden blocks in blue, yellow, orange, red and green are scattered on a light wood table while a child's hand places a yellow triangle on a red block like a roof.",
+      "colors": "yellow, blue, orange",
+      "focal": "62% 50%",
+      "notes": "Blocks tile or a Blocks category banner. 4:3 landscape, saturated primary colours match the sprout/sunshine palette. Hand at the right, so a card crop keeps object-position 62% 50%.",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/photo-1575364289437-fb1479d52732-200.jpg",
+        "300": "_img/little-sprout/photo-1575364289437-fb1479d52732-300.jpg",
+        "600": "_img/little-sprout/photo-1575364289437-fb1479d52732-600.jpg",
+        "1000": "_img/little-sprout/photo-1575364289437-fb1479d52732-1000.jpg"
+      }
+    },
+    {
+      "slot": "plush",
+      "src": "unsplash",
+      "id": "07eCb8SVGus",
+      "page": "https://unsplash.com/photos/07eCb8SVGus",
+      "url": "https://images.unsplash.com/photo-1581312742770-ce89199554af",
+      "photographer": "Oxana Lyashenko",
+      "photographerUrl": "https://unsplash.com/@sanateddy",
+      "alt": "A brown teddy bear in a navy and white striped knit jumper and a red scarf peeks out between weathered grey wooden planks.",
+      "colors": "brown, weathered grey, red",
+      "focal": "40% 55%",
+      "notes": "Plush tile. Charming, sharp, shallow focus. The grey wood is nearly monochrome so the red scarf pops; keep the bear on the left third when cropping square (object-position 40% 55%).",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/photo-1581312742770-ce89199554af-200.jpg",
+        "300": "_img/little-sprout/photo-1581312742770-ce89199554af-300.jpg",
+        "600": "_img/little-sprout/photo-1581312742770-ce89199554af-600.jpg",
+        "1000": "_img/little-sprout/photo-1581312742770-ce89199554af-1000.jpg"
+      }
+    },
+    {
+      "slot": "books",
+      "src": "pexels",
+      "id": "3661368",
+      "page": "https://www.pexels.com/photo/3661368/",
+      "url": "https://images.pexels.com/photos/3661368/pexels-photo-3661368.jpeg",
+      "photographer": "cottonbro studio",
+      "photographerUrl": "https://www.pexels.com/@cottonbro",
+      "alt": "A toddler in mint dungarees sits on a white bed beside a plush lamb and a green toy dinosaur, turning the pages of a large illustrated book.",
+      "colors": "white, mint green, peach, blush pink",
+      "focal": "50% 45%",
+      "notes": "Books tile (replaces a stack of Polish-titled covers that were legible). Bright white, sharp, 3:2 landscape; the child and open book sit centre-right (object-position 50% 45%). For a square tile crop to the middle 2/3. The book spread shows photographs, no readable text; the child's face is visible.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/3661368-200.jpg",
+        "300": "_img/little-sprout/3661368-300.jpg",
+        "600": "_img/little-sprout/3661368-600.jpg",
+        "1000": "_img/little-sprout/3661368-1000.jpg"
+      }
+    },
+    {
+      "slot": "puzzle",
+      "src": "pexels",
+      "id": "7780916",
+      "page": "https://www.pexels.com/photo/7780916/",
+      "url": "https://images.pexels.com/photos/7780916/pexels-photo-7780916.jpeg",
+      "photographer": "Mikhail Nilov",
+      "photographerUrl": "https://www.pexels.com/@mikhail-nilov",
+      "alt": "Pastel pink, yellow, orange and blue wooden puzzle pieces are scattered over a soft grey fabric, seen from above.",
+      "colors": "pastel pink, yellow, orange, grey",
+      "focal": "50% 45%",
+      "notes": "Puzzle tile. Top-down flat lay with a soft grey ground, bright and tactile. Pieces fill the frame so almost any crop works; no focal bias needed.",
+      "width": 1200,
+      "height": 1635,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/little-sprout/7780916-200.jpg",
+        "300": "_img/little-sprout/7780916-300.jpg",
+        "600": "_img/little-sprout/7780916-600.jpg",
+        "1000": "_img/little-sprout/7780916-1000.jpg"
+      }
+    },
+    {
+      "slot": "train",
+      "src": "pexels",
+      "id": "15250000",
+      "page": "https://www.pexels.com/photo/15250000/",
+      "url": "https://images.pexels.com/photos/15250000/pexels-photo-15250000.jpeg",
+      "photographer": "Vladimir Srajber",
+      "photographerUrl": "https://www.pexels.com/@vladimirsrajber",
+      "alt": "A wooden toy railway curves over an orange arched bridge, with a small white train in the foreground on a green play mat.",
+      "colors": "orange, green, natural wood",
+      "focal": "40% 55%",
+      "notes": "Train tile. Macro-style shot with soft background blur; the sharp train sits low-left and the orange bridge arches at the top right. Landscape card crop is ideal.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/15250000-200.jpg",
+        "300": "_img/little-sprout/15250000-300.jpg",
+        "600": "_img/little-sprout/15250000-600.jpg",
+        "1000": "_img/little-sprout/15250000-1000.jpg"
+      }
+    },
+    {
+      "slot": "kitchen",
+      "src": "pexels",
+      "id": "36738063",
+      "page": "https://www.pexels.com/photo/36738063/",
+      "url": "https://images.pexels.com/photos/36738063/pexels-photo-36738063.jpeg",
+      "photographer": "Kimberly Alves",
+      "photographerUrl": "https://www.pexels.com/@kimberly-alves-2160417495",
+      "alt": "Two small children, seen from behind, play at a grey toy kitchen in front of an orange and yellow arched wall.",
+      "colors": "orange, mustard, grey, cream",
+      "focal": "50% 68%",
+      "notes": "Pretend-play tile. Shot from behind so no faces; the bold arch wall behind is playful and on-palette. Portrait: for a landscape card keep object-position 50% 68% so the kitchen and both children stay in frame.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/little-sprout/36738063-200.jpg",
+        "300": "_img/little-sprout/36738063-300.jpg",
+        "600": "_img/little-sprout/36738063-600.jpg",
+        "1000": "_img/little-sprout/36738063-1000.jpg"
+      }
+    },
+    {
+      "slot": "art",
+      "src": "pexels",
+      "id": "33590129",
+      "page": "https://www.pexels.com/photo/33590129/",
+      "url": "https://images.pexels.com/photos/33590129/pexels-photo-33590129.jpeg",
+      "photographer": "Çiğdem Bilgin",
+      "photographerUrl": "https://www.pexels.com/@cigdem-bilgin-2154409770",
+      "alt": "A child's crayon drawing of a sunny landscape with a blue river and green hills, with rainbow crayons lying across the page on a shaggy rug.",
+      "colors": "blue, green, yellow",
+      "focal": "50% 55%",
+      "notes": "Art tile. Authentic kid drawing with the crayons in frame, no faces. Landscape, works at card size and as a banner for an Art supplies category.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/33590129-200.jpg",
+        "300": "_img/little-sprout/33590129-300.jpg",
+        "600": "_img/little-sprout/33590129-600.jpg",
+        "1000": "_img/little-sprout/33590129-1000.jpg"
+      }
+    },
+    {
+      "slot": "horse",
+      "src": "unsplash",
+      "id": "IM536k4QvVI",
+      "page": "https://unsplash.com/photos/IM536k4QvVI",
+      "url": "https://images.unsplash.com/photo-1755092756284-226aea1995b6",
+      "photographer": "Georgii Eletskikh",
+      "photographerUrl": "https://unsplash.com/@elegeo",
+      "alt": "A vintage dapple-grey wooden rocking horse with a dark mane stands on a bare wooden floor in a bright white room.",
+      "colors": "grey, white, honey wood",
+      "focal": "50% 45%",
+      "notes": "Rocking horse / ride-on tile. Calm and nostalgic, very clean surroundings. Portrait with the horse centred; for a square tile crop with object-position 50% 45%.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "200": "_img/little-sprout/photo-1755092756284-226aea1995b6-200.jpg",
+        "300": "_img/little-sprout/photo-1755092756284-226aea1995b6-300.jpg",
+        "600": "_img/little-sprout/photo-1755092756284-226aea1995b6-600.jpg",
+        "1000": "_img/little-sprout/photo-1755092756284-226aea1995b6-1000.jpg"
+      }
+    },
+    {
+      "slot": "nursery",
+      "src": "pexels",
+      "id": "4964488",
+      "page": "https://www.pexels.com/photo/4964488/",
+      "url": "https://images.pexels.com/photos/4964488/pexels-photo-4964488.jpeg",
+      "photographer": "Karolina Grabowska",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "A white baby crib with a grey elephant-print blanket sits against a sage-green wall beside a woven basket, with a small plush elephant hanging at the crib corner.",
+      "colors": "white, sage green, grey, straw",
+      "focal": "35% 60%",
+      "notes": "Nursery tile. Soft sage green matches the sprout-green brand colour, with soft toy details. Landscape; crib and blanket on the left, basket on the right, so keep the crop centred left (object-position 35% 60%).",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/4964488-200.jpg",
+        "300": "_img/little-sprout/4964488-300.jpg",
+        "600": "_img/little-sprout/4964488-600.jpg",
+        "1000": "_img/little-sprout/4964488-1000.jpg"
+      }
+    },
+    {
+      "slot": "rattle",
+      "src": "pexels",
+      "id": "6392802",
+      "page": "https://www.pexels.com/photo/6392802/",
+      "url": "https://images.pexels.com/photos/6392802/pexels-photo-6392802.jpeg",
+      "photographer": "William Fortunato",
+      "photographerUrl": "https://www.pexels.com/@william-fortunato",
+      "alt": "A parent's hand holds a wooden barrel rattle with coloured balls inside above a cream woven rug, with a baby's bare feet at the top edge.",
+      "colors": "cream, beige, red, blue",
+      "focal": "58% 58%",
+      "notes": "Baby / rattle tile. Hand-only (a baby's bare feet show at the very top edge, no faces), very calm cream rug with room for text at the lower left. Landscape, the rattle sits right of centre (object-position 58% 58%).",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/6392802-200.jpg",
+        "300": "_img/little-sprout/6392802-300.jpg",
+        "600": "_img/little-sprout/6392802-600.jpg",
+        "1000": "_img/little-sprout/6392802-1000.jpg"
+      }
+    },
+    {
+      "slot": "gift",
+      "src": "pexels",
+      "id": "7722004",
+      "page": "https://www.pexels.com/photo/7722004/",
+      "url": "https://images.pexels.com/photos/7722004/pexels-photo-7722004.jpeg",
+      "photographer": "İbrahim Doğan",
+      "photographerUrl": "https://www.pexels.com/@i-brahim-dogan-52378540",
+      "alt": "A wooden toy car carries a red gift box tied with a green dotted ribbon on a pale concrete surface.",
+      "colors": "red, green, natural wood, cream",
+      "focal": "50% 55%",
+      "notes": "Gift-wrap tile. Square, centred and clean. Perfect for the gift-wrap toggle or gift finder; the red and green read as a warm tomato and sprout pairing.",
+      "width": 1200,
+      "height": 1200,
+      "orientation": "square",
+      "local": {
+        "200": "_img/little-sprout/7722004-200.jpg",
+        "300": "_img/little-sprout/7722004-300.jpg",
+        "600": "_img/little-sprout/7722004-600.jpg",
+        "1000": "_img/little-sprout/7722004-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "8690656",
+      "page": "https://www.pexels.com/photo/8690656/",
+      "url": "https://images.pexels.com/photos/8690656/pexels-photo-8690656.jpeg",
+      "photographer": "Irina Kraskova",
+      "photographerUrl": "https://www.pexels.com/@irina-kraskova-76947236",
+      "alt": "A toddler seen from behind kneels on a wooden floor, playing with a looping wooden train track beside a bedroom wall.",
+      "colors": "honey wood, beige, grey",
+      "focal": "42% 60%",
+      "notes": "Second hero candidate. Moodier and warmer than the main hero; the child is seen from behind. Calm wall space on the left and top; use for a quieter alternative hero or a story section (object-position 42% 60%).",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/8690656-200.jpg",
+        "300": "_img/little-sprout/8690656-300.jpg",
+        "600": "_img/little-sprout/8690656-600.jpg",
+        "1000": "_img/little-sprout/8690656-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "38695466",
+      "page": "https://www.pexels.com/photo/38695466/",
+      "url": "https://images.pexels.com/photos/38695466/pexels-photo-38695466.jpeg",
+      "photographer": "Lee Hanson",
+      "photographerUrl": "https://www.pexels.com/@lee-hanson-2161337044",
+      "alt": "A stacked wooden rainbow, a wooden shape sorter and a green dinosaur plush sit on a wooden floor in front of a green wall.",
+      "colors": "rainbow, green, honey wood",
+      "focal": "40% 62%",
+      "notes": "Atmosphere or bundle-deal shot. Saturated and playful with a green wall that matches the sprout green. The rainbow is the hero, so keep it at the bottom-left of any crop.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/38695466-200.jpg",
+        "300": "_img/little-sprout/38695466-300.jpg",
+        "600": "_img/little-sprout/38695466-600.jpg",
+        "1000": "_img/little-sprout/38695466-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "zlLfm8-DlN4",
+      "page": "https://unsplash.com/photos/zlLfm8-DlN4",
+      "url": "https://images.unsplash.com/photo-1714618888538-8d15a9228236",
+      "photographer": "NAM CZ",
+      "photographerUrl": "https://unsplash.com/@czon00",
+      "alt": "Two angular hand-painted wooden animal figures, one zebra-striped and one brown, stand on a small wooden toy stand in soft window light.",
+      "colors": "natural wood, olive, icy blue",
+      "focal": "50% 55%",
+      "notes": "Texture or detail shot. Quiet and well lit, with a soft blue window glow behind; good for a craftsmanship or materials trust strip, or a blog-style panel.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "200": "_img/little-sprout/photo-1714618888538-8d15a9228236-200.jpg",
+        "300": "_img/little-sprout/photo-1714618888538-8d15a9228236-300.jpg",
+        "600": "_img/little-sprout/photo-1714618888538-8d15a9228236-600.jpg",
+        "1000": "_img/little-sprout/photo-1714618888538-8d15a9228236-1000.jpg"
+      }
+    }
+  ],
+  "localize": {
+    "widths": [
+      200,
+      300,
+      600,
+      1000
+    ]
+  }
+}

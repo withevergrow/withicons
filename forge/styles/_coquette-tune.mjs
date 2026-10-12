@@ -73,6 +73,8 @@ export const TUNE = {
   'rating-stars': { orn: null, dotShape: 'star' },
   // a compact sun (beside its temperature) is too small to wear a bow: the bow is tied on the temperature's plate
   'weather': p => p && p.condition === 'sunny' && p.showTemperature !== false ? { orn: 'plate' } : null,
+  // ---- run 14 statics: a gilded crown over a cream tooth like tooth (the cap reads as the gold plate)
+  'tooth-crown': { mat: 'cream', remap: { K: 'A', A: 'K' } },
 }
 
 export function tuneFor(name, params) {

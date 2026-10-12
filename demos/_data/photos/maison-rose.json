@@ -1,0 +1,301 @@
+{
+  "slug": "maison-rose",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "4041386",
+      "page": "https://www.pexels.com/photo/4041386/",
+      "url": "https://images.pexels.com/photos/4041386/pexels-photo-4041386.jpeg",
+      "photographer": "Karola G",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "An amber glass dropper bottle with a black cap stands on a small round wooden plate among pale pink rose petals on a white marble surface, with loose petals scattered to the left and soft shadows.",
+      "colors": "white, blush pink, dark amber",
+      "focal": "68% 50%",
+      "notes": "Landscape with calm white space on the left and top for the headline and 'Find your ritual' CTA; bottle sits right of centre. Use object-position 68% 50% on narrow screens, a soft ivory gradient from the left helps legibility.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/maison-rose/4041386-800.jpg",
+        "1600": "_img/maison-rose/4041386-1600.jpg"
+      }
+    },
+    {
+      "slot": "serum",
+      "src": "pexels",
+      "id": "8101534",
+      "page": "https://www.pexels.com/photo/8101534/",
+      "url": "https://images.pexels.com/photos/8101534/pexels-photo-8101534.jpeg",
+      "photographer": "Polina Kovaleva",
+      "photographerUrl": "https://www.pexels.com/@polina-kovaleva",
+      "alt": "A plum-burgundy glass serum bottle with a blank white label and a white dropper laid across its open neck, balanced on a frosted glass jar with a bamboo lid against a soft grey wall with leaf shadows.",
+      "colors": "burgundy plum, warm wood, soft grey",
+      "focal": "50% 55%",
+      "notes": "Portrait product shot with a blank label so a demo brand can be laid over it; deep burgundy matches the palette. Best for a tall best-seller card; fits 3:4 with a slight top crop.",
+      "width": 1200,
+      "height": 1598,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/8101534-800.jpg"
+      }
+    },
+    {
+      "slot": "cream",
+      "src": "pexels",
+      "id": "7321497",
+      "page": "https://www.pexels.com/photo/7321497/",
+      "url": "https://images.pexels.com/photos/7321497/pexels-photo-7321497.jpeg",
+      "photographer": "Karola G",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "A hand with dark nail polish dips two fingers into an open pink jar of white face cream on a pale white surface.",
+      "colors": "blush pink, white, soft grey-blue",
+      "focal": "45% 60%",
+      "notes": "Portrait close-up; the pink jar sits in the lower half with the hand above it, so a square card should use object-position 45% 60%. Soft pink matches the rose palette. A bare forearm and white robe cuff show at the top; no identifiable face.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/7321497-800.jpg"
+      }
+    },
+    {
+      "slot": "mask",
+      "src": "pexels",
+      "id": "6167443",
+      "page": "https://www.pexels.com/photo/6167443/",
+      "url": "https://images.pexels.com/photos/6167443/pexels-photo-6167443.jpeg",
+      "photographer": "Vie Studio",
+      "photographerUrl": "https://www.pexels.com/@vie-studio",
+      "alt": "An open glass jar of grey-brown clay face mask on white marble, its black lid turned upside down beside it, over the corner of a magazine.",
+      "colors": "clay brown, marble white, charcoal",
+      "focal": "50% 40%",
+      "notes": "Landscape high-angle flat lay, neutral and tactile. Good for the clay-mask product card or the skin-concern quiz result for oily or congested skin.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/maison-rose/6167443-800.jpg"
+      }
+    },
+    {
+      "slot": "petals",
+      "src": "unsplash",
+      "id": "Y-AQQ7xaGnI",
+      "page": "https://unsplash.com/photos/macro-photography-of-pink-rose-flower-Y-AQQ7xaGnI",
+      "url": "https://images.unsplash.com/photo-1538340794916-c941f42976f2",
+      "photographer": "Pawel Czerwinski",
+      "photographerUrl": "https://unsplash.com/@pawel_czerwinski",
+      "alt": "A single coral-pink rose in full bloom on a thin stem against a soft pale grey background, shot in clean studio light.",
+      "colors": "coral pink, pale grey, white",
+      "focal": "55% 40%",
+      "notes": "Landscape with generous pale space around the bloom, ideal for the ingredient spotlight (rose) with text beside it. The grey ground cools quickly, so pair it with warm ivory section backgrounds.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/maison-rose/photo-1538340794916-c941f42976f2-700.jpg",
+        "800": "_img/maison-rose/photo-1538340794916-c941f42976f2-800.jpg"
+      }
+    },
+    {
+      "slot": "perfume",
+      "src": "unsplash",
+      "id": "LkT5-JCePUY",
+      "page": "https://unsplash.com/photos/glass-perfume-bottle-LkT5-JCePUY",
+      "url": "https://images.unsplash.com/photo-1543422655-ac1c6ca993ed",
+      "photographer": "Siora Photography",
+      "photographerUrl": "https://unsplash.com/@siora18",
+      "alt": "A faceted glass perfume bottle with a rose-gold cap and blush liquid rests on soft, crumpled pink-white fabric in gentle light.",
+      "colors": "blush pink, rose gold, ivory",
+      "focal": "65% 50%",
+      "notes": "Landscape with the bottle right of centre and calm blush fabric on the left, so it works as a fragrance banner with copy on the left. No legible label.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/maison-rose/photo-1543422655-ac1c6ca993ed-800.jpg"
+      }
+    },
+    {
+      "slot": "lipstick",
+      "src": "pexels",
+      "id": "7256145",
+      "page": "https://www.pexels.com/photo/7256145/",
+      "url": "https://images.pexels.com/photos/7256145/pexels-photo-7256145.jpeg",
+      "photographer": "DS stories",
+      "photographerUrl": "https://www.pexels.com/@ds-stories",
+      "alt": "A fan of six lipsticks in black cases, in shades from pale pink and nude to coral and bright red, on a soft pink surface.",
+      "colors": "powder pink, rose, black",
+      "focal": "50% 40%",
+      "notes": "Portrait flat lay on powder pink, graphic and clean. Suits the cosmetics or tinted-balm card; the black cases give strong contrast against the rose palette.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/7256145-800.jpg"
+      }
+    },
+    {
+      "slot": "candle",
+      "src": "pexels",
+      "id": "6766263",
+      "page": "https://www.pexels.com/photo/6766263/",
+      "url": "https://images.pexels.com/photos/6766263/pexels-photo-6766263.jpeg",
+      "photographer": "Katrin Bolovtsova",
+      "photographerUrl": "https://www.pexels.com/@ekaterina-bolovtsova",
+      "alt": "A lit candle in a glass jar glows beside a small kraft-paper box, a bowl of white bath salts and two glass tubes of pink salts on a soft linen cloth, in warm light.",
+      "colors": "warm amber, cream, blush",
+      "focal": "35% 50%",
+      "notes": "Portrait, warm and cosy with a visible flame. Good for the candle or bath-salts card and the 'ritual' mood; slightly warmer than the rest of the set.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/6766263-800.jpg"
+      }
+    },
+    {
+      "slot": "routine",
+      "src": "pexels",
+      "id": "4960142",
+      "page": "https://www.pexels.com/photo/4960142/",
+      "url": "https://images.pexels.com/photos/4960142/pexels-photo-4960142.jpeg",
+      "photographer": "Karola G",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "A woman wrapped in a grey towel with a white towel on her head, seen mostly from behind, touches her face at a bathroom mirror, with dried flowers beside it.",
+      "colors": "soft grey, white, skin tones",
+      "focal": "45% 40%",
+      "notes": "Portrait, face only seen as a small mirror reflection so it reads as a real evening routine without an identifiable close-up. Use beside the AM/PM routine builder.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/4960142-800.jpg",
+        "900": "_img/maison-rose/4960142-900.jpg"
+      }
+    },
+    {
+      "slot": "ingredients",
+      "src": "pexels",
+      "id": "6823263",
+      "page": "https://www.pexels.com/photo/6823263/",
+      "url": "https://images.pexels.com/photos/6823263/pexels-photo-6823263.jpeg",
+      "photographer": "Antoni Shkraba",
+      "photographerUrl": "https://www.pexels.com/@shkrabaanthony",
+      "alt": "From above, a clear glass bottle packed with dried red rosebuds on pale veined marble, with more buds scattered from its neck toward the top right.",
+      "colors": "rose red, ivory marble, blush",
+      "focal": "50% 55%",
+      "notes": "Portrait flat lay, bright and clean, so it sits well on ivory sections. Bottle is centred with scattered buds at the top right; for a square ingredient-spotlight card crop around the bottle with object-position 50% 55%. Replaces an earlier crystal and amethyst still life that read as esoteric rather than skincare.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/6823263-800.jpg",
+        "900": "_img/maison-rose/6823263-900.jpg"
+      }
+    },
+    {
+      "slot": "brush",
+      "src": "pexels",
+      "id": "8580708",
+      "page": "https://www.pexels.com/photo/8580708/",
+      "url": "https://images.pexels.com/photos/8580708/pexels-photo-8580708.jpeg",
+      "photographer": "RDNE Stock project",
+      "photographerUrl": "https://www.pexels.com/@rdne",
+      "alt": "A bunch of makeup brushes with gold and white handles stands in a gold wire holder on a bright white vanity, with a blurred white instant camera behind.",
+      "colors": "white, champagne gold, soft beige",
+      "focal": "45% 40%",
+      "notes": "Portrait, bright and airy vanity detail with champagne gold that echoes the brand accent. Works as a small accessory card or an editorial strip image. Caution: a few tiny, partly hidden letters on one brush handle and a blurred white instant camera in the background; both are illegible at card sizes, so avoid a large hero crop.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/8580708-800.jpg"
+      }
+    },
+    {
+      "slot": "spa",
+      "src": "pexels",
+      "id": "35884499",
+      "page": "https://www.pexels.com/photo/35884499/",
+      "url": "https://images.pexels.com/photos/35884499/pexels-photo-35884499.jpeg",
+      "photographer": "Marine Fougère",
+      "photographerUrl": "https://www.pexels.com/@marine-fougere-2159237528",
+      "alt": "A spa treatment table covered in white towelling with a rolled white towel and a small wooden tray holding a dark candle and a reed diffuser with dried grasses, on a parquet floor.",
+      "colors": "cream white, warm oak, charcoal",
+      "focal": "50% 55%",
+      "notes": "Landscape, soft and calm: rolled towel left of centre, tray at lower right, plain towelling across the bottom-left that takes copy on a light scrim. Warm parquet floor at the top right. Good for the rituals or refill band.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/maison-rose/35884499-800.jpg",
+        "1200": "_img/maison-rose/35884499-1200.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "pexels",
+      "id": "6801176",
+      "page": "https://www.pexels.com/photo/6801176/",
+      "url": "https://images.pexels.com/photos/6801176/pexels-photo-6801176.jpeg",
+      "photographer": "Artem Podrez",
+      "photographerUrl": "https://www.pexels.com/@artempodrez",
+      "alt": "A small white dropper bottle with a black cap sits on a white block with a thin gold tray, against a flat warm beige backdrop with a lot of empty space.",
+      "colors": "warm beige, white, champagne gold",
+      "focal": "85% 70%",
+      "notes": "Second hero candidate: very wide empty beige area for a large headline, product tucked bottom right. Crop to the right edge and keep the bottle visible with object-position 85% 70%.",
+      "width": 1200,
+      "height": 675,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/maison-rose/6801176-800.jpg",
+        "1000": "_img/maison-rose/6801176-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "4735904",
+      "page": "https://www.pexels.com/photo/4735904/",
+      "url": "https://images.pexels.com/photos/4735904/pexels-photo-4735904.jpeg",
+      "photographer": "Karola G",
+      "photographerUrl": "https://www.pexels.com/@karola-g",
+      "alt": "A jar of peach-pink face cream with a white lid sits beside a lying peach tube and a tall cream pump bottle with a gold collar on a pale marble surface.",
+      "colors": "peach, cream white, soft gold",
+      "focal": "55% 65%",
+      "notes": "Portrait, airy marble set: a cream pump bottle with a gold collar, a peach tube and a peach jar. Use for a routine-set or bundle card. The jar sits low in the frame, so keep the bottom crop generous. Replaces an Unsplash rose macro that had a painted filter over it.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "800": "_img/maison-rose/4735904-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "JpnqiMBf7zQ",
+      "page": "https://unsplash.com/photos/a-bottle-of-essential-oil-sitting-on-a-cloth-JpnqiMBf7zQ",
+      "url": "https://images.unsplash.com/photo-1671493235081-5842463637cd",
+      "photographer": "Denise Chan",
+      "photographerUrl": "https://unsplash.com/@elchan",
+      "alt": "A small amber glass bottle with a black cap lies on its side on a textured cream and beige gauze cloth.",
+      "colors": "natural beige, amber, black",
+      "focal": "55% 40%",
+      "notes": "Atmosphere shot, quiet and tactile with a blank bottle. Works for the refill programme (reusable amber glass) or as a soft section background.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/maison-rose/photo-1671493235081-5842463637cd-800.jpg"
+      }
+    }
+  ],
+  "localize": {
+    "widths": [
+      800
+    ]
+  }
+}

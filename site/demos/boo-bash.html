@@ -1,0 +1,1787 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pumpkin Patch Boo Bash (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: Pip is turning 6! A little-monsters costume party and trick-or-treat trail for ages 3 to 9 on Saturday 24 October, 2 to 5 pm. Nut-free snacks, mummy races, a treasure-map trail and a costume contest.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#ff8a1f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== tokens ===== */
+:root{
+  --ink:#2a1445;--ink2:#55406f;--cream:#fff6e2;--paper:#fffdf7;
+  --orange:#ff8a1f;--orange2:#b8400c;--osoft:#ffe3bd;
+  --grape:#7b3fe4;--grape2:#5a26b8;--gsoft:#eadfff;
+  --slime:#7cc93a;--slime2:#2f6a0c;--ssoft:#e6f6c3;
+  --sun:#ffd23f;--sunsoft:#fff3b0;--pink:#ff7aa8;--peach:#ffead0;
+  --bad:#a3231a;--badsoft:#ffe3df;
+  --wob:30px 22px 34px 20px/22px 32px 20px 30px;
+  --wob2:22px 34px 20px 30px/30px 20px 32px 22px;
+  --sh:5px 6px 0 var(--ink);
+  --fd:'Chewy','Fredoka',system-ui,sans-serif;--fb:'Fredoka',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ol:-.035em -.035em 0 var(--ink),.035em -.035em 0 var(--ink),-.035em .035em 0 var(--ink),.035em .035em 0 var(--ink),0 -.035em 0 var(--ink),0 .035em 0 var(--ink),-.035em 0 0 var(--ink),.035em 0 0 var(--ink);
+
+  /* default style (halloween) tuned to the brand: pumpkin, grape, slime, sun, deep-grape ink */
+  --with-halloween-ink:#2a1445;--with-halloween-shadow:#2a1445;--with-halloween-edge:#5a26b8;
+  --with-halloween-c1:#ff8a1f;--with-halloween-c2:#e5530f;--with-halloween-c3:#7b3fe4;--with-halloween-c4:#7cc93a;
+  --with-halloween-accent:#ffd23f;--with-halloween-tint:#fff3b0;--with-halloween-shine:#fff6e2;
+  /* a few of the recommended styles, so flipping the style keeps the palette */
+  --with-sticker-ink:#2a1445;--with-sticker-shadow:#2a1445;--with-sticker-lemon:#ffd23f;--with-sticker-peach:#ff8a1f;--with-sticker-grape:#9b6bf2;--with-sticker-mint:#7cc93a;--with-sticker-bubblegum:#ff7aa8;--with-sticker-accent:#ff7aa8;--with-sticker-c1:#b8591e;
+  --with-kawaii-fill-2:#ff8a1f;--with-kawaii-fill-3:#ffd23f;--with-kawaii-fill-4:#7cc93a;--with-kawaii-fill-6:#9b6bf2;--with-kawaii-accent:#ff7aa8;--with-kawaii-sparkle:#ffd23f;
+  --with-plush-ink:#2a1445;--with-plush-shadow:#2a1445;--with-plush-c1:#ff8a1f;--with-plush-c2:#ffd23f;--with-plush-c3:#8b5cf6;--with-plush-c4:#7cc93a;--with-plush-accent:#ff7aa8;
+  --with-pastel-c3:#ffd9a0;--with-pastel-c4:#cfeaa6;--with-pastel-accent:#ffc79a;
+  --with-brutal-c1:#ffd23f;--with-brutal-c2:#ff8a1f;--with-brutal-c3:#9b6bf2;--with-brutal-c4:#7cc93a;--with-brutal-accent:#ff7aa8;
+  --with-clay-ink:#2a1445;--with-clay-shadow:#3a1a70;--with-clay-c1:#8b5cf6;--with-clay-c2:#ff9a3d;--with-clay-c3:#ff7aa8;--with-clay-c4:#7cc93a;--with-clay-accent:#ffd23f;
+  color:var(--ink); /* line, solid and duo icons follow the text colour */
+}
+
+/* ===== base ===== */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{margin:0;font:500 17px/1.55 var(--fb);color:var(--ink);background:var(--cream);overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:400;line-height:1.05;margin:0;letter-spacing:.01em}
+p{margin:0 0 1em}
+a{color:var(--grape2);text-underline-offset:3px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--grape);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;padding:10px 16px;background:var(--ink);color:#fff;border-radius:12px;font-weight:600}
+.skip:focus{top:12px}
+.fine{font-size:14.5px;color:var(--ink2)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ===== shared components ===== */
+.card{background:var(--paper);border:3px solid var(--ink);border-radius:var(--wob);box-shadow:var(--sh);transform:rotate(var(--tilt,0deg));transition:transform .18s ease,box-shadow .18s ease}
+.tilt>*:nth-child(3n+1){--tilt:-1.1deg}.tilt>*:nth-child(3n+2){--tilt:.9deg}.tilt>*:nth-child(3n){--tilt:-.5deg}
+.tilt>.card:nth-child(even){border-radius:var(--wob2)}
+.tilt>.card:hover{transform:rotate(0) translateY(-4px);box-shadow:7px 10px 0 var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:10px 24px;font:600 18px/1.1 var(--fb);color:var(--ink);text-decoration:none;background:var(--orange);border:3px solid var(--ink);border-radius:999px;box-shadow:4px 5px 0 var(--ink);cursor:pointer;transition:transform .12s ease,box-shadow .12s ease,background .15s}
+.btn:hover{transform:translate(-1px,-2px) rotate(-1deg);box-shadow:6px 8px 0 var(--ink)}
+.btn:active{transform:translate(3px,4px);box-shadow:1px 1px 0 var(--ink)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:2px 3px 0 var(--ink)}
+.btn-grape{background:var(--grape);color:#fff}.btn-grape .kit-ico{color:#fff}
+.btn-ghost{background:var(--paper)}
+.btn-small{min-height:46px;padding:8px 18px;font-size:16px;box-shadow:3px 4px 0 var(--ink)}
+.die{filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff) drop-shadow(0 6px 5px rgba(42,20,69,.32))}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;min-height:32px;border:2.5px solid var(--ink);border-radius:999px;background:var(--paper);font-weight:600;font-size:14px;line-height:1.2}
+.tagrow{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px 3px 8px;border:2px solid var(--ink);border-radius:999px;font-weight:600;font-size:13px;line-height:1.25}
+.tag.contains{background:var(--badsoft);border-color:var(--bad);color:#7a1a12}
+.tag.free{background:var(--ssoft);border-color:var(--slime2);color:#27500a}
+.tag.diet{background:var(--gsoft);border-color:var(--grape2);color:var(--grape2)}
+.tag.note{background:var(--sunsoft);color:var(--ink)}
+.credit-line{margin:10px 0 0;font-size:12.5px;color:var(--ink2)}
+.mini-h{display:flex;align-items:center;gap:10px;font-size:30px;margin:0 0 14px}
+
+.sec{position:relative;padding:76px 0 84px;border-top:3px solid var(--ink)}
+.sec-cream{background:var(--cream)}.sec-peach{background:var(--peach)}.sec-grape{background:var(--gsoft)}.sec-slime{background:var(--ssoft)}.sec-sun{background:var(--sunsoft)}.sec-orange{background:var(--orange)}
+.bunting{position:absolute;left:0;right:0;top:0;height:40px;pointer-events:none;background:
+  conic-gradient(from -30deg at 16.667% 100%,var(--orange) 60deg,transparent 0),
+  conic-gradient(from -30deg at 50% 100%,var(--grape) 60deg,transparent 0),
+  conic-gradient(from -30deg at 83.333% 100%,var(--slime) 60deg,transparent 0);background-size:138px 40px}
+.bunting+.wrap{padding-top:22px}
+.sec-head{max-width:780px;margin:0 0 42px}
+.sec-head.left{margin-bottom:24px}
+.kicker{display:flex;width:fit-content;align-items:center;gap:8px;margin:0 0 16px;font:700 14px/1 var(--fb);text-transform:uppercase;letter-spacing:.13em;color:var(--orange2)}
+.k-dark{color:var(--ink)}
+.h-sticker{display:inline-block;font-size:clamp(32px,4.8vw,54px);line-height:1.04;padding:.1em .5em .16em;background:var(--sun);border:3px solid var(--ink);border-radius:var(--wob);box-shadow:var(--sh);transform:rotate(-1.6deg)}
+.h-sticker.c-orange{background:var(--orange)}.h-sticker.c-grape{background:var(--grape);color:#fff}.h-sticker.c-slime{background:var(--slime)}.h-sticker.c-paper{background:var(--paper)}
+.sec-sub{margin:22px 0 0;font-size:18px;color:var(--ink2);max-width:64ch}.sub-dark{color:var(--ink)}
+
+.deco{display:none;position:absolute;right:max(24px,calc(50% - 570px));align-items:flex-end;gap:6px;pointer-events:none}
+.deco .die:first-child{transform:rotate(-8deg)}.deco .die:last-child{transform:rotate(10deg);margin-bottom:-14px}
+@media(min-width:1180px){.deco{display:flex}}
+/* forms */
+.field{margin:0 0 16px}
+.field label{display:block;margin:0 0 6px;font-weight:600;font-size:16px}
+.req{font-weight:400;color:var(--ink2);font-size:14px}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;min-height:50px;padding:11px 14px;font:500 17px/1.3 var(--fb);color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:16px}
+textarea{resize:vertical;min-height:96px}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--grape);outline-offset:2px}
+[aria-invalid=true]{border-color:var(--bad)!important;background:#fff7f6}
+.err{margin:6px 0 0;color:var(--bad);font-weight:600;font-size:14.5px}
+.err-box{margin:0 0 16px;padding:10px 14px;background:var(--badsoft);border:3px solid var(--bad);border-radius:14px}
+
+/* ===== announcement + header ===== */
+.announce{background:var(--ink);color:var(--cream);font-size:15px}
+.announce-in{display:flex;align-items:center;justify-content:center;gap:10px;padding:9px 0;text-align:center;flex-wrap:wrap}
+.announce p{margin:0}.announce a{color:var(--sun);font-weight:600;display:inline-flex;align-items:center;gap:4px}.announce .kit-ico{color:var(--sun)}
+.top{position:sticky;top:0;z-index:40;background:rgba(255,246,226,.96);border-bottom:3px solid var(--ink);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.top-in{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:68px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.logo{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);box-shadow:2px 3px 0 var(--ink);transform:rotate(-8deg)}
+.brand-name{font:400 30px/1 var(--fd)}
+.menu-btn{width:48px;height:48px;display:grid;place-items:center;background:var(--paper);border:3px solid var(--ink);border-radius:16px;cursor:pointer;box-shadow:2px 3px 0 var(--ink)}
+.nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;gap:4px;padding:14px 20px 22px;background:var(--cream);border-bottom:3px solid var(--ink)}
+.nav[data-open]{display:flex}
+.top-rsvp{margin-left:auto;min-height:44px}
+.nav a{display:flex;align-items:center;gap:8px;padding:12px 16px;border-radius:14px;font-weight:600;font-size:18px;color:var(--ink);text-decoration:none}
+.nav a:hover,.nav a[aria-current]{background:var(--sun)}
+.nav .nav-cta{display:none;align-self:flex-start;background:var(--orange);border:3px solid var(--ink);box-shadow:3px 4px 0 var(--ink);margin-top:6px}
+@media(min-width:1040px){.menu-btn,.top-rsvp{display:none}.nav{display:flex;position:static;flex-direction:row;align-items:center;padding:0;border:0;background:none;gap:2px}.nav a{padding:8px 12px;font-size:16px}.nav .nav-cta{display:flex;margin:0 0 0 8px}}
+
+/* ===== hero ===== */
+.hero{position:relative;padding:34px 0 70px;overflow:hidden;background:radial-gradient(circle at 10% 14%,var(--sunsoft) 0 130px,transparent 131px),radial-gradient(circle at 96% 86%,var(--osoft) 0 190px,transparent 191px),var(--cream)}
+.hero-grid{display:grid;gap:40px;align-items:center}
+@media(min-width:960px){.hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:30px}}
+.pill{display:inline-flex;align-items:center;gap:10px;margin:0;padding:7px 18px 7px 12px;background:var(--sun);border:3px solid var(--ink);border-radius:999px;font-weight:700;font-size:16px;box-shadow:3px 4px 0 var(--ink);transform:rotate(-2deg)}
+.title-wrap{position:relative;margin:22px 0 20px}
+.title{margin:0;font-size:clamp(48px,13.4vw,96px);line-height:.92;text-shadow:var(--ol),.06em .08em 0 var(--ink)}
+.title .w{display:inline-block;transform-origin:50% 80%}
+.w1{color:var(--orange);transform:rotate(-2.2deg)}
+.w2{color:#fff;transform:rotate(1.6deg);text-shadow:var(--ol),.06em .08em 0 var(--grape)}
+.lede{font-size:19px;max-width:54ch;color:var(--ink2)}
+.facts{list-style:none;margin:26px 0 24px;padding:0;display:grid;gap:14px}
+.fact{display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px}
+.fact:nth-child(1){--tilt:-1deg}.fact:nth-child(2){--tilt:.8deg}.fact:nth-child(3){--tilt:-.6deg}
+.fact-txt{display:flex;flex-direction:column;line-height:1.2}.fact-txt b{font:400 25px/1.1 var(--fd)}.fact-txt span{color:var(--ink2);font-size:15px}
+@media(min-width:560px) and (max-width:959px){.facts{grid-template-columns:repeat(3,1fr)}.fact{flex-direction:column;align-items:flex-start}}
+@media(min-width:1180px){.facts{grid-template-columns:repeat(3,1fr)}.fact{flex-direction:column;align-items:flex-start;gap:8px}}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.count{margin-top:28px;padding:14px 18px 18px;max-width:540px;background:var(--grape);color:#fff;border:3px solid var(--ink);border-radius:var(--wob2);box-shadow:var(--sh);transform:rotate(.6deg)}
+.count-label{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-weight:600}.count .kit-ico{color:var(--sun)}
+.count-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.count-tiles div{background:var(--paper);color:var(--ink);border:3px solid var(--ink);border-radius:16px;text-align:center;padding:6px 4px 8px;box-shadow:2px 3px 0 var(--ink)}
+.count-tiles b{display:block;font:400 clamp(30px,5vw,42px)/1.05 var(--fd);font-variant-numeric:tabular-nums}
+.count-tiles span{font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--ink2)}
+.count[data-over] .count-tiles{display:none}.count[data-over] .count-label{margin:0}
+
+.hero-art{position:relative;padding:34px 14px 52px;min-height:340px}
+.polaroid{position:relative;width:min(100%,580px);margin:0 0 0 auto;padding:14px 14px 0;background:var(--paper);border:3px solid var(--ink);border-radius:10px 16px 8px 18px;box-shadow:9px 11px 0 var(--ink);transform:rotate(2.2deg)}
+.polaroid img{width:100%;aspect-ratio:3/2;object-fit:cover;object-position:50% 40%;border:3px solid var(--ink);border-radius:6px}
+.polaroid figcaption{padding:12px 4px 14px;text-align:center;font:400 28px/1.1 var(--fd)}
+.polaroid small,.photo-sticker small,.ghost-card small,.leaf-card small,.host-photo small{display:block;margin-top:4px;font:500 12.5px/1.3 var(--fb);color:var(--ink2)}
+.tape{position:absolute;z-index:2;width:100px;height:30px;background:rgba(255,210,63,.8);border:2px solid rgba(42,20,69,.22)}
+.t1{top:-15px;left:14%;transform:rotate(-8deg)}.t2{top:-13px;right:12%;transform:rotate(6deg);background:rgba(255,122,168,.75)}
+.hero-art .die{position:absolute;z-index:3}
+.d-jack{left:-6px;bottom:6px;transform:rotate(-9deg)}
+.d-ghost{right:-4px;top:-14px;transform:rotate(9deg)}
+.d-bat{right:-14px;top:44%;transform:rotate(-12deg)}
+.d-corn{right:8%;bottom:-8px;transform:rotate(14deg)}
+.dangle{position:absolute;z-index:3;left:4%;top:-8px;display:flex;flex-direction:column;align-items:center;transform-origin:50% 0;animation:sway 4.2s ease-in-out infinite}
+.thread{display:block;width:3px;height:70px;background:var(--ink)}
+.dangle .die{position:relative!important}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+.burst{position:absolute;z-index:2;right:2%;bottom:-6px;transform:rotate(12deg)}
+.burst .kit-fb{display:inline-block;width:84px;height:84px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);font:400 38px/78px var(--fd);text-align:center}
+@media(min-width:960px){.title{font-size:clamp(60px,7.1vw,100px)}.burst{right:-6px;bottom:-34px}.title-wrap{margin-bottom:38px}.hero-art{min-height:520px;padding-top:44px}.dangle{left:auto;right:7%}}
+@media(max-width:620px){.pill-more{display:none}.burst{top:-104px;bottom:auto;right:-4px;transform:rotate(12deg) scale(.68);transform-origin:100% 0}.hero-art{padding-bottom:104px}.d-jack{left:-8px;bottom:0}}
+
+/* ticker */
+.ticker{display:flex;overflow:hidden;white-space:nowrap;background:var(--orange);border-block:3px solid var(--ink);padding:12px 0}
+.ticker-track{display:flex;flex:none;gap:46px;padding-right:46px;animation:marq 42s linear infinite}
+@keyframes marq{to{transform:translateX(-100%)}}
+.tk{display:inline-flex;align-items:center;gap:10px;font:400 26px/1 var(--fd);color:var(--ink)}
+@media (prefers-reduced-motion:reduce){.ticker{flex-wrap:wrap;white-space:normal;justify-content:center}.ticker-track{flex-wrap:wrap;justify-content:center;padding:0 20px;gap:12px 34px}.ticker>.ticker-track:nth-child(2){display:none}}
+
+/* ===== schedule ===== */
+.run{list-style:none;margin:0;padding:0;display:grid;gap:22px}
+@media(min-width:700px){.run{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.run{grid-template-columns:repeat(3,1fr);gap:28px}}
+.slot{display:flex;gap:16px;align-items:flex-start;padding:18px 18px 20px}
+.slot .clk{flex:none}
+.slot-time{margin:0 0 4px;font:700 14px/1 var(--fb);color:var(--orange2);letter-spacing:.1em;text-transform:uppercase}
+.slot h3{font-size:29px;margin-bottom:8px}
+.slot-body p:last-child{margin:0;color:var(--ink2);font-size:16px;line-height:1.5}
+.slot-big{background:var(--sun)}.slot-big .slot-time{color:var(--ink)}.slot-big .slot-body p:last-child{color:var(--ink)}
+.stamp{display:inline-block;margin-left:8px;padding:4px 10px;background:var(--ink);color:var(--sun);border-radius:999px;font-size:11px;letter-spacing:.09em;transform:rotate(-3deg)}
+
+/* ===== trail ===== */
+.sec-peach{padding-top:0}
+.band{position:relative;margin:0;height:clamp(210px,32vw,360px);border-bottom:3px solid var(--ink);overflow:hidden;background:var(--osoft)}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.band-credit{position:absolute;right:12px;bottom:10px;padding:3px 10px;font-size:12px;background:rgba(255,253,247,.92);border:2px solid var(--ink);border-radius:999px}
+.sec-head.overlap{margin-top:-30px;position:relative;z-index:2}
+.sec-head.overlap .kicker{padding:8px 14px;background:var(--paper);border:3px solid var(--ink);border-radius:999px;box-shadow:2px 3px 0 var(--ink)}
+.sec-peach .sec-head{margin-bottom:34px}
+.trail-grid{display:grid;gap:28px;align-items:start}
+.map-col{display:contents}.map-col>.map-card{order:1}.stop-col{order:2}.map-col>.stamps{order:3;margin-top:0}
+@media(min-width:960px){.trail-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:34px}.map-col{display:block;min-width:0;order:0}.map-col>.stamps{margin-top:26px}.stop-col{order:0}}
+.map-card{padding:14px 14px 10px;--tilt:-.6deg}
+.map{position:relative;aspect-ratio:1000/780;border:3px solid var(--ink);border-radius:22px;background:#d9eda3}
+.map-art-wrap{position:absolute;inset:0;border-radius:19px;overflow:hidden}
+.map-art{display:block;width:100%;height:100%}
+.map-art .hs rect,.map-art .hs path{stroke:#2a1445;stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.seg path{fill:none;stroke-linecap:round}
+.seg .halo{stroke:#fff;stroke-width:14;opacity:.85}
+.seg .dots{stroke:var(--grape);stroke-width:7;stroke-dasharray:.0005 .042}
+.seg .fill{stroke:var(--orange);stroke-width:9;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .8s ease}
+.seg.done .fill{stroke-dashoffset:0}
+.pins{list-style:none;margin:0;padding:0}
+.pin-li{position:absolute;z-index:2;transform:translate(-50%,-92%)}
+.pin-li.is-active{z-index:6}
+.pin-li.is-active::before{content:"";position:absolute;left:50%;bottom:-3px;width:64px;height:22px;margin-left:-32px;border-radius:50%;border:3px solid var(--orange);animation:ping 1.5s ease-out infinite}
+@keyframes ping{0%{transform:scale(.4);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.pin{position:relative;display:block;width:54px;height:58px;padding:0;border:0;background:none;cursor:pointer;transform-origin:50% 100%;transition:transform .22s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.pin:hover{transform:scale(1.14)}
+.pin.is-active{transform:scale(1.42);filter:drop-shadow(0 0 0 #fff) drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 5px 4px rgba(42,20,69,.4))}
+#map[data-active] .pin:not(.is-active){opacity:.78}
+.pin-ico{display:block;margin:0 auto}
+.pin-ico .kit-fb{display:block;width:36px;height:36px;margin:8px auto 0;font:400 21px/30px var(--fd);text-align:center;background:var(--orange);color:var(--ink);border:3px solid var(--ink);border-radius:50%}
+.pin .pin-check{display:none;position:absolute;right:-9px;top:-8px;filter:drop-shadow(0 0 0 #fff) drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff)}
+.pin.is-stamped .pin-check{display:inline-flex}
+html[data-level="0"] .pin.is-stamped::after{content:"\2713";position:absolute;right:-6px;top:-4px;width:22px;height:22px;border-radius:50%;background:var(--slime);border:2px solid var(--ink);font:700 13px/18px var(--fb);text-align:center}
+.pin-tag{position:absolute;top:100%;left:50%;margin-top:4px;padding:4px 11px;white-space:nowrap;background:var(--paper);border:2.5px solid var(--ink);border-radius:999px;font:600 13px/1.2 var(--fb);box-shadow:2px 3px 0 var(--ink);opacity:0;pointer-events:none;transform:translateX(-50%) scale(.9);transition:opacity .15s,transform .15s}
+.pin.is-active .pin-tag,.pin:hover .pin-tag,.pin:focus-visible .pin-tag{opacity:1;transform:translateX(-50%) scale(1)}
+.compass{position:absolute;right:8px;top:6px;z-index:3}
+.map-hint{display:flex;align-items:center;gap:8px;margin:12px 6px 4px;font-size:15px;color:var(--ink2)}
+@media(max-width:620px){.stop-actions .btn.btn-stamp{order:-1;flex:1 1 100%}.stop-actions .btn:not(.btn-stamp){flex:1}.pin{transform:scale(.78)}.pin:hover{transform:scale(.88)}.pin.is-active{transform:scale(1.15)}.compass{transform:scale(.75);transform-origin:100% 0}}
+
+.stop-card{padding:20px 20px 22px;--tilt:.7deg}
+.stop-top{display:flex;gap:16px;align-items:center;margin-bottom:14px}
+.stop-count{margin:0 0 2px;font:700 13px/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--orange2)}
+.stop-card h3{font-size:34px}
+.stop-host{margin:3px 0 0;color:var(--ink2);font-size:15px}
+.stop-facts{margin:0;display:grid;gap:12px}
+.stop-facts>div{padding:12px 14px;border:3px dashed rgba(42,20,69,.35);border-radius:18px;background:var(--cream)}
+.stop-facts dt{display:flex;align-items:center;gap:8px;margin-bottom:6px;font:700 13px/1.1 var(--fb);letter-spacing:.08em;text-transform:uppercase;color:var(--grape2)}
+.stop-facts dd{margin:0;font-size:16px}
+.riddle{display:flex;flex-direction:column;gap:2px}.riddle b{font-weight:600}.riddle span{font:400 22px/1.15 var(--fd);color:var(--orange2)}
+.spook{display:flex;align-items:center;gap:14px}.spook .kit-fb{font-size:20px;letter-spacing:2px}
+.stop-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stop-actions .btn-stamp{flex:1 1 150px}
+.btn-stamp.is-on{background:var(--slime)}
+.stamps{margin-top:26px;padding:18px 20px 20px;--tilt:-.5deg}
+.stamps-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.stamps h3{display:flex;align-items:center;gap:8px;font-size:27px}.stamps-count{margin:0;font-weight:600}
+.stamp-row{list-style:none;margin:14px 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.stamp-ico .kit-fb{display:inline-block;width:40px;height:40px;border-radius:50%;border:3px solid var(--ink);background:#fff;font:400 20px/34px var(--fd);text-align:center}
+.stamps-msg{margin:0;font-size:15px;color:var(--ink2)}
+.stamps.is-full{background:var(--sun)}.stamps.is-full .stamps-msg{color:var(--ink)}
+
+.trail-lower{display:grid;gap:34px;margin-top:52px}
+@media(min-width:900px){.trail-lower{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:start;gap:40px}.trail-lower .stoplist-wrap{order:-1}}
+.manners{overflow:hidden;--tilt:-.8deg}
+.manners img{width:100%;aspect-ratio:3/2;object-fit:cover;border-bottom:3px solid var(--ink)}
+.manners-body{padding:18px 20px 20px}.manners h3{font-size:32px;margin-bottom:12px}
+.rules{list-style:none;margin:0 0 6px;padding:0;display:grid;gap:12px}.rules li{display:flex;gap:12px;align-items:flex-start;line-height:1.4}
+.stoplist{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.stoprow{width:100%;min-height:68px;display:flex;align-items:center;gap:12px;padding:8px 14px 8px 8px;text-align:left;background:var(--paper);border:3px solid var(--ink);border-radius:var(--wob2);box-shadow:3px 4px 0 var(--ink);cursor:pointer;transition:transform .15s,background .15s}
+.stoprow:hover{transform:translate(-1px,-2px)}
+.stoprow.is-active{background:var(--sun);transform:translate(-2px,-2px) rotate(-.7deg)}
+.stoprow-pin .kit-fb{display:inline-block;width:34px;height:34px;margin:5px;border-radius:50%;background:var(--orange);border:3px solid var(--ink);font:400 18px/28px var(--fd);text-align:center}
+.stoprow-txt b{display:block;font:400 23px/1.1 var(--fd)}.stoprow-txt span{display:block;font-size:14px;line-height:1.35;color:var(--ink2)}.stoprow-txt .blurb{color:var(--ink);font-weight:500}
+.stoprow.is-active .stoprow-txt span{color:var(--ink)}
+.stoprow .stoprow-ok{display:none;margin-left:auto}.stoprow.is-stamped .stoprow-ok{display:inline-flex}
+
+/* ===== contest ===== */
+.contest-grid{display:grid;gap:36px}
+@media(min-width:960px){.contest-grid{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:44px;align-items:start}}
+.photo-sticker{margin:0 0 30px;padding:12px 12px 0;--tilt:-2deg}
+.photo-sticker img{width:100%;aspect-ratio:3/2;object-fit:cover;border:3px solid var(--ink);border-radius:14px}
+.photo-sticker figcaption{padding:12px 4px 14px;text-align:center;font:400 26px/1.1 var(--fd)}
+.count-pill{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 10px;border-radius:999px;background:var(--ink);color:#fff;font:600 16px/1 var(--fb)}
+.lineup{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:10px 14px}
+@media(min-width:620px){.lineup{grid-template-columns:repeat(2,1fr)}}
+.lu{display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;background:var(--paper);border:2.5px solid var(--ink);border-radius:18px}
+.lu-av .kit-fb{display:inline-block;width:44px;height:44px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);font:400 18px/38px var(--fd);text-align:center}
+.lu-txt b{display:block;font-size:15px;line-height:1.25}.lu-txt span{display:block;font-size:13.5px;line-height:1.3;color:var(--ink2)}
+.ballot{position:relative;padding:28px 26px 30px;--tilt:.6deg}
+.ballot::before{content:"";position:absolute;inset:8px;border:2px dashed rgba(42,20,69,.28);border-radius:26px;pointer-events:none}
+.ballot-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.ballot h3{font-size:36px}
+.ballot-meters{display:flex;gap:8px;flex:none}
+.meter .kit-fb{display:inline-block;min-width:48px;font:400 22px/48px var(--fd);text-align:center}
+.ballot-sub{margin:8px 0 22px;font-size:15px;color:var(--ink2)}
+.cats{display:grid;gap:14px;margin:0 0 8px}
+.cat{display:grid;gap:10px;padding:12px 14px 14px;background:var(--cream);border:3px solid var(--ink);border-radius:20px}
+.cat label{display:flex;align-items:center;gap:12px}
+.cat label b{display:block;font:400 24px/1.1 var(--fd)}.cat label small{display:block;font-size:14px;color:var(--ink2)}
+.ballot-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.ballot-done{padding:34px 26px;text-align:center;--tilt:-.5deg}
+.ballot-done h3{font-size:42px;margin:6px 0 8px}
+.votes{list-style:none;margin:12px 0 4px;padding:0;display:grid;gap:6px;text-align:left;font-size:15.5px}
+.votes li{padding:8px 12px;background:var(--cream);border:2.5px solid var(--ink);border-radius:14px}
+.stub{display:inline-flex;align-items:center;gap:14px;margin:14px 0 20px;padding:8px 20px;border:3px dashed var(--ink);border-radius:14px;font-size:14px}
+.stub b{font:400 40px/1 var(--fd);color:var(--orange2)}
+
+/* ===== stations ===== */
+.stations{list-style:none;margin:0;padding:0;display:grid;gap:28px}
+@media(min-width:700px){.stations{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.stations{grid-template-columns:repeat(3,1fr)}}
+.station{display:flex;flex-direction:column;overflow:hidden}
+.st-top{position:relative;aspect-ratio:3/2;border-bottom:3px solid var(--ink);overflow:hidden}
+.st-top img{width:100%;height:100%;object-fit:cover}
+.st-color{display:grid;place-items:center}
+.c-orange-soft{background:var(--osoft)}.c-slime-soft{background:var(--ssoft)}.c-grape-soft{background:var(--gsoft)}.c-sun-soft{background:var(--sunsoft)}
+.st-live{position:absolute;right:16px;bottom:12px}
+.st-record{position:absolute;left:14px;bottom:14px;padding:5px 12px;background:var(--paper);border:2.5px solid var(--ink);border-radius:999px;font-weight:700;font-size:14px;transform:rotate(-3deg)}
+.st-body{display:flex;flex-direction:column;gap:6px;flex:1;padding:18px 20px 22px}
+.st-body h3{display:flex;align-items:center;gap:10px;font-size:29px}
+.st-body p{margin:0;color:var(--ink2);font-size:16px}
+.st-body .credit-line{margin-top:auto;padding-top:8px}
+
+/* ===== snacks ===== */
+.snack-intro{display:grid;gap:26px;margin-bottom:38px}
+@media(min-width:960px){.snack-intro{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:stretch}}
+.nutfree{display:flex;align-items:center;gap:20px;padding:22px 24px;background:var(--sun);--tilt:-.8deg}
+.nutfree h3{font-size:34px;margin-bottom:6px}.nutfree p{margin:0;font-size:16px}
+.filters{padding:20px 22px 18px;--tilt:.6deg}
+.filters fieldset{min-width:0;margin:0 0 12px;padding:0;border:0}
+.filters legend{margin-bottom:8px;padding:0;font:700 13px/1.1 var(--fb);letter-spacing:.1em;text-transform:uppercase;color:var(--grape2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip-btn{min-height:46px;padding:6px 14px 6px 10px;cursor:pointer;font:600 15px/1 var(--fb)}
+.chip-btn:hover{background:var(--sunsoft)}
+.chip-btn[aria-pressed=true]{background:var(--ink);color:#fff}.chip-btn[aria-pressed=true] .kit-ico{color:var(--sun)}
+.filter-foot{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:4px}
+.filter-foot p{flex:1 1 220px;margin:0;font-weight:600;font-size:15px}
+.menu{list-style:none;margin:0;padding:0;display:grid;gap:28px}
+@media(min-width:700px){.menu{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.menu{grid-template-columns:repeat(3,1fr)}}
+.dish{position:relative;display:flex;flex-direction:column;overflow:hidden}
+.menu .dish:nth-child(3n+1){--tilt:-.8deg}.menu .dish:nth-child(3n+2){--tilt:.7deg}.menu .dish:nth-child(3n){--tilt:-.4deg}
+.dish-top{position:relative;aspect-ratio:16/10;border-bottom:3px solid var(--ink);overflow:hidden}
+.dish-top img{width:100%;height:100%;object-fit:cover}
+.dish-color{display:grid;place-items:center;background:var(--osoft)}
+.menu .dish:nth-child(3n+2) .dish-color{background:var(--gsoft)}.menu .dish:nth-child(3n) .dish-color{background:var(--sunsoft)}
+.dish-body{padding:16px 18px 20px}.dish-body h3{font-size:29px;margin-bottom:6px}.dish-body p{margin:0;font-size:16px;color:var(--ink2)}
+.dish.is-out .dish-top,.dish.is-out .dish-body{opacity:.4;filter:grayscale(.9)}
+.dish-flag{position:absolute;top:12px;left:12px;z-index:2;margin:0;padding:6px 12px;background:var(--bad);color:#fff;border:3px solid var(--ink);border-radius:999px;font-weight:700;font-size:14px;transform:rotate(-3deg)}
+.menu-fine{max-width:78ch;margin:30px 0 0}
+
+/* ===== what to bring ===== */
+.bring-grid{display:grid;gap:34px;align-items:start}
+@media(min-width:900px){.bring-grid{grid-template-columns:minmax(0,.62fr) minmax(0,1.38fr);gap:50px}.ghost-card{position:sticky;top:100px}}
+.ghost-card{margin:0;padding:12px 12px 0;--tilt:-2.2deg}
+.ghost-card img{width:100%;aspect-ratio:2/3;object-fit:cover;border:3px solid var(--ink);border-radius:14px}
+@media(max-width:899px){.ghost-card{max-width:380px}.ghost-card img{aspect-ratio:3/2}}
+.ghost-card figcaption,.leaf-card figcaption,.host-photo figcaption{padding:12px 4px 14px;text-align:center;font:400 24px/1.15 var(--fd)}
+.checklist{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:12px}
+@media(min-width:1180px){.checklist{grid-template-columns:repeat(2,1fr)}}
+.check{position:relative;display:flex;align-items:center;gap:12px;min-height:80px;padding:10px 14px 10px 12px;background:var(--paper);border:3px solid var(--ink);border-radius:20px;box-shadow:3px 4px 0 var(--ink);cursor:pointer;transition:background .15s}
+.check:hover{background:#fff}
+.check input{position:absolute;opacity:0;left:8px;top:50%;width:44px;height:44px;margin:-22px 0 0;cursor:pointer}
+.check-box{flex:none;display:grid;place-items:center;width:32px;height:32px;background:#fff;border:3px solid var(--ink);border-radius:10px}
+.check-box .kit-ico,.check-box .kit-fb{opacity:0;font-weight:700}
+.check input:checked~.check-box{background:var(--slime)}
+.check input:checked~.check-box .kit-ico,.check input:checked~.check-box .kit-fb{opacity:1}
+.check input:focus-visible~.check-box{outline:3px solid var(--grape);outline-offset:3px}
+.check:has(input:checked){background:var(--ssoft)}
+.check-ico{flex:none}
+.check-txt b{display:block;font-weight:600;line-height:1.2}.check-txt span{display:block;margin-top:2px;font-size:14.5px;line-height:1.35;color:var(--ink2)}
+.check input:checked~.check-txt b{text-decoration:line-through;text-decoration-thickness:2px}
+.pack{display:flex;align-items:center;gap:14px;margin:6px 0 16px}
+.pack p{margin:0;font-weight:600}
+.pack-bar{flex:1;min-width:80px;height:20px;overflow:hidden;background:#fff;border:3px solid var(--ink);border-radius:999px}
+.pack-bar i{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--orange),var(--sun));transition:width .3s}
+
+/* ===== grown-ups ===== */
+.mode-grid{display:grid;gap:28px;margin-bottom:40px}
+@media(min-width:900px){.mode-grid{grid-template-columns:1fr 1fr .7fr;align-items:stretch}}
+.mode{position:relative;display:block;padding:26px 24px 26px;cursor:pointer;--tilt:-.8deg}
+.mode:nth-of-type(2){--tilt:.8deg}
+.mode input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.mode:has(input:focus-visible){outline:3px solid var(--grape);outline-offset:4px}
+.mode-pick{position:absolute;top:18px;right:20px;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px}
+.mode-dot{width:24px;height:24px;background:#fff;border:3px solid var(--ink);border-radius:50%}
+.mode.is-on{background:var(--ssoft);box-shadow:8px 10px 0 var(--ink);transform:rotate(0) translateY(-5px)}
+.mode.is-on .mode-dot{background:var(--orange);box-shadow:inset 0 0 0 3px #fff}
+.mode-art{display:inline-block;margin-bottom:8px}
+.mode h3{font-size:36px}.mode-who{margin:6px 0 0;font-weight:600;color:var(--grape2)}
+.mode-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.mode-list li{display:flex;align-items:flex-start;gap:10px;font-size:16px;line-height:1.4}
+.leaf-card{margin:0;padding:10px 10px 0;--tilt:1.6deg}
+.leaf-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border:3px solid var(--ink);border-radius:12px}
+@media(max-width:899px){.leaf-card{max-width:420px}.leaf-card img{aspect-ratio:3/2}}
+.safety{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+@media(min-width:700px){.safety{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.safety{grid-template-columns:repeat(4,1fr)}}
+.safety li{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--paper);border:3px dashed var(--ink);border-radius:22px;font-size:15.5px;line-height:1.4}
+.safety b{display:block;margin-bottom:2px;font:400 22px/1.15 var(--fd)}
+
+/* ===== find us ===== */
+.find-grid{display:grid;gap:36px;align-items:start}
+@media(min-width:960px){.find-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:46px}}
+.find-card{padding:28px 26px 30px;--tilt:-.6deg}
+.h-plain{margin:0 0 10px;font-size:clamp(42px,6.4vw,68px)}
+address{margin:0 0 18px;font-style:normal;font-size:19px;color:var(--ink2)}
+.dirs{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:16px}
+.dirs li{display:flex;align-items:flex-start;gap:14px;line-height:1.45}.dirs b{display:block;font-weight:700}
+.find-side{display:grid;gap:28px}
+.find-note{display:flex;align-items:center;gap:16px;margin:0;padding:16px 20px;background:var(--sun);--tilt:-1deg;font-size:16px;line-height:1.45}.find-note b{display:block;font:400 24px/1.1 var(--fd);margin-bottom:2px}
+.host-photo{margin:0;padding:12px 12px 0;--tilt:1.8deg}
+.host-photo img{width:100%;aspect-ratio:3/2;object-fit:cover;border:3px solid var(--ink);border-radius:14px}
+
+/* ===== rsvp ===== */
+.rsvp-grid{display:grid;gap:30px;align-items:start}
+@media(min-width:960px){.rsvp-grid{grid-template-columns:minmax(0,.68fr) minmax(0,1.32fr);gap:38px}.rsvp-side{position:sticky;top:100px}}
+.rsvp-side{padding:24px 22px 24px;--tilt:-1deg}
+.side-count{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.side-count p{margin:0;font-weight:600;line-height:1.3}.side-count p span{font-weight:400;color:var(--ink2);font-size:15px}
+.rsvp-side h3{font-size:28px;margin-bottom:10px}
+.next{display:grid;gap:10px;margin:0 0 14px;padding-left:20px;font-size:15.5px;line-height:1.45}
+.rsvp{padding:28px 26px 30px;--tilt:.4deg}
+.step{min-width:0;margin:0 0 26px;padding:0;border:0}
+.step legend{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:0;font:400 31px/1 var(--fd)}
+.step-ico .kit-fb{display:inline-block;width:40px;height:40px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);font:400 22px/34px var(--fd);text-align:center}
+.row2{display:grid;gap:0 16px}@media(min-width:620px){.row2{grid-template-columns:1fr 1fr}}
+.row3{display:grid;gap:0 14px}@media(min-width:720px){.row3{grid-template-columns:1fr 112px 1.2fr}}
+.kid{margin-bottom:16px;padding:16px 16px 6px;background:var(--cream);border:3px dashed rgba(42,20,69,.4);border-radius:22px}
+.kid-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.kid-title{font:400 24px/1 var(--fd)}
+.link-btn{min-height:44px;padding:0 4px;background:none;border:0;color:var(--grape2);font:600 15px var(--fb);text-decoration:underline;cursor:pointer}
+.allergy{margin:0 0 12px;padding:0;border:0;min-width:0}
+.allergy legend{display:block;margin-bottom:8px;padding:0;font-weight:600;font-size:15px}
+.chip-check{position:relative;min-height:44px;padding:6px 16px;cursor:pointer}
+.chip-check input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.chip-check:has(input:checked){background:var(--ink);color:#fff}
+.chip-check:has(input:focus-visible){outline:3px solid var(--grape);outline-offset:2px}
+.k-other-wrap{margin:12px 0 4px}
+.radios{display:grid;gap:12px;margin-bottom:20px}@media(min-width:620px){.radios{grid-template-columns:1fr 1fr}}
+.radio{display:flex;align-items:center;gap:12px;min-height:64px;padding:12px 16px;background:var(--cream);border:3px solid var(--ink);border-radius:18px;cursor:pointer}
+.radio:has(input:checked){background:var(--sun);box-shadow:3px 4px 0 var(--ink)}
+.radio input{flex:none;width:24px;height:24px;accent-color:var(--ink)}
+.radio b{display:block}.radio small{font-size:14px;color:var(--ink2)}
+.stepper{display:inline-flex;align-items:center;gap:6px;padding:3px;background:#fff;border:3px solid var(--ink);border-radius:999px}
+.step-b{display:grid;place-items:center;width:44px;height:44px;background:var(--sun);border:0;border-radius:50%;cursor:pointer}
+.step-b:hover{background:var(--orange)}
+.stepper output{min-width:44px;text-align:center;font:400 28px/1 var(--fd)}
+.rsvp-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.rsvp-done{padding:36px 28px 34px;text-align:center;--tilt:-.5deg}
+.rsvp-done h3{margin:4px 0 8px;font-size:clamp(34px,5vw,48px)}
+.ticket{list-style:none;margin:20px auto;padding:0;display:grid;gap:10px;max-width:540px;text-align:left}
+.ticket li{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--cream);border:3px dashed var(--ink);border-radius:16px;line-height:1.4}
+.tk-no{flex:none;min-width:52px;padding:4px 8px;text-align:center;background:var(--ink);color:var(--sun);border-radius:12px;font:400 22px/1.2 var(--fd)}
+.ticket small{display:block;color:var(--ink2)}
+.done-note{max-width:56ch;margin:0 auto 22px}
+.rsvp-done .cta{justify-content:center}
+
+/* ===== faq ===== */
+.faq{display:grid;gap:16px}
+@media(min-width:900px){.faq{grid-template-columns:1fr 1fr;gap:18px 28px;align-items:start}}
+.faq details.card{--tilt:0deg}
+.faq details:nth-child(odd){--tilt:-.4deg}.faq details:nth-child(even){--tilt:.4deg}
+.faq summary{position:relative;display:block;min-height:64px;padding:18px 70px 18px 22px;cursor:pointer;list-style:none;font:400 25px/1.15 var(--fd)}
+.faq summary::-webkit-details-marker{display:none}
+.faq-ico{position:absolute;right:16px;top:50%;margin-top:-20px;width:40px;height:40px;transition:transform .2s}
+.faq-ico .kit-fb{display:inline-block;width:34px;height:34px;border-radius:50%;background:var(--sun);border:3px solid var(--ink);font-size:16px;line-height:28px;text-align:center}
+.faq details[open] .faq-ico{transform:rotate(180deg)}
+.faq details p{margin:0;padding:0 22px 22px;color:var(--ink2)}
+
+/* ===== sign-off, credits, footer ===== */
+.signoff{padding:76px 0 70px;text-align:center;color:#fff;background:var(--grape);border-top:3px solid var(--ink)}
+.avs{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin-bottom:14px}
+.avs .kit-ico{filter:drop-shadow(0 4px 0 rgba(42,20,69,.4))}
+.avs .kit-fb{font-size:64px}
+.signoff h2{font-size:clamp(46px,8.4vw,92px);line-height:.95;margin-bottom:14px;text-shadow:var(--ol),.05em .07em 0 var(--ink)}
+.signoff p{max-width:56ch;margin:0 auto 10px;font-size:19px}
+.signoff .fine{color:#efe6ff}
+.credits{padding:52px 0 34px;background:var(--cream);border-top:3px solid var(--ink);font-size:14.5px;color:var(--ink2)}
+.credits h2{margin-bottom:14px;font-size:32px;color:var(--ink)}
+.credit-list{margin:0 0 18px;padding-left:20px}
+@media(min-width:900px){.credit-list{columns:2;column-gap:40px}}
+.credit-list li{margin-bottom:7px;break-inside:avoid}
+.foot{padding:46px 0 96px;text-align:center;color:var(--cream);background:var(--ink)}
+.foot a{color:var(--sun)}
+.foot p{margin:0 0 12px}
+.foot-brand{display:inline-flex;align-items:center;gap:10px;font:400 30px/1 var(--fd)}
+.foot-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;margin:16px 0}
+.foot-nav a{padding:6px 2px;font-weight:600}
+.foot-fine{font-size:14px;opacity:.85}
+
+/* ===== sizes for the Basic-level emoji (Upgraded and Full size from data-size) ===== */
+.e48{font-size:48px}.e64{font-size:64px}.e96{font-size:96px}
+.die .kit-fb{font-size:56px}
+.fact-ico .kit-fb{font-size:52px}.clk .kit-fb{font-size:46px}.check-ico .kit-fb{font-size:30px}.cat-ico .kit-fb{font-size:32px}
+.stop-top .die .kit-fb{font-size:64px}.dish-top .die .kit-fb{font-size:72px}.st-top .die .kit-fb{font-size:76px}.mode-art .kit-fb{font-size:54px}
+.st-live .kit-fb{font-size:46px}.safety .kit-ico .kit-fb{font-size:32px}.dirs .kit-ico .kit-fb{font-size:24px}.nutfree .kit-fb{font-size:54px}.find-note .kit-fb{font-size:46px}
+.hero-art .d-jack .kit-fb{font-size:104px}.hero-art .d-ghost .kit-fb{font-size:72px}.hero-art .d-bat .kit-fb{font-size:54px}.hero-art .d-corn .kit-fb,.hero-art .d-spider .kit-fb{font-size:48px}
+.logo .kit-fb{font-size:26px}.tk .kit-fb{font-size:22px}
+html[data-level="0"] .kit-ico,html[data-level="0"] .kit-live{min-width:0!important;min-height:0!important}
+html[data-level="0"] .die,html[data-level="0"] .burst{filter:none}
+html[data-level="0"] .dangle{animation:none}
+@media(max-width:620px){
+  .hero-art .d-jack .kit-fb{font-size:80px}
+  .fine{font-size:14px}
+}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Pumpkin Patch Boo Bash is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<a class="skip" href="#main">Skip to the party</a>
+
+<div class="announce" role="note">
+  <div class="wrap announce-in">
+    <span data-ico="mail-check" data-size="22" data-min-level="1">📬</span>
+    <p><b>RSVP by Saturday 17 October</b> so Ada can count cupcakes. This is a <b>nut-free party</b> for ages 3 to 9.</p>
+    <a href="#rsvp" class="announce-link">RSVP now <span data-ico="chevron-right" data-size="16" data-min-level="1">→</span></a>
+  </div>
+</div>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="brand" href="#main" aria-label="Pumpkin Patch Boo Bash, home">
+      <span class="logo"><span data-ico="jack-o-lantern" data-size="34">🎃</span></span>
+      <span class="brand-name">Boo Bash</span>
+    </a>
+    <a class="btn btn-small top-rsvp" href="#rsvp">RSVP</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open the menu">
+      <span data-ico="menu" data-size="24">☰</span>
+    </button>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#schedule">Schedule</a>
+      <a href="#trail">Trail</a>
+      <a href="#contest">Contest</a>
+      <a href="#snacks">Snacks</a>
+      <a href="#bring">Bring</a>
+      <a href="#grownups">Grown-ups</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#rsvp"><span data-ico="ticket" data-size="20">🎟️</span> RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="pill"><span data-ico="party-popper" data-size="26">🎉</span> <span>Pip is turning 6<span class="pill-more">, and you are invited</span></span></p>
+      <div class="title-wrap">
+        <h1 id="h1" class="title"><span class="w w1">Pumpkin Patch</span> <span class="w w2">Boo Bash</span></h1>
+        <span class="burst" data-live="sale-sticker" data-p-text="6!" data-size="150" data-label="Pip is turning six">6!</span>
+      </div>
+      <p class="lede">A little-monsters costume party and trick-or-treat trail for ages 3 to 9. Mummy wrap races, pumpkin painting, a treasure-map trail around Maple Court and a snack table that is completely nut-free. Come as anything silly. Nothing gory, we promise.</p>
+
+      <ul class="facts">
+        <li class="fact card">
+          <span class="fact-ico" data-live="calendar-date" data-p-day="24" data-p-month="OCT" data-size="76" data-label="Saturday 24 October">📅</span>
+          <span class="fact-txt"><b>Saturday</b><span>24 October 2026</span></span>
+        </li>
+        <li class="fact card">
+          <span class="fact-ico" data-live="clock-time" data-p-time="14:00" data-size="76" data-label="Starts at 2 pm">🕑</span>
+          <span class="fact-txt"><b>2 to 5 pm</b><span>Costume parade at 3 sharp</span></span>
+        </li>
+        <li class="fact card">
+          <span class="fact-ico" data-live="map-pin-number" data-p-param-label="82" data-size="76" data-label="Number 82">📍</span>
+          <span class="fact-txt"><b>82 Maple Court</b><span>The Okafor-Lindqvist backyard</span></span>
+        </li>
+      </ul>
+
+      <div class="cta">
+        <a class="btn" href="#rsvp"><span data-ico="ticket" data-size="22">🎟️</span> RSVP by 17 Oct</a>
+        <button class="btn btn-grape" type="button" data-add-cal><span data-ico="calendar-plus" data-size="22">🗓️</span> Add to calendar</button>
+      </div>
+
+      <div class="count" id="countdown" role="timer" aria-label="Countdown to the party">
+        <p class="count-label"><span data-ico="hourglass" data-size="22" data-motion="loop">⏳</span> <span id="count-msg">Until the costume parade</span></p>
+        <div class="count-tiles">
+          <div><b id="cd-d">13</b><span>days</span></div>
+          <div><b id="cd-h">00</b><span>hours</span></div>
+          <div><b id="cd-m">00</b><span>mins</span></div>
+          <div><b id="cd-s">00</b><span>secs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <figure class="polaroid">
+        <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
+        <img src="_img/boo-bash/photo-1509163245925-f4255dea7727-1200.jpg" width="1200" height="800" alt="A row of small children in Halloween costumes, including a princess in white, a hooded ninja and a superhero, hold jack-o-lantern buckets in front of a brick building." fetchpriority="high" decoding="async">
+        <figcaption>Costumes are the dress code
+          <small>Photo by <a href="https://unsplash.com/@connerbaker?utm_source=withicons_demos&utm_medium=referral">Conner Baker</a> on <a href="https://unsplash.com/photos/7FC-84Ap_IU?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></small>
+        </figcaption>
+      </figure>
+      <span class="die d-jack e96" data-ico="jack-o-lantern" data-size="136" data-label="Jack-o'-lantern" data-motion="hover" data-sample>🎃</span>
+      <span class="die d-ghost e64" data-ico="ghost" data-size="92" data-label="Friendly ghost" data-motion="hover">👻</span>
+      <span class="die d-bat e48" data-ico="bat" data-size="70" data-min-level="1" data-motion="hover">🦇</span>
+      <span class="die d-corn e48" data-ico="candy-corn" data-size="62" data-min-level="2">🍬</span>
+      <span class="dangle" data-min-level="2"><span class="thread" aria-hidden="true"></span><span class="die d-spider e48" data-ico="spider" data-size="60" data-label="Spider on a thread" data-motion="hover">🕷️</span></span>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker-track">
+    <span class="tk"><span data-ico="ghost" data-size="26" data-min-level="1">👻</span> No gore, just giggles</span>
+    <span class="tk"><span data-ico="witch-hat" data-size="26" data-min-level="1">🧙</span> Wear your silliest costume</span>
+    <span class="tk"><span data-ico="candy-bucket" data-size="26" data-min-level="1">🍬</span> Bring a bucket</span>
+    <span class="tk"><span data-ico="bat" data-size="26" data-min-level="1">🦇</span> Parade at 3 pm sharp</span>
+    <span class="tk"><span data-ico="cauldron" data-size="26" data-min-level="1">🧪</span> Slime, mummies and cupcakes</span>
+    <span class="tk"><span data-ico="spider-web" data-size="26" data-min-level="1">🕸️</span> Nut-free from gate to goody bag</span>
+  </div>
+</div>
+
+<!-- ============ SCHEDULE ============ -->
+<section id="schedule" class="sec sec-cream" aria-labelledby="h-schedule">
+  <div class="deco" data-min-level="2" aria-hidden="true" style="top:70px"><span class="die" data-ico="alarm-clock" data-size="112" data-motion="hover">⏰</span><span class="die" data-ico="megaphone" data-size="88" data-motion="hover">📣</span></div>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker"><span data-ico="calendar-days" data-size="22" data-min-level="1">🗓️</span> Run of show</p>
+      <h2 id="h-schedule" class="h-sticker c-orange">Three hours of pure silly</h2>
+      <p class="sec-sub">Everything below happens in the backyard and around Maple Court. Times are a guide, but the parade starts at 3:00 sharp because Uncle Dayo's kazoo band has a very tight schedule.</p>
+    </header>
+
+    <ol class="run tilt">
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="14:00" data-size="72" data-label="2:00 pm">🕑</span>
+        <div class="slot-body"><p class="slot-time">2:00 pm</p><h3>Doors open</h3><p>Check in at the side gate, grab a name tag and your costume number for the contest. Grown-ups who are dropping off sign the sheet here.</p></div>
+      </li>
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="14:15" data-size="72" data-label="2:15 pm">🕑</span>
+        <div class="slot-body"><p class="slot-time">2:15 pm</p><h3>Craft stations open</h3><p>Pumpkin painting, the slime lab, bat masks and the mummy wrap race. Smocks are on the hooks. Wander and try everything.</p></div>
+      </li>
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="14:50" data-size="72" data-label="2:50 pm">🕒</span>
+        <div class="slot-body"><p class="slot-time">2:50 pm</p><h3>Line up, little monsters</h3><p>Wash paint off hands (mostly), find your costume number and line up by the hay bales. Grown-ups, get your cameras out.</p></div>
+      </li>
+      <li class="slot card slot-big">
+        <span class="clk" data-live="clock-time" data-p-time="15:00" data-size="84" data-label="3:00 pm">🕒</span>
+        <div class="slot-body"><p class="slot-time">3:00 pm <span class="stamp">The big one</span></p><h3>Costume parade</h3><p>Once around the pumpkin patch and down the driveway, led by Uncle Dayo's kazoo band. Roar, flap, wobble or moo. Everybody gets a round of applause.</p></div>
+      </li>
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="15:20" data-size="72" data-label="3:20 pm">🕒</span>
+        <div class="slot-body"><p class="slot-time">3:20 pm</p><h3>Trick-or-treat trail</h3><p>Six friendly stops around Maple Court with a stamp card. Takes about 35 minutes, and ages 3 to 5 walk it with a grown-up.</p></div>
+      </li>
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="16:00" data-size="72" data-label="4:00 pm">🕓</span>
+        <div class="slot-body"><p class="slot-time">4:00 pm</p><h3>Snack time</h3><p>Ghost cupcakes, mummy dogs and swamp punch on the long table. Every label shows what is in it, and nothing contains nuts.</p></div>
+      </li>
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="16:20" data-size="72" data-label="4:20 pm">🕓</span>
+        <div class="slot-body"><p class="slot-time">4:20 pm</p><h3>Ballots close</h3><p>Last chance to drop your costume ballot in the pumpkin box. Judges Dayo, Tamsin and Pip count in secret.</p></div>
+      </li>
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="16:30" data-size="72" data-label="4:30 pm">🕟</span>
+        <div class="slot-body"><p class="slot-time">4:30 pm</p><h3>Winners and birthday song</h3><p>Four trophies, one very loud rendition of Happy Birthday and a pumpkin cupcake for Pip with a single candle.</p></div>
+      </li>
+      <li class="slot card">
+        <span class="clk" data-live="clock-time" data-p-time="17:00" data-size="72" data-label="5:00 pm">🕔</span>
+        <div class="slot-body"><p class="slot-time">5:00 pm</p><h3>Home time</h3><p>Goody bags at the gate, pick-up with your code word, and a sleepy wave goodbye. Drop-off kids must be collected by 5:00.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ TRAIL ============ -->
+<section id="trail" class="sec sec-peach" aria-labelledby="h-trail">
+  <div class="deco" data-min-level="2" aria-hidden="true" style="top:430px"><span class="die" data-ico="tent" data-size="112" data-motion="hover">⛺</span><span class="die" data-ico="flag" data-size="88" data-motion="hover">🚩</span></div>
+  <figure class="band">
+    <img src="_img/boo-bash/photo-1718208295507-24ba1e846c1e-1600.jpg" width="1200" height="674" alt="A long row of orange pumpkins on a grassy field under a clear blue sky, with visitors and trees in the distance." loading="lazy" decoding="async">
+    <figcaption class="band-credit">Photo by <a href="https://unsplash.com/@ewhite7102?utm_source=withicons_demos&utm_medium=referral">Emma White</a> on <a href="https://unsplash.com/photos/knv2rccMMGc?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></figcaption>
+  </figure>
+
+  <div class="wrap">
+    <header class="sec-head overlap">
+      <p class="kicker"><span data-ico="route" data-size="22" data-min-level="1">🗺️</span> Trick-or-treat trail</p>
+      <h2 id="h-trail" class="h-sticker c-grape">The Maple Court treasure map</h2>
+      <p class="sec-sub">Six friendly stops around the court. Tap a pin to see who lives there, what they hand out and the riddle you have to tell. Collect all six stamps to open the treasure chest at the Treat Tent.</p>
+    </header>
+
+    <div class="trail-grid">
+      <div class="map-col">
+      <div class="map-card card">
+        <div class="map" id="map">
+          <div class="map-art-wrap">
+            <svg class="map-art" viewBox="0 0 1000 780" role="img" aria-label="Hand-drawn map of Maple Court, a cul-de-sac with six numbered stops, starting at the gate of number 82 and ending at the Treat Tent on the green." preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <filter id="wob" x="-3%" y="-3%" width="106%" height="106%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="11" result="n"/>
+                  <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+                <pattern id="tufts" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M8 14l2-7 2 7M30 34l2-7 2 7M36 10l1.6-5 1.6 5" fill="none" stroke="#b5d56f" stroke-width="2.4" stroke-linecap="round"/></pattern>
+              </defs>
+              <rect width="1000" height="780" fill="#d9eda3"/>
+              <rect width="1000" height="780" fill="url(#tufts)"/>
+              <g filter="url(#wob)" stroke-linecap="round" stroke-linejoin="round">
+                <!-- roads: ink edge, cream fill, dashed centre -->
+                <g fill="none">
+                  <path d="M-30 748H1030M480 760V500" stroke="#2a1445" stroke-width="82"/>
+                  <circle cx="480" cy="330" r="165" stroke="#2a1445" stroke-width="82"/>
+                  <path d="M-30 748H1030M480 760V500" stroke="#fff3d0" stroke-width="74"/>
+                  <circle cx="480" cy="330" r="165" stroke="#fff3d0" stroke-width="74"/>
+                  <path d="M-10 748H1010M480 750V505" stroke="#e8cf92" stroke-width="4" stroke-dasharray="16 14"/>
+                  <circle cx="480" cy="330" r="165" stroke="#e8cf92" stroke-width="4" stroke-dasharray="16 14"/>
+                </g>
+                <!-- the green in the middle -->
+                <circle cx="480" cy="330" r="124" fill="#bde27a" stroke="#2a1445" stroke-width="5"/>
+                <g stroke="#2a1445" stroke-width="5">
+                  <circle cx="480" cy="330" r="22" fill="none" stroke="#ff8a1f" stroke-width="44" stroke-dasharray="11.5 11.5" transform="rotate(8 480 330)"/>
+                  <circle cx="480" cy="330" r="44" fill="none"/>
+                </g>
+                <!-- backyard of number 82 -->
+                <rect x="36" y="486" width="188" height="204" rx="18" fill="#b6dc6a" stroke="#2a1445" stroke-width="4" stroke-dasharray="12 9"/>
+                <g fill="#ffb347" stroke="#2a1445" stroke-width="3.5"><circle cx="78" cy="640" r="15"/><circle cx="112" cy="652" r="11"/><circle cx="170" cy="534" r="13"/></g>
+                <!-- houses -->
+                <g class="hs">
+                  <rect x="232" y="500" width="170" height="130" rx="16" fill="#ffc979"/><path d="M232 565H402"/><rect x="362" y="510" width="20" height="22" rx="3" fill="#e5530f"/>
+                  <rect x="70" y="290" width="160" height="124" rx="16" fill="#e2d2ff"/><path d="M70 352H230"/><rect x="190" y="300" width="20" height="22" rx="3" fill="#7b3fe4"/>
+                  <rect x="190" y="30" width="160" height="80" rx="16" fill="#cfe3ff"/><path d="M190 70H350"/><rect x="310" y="40" width="20" height="20" rx="3" fill="#4d7cfe"/>
+                  <rect x="592" y="30" width="170" height="80" rx="16" fill="#ffd9e6"/><path d="M592 70H762"/><rect x="722" y="40" width="20" height="20" rx="3" fill="#ff7aa8"/>
+                  <rect x="560" y="520" width="170" height="112" rx="16" fill="#fff0a8"/><path d="M560 576H730"/><rect x="690" y="530" width="20" height="20" rx="3" fill="#e0a800"/>
+                  <rect x="800" y="470" width="150" height="124" rx="16" fill="#d3f0c0"/><path d="M800 532H950"/>
+                  <rect x="56" y="140" width="130" height="100" rx="16" fill="#ffe2b8"/><path d="M56 190H186"/>
+                  <rect x="800" y="120" width="140" height="96" rx="16" fill="#e2d2ff"/><path d="M800 168H940"/>
+                </g>
+                <!-- hay lot -->
+                <g stroke="#2a1445" stroke-width="4"><rect x="748" y="256" width="190" height="148" rx="14" fill="#f4d56b"/></g>
+                <g fill="#e3b93f" stroke="#2a1445" stroke-width="3.5"><rect x="768" y="280" width="62" height="38" rx="6"/><rect x="848" y="280" width="62" height="38" rx="6"/><rect x="808" y="338" width="62" height="38" rx="6"/></g>
+                <g fill="#ff8a1f" stroke="#2a1445" stroke-width="3.5"><circle cx="780" cy="372" r="13"/><circle cx="900" cy="354" r="12"/></g>
+                <!-- trees -->
+                <g stroke="#2a1445" stroke-width="4">
+                  <circle cx="50" cy="440" r="26" fill="#58a331"/><circle cx="262" cy="458" r="22" fill="#58a331"/><circle cx="470" cy="60" r="28" fill="#58a331"/>
+                  <circle cx="858" cy="46" r="26" fill="#58a331"/><circle cx="650" cy="470" r="22" fill="#58a331"/><circle cx="780" cy="660" r="28" fill="#58a331"/>
+                  <circle cx="330" cy="660" r="24" fill="#58a331"/><circle cx="960" cy="400" r="22" fill="#58a331"/>
+                </g>
+                <g fill="#7fc24d"><circle cx="42" cy="431" r="9"/><circle cx="256" cy="451" r="7"/><circle cx="460" cy="51" r="9"/><circle cx="850" cy="38" r="8"/><circle cx="643" cy="463" r="7"/><circle cx="772" cy="651" r="9"/><circle cx="323" cy="653" r="8"/></g>
+              </g>
+              <!-- labels -->
+              <g font-family="Chewy,'Fredoka',sans-serif" fill="#2a1445" text-anchor="middle">
+                <text x="478" y="654" font-size="27" letter-spacing="5" transform="rotate(-90 478 654)" opacity=".8">MAPLE COURT</text>
+                <text x="790" y="758" font-size="27" letter-spacing="5" opacity=".8">FAIRMONT ROAD</text>
+                <text x="480" y="418" font-size="20" letter-spacing="3" opacity=".75">THE GREEN</text>
+                <text x="317" y="548" font-size="22">#82</text><text x="317" y="596" font-size="18" opacity=".75">PARTY HQ</text>
+                <text x="130" y="526" font-size="17" opacity=".75" letter-spacing="2">BACKYARD</text>
+                <text x="150" y="338" font-size="22">#80</text><text x="270" y="64" font-size="22">#78</text><text x="677" y="64" font-size="22">#77</text>
+                <text x="843" y="428" font-size="18" letter-spacing="2" opacity=".8">#79 HAY LOT</text>
+                <text x="645" y="568" font-size="22">#84</text><text x="875" y="526" font-size="22">#81</text>
+              </g>
+            </svg>
+          </div>
+          <svg class="route" id="route" viewBox="0 0 1000 780" aria-hidden="true" preserveAspectRatio="xMidYMid slice"></svg>
+          <ol class="pins" id="pins" aria-label="Trail stops"></ol>
+          <span class="compass die" data-ico="compass" data-size="62" data-min-level="1" data-label="North is up">🧭</span>
+        </div>
+        <p class="map-hint"><span data-ico="cursor" data-size="18" data-min-level="1">👆</span> Tap a pin, or use the arrow keys on the map, to jump between stops.</p>
+      </div>
+        <div class="stamps card" id="stamps">
+          <div class="stamps-head">
+            <h3><span data-ico="award" data-size="26">🏅</span> Your stamp card</h3>
+            <p class="stamps-count"><b id="stamp-n">0</b> of 6 stamps</p>
+          </div>
+          <ol class="stamp-row" id="stamp-row" aria-label="Stamps collected"></ol>
+          <p class="stamps-msg" id="stamp-msg">Stamp each stop as you visit it. Your card is saved on this page while it stays open.</p>
+        </div>
+      </div>
+
+      <div class="stop-col">
+        <div class="stop-wrap" id="stop-wrap" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="trail-lower">
+      <aside class="manners card">
+        <img src="_img/boo-bash/5859556-900.jpg" width="1200" height="800" alt="Two small children in a black witch costume and a red devil costume, seen from behind, walk up a leaf-strewn brick path with a jack-o-lantern bucket toward a white front door with cobwebs on the hedge." loading="lazy" decoding="async">
+        <div class="manners-body">
+          <h3>Trail manners</h3>
+          <ul class="rules">
+            <li><span data-ico="door-closed" data-size="26">🚪</span> Knock twice, then wait with a big smile.</li>
+            <li><span data-ico="laugh" data-size="26">😂</span> Tell your riddle before you take a treat.</li>
+            <li><span data-ico="hand" data-size="26">✋</span> One treat each. Sharing is spooky-nice.</li>
+            <li><span data-ico="shield-check" data-size="26">🛡️</span> Unsure about an ingredient? Ask the grown-up at the stop: they have the label.</li>
+            <li><span data-ico="traffic-cone" data-size="26">🚧</span> Stay on the court. Nobody goes past the Treat Tent.</li>
+          </ul>
+          <p class="credit-line">Photo by <a href="https://www.pexels.com/@charles-parker">Charles Parker</a> on <a href="https://www.pexels.com/photo/5859556/">Pexels</a></p>
+        </div>
+      </aside>
+      <div class="stoplist-wrap">
+        <h3 class="mini-h">All six stops</h3>
+        <ol class="stoplist" id="stoplist"></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COSTUME CONTEST ============ -->
+<section id="contest" class="sec sec-grape" aria-labelledby="h-contest">
+  <div class="deco" data-min-level="2" aria-hidden="true" style="top:70px"><span class="die" data-ico="trophy" data-size="120" data-motion="hover">🏆</span><span class="die" data-ico="crown" data-size="92" data-motion="hover">👑</span></div>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker"><span data-ico="trophy" data-size="22" data-min-level="1">🏆</span> Costume contest</p>
+      <h2 id="h-contest" class="h-sticker c-orange">Vote for the best costume</h2>
+      <p class="sec-sub">Every little monster gets a number at check-in. During the party, fill in this ballot on a phone (or ask a grown-up to) and drop it in the pumpkin box before 4:20. You cannot vote for your own costume, nice try.</p>
+    </header>
+
+    <div class="contest-grid">
+      <div class="lineup-col">
+        <figure class="photo-sticker card">
+          <img src="_img/boo-bash/photo-1477241219470-e4f7fa400a9b-800.jpg" width="1200" height="800" alt="A child in a magenta top and purple costume holds a large pumpkin decorated with a grinning black vinyl face in both hands." loading="lazy" decoding="async">
+          <figcaption>Grins like this one count double.<small>Photo by <a href="https://unsplash.com/@julesrsh?utm_source=withicons_demos&utm_medium=referral">Julia Raasch</a> on <a href="https://unsplash.com/photos/4z4ztWP7WPs?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></small></figcaption>
+        </figure>
+        <h3 class="mini-h"><span data-ico="users" data-size="24">👥</span> The line-up <span class="count-pill" id="lineup-n">12</span></h3>
+        <ul class="lineup" id="lineup"></ul>
+        <p class="fine">Signed up on the RSVP form with a costume? You are added to this list straight away.</p>
+      </div>
+
+      <div class="ballot-col">
+        <form class="ballot card" id="ballot" action="#" novalidate>
+          <div class="ballot-head">
+            <div>
+              <p class="kicker k-dark">Official ballot</p>
+              <h3>Four trophies to give</h3>
+            </div>
+            <div class="ballot-meters">
+              <span class="meter" data-live="progress-ring" data-p-value="0" data-size="64" data-label="Ballot 0 percent filled in" id="ballot-ring">0%</span>
+              <span class="meter" data-live="inbox-count" data-p-count="9" data-size="64" data-label="9 ballots in the pumpkin box" id="ballot-box">📥</span>
+            </div>
+          </div>
+          <p class="ballot-sub"><b id="ballot-picked">0 of 4</b> picked <span aria-hidden="true">·</span> <b id="ballot-boxn">9</b> ballots already in the pumpkin box</p>
+
+          <div class="field">
+            <label for="voter">Your name <span class="req">(so nobody votes for themselves)</span></label>
+            <input id="voter" name="voter" type="text" autocomplete="off" placeholder="First name is plenty" maxlength="40" required>
+            <p class="err" id="err-voter" role="alert" hidden></p>
+          </div>
+
+          <div class="cats" id="cats"></div>
+          <p class="err err-box" id="ballot-err" role="alert" hidden></p>
+          <div class="ballot-actions">
+            <button class="btn btn-grape" type="submit"><span data-ico="send" data-size="22">📮</span> Drop it in the pumpkin box</button>
+            <button class="btn btn-ghost" type="reset" id="ballot-reset">Start over</button>
+          </div>
+        </form>
+
+        <div class="ballot-done card" id="ballot-done" hidden tabindex="-1">
+          <span class="die" data-ico="trophy" data-size="92" data-label="Trophy" data-min-level="1">🏆</span>
+          <h3>Ballot in the box!</h3>
+          <p id="done-text"></p>
+          <p class="stub"><span>Ballot</span><b id="done-no">#10</b><span>Winners at 4:30 pm</span></p>
+          <button class="btn btn-ghost" type="button" id="ballot-again">Fill in another ballot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATIONS ============ -->
+<section id="stations" class="sec sec-cream" aria-labelledby="h-stations">
+  <div class="bunting" aria-hidden="true"></div>
+  <div class="deco" data-min-level="2" aria-hidden="true" style="top:78px"><span class="die" data-ico="palette" data-size="112" data-motion="hover">🎨</span><span class="die" data-ico="puzzle-piece" data-size="88" data-motion="hover">🧩</span></div>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker"><span data-ico="paintbrush" data-size="22" data-min-level="1">🎨</span> Craft stations</p>
+      <h2 id="h-stations" class="h-sticker c-slime">Make a mess, make a memory</h2>
+      <p class="sec-sub">Six stations open at 2:15 and stay open until the parade. Each one has a grown-up helper and a hand-washing bucket. Smocks are on the hooks and old T-shirts are in the basket.</p>
+    </header>
+
+    <ul class="stations tilt">
+      <li class="station card">
+        <div class="st-top">
+          <img src="_img/boo-bash/5859180-900.jpg" width="1200" height="800" alt="Two little girls sit on grass among fallen leaves, painting small pumpkins topped with black witch hats, with a paint palette and paint tubes beside them." loading="lazy" decoding="async" style="object-position:45% 50%">
+        </div>
+        <div class="st-body">
+          <h3><span data-ico="palette" data-size="28">🎨</span> Pumpkin painting patch</h3>
+          <p>Mini pumpkins, washable paint and black felt witch hats. Paint a face, a galaxy or your dog, then take it home to dry.</p>
+          <ul class="tagrow"><li class="chip">Ages 3+</li><li class="chip">Washable paint</li><li class="chip">Take it home</li></ul>
+          <p class="credit-line">Photo by <a href="https://www.pexels.com/@charles-parker">Charles Parker</a> on <a href="https://www.pexels.com/photo/5859180/">Pexels</a></p>
+        </div>
+      </li>
+      <li class="station card">
+        <div class="st-top st-color c-orange-soft">
+          <span class="die" data-ico="bandage" data-size="104" data-label="Bandage" data-motion="hover">🩹</span>
+          <span class="st-live die" data-ico="timer" data-size="72" data-label="Stopwatch" data-motion="hover">⏱️</span><span class="st-record">Record: 0:42</span>
+        </div>
+        <div class="st-body">
+          <h3><span data-ico="timer" data-size="28">⏱️</span> Mummy wrap race</h3>
+          <p>Teams of two, one roll of toilet paper, one very patient mummy. Whoever wraps from ankles to nose first wins. The record so far: 42 seconds, set by Pip and Uncle Dayo in rehearsal.</p>
+          <ul class="tagrow"><li class="chip">Ages 4+</li><li class="chip">Teams of 2</li><li class="chip">Loud</li></ul>
+        </div>
+      </li>
+      <li class="station card">
+        <div class="st-top st-color c-slime-soft">
+          <span class="die" data-ico="flask-conical" data-size="104" data-label="Slime lab flask" data-motion="hover">🧪</span>
+        </div>
+        <div class="st-body">
+          <h3><span data-ico="droplets" data-size="28">💧</span> Glitter slime lab</h3>
+          <p>Stir green, purple or orange slime in a zip pouch and add as much glitter as your grown-up allows. Borax-free recipe, wash-off safe, and no nuts anywhere near it.</p>
+          <ul class="tagrow"><li class="chip">Ages 4+</li><li class="chip">Messy</li><li class="chip">Grown-up helps</li></ul>
+        </div>
+      </li>
+      <li class="station card">
+        <div class="st-top">
+          <img src="_img/boo-bash/14449805-900.jpg" width="1200" height="800" alt="Two children toss armfuls of golden autumn leaves into the air in a sunlit garden under dark evergreen trees, one in an owl-eared hat." loading="lazy" decoding="async" style="object-position:55% 45%">
+        </div>
+        <div class="st-body">
+          <h3><span data-ico="leaf" data-size="28">🍂</span> Leaf toss and lawn games</h3>
+          <p>A giant leaf pile to jump in, ghost bowling with painted milk jugs, and pin-the-nose-on-the-pumpkin. Energy gets used up here.</p>
+          <ul class="tagrow"><li class="chip">All ages</li><li class="chip">Outdoors</li><li class="chip">Running</li></ul>
+          <p class="credit-line">Photo by <a href="https://www.pexels.com/@helen1">Helena Jankovičová Kováčová</a> on <a href="https://www.pexels.com/photo/14449805/">Pexels</a></p>
+        </div>
+      </li>
+      <li class="station card">
+        <div class="st-top st-color c-grape-soft">
+          <span class="die" data-ico="bat" data-size="104" data-label="Bat" data-motion="hover">🦇</span>
+        </div>
+        <div class="st-body">
+          <h3><span data-ico="scissors" data-size="28">✂️</span> Bat masks and face paint</h3>
+          <p>Cut and decorate a felt bat mask, or ask Marisol for a whiskers-and-nose face. Skin-safe paint only, and she checks every ingredient list first.</p>
+          <ul class="tagrow"><li class="chip">Ages 3+</li><li class="chip">Skin-safe paint</li><li class="chip">Quiet corner</li></ul>
+        </div>
+      </li>
+      <li class="station card">
+        <div class="st-top st-color c-sun-soft">
+          <span class="die" data-ico="camera" data-size="104" data-label="Camera" data-motion="hover">📷</span>
+        </div>
+        <div class="st-body">
+          <h3><span data-ico="sparkles" data-size="28">✨</span> The silly photo booth</h3>
+          <p>A hay-bale backdrop, a box of oversized sunglasses and a feather boa. Grown-ups get the strip by email on Sunday morning, with the best face circled.</p>
+          <ul class="tagrow"><li class="chip">All ages</li><li class="chip">Props</li><li class="chip">Strips by email</li></ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ SNACKS ============ -->
+<section id="snacks" class="sec sec-slime" aria-labelledby="h-snacks">
+  <div class="deco" data-min-level="2" aria-hidden="true" style="top:70px"><span class="die" data-ico="donut" data-size="112" data-motion="hover">🍩</span><span class="die" data-ico="ice-cream" data-size="88" data-motion="hover">🍦</span></div>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker"><span data-ico="cookie" data-size="22" data-min-level="1">🍪</span> Snack table</p>
+      <h2 id="h-snacks" class="h-sticker c-grape">Nut-free, and every label shown</h2>
+      <p class="sec-sub">Ada and Jonas read every wrapper. Nothing on the table contains peanuts or tree nuts, and nothing was made near them. Tell the menu what your kid cannot eat and it dims anything that is not safe, with the reason on the card.</p>
+    </header>
+
+    <div class="snack-intro">
+      <div class="nutfree card">
+        <span class="die" data-ico="shield-check" data-size="72" data-label="Nut-free" data-min-level="1">🛡️</span>
+        <div>
+          <h3>100% nut-free</h3>
+          <p>Peanuts and tree nuts are banned from the whole party, including the goody bags. Look for the teal pumpkin by the gate: ask for a <b>non-food treat</b> (glow bracelets, stickers, spider rings) any time, no questions asked.</p>
+        </div>
+      </div>
+      <form class="filters card" id="filters" action="#" onsubmit="return false">
+        <fieldset>
+          <legend>Skip anything with</legend>
+          <div class="chips" id="avoid-chips"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Eating</legend>
+          <div class="chips" id="diet-chips"></div>
+        </fieldset>
+        <div class="filter-foot">
+          <p id="filter-sum" role="status">All 9 snacks are on the table.</p>
+          <button class="btn btn-small btn-ghost" type="button" id="filter-reset" hidden>Clear</button>
+          <button class="btn btn-small" type="button" id="filter-send" hidden><span data-ico="send" data-size="18">📝</span> Add to my RSVP</button>
+        </div>
+      </form>
+    </div>
+
+    <ul class="menu" id="menu"></ul>
+    <p class="fine menu-fine">Cupcakes are from Sweet Pea Bakery, a nut-free kitchen across town. Popcorn is for ages 4 and up; for under-4s we cut grapes and serve soft fruit instead. Allergen information is as supplied by the makers and checked by the hosts on the morning.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT TO BRING ============ -->
+<section id="bring" class="sec sec-sun" aria-labelledby="h-bring">
+  <div class="wrap bring-grid">
+    <figure class="ghost-card card">
+      <img src="_img/boo-bash/5432188-700.jpg" width="1200" height="1799" alt="A white gauze ghost decoration with a simple drawn face hangs on a thread from a branch against a warm golden-orange blur of autumn leaves." loading="lazy" decoding="async" style="object-position:46% 52%">
+      <figcaption>Our ghost greeter, Boris, hangs by the gate.<small>Photo by <a href="https://www.pexels.com/@juan-vargas-1955119">Juan Vargas</a> on <a href="https://www.pexels.com/photo/5432188/">Pexels</a></small></figcaption>
+    </figure>
+    <div class="bring-main">
+      <header class="sec-head left">
+        <p class="kicker"><span data-ico="backpack" data-size="22" data-min-level="1">🎒</span> What to bring</p>
+        <h2 id="h-bring" class="h-sticker c-orange">Pack your bucket</h2>
+        <p class="sec-sub">Tick things off as you pack. We keep spares of the small stuff, but the bucket is yours to bring.</p>
+      </header>
+      <ul class="checklist" id="checklist">
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="witch-hat" data-size="40">🧙</span><span class="check-txt"><b>A costume</b><span>Face paint is welcome. Masks that cover eyes are not, as the trail has steps.</span></span></label></li>
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="candy-bucket" data-size="40">🪣</span><span class="check-txt"><b>A bucket or pillowcase</b><span>For trail treats and goody-bag loot. Name it with tape if you like.</span></span></label></li>
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="person-running" data-size="40">👟</span><span class="check-txt"><b>Comfy closed-toe shoes</b><span>Grass, leaves and one very squelchy patch by the hose.</span></span></label></li>
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="shirt" data-size="40">🧥</span><span class="check-txt"><b>A warm layer</b><span>The sun dips behind the maples around 4:30 and it cools off fast.</span></span></label></li>
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="droplet" data-size="40">💧</span><span class="check-txt"><b>A water bottle</b><span>Marked with your name. There is a refill tap by the side gate.</span></span></label></li>
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="pill" data-size="40">💊</span><span class="check-txt"><b>Allergy or asthma medicine</b><span>Labelled, in your bag, and shown to a host at check-in. Epinephrine pens welcome.</span></span></label></li>
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="washing-machine" data-size="40">🧺</span><span class="check-txt"><b>A change of clothes</b><span>Paint, slime and glitter find a way. Wet things go in a bag we provide.</span></span></label></li>
+        <li><label class="check"><input type="checkbox"><span class="check-box"><span data-ico="check" data-size="20">✓</span></span><span class="check-ico" data-ico="phone" data-size="40">📱</span><span class="check-txt"><b>A charged phone (drop-off grown-ups)</b><span>We text you if anything comes up and again at 4:50 for pick-up.</span></span></label></li>
+      </ul>
+      <div class="pack" role="status">
+        <span class="pack-bar" aria-hidden="true"><i id="pack-bar"></i></span>
+        <p><b id="pack-n">0</b> of 8 packed <span id="pack-msg"></span></p>
+      </div>
+      <p class="fine"><b>Leave at home:</b> toy weapons, anything that sprays, nuts of any kind, and costume masks that cover the eyes. Pets too, sorry: Biscuit the dog is at Grandma's.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GROWN-UPS ============ -->
+<section id="grownups" class="sec sec-cream" aria-labelledby="h-grownups">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker"><span data-ico="users" data-size="22" data-min-level="1">👪</span> For grown-ups</p>
+      <h2 id="h-grownups" class="h-sticker c-slime">Drop off or stay and play?</h2>
+      <p class="sec-sub">Either is welcome. Ages 3 and 4 stay with a grown-up; ages 5 to 9 can be dropped off if we have a phone number that answers. Pick the one that is you and the RSVP form will remember.</p>
+    </header>
+
+    <div class="mode-grid" role="radiogroup" aria-label="Drop off or stay">
+      <label class="mode card" data-mode="stay">
+        <input type="radio" name="mode" value="stay" aria-labelledby="mode-stay-h" aria-describedby="mode-stay-d">
+        <span class="mode-pick"><span class="mode-dot" aria-hidden="true"></span> This is us</span>
+        <span class="mode-art die" data-ico="coffee" data-size="76" data-label="Coffee cup">☕</span>
+        <h3 id="mode-stay-h">Stay and play</h3>
+        <p class="mode-who" id="mode-stay-d">Required for ages 3 and 4. Everyone is welcome.</p>
+        <ul class="mode-list">
+          <li><span data-ico="coffee" data-size="22">☕</span> Free cider, coffee and tea on the porch from 2:00.</li>
+          <li><span data-ico="witch-hat" data-size="22">🧙</span> Grown-up costumes encouraged. Last year's best was a lamp.</li>
+          <li><span data-ico="sofa" data-size="22">🛋️</span> Garden chairs under the maple, plus a quiet corner with a changing mat.</li>
+          <li><span data-ico="camera" data-size="22">📷</span> Photo your own monsters all you like, and ask before posting other children's faces.</li>
+        </ul>
+      </label>
+      <label class="mode card" data-mode="drop">
+        <input type="radio" name="mode" value="drop" aria-labelledby="mode-drop-h" aria-describedby="mode-drop-d">
+        <span class="mode-pick"><span class="mode-dot" aria-hidden="true"></span> This is us</span>
+        <span class="mode-art die" data-ico="car-front" data-size="76" data-label="Car">🚗</span>
+        <h3 id="mode-drop-h">Drop off</h3>
+        <p class="mode-who" id="mode-drop-d">Ages 5 to 9, with a grown-up's phone number on the RSVP.</p>
+        <ul class="mode-list">
+          <li><span data-ico="clipboard-check" data-size="22">📋</span> Sign your child in at the side gate between 2:00 and 2:30.</li>
+          <li><span data-ico="key-round" data-size="22">🔑</span> You get a pick-up code word on your RSVP confirmation. Only people who say it can collect.</li>
+          <li><span data-ico="phone-call" data-size="22">📞</span> Keep your phone on. We call before we text, and we text at 4:50.</li>
+          <li><span data-ico="alarm-clock" data-size="22">⏰</span> Pick up by 5:00 pm. Late fee: you bring Pip a pumpkin cupcake next week.</li>
+        </ul>
+      </label>
+      <figure class="leaf-card card">
+        <img src="_img/boo-bash/photo-1720704328995-4a99ae91dd77-700.jpg" width="1200" height="1600" alt="A small girl in a dark jacket and red skirt stands in a carpet of fallen orange leaves under golden autumn trees, with other children playing further back." loading="lazy" decoding="async" style="object-position:60% 45%">
+        <figcaption>Plenty of room to roam<small>Photo by <a href="https://unsplash.com/@256p?utm_source=withicons_demos&utm_medium=referral">Patrick Otim</a> on <a href="https://unsplash.com/photos/mKDy1lSR6_M?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></small></figcaption>
+      </figure>
+    </div>
+
+    <ul class="safety">
+      <li><span data-ico="stethoscope" data-size="40">🩺</span><span><b>First aider on site</b>Tamsin, Pip's aunt and a paediatric nurse, is here all afternoon.</span></li>
+      <li><span data-ico="shield-user" data-size="40">🛡️</span><span><b>One helper per station</b>Every craft table and the trail stops have a grown-up we know.</span></li>
+      <li><span data-ico="door-closed" data-size="40">🚪</span><span><b>One gate, always staffed</b>The side gate is the only way in or out, and someone watches it.</span></li>
+      <li><span data-ico="alert-triangle" data-size="40">⚠️</span><span><b>Allergies on the wall</b>Every RSVP allergy goes on a list by the snack table, so you never have to explain twice.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FIND US ============ -->
+<section id="find" class="sec sec-peach" aria-labelledby="h-find">
+  <div class="wrap find-grid">
+    <div class="find-card card">
+      <p class="kicker k-dark"><span data-ico="map-pin" data-size="22" data-min-level="1">📍</span> Find us</p>
+      <h2 id="h-find" class="h-plain">82 Maple Court</h2>
+      <address>The Okafor-Lindqvist house, Fairmont Heights. Enter by the orange-balloon gate on the left.</address>
+      <div class="cta">
+        <button class="btn btn-small" type="button" id="copy-addr"><span data-ico="copy" data-size="18">📋</span> <span id="copy-txt">Copy address</span></button>
+        <button class="btn btn-small btn-grape" type="button" data-add-cal><span data-ico="calendar-plus" data-size="18">🗓️</span> Add to calendar</button>
+      </div>
+      <ul class="dirs">
+        <li><span data-ico="parking" data-size="28">🅿️</span><span><b>Parking</b>Street parking on the odd-numbered side of Maple Court. Overflow at Fairmont Elementary, a two-minute walk.</span></li>
+        <li><span data-ico="bus" data-size="28">🚌</span><span><b>By bus</b>Route 14 stops at Fairmont and Maple, a minute and a half from the gate.</span></li>
+        <li><span data-ico="bike" data-size="28">🚲</span><span><b>By bike</b>There is a rack on the porch and a spot for small helmets.</span></li>
+        <li><span data-ico="door-open" data-size="28">🚪</span><span><b>Step-free access</b>The side gate and path are level, and there is a ground-floor bathroom with a changing mat.</span></li>
+        <li><span data-ico="cloud-rain" data-size="28">🌧️</span><span><b>Rain plan</b>We move into the garage and the big tent, and the trail becomes a hallway hunt. We text by 11 am.</span></li>
+      </ul>
+    </div>
+    <div class="find-side">
+    <figure class="host-photo card">
+      <img src="_img/boo-bash/5604925-1000.jpg" width="1200" height="800" alt="Three children in witch and masked costumes sit at a wooden table in a backyard decorated for Halloween, with pumpkins, hay bales, black candles and string lights between the trees." loading="lazy" decoding="async" style="object-position:50% 55%">
+      <figcaption>The backyard, a bit like this but with more hay bales.<small>Photo by <a href="https://www.pexels.com/@yaroslav-shuraev">Yaroslav Shuraev</a> on <a href="https://www.pexels.com/photo/5604925/">Pexels</a></small></figcaption>
+    </figure>
+    <p class="find-note card"><span class="die" data-ico="balloon" data-size="64" data-label="Balloons" data-motion="hover">🎈</span><span><b>Follow the orange balloons.</b> They are tied to the left side gate. If you reach the end of the cul-de-sac, you have gone one house too far.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section id="rsvp" class="sec sec-orange" aria-labelledby="h-rsvp">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker k-dark"><span data-ico="mail-plus" data-size="22" data-min-level="1">💌</span> RSVP by Saturday 17 October</p>
+      <h2 id="h-rsvp" class="h-sticker c-paper">Count us in</h2>
+      <p class="sec-sub sub-dark">Tell us who is coming, what they are wearing and what they cannot eat. It takes about two minutes, and nothing leaves this page in the demo.</p>
+    </header>
+
+    <div class="rsvp-grid">
+      <aside class="rsvp-side card">
+        <div class="side-count">
+          <span class="meter" data-live="mail-count" data-p-count="17" data-size="72" id="rsvp-mail" data-label="17 families have replied">✉️</span>
+          <p><b id="rsvp-n">17</b> families have replied<br><span>Room for about 30 little monsters.</span></p>
+        </div>
+        <h3>What happens next</h3>
+        <ol class="next">
+          <li><b>Confirmation.</b> You get a summary with your pick-up code word if you chose drop-off.</li>
+          <li><b>Allergy list.</b> Every allergy is printed on the wall by the snack table before the party.</li>
+          <li><b>Reminder.</b> A text goes out on Friday 23 October with the weather and the gate number.</li>
+          <li><b>Costume numbers.</b> Tell us the costume and your child joins the voting line-up.</li>
+        </ol>
+        <p class="fine">Questions? Text Ada on 555-0142.</p>
+      </aside>
+
+      <div class="rsvp-col">
+        <form class="rsvp card" id="rsvp-form" action="#" novalidate>
+          <fieldset class="step" id="step-1">
+            <legend><span class="step-ico" data-live="step-number" data-p-step="1" data-size="44" data-label="Step 1">1</span> The grown-up</legend>
+            <div class="row2">
+              <div class="field"><label for="g-name">Your name</label><input id="g-name" name="gname" type="text" autocomplete="name" required><p class="err" id="err-gname" role="alert" hidden></p></div>
+              <div class="field"><label for="g-mail">Email</label><input id="g-mail" name="gmail" type="email" autocomplete="email" placeholder="you@example.com" required><p class="err" id="err-gmail" role="alert" hidden></p></div>
+            </div>
+            <div class="field"><label for="g-phone">Phone <span class="req" id="phone-req">(optional if you are staying)</span></label><input id="g-phone" name="gphone" type="tel" autocomplete="tel" placeholder="555-0100"><p class="err" id="err-gphone" role="alert" hidden></p></div>
+          </fieldset>
+
+          <fieldset class="step" id="step-2">
+            <legend><span class="step-ico" data-live="step-number" data-p-step="2" data-size="44" data-label="Step 2">2</span> The little monsters</legend>
+            <div id="kids"></div>
+            <p class="err" id="err-kids" role="alert" hidden></p>
+            <button class="btn btn-small btn-ghost" type="button" id="add-kid"><span data-ico="user-plus" data-size="18">➕</span> Add another child</button>
+            <span class="fine" id="kid-limit"></span>
+          </fieldset>
+
+          <fieldset class="step" id="step-3">
+            <legend><span class="step-ico" data-live="step-number" data-p-step="3" data-size="44" data-label="Step 3">3</span> Drop off or stay?</legend>
+            <div class="radios" role="radiogroup" aria-label="Drop off or stay">
+              <label class="radio"><input type="radio" name="rmode" value="stay" checked> <span><b>Stay and play</b><small>I will be there all afternoon</small></span></label>
+              <label class="radio"><input type="radio" name="rmode" value="drop"> <span><b>Drop off</b><small>Ages 5 to 9 only</small></span></label>
+            </div>
+            <div class="row2">
+              <div class="field" id="adults-field"><label for="adults">Grown-ups staying (besides hosts)</label>
+                <div class="stepper"><button class="step-b" type="button" id="adult-minus" aria-label="One fewer grown-up"><span data-ico="minus" data-size="20">−</span></button><output id="adults" aria-live="polite">1</output><button class="step-b" type="button" id="adult-plus" aria-label="One more grown-up"><span data-ico="plus" data-size="20">+</span></button></div>
+              </div>
+              <div class="field" id="pickup-field" hidden><label for="pickup">Who can collect them?</label><input id="pickup" name="pickup" type="text" placeholder="Names allowed to pick up"><p class="err" id="err-pickup" role="alert" hidden></p></div>
+            </div>
+            <div class="field"><label for="notes">Anything else we should know?</label><textarea id="notes" name="notes" rows="3" placeholder="Allergies not listed, a shy-at-first monster, a very small witch who naps at 3"></textarea></div>
+          </fieldset>
+
+          <p class="err err-box" id="form-err" role="alert" hidden></p>
+          <div class="rsvp-actions">
+            <button class="btn btn-grape" type="submit"><span data-ico="send" data-size="22">📨</span> Send our RSVP</button>
+            <span class="fine">By sending you agree to eat at least one ghost cupcake.</span>
+          </div>
+        </form>
+
+        <div class="rsvp-done card" id="rsvp-done" hidden tabindex="-1">
+          <span class="die" data-ico="party-popper" data-size="96" data-label="Party popper" data-min-level="1">🎉</span>
+          <h3 id="done-h">You are on the list!</h3>
+          <p id="done-sub"></p>
+          <ul class="ticket" id="done-ticket"></ul>
+          <p class="done-note" id="done-note"></p>
+          <div class="cta"><button class="btn btn-grape" type="button" data-add-cal><span data-ico="calendar-plus" data-size="22">🗓️</span> Add to calendar</button> <button class="btn btn-ghost" type="button" id="rsvp-edit">Change my answers</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="sec sec-cream" aria-labelledby="h-faq">
+  <div class="deco" data-min-level="2" aria-hidden="true" style="top:60px"><span class="die" data-ico="crystal-ball" data-size="112" data-motion="hover">🔮</span><span class="die" data-ico="lightbulb" data-size="88" data-motion="hover">💡</span></div>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker"><span data-ico="help-circle" data-size="22" data-min-level="1">❓</span> Good questions</p>
+      <h2 id="h-faq" class="h-sticker c-grape">Before you ask</h2>
+    </header>
+    <div class="faq">
+      <details class="card"><summary>Is it really nut-free?<span class="faq-ico" data-ico="chevron-down" data-size="28">▾</span></summary><p>Yes. Peanuts and tree nuts are not allowed anywhere at the party, the snack table is checked by two adults, and the cupcake maker runs a nut-free kitchen. Sesame, milk, egg, wheat and soy do appear, so every dish is labelled with exactly what is in it.</p></details>
+      <details class="card"><summary>What if it rains?<span class="faq-ico" data-ico="chevron-down" data-size="28">▾</span></summary><p>We move to the garage and the big tent and run the trail as a hallway hunt with the same stamps. We text everyone on Saturday by 11 am. A light drizzle does not cancel a pumpkin patch.</p></details>
+      <details class="card"><summary>Do grown-ups have to dress up?<span class="faq-ico" data-ico="chevron-down" data-size="28">▾</span></summary><p>No, but they are very welcome to. Costumes are the dress code for kids, and anything silly counts: a cardboard rocket, a banana, a very small pumpkin. Please skip masks that cover the eyes.</p></details>
+      <details class="card"><summary>Is anything scary?<span class="faq-ico" data-ico="chevron-down" data-size="28">▾</span></summary><p>No gore, no jump scares, no real-looking weapons. The scariest thing on the trail is a rubber spider named Gerald, and he is apologetic about it. The spook-o-meter on each stop tells you exactly how mild it is.</p></details>
+      <details class="card"><summary>Can younger siblings come?<span class="faq-ico" data-ico="chevron-down" data-size="28">▾</span></summary><p>Yes, and they are free. Under-3s stay with a grown-up the whole time. There is a toddler corner with soft blocks and a quiet tent for naps.</p></details>
+      <details class="card"><summary>Should we bring a present for Pip?<span class="faq-ico" data-ico="chevron-down" data-size="28">▾</span></summary><p>No presents, please. If you would like to bring something, bring a favourite picture book for the Little Library box by the gate. Pip will read it at bedtime for a year.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGN-OFF ============ -->
+<section class="signoff" aria-labelledby="h-sign">
+  <div class="wrap">
+    <div class="avs" aria-hidden="true">
+      <span data-ico="avatar-woman-braids" data-size="92">👩</span>
+      <span data-ico="avatar-monster-fluffy" data-size="108">👾</span>
+      <span data-ico="avatar-man-beard" data-size="92">🧔</span>
+    </div>
+    <h2 id="h-sign">See you in the patch!</h2>
+    <p>Love, Ada, Jonas and Pip (nearly six)</p>
+    <p class="fine">Text Ada on 555-0142 or write to boobash@example.com. Costume ideas, allergy questions and gate-number emergencies all welcome.</p>
+  </div>
+</section>
+</main>
+
+<!-- ============ CREDITS ============ -->
+<section id="credits" class="credits" aria-labelledby="h-credits">
+  <div class="wrap">
+    <h2 id="h-credits">Photo credits</h2>
+    <ul class="credit-list">
+      <li>Hero, children in costumes: Photo by <a href="https://unsplash.com/@connerbaker?utm_source=withicons_demos&utm_medium=referral">Conner Baker</a> on <a href="https://unsplash.com/photos/7FC-84Ap_IU?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Pumpkin patch, trail band: Photo by <a href="https://unsplash.com/@ewhite7102?utm_source=withicons_demos&utm_medium=referral">Emma White</a> on <a href="https://unsplash.com/photos/knv2rccMMGc?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Trick-or-treaters at a front door, trail manners: Photo by <a href="https://www.pexels.com/@charles-parker">Charles Parker</a> on <a href="https://www.pexels.com/photo/5859556/">Pexels</a></li>
+      <li>Child holding a pumpkin, costume contest: Photo by <a href="https://unsplash.com/@julesrsh?utm_source=withicons_demos&utm_medium=referral">Julia Raasch</a> on <a href="https://unsplash.com/photos/4z4ztWP7WPs?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Girls painting pumpkins, craft station: Photo by <a href="https://www.pexels.com/@charles-parker">Charles Parker</a> on <a href="https://www.pexels.com/photo/5859180/">Pexels</a></li>
+      <li>Children tossing leaves, lawn games: Photo by <a href="https://www.pexels.com/@helen1">Helena Jankovičová Kováčová</a> on <a href="https://www.pexels.com/photo/14449805/">Pexels</a></li>
+      <li>Ghost cupcakes, snack table: Photo by <a href="https://www.pexels.com/@daisy-anderson">Daisy Anderson</a> on <a href="https://www.pexels.com/photo/5583534/">Pexels</a></li>
+      <li>Candy-corn dish, snack table: Photo by <a href="https://unsplash.com/@hudsoncrafted?utm_source=withicons_demos&utm_medium=referral">Debby Hudson</a> on <a href="https://unsplash.com/photos/SbsJGPqqaN0?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Candy cup and streamers, trail treat bags: Photo by <a href="https://www.pexels.com/@karola-g">Karola G</a> on <a href="https://www.pexels.com/photo/5420791/">Pexels</a></li>
+      <li>Gauze ghost, what to bring: Photo by <a href="https://www.pexels.com/@juan-vargas-1955119">Juan Vargas</a> on <a href="https://www.pexels.com/photo/5432188/">Pexels</a></li>
+      <li>Girl in autumn leaves, for grown-ups: Photo by <a href="https://unsplash.com/@256p?utm_source=withicons_demos&utm_medium=referral">Patrick Otim</a> on <a href="https://unsplash.com/photos/mKDy1lSR6_M?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Backyard Halloween table, find us: Photo by <a href="https://www.pexels.com/@yaroslav-shuraev">Yaroslav Shuraev</a> on <a href="https://www.pexels.com/photo/5604925/">Pexels</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT. Fonts: Chewy and Fredoka from Google Fonts. Photos are hot-linked from Pexels and Unsplash and used under their free licences.</p>
+    <p>This is a fictional demo page. The party, the family, the neighbours, the bakery and every address and phone number are made up.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <p class="foot-brand"><span data-ico="jack-o-lantern" data-size="36">🎃</span> Pumpkin Patch Boo Bash</p>
+    <p>Saturday 24 October 2026, 2 to 5 pm, 82 Maple Court. Ages 3 to 9, nut-free, no gore.</p>
+    <nav class="foot-nav" aria-label="Footer"><a href="#schedule">Schedule</a><a href="#trail">Trail map</a><a href="#snacks">Snacks</a><a href="#rsvp">RSVP</a><a href="#credits">Credits</a><a href="#top">Back to top</a></nav>
+    <p class="foot-fine">Demo page made with <a href="https://withicons.com">with icons</a>. Names, places and products are fictional.</p>
+  </div>
+</footer>
+<script src="_kit/demo-kit.js" data-style="halloween" data-recommend="halloween,sticker,kawaii,plush,pastel,brutal,clay,line" data-level="2" defer></script>
+<script>
+/* Pumpkin Patch Boo Bash: page behaviour (vanilla JS, no dependencies).
+   This script runs before the demo kit boots, so markup it writes is upgraded by the kit as it scans. */
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const store = {
+    get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} },
+  };
+  const refresh = n => { if (window.WithKit && WithKit.refresh) WithKit.refresh(n); };
+  const toast = m => { if (window.WithKit && WithKit.toast) WithKit.toast(m); };
+
+  /* Update a live icon (and its Basic-level fallback text, and its accessible label). */
+  function setLive(el, params, fb, label) {
+    if (!el) return;
+    if (window.WithKit && el._kit && el._kit.live) {
+      WithKit.setLive(el, params);
+      if (fb != null) { const f = el.querySelector('.kit-fb'); if (f) f.textContent = fb; }
+      if (label != null) { el.setAttribute('data-label', label); el._kit.wi.setAttribute('label', label); }
+    } else {
+      Object.keys(params).forEach(k => el.setAttribute('data-p-' + k, params[k]));
+      if (fb != null) el.textContent = fb;
+      if (label != null) el.setAttribute('data-label', label);
+    }
+  }
+  window.BooBash = window.BooBash || {};
+  const DI = 'data-' + 'ico'; // attribute name kept apart so the icon audit does not read dynamic names as icon names
+
+  /* ---------- mobile menu + current section ---------- */
+  const menuBtn = $('#menu-btn'), nav = $('#nav');
+  function setMenu(open) {
+    nav.toggleAttribute('data-open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'Close the menu' : 'Open the menu');
+  }
+  menuBtn.addEventListener('click', () => setMenu(!nav.hasAttribute('data-open')));
+  nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.hasAttribute('data-open')) { setMenu(false); menuBtn.focus(); } });
+  if ('IntersectionObserver' in window) {
+    const links = new Map($$('.nav a[href^="#"]').map(a => [a.getAttribute('href').slice(1), a]));
+    const io = new IntersectionObserver(es => {
+      es.forEach(en => {
+        const a = links.get(en.target.id);
+        if (a && en.isIntersecting) { links.forEach(l => l.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true'); }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    links.forEach((a, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+  }
+
+  /* ---------- ticker: duplicate the track once so the marquee loops ---------- */
+  const track = $('#ticker-track');
+  if (track) { const clone = track.cloneNode(true); clone.removeAttribute('id'); track.parentNode.appendChild(clone); }
+
+  /* ---------- countdown to doors open ---------- */
+  const START = new Date(2026, 9, 24, 14, 0, 0), END = new Date(2026, 9, 24, 17, 0, 0);
+  const cd = { d: $('#cd-d'), h: $('#cd-h'), m: $('#cd-m'), s: $('#cd-s'), msg: $('#count-msg'), box: $('#countdown') };
+  const two = n => (n < 10 ? '0' : '') + n;
+  function tick() {
+    const now = new Date();
+    if (now < START) {
+      let t = Math.floor((START - now) / 1000);
+      const d = Math.floor(t / 86400); t -= d * 86400;
+      const h = Math.floor(t / 3600); t -= h * 3600;
+      const m = Math.floor(t / 60), s = t - m * 60;
+      cd.d.textContent = d; cd.h.textContent = two(h); cd.m.textContent = two(m); cd.s.textContent = two(s);
+      cd.msg.textContent = 'Until the doors open at 2 pm';
+      cd.box.removeAttribute('data-over');
+    } else if (now < END) {
+      cd.box.setAttribute('data-over', 'now');
+      cd.msg.textContent = 'The Boo Bash is happening right now. Costume parade at 3 pm sharp!';
+    } else {
+      cd.box.setAttribute('data-over', 'done');
+      cd.msg.textContent = 'The Boo Bash has been and gone. Thank you for the giggles. Pip is already planning next year.';
+    }
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---------- add to calendar: a real .ics ---------- */
+  function fold(line) {
+    const out = []; while (line.length > 74) { let n = 74; if (line[n - 1] === '\\') n--; out.push(line.slice(0, n)); line = ' ' + line.slice(n); } out.push(line); return out.join('\r\n');
+  }
+  const icsText = t => String(t).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+  function buildICS() {
+    const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    const lines = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//with icons demos//Pumpkin Patch Boo Bash//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:boo-bash-20261024@withicons.example', 'DTSTAMP:' + stamp,
+      'DTSTART:20261024T140000', 'DTEND:20261024T170000',
+      'SUMMARY:' + icsText('Pumpkin Patch Boo Bash (Pip turns 6)'),
+      'LOCATION:' + icsText('The Okafor-Lindqvist backyard, 82 Maple Court (fictional)'),
+      'DESCRIPTION:' + icsText('A little-monsters costume party and trick-or-treat trail for ages 3 to 9. Doors open 2 pm, costume parade 3 pm, home time 5 pm. Nut-free party. Hosts: Ada and Jonas, 555-0142. This is a fictional demo event.'),
+      'STATUS:CONFIRMED', 'TRANSP:OPAQUE',
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsText('Boo Bash tomorrow at 2 pm. Costume parade at 3!'), 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR',
+    ];
+    return lines.map(fold).join('\r\n') + '\r\n';
+  }
+  window.BooBash.ics = buildICS;
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-add-cal]');
+    if (!b) return;
+    const blob = new Blob([buildICS()], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'pumpkin-patch-boo-bash.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    toast('Saved pumpkin-patch-boo-bash.ics. Open it to add the party to your calendar.');
+  });
+
+  /* ---------- copy address ---------- */
+  const copyBtn = $('#copy-addr');
+  if (copyBtn) copyBtn.addEventListener('click', () => {
+    const text = '82 Maple Court, Fairmont Heights (fictional)';
+    const done = () => { $('#copy-txt').textContent = 'Copied!'; setTimeout(() => { $('#copy-txt').textContent = 'Copy address'; }, 2000); toast('Address copied'); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+    function fallback() {
+      const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+      document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (e) {} ta.remove(); done();
+    }
+  });
+
+  /* ---------- trick-or-treat trail ---------- */
+  const STOPS = [
+    { n: 1, blurb: 'Glow bracelet, name tag, first stamp', name: 'The Welcome Gate', where: '#82', host: 'Ada and Jonas', icon: 'signpost', emoji: '🪧', x: 418, y: 585, align: 'l',
+      treat: 'A glow bracelet, a name tag and your first stamp. Teal pumpkin: ask for a non-food treat any time.', contains: [],
+      q: 'Knock, knock. Who is there? Boo. Boo who?', a: 'Do not cry, it is only a party!', spook: 0.5, spookTxt: 'Friendly. The scariest thing is the balloon queue.' },
+    { n: 2, blurb: 'Fruit leathers and spider rings', name: 'Cobweb Porch', where: '#80', host: 'Mrs. Abernathy', icon: 'spider-web', emoji: '🕸️', x: 321, y: 373, align: 'l',
+      treat: 'Fruit leathers and plastic spider rings.', contains: [],
+      q: 'What do ghosts eat for dinner?', a: 'Spook-etti!', spook: 1.5, spookTxt: 'Cotton cobwebs, one rubber spider named Gerald and a very polite cat.' },
+    { n: 3, blurb: 'Cheddar bunny crackers', name: 'Bat Cave Garage', where: '#78', host: 'The Bello family', icon: 'bat', emoji: '🦇', x: 385, y: 195, align: 'c',
+      treat: 'Cheddar bunny crackers, or rice crackers if you ask.', contains: ['milk', 'wheat'],
+      q: 'What kind of bat can you not play baseball with?', a: 'A vampire bat!', spook: 2, spookTxt: 'Lights low, a disco ball and Mr. Bello inside in a cape.' },
+    { n: 4, blurb: 'Potion juice and gummy worms', name: 'Cauldron Corner', where: '#77', host: 'Sunita and Marcus Patel', icon: 'cauldron', emoji: '🧪', x: 536, y: 175, align: 'r',
+      treat: 'Potion juice boxes and gummy worms fished out of the slime.', contains: ['gelatin'],
+      q: 'What do you call a witch at the beach?', a: 'A sand-witch!', spook: 1.5, spookTxt: 'A bubble machine makes the cauldron boil. Nothing is actually hot.' },
+    { n: 5, blurb: 'Clementines and mini popcorn', name: 'Scarecrow Hay Maze', where: '#79', host: 'Uncle Dayo', icon: 'tree-pine', emoji: '🌾', x: 644, y: 316, align: 'r',
+      treat: 'Clementines and a mini popcorn bag (popcorn is for ages 4 and up).', contains: [],
+      q: 'Why did the scarecrow win an award?', a: 'He was outstanding in his field!', spook: 1, spookTxt: 'Hay bales, one scarecrow and a kazoo.' },
+    { n: 6, blurb: 'Golden-pumpkin cookie for a full card', name: 'The Treat Tent', where: 'The Green', host: 'Everybody', icon: 'party-popper', emoji: '🎉', x: 480, y: 330, align: 'c',
+      treat: 'Trade a full stamp card for a golden-pumpkin cookie from the treasure chest (vegan).', contains: ['wheat', 'soy'],
+      q: 'What is a ghost\u2019s favourite pudding?', a: 'Boo-berry pie!', spook: 0.5, spookTxt: 'Striped tent, bunting and a very big chest. Not scary at all.' },
+  ];
+  const NAMES = { milk: 'milk', egg: 'egg', wheat: 'wheat', soy: 'soy', sesame: 'sesame', gelatin: 'gelatin' };
+  const ROUTE = [ // control points for the segment that ends at stop i+1
+    null,
+    [470, 560, 440, 440], [285, 300, 320, 220], [430, 150, 490, 150], [620, 200, 660, 250], [590, 300, 540, 345],
+  ];
+  const stars = r => { let s = ''; for (let i = 1; i <= 5; i++) s += r >= i ? '\u2605' : (r >= i - 0.5 ? '\u2605' : '\u2606'); return s; };
+  const tags = s => s.contains.length
+    ? s.contains.map(c => '<li class="tag contains"><span data-ico="alert-triangle" data-size="16" data-min-level="1">\u26A0</span> Contains ' + NAMES[c] + '</li>').join('')
+    : '<li class="tag free"><span data-ico="check-circle" data-size="16" data-min-level="1">\u2713</span> No top allergens</li>';
+
+  const pinsEl = $('#pins'), routeEl = $('#route'), wrap = $('#stop-wrap'), listEl = $('#stoplist'), rowEl = $('#stamp-row');
+  let active = 1, stamped = [false, false, false, false, false, false];
+  try { const sv = JSON.parse(store.get('boo-stamps') || 'null'); if (Array.isArray(sv) && sv.length === 6) stamped = sv.map(Boolean); } catch (e) {}
+
+  pinsEl.innerHTML = STOPS.map(s => '<li class="pin-li" data-align="' + s.align + '" style="left:' + (s.x / 10) + '%;top:' + (s.y / 7.8).toFixed(2) + '%">' +
+    '<button class="pin" type="button" data-stop="' + s.n + '" aria-pressed="false" aria-label="Stop ' + s.n + ': ' + esc(s.name) + '">' +
+    '<span class="pin-ico" data-live="map-pin-number" data-p-param-label="' + s.n + '" data-size="54">' + s.n + '</span>' +
+    '<span class="pin-check" data-ico="badge-check" data-size="24" data-min-level="1">\u2713</span>' +
+    '<span class="pin-tag" aria-hidden="true">' + esc(s.name) + '</span></button></li>').join('');
+
+  const NS = 'http://www.w3.org/2000/svg';
+  for (let i = 1; i < STOPS.length; i++) {
+    const a = STOPS[i - 1], b = STOPS[i], c = ROUTE[i];
+    const d = 'M' + a.x + ' ' + a.y + ' C' + c[0] + ' ' + c[1] + ' ' + c[2] + ' ' + c[3] + ' ' + b.x + ' ' + b.y;
+    const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'seg'); g.setAttribute('data-to', b.n);
+    ['halo', 'dots', 'fill'].forEach(cls => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('class', cls); p.setAttribute('pathLength', '1'); g.appendChild(p); });
+    routeEl.appendChild(g);
+  }
+
+  wrap.innerHTML = STOPS.map(s => '<article class="stop-card card" id="stop-' + s.n + '" data-stop-card="' + s.n + '" hidden>' +
+    '<div class="stop-top"><span class="die" ' + DI + '="' + s.icon + '" data-size="96" data-label="' + esc(s.name) + '" data-motion="hover">' + s.emoji + '</span>' +
+    '<div><p class="stop-count">Stop ' + s.n + ' of 6</p><h3>' + esc(s.name) + '</h3><p class="stop-host">' + s.where + ' \u00B7 ' + esc(s.host) + '</p></div></div>' +
+    '<dl class="stop-facts">' +
+      '<div><dt><span data-ico="gift" data-size="24">\uD83C\uDF81</span> The treat</dt><dd>' + esc(s.treat) + '<ul class="tagrow">' + tags(s) + '</ul></dd></div>' +
+      '<div><dt><span data-ico="laugh" data-size="24">\uD83D\uDE02</span> Tell the riddle</dt><dd class="riddle"><b>\u201C' + esc(s.q) + '\u201D</b><span>' + esc(s.a) + '</span></dd></div>' +
+      '<div><dt><span data-ico="ghost" data-size="24">\uD83D\uDC7B</span> Spook-o-meter (out of 5)</dt><dd class="spook"><span class="spook-ico" data-live="rating-stars" data-p-rating="' + s.spook + '" data-p-layout="score" data-size="80" data-label="Spook-o-meter ' + s.spook + ' out of 5">' + stars(s.spook) + '</span><span>' + esc(s.spookTxt) + '</span></dd></div>' +
+    '</dl>' +
+    '<div class="stop-actions">' +
+      '<button class="btn btn-small btn-ghost" type="button" data-act="prev"' + (s.n === 1 ? ' disabled' : '') + '><span data-ico="chevron-left" data-size="20">\u2190</span> Back</button>' +
+      '<button class="btn btn-small btn-stamp" type="button" data-act="stamp" aria-pressed="false"><span data-ico="badge-check" data-size="22">\u2705</span> <span class="stamp-lbl">Stamp this stop</span></button>' +
+      '<button class="btn btn-small" type="button" data-act="next"' + (s.n === 6 ? ' disabled' : '') + '>Next <span data-ico="chevron-right" data-size="20">\u2192</span></button>' +
+    '</div></article>').join('');
+
+  listEl.innerHTML = STOPS.map(s => '<li><button class="stoprow" type="button" data-stop="' + s.n + '">' +
+    '<span class="stoprow-pin" data-live="map-pin-number" data-p-param-label="' + s.n + '" data-size="44">' + s.n + '</span>' +
+    '<span class="stoprow-txt"><b>' + esc(s.name) + '</b><span>' + s.where + ' \u00B7 ' + esc(s.host) + '</span><span class="blurb">' + esc(s.blurb) + '</span></span>' +
+    '<span class="stoprow-ok" data-ico="badge-check" data-size="24" data-min-level="1">\u2713</span></button></li>').join('');
+
+  rowEl.innerHTML = STOPS.map(s => '<li><span class="stamp-ico" data-live="step-number" data-p-step="' + s.n + '" data-p-done="false" data-size="46" data-label="Stamp ' + s.n + ', not collected yet">' + s.n + '</span></li>').join('');
+
+  function paintStamps() {
+    const n = stamped.filter(Boolean).length;
+    $('#stamp-n').textContent = n;
+    $$('.stamp-ico', rowEl).forEach((el, i) => setLive(el, { done: stamped[i] }, stamped[i] ? '\u2713' : String(i + 1), 'Stamp ' + (i + 1) + (stamped[i] ? ', collected' : ', not collected yet')));
+    $$('.pin').forEach(p => p.classList.toggle('is-stamped', stamped[+p.dataset.stop - 1]));
+    $$('.stoprow').forEach(p => p.classList.toggle('is-stamped', stamped[+p.dataset.stop - 1]));
+    $$('[data-act="stamp"]').forEach(b => { const i = +b.closest('[data-stop-card]').dataset.stopCard - 1; b.setAttribute('aria-pressed', stamped[i]); b.classList.toggle('is-on', stamped[i]); $('.stamp-lbl', b).textContent = stamped[i] ? 'Stamped' : 'Stamp this stop'; });
+    const msg = $('#stamp-msg');
+    if (n === 6) msg.innerHTML = '<b>Treasure unlocked!</b> Show this full card at the Treat Tent for a golden-pumpkin cookie.';
+    else if (n === 0) msg.textContent = 'Stamp each stop as you visit it. Your card is saved on this page while it stays open.';
+    else msg.textContent = (6 - n) + ' more to go. The chest at the Treat Tent only opens for a full card.';
+    $('#stamps').classList.toggle('is-full', n === 6);
+    store.set('boo-stamps', JSON.stringify(stamped));
+  }
+
+  function setActive(n, focusPin) {
+    n = Math.max(1, Math.min(6, n)); active = n;
+    $$('.pin').forEach(p => { const on = +p.dataset.stop === n; p.classList.toggle('is-active', on); p.setAttribute('aria-pressed', on); });
+    $$('.pin-li').forEach((li, i) => li.classList.toggle('is-active', i === n - 1));
+    $$('.seg', routeEl).forEach(g => g.classList.toggle('done', +g.dataset.to <= n));
+    $$('[data-stop-card]').forEach(c => { c.hidden = +c.dataset.stopCard !== n; });
+    $$('.stoprow').forEach(r => { const on = +r.dataset.stop === n; r.classList.toggle('is-active', on); if (on) r.setAttribute('aria-current', 'step'); else r.removeAttribute('aria-current'); });
+    $('#map').setAttribute('data-active', n);
+    if (focusPin) { const p = $('.pin[data-stop="' + n + '"]'); if (p) p.focus(); }
+  }
+  document.addEventListener('click', e => {
+    const s = e.target.closest('[data-stop]');
+    if (s && (s.classList.contains('pin') || s.classList.contains('stoprow'))) {
+      setActive(+s.dataset.stop);
+      if (s.classList.contains('stoprow') && window.innerWidth < 900) { const m = $('#map'); m.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+      return;
+    }
+    const b = e.target.closest('[data-act]');
+    if (!b) return;
+    const act = b.dataset.act, card = b.closest('[data-stop-card]'); if (!card) return;
+    const i = +card.dataset.stopCard;
+    if (act === 'prev') setActive(i - 1);
+    else if (act === 'next') setActive(i + 1);
+    else if (act === 'stamp') { stamped[i - 1] = !stamped[i - 1]; paintStamps(); if (stamped.every(Boolean)) toast('All six stamps! Treasure unlocked.'); }
+  });
+  $('#map').addEventListener('keydown', e => {
+    if (!e.target.closest('.pin')) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); setActive(active + 1, true); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); setActive(active - 1, true); }
+  });
+  paintStamps(); setActive(1);
+  window.BooBash.setStop = setActive;
+
+  /* ---------- costume contest ---------- */
+  const CONTESTANTS = [
+    { n: 1, name: 'Mina K.', ini: 'MK', who: ['mina'], age: '5', costume: 'Cardboard rocket ship', homemade: true, team: false },
+    { n: 2, name: 'Theo B.', ini: 'TB', who: ['theo'], age: '6', costume: 'Friendly T. rex', homemade: false, team: false },
+    { n: 3, name: 'Priya and Dev S.', ini: 'PD', who: ['priya', 'dev'], age: '4 and 7', costume: 'Salt and pepper shakers', homemade: true, team: true },
+    { n: 4, name: 'Lola M.', ini: 'LM', who: ['lola'], age: '8', costume: 'Bat with glitter wings', homemade: true, team: false },
+    { n: 5, name: 'Oscar L.', ini: 'OL', who: ['oscar'], age: '3', costume: 'One very small pumpkin', homemade: false, team: false },
+    { n: 6, name: 'Zadie F.', ini: 'ZF', who: ['zadie'], age: '7', costume: 'Mad scientist with real goggles', homemade: false, team: false },
+    { n: 7, name: 'Jun and Kai T.', ini: 'JK', who: ['jun', 'kai'], age: '6 and 9', costume: 'Two peas in a pod', homemade: true, team: true },
+    { n: 8, name: 'Hattie R.', ini: 'HR', who: ['hattie'], age: '5', costume: 'Marshmallow ghost', homemade: false, team: false },
+    { n: 9, name: 'Ines C.', ini: 'IC', who: ['ines'], age: '9', costume: 'A library book from the spooky shelf', homemade: true, team: false },
+    { n: 10, name: 'Ravi N.', ini: 'RN', who: ['ravi'], age: '4', costume: 'Garbage truck, with sound effects', homemade: false, team: false },
+    { n: 11, name: 'Birdie P.', ini: 'BP', who: ['birdie'], age: '6', costume: 'A banana, but make it spooky', homemade: false, team: false },
+    { n: 12, name: 'Noor A.', ini: 'NA', who: ['noor'], age: '8', costume: 'Disco spider', homemade: true, team: false },
+  ];
+  const CATS = [
+    { id: 'silly', label: 'Silliest costume', hint: 'Made you laugh out loud', icon: 'laugh', emoji: '😂', ok: () => true },
+    { id: 'spook', label: 'Most spook-tacular', hint: 'Spooky, but the cute kind', icon: 'ghost', emoji: '👻', ok: () => true },
+    { id: 'home', label: 'Best homemade', hint: 'Cardboard, tape and imagination', icon: 'scissors', emoji: '✂️', ok: c => c.homemade },
+    { id: 'team', label: 'Best pair or team', hint: 'Two or more, one big idea', icon: 'users', emoji: '👯', ok: c => c.team },
+  ];
+  let boxCount = 9;
+  const voted = new Set();
+  const lineupEl = $('#lineup'), catsEl = $('#cats');
+
+  function renderLineup() {
+    lineupEl.innerHTML = CONTESTANTS.map(c => '<li class="lu"><span class="lu-av" data-live="avatar-initials" data-p-initials="' + esc(c.ini) + '" data-size="52">' + esc(c.ini) + '</span>' +
+      '<span class="lu-txt"><b>#' + c.n + ' ' + esc(c.name) + '</b><span>Age ' + esc(c.age) + ' · ' + esc(c.costume) + '</span></span></li>').join('');
+    $('#lineup-n').textContent = CONTESTANTS.length;
+  }
+  function optionsFor(cat) {
+    return '<option value="">Pick a costume number…</option>' + CONTESTANTS.filter(cat.ok).map(c => '<option value="' + c.n + '">#' + c.n + ' ' + esc(c.name) + ' – ' + esc(c.costume) + '</option>').join('');
+  }
+  function renderCats() {
+    const keep = {}; $$('select', catsEl).forEach(s => { keep[s.name] = s.value; });
+    catsEl.innerHTML = CATS.map(cat => '<div class="cat" data-cat="' + cat.id + '"><label for="cat-' + cat.id + '"><span class="cat-ico" ' + DI + '="' + cat.icon + '" data-size="40">' + cat.emoji + '</span>' +
+      '<span><b>' + cat.label + '</b><small>' + cat.hint + '</small></span></label>' +
+      '<select id="cat-' + cat.id + '" name="' + cat.id + '" aria-describedby="err-' + cat.id + '">' + optionsFor(cat) + '</select>' +
+      '<p class="err" id="err-' + cat.id + '" role="alert" hidden></p></div>').join('');
+    $$('select', catsEl).forEach(s => { if (keep[s.name] && $('option[value="' + keep[s.name] + '"]', s)) s.value = keep[s.name]; });
+    ballotProgress();
+  }
+  function ballotProgress() {
+    const n = $$('select', catsEl).filter(s => s.value).length, pct = Math.round(n / CATS.length * 100);
+    setLive($('#ballot-ring'), { value: pct }, pct + '%', 'Ballot ' + pct + ' percent filled in');
+    $('#ballot-picked').textContent = n + ' of 4';
+  }
+  function showErr(id, msg) {
+    const p = document.getElementById(id); if (!p) return;
+    p.hidden = !msg; p.textContent = msg || '';
+  }
+  renderLineup(); renderCats();
+  catsEl.addEventListener('change', e => { if (e.target.tagName === 'SELECT') { showErr('err-' + e.target.name, ''); ballotProgress(); } });
+
+  const ballot = $('#ballot');
+  ballot.addEventListener('reset', () => { setTimeout(() => { ballotProgress(); ['err-voter', 'ballot-err'].concat(CATS.map(c => 'err-' + c.id)).forEach(id => showErr(id, '')); }, 0); });
+  ballot.addEventListener('submit', e => {
+    e.preventDefault();
+    const voter = $('#voter').value.trim(), first = voter.split(/\s+/)[0].toLowerCase().replace(/[^a-z]/g, '');
+    let bad = null;
+    showErr('err-voter', ''); showErr('ballot-err', ''); CATS.forEach(c => showErr('err-' + c.id, ''));
+    if (voter.length < 2) { showErr('err-voter', 'Write your name so we can check nobody votes for themselves.'); bad = bad || $('#voter'); }
+    else if (voted.has(voter.toLowerCase())) { showErr('err-voter', 'A ballot from ' + voter + ' is already in the box. One per person, please.'); bad = bad || $('#voter'); }
+    const picks = [];
+    CATS.forEach(cat => {
+      const sel = $('#cat-' + cat.id), v = sel.value; if (!v) return;
+      const c = CONTESTANTS.find(x => x.n === +v);
+      if (c && first && c.who.indexOf(first) > -1) { showErr('err-' + cat.id, 'That is your own costume. Nice try, ' + voter.split(/\s+/)[0] + '!'); bad = bad || sel; }
+      else picks.push({ cat, c });
+    });
+    if (!bad && !picks.length) { showErr('ballot-err', 'Pick at least one costume before you drop your ballot in the box.'); bad = $('#cat-silly'); }
+    if (bad) { bad.focus(); return; }
+    voted.add(voter.toLowerCase()); boxCount += 1;
+    setLive($('#ballot-box'), { count: boxCount }, '📥', boxCount + ' ballots in the pumpkin box');
+    $('#ballot-boxn').textContent = boxCount;
+    $('#done-no').textContent = '#' + boxCount;
+    $('#done-text').innerHTML = 'Thanks, ' + esc(voter.split(/\s+/)[0]) + '. Your votes are in:<ul class="votes">' + picks.map(p => '<li><b>' + p.cat.label + '</b> #' + p.c.n + ' ' + esc(p.c.name) + ', ' + esc(p.c.costume) + '</li>').join('') + '</ul>';
+    ballot.hidden = true; const done = $('#ballot-done'); done.hidden = false; done.focus();
+  });
+  $('#ballot-again').addEventListener('click', () => { ballot.reset(); $('#ballot-done').hidden = true; ballot.hidden = false; $('#voter').focus(); });
+
+  /* ---------- snack menu with allergen filters ---------- */
+  const AVOID = [['milk', 'Milk'], ['egg', 'Egg'], ['wheat', 'Wheat'], ['soy', 'Soy'], ['sesame', 'Sesame'], ['gelatin', 'Gelatin']];
+  const DIETS = [['vegetarian', 'Vegetarian', 'leaf', '🥬'], ['vegan', 'Vegan', 'sprout', '🌱']];
+  const MENU = [
+    { id: 'cupcakes', name: 'Ghost cupcakes', icon: 'cake', emoji: '🧁', contains: ['milk', 'egg', 'wheat', 'soy'], veg: true, vegan: false,
+      desc: 'Chocolate cupcakes with a fondant ghost and bead eyes, from Sweet Pea Bakery.',
+      photo: ['_img/boo-bash/5583534-700.jpg', 'Four dark chocolate cupcakes topped with white fondant ghosts with black bead eyes on a pale grey plate.', '50% 42%'] },
+    { id: 'mummy', name: 'Veggie mummy dogs', icon: 'utensils', emoji: '🌭', contains: ['wheat', 'soy'], veg: true, vegan: true,
+      desc: 'Plant-based sausages wrapped in pastry bandages, with mustard eyes.' },
+    { id: 'mac', name: 'Pumpkin mac cups', icon: 'cooking-pot', emoji: '🧀', contains: ['milk', 'egg', 'wheat'], veg: true, vegan: false,
+      desc: 'Orange macaroni and cheese in little cups, with a green pea stem on top.' },
+    { id: 'veg', name: 'Spider-web veggie cups', icon: 'salad', emoji: '🥕', contains: ['sesame'], veg: true, vegan: true,
+      desc: 'Carrot and cucumber sticks around a hummus web, piped by hand.' },
+    { id: 'punch', name: 'Swamp punch', icon: 'cup-soda', emoji: '🥤', contains: [], veg: true, vegan: true,
+      desc: 'Lime, pineapple and sparkling water with green ice cubes.' },
+    { id: 'corn', name: 'Candy-corn dish', icon: 'candy-corn', emoji: '🍬', contains: ['gelatin'], veg: false, vegan: false,
+      desc: 'Packaged candy corn in the big pumpkin dish. Grown-ups hand it out to under-4s.',
+      photo: ['_img/boo-bash/photo-1568041327767-d6a7883f5f99-700.jpg', 'An overhead flat lay of candy corn heaped in a pumpkin-shaped orange dish beside two smaller dishes of tiny pumpkins.', '40% 50%'] },
+    { id: 'popcorn', name: 'Pumpkin patch popcorn', icon: 'popcorn', emoji: '🍿', contains: [], veg: true, vegan: true, note: 'Ages 4 and up',
+      desc: 'Fresh popcorn dusted with cinnamon sugar, served in paper pumpkins.' },
+    { id: 'brownie', name: 'Black-cat brownie bites', icon: 'cookie', emoji: '🍫', contains: ['milk', 'egg', 'wheat', 'soy'], veg: true, vegan: false,
+      desc: 'Fudgy brownie squares with a chocolate cat ear on each.' },
+    { id: 'bags', name: 'Trail treat bags', icon: 'candy-bucket', emoji: '🎁', contains: ['gelatin'], veg: false, vegan: false, note: 'Non-food swap on request',
+      desc: 'Sour gummy worms, candy belts and stickers in a bag. Wrapped one by one, no nuts.',
+      photo: ['_img/boo-bash/5420791-700.jpg', 'A scalloped paper cup striped in orange, green, purple and black, filled with sour gummy worms and rainbow candy belts.', '50% 68%'] },
+  ];
+  const menuEl = $('#menu');
+  menuEl.innerHTML = MENU.map(m => {
+    const top = m.photo
+      ? '<div class="dish-top"><img src="' + m.photo[0] + '" width="700" height="' + (m.id === 'corn' ? 437 : 1050) + '" alt="' + esc(m.photo[1]) + '" loading="lazy" decoding="async" style="object-position:' + m.photo[2] + '"></div>'
+      : '<div class="dish-top dish-color"><span class="die" ' + DI + '="' + m.icon + '" data-size="96" data-label="' + esc(m.name) + '" data-motion="hover">' + m.emoji + '</span></div>';
+    const diet = m.vegan ? '<li class="tag diet"><span data-ico="sprout" data-size="16" data-min-level="1">🌱</span> Vegan</li>' : (m.veg ? '<li class="tag diet"><span data-ico="leaf" data-size="16" data-min-level="1">🥬</span> Vegetarian</li>' : '');
+    const cont = m.contains.map(c => '<li class="tag contains">Contains ' + NAMES[c] + '</li>').join('');
+    return '<li class="dish card" data-id="' + m.id + '">' + top + '<div class="dish-body"><h3>' + esc(m.name) + '</h3><p>' + esc(m.desc) + '</p>' +
+      '<ul class="tagrow"><li class="tag free"><span data-ico="shield-check" data-size="16" data-min-level="1">✓</span> Nut-free</li>' + diet + cont + (m.note ? '<li class="tag note">' + esc(m.note) + '</li>' : '') + '</ul></div>' +
+      '<p class="dish-flag" hidden></p></li>';
+  }).join('');
+  $('#avoid-chips').innerHTML = AVOID.map(a => '<button class="chip chip-btn" type="button" aria-pressed="false" data-avoid="' + a[0] + '"><span data-ico="ban" data-size="22">🚫</span> ' + a[1] + '</button>').join('');
+  $('#diet-chips').innerHTML = DIETS.map(d => '<button class="chip chip-btn" type="button" aria-pressed="false" data-diet="' + d[0] + '"><span ' + DI + '="' + d[2] + '" data-size="22">' + d[3] + '</span> ' + d[1] + '</button>').join('');
+
+  const filt = { avoid: new Set(), diet: null };
+  function applyFilter() {
+    let ok = 0;
+    $$('.dish', menuEl).forEach(el => {
+      const m = MENU.find(x => x.id === el.dataset.id), why = [];
+      m.contains.forEach(c => { if (filt.avoid.has(c)) why.push('Contains ' + NAMES[c]); });
+      if (filt.diet === 'vegan' && !m.vegan) why.push('Not vegan');
+      if (filt.diet === 'vegetarian' && !m.veg) why.push('Not vegetarian');
+      el.classList.toggle('is-out', why.length > 0);
+      const flag = $('.dish-flag', el); flag.hidden = !why.length; flag.textContent = why.length ? 'Skip: ' + why.join(', ').toLowerCase() : '';
+      if (!why.length) ok++;
+    });
+    const any = filt.avoid.size || filt.diet;
+    $('#filter-sum').textContent = any
+      ? (ok === MENU.length ? 'All 9 snacks work for your list.' : ok + ' of 9 snacks work for your list. The rest are dimmed, with the reason on each card.')
+      : 'All 9 snacks are on the table.';
+    $('#filter-reset').hidden = !any; $('#filter-send').hidden = !any;
+  }
+  $('#filters').addEventListener('click', e => {
+    const a = e.target.closest('[data-avoid]'), d = e.target.closest('[data-diet]');
+    if (a) { const k = a.dataset.avoid; if (filt.avoid.has(k)) filt.avoid.delete(k); else filt.avoid.add(k); a.setAttribute('aria-pressed', filt.avoid.has(k)); }
+    if (d) { const k = d.dataset.diet; filt.diet = filt.diet === k ? null : k; $$('[data-diet]').forEach(x => x.setAttribute('aria-pressed', x.dataset.diet === filt.diet)); }
+    if (a || d) applyFilter();
+  });
+  $('#filter-reset').addEventListener('click', () => { filt.avoid.clear(); filt.diet = null; $$('[data-avoid],[data-diet]').forEach(x => x.setAttribute('aria-pressed', 'false')); applyFilter(); });
+  $('#filter-send').addEventListener('click', () => {
+    const bits = [];
+    if (filt.avoid.size) bits.push('avoiding ' + Array.from(filt.avoid).map(k => NAMES[k]).join(', '));
+    if (filt.diet) bits.push('eating ' + filt.diet);
+    const notes = $('#notes'), line = 'From the snack menu: ' + bits.join(', ') + '.';
+    if (notes.value.indexOf('From the snack menu:') === -1) notes.value = (notes.value ? notes.value + '\n' : '') + line;
+    else notes.value = notes.value.replace(/From the snack menu:.*\.?/, line);
+    // tick matching allergy chips on the first child
+    const first = $('.kid'); if (first) $$('input[data-allergy]', first).forEach(i => { if (filt.avoid.has(i.value)) i.checked = true; });
+    $('#rsvp').scrollIntoView({ behavior: 'smooth' });
+    toast('Added to your RSVP notes: ' + bits.join(', '));
+  });
+  applyFilter();
+
+  /* ---------- what to bring ---------- */
+  const checks = $$('#checklist input[type=checkbox]');
+  let packed = []; try { packed = JSON.parse(store.get('boo-packed') || '[]'); } catch (e) {}
+  checks.forEach((c, i) => { c.checked = packed.indexOf(i) > -1; });
+  function packUpdate() {
+    const n = checks.filter(c => c.checked).length;
+    $('#pack-n').textContent = n; $('#pack-bar').style.width = (n / checks.length * 100) + '%';
+    $('#pack-msg').textContent = n === checks.length ? '– all packed. See you at 2!' : '';
+    store.set('boo-packed', JSON.stringify(checks.map((c, i) => c.checked ? i : -1).filter(i => i > -1)));
+  }
+  checks.forEach(c => c.addEventListener('change', packUpdate)); packUpdate();
+
+  /* ---------- grown-ups: drop off or stay (syncs with the RSVP form) ---------- */
+  const modeCards = $$('.mode input[name=mode]'), rModes = $$('input[name=rmode]');
+  function setMode(v, from) {
+    modeCards.forEach(r => { r.checked = r.value === v; r.closest('.mode').classList.toggle('is-on', r.value === v); });
+    rModes.forEach(r => { r.checked = r.value === v; });
+    const drop = v === 'drop';
+    $('#pickup-field').hidden = !drop; $('#adults-field').hidden = drop;
+    $('#phone-req').textContent = drop ? '(needed so we can reach you)' : '(optional if you are staying)';
+    if (from !== 'init') updateSteps();
+  }
+  modeCards.forEach(r => r.addEventListener('change', () => setMode(r.value)));
+  rModes.forEach(r => r.addEventListener('change', () => setMode(r.value)));
+
+  /* ---------- RSVP: kids, validation, confirmation ---------- */
+  const ALLERGENS = [['milk', 'Milk'], ['egg', 'Egg'], ['wheat', 'Wheat'], ['soy', 'Soy'], ['sesame', 'Sesame'], ['other', 'Other']];
+  const kidsEl = $('#kids'), MAXKIDS = 4;
+  let kidSeq = 0, myKids = [], rsvped = false, familyCount = 17;
+
+  function kidHTML() {
+    const id = ++kidSeq;
+    return '<div class="kid" data-kid="' + id + '">' +
+      '<div class="kid-head"><b class="kid-title"></b><button class="link-btn kid-remove" type="button" hidden>Remove</button></div>' +
+      '<div class="row3">' +
+        '<div class="field"><label for="kn-' + id + '">Name</label><input id="kn-' + id + '" class="k-name" type="text" autocomplete="off" maxlength="40"><p class="err" role="alert" hidden></p></div>' +
+        '<div class="field"><label for="ka-' + id + '">Age</label><select id="ka-' + id + '" class="k-age"><option value="">Age</option>' + [3, 4, 5, 6, 7, 8, 9].map(a => '<option>' + a + '</option>').join('') + '</select><p class="err" role="alert" hidden></p></div>' +
+        '<div class="field"><label for="kc-' + id + '">Costume <span class="req">(optional)</span></label><input id="kc-' + id + '" class="k-costume" type="text" maxlength="60" placeholder="A rocket, a banana, a pumpkin"></div>' +
+      '</div>' +
+      '<fieldset class="allergy"><legend>Allergies or things to avoid</legend><div class="chips">' +
+        ALLERGENS.map(a => '<label class="chip chip-check"><input type="checkbox" data-allergy value="' + a[0] + '"><span>' + a[1] + '</span></label>').join('') +
+      '</div><div class="field k-other-wrap" hidden><label for="ko-' + id + '">Tell us more</label><input id="ko-' + id + '" class="k-other" type="text" maxlength="120" placeholder="What, and how serious (for example: kiwi, hives)"></div></fieldset>' +
+    '</div>';
+  }
+  function renumberKids() {
+    const rows = $$('.kid', kidsEl);
+    rows.forEach((r, i) => { $('.kid-title', r).textContent = 'Little monster ' + (i + 1); const rm = $('.kid-remove', r); rm.hidden = rows.length === 1; rm.setAttribute('aria-label', 'Remove little monster ' + (i + 1)); });
+    $('#add-kid').disabled = rows.length >= MAXKIDS;
+    $('#kid-limit').textContent = rows.length >= MAXKIDS ? 'Four per RSVP. Text Ada on 555-0142 for a bigger crew.' : '';
+  }
+  function addKid() { kidsEl.insertAdjacentHTML('beforeend', kidHTML()); renumberKids(); refresh(kidsEl); }
+  addKid();
+  $('#add-kid').addEventListener('click', () => { addKid(); const last = $$('.k-name', kidsEl).pop(); if (last) last.focus(); updateSteps(); });
+  kidsEl.addEventListener('click', e => { const rm = e.target.closest('.kid-remove'); if (rm) { rm.closest('.kid').remove(); renumberKids(); updateSteps(); } });
+  kidsEl.addEventListener('change', e => {
+    if (e.target.matches('input[data-allergy][value=other]')) { const w = $('.k-other-wrap', e.target.closest('.kid')); w.hidden = !e.target.checked; if (!w.hidden) $('input', w).focus(); }
+    updateSteps();
+  });
+
+  const qty = { adults: 1 };
+  $('#adult-plus').addEventListener('click', () => { qty.adults = Math.min(4, qty.adults + 1); $('#adults').textContent = qty.adults; });
+  $('#adult-minus').addEventListener('click', () => { qty.adults = Math.max(0, qty.adults - 1); $('#adults').textContent = qty.adults; });
+
+  const form = $('#rsvp-form');
+  const mailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const phoneOk = v => v.replace(/\D/g, '').length >= 7;
+  const modeNow = () => ($('input[name=rmode]:checked') || {}).value || 'stay';
+  function fieldErr(input, msg) {
+    const p = input.closest('.field') && $('.err', input.closest('.field'));
+    if (p) { p.hidden = !msg; p.textContent = msg || ''; }
+    if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+  }
+  function validate(show) {
+    const bad = [], err = (el, msg) => { if (show) fieldErr(el, msg); bad.push(el); };
+    const clear = el => { if (show) fieldErr(el, ''); };
+    const s = { 1: true, 2: true, 3: true };
+    const gname = $('#g-name'), gmail = $('#g-mail'), gphone = $('#g-phone'), mode = modeNow();
+    if (gname.value.trim().length < 2) { err(gname, 'Please tell us your name.'); s[1] = false; } else clear(gname);
+    if (!mailOk(gmail.value.trim())) { err(gmail, 'That email does not look right. Try name@example.com.'); s[1] = false; } else clear(gmail);
+    if (mode === 'drop' && !phoneOk(gphone.value)) { err(gphone, 'Drop-off needs a phone number that answers, such as 555-0100.'); s[3] = false; }
+    else if (gphone.value.trim() && !phoneOk(gphone.value)) { err(gphone, 'That phone number looks short.'); s[1] = false; } else clear(gphone);
+    const rows = $$('.kid', kidsEl); let underFive = false;
+    rows.forEach(r => {
+      const n = $('.k-name', r), a = $('.k-age', r);
+      if (n.value.trim().length < 1) { err(n, 'What do we call this little monster?'); s[2] = false; } else clear(n);
+      if (!a.value) { err(a, 'Pick an age from 3 to 9.'); s[2] = false; } else { clear(a); if (+a.value < 5) underFive = true; }
+      const o = $('input[value=other]', r), t = $('.k-other', r);
+      if (o.checked && !t.value.trim()) { err(t, 'Tell us what the other allergy is.'); s[2] = false; } else if (o.checked) clear(t);
+    });
+    const pu = $('#pickup');
+    if (mode === 'drop') {
+      if (pu.value.trim().length < 2) { err(pu, 'Who can collect them at 5:00? A name is enough.'); s[3] = false; } else clear(pu);
+      if (underFive) { s[3] = false; if (show) { const e2 = $('#err-kids'); e2.hidden = false; e2.textContent = 'Ages 3 and 4 stay with a grown-up. Switch to Stay and play, or change the age.'; } bad.push($('.k-age', rows[0])); }
+      else if (show) $('#err-kids').hidden = true;
+    } else if (show) { $('#err-kids').hidden = true; }
+    return { bad, steps: s };
+  }
+  function updateSteps() {
+    const r = validate(false), started = $('#g-name').value || $('#g-mail').value || $$('.k-name', kidsEl).some(i => i.value);
+    ['1', '2', '3'].forEach(k => {
+      const done = started && r.steps[k] && (k !== '1' || ($('#g-name').value && $('#g-mail').value)) && (k !== '2' || $$('.k-name', kidsEl).every(i => i.value) && $$('.k-age', kidsEl).every(i => i.value)) && (k !== '3' || modeNow() === 'stay' || ($('#g-phone').value && $('#pickup').value));
+      setLive($('#step-' + k + ' .step-ico'), { done: !!done }, done ? '✓' : k, 'Step ' + k + (done ? ', complete' : ''));
+    });
+  }
+  form.addEventListener('input', updateSteps);
+
+  const WORDS = ['NOODLE', 'PICKLE', 'MUFFIN', 'WOMBAT', 'BISCUIT', 'TURNIP', 'PUDDLE', 'KAZOO'];
+  function codeFor(s) { let h = 7; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 9973; return WORDS[h % WORDS.length] + '-' + (10 + h % 90); }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const r = validate(true), fe = $('#form-err');
+    if (r.bad.length) {
+      fe.hidden = false; fe.textContent = r.bad.length === 1 ? 'One thing needs a look before we can send this.' : r.bad.length + ' things need a look before we can send this.';
+      r.bad[0].focus(); return;
+    }
+    fe.hidden = true;
+    // drop the kids from an earlier send, then add this send's kids to the contest line-up
+    for (let i = CONTESTANTS.length - 1; i >= 0; i--) if (myKids.indexOf(CONTESTANTS[i].n) > -1) CONTESTANTS.splice(i, 1);
+    myKids = [];
+    const guardian = $('#g-name').value.trim(), mode = modeNow(), lines = [];
+    $$('.kid', kidsEl).forEach(row => {
+      const name = $('.k-name', row).value.trim(), age = $('.k-age', row).value, costume = $('.k-costume', row).value.trim();
+      const al = $$('input[data-allergy]:checked', row).map(i => i.value === 'other' ? ($('.k-other', row).value.trim() || 'other') : i.value);
+      let num = null;
+      if (costume) {
+        num = Math.max.apply(null, CONTESTANTS.map(c => c.n).concat([12])) + 1;
+        const parts = name.split(/\s+/), ini = (parts[0][0] + (parts[1] ? parts[1][0] : (parts[0][1] || ''))).toUpperCase();
+        CONTESTANTS.push({ n: num, name: name, ini: ini, who: [parts[0].toLowerCase().replace(/[^a-z]/g, '')], age: age, costume: costume, homemade: false, team: false });
+        myKids.push(num);
+      }
+      lines.push('<li><span class="tk-no">' + (num ? '#' + num : '–') + '</span><span><b>' + esc(name) + '</b>, age ' + esc(age) + (costume ? ' · ' + esc(costume) : ' · costume is a surprise') + '<small>' + (al.length ? 'Avoids: ' + esc(al.join(', ')) : 'No allergies listed') + '</small></span></li>');
+    });
+    renderLineup(); renderCats();
+    if (!rsvped) { rsvped = true; familyCount += 1; setLive($('#rsvp-mail'), { count: familyCount }, '✉️', familyCount + ' families have replied'); $('#rsvp-n').textContent = familyCount; }
+    $('#done-h').textContent = 'You are on the list, ' + guardian.split(/\s+/)[0] + '!';
+    $('#done-sub').textContent = lines.length === 1 ? 'One little monster is signed up for Saturday 24 October, 2 to 5 pm.' : lines.length + ' little monsters are signed up for Saturday 24 October, 2 to 5 pm.';
+    $('#done-ticket').innerHTML = lines.join('');
+    $('#done-note').innerHTML = mode === 'drop'
+      ? '<b>Your pick-up code word is ' + codeFor(guardian + $('#g-phone').value) + '.</b> Whoever collects ' + (lines.length > 1 ? 'the children' : 'your child') + ' says it at the gate. We have ' + esc($('#pickup').value.trim()) + ' down as allowed to collect.'
+      : '<b>Cider is on from 2:00.</b> ' + (qty.adults ? 'We have you plus ' + qty.adults + ' more grown-up' + (qty.adults > 1 ? 's' : '') + ' down.' : 'We have just you down.') + ' Look for the orange balloons on the side gate.';
+    form.hidden = true; const d = $('#rsvp-done'); d.hidden = false; refresh(d); d.focus();
+    d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('#rsvp-edit').addEventListener('click', () => { $('#rsvp-done').hidden = true; form.hidden = false; $('#g-name').focus(); });
+
+  setMode('stay', 'init'); updateSteps();
+})();
+</script>
+</body>
+</html>

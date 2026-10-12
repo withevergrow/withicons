@@ -27,9 +27,9 @@ describe('stdio server (SDK client)', () => {
   })
   after(async () => { await client.close() })
 
-  test('lists the nine tools', async () => {
+  test('lists the ten tools', async () => {
     const { tools } = await client.listTools()
-    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'export_icon', 'get_icon', 'list_categories', 'list_palettes', 'list_styles', 'recommend_styles', 'resolve_icon', 'search_icons'])
+    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'export_icon', 'get_icon', 'list_categories', 'list_palettes', 'list_styles', 'preview_icons', 'recommend_styles', 'resolve_icon', 'search_icons'])
     const x = tools.find(t => t.name === 'export_icon')
     for (const k of ['name', 'format', 'motion', 'background', 'out_dir', 'to', 'fps']) assert.ok(x.inputSchema.properties[k], k)
     assert.match(x.description, /gif/)
@@ -51,6 +51,70 @@ describe('stdio server (SDK client)', () => {
     assert.equal(r.results[0].name, 'trash')
     assert.match(r.results[0].reason, /trash/)
     assert.match(r.results[0].snippet, /import \{ Trash \} from '@withicons\/react'/)
+  })
+  // search_icons separates what the query names from what is only related. The words below are unknown to the library today;
+  // if an icon with that name is ever added the test skips itself (pick another word that no icon carries).
+  const unknownWord = async (t, word) => {
+    const known = parse(await client.callTool({ name: 'resolve_icon', arguments: { name: word } }))
+    if (known.status !== 'unknown') { t.skip(`"${word}" is now an icon or alias: choose another word`); return false }
+    return true
+  }
+  test('search_icons: a word no icon carries is "no exact match", with similar icons as additional results', async t => {
+    if (!await unknownWord(t, 'steak')) return
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'steak' } })
+    const r = parse(raw)
+    assert.equal(r.noExactMatch, true)
+    assert.equal(r.count, 0)
+    assert.deepEqual(r.results, [])
+    assert.equal(r.confidence, null)
+    assert.ok(r.additional.length >= 1 && r.additional.length <= 5, `additional: ${r.additional.length}`)
+    for (const x of r.additional) {
+      assert.ok(x.name && x.category && x.url, x.name)
+      assert.match(x.reason, /loosely related/)
+      assert.equal(x.snippet, undefined, 'additional results stay short: no snippet')
+    }
+    assert.match(r.hint, /^No exact match for "steak"/)
+    assert.deepEqual(r.suggestions, [])
+    const text = raw.content[0].text
+    assert.match(text, /^No exact match for "steak"/)
+    assert.match(text, /\nAdditional results \(loosely related, not exact matches\):\n- \S+ \(/)
+    assert.ok(text.length < 900, `summary stays short: ${text.length}`)
+  })
+  test('search_icons: a related concept is not an exact match ("toaster" -> kitchen icons only as additional results)', async t => {
+    if (!await unknownWord(t, 'toaster')) return
+    const r = parse(await client.callTool({ name: 'search_icons', arguments: { query: 'toaster' } }))
+    assert.equal(r.noExactMatch, true)
+    assert.equal(r.count, 0)
+    assert.ok(r.additional.length >= 1)
+  })
+  test('search_icons: exact matches stay in results, loose ones go to additional', async () => {
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'trash can', limit: 5 } })
+    const r = parse(raw)
+    assert.equal(r.noExactMatch, undefined)
+    assert.equal(r.results[0].name, 'trash')
+    assert.equal(r.count, r.results.length)
+    assert.ok(r.results.every(x => x.confidence !== 'low'), 'no low-confidence icon among the matches')
+    assert.ok((r.additional || []).length <= 5)
+    const names = new Set(r.results.map(x => x.name))
+    assert.ok((r.additional || []).every(x => !names.has(x.name)), 'additional never repeats a match')
+    // beside real matches only related-concept icons are offered, never low-confidence guesses ("trash can" -> calendar-x)
+    assert.ok((r.additional || []).every(x => x.confidence !== 'low'), 'no guesses beside exact matches')
+    if (r.additional && r.additional.length) assert.match(raw.content[0].text, /\nAdditional results \(loosely related, not exact matches\):\n/)
+  })
+  test('search_icons: a misspelling is still an exact match, spell-corrected', async () => {
+    const r = parse(await client.callTool({ name: 'search_icons', arguments: { query: 'calandar' } }))
+    assert.equal(r.noExactMatch, undefined)
+    assert.equal(r.results[0].name, 'calendar')
+    assert.equal(r.didYouMean, 'calendar')
+  })
+  test('search_icons: gibberish has no matches and nothing to offer: browse hint, no additional results', async () => {
+    const raw = await client.callTool({ name: 'search_icons', arguments: { query: 'xqzvk' } })
+    const r = parse(raw)
+    assert.equal(r.noExactMatch, true)
+    assert.equal(r.count, 0)
+    assert.equal(r.additional, undefined)
+    assert.ok(r.hint)
+    assert.match(raw.content[0].text, /^No icons for "xqzvk"/)
   })
   test('get_icon home react', async () => {
     const r = parse(await client.callTool({ name: 'get_icon', arguments: { name: 'home', format: 'react' } }))
@@ -218,8 +282,9 @@ describe('stdio server (SDK client)', () => {
     assert.equal(g.colors.mainRole, 'c1')   // bubblegum pink body (sticker paints its main body with c1)
     const p = parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'bell', style: 'sticker', limit: 1 } }))
     assert.equal(p.mainRole, 'c1')
-    assert.ok(p.mainRoleShare > 0.3 && p.mainRoleShare <= 1)
-    assert.match(p.mainRoleNote, /c1 paints the main body of bell in sticker/)
+    // the share is of the whole drawn icon (its outline and die-cut border included), measured on the render
+    assert.ok(p.mainRoleShare > 0.2 && p.mainRoleShare <= 1)
+    assert.match(p.mainRoleNote, /c1 \(Main colour\) paints the largest part of bell in sticker/)
     assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', style: 'duo', limit: 1 } })).mainRole, 'c1')
     assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', style: 'line', limit: 1 } })).mainRole, 'ink')
     assert.equal(parse(await client.callTool({ name: 'list_palettes', arguments: { name: 'home', limit: 1 } })).mainRole, undefined, 'needs a style')
@@ -452,7 +517,7 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(JSON.parse(init.body).result.serverInfo.name, 'withicons')
     const list = await handler(rpc(2, 'tools/list', {}))
     const tools = JSON.parse(list.body).result.tools
-    assert.equal(tools.length, 9)
+    assert.equal(tools.length, 10)
     // remote: no out_dir (nothing to write to), raster / animated formats answer with the command
     assert.ok(!tools.find(t => t.name === 'export_icon').inputSchema.properties.out_dir)
     const call = await handler(rpc(3, 'tools/call', { name: 'search_icons', arguments: { query: 'throw away' } }))
@@ -481,7 +546,10 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(r.statusCode, 200)
     const b = JSON.parse(r.body)
     assert.equal(b.results[0].name, 'trash')
-    assert.equal(b.results.length, 3)
+    // results are exact matches only (loosely related icons are in `additional`); limit caps them
+    assert.ok(b.results.length >= 1 && b.results.length <= 3)
+    assert.ok(b.results.every(x => x.confidence !== 'low'))
+    assert.equal(JSON.parse((await handler(ev('GET', '/api/search', 'q=trash%20can&limit=1'))).body).results.length, 1)
     assert.equal(r.headers['access-control-allow-origin'], '*')
   })
   test('GET /api/recommend', async () => {
@@ -489,6 +557,14 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(r.statusCode, 200)
     assert.equal(JSON.parse(r.body).recommendations[0].style, 'christmas')
     assert.equal((await handler(ev('GET', '/api/recommend', 'use=nope'))).statusCode, 400)
+  })
+  test('GET /api/recommend?compact=1: the short form, same ranking', async () => {
+    const full = JSON.parse((await handler(ev('GET', '/api/recommend', 'for=pitch%20deck%20for%20a%20dentist'))).body)
+    const small = JSON.parse((await handler(ev('GET', '/api/recommend', 'for=pitch%20deck%20for%20a%20dentist&compact=1'))).body)
+    assert.deepEqual(small.recommendations.map(x => x.style), full.recommendations.map(x => x.style))
+    assert.ok(JSON.stringify(small).length < JSON.stringify(full).length / 2, 'compact is much smaller')
+    assert.deepEqual(Object.keys(small.recommendations[0]).sort(), ['group', 'react', 'style', 'suits', 'webComponent'])
+    assert.equal(JSON.parse((await handler(ev('GET', '/api/recommend', 'for=pitch%20deck&compact=0'))).body).recommendations[0].files !== undefined, true, 'compact=0 is the full form')
   })
   test('GET /api/icon/<name>', async () => {
     const r = JSON.parse((await handler(ev('GET', '/api/icon/home', 'style=solid&format=react'))).body)

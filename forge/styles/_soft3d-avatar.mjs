@@ -52,6 +52,9 @@ const PEOPLE = {
   'avatar-woman-bob': { skin: 6, hair: 'black', cloth: 'coral', hairStyle: 'bob', top: 'tee', lashes: true },
   'avatar-person-glasses': { skin: 3, hair: 'brown', cloth: 'navy', hairStyle: 'short', top: 'shirt', glasses: 'square' },
   'avatar-person-headphones': { skin: 4, hair: 'dark', cloth: 'teal', detail: 'grey', hairStyle: 'crop', top: 'hoodie', headphones: true },
+  // the hijab owns c2 (wear: 'c2'), as the palettes say; brows paint in ink
+  'avatar-woman-hijab': { skin: 3, hair: 'black', cloth: 'teal', hairStyle: 'none', top: 'tee', hijab: true, wear: 'c2', lashes: true },
+  'avatar-person-wheelchair': { skin: 1, hair: 'brown', cloth: 'blue', hairStyle: 'crop', top: 'tee', wheelchair: true },
 }
 
 export const isAvatar = icon => String(icon?.name || '').startsWith('avatar-')
@@ -207,13 +210,57 @@ function bust(icon, R) {
   if (R.cap) cap(p, hx, hy)
   if (R.glasses) glasses(p, R.glasses, hx, ey, edx)
   if (R.headphones) headphones(p, hx, hy, rx)
+  if (R.wheelchair) wheelchair(p)
   return p.finish()
+}
+
+// a path moved by a uniform scale s and a shift (absolute and relative commands, arcs included)
+function moveD(d, s, tx, ty) {
+  const A = { m: 2, l: 2, t: 2, h: 1, v: 1, c: 6, s: 4, q: 4, a: 7, z: 0 }
+  const out = []
+  for (const [, c, args] of String(d).matchAll(/([MLHVCSQTAZmlhvcsqtaz])([^MLHVCSQTAZmlhvcsqtaz]*)/g)) {
+    const v = (args.match(/-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi) || []).map(Number)
+    const k = c.toLowerCase(), abs = c !== k, w = A[k]
+    const X = x => abs ? x * s + tx : x * s, Y = y => abs ? y * s + ty : y * s
+    const r = []
+    for (let i = 0; w && i + w <= v.length; i += w) {
+      if (k === 'a') r.push(v[i] * s, v[i + 1] * s, v[i + 2], v[i + 3], v[i + 4], X(v[i + 5]), Y(v[i + 6]))
+      else if (k === 'h') r.push(X(v[i]))
+      else if (k === 'v') r.push(Y(v[i]))
+      else for (let j = 0; j < w; j += 2) r.push(X(v[i + j]), Y(v[i + j + 1]))
+    }
+    out.push(c + r.map(x => n(x)).join(' '))
+  }
+  return out.join('')
+}
+// AVATAR-PERSON-WHEELCHAIR: the seated bust a size smaller on the left (its torso runs on to the seat), the chair on
+// the right where the skeleton draws it: a wheel at (17.75, 17.75) in front of the body, the armrest over it and the
+// back post rising to a push handle. The chair paints in accent (the palettes' pop colour, like the headphones), the
+// tyre in ink, so the person keeps the convention's skin, hair and clothing roles.
+function wheelchair(p) {
+  const s = 0.84, tx = -0.83, ty = 1.12
+  for (const [, a] of p.out) {
+    if (a.class === 'wm-shadow' || !a.d) continue
+    a.d = moveD(a.d, s, tx, ty)
+    if (a['stroke-width'] !== undefined) a['stroke-width'] = n(+a['stroke-width'] * s)
+  }
+  const cx = 17.75, cy = 17.75
+  const ring = (r1, r2) => E(cx, cy, r1) + E(cx, cy, r2)
+  p.line(`M${cx} ${cy - 2.9}V${cy + 2.9}M${cx - 2.9} ${cy}H${cx + 2.9}M${n(cx - 2.05)} ${n(cy - 2.05)}l4.1 4.1M${n(cx - 2.05)} ${n(cy + 2.05)}l4.1-4.1`, 'shadow', 0.22, 0.4, 'wm-a')
+  p.out.push(['path', { d: ring(4.4, 3.15), fill: p.col('ink'), 'fill-rule': 'evenodd', class: 'wm-a' }])
+  p.out.push(['path', { d: ring(4.4, 3.15), fill: p.G.vol(), 'fill-rule': 'evenodd', class: 'wm-a' }])
+  p.line(E(cx, cy, 2.55), 'accent', 0.55, 1, 'wm-a')
+  p.form(E(cx, cy, 0.95), 'accent', 'wm-a', 'soft')
+  p.line('M14.3 15.1a3.9 3.9 0 0 1 3.3-1.8', 'shine', 0.45, 0.35, 'wm-shine')
+  p.line('M15.3 12.5H20V8.75h1.8', 'accent', 1.4, 1, 'wm-a')
+  p.line('M15.5 12.2h4.1V9.2', 'shine', 0.4, 0.4, 'wm-shine')
 }
 
 function torso(p, R, baby) {
   const top = baby ? 17.4 : 16.7
   const d = baby
     ? `M5.4 22.6c0-3.1 2.4-5 4.8-5.3h3.6c2.4.3 4.8 2.2 4.8 5.3z`
+    : R.wheelchair ? `M3.9 25.8V22.6c0-3.9 2.6-5.9 5.6-6.1l2.5.4 2.5-.4c3 .2 5.6 2.2 5.6 6.1v3.2z`   // runs on to the seat (scaled down later)
     : `M3.9 22.6c0-3.9 2.6-5.9 5.6-6.1l2.5.4 2.5-.4c3 .2 5.6 2.2 5.6 6.1z`
   p.form(d, R.wear, 'wm-k')
   // soft folds and the underside of the arms

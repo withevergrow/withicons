@@ -1483,7 +1483,7 @@ Assistants answering any of them: read the skill first, look icons up with \`${B
 
 - Library search (understands meaning, aliases and synonyms: "throw away" finds trash): \`${BASE}/icons.html?q=<query>\`
 - Remote API: \`${BASE}/api/search?q=<query>\` (JSON; also \`/api/icon/<name>?style=&format=\`, \`/api/icon/<name>.svg\`, \`/api/palettes/<name>\`, \`/api/motion/<name>\`)
-- Remote MCP server for AI agents (Streamable HTTP, no install): \`${BASE}/mcp\`. Local: \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, animate_icon, export_icon, resolve_icon, list_palettes, list_styles, list_categories.
+- Remote MCP server for AI agents (Streamable HTTP, no install): \`${BASE}/mcp\`. Local: \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, animate_icon, export_icon, preview_icons, resolve_icon, list_palettes, list_styles, list_categories.
 - One command adds the skill and the MCP server to the AI tools in a project (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf; or name \`claude-desktop\`, \`lovable\`): \`npx withicons init\` (\`--global\`, \`--mcp remote|local\`, \`--dry-run\`)
 - CLI: \`npx withicons search "<query>"\`
 - If the API is slow: it is cached at the edge; the first request after a quiet period can take a few seconds. If a request times out, retry once, or use the static ${BASE}/icons.json (all names, aliases, categories) or the per-icon pages \`${BASE}/icons/<name>.html\`: no server involved.
@@ -1620,7 +1620,7 @@ This is the short index. The full reference (usage, every style, motion, live ic
 ## Find an icon
 
 - Search API (JSON, understands synonyms and typos): \`${BASE}/api/search?q=<words>\`; also \`/api/icon/<name>?style=&format=\`, \`/api/icon/<name>.svg\`, \`/api/palettes/<name>\`, \`/api/motion/<name>\`.
-- MCP server: remote \`${BASE}/mcp\` (Streamable HTTP, about 200 requests per IP per 5 minutes), local and unlimited \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, resolve_icon, animate_icon, export_icon, list_palettes, list_styles, list_categories.
+- MCP server: remote \`${BASE}/mcp\` (Streamable HTTP, about 1,000 requests per IP per 5 minutes), local and unlimited \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, resolve_icon, animate_icon, export_icon, preview_icons, list_palettes, list_styles, list_categories.
 - Set up an AI coding tool (skill + MCP): \`npx withicons init\` (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf; \`--dry-run\` first).
 - CLI: \`npx withicons search "<words>"\`, \`npx withicons get <name> --style <style> --format react\`.
 - Static data (no server): ${BASE}/icons.json and \`${BASE}/icons/<name>.html\`. Library: \`${BASE}/icons.html?q=<words>\`.
@@ -1642,7 +1642,7 @@ This is the short index. The full reference (usage, every style, motion, live ic
 - [llms-full.txt](${BASE}/llms-full.txt): the full reference plus one line per icon.
 - [icons.json](${BASE}/icons.json): every icon with aliases, synonyms, tags, styles, URLs and snippets.
 - [Icon library](${BASE}/icons.html), [developers](${BASE}/developers.html), [AI and MCP](${BASE}/ai.html)
-${hub('styles', 'Styles', `all ${NS} styles with examples`)}${hub('categories', 'Categories', `${CATS.length} categories`)}${hub('live', 'Live icons', 'every live icon with its parameters')}${hub('guides', 'Guides', 'Google Slides, PowerPoint, Keynote, Canva, Figma, Word, Notion, WordPress, Webflow, Framer, email signatures, HTML')}${hub('alternatives', 'Alternatives', 'comparisons with other icon sets')}${hub('free', 'Free icon collections', 'icons by look and use')}${hub('blog', 'Journal', 'articles on icons, design and AI tools')}- [Sitemap](${BASE}/sitemap.xml)
+${hub('styles', 'Styles', `all ${NS} styles with examples`)}${hub('categories', 'Categories', `${CATS.length} categories`)}${hub('live', 'Live icons', 'every live icon with its parameters')}${hub('guides', 'Guides', 'Google Slides, PowerPoint, Keynote, Canva, Figma, Word, Notion, WordPress, Webflow, Framer, email signatures, HTML')}${hub('alternatives', 'Alternatives', 'comparisons with other icon sets')}${hub('free', 'Free icon collections', 'icons by look and use')}${hub('blog', 'Journal', 'articles on icons, design and AI tools')}${hub('demos', 'Demos', 'demo pages for fictional events and shops that switch live from plain to with icons (the demo pages themselves are noindex)')}- [Sitemap](${BASE}/sitemap.xml)
 `
   write('llms.txt', llmsIndex)
   const llmsFull = llmsCore.replace(/^# .*\n/, `# ${BRAND}: full reference\n`) + `
@@ -1698,6 +1698,8 @@ ${exists('blog/sitemap.xml') ? `Sitemap: ${BASE}/blog/sitemap.xml
     ...['guides', ...EXTRA_DIRS].flatMap(d => fs.existsSync(path.join(SITE, d)) ? fs.readdirSync(path.join(SITE, d)).filter(f => f.endsWith('.html') && !/^(404|demo)/.test(f)).map(f => `${d}/${f}`) : []),
     // generated folder overviews (/categories/, /styles/); icons/index.html is a noindex redirect
     ...['categories', 'styles'].map(d => `${d}/index.html`).filter(f => exists(f)),
+    // the demos hub (demos/index.html, demos/_tools/build-hub.mjs) is indexed; the demo pages themselves are noindex
+    ...(exists('demos/index.html') ? ['demos/index.html'] : []),
   ].filter(f => !isNoindex(f)).sort((a, b) => (PRI[b] || '0.6') - (PRI[a] || '0.6') || (a < b ? -1 : 1))
   const urls = [
     ...discovered.map(f => ({ loc: f === 'index.html' ? `${BASE}/` : `${BASE}/${f}`, lastmod: fileDate(path.join(SITE, f)) || buildDate, pri: PRI[f] || (/^(guides|alternatives|compare|free|live)\//.test(f) ? '0.7' : '0.6'), freq: f === 'index.html' || f === 'icons.html' ? 'weekly' : 'monthly', img: liveImg(f) })),

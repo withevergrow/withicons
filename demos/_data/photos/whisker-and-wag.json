@@ -1,0 +1,265 @@
+{
+  "slug": "whisker-and-wag",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "pexels",
+      "id": "8081421",
+      "page": "https://www.pexels.com/photo/8081421/",
+      "url": "https://images.pexels.com/photos/8081421/pexels-photo-8081421.jpeg",
+      "photographer": "Skyler Ewing",
+      "photographerUrl": "https://www.pexels.com/@skyler-ewing-266953",
+      "alt": "A cream goldendoodle puppy bounds across a sunny green field.",
+      "colors": "",
+      "focal": "50% 60%",
+      "notes": "",
+      "width": 1200,
+      "height": 960,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/whisker-and-wag/8081421-1000.jpg"
+      }
+    },
+    {
+      "slot": "dog",
+      "src": "pexels",
+      "id": "25786020",
+      "page": "https://www.pexels.com/photo/25786020/",
+      "url": "https://images.pexels.com/photos/25786020/pexels-photo-25786020.jpeg",
+      "photographer": "gy1610",
+      "photographerUrl": "https://www.pexels.com/@gy1610-25786020",
+      "alt": "A black-and-white dog lying in lush green grass.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/whisker-and-wag/25786020-1000.jpg"
+      }
+    },
+    {
+      "slot": "cat",
+      "src": "pexels",
+      "id": "35765312",
+      "page": "https://www.pexels.com/photo/35765312/",
+      "url": "https://images.pexels.com/photos/35765312/pexels-photo-35765312.jpeg",
+      "photographer": "Foto Panda",
+      "photographerUrl": "https://www.pexels.com/@foto-panda-29725457",
+      "alt": "Close-up of a tabby cat looking straight at the camera.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/whisker-and-wag/35765312-600.jpg"
+      }
+    },
+    {
+      "slot": "treats",
+      "src": "pexels",
+      "id": "8121154",
+      "page": "https://www.pexels.com/photo/8121154/",
+      "url": "https://images.pexels.com/photos/8121154/pexels-photo-8121154.jpeg",
+      "photographer": "Rubenstein Rebello",
+      "photographerUrl": "https://www.pexels.com/@rubenstein111rebello",
+      "alt": "Bone-shaped dog treats arranged on brown paper, seen from above.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 1500,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/whisker-and-wag/8121154-600.jpg"
+      }
+    },
+    {
+      "slot": "toys",
+      "src": "pexels",
+      "id": "14084426",
+      "page": "https://www.pexels.com/photo/14084426/",
+      "url": "https://images.pexels.com/photos/14084426/pexels-photo-14084426.jpeg",
+      "photographer": "Barnabas Davoti",
+      "photographerUrl": "https://www.pexels.com/@barnabas-davoti-31615494",
+      "alt": "Two golden retrievers playing with a plush toy on grass.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/whisker-and-wag/14084426-1000.jpg"
+      }
+    },
+    {
+      "slot": "bed",
+      "src": "unsplash",
+      "id": "A7nK49HCqSI",
+      "page": "https://unsplash.com/photos/A7nK49HCqSI",
+      "url": "https://images.unsplash.com/photo-1541188495357-ad2dc89487f4",
+      "photographer": "Aleksandar Cvetanovic",
+      "photographerUrl": "https://unsplash.com/@a_cvetanovic",
+      "alt": "An orange tabby cat sleeping on a white pet bed.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/whisker-and-wag/photo-1541188495357-ad2dc89487f4-600.jpg"
+      }
+    },
+    {
+      "slot": "leash",
+      "src": "unsplash",
+      "id": "ZZOO5BRdZlw",
+      "page": "https://unsplash.com/photos/ZZOO5BRdZlw",
+      "url": "https://images.unsplash.com/photo-1546687813-3fcc1c363a07",
+      "photographer": "Ryan Waring",
+      "photographerUrl": "https://unsplash.com/@ryanwaring",
+      "alt": "A tan leather collar on a white dog figurine in a studio shot.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/whisker-and-wag/photo-1546687813-3fcc1c363a07-600.jpg"
+      }
+    },
+    {
+      "slot": "bowl",
+      "src": "unsplash",
+      "id": "UcvniPaMR_A",
+      "page": "https://unsplash.com/photos/UcvniPaMR_A",
+      "url": "https://images.unsplash.com/photo-1746483966755-273b467b24fa",
+      "photographer": "Karsten Winegeart",
+      "photographerUrl": "https://unsplash.com/@_karsten",
+      "alt": "A French bulldog puppy standing by its food bowl at breakfast time.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/whisker-and-wag/photo-1746483966755-273b467b24fa-600.jpg"
+      }
+    },
+    {
+      "slot": "smallpet",
+      "src": "pexels",
+      "id": "19613749",
+      "page": "https://www.pexels.com/photo/19613749/",
+      "url": "https://images.pexels.com/photos/19613749/pexels-photo-19613749.jpeg",
+      "photographer": "wwarby",
+      "photographerUrl": "https://www.pexels.com/@wwarby",
+      "alt": "A domestic rabbit sitting on grass.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 900,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/whisker-and-wag/19613749-600.jpg"
+      }
+    },
+    {
+      "slot": "grooming",
+      "src": "pexels",
+      "id": "6131580",
+      "page": "https://www.pexels.com/photo/6131580/",
+      "url": "https://images.pexels.com/photos/6131580/pexels-photo-6131580.jpeg",
+      "photographer": "Tima Miroshnichenko",
+      "photographerUrl": "https://www.pexels.com/@tima-miroshnichenko",
+      "alt": "A groomer blow-drying a Yorkshire Terrier.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/whisker-and-wag/6131580-600.jpg"
+      }
+    },
+    {
+      "slot": "spare-volunteer",
+      "src": "pexels",
+      "id": "7474353",
+      "page": "https://www.pexels.com/photo/7474353/",
+      "url": "https://images.pexels.com/photos/7474353/pexels-photo-7474353.jpeg",
+      "photographer": "Mikhail Nilov",
+      "photographerUrl": "https://www.pexels.com/@mikhail-nilov",
+      "alt": "A volunteer holding a happy dog, promoting pet adoption.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape"
+    },
+    {
+      "slot": "walk",
+      "src": "unsplash",
+      "id": "aI3EBLvcyu4",
+      "page": "https://unsplash.com/photos/aI3EBLvcyu4",
+      "url": "https://images.unsplash.com/photo-1494947665470-20322015e3a8",
+      "photographer": "Matt Nelson",
+      "photographerUrl": "https://unsplash.com/@mnelson",
+      "alt": "Four dogs on leashes walking together in a park.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/whisker-and-wag/photo-1494947665470-20322015e3a8-1000.jpg"
+      }
+    },
+    {
+      "slot": "spare-dog",
+      "src": "pexels",
+      "id": "11570324",
+      "page": "https://www.pexels.com/photo/11570324/",
+      "url": "https://images.pexels.com/photos/11570324/pexels-photo-11570324.jpeg",
+      "photographer": "Antonin Imagery",
+      "photographerUrl": "https://www.pexels.com/@antonin-imagery-170427121",
+      "alt": "A golden retriever racing across the grass.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape"
+    },
+    {
+      "slot": "shelter",
+      "src": "pexels",
+      "id": "6568943",
+      "page": "https://www.pexels.com/photo/6568943/",
+      "url": "https://images.pexels.com/photos/6568943/pexels-photo-6568943.jpeg",
+      "photographer": "cottonbro studio",
+      "photographerUrl": "https://www.pexels.com/@cottonbro",
+      "alt": "A woman with a dog seeking adoption, holding a Take Me Home sign.",
+      "colors": "",
+      "focal": "50% 50%",
+      "notes": "",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "600": "_img/whisker-and-wag/6568943-600.jpg"
+      }
+    }
+  ]
+}

@@ -11,7 +11,7 @@
 //        --bucket <b> --distribution <id> --function <name>   (override the stack outputs)
 // Env overrides: WITHICONS_BUCKET, WITHICONS_DISTRIBUTION_ID, WITHICONS_FUNCTION_NAME, WITHICONS_STACK.
 // Cache warm (after a real deploy): --skip-warm  --warm-only (just warm, no build/upload)  --warm-limit <n> (default 150,
-//        max 180: WAF allows 200 API requests per IP per 5 min)  --warm-base <url> (default https://withicons.com)
+//        max 180: the WAF allows 1000 API requests per IP per 5 min, keep the warm well under it)  --warm-base <url> (default https://withicons.com)
 //
 // Why not plain `aws s3 sync`: in CI every checked-out file has a fresh mtime, so sync re-uploads all
 // ~700 files and cannot tell us which paths really changed. We diff local MD5s against S3 ETags instead,
@@ -209,9 +209,11 @@ if (!flag('skip-lambda')) {
   if (!fs.existsSync(path.join(MCP_DIST, 'lambda.mjs'))) log('! packages/mcp/dist/lambda.mjs not found - skipping the API Lambda')
   else {
     const entries = [['index.mjs', fs.readFileSync(path.join(ROOT, 'infra', 'lambda', 'index.mjs'))], ['mcp/package.json', Buffer.from('{"type":"module"}\n')]]
+    // export_icon's PNG renderer (@resvg/resvg-wasm, compiled on the first PNG export): mcp/resvg.wasm next to lambda.mjs
+    if (!fs.existsSync(path.join(MCP_DIST, 'resvg.wasm'))) die('packages/mcp/dist/resvg.wasm not found: the hosted PNG export needs it (npm ci, then build packages/mcp)')
     for (const k of walk(MCP_DIST).sort()) {
       // lambda.mjs inlines the small data (meta, search index, motion) and reads the big data from mcp/data/ on first use:
-      // ship data/svg-<style>.json + data/palettes.json; the npm-only files (stdio bin, library, the other data/ JSON) stay out
+      // ship data/svg-<style>.json + data/palettes.json (+ resvg.wasm); the npm-only files (stdio bin, library, the other data/ JSON) stay out
       if (k.endsWith('.map') || k.endsWith('.d.ts') || k === 'stdio.mjs' || k === 'lib.mjs') continue
       if (k.startsWith('data/') && !/^data\/(svg-[a-z0-9-]+|palettes)\.json$/.test(k)) continue
       entries.push([`mcp/${k}`, fs.readFileSync(path.join(MCP_DIST, k))])
@@ -220,11 +222,14 @@ if (!flag('skip-lambda')) {
     lambdaZip = zip(entries)
     // update-function-code --zip-file accepts at most 50 MB; every style's SVGs are in the zip, so watch the growth
     if (lambdaZip.length > 45 * 1048576) die(`the API Lambda zip is ${(lambdaZip.length / 1048576).toFixed(1)} MB (limit 50 MB for a direct upload): upload via S3 or slim packages/mcp/dist/lambda.mjs`)
+    // unzipped, a Lambda package may hold at most 250 MB
+    const unzipped = entries.reduce((n, [, d]) => n + d.length, 0)
+    if (unzipped > 240 * 1048576) die(`the API Lambda is ${(unzipped / 1048576).toFixed(1)} MB unzipped (limit 250 MB)`)
     const sha = crypto.createHash('sha256').update(lambdaZip).digest('base64')
     let current = null
     if (T.fn) current = awsJson(['lambda', 'get-function-configuration', '--function-name', T.fn], { allowFail: true })?.CodeSha256
     plan.lambda = current === sha ? 'unchanged' : 'update'
-    log(`> lambda: ${entries.length} files, ${(lambdaZip.length / 1024).toFixed(0)} KB zip, sha256 ${sha.slice(0, 12)}... -> ${plan.lambda}${current ? '' : ' (current code unknown)'}`)
+    log(`> lambda: ${entries.length} files, ${(lambdaZip.length / 1024).toFixed(0)} KB zip (${(unzipped / 1048576).toFixed(1)} MB unzipped), sha256 ${sha.slice(0, 12)}... -> ${plan.lambda}${current ? '' : ' (current code unknown)'}`)
   }
 }
 
@@ -306,7 +311,7 @@ async function postDeployCacheWarm() {
 }
 
 // Queries: a curated list of what people and agents actually type, then icon names from site/icons.json, deduped.
-// Budget: the WAF rule (WafRateLimitPer5Min, default 200) counts EVERY /api/* request per IP over 5 minutes, cache
+// Budget: the WAF rule (WafRateLimitPer5Min, default 1000) counts EVERY /api/* request per IP over 5 minutes, cache
 // hits included, so one warm run stays at <= 180 and stops at the first 429. Two deploys within 5 minutes from the
 // same runner can still trip it for that runner only (the warm then stops; nothing else is affected).
 async function warmApiCache() {
@@ -350,7 +355,8 @@ async function warmApiCache() {
 // ------------------------------------------------------------------ Lambda smoke test
 // Unpack the bundle into an empty temp dir (no node_modules anywhere above it, like Lambda), load it and
 // call the handler with Function URL v2 events. Catches non-bundled dependencies, missing data files and startup crashes;
-// also checks the origin secret, the keep-warm ping and reports the cold import (Lambda INIT) and first-request times.
+// also checks the origin secret, the keep-warm ping, a PNG export (the wasm renderer) and reports the cold import (Lambda
+// INIT), first-request and first-PNG times.
 function smokeTestLambda(entries) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'withicons-lambda-'))
   try {
@@ -374,6 +380,14 @@ function smokeTestLambda(entries) {
         out.push(e.requestContext.http.method + ' ' + e.rawPath + ' -> ' + (r && r.statusCode))
         if (!r || r.statusCode !== 200) bad.push(out[out.length - 1])
       }
+      // export_icon PNG: resvg.wasm is in the zip and starts (the first PNG compiles it)
+      const t1 = performance.now()
+      const png = await handler(ev('POST', '/mcp', '', JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/call', params: { name: 'export_icon', arguments: { name: 'home', style: 'solid', format: 'png', size: 512 } } })), {})
+      const pngMs = performance.now() - t1
+      let pngOk = false
+      try { const res = JSON.parse(png.body).result; pngOk = res.structuredContent.made === true && Buffer.from(res.content.find(c => c.type === 'resource').resource.blob, 'base64').readUInt32BE(16) === 512 } catch {}
+      if (!pngOk) bad.push('export_icon did not make a 512 px PNG (is mcp/resvg.wasm in the zip?)')
+      out.push('first PNG 512 px (wasm start + render) ' + pngMs.toFixed(0) + ' ms')
       const noSecret = await handler(ev('GET', '/api/search', 'q=home', undefined, 'wrong'), {})
       if (!noSecret || noSecret.statusCode !== 401) bad.push('request without the origin secret was not rejected')
       const warm = await handler({ source: 'withicons.warm' }, {})

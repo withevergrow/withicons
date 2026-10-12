@@ -44,6 +44,10 @@ const NAMES = {
   'sale-sticker': 'blush', 'badge-text': 'lavender', 'ribbon-label': 'blush', 'percent-badge': 'mint', 'app-badge': 'lavender', 'avatar-initials': 'peach',
   'dice': 'lavender', 'gauge-value': 'lavender', 'progress-ring': 'mint', 'signal-bars': 'sky', 'wifi-strength': 'sky', 'cellular-tech': 'sky',
   'volume-level': 'sky', 'bar-values': 'lavender', 'speech-bubble-text': 'lavender', 'step-number': 'lavender',
+  // run 14: peach and butter bakes, a peach oven, a blush crayon, a baby-blue stroller, a mint clinic chair,
+  // a butter worried face like smile and frown (tooth-crown and mosque take their hues in T below)
+  'baguette': 'peach', 'croissant': 'butter', 'wheat': 'butter', 'rolling-pin': 'butter', 'oven': 'peach', 'crayon': 'blush',
+  'stroller': 'sky', 'dental-chair': 'mint', 'worried': 'butter',
 }
 
 // per-icon automatic-composer tuning (same keys as the field composer understands):
@@ -75,6 +79,9 @@ const T = {
   'battery-percent': { hues: { main: 'lavender', part: 'lavender', inlay: 'paper' } },
   // the static alarm clock: a blush body under butter bells
   'alarm-clock-time': { ...DIAL, hues: { main: 'blush', part: 'butter', badge: 'butter' } },
+  // a butter (gold) crown over a blush tooth like tooth; a mint mosque with butter door, minaret and crescent
+  'tooth-crown': { hues: { main: 'butter', part: 'blush' } },
+  mosque: { hues: { main: 'mint', part: 'butter', inlay: 'butter', badge: 'butter' } },
 }
 export const autoTune = name => T[name] || {}
 

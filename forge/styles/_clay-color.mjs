@@ -44,6 +44,15 @@ const RULES = [
   ['fur', /^(avatar-cat)$/],
   ['monster', /^(avatar-monster.*|avatar-alien|avatar-dino)$/],
   ['skin', /^avatar-/],
+  // bakery, kids, dental, places (the 16 icons of run 14)
+  ['caramel', /^(bread|baguette|croissant|rolling-pin)$/],
+  ['gold', /^(wheat|tooth-crown)$/],
+  ['grey', /^(oven)$/],
+  ['red', /^(playground|crayon)$/],
+  ['pink', /^(stroller)$/],
+  ['cream', /^(baby-bottle)$/],
+  ['teal', /^(dental-chair)$/],
+  ['green', /^(mosque)$/],
   ['red', /^(heart|heart-pulse|heart-crack|siren|apple|hospital|ambulance|bandage|briefcase-medical|first-aid|pill|life-buoy|alert-circle|ban|x-circle|stop|circle-stop|record|youtube|gift|tomato|cherry|strawberry)$/],
   ['gold', /^(sun|sun-dim|moon|sun-moon|star|star-half|lightbulb|lightbulb-off|trophy|award|medal|crown|zap|zap-off|coins|key|key-round|bell|bell-ring|bell-plus|bell-off|sparkles|wand|wand-sparkles|alert-triangle|lemon|banana|cheese|egg|hand-coins|badge-dollar-sign|dollar-sign|euro|pound-sterling|indian-rupee|piggy-bank|taxi|school|graduation-cap)$/],
   ['orange', /^(flame|pizza|burger|cookie|basketball|traffic-cone|fuel|sunrise|sunset|rocket|cat|fox|carrot|soup|cooking-pot|popcorn|beer|backpack|hard-hat|tennis|volleyball|football|party-popper|megaphone|package|package-open|truck|boxes|cube|warehouse)$/],
@@ -94,6 +103,7 @@ function person(name) {
   let hair = HAIR[(n * 7 + 1) % HAIR.length]
   if (k.startsWith('older')) hair = '#C9C4D2'
   if (k === 'man-turban') hair = '#E2574C'
+  if (k === 'woman-hijab') hair = '#2CC0A8'           // the hijab owns c2: a fabric colour, never a skin-like brown
   if (k === 'person-headphones') hair = '#3A3550'
   if (k === 'person-glasses') hair = '#2B2230'          // hair and frames share the role
   if (t >= 3 && hair === '#E0B062') hair = '#2B2230'

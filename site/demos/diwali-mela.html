@@ -1,0 +1,1809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rangoli Square Diwali Mela (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: A free neighbourhood Diwali festival in Eastgate: 24 food and craft stalls, a rangoli contest, garba and dandiya, the evening aarti and a 9:30 pm fireworks finale. Saturday 7 November 2026, 4 to 10 pm.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#1a0f3f">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Rozha+One&display=swap" rel="stylesheet">
+<style>
+/* ───────── tokens ───────── */
+:root{
+  --night:#1a0f3f;--night2:#2d1a78;--plum:#3b0a45;
+  --mag:#e11d74;--magd:#b5115a;--saf:#ff8a1f;--safd:#9a4600;--gold:#ffc21a;--goldd:#a87800;
+  --teal:#0c7c80;--teald:#075a5f;--tealb:#17b8b4;
+  --cream:#fff6e0;--paper:#fffbf2;--ink:#2a1450;--muted:#5a4a78;
+  --display:'Rozha One',Georgia,'Times New Roman',serif;
+  --body:'Poppins',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --pad:clamp(16px,4vw,32px);--max:1200px;
+  /* icon palettes tuned to the festival: magenta, gold, teal, saffron, plum */
+  --with-utsav-c1:#ffb300;--with-utsav-c2:#ff6f1a;--with-utsav-c3:#e11d74;--with-utsav-c4:#0b8f93;
+  --with-utsav-accent:#ffd34e;--with-utsav-edge:#ffe08a;--with-utsav-ink:#3b0a45;--with-utsav-shadow:#5a1230;
+  --with-rangoli-c1:#ffb21f;--with-rangoli-c2:#ff6a2a;--with-rangoli-c3:#e11d74;--with-rangoli-c4:#5b2bd0;--with-rangoli-accent:#ffc21a;
+  --with-brutal-c1:#ffc21a;--with-brutal-c2:#ff4f9a;--with-brutal-c3:#17b8b4;--with-brutal-c4:#ff8a1f;--with-brutal-accent:#e11d74;
+  --with-sticker-lemon:#ffc21a;--with-sticker-bubblegum:#ff4f9a;--with-sticker-peach:#ff8a1f;--with-sticker-mint:#17b8b4;--with-sticker-grape:#7a3fe0;--with-sticker-accent:#e11d74;
+  --with-bento-c1:#e11d74;--with-bento-c3:#ff8a1f;--with-bento-c4:#0c7c80;--with-bento-accent:#ffc21a;
+  --with-retro-1:#ffc21a;--with-retro-2:#ff8a1f;--with-retro-3:#e11d74;--with-retro-4:#0c7c80;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:140px;-webkit-text-size-adjust:100%}
+body{margin:0;font:400 1rem/1.6 var(--body);color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4,p,ul,ol,figure,dl,dd{margin:0}
+ul,ol{padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--mag);outline-offset:3px;border-radius:6px}
+.dark :focus-visible,.hero :focus-visible,.site-head :focus-visible,.site-foot :focus-visible{outline-color:var(--gold)}
+.wrap{width:min(var(--max),100% - 2*var(--pad));margin-inline:auto}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--gold);color:var(--plum);font-weight:700;padding:10px 16px;border-radius:0 0 12px 12px;text-decoration:none}
+.skip:focus{top:0}
+
+/* ───────── level tuning: Basic is a plain, tidy site ───────── */
+:is(html[data-level="0"],html:not([data-level])) .kit-ico,:is(html[data-level="0"],html:not([data-level])) .kit-live{min-width:0!important;min-height:0!important}
+:is(html[data-level="0"],html:not([data-level])) [data-size]{font-size:20px;line-height:1}
+:is(html[data-level="0"],html:not([data-level])) :is([data-size="16"],[data-size="18"]){font-size:16px}
+:is(html[data-level="0"],html:not([data-level])) :is([data-size="28"],[data-size="32"]){font-size:26px}
+:is(html[data-level="0"],html:not([data-level])) :is([data-size="36"],[data-size="40"]){font-size:32px}
+:is(html[data-level="0"],html:not([data-level])) :is([data-size="44"],[data-size="48"]){font-size:38px}
+:is(html[data-level="0"],html:not([data-level])) :is([data-size="56"],[data-size="64"]){font-size:46px}
+:is(html[data-level="0"],html:not([data-level])) :is([data-size="72"],[data-size="80"],[data-size="88"],[data-size="96"]){font-size:60px}
+:is(html[data-level="0"],html:not([data-level])) :is(.live-box,.steps .num,.stamp,.ribbon,.pin) [data-size]{font-size:1.15rem;font-weight:800;line-height:1.1}
+:is(html[data-level="0"],html:not([data-level])) :is([data-size="120"],[data-size="140"],[data-size="160"]){font-size:80px}
+
+/* ───────── buttons, chips, small parts ───────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border:3px solid var(--plum);border-radius:999px;background:var(--gold);color:var(--plum);font:700 .98rem/1.1 var(--body);text-decoration:none;box-shadow:0 5px 0 var(--plum);transition:transform .12s,box-shadow .12s,background .15s;-webkit-tap-highlight-color:transparent}
+.btn:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--plum)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--plum)}
+.btn--mag{background:var(--mag);color:#fff}
+.btn--cream{background:var(--cream)}
+.btn--teal{background:var(--teal);color:#fff}
+.btn--ghost{background:transparent;color:inherit;border-color:currentColor;box-shadow:0 5px 0 currentColor}
+.btn--sm{min-height:44px;padding:0 18px;font-size:.9rem}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:700 .78rem/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font:700 .75rem/1.4 var(--body);letter-spacing:.04em;background:var(--cream);color:var(--plum);border:2px solid var(--plum)}
+.medal{display:grid;place-items:center;flex:none;width:var(--m,64px);height:var(--m,64px);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0,var(--cream) 55%,#ffe3a8 100%);border:3px solid var(--plum);box-shadow:3px 3px 0 var(--plum);color:var(--plum)}
+.medal--lg{--m:96px}
+.medal--sm{--m:48px}
+:is(html[data-level="0"],html:not([data-level])) .medal{background:none;box-shadow:none;border-width:2px}
+.band{position:relative;padding:clamp(60px,8vw,104px) 0;overflow:clip}
+.band--edge::before{content:"";position:absolute;left:0;right:0;top:0;height:22px;z-index:2;pointer-events:none;background:radial-gradient(circle at 22px 0,var(--prev) 0 21px,transparent 22px) 0 0/44px 22px repeat-x}
+:is(html[data-level="0"],html:not([data-level])) .band--edge::before{display:none}
+.band--cream{background:var(--cream)}
+.band--paper{background:var(--paper)}
+.band--night{background:var(--night);color:var(--cream)}
+.band--mag{background:linear-gradient(160deg,#b5115a 0,#e11d74 45%,#c2145f 100%);color:#fff}
+.band--teal{background:var(--teal);color:#fff}
+.band--gold{background:var(--gold);color:var(--plum)}
+.sec-head{display:grid;gap:12px;max-width:760px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-head h2{font:400 clamp(2.1rem,5.2vw,3.7rem)/1.02 var(--display)}
+.sec-head p{font-size:1.08rem;max-width:62ch}
+.head-row{display:grid;gap:20px;align-items:center}
+.cluster{display:none;gap:4px;align-items:center;justify-content:flex-end}
+@media(min-width:960px){.head-row{grid-template-columns:1fr auto;gap:40px}.cluster{display:flex}.cluster>span:nth-child(2){margin-top:34px}}
+.sec-head--c{margin-inline:auto;text-align:center;justify-items:center}
+.eyebrow--mag{color:var(--magd)}
+.band--night .eyebrow{color:var(--gold)}
+.band--mag .eyebrow,.band--teal .eyebrow{color:#fff}
+.band--gold .eyebrow{color:var(--plum)}
+.paisley{position:absolute;inset:0;pointer-events:none;opacity:.07;background:
+  radial-gradient(circle at 20px 20px,currentColor 0 3px,transparent 3.5px) 0 0/40px 40px,
+  radial-gradient(circle at 0 0,transparent 0 11px,currentColor 11.5px 13px,transparent 13.5px) 0 0/40px 40px}
+:is(html[data-level="0"],html:not([data-level])) .paisley,:is(html[data-level="0"],html:not([data-level])) .mandala{display:none}
+
+/* ───────── lights marquee + bulbs ───────── */
+.marquee{position:relative;background:var(--gold);color:var(--plum);overflow:hidden;font:700 .8rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase}
+.marquee__run{display:flex;width:max-content;align-items:center;animation:mq 52s linear infinite;padding:12px 0}
+.marquee:hover .marquee__run,.marquee.is-paused .marquee__run{animation-play-state:paused}
+.mq{display:inline-flex;align-items:center;gap:10px;padding-right:30px;white-space:nowrap}
+.mq::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--mag);margin-left:20px}
+.marquee__pause{position:absolute;right:0;top:0;bottom:0;display:flex;align-items:center;gap:8px;padding:0 14px 0 34px;border:0;background:linear-gradient(90deg,transparent,var(--gold) 38%);color:var(--plum);font:700 .72rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;min-width:44px}
+.bulbs{position:relative;height:16px;background:var(--plum)}
+.bulbs::before,.bulbs::after{content:"";position:absolute;inset:0;background-size:64px 16px;background-repeat:repeat-x}
+.bulbs::before{background-image:radial-gradient(circle at 8px 8px,var(--gold) 0 4px,transparent 5px),radial-gradient(circle at 40px 8px,var(--tealb) 0 4px,transparent 5px);animation:twinkle 1.4s steps(1) infinite}
+.bulbs::after{background-image:radial-gradient(circle at 24px 8px,var(--mag) 0 4px,transparent 5px),radial-gradient(circle at 56px 8px,var(--saf) 0 4px,transparent 5px);animation:twinkle 1.4s steps(1) .7s infinite}
+@keyframes twinkle{0%,100%{opacity:1}50%{opacity:.25}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(225,29,116,.55)}100%{box-shadow:0 0 0 16px rgba(225,29,116,0)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-8px) rotate(var(--r,0deg))}}
+
+/* ───────── header ───────── */
+.site-head{position:sticky;top:0;z-index:60;background:var(--night);color:var(--cream);border-bottom:3px solid var(--gold)}
+.site-head__in{display:flex;align-items:center;gap:14px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;font:400 1.3rem/1 var(--display);color:var(--gold);text-decoration:none;margin-right:auto}
+.brand small{display:block;font:600 .62rem/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--cream);margin-top:4px}
+.nav{position:absolute;left:0;right:0;top:100%;background:var(--night);border-bottom:3px solid var(--gold);padding:8px var(--pad) 20px;display:none}
+.nav.is-open{display:block}
+.nav a{display:flex;align-items:center;gap:12px;min-height:48px;padding:0 4px;color:var(--cream);text-decoration:none;font-weight:600;border-bottom:1px solid rgba(255,246,224,.14)}
+.nav a:hover{color:var(--gold)}
+.nav a[aria-current="true"]{color:var(--gold)}
+.menu-btn{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:14px;border:2px solid rgba(255,246,224,.4);background:transparent;color:var(--cream)}
+.head-cta{display:none}
+@media (min-width:1020px){
+  .nav{position:static;display:flex;gap:2px;padding:0;border:0;background:none}
+  .nav a{min-height:44px;padding:0 11px;border:0;border-radius:999px;font-size:.88rem}
+  .nav a:hover,.nav a[aria-current="true"]{background:rgba(255,194,26,.16)}
+  .nav a .nav-ico{display:none}
+  .menu-btn{display:none}
+  .head-cta{display:inline-flex}
+}
+
+/* ───────── hero ───────── */
+.hero{position:relative;color:var(--cream);padding:76px 0 64px;overflow:clip;background:
+  radial-gradient(120% 90% at 82% 28%,#51239f 0,transparent 58%),radial-gradient(90% 70% at 8% 100%,#7a0f55 0,transparent 55%),var(--night)}
+.bunting{position:absolute;left:0;right:0;top:0;height:46px;z-index:2;pointer-events:none;background:
+  conic-gradient(from -25deg at 24px 100%,var(--mag) 0 50deg,transparent 0) 0 0/288px 100% repeat-x,
+  conic-gradient(from -25deg at 72px 100%,var(--gold) 0 50deg,transparent 0) 0 0/288px 100% repeat-x,
+  conic-gradient(from -25deg at 120px 100%,var(--tealb) 0 50deg,transparent 0) 0 0/288px 100% repeat-x,
+  conic-gradient(from -25deg at 168px 100%,var(--saf) 0 50deg,transparent 0) 0 0/288px 100% repeat-x,
+  conic-gradient(from -25deg at 216px 100%,#8d5cff 0 50deg,transparent 0) 0 0/288px 100% repeat-x,
+  conic-gradient(from -25deg at 264px 100%,#ff6aa8 0 50deg,transparent 0) 0 0/288px 100% repeat-x,
+  linear-gradient(var(--gold),var(--gold)) 0 0/100% 3px no-repeat}
+.hero__grid{position:relative;z-index:1;display:grid;gap:44px;align-items:center}
+.hero__copy{position:relative;z-index:2;display:grid;gap:22px;justify-items:start}
+@media(max-width:899px){.mandala{opacity:.5}}
+.hero h1{font:400 clamp(2.9rem,7.4vw,5.5rem)/.9 var(--display);letter-spacing:-.01em;margin-top:6px}
+.hero h1 .l1{display:block;background:linear-gradient(180deg,#fff0a8 0,#ffc21a 50%,#ff8a1f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.06em;filter:drop-shadow(0 4px 0 #7a0f55)}
+.hero h1 .l2{display:block;font-size:.6em;letter-spacing:.07em;text-transform:uppercase;color:var(--cream);margin-top:.12em}
+.hero h1 .l2 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--tealb)}
+.hero__lead{font-size:clamp(1.05rem,2.2vw,1.28rem);max-width:46ch;color:#ffeccd}
+.hero__lead strong{color:var(--gold)}
+.hero__ticket{position:relative;z-index:1;margin-top:52px}
+.ticket{display:grid;background:var(--cream);color:var(--plum);border:3px solid var(--plum);border-radius:26px;box-shadow:8px 8px 0 var(--gold);overflow:hidden}
+.ticket__cell{display:flex;align-items:center;gap:16px;padding:16px 22px}
+.ticket__cell+.ticket__cell{border-top:3px dashed rgba(59,10,69,.28)}
+.ticket b{font:400 1.3rem/1.15 var(--display);display:block}
+.ticket small{display:block;font-size:.86rem;color:var(--muted);font-weight:500;line-height:1.4;margin-top:2px}
+@media(min-width:860px){.ticket{grid-template-columns:1fr 1fr 1.3fr}.ticket__cell+.ticket__cell{border-top:0;border-left:3px dashed rgba(59,10,69,.28)}}
+.live-box{display:inline-grid;place-items:center}
+:is(html[data-level="0"],html:not([data-level])) .live-box{min-width:64px;min-height:64px;padding:6px 10px;border:3px solid var(--plum);border-radius:14px;background:#fff;color:var(--plum);font:400 1.4rem/1 var(--display);text-align:center}
+.hero__cta{display:flex;flex-wrap:wrap;gap:14px 12px}
+.hero__cta .btn{padding:0 20px}
+.livechip{display:inline-flex;align-items:flex-start;gap:10px;padding:9px 18px;border-radius:22px;background:rgba(255,246,224,.1);border:2px solid rgba(255,246,224,.35);font-size:.9rem;font-weight:500}
+.livechip .dot{width:12px;height:12px;border-radius:50%;background:var(--mag);animation:pulse 1.6s infinite;flex:none;margin-top:.45em}
+.livechip.is-off .dot{background:#9d92bd;animation:none}
+.livechip b{color:var(--gold);font-weight:700}
+.hero__facts{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.92rem;color:#ffe3b5;font-weight:500}
+.hero__facts li{display:flex;align-items:center;gap:8px}
+.hero__art{position:relative;display:grid;place-items:center;padding:20px 18px 24px}
+.mandala{position:absolute;width:min(920px,170vw);aspect-ratio:1;border-radius:50%;pointer-events:none;background:
+  repeating-conic-gradient(from 0deg,rgba(255,194,26,.34) 0 2deg,transparent 2deg 6deg),
+  radial-gradient(circle,transparent 0 55%,rgba(225,29,116,.6) 55.4% 56.4%,transparent 56.8% 61%,rgba(255,194,26,.55) 61.4% 62.2%,transparent 62.6% 70%,rgba(23,184,180,.45) 70.4% 71%,transparent 71.4%);
+  -webkit-mask:radial-gradient(circle,#000 0 54%,rgba(0,0,0,.0) 74%);mask:radial-gradient(circle,#000 0 54%,rgba(0,0,0,.0) 74%);animation:spin 160s linear infinite}
+.arch{position:relative;width:min(100%,430px);aspect-ratio:4/5;border-radius:999px 999px 26px 26px;border:5px solid var(--gold);background:var(--night2);box-shadow:0 0 0 6px var(--mag),0 0 0 10px var(--night),0 0 0 13px var(--gold),0 30px 70px rgba(0,0,0,.55);overflow:hidden}
+.arch img{width:100%;height:100%;object-fit:cover;object-position:16% 50%}
+.arch::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(26,15,63,.72));pointer-events:none}
+.arch__cap{position:absolute;left:0;right:0;bottom:12px;z-index:2;text-align:center;font:600 .74rem/1.3 var(--body);letter-spacing:.06em;color:#ffeccd;padding:0 24px}
+.arch__cap a{color:var(--gold)}
+.stamp{position:absolute;right:-4px;top:2%;z-index:3;--r:10deg;transform:rotate(10deg);animation:bob 4.6s ease-in-out infinite}
+:is(html[data-level="0"],html:not([data-level])) .stamp{width:92px;height:92px;display:grid;place-items:center;border-radius:50%;background:var(--mag);color:#fff;font-weight:800;border:3px solid var(--plum);animation:none}
+.diya-hero{position:absolute;left:-6px;bottom:2%;z-index:3}
+.diya-hero .medal{--m:104px}
+:is(html[data-level="0"],html:not([data-level])) .diya-hero .medal{border:0;background:none}
+.hero__spark{position:absolute;z-index:3}
+@media (min-width:900px){
+  .hero{padding:96px 0 84px}
+  .hero__grid{grid-template-columns:1.1fr .9fr}
+  .stamp{right:-14px}
+  .diya-hero{left:-18px}
+}
+@media (max-width:520px){.hero__cta{display:grid;grid-template-columns:1fr}.hero__cta .btn{width:100%}.hero__art{padding-inline:6px}.diya-hero .medal{--m:84px}}
+
+/* ───────── countdown band ───────── */
+.cd{background:linear-gradient(100deg,#b5115a,#e11d74 55%,#f0457f);color:#fff;border-block:3px solid var(--plum);position:relative;overflow:clip}
+.cd__in{display:grid;gap:22px;padding:30px 0;align-items:center}
+.cd__time{display:flex;align-items:center;gap:clamp(12px,2.4vw,24px);flex-wrap:wrap}
+.cd__units{display:flex;gap:clamp(8px,1.6vw,16px)}
+.cd__unit{display:grid;justify-items:center;min-width:clamp(62px,12vw,92px);padding:10px 8px 8px;border-radius:18px;background:rgba(26,15,63,.34);border:2px solid rgba(255,246,224,.4)}
+.cd__unit b{font:400 clamp(2rem,5vw,3.2rem)/1 var(--display);font-variant-numeric:tabular-nums}
+.cd__unit span{font:700 .68rem/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ffd9e9}
+.cd__msg{font:400 clamp(1.4rem,3.4vw,2.1rem)/1.15 var(--display)}
+.cd__rsvp{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.cd__rsvp b{font:400 clamp(2.2rem,5vw,3.4rem)/1 var(--display);color:var(--gold);font-variant-numeric:tabular-nums}
+.cd__rsvp p{max-width:30ch;font-weight:600;line-height:1.3}
+@media (min-width:900px){.cd__in{grid-template-columns:1.25fr 1fr;justify-items:start}.cd__rsvp{justify-self:end}}
+
+/* ───────── timetable ───────── */
+.tt-controls{display:grid;gap:14px;margin-bottom:18px}
+.tt-controls p{font-size:.95rem;color:var(--muted);max-width:70ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:3px solid var(--plum);background:var(--paper);color:var(--plum);font:700 .9rem/1 var(--body);transition:background .15s,transform .12s}
+.chip:hover{transform:translateY(-2px)}
+.chip[aria-pressed="true"]{background:var(--mag);color:#fff;box-shadow:0 3px 0 var(--plum)}
+.chip small{font:700 .72rem/1.3 var(--body);background:var(--plum);color:var(--cream);border-radius:999px;padding:1px 8px}
+.chip[aria-pressed="true"] small{background:#fff;color:var(--magd)}
+.demo-bar{position:sticky;top:67px;z-index:30;display:flex;align-items:center;gap:14px;background:var(--plum);color:var(--cream);border:3px solid var(--plum);border-radius:20px;padding:8px 16px 8px 10px;box-shadow:0 8px 0 rgba(59,10,69,.16);margin-bottom:28px}
+.demo-bar .medal{--m:52px;background:var(--cream);border-color:var(--gold);box-shadow:none}
+.demo-bar__t{font:400 1.45rem/1 var(--display);min-width:5.4ch;color:var(--gold);font-variant-numeric:tabular-nums}
+.demo-bar__t small{display:block;font:700 .62rem/1.2 var(--body);letter-spacing:.14em;text-transform:uppercase;color:#ffe3b5;margin-top:4px}
+.demo-bar input[type=range]{flex:1;min-width:0;accent-color:var(--gold);height:44px}
+.demo-bar .btn{box-shadow:none;border-color:var(--gold);min-height:40px}
+.nowboard{display:grid;gap:18px;margin-bottom:38px}
+.nb{display:flex;gap:16px;align-items:center;padding:18px 20px;border:3px solid var(--plum);border-radius:24px;box-shadow:6px 6px 0 var(--plum)}
+.nb--now{background:linear-gradient(135deg,var(--mag),#ff5d6c);color:#fff}
+.nb--next{background:var(--gold);color:var(--plum)}
+.nb__k{font:800 .72rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.nb__k i{width:10px;height:10px;border-radius:50%;background:#fff;animation:pulse 1.6s infinite}
+.nb h3{font:400 clamp(1.4rem,3vw,1.9rem)/1.1 var(--display);margin:6px 0 4px}
+.nb p{font-size:.94rem;font-weight:500}
+@media(min-width:800px){.nowboard{grid-template-columns:1.2fr 1fr}}
+.timeline{display:grid;gap:20px}
+.slot{display:grid;grid-template-columns:20px 1fr;grid-template-areas:"rail time" "rail card";gap:8px 12px;align-items:start}
+.slot__time{grid-area:time;font:400 1.6rem/1 var(--display);color:var(--plum);padding-top:0;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:6px}
+.slot__time small{font:700 .7rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.slot__rail{grid-area:rail;position:relative;align-self:stretch;display:flex;justify-content:center}
+.slot__rail::before{content:"";position:absolute;top:0;bottom:-28px;width:0;border-left:4px dotted rgba(59,10,69,.4)}
+.slot:last-child .slot__rail::before{bottom:50%}
+.slot__rail i{position:relative;z-index:1;margin-top:3px;width:20px;height:20px;border-radius:50%;background:var(--cream);border:4px solid var(--plum);transition:background .3s}
+.slot__card{grid-area:card;display:grid;grid-template-columns:52px 1fr;gap:6px 14px;align-items:start;background:#fff;border:3px solid var(--plum);border-radius:22px;padding:16px 18px;box-shadow:6px 6px 0 var(--plum);position:relative;transition:transform .25s,box-shadow .25s,background .3s}
+.slot__card .medal{--m:52px;grid-column:1}
+.slot__card h3{grid-column:2;align-self:center}
+.slot__card>p,.slot__badge{grid-column:1/-1}
+.slot__card h3{font:400 1.25rem/1.15 var(--display)}
+.slot__card p{font-size:.94rem}
+.slot__meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.84rem;font-weight:600;color:var(--muted)}
+.slot__meta span{display:inline-flex;align-items:center;gap:6px}
+.slot__badge{order:-1;justify-self:start;margin-bottom:6px;display:none;padding:3px 12px;border-radius:999px;font:800 .66rem/1.4 var(--body);letter-spacing:.12em;text-transform:uppercase;border:2px solid var(--plum)}
+.slot.is-now .slot__card{background:linear-gradient(135deg,var(--mag),#ff5d6c);color:#fff;transform:translateX(4px) scale(1.01);box-shadow:8px 8px 0 var(--gold)}
+.slot.is-now .slot__card h3,.slot.is-now .slot__meta{color:#fff}
+.slot.is-now .slot__badge{display:block;background:#fff;color:var(--magd)}
+.slot.is-now .slot__rail i{background:var(--mag);animation:pulse 1.6s infinite}
+.slot.is-next .slot__card{background:#fff1bf;border-color:var(--plum)}
+.slot.is-next .slot__badge{display:block;background:var(--gold);color:var(--plum)}
+.slot.is-next .slot__rail i{background:var(--gold)}
+.slot.is-past .slot__card{opacity:.6;box-shadow:3px 3px 0 var(--plum)}
+.slot.is-past .slot__rail i{background:var(--tealb)}
+.slot.is-past .slot__badge{display:block;background:var(--cream);color:var(--muted);border-color:rgba(59,10,69,.3)}
+@media(min-width:760px){.slot{grid-template-columns:104px 24px 1fr;grid-template-areas:"time rail card";gap:0 18px}.slot__time{font-size:2.2rem;display:block;text-align:right;padding-top:20px}.slot__time small{display:block;margin-top:4px}.slot__rail i{margin-top:20px}.slot__rail::before{bottom:-20px}.slot__card{padding:20px 24px;grid-template-columns:auto 1fr;gap:4px 18px}.slot__card .medal{--m:72px;grid-row:1/span 4}.slot__card>*,.slot__card>p,.slot__badge{grid-column:2}.slot__card>.medal{grid-column:1}.slot__card h3{font-size:1.4rem}}
+.allday{margin-top:34px;padding:22px;border:3px dashed var(--plum);border-radius:24px;background:rgba(255,194,26,.2);display:grid;gap:14px}
+.allday h3{font:400 1.5rem/1.1 var(--display);display:flex;align-items:center;gap:10px}
+.allday ul{display:grid;gap:10px}
+.allday li{display:flex;gap:12px;align-items:center;font-size:.95rem}
+.allday li b{display:block}
+@media(min-width:760px){.allday ul{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1020px){.allday ul{grid-template-columns:repeat(4,1fr)}}
+
+/* ───────── wall of diyas ───────── */
+.lights-grid{position:relative;display:grid;gap:34px;align-items:center}
+@media(min-width:900px){.lights-grid{grid-template-columns:1fr 1.05fr;gap:56px}}
+.photo-frame{position:relative;border:4px solid var(--gold);border-radius:26px;overflow:hidden;box-shadow:8px 8px 0 var(--mag);aspect-ratio:4/3;background:var(--night2)}
+@media(min-width:900px){.photo-frame{aspect-ratio:auto;align-self:stretch;min-height:480px}}
+.photo-frame img{width:100%;height:100%;object-fit:cover}
+.photo-frame figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 10px;background:linear-gradient(transparent,rgba(26,15,63,.88));font-size:.78rem;font-weight:500;color:#ffeccd}
+.photo-frame figcaption a{color:var(--gold)}
+.wall{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:14px;border-radius:24px;background:linear-gradient(180deg,#2b1773,#190e3d);border:3px solid var(--gold);box-shadow:6px 6px 0 var(--mag);margin:22px 0 16px}
+.diya{aspect-ratio:1;display:grid;place-items:center;border-radius:16px;border:2px solid rgba(255,246,224,.2);background:rgba(255,246,224,.06);padding:0;min-width:44px;transition:background .4s,border-color .4s}
+.diya>span{filter:grayscale(1) brightness(.6);opacity:.75;transition:filter .5s,opacity .5s;pointer-events:none}
+.diya[aria-pressed="true"]{background:radial-gradient(circle,rgba(255,194,26,.4),rgba(255,138,31,.08) 72%);border-color:var(--gold)}
+.diya[aria-pressed="true"]>span{filter:drop-shadow(0 0 6px #ffc21a) drop-shadow(0 0 16px #ff8a1f);opacity:1}
+.wall-foot{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center}
+.wall-foot b{font:400 2rem/1 var(--display);color:var(--gold);font-variant-numeric:tabular-nums}
+@media(max-width:560px){.wall{grid-template-columns:repeat(4,1fr)}}
+
+/* ───────── stalls ───────── */
+.filters{display:grid;gap:12px;background:var(--teald);border:3px solid var(--plum);border-radius:22px;padding:14px;margin-bottom:26px;box-shadow:0 6px 0 rgba(0,0,0,.18)}
+.filters .chip{background:var(--cream)}
+.filters .chip[aria-pressed="true"]{background:var(--mag)}
+.filters__row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.search{position:relative;flex:1 1 240px;display:flex;align-items:center}
+.search .ico{position:absolute;left:14px;color:var(--plum);display:flex;pointer-events:none}
+.search .in{padding-left:46px}
+.sel{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.88rem;color:#d8fbf8}
+.sel .in{width:auto;min-height:48px;padding:6px 38px 6px 12px}
+.count{font-weight:600;color:#d8fbf8;font-size:.92rem}
+.stalls{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))}
+.stall{display:flex;flex-direction:column;background:var(--paper);color:var(--ink);border:3px solid var(--plum);border-radius:22px;overflow:hidden;box-shadow:6px 6px 0 var(--plum);animation:rise .35s both}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}}
+.stall__ph{aspect-ratio:3/2;overflow:hidden;border-bottom:3px solid var(--plum)}
+.stall__art{height:100%;display:grid;place-items:center;background:radial-gradient(circle at 50% 50%,transparent 0 33%,rgba(255,255,255,.35) 33.5% 35%,transparent 35.5% 44%,rgba(255,255,255,.3) 44.5% 46%,transparent 46.5%),repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,255,255,.22) 0 9deg,transparent 9deg 18deg),var(--c)}
+.medal--xl{--m:132px}
+.stall__ph img{width:100%;height:100%;object-fit:cover}
+.stall__bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 14px;background:var(--c,var(--gold));color:var(--plum);font:800 .7rem/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase;border-bottom:3px solid var(--plum)}
+.stall__body{padding:16px 18px 18px;display:grid;gap:10px;flex:1;align-content:start}
+.stall h3{font:400 1.28rem/1.1 var(--display)}
+.stall__zone{font-size:.8rem;font-weight:600;color:var(--muted)}
+.stall p{font-size:.92rem}
+.stall p b{color:var(--plum)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;font:700 .7rem/1.5 var(--body);border:2px solid var(--plum);background:#fff}
+.tag--v{background:#d9f7e4}.tag--j{background:#ffe9b0}.tag--n{background:#ffd9e8}
+@media(max-width:559px){
+  .stall{display:grid;grid-template-columns:120px 1fr}
+  .stall__ph{grid-row:1/span 2;aspect-ratio:auto;border-bottom:0;border-right:3px solid var(--plum)}
+  .stall__art .medal--xl{--m:100px}
+  .stall__bar{grid-column:2;grid-row:1;padding:8px 12px;font-size:.6rem}
+  .stall__body{grid-column:2;grid-row:2;padding:12px 14px 14px}
+  .stall h3{font-size:1.12rem}
+  .chip{padding:0 12px;font-size:.86rem}
+}
+.empty{grid-column:1/-1;display:grid;justify-items:center;gap:10px;text-align:center;padding:40px 16px;border:3px dashed var(--cream);border-radius:24px;color:var(--cream)}
+.empty h3{font:400 1.6rem/1.1 var(--display)}
+
+/* ───────── forms ───────── */
+.form{display:grid;gap:18px}
+.field{display:grid;gap:6px;border:0;padding:0;margin:0;min-width:0}
+.field>label,.field>legend{font-weight:700;font-size:.92rem;padding:0}
+.field .hint{font-size:.8rem;color:var(--muted);font-weight:500}
+.in{width:100%;min-height:50px;padding:10px 16px;border:3px solid var(--plum);border-radius:14px;background:#fff;color:var(--ink)}
+textarea.in{min-height:96px;resize:vertical}
+select.in{appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%233b0a45' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:38px}
+.in:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-color:var(--mag)}
+.err{display:none;align-items:center;gap:6px;color:var(--magd);font-weight:600;font-size:.86rem}
+.is-bad .in{border-color:var(--mag);background:#fff1f6}
+.is-bad .err{display:flex}
+.row2{display:grid;gap:16px}
+@media(min-width:620px){.row2{grid-template-columns:1fr 1fr}}
+.opts{display:grid;gap:10px}
+@media(min-width:520px){.opts--2{grid-template-columns:1fr 1fr}}
+.opt{position:relative;display:block}
+.opt input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+.opt__box{display:flex;gap:12px;align-items:center;padding:10px 14px;border:3px solid var(--plum);border-radius:16px;background:#fff;min-height:64px;transition:background .15s,box-shadow .15s}
+.opt__box b{display:block;font-size:.95rem;line-height:1.2}
+.opt__box small{display:block;font-size:.8rem;color:var(--muted);font-weight:500}
+.opt input:checked+.opt__box{background:#ffe27a;box-shadow:4px 4px 0 var(--plum)}
+.opt input:focus-visible+.opt__box{outline:3px solid var(--mag);outline-offset:3px}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;font-weight:500;cursor:pointer;min-height:44px}
+.chk input{width:24px;height:24px;margin:2px 0 0;accent-color:var(--mag);flex:none}
+.stepper{display:inline-flex;align-items:center;border:3px solid var(--plum);border-radius:999px;background:#fff;overflow:hidden;width:max-content}
+.stepper button{width:50px;height:46px;border:0;background:var(--gold);color:var(--plum);display:grid;place-items:center}
+.stepper button:hover{background:#ffd75e}
+.stepper output{min-width:48px;text-align:center;font:400 1.4rem/1 var(--display)}
+.card{background:var(--cream);color:var(--ink);border:3px solid var(--plum);border-radius:28px;padding:clamp(20px,3.4vw,34px);box-shadow:8px 8px 0 var(--plum)}
+.card h3{font:400 clamp(1.5rem,3vw,2rem)/1.1 var(--display);margin-bottom:6px}
+.success{display:grid;gap:14px;justify-items:start;animation:rise .4s both}
+.success[hidden],.form[hidden]{display:none}
+.success h3{font:400 clamp(1.7rem,3.6vw,2.4rem)/1.1 var(--display)}
+.success dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:.95rem}
+.success dt{font-weight:700;color:var(--muted)}
+.success .btns{display:flex;flex-wrap:wrap;gap:12px}
+.meter{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.meter b{font:400 2.4rem/1 var(--display);font-variant-numeric:tabular-nums}
+.meter p{font-weight:600;max-width:24ch;line-height:1.3}
+
+/* ───────── rangoli contest ───────── */
+.contest{display:grid;gap:40px;align-items:start}
+@media(min-width:960px){.contest{grid-template-columns:.95fr 1.05fr;gap:56px}}
+.contest__media{display:grid;gap:26px}
+.polaroid{position:relative;background:var(--cream);padding:12px 12px 14px;border:3px solid var(--plum);border-radius:20px;box-shadow:8px 8px 0 var(--gold);transform:rotate(-1.6deg);color:var(--plum);width:min(100%,460px);justify-self:center}
+.polaroid img{width:100%;height:auto;aspect-ratio:4/4.4;object-fit:cover;object-position:62% 45%;border-radius:10px;border:2px solid var(--plum)}
+.polaroid figcaption{font-size:.74rem;font-weight:500;margin-top:8px;padding:0 4px;color:var(--muted)}
+.polaroid figcaption a{color:var(--magd)}
+.polaroid .ribbon{position:absolute;right:-12px;top:-18px;z-index:2;--r:6deg;transform:rotate(6deg)}
+:is(html[data-level="0"],html:not([data-level])) .ribbon{background:var(--gold);padding:6px 14px;border:2px solid var(--plum);font-weight:800;color:var(--plum)}
+.prizes{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+.prize{display:grid;justify-items:center;gap:6px;text-align:center;padding:14px 10px;border:3px solid var(--plum);border-radius:20px;background:var(--cream);color:var(--plum);box-shadow:4px 4px 0 var(--plum)}
+.prize b{font:400 1.7rem/1 var(--display)}
+.prize>span:last-child{font-size:.8rem;font-weight:600}
+.prize--1{background:var(--gold)}
+@media(min-width:620px){.prizes{grid-template-columns:repeat(4,1fr)}}
+.crit{display:grid;gap:10px}
+.crit li{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:.9rem;font-weight:600}
+.crit li i{grid-column:1/-1;height:12px;border-radius:99px;background:rgba(255,246,224,.25);overflow:hidden;border:2px solid var(--cream)}
+.crit li i::after{content:"";display:block;height:100%;width:var(--w);background:var(--gold)}
+.facts{display:grid;gap:10px;margin:16px 0 22px;font-size:.92rem}
+.facts li{display:flex;gap:10px;align-items:flex-start}
+.facts li b{font-weight:700}
+.plot-ok{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:16px;border-radius:20px;background:#fff;border:3px solid var(--plum)}
+.plot-ok .live-box{flex:none}
+
+/* ───────── garba ───────── */
+.garba{display:grid;gap:44px;align-items:center}
+@media(min-width:900px){.garba{grid-template-columns:.9fr 1.1fr;gap:64px}}
+.disc{position:relative;width:min(calc(100% - 44px),430px);aspect-ratio:1;justify-self:center;margin:30px 22px}
+.disc::before{content:"";position:absolute;inset:-26px;border-radius:50%;border:5px dotted var(--plum);animation:spin 60s linear infinite}
+.disc__img{position:absolute;inset:0;border-radius:50%;overflow:hidden;border:6px solid var(--plum);box-shadow:0 0 0 10px var(--mag),0 0 0 14px var(--plum),10px 14px 0 14px rgba(59,10,69,.25)}
+.disc__img img{width:100%;height:100%;object-fit:cover}
+.disc .medal{position:absolute;right:-14px;bottom:2%;--m:92px;z-index:2}
+.disc__cap{position:absolute;left:50%;bottom:-48px;transform:translateX(-50%);width:max-content;max-width:100%;font-size:.74rem;font-weight:600;text-align:center}
+.steps{display:grid;gap:14px;margin:22px 0}
+.steps li{display:flex;gap:16px;align-items:center;padding:12px 16px 12px 12px;border:3px solid var(--plum);border-radius:20px;background:var(--cream);box-shadow:4px 4px 0 var(--plum)}
+.steps li b{display:block;font-size:1.02rem}
+.steps li span{font-size:.9rem}
+.steps .num{flex:none}
+:is(html[data-level="0"],html:not([data-level])) .steps .num{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--mag);color:#fff;font-weight:800}
+.garba__facts{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.garba__facts div{display:flex;gap:12px;align-items:flex-start;font-size:.92rem}
+.garba__facts b{display:block}
+
+/* ───────── fireworks and safety ───────── */
+.fw{position:relative;border:4px solid var(--gold);border-radius:30px;overflow:hidden;min-height:clamp(320px,52vw,520px);display:grid;align-items:end;box-shadow:8px 8px 0 var(--mag);background:#000}
+.fw>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.fw::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,6,28,.9) 0,rgba(10,6,28,.68) 42%,rgba(10,6,28,.12) 78%),linear-gradient(0deg,rgba(10,6,28,.7) 0,transparent 50%)}
+.fw__in{position:relative;z-index:2;display:grid;gap:14px;padding:clamp(20px,4vw,40px);align-items:end;max-width:680px}
+.fw__in h2{font:400 clamp(2.2rem,5.4vw,4rem)/1 var(--display);color:var(--gold);text-shadow:0 2px 14px rgba(10,6,28,.7)}
+.fw__in p{max-width:52ch;color:#ffeccd}
+.fw__time{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.fw__time b{font:400 clamp(1.8rem,4vw,2.6rem)/1 var(--display)}
+.fw__cr{font-size:.74rem;font-weight:500;color:#e6d9f5}
+.fw__cr a{color:var(--gold)}
+.safety{display:grid;gap:18px;margin-top:34px}
+@media(min-width:700px){.safety{grid-template-columns:repeat(2,1fr)}.sf--photo{grid-column:1/-1}}
+@media(min-width:1020px){.safety{grid-template-columns:1fr 1fr 1fr}.sf--photo{grid-column:1;grid-row:1/span 3}}
+.sf{display:flex;gap:16px;align-items:flex-start;padding:18px;border:3px solid var(--cream);border-radius:22px;background:rgba(255,246,224,.07)}
+.sf h3{font:700 1.05rem/1.25 var(--body);color:var(--gold);margin-bottom:4px}
+.sf p{font-size:.92rem;color:#fff1d6}
+.sf--alert{background:var(--mag);border-color:var(--gold)}
+.sf--alert h3{color:#fff}
+.sf--photo{padding:0;overflow:hidden;display:flex;flex-direction:column;gap:0}
+.sf--photo img{width:100%;flex:1 1 0;height:0;min-height:260px;object-fit:cover;object-position:50% 30%}
+.sf--photo div{padding:16px 18px 18px}
+.sf--photo small{display:block;margin-top:8px;font-size:.72rem;color:#d9ccf0}
+.sf--photo small a{color:var(--gold)}
+.sf .medal{--m:56px}
+
+/* ───────── join (volunteer + vendor) ───────── */
+.join-band{position:relative;border:3px solid var(--plum);border-radius:28px;overflow:hidden;min-height:260px;display:grid;align-items:end;box-shadow:8px 8px 0 var(--plum);margin-bottom:38px;background:#7a0f1f}
+.join-band>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}
+.join-band::after{content:"";position:absolute;inset:0;background:rgba(59,10,69,.82)}
+@media(min-width:760px){.join-band::after{background:linear-gradient(90deg,rgba(59,10,69,.94) 0,rgba(59,10,69,.62) 55%,rgba(59,10,69,.1))}}
+.join-band__in{position:relative;z-index:2;padding:clamp(22px,4vw,40px);color:var(--cream);display:grid;gap:12px;max-width:620px}
+.join-band h2{font:400 clamp(2rem,4.6vw,3.2rem)/1.02 var(--display);color:var(--gold)}
+.join-band__cr{font-size:.74rem;font-weight:500;color:#e6d9f5}
+.join-band__cr a{color:var(--gold)}
+.tabs{display:inline-flex;border:3px solid var(--plum);border-radius:999px;background:#fff;overflow:hidden;margin-bottom:24px;max-width:100%}
+.tabs button{display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 22px;border:0;background:none;font:700 .95rem/1 var(--body);color:var(--plum)}
+.tabs button[aria-selected="true"]{background:var(--plum);color:var(--gold)}
+.join-grid{display:grid;gap:30px;align-items:start}
+@media(min-width:960px){.join-grid{grid-template-columns:.85fr 1.15fr;gap:48px}}
+.tick li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:2px dotted rgba(59,10,69,.25);font-size:.95rem}
+.tick li:last-child{border:0}
+.tick b{font-weight:700}
+.shifts{display:grid;gap:8px}
+@media(min-width:520px){.shifts{grid-template-columns:1fr 1fr}}
+.shifts .opt__box{min-height:56px;padding:8px 12px;border-radius:14px}
+.shifts .opt__box small{font-size:.75rem}
+.rolebar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:14px 18px;border:3px solid var(--plum);border-radius:20px;background:#fff;margin-bottom:22px;box-shadow:4px 4px 0 var(--plum)}
+.rolebar b{font:400 1.6rem/1 var(--display);font-variant-numeric:tabular-nums}
+.rolebar p{font-weight:600;font-size:.92rem}
+.rolebar .bar{flex:1 1 140px;height:14px;border-radius:99px;border:2px solid var(--plum);background:#fff;overflow:hidden;min-width:100px}
+.rolebar .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--saf),var(--mag));width:var(--w,50%);transition:width .5s}
+
+/* ───────── visit: map + info ───────── */
+.visit{display:grid;gap:36px;align-items:start}
+@media(min-width:980px){.visit>div:first-child{position:sticky;top:92px}}
+@media(min-width:980px){.visit{grid-template-columns:1.1fr .9fr;gap:48px}}
+.map{position:relative;aspect-ratio:5/4;border:3px solid var(--plum);border-radius:26px;overflow:hidden;background:#ffe7b0;box-shadow:8px 8px 0 var(--plum);background-image:radial-gradient(circle at 1.5px 1.5px,rgba(59,10,69,.18) 1.5px,transparent 2px);background-size:18px 18px}
+.map i{position:absolute;display:block}
+.m-road{background:#fffdf6;border:2px solid var(--plum)}
+.m-h1{left:-3%;right:-3%;top:6%;height:9%}
+.m-h2{left:-3%;right:-3%;top:85%;height:8%}
+.m-v1{top:-3%;bottom:-3%;left:7%;width:7%}
+.m-canal{top:-3%;bottom:-3%;right:-2%;width:11%;background:repeating-linear-gradient(180deg,#5fd6d0 0 14px,#3fc1bb 14px 28px);border-left:3px solid var(--plum)}
+.m-plaza{left:18%;top:20%;width:66%;height:60%;border-radius:20px;border:3px solid var(--plum);background:radial-gradient(circle at 50% 50%,#ffd35c 0 20%,#ff8a1f 20.5% 21.5%,#ffcf4a 22% 30%,#e11d74 30.5% 31.5%,#ffb21f 32% 100%)}
+.m-zone{border:3px solid var(--plum);border-radius:12px;color:var(--plum);font:800 .6rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;display:grid;place-items:center;text-align:center;padding:2px}
+.m-stage{left:60%;top:24%;width:20%;height:18%;background:var(--mag);color:#fff}
+.m-food{left:21%;top:28%;width:10%;height:46%;background:var(--tealb);writing-mode:vertical-rl}
+.m-fw{left:58%;top:60%;width:23%;height:17%;background:#2d1a78;color:var(--gold)}
+.m-aid{left:34%;top:64%;width:10%;height:11%;background:#fff}
+.m-p{left:1.5%;top:44%;width:5%;aspect-ratio:1;background:#2d6ae0;color:#fff;border:2px solid var(--plum);border-radius:8px;font:800 .8rem/1 var(--body);display:grid;place-items:center}
+.m-lbl{font:700 .62rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--plum);background:#fffdf6;padding:3px 6px;border-radius:6px;border:2px solid var(--plum)}
+.pin{position:absolute;z-index:3;transform:translate(-50%,-92%);background:none;border:0;padding:0;display:grid;place-items:center;transition:transform .2s;min-width:44px;min-height:44px}
+.pin:hover,.pin.is-on{transform:translate(-50%,-100%) scale(1.15);z-index:5}
+.pin.is-on{filter:drop-shadow(0 0 8px var(--gold))}
+@media(max-width:560px){.pin .kit-live{transform:scale(.8);transform-origin:50% 100%}.m-zone{font-size:.5rem}.m-lbl{font-size:.52rem;padding:2px 4px}}
+:is(html[data-level="0"],html:not([data-level])) .pin .kit-fb{width:34px;height:34px;border-radius:50%;background:var(--mag);color:#fff;font-weight:800;display:grid;place-items:center;border:2px solid var(--plum)}
+.map__detail{margin-top:16px;background:var(--plum);color:var(--cream);border-radius:16px;padding:12px 16px;font-size:.9rem;line-height:1.4;display:flex;gap:12px;align-items:flex-start;border:3px solid var(--gold)}
+.map__detail .kit-ico{margin-top:2px}
+.legend{display:grid;gap:8px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.legend button{display:flex;gap:12px;align-items:center;text-align:left;width:100%;min-height:56px;padding:8px 12px;border:3px solid var(--plum);border-radius:16px;background:#fff;font-size:.88rem;line-height:1.25}
+.legend button b{display:block}
+.legend button[aria-pressed="true"]{background:#ffe27a;box-shadow:3px 3px 0 var(--plum)}
+.info{display:grid;gap:16px}
+.info__c{display:flex;gap:16px;align-items:flex-start;padding:18px;border:3px solid var(--plum);border-radius:22px;background:#fff;box-shadow:5px 5px 0 var(--plum)}
+.info__c h3{font:400 1.3rem/1.1 var(--display);margin-bottom:6px}
+.info__c p,.info__c li{font-size:.92rem}
+.info__c ul{display:grid;gap:4px;margin-top:6px}
+.info__c li{display:flex;gap:8px;align-items:flex-start}
+.wx{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:22px;background:linear-gradient(135deg,#2d1a78,#1a0f3f);color:var(--cream);border:3px solid var(--plum);box-shadow:5px 5px 0 var(--gold)}
+.wx p{font-size:.92rem}
+.wx b{display:block;font-size:1rem;color:var(--gold)}
+.wx .live-box{background:var(--cream);border-radius:20px;border:3px solid var(--gold)}
+
+/* ───────── faq ───────── */
+.faq{display:grid;gap:12px;max-width:860px;margin-inline:auto}
+.faq details{border:3px solid var(--plum);border-radius:20px;background:#fff;box-shadow:4px 4px 0 var(--plum);overflow:hidden}
+.faq summary{display:flex;align-items:center;gap:14px;min-height:60px;padding:10px 18px;font-weight:700;list-style:none;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .q{flex:1}
+.faq summary .chev{display:flex;transition:transform .25s}
+.faq details[open] summary{background:var(--gold)}
+.faq details[open] summary .chev{transform:rotate(180deg)}
+.faq .ans{padding:14px 18px 18px 18px;font-size:.96rem;border-top:3px solid var(--plum)}
+.faq .ans p+p{margin-top:8px}
+
+/* ───────── sign-off, credits, footer ───────── */
+.signoff{text-align:center;display:grid;gap:22px;justify-items:center}
+.signoff h2{font:400 clamp(2.4rem,7vw,5rem)/.98 var(--display);color:var(--gold)}
+.signoff p{max-width:58ch;font-size:1.08rem;color:#ffeccd}
+.hosts{display:flex;flex-wrap:wrap;gap:22px 34px;justify-content:center}
+.host{display:grid;justify-items:center;gap:4px;font-size:.88rem}
+.host b{font:400 1.2rem/1.1 var(--display);color:var(--cream)}
+.host span{color:#e9d8ff}
+#credits{padding:48px 0 30px;background:var(--paper);font-size:.84rem;color:var(--muted)}
+#credits h2{font:400 1.6rem/1.1 var(--display);color:var(--plum);margin-bottom:12px}
+#credits ul{display:grid;gap:6px 36px;margin:14px 0}
+@media(min-width:900px){#credits ul{grid-template-columns:1fr 1fr}}
+#credits a{color:var(--magd);font-weight:600}
+.site-foot{background:var(--plum);color:#f3e3f4;padding:46px 0 96px}
+.site-foot__g{display:grid;gap:30px}
+@media(min-width:800px){.site-foot__g{grid-template-columns:1.3fr 1fr 1fr}}
+.site-foot h2{font:400 1.2rem/1.1 var(--display);color:var(--gold);margin-bottom:10px}
+.site-foot li{display:flex;gap:10px;align-items:center;margin:6px 0;font-size:.92rem}
+.site-foot a{text-decoration:none;font-weight:500}
+.site-foot a:hover{color:var(--gold);text-decoration:underline}
+.site-foot small{display:block;margin-top:26px;padding-top:18px;border-top:1px solid rgba(243,227,244,.25);font-size:.8rem;color:#d4bcd6}
+.toast{position:fixed;left:14px;bottom:max(14px,env(safe-area-inset-bottom));z-index:90;background:var(--plum);color:var(--cream);border:3px solid var(--gold);padding:12px 18px;border-radius:16px;font-weight:600;font-size:.9rem;max-width:min(380px,calc(100vw - 28px));box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.toast[hidden]{display:none}
+.lv2-only{display:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .marquee__run{animation:none!important}
+}
+
+/* ───────── late additions ───────── */
+[hidden]{display:none!important}
+.cap{text-align:center;font-size:.76rem;font-weight:600;margin-top:12px;color:var(--plum)}
+.cap a{text-decoration:underline}
+.workshop{display:grid;background:var(--cream);color:var(--ink);border:3px solid var(--plum);border-radius:28px;overflow:hidden;box-shadow:8px 8px 0 var(--plum)}
+.workshop figure{position:relative;min-height:300px;margin:0}
+.workshop figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.workshop figcaption{position:absolute;left:0;right:0;bottom:0;padding:24px 14px 8px;background:linear-gradient(transparent,rgba(59,10,69,.85));font-size:.72rem;font-weight:500;color:#fff}
+.workshop figcaption a{color:var(--gold)}
+.workshop .eyebrow{color:var(--magd)!important}
+.workshop__body{padding:clamp(20px,3.4vw,38px);display:grid;gap:14px;align-content:center}
+@media(min-width:800px){.workshop{grid-template-columns:.8fr 1.2fr}}
+.rsvp{display:grid;gap:40px;align-items:center}
+@media(min-width:960px){.rsvp{grid-template-columns:1fr 1fr;gap:64px}}
+.banner{position:relative;margin:0 0 44px;border:3px solid var(--plum);border-radius:28px;overflow:hidden;height:clamp(230px,32vw,400px);box-shadow:8px 8px 0 var(--plum);background:#220f20}
+.banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,15,63,.9) 0,rgba(26,15,63,.35) 55%,transparent)}
+.banner figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:clamp(16px,3vw,32px);display:grid;gap:6px;color:#fff}
+.banner figcaption b{font:400 clamp(1.9rem,5vw,3.4rem)/1 var(--display);color:var(--gold)}
+.banner__cr{font-size:.7rem;font-weight:500;color:#e6d9f5}
+.banner__cr a{color:var(--gold)}
+.garland{display:flex;justify-content:space-between;align-items:center;gap:4px;padding:0 var(--pad);margin:-30px 0 34px;position:relative}
+.garland::before{content:"";position:absolute;left:0;right:0;top:50%;height:3px;background:var(--gold);opacity:.55}
+.garland>*{position:relative;z-index:1}
+@media(max-width:700px){.garland>*:nth-child(n+9){display:none}}
+.toast{bottom:84px}
+.hero__spark{pointer-events:none}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Rangoli Square Diwali Mela is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<a class="skip" href="#main">Skip to the festival</a>
+
+<div class="marquee" id="marquee" role="region" aria-label="Festival headlines">
+  <div class="marquee__run">
+    <div class="mq-group" style="display:flex">
+      <span class="mq"><span data-ico="diya" data-size="22">🪔</span> Free entry for everyone</span>
+      <span class="mq"><span data-ico="calendar" data-size="20">📅</span> Saturday 7 November 2026</span>
+      <span class="mq"><span data-ico="store" data-size="22">🎪</span> 24 food and craft stalls</span>
+      <span class="mq"><span data-ico="rangoli-pattern" data-size="22">🎨</span> Rangoli contest at 5 pm</span>
+      <span class="mq"><span data-ico="dholak" data-size="22">🥁</span> Garba and dandiya at 7 pm</span>
+      <span class="mq"><span data-ico="puja-thali" data-size="22">🙏</span> Evening aarti at 8 pm</span>
+      <span class="mq"><span data-ico="firecracker" data-size="22">🎆</span> Fireworks at 9:30 pm</span>
+      <span class="mq"><span data-ico="accessibility" data-size="20">♿</span> Step-free, with a quiet zone</span>
+    </div>
+    <div class="mq-group" style="display:flex" aria-hidden="true">
+      <span class="mq"><span data-ico="diya" data-size="22">🪔</span> Free entry for everyone</span>
+      <span class="mq"><span data-ico="calendar" data-size="20">📅</span> Saturday 7 November 2026</span>
+      <span class="mq"><span data-ico="store" data-size="22">🎪</span> 24 food and craft stalls</span>
+      <span class="mq"><span data-ico="rangoli-pattern" data-size="22">🎨</span> Rangoli contest at 5 pm</span>
+      <span class="mq"><span data-ico="dholak" data-size="22">🥁</span> Garba and dandiya at 7 pm</span>
+      <span class="mq"><span data-ico="puja-thali" data-size="22">🙏</span> Evening aarti at 8 pm</span>
+      <span class="mq"><span data-ico="firecracker" data-size="22">🎆</span> Fireworks at 9:30 pm</span>
+      <span class="mq"><span data-ico="accessibility" data-size="20">♿</span> Step-free, with a quiet zone</span>
+    </div>
+  </div>
+  <button class="marquee__pause" id="mq-pause" type="button" aria-pressed="false" aria-label="Pause the scrolling headlines"><span data-ico="pause" data-size="18">⏸</span> <span>Pause</span></button>
+</div>
+<div class="bulbs" aria-hidden="true"></div>
+
+<header class="site-head">
+  <div class="wrap site-head__in">
+    <a class="brand" href="#top" aria-label="Rangoli Square Diwali Mela, home">
+      <span data-ico="diya" data-size="36" data-fixed-style="utsav">🪔</span>
+      <span>Rangoli Square<small>Diwali Mela 2026</small></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#timetable"><span class="nav-ico" data-ico="clock" data-size="22">🕓</span>Timetable</a>
+      <a href="#stalls"><span class="nav-ico" data-ico="store" data-size="22">🎪</span>Stalls</a>
+      <a href="#rangoli"><span class="nav-ico" data-ico="rangoli-pattern" data-size="22">🎨</span>Rangoli</a>
+      <a href="#garba"><span class="nav-ico" data-ico="dholak" data-size="22">🥁</span>Garba</a>
+      <a href="#fireworks"><span class="nav-ico" data-ico="firecracker" data-size="22">🎆</span>Fireworks</a>
+      <a href="#join"><span class="nav-ico" data-ico="hand-heart" data-size="22">🤝</span>Join us</a>
+      <a href="#visit"><span class="nav-ico" data-ico="map-pin" data-size="22">📍</span>Visit</a>
+    </nav>
+    <a class="btn btn--mag btn--sm head-cta" href="#rsvp"><span data-ico="ticket" data-size="24">🎟️</span> RSVP free</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span data-ico="menu" data-size="26" data-fixed-style="line">☰</span></button>
+  </div>
+</header>
+
+<main id="main">
+<div id="top"></div>
+
+<!-- ═════ HERO ═════ -->
+<section class="hero" aria-labelledby="h1">
+  <div class="bunting" aria-hidden="true"></div>
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow" style="color:var(--gold)"><span data-ico="sparkles" data-size="20" data-min-level="1"></span> Eastgate Indian Cultural Association presents</p>
+      <h1 id="h1"><span class="l1">Rangoli Square</span><span class="l2">Diwali <em>Mela</em></span></h1>
+      <p class="hero__lead">A neighbourhood festival of lights: <strong>24 food and craft stalls</strong>, a plaza-wide rangoli contest, garba under the lanterns and fireworks to finish. Free for everyone, so bring your whole street.</p>
+
+      <div class="hero__cta">
+        <a class="btn btn--mag" href="#rsvp"><span data-ico="ticket" data-size="24">🎟️</span> RSVP, it's free</a>
+        <button class="btn btn--cream" id="ics-hero" type="button"><span data-ico="calendar-plus" data-size="24">📆</span> Add to calendar</button>
+        <a class="btn btn--ghost" href="#timetable">See the timetable</a>
+      </div>
+
+      <p class="livechip" id="hero-now" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="hero-now-t">Gates open Saturday 7 November at 4 pm</span></p>
+
+      <ul class="hero__facts" aria-label="At a glance">
+        <li><span data-ico="store" data-size="22">🎪</span> 24 stalls</li>
+        <li><span data-ico="trophy" data-size="22">🏆</span> 36 rangoli plots</li>
+        <li><span data-ico="diya" data-size="22">🪔</span> 600 diyas to light</li>
+        <li><span data-ico="accessibility" data-size="22">♿</span> Step-free site</li>
+      </ul>
+    </div>
+
+    <div class="hero__art">
+      <div class="mandala" aria-hidden="true"></div>
+      <figure class="arch">
+        <img src="_img/diwali-mela/31559552-1600.jpg" width="1200" height="878" fetchpriority="high" decoding="async" alt="Tall glowing paper lanterns in orange, yellow, green and pink line a night street under strings of festival bunting while people stroll toward the lit end of the road.">
+        <figcaption class="arch__cap">Photo by <a href="https://www.pexels.com/@ajay-kumar-602391836">Ajay Kumar</a> on <a href="https://www.pexels.com/photo/31559552/">Pexels</a></figcaption>
+      </figure>
+      <div class="stamp"><span data-live="sale-sticker" data-p-text="FREE" data-size="120" data-label="Free entry">FREE</span></div>
+      <div class="diya-hero"><span class="medal"><span data-ico="diya" data-size="64" data-motion="loop" data-label="A lit diya" data-sample>🪔</span></span></div>
+      <span class="hero__spark" style="left:0;top:4%" data-ico="sparkles" data-size="44" data-motion="loop" data-min-level="2"></span>
+      <span class="hero__spark" style="right:4%;bottom:6%" data-ico="sparkler" data-size="56" data-motion="hover" data-min-level="2"></span>
+    </div>
+  </div>
+  <div class="wrap hero__ticket">
+    <div class="ticket">
+      <div class="ticket__cell">
+        <span class="live-box"><span data-live="calendar-date" data-p-day="7" data-p-month="NOV" data-size="72" data-label="Saturday 7 November 2026">Sat 7 Nov</span></span>
+        <div><b>Saturday 7 November 2026</b><small>Diwali weekend, rain or shine</small></div>
+      </div>
+      <div class="ticket__cell">
+        <span class="live-box"><span data-live="clock-time" data-p-time="16:00" data-size="72" data-label="4 pm">4 pm</span></span>
+        <div><b>4 pm to 10 pm</b><small>Stalls open at 4, fireworks at 9:30</small></div>
+      </div>
+      <div class="ticket__cell">
+        <span class="medal" style="--m:72px"><span data-ico="map-pin" data-size="40">📍</span></span>
+        <div><b>Rangoli Square, Eastgate</b><small>Marigold Street entrance, 3 minutes from Eastgate station</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ COUNTDOWN + RSVP COUNT ═════ -->
+<section class="cd" aria-label="Countdown to the mela">
+  <div class="wrap cd__in">
+    <div class="cd__time">
+      <span class="live-box" data-min-level="1"><span data-live="timer-ring" data-p-left="27" data-p-total="60" data-size="104" id="cd-ring" data-label="27 days to go">27 days</span></span>
+      <div>
+        <p class="eyebrow" style="color:var(--gold)" id="cd-eyebrow">Gates open Saturday 7 November, 4 pm</p>
+        <div class="cd__units" id="cd-units" role="timer" aria-label="Time until the gates open">
+          <div class="cd__unit"><b id="cd-d">27</b><span>days</span></div>
+          <div class="cd__unit"><b id="cd-h">00</b><span>hours</span></div>
+          <div class="cd__unit"><b id="cd-m">00</b><span>mins</span></div>
+          <div class="cd__unit"><b id="cd-s">00</b><span>secs</span></div>
+        </div>
+        <p class="cd__msg" id="cd-msg" hidden></p>
+      </div>
+    </div>
+    <div class="cd__rsvp">
+      <span class="medal"><span data-ico="users" data-size="40">👥</span></span>
+      <b id="rsvp-count">1,284</b>
+      <p>neighbours have said they're coming. Free, no ticket needed.</p>
+      <a class="btn btn--sm" href="#rsvp">Count me in</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ TIMETABLE ═════ -->
+<section class="band band--cream" id="timetable" aria-labelledby="tt-h">
+  <div class="paisley" aria-hidden="true" style="color:var(--plum)"></div>
+  <div class="wrap" style="position:relative">
+    <div class="head-row"><div class="sec-head">
+      <p class="eyebrow eyebrow--mag"><span data-ico="clock" data-size="22">🕓</span> The day, hour by hour</p>
+      <h2 id="tt-h">Six hours of light, one Saturday</h2>
+      <p>Everything on the main lawn runs to this clock, and the stalls stay open all evening. The board follows your device's time; pick a demo time to see how the day looks at any hour.</p>
+    </div>
+    <div class="cluster" aria-hidden="true" data-min-level="2"><span data-ico="kalash" data-size="112" data-motion="hover"></span><span data-ico="diya" data-size="96" data-motion="hover"></span><span data-ico="lotus" data-size="112" data-motion="hover"></span></div></div>
+
+    <div class="tt-controls">
+      <div class="chips" role="group" aria-label="Preview a time of day">
+        <button class="chip" type="button" data-t="live" aria-pressed="true"><span data-ico="clock" data-size="22">🕓</span> Live clock</button>
+        <button class="chip" type="button" data-t="15:30" aria-pressed="false">3:30 pm</button>
+        <button class="chip" type="button" data-t="17:20" aria-pressed="false">5:20 pm</button>
+        <button class="chip" type="button" data-t="18:40" aria-pressed="false">6:40 pm</button>
+        <button class="chip" type="button" data-t="19:30" aria-pressed="false">7:30 pm</button>
+        <button class="chip" type="button" data-t="20:10" aria-pressed="false">8:10 pm</button>
+        <button class="chip" type="button" data-t="21:35" aria-pressed="false">9:35 pm</button>
+        <button class="chip" type="button" data-t="22:10" aria-pressed="false">10:10 pm</button>
+      </div>
+      <p id="tt-note">Showing your device's clock as if today were mela day (Saturday 7 November).</p>
+    </div>
+
+    <div class="demo-bar" role="group" aria-label="Demo time">
+      <span class="medal"><span data-live="clock-time" data-p-time="16:00" data-size="40" id="demo-clock" data-label="Demo clock">🕓</span></span>
+      <div class="demo-bar__t"><span id="demo-t">4:00 pm</span><small id="demo-mode">Live clock</small></div>
+      <input type="range" id="demo-range" min="900" max="1380" step="5" value="960" aria-label="Demo time of day, 3 pm to 11 pm">
+      <button class="btn btn--sm btn--cream" id="demo-live" type="button">Live</button>
+    </div>
+
+    <div class="nowboard" id="nowboard" aria-live="polite">
+      <div class="nb nb--now" id="nb-now"></div>
+      <div class="nb nb--next" id="nb-next"></div>
+    </div>
+
+    <ol class="timeline" id="timeline">
+      <li class="slot" data-start="16:00" data-end="17:00" data-icon="store" data-emoji="🎪" data-title="Gates and stalls open">
+        <div class="slot__time">4:00<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="store" data-size="40">🎪</span></span>
+          <h3>Gates and stalls open</h3>
+          <p>Come in through Gate A on Marigold Street. Councillor Meera Joshi lights the first diya at 4:15, Food Lane fires up and the info tent hands out free festival maps.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Gate A and Food Lane</span><span><span data-ico="ticket" data-size="20">🎟️</span> Free entry</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+      <li class="slot" data-start="17:00" data-end="18:30" data-icon="rangoli-pattern" data-emoji="🎨" data-title="Rangoli contest">
+        <div class="slot__time">5:00<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="rangoli-pattern" data-size="40">🎨</span></span>
+          <h3>Rangoli contest: the plaza becomes a canvas</h3>
+          <p>Thirty-six teams colour their plots with powder, petals and lamps while the judges stroll. Spectators are welcome to watch, ask questions and cheer. Sign-up is open until the plots run out.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Rangoli Ground</span><span><span data-ico="hourglass" data-size="20">⏳</span> 90 minutes</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+      <li class="slot" data-start="18:30" data-end="19:00" data-icon="trophy" data-emoji="🏆" data-title="Winners and garba warm-up">
+        <div class="slot__time">6:30<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="trophy" data-size="40">🏆</span></span>
+          <h3>Judging, winners and a garba warm-up</h3>
+          <p>Prizes are announced from the stage, then a 15-minute lesson teaches the three steps you need for the circle. Absolute beginners and two left feet are the whole point.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Main stage</span><span><span data-ico="users" data-size="20">👥</span> All ages</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+      <li class="slot" data-start="19:00" data-end="20:00" data-icon="dholak" data-emoji="🥁" data-title="Garba and dandiya">
+        <div class="slot__time">7:00<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="dholak" data-size="40">🥁</span></span>
+          <h3>Garba and dandiya</h3>
+          <p>DJ Kiran and the Eastgate Dhol Collective keep the circle turning for a full hour. Dandiya sticks are free to borrow at the stage; flat, soft-soled shoes are kindest to the plaza.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Stage lawn</span><span><span data-ico="music-note" data-size="20">🎵</span> Live dhol</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+      <li class="slot" data-start="20:00" data-end="20:30" data-icon="puja-thali" data-emoji="🙏" data-title="Lakshmi aarti">
+        <div class="slot__time">8:00<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="puja-thali" data-size="40">🙏</span></span>
+          <h3>Lakshmi aarti and the wall of diyas</h3>
+          <p>Pandit Ramesh Shastri leads the evening aarti with bells and a thali for everyone to pass. Afterwards, light a diya on the wall and make a wish for the year ahead.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Diya wall</span><span><span data-ico="accessibility" data-size="20">♿</span> Seating for elders</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+      <li class="slot" data-start="20:30" data-end="21:30" data-icon="sparkler" data-emoji="🎇" data-title="Mithai hour and sparkler corner">
+        <div class="slot__time">8:30<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="sparkler" data-size="40">🎇</span></span>
+          <h3>Mithai hour and the sparkler corner</h3>
+          <p>Last orders on hot jalebi, a lantern walk round the plaza and a supervised sparkler corner for families. Fire marshals are on hand and grown-ups hold the lighter.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Food Lane and Sparkler corner</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+      <li class="slot" data-start="21:30" data-end="21:50" data-icon="firecracker" data-emoji="🎆" data-title="Fireworks finale">
+        <div class="slot__time">9:30<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="firecracker" data-size="40">🎆</span></span>
+          <h3>Fireworks finale</h3>
+          <p>Twenty minutes of fireworks from the south lawn, fired by licensed pyrotechnicians. Everyone stays behind the barriers and faces the stage. Ear defenders are free at the info tent.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Fireworks lawn</span><span><span data-ico="shield-alert" data-size="20">🛡️</span> Safety zone</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+      <li class="slot" data-start="21:50" data-end="22:00" data-icon="hand-heart" data-emoji="🫶" data-title="Closing circle">
+        <div class="slot__time">9:50<small>pm</small></div>
+        <div class="slot__rail" aria-hidden="true"><i></i></div>
+        <article class="slot__card">
+          <span class="medal"><span data-ico="hand-heart" data-size="40">🫶</span></span>
+          <h3>Closing circle: Shubh Diwali</h3>
+          <p>A thank-you from the volunteers, a last round of applause for the stallholders, and the final diyas carried out to light the way home. Gates close at 10 pm.</p>
+          <p class="slot__meta"><span><span data-ico="map-pin" data-size="20">📍</span> Main stage</span></p>
+          <span class="slot__badge"></span>
+        </article>
+      </li>
+    </ol>
+
+    <div class="allday">
+      <h3><span data-ico="sparkles" data-size="32">✨</span> Running all evening</h3>
+      <ul>
+        <li><span class="medal medal--sm"><span data-ico="mehndi-hand" data-size="28">✋</span></span><div><b>Henna lane</b>4 to 9:15 pm. Cones from $5, full designs from $10.</div></li>
+        <li><span class="medal medal--sm"><span data-ico="paintbrush" data-size="28">🖌️</span></span><div><b>Diya painting</b>Craft tent, 4:30 to 7 pm. Free kits for all ages.</div></li>
+        <li><span class="medal medal--sm"><span data-ico="coffee" data-size="28">☕</span></span><div><b>Chai lane</b>Kulhad chai and filter kaapi until 9:45 pm.</div></li>
+        <li><span class="medal medal--sm"><span data-ico="smile" data-size="28">😊</span></span><div><b>Little ones' corner</b>Face paint and story tent, 4 to 8 pm.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ WALL OF DIYAS ═════ -->
+<section class="band band--night dark" id="lights" aria-labelledby="lights-h">
+  <div class="wrap lights-grid">
+    <figure class="photo-frame">
+      <img src="_img/diwali-mela/19338044-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" style="object-position:60% 40%" alt="Two children bend over a long row of small lit diyas set along a wall at night.">
+      <figcaption>Photo by <a href="https://www.pexels.com/@sk-siddique-ali-274855415">SK Siddique Ali</a> on <a href="https://www.pexels.com/photo/19338044/">Pexels</a></figcaption>
+    </figure>
+    <div>
+      <p class="eyebrow"><span data-ico="diya" data-size="22">🪔</span> After the aarti, 8:05 pm</p>
+      <h2 style="font:400 clamp(2.1rem,5.2vw,3.7rem)/1.02 var(--display);margin:10px 0 14px" id="lights-h">Light a diya on the wall</h2>
+      <p style="max-width:56ch;color:#ffeccd">Six hundred hand-painted clay diyas line the north wall of the plaza, filled by the volunteers and lit by you. Children light the first row, neighbours the rest. Try it here: tap a diya, or light the whole little wall at once.</p>
+      <div class="wall" id="wall" role="group" aria-label="A wall of 24 diyas"></div>
+      <div class="wall-foot">
+        <b id="wall-n" aria-live="polite">0</b><span>of 24 lit</span>
+        <button class="btn btn--sm" id="wall-all" type="button"><span data-ico="flame" data-size="22">🔥</span> Light them all</button>
+        <button class="btn btn--sm btn--ghost" id="wall-off" type="button">Blow them out</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ STALLS ═════ -->
+<section class="band band--teal band--edge dark" id="stalls" aria-labelledby="st-h" style="--prev:#1a0f3f">
+  <div class="paisley" aria-hidden="true" style="color:#fff"></div>
+  <div class="wrap" style="position:relative">
+    <div class="head-row"><div class="sec-head">
+      <p class="eyebrow"><span data-ico="store" data-size="22">🎪</span> Food Lane, Sweet Row and Craft Row</p>
+      <h2 id="st-h">Twenty-four stalls, one very hungry square</h2>
+      <p>Every stall is run by a local family, society or small business, and everything on Food Lane is vegetarian. Filter by what you're after, then ask for a stall card at Gate A to plan your route.</p>
+    </div>
+    <div class="cluster" aria-hidden="true" data-min-level="2"><span data-ico="jalebi" data-size="104" data-motion="hover"></span><span data-ico="mithai-box" data-size="112" data-motion="hover"></span><span data-ico="thandai" data-size="104" data-motion="hover"></span></div></div>
+
+    <div class="filters" role="search" aria-label="Stall directory filters">
+      <div class="chips" id="cat-chips" role="group" aria-label="Stall type">
+        <button class="chip" type="button" data-cat="all" aria-pressed="true"><span data-ico="utensils" data-size="24">🍽️</span> All <small data-n="all">24</small></button>
+        <button class="chip" type="button" data-cat="Chaat" aria-pressed="false"><span data-ico="cooking-pot" data-size="24">🍲</span> Chaat <small data-n="Chaat">6</small></button>
+        <button class="chip" type="button" data-cat="Sweets" aria-pressed="false"><span data-ico="jalebi" data-size="24">🍬</span> Sweets <small data-n="Sweets">5</small></button>
+        <button class="chip" type="button" data-cat="Chai" aria-pressed="false"><span data-ico="coffee" data-size="24">☕</span> Chai <small data-n="Chai">4</small></button>
+        <button class="chip" type="button" data-cat="Crafts" aria-pressed="false"><span data-ico="paintbrush" data-size="24">🖌️</span> Crafts <small data-n="Crafts">6</small></button>
+        <button class="chip" type="button" data-cat="Henna" aria-pressed="false"><span data-ico="mehndi-hand" data-size="24">✋</span> Henna <small data-n="Henna">3</small></button>
+      </div>
+      <div class="filters__row">
+        <div class="search">
+          <span class="ico" data-ico="search" data-size="22" data-fixed-style="line">🔍</span>
+          <input class="in" id="stall-q" type="search" placeholder="Search dishes or stalls" aria-label="Search stalls" autocomplete="off">
+        </div>
+        <button class="chip" type="button" data-diet="vegan" aria-pressed="false"><span data-ico="leaf" data-size="24">🌿</span> Vegan options</button>
+        <button class="chip" type="button" data-diet="jain" aria-pressed="false"><span data-ico="lotus" data-size="24">🪷</span> Jain-friendly</button>
+        <label class="sel">Sort <select class="in" id="stall-sort"><option value="no">Stall number</option><option value="az">Name, A to Z</option></select></label>
+      </div>
+      <p class="count" id="stall-count" aria-live="polite">Showing all 24 stalls</p>
+    </div>
+
+    <div class="stalls" id="stalls-grid"></div>
+    <div class="empty" id="stalls-empty" hidden>
+      <span data-ico="search" data-size="64" data-label="No results">🔍</span>
+      <h3>No stall matches that yet</h3>
+      <p>Try "chai" or "lantern", or clear the filters to see all twenty-four.</p>
+      <button class="btn btn--cream btn--sm" id="stall-reset" type="button">Clear filters</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ RANGOLI CONTEST ═════ -->
+<section class="band band--mag band--edge dark" id="rangoli" aria-labelledby="rg-h" style="--prev:#0c7c80">
+  <div class="paisley" aria-hidden="true" style="color:#fff"></div>
+  <div class="wrap contest" style="position:relative">
+    <div class="contest__media">
+      <figure class="polaroid">
+        <div class="ribbon"><span data-live="ribbon-label" data-p-text="1ST" data-size="92" data-label="First prize">1ST</span></div>
+        <img src="_img/diwali-mela/34400019-1000.jpg" width="1200" height="1600" loading="lazy" decoding="async" alt="Close view of a coloured-powder rangoli on the ground: a yellow medallion with a magenta flower and green leaves, ringed by white scrollwork and big green petals.">
+        <figcaption>Powder rangoli, the classic. Photo by <a href="https://www.pexels.com/@anshu">Anshu Kumar</a> on <a href="https://www.pexels.com/photo/34400019/">Pexels</a></figcaption>
+      </figure>
+      <div>
+        <h3 style="font:400 1.5rem/1.1 var(--display);color:#ffe9a0;margin-bottom:12px">Prizes, paid as Eastgate shop vouchers</h3>
+        <div class="prizes">
+          <div class="prize prize--1"><span data-ico="trophy" data-size="40">🏆</span><b>$300</b><span>First place</span></div>
+          <div class="prize"><span data-ico="award" data-size="40">🏅</span><b>$150</b><span>Second place</span></div>
+          <div class="prize"><span data-ico="star" data-size="40">⭐</span><b>$75</b><span>Third place</span></div>
+          <div class="prize"><span data-ico="heart" data-size="40">❤️</span><b>$100</b><span>People's pick</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font:400 1.5rem/1.1 var(--display);color:#ffe9a0;margin-bottom:12px">How the judges score</h3>
+        <ul class="crit">
+          <li><span>Creativity and idea</span><span>30%</span><i style="--w:30%"></i></li>
+          <li><span>Colour and craft</span><span>30%</span><i style="--w:30%"></i></li>
+          <li><span>Symmetry and detail</span><span>20%</span><i style="--w:20%"></i></li>
+          <li><span>Theme: "Lights of Home"</span><span>20%</span><i style="--w:20%"></i></li>
+        </ul>
+        <p style="font-size:.88rem;margin-top:10px;color:#fff">Judges: Kavita Deshmukh (folk-art teacher), Arjun Mehta (Eastgate Art College) and Rosa Delgado (mural artist).</p>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow"><span data-ico="rangoli-pattern" data-size="22">🎨</span> Contest, 5 pm to 6:30 pm</p>
+      <h2 style="font:400 clamp(2.1rem,5.2vw,3.7rem)/1.02 var(--display);margin:10px 0 14px" id="rg-h">Colour the square</h2>
+      <p style="max-width:58ch">Thirty-six plots, ninety minutes, one theme: <strong>Lights of Home</strong>. Enter solo or with a team of up to four, pick your style, and we'll hold a plot (and a colour kit, if you like) with your name on it.</p>
+      <ul class="facts">
+        <li><span data-ico="clock" data-size="24">🕓</span><span><b>Check in 4:30 to 4:55 pm</b> at the Rangoli desk on the Rangoli Ground.</span></li>
+        <li><span data-ico="ruler" data-size="24">📏</span><span><b>Plots are 4 by 4 ft</b> for solo and pairs, <b>6 by 6 ft</b> for teams of three or four.</span></li>
+        <li><span data-ico="flower" data-size="24">🌸</span><span><b>Powder, petals, rice flour, lentils and small diyas</b> are welcome. Chalk, glitter and paint are not: the plaza is washed down after.</span></li>
+        <li><span data-ico="accessibility" data-size="24">♿</span><span><b>Step-free plots</b> near Gate A, with table-top boards for artists who prefer not to kneel.</span></li>
+      </ul>
+
+      <div class="card" id="rg-card">
+        <div class="meter" style="margin-bottom:16px">
+          <span class="live-box"><span data-live="progress-ring" data-p-value="81" data-size="76" id="plots-ring" data-label="81 percent of plots taken">81%</span></span>
+          <b id="plots-left">7</b>
+          <p><span id="plots-text">plots left of 36. They go quickly in the week before.</span></p>
+        </div>
+        <form class="form" id="rg-form" action="#" novalidate>
+          <h3>Claim a plot</h3>
+          <div class="row2">
+            <div class="field" data-f="name"><label for="rg-name">Your name or team name</label><input class="in" id="rg-name" name="name" autocomplete="name" placeholder="Priya Nair, or Team Marigold" aria-describedby="rg-name-e"><span class="err" id="rg-name-e" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Please tell us who is entering.</span></div>
+            <div class="field" data-f="email"><label for="rg-email">Email</label><input class="in" id="rg-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" aria-describedby="rg-email-e"><span class="err" id="rg-email-e" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> That email doesn't look right, so we couldn't send your plot number.</span></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="rg-phone">Phone <span style="font-weight:500;color:var(--muted)">(optional, for day-of changes)</span></label><input class="in" id="rg-phone" name="phone" type="tel" autocomplete="tel" placeholder="555-0123"></div>
+            <div class="field"><label id="rg-team-l">Team size</label>
+              <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+                <div class="stepper" role="group" aria-labelledby="rg-team-l"><button type="button" id="team-minus" aria-label="One fewer"><span data-ico="minus" data-size="22" data-fixed-style="line">−</span></button><output id="team-n" aria-live="polite">1</output><button type="button" id="team-plus" aria-label="One more"><span data-ico="plus" data-size="22" data-fixed-style="line">+</span></button></div>
+                <span class="hint" id="plot-size">Plot size: 4 by 4 ft</span>
+              </div>
+            </div>
+          </div>
+          <fieldset class="field" data-f="style" style="min-width:0"><legend>Your style</legend>
+            <div class="opts opts--2" role="radiogroup" aria-describedby="rg-style-e">
+              <label class="opt"><input type="radio" name="style" value="Powder rangoli"><span class="opt__box"><span data-ico="rangoli-pattern" data-size="40">🎨</span><span><b>Powder rangoli</b><small>Classic coloured powder</small></span></span></label>
+              <label class="opt"><input type="radio" name="style" value="Flower rangoli"><span class="opt__box"><span data-ico="marigold" data-size="40">🌼</span><span><b>Flower rangoli</b><small>Petals and marigolds</small></span></span></label>
+              <label class="opt"><input type="radio" name="style" value="Diya and lamp art"><span class="opt__box"><span data-ico="diya" data-size="40">🪔</span><span><b>Diya and lamp art</b><small>A pattern drawn in lamps</small></span></span></label>
+              <label class="opt"><input type="radio" name="style" value="Little artists"><span class="opt__box"><span data-ico="baby" data-size="40">🧒</span><span><b>Little artists</b><small>Under 12, with a grown-up</small></span></span></label>
+            </div>
+            <span class="err" id="rg-style-e" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Pick a style so we can place you in the right row.</span>
+          </fieldset>
+          <div class="field"><label for="rg-idea">What will you make? <span style="font-weight:500;color:var(--muted)">(optional)</span></label><textarea class="in" id="rg-idea" name="idea" maxlength="200" placeholder="A lotus ringed with 108 tiny diyas, in magenta and gold"></textarea></div>
+          <label class="chk"><input type="checkbox" name="kit"> <span>Please set aside a free colour kit: eight powder colours and a stencil set, first come first served.</span></label>
+          <label class="chk"><input type="checkbox" name="stepfree"> <span>I need a step-free plot near Gate A.</span></label>
+          <div class="field" data-f="rules"><label class="chk"><input type="checkbox" name="rules" id="rg-rules" aria-describedby="rg-rules-e"> <span>I've read the contest rules and agree to wash down my plot at 6:50 pm.</span></label><span class="err" id="rg-rules-e" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Please tick the rules box to continue.</span></div>
+          <button class="btn btn--mag" type="submit" style="justify-self:start"><span data-ico="check" data-size="24" data-fixed-style="line">✔️</span> Claim my plot</button>
+        </form>
+        <div class="success" id="rg-ok" hidden role="status" tabindex="-1">
+          <span class="live-box"><span data-live="ticket-number" data-p-number="30" data-p-hash="true" data-size="104" id="plot-ticket" data-label="Your plot number">#30</span></span>
+          <h3 id="ok-h">You're in!</h3>
+          <dl id="ok-dl"></dl>
+          <p style="font-size:.92rem">A confirmation with your plot map is on its way. Bring a photo ID for your team lead at check-in. Plots not claimed by 4:55 pm go to the waiting list.</p>
+          <div class="btns">
+            <button class="btn btn--sm btn--teal" id="ics-rg" type="button"><span data-ico="calendar-plus" data-size="24">📆</span> Add contest to calendar</button>
+            <button class="btn btn--sm btn--cream" id="rg-again" type="button">Sign up a friend</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap" style="position:relative;margin-top:60px">
+    <div class="workshop">
+      <figure>
+        <img src="_img/diwali-mela/8887005-1000.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="A painted clay diya in pink, green and gold sits among marigold petals and pink flowers.">
+        <figcaption>Photo by <a href="https://www.pexels.com/@lara-jameson">Lara Jameson</a> on <a href="https://www.pexels.com/photo/8887005/">Pexels</a></figcaption>
+      </figure>
+      <div class="workshop__body">
+        <p class="eyebrow eyebrow--mag"><span data-ico="paintbrush" data-size="22">🖌️</span> Craft tent, 4:30 to 7 pm</p>
+        <h3 style="font:400 clamp(1.7rem,3.6vw,2.5rem)/1.05 var(--display)">Paint-a-diya workshop</h3>
+        <p>Pick a plain clay diya, a brush and a palette of pink, green and gold, and decorate your own. Takes 40 minutes, dries while you wander, and it's yours to carry to the wall of diyas at the aarti. Free, for all ages; under-8s paint with a grown-up.</p>
+        <div class="chips" id="ws-chips" role="group" aria-label="Choose a session">
+          <button class="chip" type="button" data-s="4:30 pm" aria-pressed="true">4:30 pm <small>5 left</small></button>
+          <button class="chip" type="button" data-s="5:15 pm" aria-pressed="false">5:15 pm <small>8 left</small></button>
+          <button class="chip" type="button" data-s="6:00 pm" aria-pressed="false">6:00 pm <small>11 left</small></button>
+          <button class="chip" type="button" data-s="6:45 pm" aria-pressed="false">6:45 pm <small>12 left</small></button>
+        </div>
+        <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn--mag btn--sm" id="ws-save" type="button"><span data-ico="bookmark-plus" data-size="24">🔖</span> Save me a seat</button>
+          <span id="ws-msg" style="font-weight:600;font-size:.92rem" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ GARBA ═════ -->
+<section class="band band--gold band--edge" id="garba" aria-labelledby="gb-h" style="--prev:#c9176a">
+  <div class="paisley" aria-hidden="true" style="color:var(--plum)"></div>
+  <div class="wrap garba" style="position:relative">
+    <div>
+      <div class="disc">
+        <div class="disc__img"><img src="_img/diwali-mela/17264037-1000.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Hands wearing bangles and colourful sleeves meet in a starburst of painted dandiya sticks during a Navratri dance."></div>
+        <span class="medal"><span data-ico="dholak" data-size="56" data-motion="hover" data-label="Dholak drum">🥁</span></span>
+      </div>
+      <p class="cap">Photo by <a href="https://www.pexels.com/@djvvadi">Teja J</a> on <a href="https://www.pexels.com/photo/17264037/">Pexels</a></p>
+    </div>
+    <div>
+      <p class="eyebrow eyebrow--mag" style="color:var(--plum)"><span data-ico="dholak" data-size="22">🥁</span> Stage lawn, 7 pm to 8 pm</p>
+      <h2 id="gb-h" style="font:400 clamp(2.1rem,5.2vw,3.7rem)/1.02 var(--display);margin:10px 0 14px">Garba, dandiya and one very big circle</h2>
+      <p style="max-width:56ch;font-size:1.05rem">The circle starts small and grows until it wraps the whole stage lawn. You don't need to know a single step: the 6:30 warm-up covers the basics, and the person next to you will happily fix your clap.</p>
+      <ol class="steps">
+        <li><span class="num"><span data-live="step-number" data-p-step="1" data-size="48" data-label="Step 1">1</span></span><div><b>Do taali: two claps, step in</b><span>Clap twice, step to the right, bring your feet together.</span></div></li>
+        <li><span class="num"><span data-live="step-number" data-p-step="2" data-size="48" data-label="Step 2">2</span></span><div><b>Teen taali: three claps, turn</b><span>Three claps and a half-turn with arms wide. Eyes on the person ahead.</span></div></li>
+        <li><span class="num"><span data-live="step-number" data-p-step="3" data-size="48" data-label="Step 3">3</span></span><div><b>Dandiya: sticks up, partner tap</b><span>Tap your partner's sticks at shoulder height, then swap sides on the beat.</span></div></li>
+      </ol>
+      <div class="garba__facts">
+        <div><span data-ico="gem" data-size="32">💎</span><span><b>Dress</b>Colour is the dress code: chaniya choli, kediyu, or your brightest jumper.</span></div>
+        <div><span data-ico="heart-pulse" data-size="32">💓</span><span><b>Footwear</b>Flat, soft-soled shoes. The plaza floor is smooth stone.</span></div>
+        <div><span data-ico="music-note" data-size="32">🎵</span><span><b>Sticks</b>Free dandiya sticks at the stage. Please return them to the basket.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ FIREWORKS + SAFETY ═════ -->
+<section class="band band--night band--edge dark" id="fireworks" aria-labelledby="fw-h" style="--prev:#ffc21a">
+  <div class="wrap">
+    <div class="fw">
+      <img src="_img/diwali-mela/photo-1760881973494-6df29de5e36f-1600.jpg" width="1200" height="801" loading="lazy" decoding="async" alt="Multicoloured fireworks burst across a black night sky above a silhouetted crowd watching.">
+      <div class="fw__in">
+        <p class="eyebrow" style="color:var(--gold)"><span data-ico="firecracker" data-size="24">🎆</span> The finale</p>
+        <h2 id="fw-h">Fireworks at <span style="white-space:nowrap">9:30 pm.</span> Sharp.</h2>
+        <p>Twenty minutes of fireworks from the south lawn, fired by licensed pyrotechnicians while the whole square watches from behind the barriers. Music from the stage, lights down, phones up.</p>
+        <div class="fw__time">
+          <span class="live-box"><span data-live="alarm-clock-time" data-p-time="21:30" data-size="80" data-label="9:30 pm">9:30 pm</span></span>
+          <div><b id="fw-count">Launch at 9:30 pm</b><span style="display:block;font-size:.9rem;color:#ffeccd">Lawn fenced from 9:00 pm. Take your spot by 9:15.</span></div>
+        </div>
+        <small class="fw__cr">Photo by <a href="https://unsplash.com/@lovelyscape?utm_source=withicons_demos&utm_medium=referral">Gabriel Mihalcea</a> on <a href="https://unsplash.com/photos/colorful-fireworks-explode-in-the-night-sky-above-silhouetted-crowd-lFMNlflDdow?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></small>
+      </div>
+    </div>
+
+    <div class="safety">
+      <article class="sf sf--photo">
+        <img src="_img/diwali-mela/19120891-800.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="A little girl in a floral dress holds two sparklers at night in a lane strung with fairy lights, with small diyas glowing at her feet.">
+        <div>
+          <h3>Sparkler corner, 8:30 pm</h3>
+          <p>Supervised by fire marshals: one bucket of sand and water per bay, one adult per child, gloves provided. Take your sparkler from the marshal, never from a pocket.</p>
+          <small>Photo by <a href="https://www.pexels.com/@rohit-photography-751545565">Rohit Photography</a> on <a href="https://www.pexels.com/photo/19120891/">Pexels</a></small>
+        </div>
+      </article>
+      <article class="sf sf--alert"><span class="medal"><span data-ico="shield-alert" data-size="32">🛡️</span></span><div><h3>A fenced 200-foot launch zone</h3><p>The south lawn is fenced from 9:00 pm. Marshals in orange vests close it, and nobody crosses until the all-clear. Never lift a barrier, even for a lost shoe.</p></div></article>
+      <article class="sf"><span class="medal"><span data-ico="eye" data-size="32">👁️</span></span><div><h3>Best views</h3><p>Stand on the stage lawn or the north steps and face south. The food lane and the wall of diyas sit outside the fallout area.</p></div></article>
+      <article class="sf"><span class="medal"><span data-ico="headphones" data-size="32">🎧</span></span><div><h3>Little ears, big bangs</h3><p>Free ear defenders for children and anyone sensitive to noise at the info tent. The quiet zone on the library steps has a clear view and a softer sound.</p></div></article>
+      <article class="sf"><span class="medal"><span data-ico="dog" data-size="32">🐕</span></span><div><h3>Pets</h3><p>Fireworks frighten animals, so please leave pets at home. If they must come, keep them leashed and use the quiet zone. Assistance dogs are always welcome.</p></div></article>
+      <article class="sf"><span class="medal"><span data-ico="briefcase-medical" data-size="32">🩹</span></span><div><h3>First aid, all evening</h3><p>Trained first-aiders and a medical tent beside the info tent, open from 3:30 pm until the last guest has left.</p></div></article>
+      <article class="sf"><span class="medal"><span data-ico="wind" data-size="32">💨</span></span><div><h3>Wind check at 9:00 pm</h3><p>If gusts top 20 mph the show slips to 9:45 pm. We'll announce it from the stage and the info tent, and on the info line, 555-0142.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ JOIN: VOLUNTEER + VENDOR ═════ -->
+<section class="band band--paper band--edge" id="join" aria-labelledby="jn-h" style="--prev:#1a0f3f">
+  <div class="wrap">
+    <div class="join-band">
+      <img src="_img/diwali-mela/photo-1760786933035-32da5ebb881c-1600.jpg" width="1200" height="825" loading="lazy" decoding="async" alt="Market shelves stacked with red and ivory bangles beside gold tassels and necklaces against a red wall.">
+      <div class="join-band__in">
+        <p class="eyebrow" style="color:var(--gold)"><span data-ico="hand-heart" data-size="24">🤝</span> The mela runs on neighbours</p>
+        <h2 id="jn-h">Run a stall or lend a hand</h2>
+        <p>Twelve stall pitches are still open and we need 22 more volunteers. Pick a side below: both take under two minutes.</p>
+        <small class="join-band__cr">Photo by <a href="https://unsplash.com/@zoshuacolah?utm_source=withicons_demos&utm_medium=referral">Zoshua Colah</a> on <a href="https://unsplash.com/photos/colorful-bangles-and-jewelry-displayed-at-a-market-stall-8YbJMuAk2BU?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></small>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="How would you like to join?">
+      <button type="button" role="tab" id="tab-vol" aria-selected="true" aria-controls="panel-vol"><span data-ico="hand-heart" data-size="24">🤝</span> Volunteer</button>
+      <button type="button" role="tab" id="tab-ven" aria-selected="false" aria-controls="panel-ven" tabindex="-1"><span data-ico="store" data-size="24">🎪</span> Run a stall</button>
+    </div>
+
+    <div class="join-grid" id="panel-vol" role="tabpanel" aria-labelledby="tab-vol">
+      <div>
+        <div class="rolebar"><span class="live-box"><span data-live="progress-ring" data-p-value="63" data-size="64" id="vol-ring" data-label="63 percent of volunteers signed up">63%</span></span><div><b id="vol-n">38</b> <span style="font-weight:600">of 60 volunteers</span><div class="bar" style="margin-top:6px"><i id="vol-bar" style="--w:63%"></i></div></div></div>
+        <h3 style="font:400 1.7rem/1.1 var(--display);margin-bottom:8px">What you get</h3>
+        <ul class="tick">
+          <li><span data-ico="utensils" data-size="28">🍽️</span><span><b>A Food Lane dinner token</b> for any stall, on us.</span></li>
+          <li><span data-ico="shirt" data-size="28">👕</span><span><b>A saffron mela T-shirt</b> to keep. Sizes XS to 3XL.</span></li>
+          <li><span data-ico="users-round" data-size="28">👥</span><span><b>A buddy and a briefing.</b> Every shift starts with ten minutes of hand-over and a cup of chai.</span></li>
+          <li><span data-ico="heart" data-size="28">❤️</span><span><b>Your name on the thank-you wall</b> at the closing circle, if you'd like it there.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <form class="form" id="vol-form" action="#" novalidate>
+          <h3>Pick your shifts</h3>
+          <div class="row2">
+            <div class="field" data-f="name"><label for="vol-name">Name</label><input class="in" id="vol-name" autocomplete="name" placeholder="Sam Okafor"><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> We need a name for the shift sheet.</span></div>
+            <div class="field" data-f="email"><label for="vol-email">Email</label><input class="in" id="vol-email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Please check the email address.</span></div>
+          </div>
+          <fieldset class="field" data-f="shifts" style="min-width:0"><legend>Shifts <span style="font-weight:500;color:var(--muted)">(pick one or more)</span></legend>
+            <div class="shifts">
+              <label class="opt"><input type="checkbox" name="shift" value="Setup, 1 to 4 pm"><span class="opt__box"><span data-ico="hammer" data-size="32">🔨</span><span><b>Setup</b><small>1 to 4 pm. Plots, lanterns, stalls</small></span></span></label>
+              <label class="opt"><input type="checkbox" name="shift" value="Welcome desk, 4 to 7 pm"><span class="opt__box"><span data-ico="smile" data-size="32">😊</span><span><b>Welcome desk</b><small>4 to 7 pm. Maps and smiles</small></span></span></label>
+              <label class="opt"><input type="checkbox" name="shift" value="Rangoli marshal, 4:30 to 7 pm"><span class="opt__box"><span data-ico="rangoli-pattern" data-size="32">🎨</span><span><b>Rangoli marshal</b><small>4:30 to 7 pm. Plots and kits</small></span></span></label>
+              <label class="opt"><input type="checkbox" name="shift" value="Garba steward, 6:30 to 8:30 pm"><span class="opt__box"><span data-ico="dholak" data-size="32">🥁</span><span><b>Garba steward</b><small>6:30 to 8:30 pm. Keep the circle safe</small></span></span></label>
+              <label class="opt"><input type="checkbox" name="shift" value="Fireworks marshal, 8:45 to 10 pm"><span class="opt__box"><span data-ico="shield-alert" data-size="32">🛡️</span><span><b>Fireworks marshal</b><small>8:45 to 10 pm. Training at 7:30</small></span></span></label>
+              <label class="opt"><input type="checkbox" name="shift" value="Clean-up, 10 to 11:30 pm"><span class="opt__box"><span data-ico="recycle" data-size="32">♻️</span><span><b>Clean-up</b><small>10 to 11:30 pm. Brooms and bins</small></span></span></label>
+            </div>
+            <span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Pick at least one shift, even a short one helps.</span>
+          </fieldset>
+          <div class="field"><label for="vol-size">T-shirt size</label><select class="in" id="vol-size"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option></select></div>
+          <button class="btn btn--teal" type="submit" style="justify-self:start"><span data-ico="hand-heart" data-size="24">🤝</span> Sign me up</button>
+        </form>
+        <div class="success" id="vol-ok" hidden role="status" tabindex="-1"><span class="medal medal--lg"><span data-ico="hand-heart" data-size="64">🤝</span></span><h3 id="vol-ok-h">Thank you!</h3><p id="vol-ok-p"></p><button class="btn btn--sm btn--cream" id="vol-again" type="button">Sign up someone else</button></div>
+      </div>
+    </div>
+
+    <div class="join-grid" id="panel-ven" role="tabpanel" aria-labelledby="tab-ven" hidden>
+      <div>
+        <div class="rolebar"><span class="live-box"><span data-live="progress-ring" data-p-value="50" data-size="64" id="ven-ring" data-label="50 percent of pitches taken">50%</span></span><div><b id="ven-n">12</b> <span style="font-weight:600">of 24 pitches still open. Applications close Saturday 24 October.</span></div></div>
+        <h3 style="font:400 1.7rem/1.1 var(--display);margin-bottom:8px">Pitches and rules</h3>
+        <ul class="tick">
+          <li><span data-ico="tag" data-size="28">🏷️</span><span><b>$45 craft and community pitch</b> (10 by 10 ft, table and a canopy).</span></li>
+          <li><span data-ico="cooking-pot" data-size="28">🍲</span><span><b>$90 food pitch.</b> Needs a food-hygiene certificate and public-liability cover. Everything sold on Food Lane is vegetarian.</span></li>
+          <li><span data-ico="zap" data-size="28">⚡</span><span><b>Power:</b> six pitches have sockets, first come first served.</span></li>
+          <li><span data-ico="flame" data-size="28">🔥</span><span><b>Gas and flame:</b> a gas-safety certificate, a fire blanket and an extinguisher are required.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <form class="form" id="ven-form" action="#" novalidate>
+          <h3>Apply for a pitch</h3>
+          <div class="row2">
+            <div class="field" data-f="biz"><label for="ven-biz">Stall or business name</label><input class="in" id="ven-biz" placeholder="Rani's Kitchen"><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> What should we call your stall on the map?</span></div>
+            <div class="field" data-f="cat"><label for="ven-cat">What kind of stall?</label><select class="in" id="ven-cat"><option value="">Choose one</option><option>Chaat</option><option>Sweets</option><option>Chai</option><option>Crafts</option><option>Henna</option><option>Something else</option></select><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Pick the closest type.</span></div>
+          </div>
+          <div class="row2">
+            <div class="field" data-f="email"><label for="ven-email">Email</label><input class="in" id="ven-email" type="email" autocomplete="email" placeholder="hello@example.com"><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Please check the email address.</span></div>
+            <div class="field"><label for="ven-phone">Phone <span style="font-weight:500;color:var(--muted)">(optional)</span></label><input class="in" id="ven-phone" type="tel" autocomplete="tel" placeholder="555-0166"></div>
+          </div>
+          <div class="field" data-f="sell"><label for="ven-sell">What will you sell?</label><textarea class="in" id="ven-sell" maxlength="240" placeholder="Hand-block printed cushion covers, $14 to $60, all made in Eastgate"></textarea><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> A line or two on what you'll sell helps us place you.</span></div>
+          <label class="chk"><input type="checkbox" id="ven-power"> <span>I need a power socket.</span></label>
+          <div class="field" data-f="hyg"><label class="chk"><input type="checkbox" id="ven-hyg"> <span>I hold a current food-hygiene certificate (food stalls only).</span></label><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Food stalls need a hygiene certificate. Tick the box if you hold one.</span></div>
+          <button class="btn btn--mag" type="submit" style="justify-self:start"><span data-ico="store" data-size="24">🎪</span> Apply for a pitch</button>
+        </form>
+        <div class="success" id="ven-ok" hidden role="status" tabindex="-1"><span class="medal medal--lg"><span data-ico="badge-check" data-size="64">✅</span></span><h3 id="ven-ok-h">Application received</h3><p id="ven-ok-p"></p><button class="btn btn--sm btn--cream" id="ven-again" type="button">Apply for another stall</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ VISIT: MAP + PRACTICAL ═════ -->
+<section class="band band--cream" id="visit" aria-labelledby="vs-h">
+  <div class="paisley" aria-hidden="true" style="color:var(--plum)"></div>
+  <div class="wrap" style="position:relative">
+    <figure class="banner">
+      <img src="_img/diwali-mela/photo-1508519829430-40f7d3d161b4-1600.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Strings of fairy lights stretch across a market lane at night with red paper lanterns hanging beneath them.">
+      <figcaption><span class="eyebrow" style="color:var(--gold)"><span data-ico="lightbulb" data-size="22">💡</span> Marigold Street</span><b>Follow the lights to Gate A</b><span class="banner__cr">Photo by <a href="https://unsplash.com/@pratham061?utm_source=withicons_demos&utm_medium=referral">Pratham Gupta</a> on <a href="https://unsplash.com/photos/tilt-shift-lens-photography-of-street-lights-DksFIwoPLAA?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></span></figcaption>
+    </figure>
+
+    <div class="sec-head">
+      <p class="eyebrow eyebrow--mag"><span data-ico="map-pin" data-size="22">📍</span> Plan your visit</p>
+      <h2 id="vs-h">Free to enter, easy to find</h2>
+      <p>The plaza sits between Station Road and the canal, a short walk from Eastgate station. Tap a pin to see what's where.</p>
+    </div>
+
+    <div class="visit">
+      <div>
+        <div class="map" id="map" role="group" aria-label="Map of Rangoli Square">
+          <i class="m-road m-h1"></i><i class="m-road m-h2"></i><i class="m-road m-v1"></i><i class="m-canal"></i>
+          <i class="m-plaza"></i>
+          <i class="m-zone m-stage">Stage</i><i class="m-zone m-food">Food Lane</i><i class="m-zone m-fw">Fireworks lawn</i><i class="m-zone m-aid">Info and aid</i>
+          <i class="m-p" title="Parking P1">P</i>
+          <i class="m-lbl" style="left:34%;top:7.5%">Marigold Street</i>
+          <i class="m-lbl" style="left:34%;top:86.5%">Lamp Lane</i>
+          <i class="m-lbl" style="left:80%;top:48%;writing-mode:vertical-rl;background:#5fd6d0">Eastgate canal</i>
+          <i class="m-lbl" style="left:1.5%;top:60%;writing-mode:vertical-rl">Station Road</i>
+          <button class="pin" data-pin="1" style="left:30%;top:17%" aria-label="Pin 1, Gate A"><span data-live="map-pin-number" data-p-param-label="1" data-size="44" data-label="Pin 1">1</span></button>
+          <button class="pin" data-pin="2" style="left:70%;top:34%" aria-label="Pin 2, Main stage"><span data-live="map-pin-number" data-p-param-label="2" data-size="44" data-label="Pin 2">2</span></button>
+          <button class="pin" data-pin="3" style="left:26%;top:50%" aria-label="Pin 3, Food Lane"><span data-live="map-pin-number" data-p-param-label="3" data-size="44" data-label="Pin 3">3</span></button>
+          <button class="pin" data-pin="4" style="left:48%;top:56%" aria-label="Pin 4, Rangoli Ground"><span data-live="map-pin-number" data-p-param-label="4" data-size="44" data-label="Pin 4">4</span></button>
+          <button class="pin" data-pin="5" style="left:39%;top:67%" aria-label="Pin 5, Info and first aid"><span data-live="map-pin-number" data-p-param-label="5" data-size="44" data-label="Pin 5">5</span></button>
+          <button class="pin" data-pin="6" style="left:70%;top:72%" aria-label="Pin 6, Fireworks lawn"><span data-live="map-pin-number" data-p-param-label="6" data-size="44" data-label="Pin 6">6</span></button>
+
+        </div>
+        <p class="map__detail" id="map-detail" aria-live="polite"><span data-ico="navigation" data-size="24">🧭</span><span id="map-detail-t">Tap a pin or a row below. The plaza is about 600 feet from Gate A to the fireworks lawn.</span></p>
+        <div class="legend" id="legend">
+          <button type="button" data-pin="1" aria-pressed="false"><span data-ico="map-pin" data-size="28">📍</span><span><b>1 Gate A, Marigold Street</b>Main entrance, bag check, free maps</span></button>
+          <button type="button" data-pin="2" aria-pressed="false"><span data-ico="music-note" data-size="28">🎵</span><span><b>2 Main stage</b>Garba, aarti, announcements</span></button>
+          <button type="button" data-pin="3" aria-pressed="false"><span data-ico="utensils" data-size="28">🍽️</span><span><b>3 Food Lane</b>Stalls 01 to 15, hand-washing at both ends</span></button>
+          <button type="button" data-pin="4" aria-pressed="false"><span data-ico="rangoli-pattern" data-size="28">🎨</span><span><b>4 Rangoli Ground</b>Contest plots, craft tent, check-in desk</span></button>
+          <button type="button" data-pin="5" aria-pressed="false"><span data-ico="briefcase-medical" data-size="28">🩹</span><span><b>5 Info and first aid</b>Ear defenders, lost and found, medical tent</span></button>
+          <button type="button" data-pin="6" aria-pressed="false"><span data-ico="firecracker" data-size="28">🎆</span><span><b>6 Fireworks lawn</b>Fenced from 9 pm, watch facing south</span></button>
+        </div>
+      </div>
+
+      <div class="info">
+        <div class="wx">
+          <span class="live-box"><span data-live="weather" data-p-condition="partly" data-p-temperature="55" data-p-unit="fahrenheit" data-size="88" data-label="A typical early-November evening: partly cloudy, 55 degrees Fahrenheit">55°F</span></span>
+          <p><b>A typical November evening</b>Dry and crisp. Bring a shawl or a jacket; heaters line Food Lane and the stage lawn.</p>
+        </div>
+        <article class="info__c"><span class="medal medal--sm"><span data-ico="ticket" data-size="28">🎟️</span></span><div><h3>Free entry, no ticket</h3><p>Walk in any time from 4 to 10 pm. RSVPing only helps us plan queues, toilets and bins. Re-entry is free the same day.</p></div></article>
+        <article class="info__c"><span class="medal medal--sm"><span data-ico="bus" data-size="28">🚌</span></span><div><h3>By bus, train or on foot</h3><ul>
+          <li><span data-ico="bus" data-size="20">🚌</span> Buses 14 and 22 stop on Station Road, two minutes away.</li>
+          <li><span data-ico="train" data-size="20">🚆</span> Eastgate station is an 8-minute lit, step-free walk.</li>
+          <li><span data-ico="route" data-size="20">🧭</span> Free shuttle from the station every 15 minutes, 3:30 to 10:30 pm.</li></ul></div></article>
+        <article class="info__c"><span class="medal medal--sm"><span data-ico="parking" data-size="28">🅿️</span></span><div><h3>Parking and bikes</h3><p>Eastgate Multi-storey (P1) is $6 flat after 3 pm, four minutes' walk. Fourteen accessible bays on Lamp Lane are held free. A staffed bike valet at Gate B is free too.</p></div></article>
+        <article class="info__c"><span class="medal medal--sm"><span data-ico="accessibility" data-size="28">♿</span></span><div><h3>Accessibility</h3><ul>
+          <li><span data-ico="check" data-size="20">✔️</span> Step-free route from Gate A to every stall and the stage.</li>
+          <li><span data-ico="check" data-size="20">✔️</span> Wheelchair platforms at the stage and the fireworks lawn.</li>
+          <li><span data-ico="check" data-size="20">✔️</span> Quiet zone on the library steps, ear defenders free.</li>
+          <li><span data-ico="check" data-size="20">✔️</span> Sign-language interpreter at the 6:30 stage welcome and the aarti.</li>
+          <li><span data-ico="check" data-size="20">✔️</span> Large-print timetables, accessible toilets, assistance dogs welcome.</li></ul></div></article>
+        <article class="info__c"><span class="medal medal--sm"><span data-ico="phone" data-size="28">📞</span></span><div><h3>Questions?</h3><p>Info line <a href="tel:5550142"><b>555-0142</b></a> (10 am to 6 pm before the day, 4 to 10 pm on it) or <a href="mailto:mela@eastgate-ica.example">mela@eastgate-ica.example</a>.</p></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ RSVP ═════ -->
+<section class="band band--night dark" id="rsvp" aria-labelledby="rv-h">
+  <div class="wrap rsvp">
+    <div>
+      <p class="eyebrow"><span data-ico="ticket" data-size="22">🎟️</span> Free, no ticket needed</p>
+      <h2 id="rv-h" style="font:400 clamp(2.1rem,5.2vw,3.7rem)/1.02 var(--display);margin:10px 0 14px">Tell us you're coming</h2>
+      <p style="max-width:50ch;color:#ffeccd">An RSVP is not a booking, just a headcount. It helps us order enough chai, open enough toilets and decide how many marshals stand at Gate A. It takes ten seconds.</p>
+      <div class="meter" style="margin-top:24px;color:var(--cream)">
+        <span class="live-box"><span data-live="progress-ring" data-p-value="51" data-size="96" id="rsvp-ring" data-label="51 percent of the 2,500 expected visitors have said they are coming">51%</span></span>
+        <b id="rsvp-big" style="color:var(--gold)">1,284</b>
+        <p>of the 2,500 neighbours we're planning for have RSVP'd.</p>
+      </div>
+    </div>
+    <div class="card">
+      <form class="form" id="rsvp-form" action="#" novalidate>
+        <h3>Count us in</h3>
+        <div class="row2">
+          <div class="field" data-f="name"><label for="rv-name">Your name</label><input class="in" id="rv-name" autocomplete="name" placeholder="Lena Fischer"><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> Please add your name.</span></div>
+          <div class="field" data-f="email"><label for="rv-email">Email</label><input class="in" id="rv-email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" role="alert"><span data-ico="alert-circle" data-size="20" data-fixed-style="line">⚠️</span> That email doesn't look right.</span></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label id="rv-n-l">How many of you?</label><div class="stepper" role="group" aria-labelledby="rv-n-l"><button type="button" id="rv-minus" aria-label="One fewer"><span data-ico="minus" data-size="22" data-fixed-style="line">−</span></button><output id="rv-n" aria-live="polite">2</output><button type="button" id="rv-plus" aria-label="One more"><span data-ico="plus" data-size="22" data-fixed-style="line">+</span></button></div><span class="hint">Up to 12 per RSVP.</span></div>
+          <div class="field"><label for="rv-how">How are you getting here?</label><select class="in" id="rv-how"><option>On foot</option><option>Bus or train</option><option>Car</option><option>Bike</option></select></div>
+        </div>
+        <label class="chk"><input type="checkbox" id="rv-access"> <span>Someone in our group needs step-free access or the quiet zone.</span></label>
+        <label class="chk"><input type="checkbox" id="rv-remind" checked> <span>Send one reminder on the morning of the mela.</span></label>
+        <button class="btn btn--mag" type="submit" style="justify-self:start"><span data-ico="ticket" data-size="24">🎟️</span> Count us in</button>
+      </form>
+      <div class="success" id="rsvp-ok" hidden role="status" tabindex="-1">
+        <span class="medal medal--lg"><span data-ico="party-popper" data-size="64" data-motion="once">🎉</span></span>
+        <h3 id="rsvp-ok-h">You're counted!</h3>
+        <p id="rsvp-ok-p"></p>
+        <div class="btns">
+          <button class="btn btn--sm btn--teal" id="ics-rsvp" type="button"><span data-ico="calendar-plus" data-size="24">📆</span> Add to calendar</button>
+          <button class="btn btn--sm btn--cream" id="copy-link" type="button"><span data-ico="share" data-size="24">🔗</span> Copy invite link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ FAQ ═════ -->
+<section class="band band--paper" id="faq" aria-labelledby="fq-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--c">
+      <p class="eyebrow eyebrow--mag"><span data-ico="help-circle" data-size="22">❓</span> Before you come</p>
+      <h2 id="fq-h">Good questions</h2>
+    </div>
+    <div class="faq" id="faq-list">
+      <details><summary><span data-ico="ticket" data-size="28">🎟️</span><span class="q">Is it really free?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>Yes. Entry, the rangoli contest, the diya-painting workshop and the shuttle from the station cost nothing. You only pay for food, drinks and whatever you buy from a stall.</p></div></details>
+      <details><summary><span data-ico="cooking-pot" data-size="28">🍲</span><span class="q">Is the food vegetarian? What about allergies?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>Everything on Food Lane is vegetarian, and many dishes are vegan or Jain-friendly: use the filters in the stall directory. Every stall posts an allergen card. Sweets often contain nuts, so please ask before you buy for someone with an allergy.</p></div></details>
+      <details><summary><span data-ico="umbrella" data-size="28">☂️</span><span class="q">What if it rains?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>The mela runs rain or shine. Food Lane and Craft Row sit under awnings, the stage has a roof, and ponchos are free at Gate A. If a thunderstorm warning is in force, the fireworks move to Sunday 8 November at 7 pm and we'll say so on the info line.</p></div></details>
+      <details><summary><span data-ico="sparkler" data-size="28">🎇</span><span class="q">Can I bring my own fireworks, sparklers or lanterns?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>Please don't. The only fireworks are the licensed show at 9:30 pm, and the only sparklers are in the supervised corner at 8:30 pm. Sky lanterns and open-flame lanterns are not allowed on the plaza.</p></div></details>
+      <details><summary><span data-ico="dog" data-size="28">🐕</span><span class="q">Can I bring my dog?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>Assistance dogs are always welcome. Pets are better at home on the night because of the fireworks; if yours must come, keep them leashed and use the quiet zone on the library steps.</p></div></details>
+      <details><summary><span data-ico="users" data-size="28">👥</span><span class="q">We're a group of twenty. Can we all come?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>Of course. Each RSVP takes up to 12 people, so send two for a bigger group. For temple, school or office outings of 30 or more, email the info line so we can mark a meeting spot at Gate A.</p></div></details>
+      <details><summary><span data-ico="bike" data-size="28">🚲</span><span class="q">Where do I leave my bike or pram?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>There's a free staffed bike valet at Gate B and a buggy park beside the info tent. Prams and wheelchairs can use every path on the plaza.</p></div></details>
+      <details><summary><span data-ico="handshake" data-size="28">🤝</span><span class="q">Can my business sponsor the mela?</span><span class="chev" data-ico="chevron-down" data-size="24" data-fixed-style="line">▾</span></summary><div class="ans"><p>Yes, and thank you. The Eastgate Indian Cultural Association is a volunteer-run non-profit. Local businesses can sponsor a rangoli plot, a lantern string or a slice of the fireworks fund. Write to mela@eastgate-ica.example.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ═════ SIGN-OFF ═════ -->
+<section class="band band--night dark" aria-labelledby="so-h">
+  <div class="garland" id="garland" aria-hidden="true" data-min-level="2"></div>
+  <div class="wrap signoff">
+    <span class="medal medal--lg"><span data-ico="diya" data-size="72" data-motion="loop" data-label="A lit diya">🪔</span></span>
+    <h2 id="so-h">See you in the square</h2>
+    <p>Diwali is the story of light finding its way home. For one evening, Rangoli Square is that home: a little louder, a lot brighter, and open to everyone who walks in. Bring someone who has never been.</p>
+    <div class="hosts">
+      <div class="host"><span data-ico="avatar-older-woman" data-size="72" data-label="Kamala Iyer">👵</span><b>Kamala Iyer</b><span>Chair, Eastgate ICA</span></div>
+      <div class="host"><span data-ico="avatar-man-beard" data-size="72" data-label="Dev Malhotra">🧔</span><b>Dev Malhotra</b><span>Mela director</span></div>
+      <div class="host"><span data-ico="avatar-woman-braids" data-size="72" data-label="Aisha Rahman">👩</span><b>Aisha Rahman</b><span>Volunteer lead</span></div>
+    </div>
+    <a class="btn" href="#rsvp"><span data-ico="ticket" data-size="24">🎟️</span> RSVP, it's free</a>
+  </div>
+</section>
+</main>
+
+<!-- ═════ CREDITS + FOOTER ═════ -->
+<section id="credits" aria-labelledby="cr-h">
+  <div class="wrap">
+    <h2 id="cr-h">Photo credits</h2>
+    <ul>
+      <li>Hero, lantern street: Photo by <a href="https://www.pexels.com/@ajay-kumar-602391836">Ajay Kumar</a> on <a href="https://www.pexels.com/photo/31559552/">Pexels</a></li>
+      <li>Wall of diyas, children lighting diyas: Photo by <a href="https://www.pexels.com/@sk-siddique-ali-274855415">SK Siddique Ali</a> on <a href="https://www.pexels.com/photo/19338044/">Pexels</a></li>
+      <li>Chaat stall: Photo by <a href="https://www.pexels.com/@diana-teronpi-2153298285">Diana Teronpi</a> on <a href="https://www.pexels.com/photo/39025942/">Pexels</a></li>
+      <li>Mithai box: Photo by <a href="https://www.pexels.com/@towfiqu-barbhuiya-3440682">Towfiqu barbhuiya</a> on <a href="https://www.pexels.com/photo/11484120/">Pexels</a></li>
+      <li>Diyas and terracotta: Photo by <a href="https://www.pexels.com/@abin-daniel-k-2152430448">Abin Daniel K</a> on <a href="https://www.pexels.com/photo/32194484/">Pexels</a></li>
+      <li>Powder rangoli: Photo by <a href="https://www.pexels.com/@anshu">Anshu Kumar</a> on <a href="https://www.pexels.com/photo/34400019/">Pexels</a></li>
+      <li>Painted diya: Photo by <a href="https://www.pexels.com/@lara-jameson">Lara Jameson</a> on <a href="https://www.pexels.com/photo/8887005/">Pexels</a></li>
+      <li>Dandiya sticks: Photo by <a href="https://www.pexels.com/@djvvadi">Teja J</a> on <a href="https://www.pexels.com/photo/17264037/">Pexels</a></li>
+      <li>Fireworks: Photo by <a href="https://unsplash.com/@lovelyscape?utm_source=withicons_demos&utm_medium=referral">Gabriel Mihalcea</a> on <a href="https://unsplash.com/photos/colorful-fireworks-explode-in-the-night-sky-above-silhouetted-crowd-lFMNlflDdow?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Sparklers: Photo by <a href="https://www.pexels.com/@rohit-photography-751545565">Rohit Photography</a> on <a href="https://www.pexels.com/photo/19120891/">Pexels</a></li>
+      <li>Bangles market stall: Photo by <a href="https://unsplash.com/@zoshuacolah?utm_source=withicons_demos&utm_medium=referral">Zoshua Colah</a> on <a href="https://unsplash.com/photos/colorful-bangles-and-jewelry-displayed-at-a-market-stall-8YbJMuAk2BU?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+      <li>Market lane lights: Photo by <a href="https://unsplash.com/@pratham061?utm_source=withicons_demos&utm_medium=referral">Pratham Gupta</a> on <a href="https://unsplash.com/photos/tilt-shift-lens-photography-of-street-lights-DksFIwoPLAA?utm_source=withicons_demos&utm_medium=referral">Unsplash</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT. Demo page made with with icons. Names, places and products are fictional.</p>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="site-foot__g">
+      <div>
+        <h2>Rangoli Square Diwali Mela</h2>
+        <p style="max-width:40ch;font-size:.92rem">A free neighbourhood festival of lights, hosted by the Eastgate Indian Cultural Association. Saturday 7 November 2026, 4 to 10 pm.</p>
+        <ul style="margin-top:14px">
+          <li><span data-ico="map-pin" data-size="24">📍</span> Rangoli Square, 18 Marigold Street, Eastgate</li>
+          <li><span data-ico="phone" data-size="24">📞</span> <a href="tel:5550142">555-0142</a></li>
+          <li><span data-ico="mail" data-size="24">✉️</span> <a href="mailto:mela@eastgate-ica.example">mela@eastgate-ica.example</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>The day</h2>
+        <ul>
+          <li><a href="#timetable">Timetable</a></li>
+          <li><a href="#stalls">Stall directory</a></li>
+          <li><a href="#rangoli">Rangoli contest</a></li>
+          <li><a href="#garba">Garba and dandiya</a></li>
+          <li><a href="#fireworks">Fireworks and safety</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get involved</h2>
+        <ul>
+          <li><a href="#rsvp">RSVP, it's free</a></li>
+          <li><a href="#join">Volunteer</a></li>
+          <li><a href="#join">Run a stall</a></li>
+          <li><a href="#visit">Getting here</a></li>
+          <li><a href="#faq">Questions</a></li>
+        </ul>
+      </div>
+    </div>
+    <small>Demo page made with with icons. Names, places and products are fictional. &copy; 2026 Eastgate Indian Cultural Association (fictional). Icons: <a href="https://withicons.com" style="text-decoration:underline">with icons</a>.</small>
+  </div>
+</footer>
+<div class="toast" id="toast" hidden role="status"></div>
+<script src="_kit/demo-kit.js" data-style="utsav" data-recommend="utsav,rangoli,brutal,sticker,bento,engrave,duo,retro" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict'
+  var $ = function (s, r) { return (r || document).querySelector(s) }
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)) }
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c] }) }
+  var pad = function (n) { return String(n).padStart(2, '0') }
+  var fmtN = function (n) { return Number(n).toLocaleString('en-US') }
+  var refresh = function (n) { if (window.WithKit && WithKit.refresh) WithKit.refresh(n || document) }
+  var ico = function (name, emoji, size, extra) { return "<span data-ico='" + name + "' data-size='" + size + "'" + (extra || '') + '>' + emoji + '</span>' }
+
+  /* toast */
+  var toastT = 0
+  function toast(msg) {
+    var t = $('#toast'); t.textContent = msg; t.hidden = false
+    clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true }, 3200)
+  }
+
+  /* update a live icon (works before and after the kit has upgraded the slot) */
+  function live(el, p, fb) {
+    if (!el) return
+    if (window.WithKit && el._kit) WithKit.setLive(el, p)
+    else Object.keys(p).forEach(function (k) { el.dataset['p' + k.replace(/(^|-)(\w)/g, function (_, __, c) { return c.toUpperCase() })] = p[k] })
+    if (fb != null) { var f = el.querySelector('.kit-fb'); if (f) f.textContent = fb; else if (!el._kit) el.textContent = fb }
+  }
+
+  /* ───────── event facts ───────── */
+  var START = new Date(2026, 10, 7, 16, 0, 0), END = new Date(2026, 10, 7, 22, 0, 0)
+  var toMin = function (t) { var a = t.split(':'); return +a[0] * 60 + +a[1] }
+  var f12 = function (m) { m = Math.round(m); var h = Math.floor(m / 60) % 24, mm = m % 60, ap = h >= 12 ? 'pm' : 'am'; h = h % 12 || 12; return h + ':' + pad(mm) + ' ' + ap }
+  var dur = function (m) { m = Math.max(0, Math.round(m)); if (m < 1) return 'under a minute'; var h = Math.floor(m / 60), r = m % 60; return h ? h + ' h' + (r ? ' ' + r + ' min' : '') : r + ' min' }
+
+  /* ───────── nav, marquee ───────── */
+  var mb = $('#menu-btn'), nav = $('#nav')
+  mb.addEventListener('click', function () { var o = nav.classList.toggle('is-open'); mb.setAttribute('aria-expanded', o) })
+  nav.addEventListener('click', function (e) { if (e.target.closest('a')) { nav.classList.remove('is-open'); mb.setAttribute('aria-expanded', 'false') } })
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('is-open')) { nav.classList.remove('is-open'); mb.setAttribute('aria-expanded', 'false'); mb.focus() } })
+
+  var mqb = $('#mq-pause'), mq = $('#marquee')
+  mqb.addEventListener('click', function () {
+    var p = mq.classList.toggle('is-paused')
+    mqb.setAttribute('aria-pressed', p); mqb.setAttribute('aria-label', p ? 'Play the scrolling headlines' : 'Pause the scrolling headlines')
+    mqb.innerHTML = (p ? ico('play', '▶', 18) : ico('pause', '⏸', 18)) + ' <span>' + (p ? 'Play' : 'Pause') + '</span>'
+    refresh(mqb)
+  })
+
+  if ('IntersectionObserver' in window) {
+    var links = {}; $$('.nav a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a })
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting && links[e.target.id]) { Object.keys(links).forEach(function (k) { links[k].removeAttribute('aria-current') }); links[e.target.id].setAttribute('aria-current', 'true') } })
+    }, { rootMargin: '-35% 0px -55% 0px' })
+    Object.keys(links).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s) })
+  }
+
+  /* ───────── add to calendar (.ics) ───────── */
+  var ICS = {
+    mela: { uid: 'mela-2026', title: 'Rangoli Square Diwali Mela', start: '20261107T160000', end: '20261107T220000',
+      desc: 'Free neighbourhood Diwali festival. Stalls open 4 pm, rangoli contest 5 pm, garba 7 pm, aarti 8 pm, fireworks 9:30 pm. Info line 555-0142.', loc: 'Rangoli Square, 18 Marigold Street, Eastgate' },
+    rangoli: { uid: 'rangoli-2026', title: 'Rangoli contest, Diwali Mela', start: '20261107T163000', end: '20261107T183000',
+      desc: 'Check in 4:30 to 4:55 pm at the Rangoli desk. Contest 5 to 6:30 pm, winners at 6:40 pm. Theme: Lights of Home.', loc: 'Rangoli Ground, Rangoli Square, Eastgate' }
+  }
+  function fold(l) { var o = []; while (l.length > 73) { o.push(l.slice(0, 73)); l = ' ' + l.slice(73) } o.push(l); return o.join('\r\n') }
+  function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n') }
+  function downloadIcs(key) {
+    var ev = ICS[key], n = new Date()
+    var stamp = n.getUTCFullYear() + pad(n.getUTCMonth() + 1) + pad(n.getUTCDate()) + 'T' + pad(n.getUTCHours()) + pad(n.getUTCMinutes()) + pad(n.getUTCSeconds()) + 'Z'
+    var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//with icons demos//Rangoli Square Diwali Mela//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+      'UID:' + ev.uid + '@diwali-mela.demo.example', 'DTSTAMP:' + stamp, 'DTSTART:' + ev.start, 'DTEND:' + ev.end, 'SUMMARY:' + icsEsc(ev.title), 'DESCRIPTION:' + icsEsc(ev.desc), 'LOCATION:' + icsEsc(ev.loc),
+      'BEGIN:VALARM', 'TRIGGER:-PT2H', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(ev.title + ' starts in two hours'), 'END:VALARM', 'END:VEVENT', 'END:VCALENDAR']
+    var blob = new Blob([lines.map(fold).join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' })
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = (key === 'mela' ? 'rangoli-square-diwali-mela' : 'rangoli-contest-diwali-mela') + '.ics'
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href) }, 1500)
+    toast('Calendar file downloaded: ' + ev.title)
+  }
+  ;[['#ics-hero', 'mela'], ['#ics-rsvp', 'mela'], ['#ics-rg', 'rangoli']].forEach(function (p) { var b = $(p[0]); if (b) b.addEventListener('click', function () { downloadIcs(p[1]) }) })
+
+  /* ───────── countdown ───────── */
+  var lastDays = null
+  function tickCd() {
+    var now = new Date(), diff = START - now, units = $('#cd-units'), msg = $('#cd-msg'), ring = $('#cd-ring'), box = ring.parentNode
+    if (diff > 0) {
+      var s = Math.floor(diff / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), sec = s % 60
+      $('#cd-d').textContent = d; $('#cd-h').textContent = pad(h); $('#cd-m').textContent = pad(m); $('#cd-s').textContent = pad(sec)
+      if (d !== lastDays) { lastDays = d; live(ring, { left: Math.min(99, d), total: Math.min(99, Math.max(60, d)) }, d + (d === 1 ? ' day' : ' days')); ring.setAttribute('aria-label', d + ' days to go') }
+      units.hidden = false; msg.hidden = true; box.hidden = false
+    } else if (now < END) {
+      units.hidden = true; msg.hidden = false; box.hidden = true
+      msg.textContent = 'The mela is on! Gates are open until 10 pm. Come on down.'
+      $('#cd-eyebrow').textContent = 'Happening today at Rangoli Square'
+    } else {
+      units.hidden = true; msg.hidden = false; box.hidden = true
+      msg.textContent = 'The 2026 mela has come and gone. Thank you, Eastgate. See you next Diwali!'
+      $('#cd-eyebrow').textContent = 'Saturday 7 November 2026, 4 to 10 pm'
+    }
+  }
+  tickCd(); setInterval(tickCd, 1000)
+
+  /* ───────── timetable: now / next, with a demo clock ───────── */
+  var slots = $$('.slot').map(function (el) { return { el: el, start: toMin(el.dataset.start), end: toMin(el.dataset.end), title: el.dataset.title, icon: el.dataset.icon, emoji: el.dataset.emoji, badge: $('.slot__badge', el) } })
+  var mode = 'live', sig = '', ttTimer = 0
+  var range = $('#demo-range'), chips = $$('[data-t]')
+  function curMin() { if (mode === 'live') { var d = new Date(); return d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60 } return mode }
+  function nb(kind, icon, emoji, k, h, p) {
+    var el = $('#nb-' + kind)
+    el.innerHTML = '<span class="medal">' + ico(icon, emoji, 44) + '</span><div><p class="nb__k">' + (kind === 'now' ? '<i></i>' : '') + k + '</p><h3>' + esc(h) + '</h3><p class="nb-sub">' + p + '</p></div>'
+    refresh(el)
+  }
+  function renderTT() {
+    var t = curMin(), idx = -1, nxt = -1, phase
+    slots.forEach(function (s, i) { if (t >= s.start && t < s.end) idx = i })
+    if (idx >= 0) { phase = 'during'; nxt = idx + 1 < slots.length ? idx + 1 : -1 }
+    else if (t < slots[0].start) { phase = 'before'; nxt = 0 } else { phase = 'after' }
+    slots.forEach(function (s, i) {
+      var c = s.el.classList; c.remove('is-past', 'is-now', 'is-next')
+      var past = idx >= 0 ? i < idx : phase === 'after'
+      if (i === idx) { c.add('is-now'); s.badge.textContent = 'Happening now' }
+      else if (i === nxt) { c.add('is-next'); s.badge.textContent = 'Up next, ' + dur(s.start - t) }
+      else if (past) { c.add('is-past'); s.badge.textContent = 'Done' }
+      else s.badge.textContent = ''
+      if (i === idx) s.el.setAttribute('aria-current', 'time'); else s.el.removeAttribute('aria-current')
+    })
+    var nowS = slots[idx], nextS = slots[nxt], key = phase + idx + nxt
+    if (key !== sig) {
+      sig = key
+      if (phase === 'during') nb('now', nowS.icon, nowS.emoji, 'Happening now', nowS.title, '')
+      else if (phase === 'before') nb('now', 'hourglass', '⏳', 'Not open yet', 'The lights are going up', '')
+      else nb('now', 'moon', '🌙', 'The mela is over', 'Thank you, Eastgate', 'The last diyas are carried home. See you next Diwali.')
+      if (nextS) nb('next', nextS.icon, nextS.emoji, 'Up next', nextS.title, '')
+      else nb('next', 'calendar', '📅', 'Next up', "Next year's mela", 'Watch this space, and thank you for coming.')
+    }
+    var sub = $('#nb-now .nb-sub'), sub2 = $('#nb-next .nb-sub')
+    if (phase === 'during') sub.textContent = f12(nowS.start) + ' to ' + f12(nowS.end) + '. Ends in ' + dur(nowS.end - t) + '.'
+    else if (phase === 'before') sub.textContent = 'Gates open at ' + f12(slots[0].start) + ', in ' + dur(slots[0].start - t) + '.'
+    if (nextS) sub2.textContent = f12(nextS.start) + ', ' + (nextS.start - t < 1 ? 'starting now' : 'in ' + dur(nextS.start - t)) + '.'
+    // demo bar + clock icon
+    var tm = Math.floor(t), hhmm = pad(Math.floor(tm / 60) % 24) + ':' + pad(tm % 60)
+    live($('#demo-clock'), { time: hhmm }, '🕓')
+    $('#demo-t').textContent = f12(tm)
+    $('#demo-mode').textContent = mode === 'live' ? 'Live clock' : 'Demo time'
+    if (mode !== 'live') range.value = Math.min(1380, Math.max(900, mode))
+    else range.value = Math.min(1380, Math.max(900, Math.round(t / 5) * 5))
+    var now = new Date(), today = now.getFullYear() === 2026 && now.getMonth() === 10 && now.getDate() === 7
+    $('#tt-note').textContent = mode !== 'live' ? 'Demo time fixed at ' + f12(tm) + '. Choose Live clock to follow your device again.'
+      : today ? "It's mela day: this is the real running order, live." : now > END ? 'The 2026 mela has finished, so this replays the day using your device clock.' : "Showing your device's clock as if today were mela day (Saturday 7 November)."
+    // hero chip
+    var chip = $('#hero-now'), ct = $('#hero-now-t'), onDay = mode !== 'live' || today
+    chip.classList.toggle('is-off', !(onDay && phase === 'during'))
+    if (!onDay) {
+      var dl = Math.floor((START - now) / 864e5)
+      ct.innerHTML = now > END ? 'Thank you, Eastgate. See you next Diwali.' : 'Gates open Saturday 7 November at 4 pm' + (dl > 0 ? ', <b>in ' + dl + ' day' + (dl === 1 ? '' : 's') + '</b>' : ', <b>later today</b>')
+    } else if (phase === 'during') ct.innerHTML = (mode !== 'live' ? 'Demo ' + f12(tm) + '. ' : '') + 'Right now: <b>' + esc(nowS.title) + '</b>' + (nextS ? '. Next: ' + esc(nextS.title) + ' at ' + f12(nextS.start) : '')
+    else if (phase === 'before') ct.innerHTML = (mode !== 'live' ? 'Demo ' + f12(tm) + '. ' : '') + 'Gates open at <b>4:00 pm</b>, in ' + dur(slots[0].start - t)
+    else ct.textContent = (mode !== 'live' ? 'Demo ' + f12(tm) + '. ' : '') + 'The mela has closed. Thank you, Eastgate.'
+  }
+  function setMode(m) {
+    mode = m === 'live' ? 'live' : (typeof m === 'number' ? m : toMin(m))
+    chips.forEach(function (c) { c.setAttribute('aria-pressed', String((c.dataset.t === 'live') === (mode === 'live') && (mode === 'live' || toMin(c.dataset.t) === mode))) })
+    clearInterval(ttTimer); if (mode === 'live') ttTimer = setInterval(renderTT, 15000)
+    renderTT()
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { setMode(c.dataset.t) }) })
+  range.addEventListener('input', function () { setMode(+range.value) })
+  $('#demo-live').addEventListener('click', function () { setMode('live') })
+  setMode('live')
+
+  /* ───────── wall of diyas ───────── */
+  var wall = $('#wall'), wn = $('#wall-n'), lit = 0
+  var wh = ''
+  for (var i = 1; i <= 24; i++) wh += '<button class="diya" type="button" aria-pressed="false" aria-label="Light diya ' + i + '">' + ico('diya', '🪔', 40, ' data-kit-key="wall"') + '</button>'
+  wall.innerHTML = wh
+  function countLit() { lit = $$('.diya[aria-pressed="true"]', wall).length; wn.textContent = lit }
+  wall.addEventListener('click', function (e) {
+    var b = e.target.closest('.diya'); if (!b) return
+    b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); countLit()
+    if (lit === 24) toast('All 24 lit. The square looks wonderful.')
+  })
+  $('#wall-all').addEventListener('click', function () { $$('.diya', wall).forEach(function (b, i) { setTimeout(function () { b.setAttribute('aria-pressed', 'true'); countLit() }, i * 55) }) })
+  $('#wall-off').addEventListener('click', function () { $$('.diya', wall).forEach(function (b) { b.setAttribute('aria-pressed', 'false') }); countLit() })
+
+  /* garland of marigolds (Full level only) */
+  var g = $('#garland'), gn = ['marigold', 'diya', 'lotus', 'marigold', 'paisley', 'marigold', 'diya', 'lotus', 'marigold', 'toran', 'marigold', 'diya', 'lotus', 'marigold', 'paisley', 'marigold'], gh = ''
+  gn.forEach(function (n) { gh += ico(n, '', 40) })
+  g.innerHTML = gh
+
+  /* ───────── stall directory ───────── */
+  var IMG = '_img/diwali-mela/'
+  var STALLS = [
+    { n: 1, name: "Sharma Ji's Chaat Corner", cat: 'Chaat', zone: 'Food Lane', tr: 'Pani puri, dahi sev puri, aloo tikki chaat', price: '$4 to $9', jain: 1, ico: 'cooking-pot', em: '🍲',
+      img: { src: IMG + '39025942-600.jpg', w: 1200, h: 800, pos: '45% 60%', alt: 'A vendor in black gloves plates chaat at a counter lined with bowls of green chutney, sev, peanuts and yogurt.' } },
+    { n: 2, name: 'Chowpatty Bhel House', cat: 'Chaat', zone: 'Food Lane', tr: 'Bhel puri, sev batata puri, ragda pattice', price: '$4 to $8', vegan: 1, jain: 1, ico: 'salad', em: '🥗' },
+    { n: 3, name: 'Mumbai Local Vada Pav', cat: 'Chaat', zone: 'Food Lane', tr: 'Vada pav, misal pav, dry garlic chutney', price: '$3 to $8', vegan: 1, ico: 'burger', em: '🍔' },
+    { n: 4, name: 'Gujarat Ghar ke Khaman', cat: 'Chaat', zone: 'Food Lane', tr: 'Khaman, dhokla, fafda with papaya chutney', price: '$4 to $9', vegan: 1, jain: 1, ico: 'utensils', em: '🍽️' },
+    { n: 5, name: 'Dilli Chole Bhature', cat: 'Chaat', zone: 'Food Lane', tr: 'Chole bhature, kulcha, pickled onion', price: '$8 to $12', vegan: 1, ico: 'soup', em: '🥣' },
+    { n: 6, name: 'Amritsari Kulcha Cart', cat: 'Chaat', zone: 'Food Lane', tr: 'Stuffed aloo and paneer kulcha with chole', price: '$8 to $11', ico: 'pizza', em: '🫓' },
+    { n: 7, name: 'Mithai Mahal', cat: 'Sweets', zone: 'Sweet Row', tr: 'Kaju katli, barfi, boxed assortments', price: '$6 to $38', nuts: 1, ico: 'mithai-box', em: '🍬',
+      img: { src: IMG + '11484120-600.jpg', w: 1200, h: 801, pos: '50% 50%', alt: 'Overhead view of a white box of assorted Indian sweets: almond-flaked barfi, creamy sweets topped with pistachio, pink coconut-dusted rolls and golden laddoo.' } },
+    { n: 8, name: 'Jalebi Junction', cat: 'Sweets', zone: 'Sweet Row', tr: 'Hot jalebi with rabri, imarti', price: '$5 to $9', ico: 'jalebi', em: '🍯' },
+    { n: 9, name: 'Laddoo Ladies Collective', cat: 'Sweets', zone: 'Sweet Row', tr: 'Besan, motichoor and coconut laddoo', price: '$4 to $14', vegan: 1, nuts: 1, ico: 'laddoo', em: '🧆' },
+    { n: 10, name: 'Bengal Mishti Ghar', cat: 'Sweets', zone: 'Sweet Row', tr: 'Rasgulla, sandesh, mishti doi in clay pots', price: '$4 to $10', ico: 'donut', em: '🍩' },
+    { n: 11, name: 'Dry Fruit Dabba Co.', cat: 'Sweets', zone: 'Sweet Row', tr: 'Almond, fig and pistachio gift boxes', price: '$12 to $45', vegan: 1, nuts: 1, ico: 'gift', em: '🎁' },
+    { n: 12, name: 'Kulhad Chai Wallah', cat: 'Chai', zone: 'Chai Lane', tr: 'Masala chai in clay kulhads, adrak chai, oat-milk on request', price: '$2 to $4', vegan: 1, ico: 'teapot', em: '🫖' },
+    { n: 13, name: 'Kesar Thandai Bar', cat: 'Chai', zone: 'Chai Lane', tr: 'Thandai, saffron milk, rose sharbat', price: '$4 to $6', nuts: 1, ico: 'thandai', em: '🥛' },
+    { n: 14, name: 'Filter Kaapi Truck', cat: 'Chai', zone: 'Chai Lane', tr: 'Filter kaapi, badam milk, medu vada', price: '$3 to $7', ico: 'coffee', em: '☕' },
+    { n: 15, name: 'Cutting Chai and Marie', cat: 'Chai', zone: 'Chai Lane', tr: 'Mumbai cutting chai, biscuits for dunking', price: '$2 to $3', ico: 'cookie', em: '🍪' },
+    { n: 16, name: 'Diya and Clay Co.', cat: 'Crafts', zone: 'Craft Row', tr: 'Hand-painted diyas, terracotta pots, tealight sets', price: '$3 to $24', ico: 'diya', em: '🪔',
+      img: { src: IMG + '32194484-600.jpg', w: 1200, h: 1648, pos: '50% 68%', alt: 'Terracotta pots beside a wicker basket and a wide bowl heaped with small unlit clay diyas in warm sunlight.' } },
+    { n: 17, name: 'Bangle Bazaar', cat: 'Crafts', zone: 'Craft Row', tr: 'Lac and glass bangles, jhumkas, maang tikka', price: '$6 to $40', ico: 'gem', em: '💎' },
+    { n: 18, name: 'Toran Tales', cat: 'Crafts', zone: 'Craft Row', tr: 'Marigold-and-bead door torans, paper garlands', price: '$8 to $30', ico: 'toran', em: '🌼' },
+    { n: 19, name: 'Paper Lantern Atelier', cat: 'Crafts', zone: 'Craft Row', tr: 'Star-shaped akash kandil lanterns, flat-packed', price: '$12 to $28', ico: 'sky-lantern', em: '🏮' },
+    { n: 20, name: 'Block and Brush Studio', cat: 'Crafts', zone: 'Craft Row', tr: 'Hand-block printed cushion covers and dupattas', price: '$14 to $60', ico: 'paisley', em: '🧵' },
+    { n: 21, name: 'Rangoli Colours and Stencils', cat: 'Crafts', zone: 'Craft Row', tr: 'Powder colours, stencils and petal packs for the contest', price: '$2 to $15', ico: 'rangoli-pattern', em: '🎨' },
+    { n: 22, name: "Meher's Mehndi Studio", cat: 'Henna', zone: 'Henna Lane', tr: 'Festive henna designs in 10 to 20 minutes', price: '$10 to $25', ico: 'mehndi-hand', em: '✋' },
+    { n: 23, name: 'Little Hands Henna', cat: 'Henna', zone: 'Henna Lane', tr: 'Small henna designs for children, glitter bindis', price: '$5 to $8', ico: 'hand', em: '🖐️' },
+    { n: 24, name: "Sana's Henna Cones", cat: 'Henna', zone: 'Henna Lane', tr: 'Fresh henna cones to take home, aftercare balm', price: '$5 to $12', ico: 'leaf', em: '🌿' }
+  ]
+  var CAT_COL = { Chaat: '#ff8a1f', Sweets: '#ff8fbd', Chai: '#5fd6d0', Crafts: '#ffc21a', Henna: '#b79cff' }
+  var grid = $('#stalls-grid'), cards = []
+  STALLS.forEach(function (s) {
+    var tags = '<span class="tag tag--v">Vegetarian</span>' + (s.vegan ? '<span class="tag tag--v">Vegan options</span>' : '') + (s.jain ? '<span class="tag tag--j">Jain-friendly</span>' : '') + (s.nuts ? '<span class="tag tag--n">Contains nuts</span>' : '')
+    if (s.cat === 'Crafts' || s.cat === 'Henna') tags = s.cat === 'Henna' ? '<span class="tag">Skin-safe natural henna</span>' : '<span class="tag">Made locally</span>'
+    var el = document.createElement('article')
+    el.className = 'stall'; el.style.setProperty('--c', CAT_COL[s.cat])
+    el.innerHTML = '<div class="stall__ph">' + (s.img ? '<img src="' + s.img.src + '" width="' + s.img.w + '" height="' + s.img.h + '" loading="lazy" decoding="async" style="object-position:' + s.img.pos + '" alt="' + esc(s.img.alt) + '">' : '<div class="stall__art"><span class="medal medal--xl">' + ico(s.ico, s.em, 88) + '</span></div>') + '</div>' +
+      '<div class="stall__bar"><span>' + s.cat + ' &middot; ' + s.zone + '</span><span>No. ' + pad(s.n) + '</span></div>' +
+      '<div class="stall__body"><h3>' + esc(s.name) + '</h3>' +
+      '<p><b>Try:</b> ' + esc(s.tr) + '</p><p class="stall__zone">' + s.price + (s.cat === 'Crafts' || s.cat === 'Henna' ? '' : ' &middot; all vegetarian') + '</p><div class="tags">' + tags + '</div></div>'
+    el.dataset.cat = s.cat; el.dataset.q = (s.name + ' ' + s.tr + ' ' + s.cat + ' ' + s.zone).toLowerCase(); el.dataset.n = s.n
+    s.el = el; grid.appendChild(el)
+  })
+  var F = { cat: 'all', diets: {}, q: '', sort: 'no' }
+  function matches(s, ignoreCat) {
+    if (!ignoreCat && F.cat !== 'all' && s.cat !== F.cat) return false
+    if (F.diets.vegan && !s.vegan) return false
+    if (F.diets.jain && !s.jain) return false
+    if (F.q && s.el.dataset.q.indexOf(F.q) < 0) return false
+    return true
+  }
+  function applyFilters() {
+    var shown = 0
+    STALLS.forEach(function (s) { var ok = matches(s); s.el.hidden = !ok; if (ok) shown++ })
+    var cnt = { all: 0, Chaat: 0, Sweets: 0, Chai: 0, Crafts: 0, Henna: 0 }
+    STALLS.forEach(function (s) { if (matches(s, true)) { cnt.all++; cnt[s.cat]++ } })
+    $$('[data-n]', $('#cat-chips')).forEach(function (el) { el.textContent = cnt[el.dataset.n] })
+    var parts = []
+    if (F.cat !== 'all') parts.push(F.cat.toLowerCase())
+    if (F.diets.vegan) parts.push('vegan-friendly')
+    if (F.diets.jain) parts.push('Jain-friendly')
+    $('#stall-count').textContent = shown === STALLS.length ? 'Showing all 24 stalls' : 'Showing ' + shown + ' of 24 stalls' + (parts.length ? ': ' + parts.join(', ') : '') + (F.q ? ' matching "' + F.q + '"' : '')
+    $('#stalls-empty').hidden = shown > 0
+  }
+  function sortStalls() {
+    var arr = STALLS.slice().sort(function (a, b) { return F.sort === 'az' ? a.name.localeCompare(b.name) : a.n - b.n })
+    arr.forEach(function (s) { grid.appendChild(s.el) })
+  }
+  $('#cat-chips').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-cat]'); if (!b) return
+    F.cat = b.dataset.cat; $$('[data-cat]').forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)) }); applyFilters()
+  })
+  $$('[data-diet]').forEach(function (b) { b.addEventListener('click', function () {
+    var on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', String(on)); F.diets[b.dataset.diet] = on; applyFilters()
+  }) })
+  $('#stall-q').addEventListener('input', function (e) { F.q = e.target.value.trim().toLowerCase(); applyFilters() })
+  $('#stall-sort').addEventListener('change', function (e) { F.sort = e.target.value; sortStalls() })
+  $('#stall-reset').addEventListener('click', function () {
+    F.cat = 'all'; F.diets = {}; F.q = ''; $('#stall-q').value = ''
+    $$('[data-cat]').forEach(function (c) { c.setAttribute('aria-pressed', String(c.dataset.cat === 'all')) })
+    $$('[data-diet]').forEach(function (c) { c.setAttribute('aria-pressed', 'false') }); applyFilters()
+  })
+  applyFilters()
+  refresh(grid)
+
+  /* ───────── shared form helpers ───────── */
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+  function bad(field, on) { if (field) field.classList.toggle('is-bad', !!on); var inp = field && field.querySelector('.in,input[type=checkbox]'); if (inp) inp.setAttribute('aria-invalid', on ? 'true' : 'false') }
+  function firstBad(form) { var f = form.querySelector('.is-bad'); if (f) { var i = f.querySelector('input,select,textarea'); if (i) i.focus() } }
+  function liveClear(form) { form.addEventListener('input', function (e) { var f = e.target.closest('.is-bad'); if (f) bad(f, false) }); form.addEventListener('change', function (e) { var f = e.target.closest('.is-bad'); if (f) bad(f, false) }) }
+  function stepper(minus, plus, out, lo, hi, cb) {
+    var n = +out.textContent
+    function set(v) { n = Math.max(lo, Math.min(hi, v)); out.textContent = n; if (cb) cb(n) }
+    $(minus).addEventListener('click', function () { set(n - 1) }); $(plus).addEventListener('click', function () { set(n + 1) })
+    return { get: function () { return n }, set: set }
+  }
+  function show(form, ok) { form.hidden = true; ok.hidden = false; ok.focus(); ok.scrollIntoView({ block: 'nearest', behavior: 'smooth' }) }
+  function again(form, ok) { ok.hidden = true; form.hidden = false; form.reset(); $$('.is-bad', form).forEach(function (f) { bad(f, false) }); var i = form.querySelector('input'); if (i) i.focus() }
+
+  /* ───────── rangoli sign-up ───────── */
+  var rg = { taken: 29, total: 36 }
+  var rgForm = $('#rg-form'), rgOk = $('#rg-ok')
+  var team = stepper('#team-minus', '#team-plus', $('#team-n'), 1, 4, function (n) { $('#plot-size').textContent = 'Plot size: ' + (n <= 2 ? '4 by 4 ft' : '6 by 6 ft') })
+  liveClear(rgForm)
+  function plotsUI() {
+    var left = Math.max(0, rg.total - rg.taken), pct = Math.min(100, Math.round(rg.taken / rg.total * 100))
+    $('#plots-left').textContent = left
+    $('#plots-text').textContent = left ? 'plots left of 36. They go quickly in the week before.' : 'plots left. New entries join the waiting list.'
+    live($('#plots-ring'), { value: pct }, pct + '%'); $('#plots-ring').setAttribute('aria-label', pct + ' percent of plots taken')
+  }
+  rgForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var name = $('#rg-name').value.trim(), email = $('#rg-email').value.trim(), st = rgForm.querySelector('input[name=style]:checked'), rules = $('#rg-rules').checked
+    bad($('[data-f=name]', rgForm), !name); bad($('[data-f=email]', rgForm), !EMAIL.test(email)); bad($('[data-f=style]', rgForm), !st); bad($('[data-f=rules]', rgForm), !rules)
+    if (rgForm.querySelector('.is-bad')) { firstBad(rgForm); return }
+    rg.taken++
+    var waiting = rg.taken > rg.total, no = waiting ? rg.taken - rg.total : rg.taken, row = { 'Powder rangoli': 'A', 'Flower rangoli': 'B', 'Diya and lamp art': 'C', 'Little artists': 'D' }[st.value]
+    var first = name.split(/\s+/)[0], n = team.get(), kit = rgForm.kit.checked, sf = rgForm.stepfree.checked
+    $('#ok-h').textContent = waiting ? "You're on the waiting list, " + first : "You're in, " + first + '!'
+    live($('#plot-ticket'), { number: no, hash: 'true' }, '#' + no); $('#plot-ticket').setAttribute('aria-label', waiting ? 'Waiting list number ' + no : 'Plot number ' + no)
+    $('#ok-dl').innerHTML = '<dt>' + (waiting ? 'Waiting list' : 'Plot') + '</dt><dd>' + (waiting ? 'Number ' + no : 'Row ' + row + ', plot ' + no) + '</dd><dt>Style</dt><dd>' + esc(st.value) + '</dd><dt>Team</dt><dd>' + esc(name) + ', ' + n + (n === 1 ? ' person' : ' people') + ', ' + (n <= 2 ? '4 by 4 ft' : '6 by 6 ft') + '</dd><dt>Check-in</dt><dd>4:30 to 4:55 pm, Rangoli desk</dd><dt>Colour kit</dt><dd>' + (kit ? 'Set aside for you' : 'Bring your own') + '</dd>' + (sf ? '<dt>Access</dt><dd>Step-free plot near Gate A</dd>' : '')
+    plotsUI(); show(rgForm, rgOk)
+    toast(waiting ? 'Added to the waiting list' : 'Plot ' + no + ' is yours')
+  })
+  $('#rg-again').addEventListener('click', function () { again(rgForm, rgOk); team.set(1) })
+
+  /* paint-a-diya workshop seats */
+  var seats = { '4:30 pm': 5, '5:15 pm': 8, '6:00 pm': 11, '6:45 pm': 12 }, held = {}, sess = '4:30 pm'
+  function wsUI() {
+    $$('#ws-chips .chip').forEach(function (c) { c.querySelector('small').textContent = seats[c.dataset.s] + ' left'; c.setAttribute('aria-pressed', String(c.dataset.s === sess)) })
+    $('#ws-save').lastChild.textContent = held[sess] ? ' Release my seat' : ' Save me a seat'
+    $('#ws-save').disabled = !held[sess] && seats[sess] < 1
+  }
+  $('#ws-chips').addEventListener('click', function (e) { var c = e.target.closest('.chip'); if (!c) return; sess = c.dataset.s; $('#ws-msg').textContent = held[sess] ? 'Your seat is saved for ' + sess + '.' : ''; wsUI() })
+  $('#ws-save').addEventListener('click', function () {
+    if (held[sess]) { held[sess] = false; seats[sess]++; $('#ws-msg').textContent = 'Seat released for ' + sess + '.' }
+    else if (seats[sess] > 0) { held[sess] = true; seats[sess]--; $('#ws-msg').textContent = 'Seat saved for ' + sess + '. See you in the Craft tent!' }
+    wsUI()
+  })
+  wsUI()
+
+  /* ───────── volunteer + vendor ───────── */
+  var tabs = $$('[role=tab]'), panels = { 'tab-vol': $('#panel-vol'), 'tab-ven': $('#panel-ven') }
+  function pick(t) { tabs.forEach(function (x) { var on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; panels[x.id].hidden = !on }) }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { pick(t) })
+    t.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; pick(n); n.focus() } })
+  })
+  var vol = { n: 38 }, volForm = $('#vol-form'), volOk = $('#vol-ok'); liveClear(volForm)
+  volForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var name = $('#vol-name').value.trim(), email = $('#vol-email').value.trim(), sh = $$('input[name=shift]:checked', volForm).map(function (i) { return i.value })
+    bad($('[data-f=name]', volForm), !name); bad($('[data-f=email]', volForm), !EMAIL.test(email)); bad($('[data-f=shifts]', volForm), !sh.length)
+    if (volForm.querySelector('.is-bad')) { firstBad(volForm); return }
+    vol.n = Math.min(60, vol.n + 1); var pct = Math.round(vol.n / 60 * 100)
+    $('#vol-n').textContent = vol.n; $('#vol-bar').style.setProperty('--w', pct + '%'); live($('#vol-ring'), { value: pct }, pct + '%')
+    $('#vol-ok-h').textContent = 'Thank you, ' + name.split(/\s+/)[0] + '!'
+    $('#vol-ok-p').textContent = 'You are booked for: ' + sh.join('; ') + '. Your briefing pack and T-shirt (size ' + $('#vol-size').value + ') will be waiting at the welcome desk. We will email you by Saturday 31 October.'
+    show(volForm, volOk); toast('Shift sheet updated: ' + vol.n + ' of 60 volunteers')
+  })
+  $('#vol-again').addEventListener('click', function () { again(volForm, volOk) })
+  var ven = { open: 12 }, venForm = $('#ven-form'), venOk = $('#ven-ok'); liveClear(venForm)
+  venForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var biz = $('#ven-biz').value.trim(), cat = $('#ven-cat').value, email = $('#ven-email').value.trim(), sell = $('#ven-sell').value.trim(), food = /^(Chaat|Sweets|Chai)$/.test(cat)
+    bad($('[data-f=biz]', venForm), !biz); bad($('[data-f=cat]', venForm), !cat); bad($('[data-f=email]', venForm), !EMAIL.test(email)); bad($('[data-f=sell]', venForm), sell.length < 8); bad($('[data-f=hyg]', venForm), food && !$('#ven-hyg').checked)
+    if (venForm.querySelector('.is-bad')) { firstBad(venForm); return }
+    ven.open = Math.max(0, ven.open - 1); var pct = Math.round((24 - ven.open) / 24 * 100)
+    $('#ven-n').textContent = ven.open; live($('#ven-ring'), { value: pct }, pct + '%')
+    $('#ven-ok-h').textContent = 'Application received, ' + biz
+    $('#ven-ok-p').textContent = 'Reference VND-' + (1030 + 24 - ven.open) + '. ' + (food ? 'Food pitch, $90' : 'Craft and community pitch, $45') + ', due by Saturday 24 October. We will reply within three working days' + ($('#ven-power').checked ? ', and will try to place you beside a socket.' : '.')
+    show(venForm, venOk); toast('Application sent. ' + ven.open + ' pitches still open')
+  })
+  $('#ven-again').addEventListener('click', function () { again(venForm, venOk) })
+
+  /* ───────── map ───────── */
+  var PIN = {
+    1: 'Gate A, Marigold Street. Main entrance, bag check and free festival maps. Step-free from the pavement.',
+    2: 'Main stage. Garba at 7, aarti at 8, announcements all evening. Wheelchair platform on the left of the lawn.',
+    3: 'Food Lane. Stalls 01 to 15: chaat, sweets and chai. Hand-washing stations at both ends, heaters along the middle.',
+    4: 'Rangoli Ground. Contest plots from 5 pm, the craft tent for diya painting, and the check-in desk.',
+    5: 'Info tent and first aid. Maps, lost and found, free ear defenders, the medical tent and accessible toilets.',
+    6: 'Fireworks lawn. Fenced from 9:00 pm. Watch from the stage lawn or the north steps, facing south.'
+  }
+  function selPin(n) {
+    $$('.pin').forEach(function (p) { p.classList.toggle('is-on', p.dataset.pin === String(n)) })
+    $$('#legend button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.pin === String(n))) })
+    $('#map-detail-t').textContent = PIN[n]
+  }
+  $('#map').addEventListener('click', function (e) { var p = e.target.closest('.pin'); if (p) selPin(p.dataset.pin) })
+  $('#legend').addEventListener('click', function (e) { var b = e.target.closest('button'); if (b) selPin(b.dataset.pin) })
+
+  /* ───────── RSVP ───────── */
+  var rsvp = { n: 1284, cap: 2500 }, rvForm = $('#rsvp-form'), rvOk = $('#rsvp-ok'); liveClear(rvForm)
+  var party = stepper('#rv-minus', '#rv-plus', $('#rv-n'), 1, 12)
+  function rsvpUI() {
+    var pct = Math.min(100, Math.round(rsvp.n / rsvp.cap * 100))
+    $('#rsvp-count').textContent = fmtN(rsvp.n); $('#rsvp-big').textContent = fmtN(rsvp.n)
+    live($('#rsvp-ring'), { value: pct }, pct + '%'); $('#rsvp-ring').setAttribute('aria-label', pct + ' percent of the 2,500 expected visitors have said they are coming')
+  }
+  rvForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var name = $('#rv-name').value.trim(), email = $('#rv-email').value.trim()
+    bad($('[data-f=name]', rvForm), !name); bad($('[data-f=email]', rvForm), !EMAIL.test(email))
+    if (rvForm.querySelector('.is-bad')) { firstBad(rvForm); return }
+    var n = party.get(); rsvp.n += n; rsvpUI()
+    $('#rsvp-ok-h').textContent = "You're counted, " + name.split(/\s+/)[0] + '!'
+    $('#rsvp-ok-p').textContent = n + (n === 1 ? ' person' : ' people') + ' from your group, arriving ' + $('#rv-how').value.toLowerCase().replace(/^on /, 'on ') + '. You are among ' + fmtN(rsvp.n) + ' neighbours so far.' + ($('#rv-access').checked ? ' We have noted your access request: the welcome desk at Gate A will have a step-free route map ready.' : '') + ($('#rv-remind').checked ? ' One reminder will arrive on the morning of Saturday 7 November.' : '')
+    show(rvForm, rvOk); toast(fmtN(rsvp.n) + ' neighbours and counting')
+  })
+  $('#copy-link').addEventListener('click', function () {
+    var url = location.href.split('#')[0]
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(function () { toast('Invite link copied') }, function () { toast('Copy this link: ' + url) })
+    else toast('Copy this link: ' + url)
+  })
+  // the page's RSVP-again flow: reopen the form from the sign-in link in the hero count
+  $$('a[href="#rsvp"]').forEach(function (a) { a.addEventListener('click', function () { if (rvForm.hidden) { again(rvForm, rvOk); party.set(2) } }) })
+
+  /* ───────── FAQ: one open at a time ───────── */
+  var dets = $$('#faq-list details')
+  dets.forEach(function (d) { d.addEventListener('toggle', function () { if (d.open) dets.forEach(function (o) { if (o !== d) o.open = false }) }) })
+  dets[0].open = true
+
+  refresh(document)
+})()
+</script>
+</body></html>

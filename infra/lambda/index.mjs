@@ -5,8 +5,9 @@
 // adds a secret x-origin-verify header to every origin request; anything that reaches the
 // Function URL without it is rejected here before the real handler runs.
 //
-// scripts/deploy.mjs zips this file at the root and the API under mcp/ (lambda.mjs + data/svg-<style>.json + data/palettes.json),
-// so the real handler is ./mcp/lambda.mjs (export `handler`, Function URL payload v2 in, {statusCode, headers, body} out).
+// scripts/deploy.mjs zips this file at the root and the API under mcp/ (lambda.mjs + resvg.wasm + data/svg-<style>.json +
+// data/palettes.json), so the real handler is ./mcp/lambda.mjs (export `handler`, Function URL payload v2 in, {statusCode,
+// headers, body} out). resvg.wasm (export_icon's PNG renderer) is compiled on the first PNG request, not at INIT.
 import { timingSafeEqual } from 'node:crypto'
 // Imported at the top level, NOT inside the first request: Lambda runs module loading in its INIT phase (full CPU, before
 // any request is accepted), so parsing the bundle, building the search tables and warming the MCP SDK (lambda.mjs does

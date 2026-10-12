@@ -225,7 +225,7 @@ function fallbackMotion(ctx) {
 
 // "Turn into": icon A becomes icon B and back (ctx.swap, as the site's editor builds it). to: "name" | "name@style"
 // (default: the icon's first suggested swap); effect: fade, flip, scale, morph, ... (default: the suggestion's, else fade)
-export function swapFor(lib, ctx, { to, effect, hold, duration, palette, colors, color } = {}) {
+export function swapFor(lib, ctx, { to, effect, hold, duration, palette, colors, color, theme } = {}) {
   const spec = ctx.motionSpec
   const pick = to ? { to: String(to), effect } : (spec && spec.swap && spec.swap[0]) || null
   if (!pick) throw new ExportError(`"${ctx.name}" has no suggested swap target: add --to <icon> (or "<icon>@<style>"), e.g. --to ${ctx.name}@solid`, 'missing_swap_target', true)
@@ -236,6 +236,8 @@ export function swapFor(lib, ctx, { to, effect, hold, duration, palette, colors,
   if (effects.length && !effects.includes(fx)) throw new ExportError(`--effect: unknown effect "${fx}". Effects: ${effects.join(', ')}`, 'unknown_effect', true)
   const B = splitSvg(lib.svgOf(name, style))
   let vars = {}, ink = ctx.color || null
+  // a theme goes on B's own parts (B's roles differ from A's)
+  if (theme && typeof lib.themeColors === 'function') colors = { ...lib.themeColors(name, style, theme).colors, ...(colors || {}) }
   if (palette || (colors && Object.keys(colors).length) || color) {
     try { const a = lib.applyColors(name, style, { palette, colors: color ? { ink: color, ...(colors || {}) } : colors }); vars = a.vars || {}; ink = a.color || ink } catch { /* no such palette for B: its defaults */ }
   }
@@ -329,11 +331,68 @@ function planPalettes(lib, names, palette, colors, strict) {
   }
   if (strict) throw new ExportError(`palette "${palette}" exists for ${have.join(', ')} but not for ${missing.join(', ')}; nothing was written. ` +
     `Leave out --strict to give ${missing.length === 1 ? 'it' : 'them'} the same colours (borrowed from ${have[0]}), or pick a palette per icon (withicons palettes <name>).`, 'unknown_palette', false, { missing, have })
+  // the donor's colours go on each icon's parts by size, per style (lib.borrowColors), never role by role: a role that
+  // is a speck on the donor can be a whole part elsewhere. Older libraries: the palette's role colours as they are.
+  if (typeof lib.borrowColors === 'function') {
+    for (const n of missing) plan.set(n, { palette: undefined, colors: colors || {}, borrow: { from: have[0], palette } })
+    return { plan, notes: [], borrowed: { from: have[0], palette, missing } }
+  }
   const donor = lib.applyColors(have[0], 'line', { palette })
-  // borrowed roles act like a palette's: no warning when this style leaves some of them out
   const borrowed = Object.keys(donor.colors).filter(k => !(colors && k in colors))
   for (const n of missing) plan.set(n, { palette: undefined, colors: { ...donor.colors, ...(colors || {}) }, borrowed })
   return { plan, notes: [`${missing.join(', ')} ${missing.length === 1 ? 'has' : 'have'} no palette "${palette}": used ${have[0]}'s "${palette}" colours instead (--strict fails instead).`] }
+}
+
+// ---- brand themes: one colour set, resolved onto each icon's own parts in each style (lib.themeColors) ----
+const THEME_KEYS = ['primary', 'secondary', 'tertiary', 'ink']
+const ROLE_KEYS = ['c1', 'c2', 'c3', 'c4', 'tint', 'accent', 'shadow', 'shine', 'edge']
+// "#0ea5e9" | "#0ea5e9,#f59e0b,ink=#111827" | { primary, secondary, tertiary, ink } -> { theme: { primary, ... }, colors }
+// (hex). sep: the separator between colours in a string ("," for --theme, "/" inside one --per-icon entry); roles: role
+// keys (c1, tint ...) are allowed too and come back in colors (per-icon colours: keep an avatar's skin, c1)
+function parseColourSet(v, what, { partial = false, sep = /[,;]/, roles = false } = {}) {
+  let t = v
+  if (typeof v === 'string') {
+    t = {}
+    let i = 0
+    for (const part of v.split(sep).map(x => x.trim()).filter(Boolean)) {
+      const m = /^([a-z0-9]+)\s*[=:]\s*(.+)$/i.exec(part)
+      if (m) t[m[1].toLowerCase()] = m[2].trim()
+      else { if (i >= 3) throw new ExportError(`${what}: at most three colours in order (primary, secondary, tertiary); name the ink: ink=#hex`, 'invalid_theme', true); t[THEME_KEYS[i++]] = part }
+    }
+  }
+  if (!t || typeof t !== 'object' || Array.isArray(t)) throw new ExportError(`${what}: give hex colours, e.g. "#0ea5e9" or { primary: "#0ea5e9", secondary: "#f59e0b" }`, 'invalid_theme', true)
+  const theme = {}, colors = {}
+  for (const [k, c] of Object.entries(t)) {
+    if (c == null || c === '') continue
+    const role = roles && ROLE_KEYS.includes(k)
+    if (!THEME_KEYS.includes(k) && !role) throw new ExportError(`${what}: unknown key "${k}". Keys: ${[...THEME_KEYS, ...(roles ? ROLE_KEYS : [])].join(', ')}`, 'invalid_theme', true)
+    const m = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(String(c).trim())
+    if (!m) throw new ExportError(`${what}: ${k} "${c}" is not a hex colour (e.g. #0ea5e9)`, 'invalid_color', true)
+    ;(role ? colors : theme)[k] = '#' + (m[1].length === 3 ? m[1].split('').map(x => x + x).join('') : m[1]).toLowerCase()
+  }
+  if (!partial && !theme.primary) throw new ExportError(`${what} needs a primary colour, e.g. "#0ea5e9"`, 'invalid_theme', true)
+  return { theme, colors }
+}
+export function parseTheme(v, what = '--theme') {
+  if (v == null || v === '') return null
+  return parseColourSet(v, what).theme
+}
+// { heart: "#e11d48", star: { primary: "#f59e0b" }, "avatar-woman": { primary: "#0ea5e9", c1: "#f6d2b6" } }
+//   | "heart=#e11d48,star=#f59e0b/#fde68a,avatar-woman=#0ea5e9/c1:#f6d2b6" -> Map(icon -> { theme (partial), colors })
+export function parsePerIcon(lib, v, names) {
+  if (v == null || v === '') return null
+  const pairs = typeof v === 'object' ? Object.entries(v) : String(v).split(/[,;]/).map(p => p.trim()).filter(Boolean).map(p => {
+    const m = /^([^=]+)=(.+)$/.exec(p)
+    if (!m) throw new ExportError(`--per-icon: "${p}" is not icon=colours (e.g. --per-icon "heart=#e11d48,star=#f59e0b/#fde68a")`, 'invalid_option', true)
+    return [m[1].trim(), m[2].trim()]
+  })
+  const map = new Map()
+  for (const [k, t] of pairs) {
+    const icon = lib.resolveName(k)
+    if (!names.includes(icon)) throw new ExportError(`per-icon colours: "${k}" is not one of the icons being exported (${names.join(', ')})`, 'invalid_option', true)
+    map.set(icon, parseColourSet(t, `per-icon colours for ${icon}`, { partial: true, sep: /\//, roles: true }))
+  }
+  return map.size ? map : null
 }
 
 // names x styles x formats -> files. Returns { files: [{ name, style, format, filename, file, bytes, data }], notes, warnings }
@@ -363,8 +422,19 @@ export async function exportIcons(lib, o) {
   const probe = lib.data().meta.icons[0].name
   const strokeStyles = new Set(lib.data().meta.styles.map(s => s.name).filter(st => { try { return /^<svg[^>]* stroke-width="/.test(lib.svgOf(probe, st)) } catch { return false } }))
   if (strokeWidth !== undefined && !styles.some(s => strokeStyles.has(s))) notes.add(`--stroke-width applies to outline styles only (${[...strokeStyles].join(', ')}); ${styles.join(', ')} ignore${styles.length === 1 ? 's' : ''} it`)
+  // brand colours: one theme for every icon, per-icon colours over it (a theme replaces a palette)
+  const theme = parseTheme(o.theme)
+  const perIcon = parsePerIcon(lib, o.perIcon, names)
+  if ((theme || perIcon) && o.palette) throw new ExportError('a theme and a palette both recolour the icons: pass one (a theme for brand colours, a palette for a set picked per icon)', 'theme_and_palette', true)
+  if ((theme || perIcon) && typeof lib.themeColors !== 'function') throw new ExportError('themes need a newer @withicons/mcp (npm i withicons@latest)', 'unsupported', true)
   const pal = planPalettes(lib, names, o.palette, colors, !!o.strictPalette)
   for (const n of pal.notes) warnings.add(n)
+  const themeOf = n => {
+    const t = { ...(theme || {}), ...((perIcon && perIcon.get(n) && perIcon.get(n).theme) || {}) }
+    if (!Object.keys(t).length) return null
+    if (!t.primary) throw new ExportError(`per-icon colours for ${n} need a primary colour (or give theme a primary for every icon)`, 'invalid_theme', true)
+    return t
+  }
   const wantsSwap = !!(o.to || (motion && motion.swap))
   const sheetAnimated = formats.includes('pptx-sheet') && ((motion && motion !== false) || wantsSwap || o.animated)
   if ((motion !== undefined || wantsSwap) && !formats.some(f => (WE.get(f) && WE.get(f).animated) || (f === 'pptx-sheet' && sheetAnimated)))
@@ -381,14 +451,31 @@ export async function exportIcons(lib, o) {
   const dir = o.out === '-' ? null : path.resolve(o.out || '.')
   for (const name of names) {
     const title = lib.getIcon({ name, style: 'line' }).title
-    const { palette, colors: cols, borrowed } = pal.plan.get(name)
+    const { palette, colors: planned, borrowed, borrow } = pal.plan.get(name)
+    // role colours set for this icon alone (per-icon: keep a people avatar's skin, c1) win over the shared ones
+    const explicit = { ...planned, ...((perIcon && perIcon.get(name) && perIcon.get(name).colors) || {}) }
+    const iconTheme = themeOf(name)
+    // the colours of this icon in one style: a theme or a borrowed palette resolves on its own parts there; the
+    // colours set by hand (colors, color) always win
+    const coloursIn = st => {
+      if (iconTheme) {
+        const t = lib.themeColors(name, st, iconTheme)
+        return { cols: { ...t.colors, ...(color ? { ink: color } : {}), ...explicit }, theme: { theme: iconTheme, parts: t.parts, exact: t.exact, exactShare: t.exactShare, ...(t.inkLeads && !color && !explicit.ink ? { inkLeads: true } : {}) } }
+      }
+      if (borrow) {
+        const b = lib.borrowColors(name, st, borrow.from, borrow.palette)
+        return { cols: { ...b.colors, ...explicit }, borrowed: { from: b.from, palette: b.palette, parts: b.parts } }
+      }
+      return { cols: explicit }
+    }
     for (const format of formats) {
       const f = WE.get(format)
       for (const style of PER_ICON.has(format) ? [styles[0]] : styles) {
         const sw = strokeWidth && strokeStyles.has(style) ? strokeWidth : undefined
+        const here = coloursIn(style), cols = here.cols
         const { ctx, applied } = buildCtx(lib, { name, style, title, palette, colors: cols, color, motion, duration: o.duration, strokeWidth: sw })
-        if (applied && !PER_ICON.has(format) && !colourEntries.has(name + '|' + style)) colourEntries.set(name + '|' + style, { name, style, applied, borrowed })
-        if (wantsSwap && f.animated) ctx.swap = swapFor(lib, ctx, { to: o.to, effect: o.effect, hold: o.hold, duration: o.duration, palette, colors: cols, color })
+        if (applied && !PER_ICON.has(format) && !colourEntries.has(name + '|' + style)) colourEntries.set(name + '|' + style, { name, style, applied, borrowed, ...(here.theme ? { theme: here.theme } : {}), ...(here.borrowed ? { borrow: here.borrowed } : {}) })
+        if (wantsSwap && f.animated) ctx.swap = swapFor(lib, ctx, { to: o.to, effect: o.effect, hold: o.hold, duration: o.duration, palette, colors: explicit, color, theme: iconTheme })
         const opts = { background, padding: o.padding }
         if (o.size !== undefined) opts.size = o.size
         else if (format === 'svg' || format === 'svg-flat') opts.size = 24
@@ -409,7 +496,8 @@ export async function exportIcons(lib, o) {
           ctx.variants = opts.variants
           // the chosen colours, for every style (variable names are per style, so they never clash)
           if (palette || Object.keys(cols).length || color) for (const v of opts.variants) {
-            try { Object.assign(ctx.vars, lib.applyColors(name, v.style, { palette, colors: color ? { ink: color, ...cols } : cols }).vars) } catch { /* palette missing for this style */ }
+            const vc = coloursIn(v.style).cols
+            try { Object.assign(ctx.vars, lib.applyColors(name, v.style, { palette, colors: color ? { ink: color, ...vc } : vc }).vars) } catch { /* palette missing for this style */ }
           }
         }
         let r
@@ -439,6 +527,14 @@ export async function exportIcons(lib, o) {
     for (const it of out) { it.file = path.join(dir, it.filename); fs.writeFileSync(it.file, it.data) }
   }
   if (dir && !o.keepData) for (const it of out) delete it.data
+  // icons that borrowed a palette: one warning each, naming which of their parts took which of the donor's colours
+  if (pal.borrowed) for (const n of pal.borrowed.missing) {
+    const es = [...colourEntries.values()].filter(e => e.name === n && e.borrow)
+    const map = es.length === 1 && Object.keys(es[0].borrow.parts).length
+      ? Object.entries(es[0].borrow.parts).map(([mine, theirs]) => `${mine} <- ${pal.borrowed.from}'s ${theirs}`).join(', ') : null
+    warnings.add(`${n} has no palette "${pal.borrowed.palette}": used ${pal.borrowed.from}'s "${pal.borrowed.palette}" colours instead, matched by part size` +
+      `${map ? ` (${map})` : ' in each style'}, not role by role (--strict fails instead).`)
+  }
   // colours: one line per colour for the whole command, never one per icon. Only the colours set by hand are checked
   // (a palette's own roles, and roles borrowed from another icon's palette, may leave some out); the ink always applies.
   if (colourEntries.size && typeof lib.colorSummary === 'function') {
@@ -448,5 +544,16 @@ export async function exportIcons(lib, o) {
     for (const n of sum.notes) notes.add(n)
     for (const w of sum.warnings) warnings.add(w)
   }
-  return { files: out, notes: [...notes], warnings: [...warnings] }
+  // per icon and style: colours that change nothing there (as get_icon's appliedPalette.ignored), where a theme's
+  // colours went, and which donor colours a borrowed palette put on which part
+  const colorReport = []
+  for (const e of colourEntries.values()) {
+    const ignored = e.applied && e.applied.ignored && e.applied.ignored.length ? e.applied.ignored : null
+    if (!ignored && !e.theme && !e.borrow) continue
+    colorReport.push({ name: e.name, style: e.style,
+      ...(ignored ? { ignored, paintedWith: e.applied.usedRoles } : {}),
+      ...(e.theme ? { theme: { ...e.theme.parts, exact: e.theme.exact, exactShare: e.theme.exactShare, ...(e.theme.inkLeads ? { inkLeads: true } : {}) } } : {}),
+      ...(e.borrow ? { borrowed: e.borrow } : {}) })
+  }
+  return { files: out, notes: [...notes], warnings: [...warnings], colorReport }
 }

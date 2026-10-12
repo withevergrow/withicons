@@ -198,7 +198,7 @@ function fallbackFooter(p) {
           <li><a href="${p}ai.html">For AI agents</a></li><li><a href="${p}ai.html#mcp">MCP server</a></li>
           <li><a href="${p}ai.html#skill">Agent skill</a></li><li><a href="${p}llms.txt">llms.txt</a></li></ul></div>
         <div class="foot-col s-sketch"><h2>About</h2><ul>
-          <li><a href="${p}about.html">About</a></li><li><a href="${p}blog/index.html">Journal</a></li><li><a href="${p}license.html">License</a></li>
+          <li><a href="${p}about.html">About</a></li><li><a href="${p}blog/index.html">Journal</a></li><li><a href="${p}demos/index.html">Demos</a></li><li><a href="${p}license.html">License</a></li>
           <li><a href="${p}faq.html">FAQ</a></li><li><a href="https://github.com/withevergrow/withicons/issues/new?template=icon-request.yml">Request an icon</a></li><li><a href="https://github.com/withevergrow/withicons/issues/new/choose">Send feedback</a></li><li><a href="https://withevergrow.com">Evergrow</a></li></ul></div>
       </nav>
     </div>

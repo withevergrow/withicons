@@ -73,4 +73,9 @@ export const TUNE = {
   'calendar': { header: 10 }, 'calendar-days': { header: 10 }, 'calendar-check': { header: 10 }, 'calendar-plus': { header: 10 },
   'calendar-x': { header: 10 }, 'calendar-clock': { header: 10 }, 'calendar-span': { header: 10 },
   'coffee': { a: 'c3', s: 'c3' },
+  // run 14: chocolate bakes and rolling pin like bread and cookie, golden wheat, a cream oven and baby bottle like the
+  // fridge, a gold crown over a cream tooth like tooth, a cream mosque with a gold minaret and crescent
+  'baguette': { k: 'c3', a: 'c2', s: 'c2' }, 'croissant': { k: 'c3', a: 'c2', s: 'c2' }, 'rolling-pin': { k: 'c3', a: 'c2', s: 'c2' },
+  'wheat': { k: 'tint', a: 'c2', s: 'c2' }, 'oven': { k: 'c4', a: 'c2', s: 'c2' }, 'baby-bottle': { k: 'c4', a: 'c1', s: 'c2' },
+  'tooth-crown': { k: 'tint', a: 'c4', s: 'c2' }, 'mosque': { k: 'c4', a: 'tint', s: 'tint' },
 }

@@ -213,5 +213,5 @@ each plays once as it scrolls in, and one calm loop at most; reduced motion stil
 ## Icons with a tuned animation
 
 <!-- motion:start -->
-734 icons have a tuned animation (any icon can use any preset). The table (icon, loop, hover, swaps, what it says) is in [motion-icons.md](motion-icons.md); grep it for one icon.
+750 icons have a tuned animation (any icon can use any preset). The table (icon, loop, hover, swaps, what it says) is in [motion-icons.md](motion-icons.md); grep it for one icon.
 <!-- motion:end -->

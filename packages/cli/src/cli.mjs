@@ -50,7 +50,7 @@ Colours (multi-colour styles: duo, blueprint${paletteStyles && paletteStyles.len
   --colors <k=v,...>        get: several at once: "c1=#e11d48,ink=#111" or a variable "retro-2=#0ea5e9"
   --tag <tag>               palettes: only palettes with this tag (pastel, neon, retro, true-to-life …;
                               avatars: true-to-life = the skin-tone and hair palettes)
-  Duo: --with-duo (tint) and --with-duo-accent (one detail) are CSS variables; "Duo with an accent" =
+  Duo: --with-duo (c1, a see-through tone) and --with-duo-accent (one detail) are CSS variables; "Duo with an accent" =
   --colors "duo=#6B70F7,duo-accent=#6B70F7" --stroke-width 1.5. Holiday styles (utsav, rangoli, halloween,
   christmas, lunar, valentine) also have festival palettes: withicons styles --for christmas lists them.
 
@@ -141,7 +141,7 @@ const COLOUR_OPTS = `  --palette <id>            one of the icon's palettes (wit
   --color <css color>       the ink (currentColor)
   A role the style does not paint the icon with changes nothing. With several icons, one line per colour says
   which icons use it ("--accent applies to: phone-call (14 others don't use it)"); a warning only when none do.
-  withicons palettes <name> --style <style> marks the main role (the colour of the icon's body).`
+  withicons palettes <name> --style <style> marks the main role (the colour role painting the largest part).`
 const COMMAND_HELP = ({ styles = [] } = {}) => {
   const st = styles.length ? styles.join(', ') : 'line (default), solid, duo, …'
   return {
@@ -151,7 +151,7 @@ Options
   --limit, -n <n>           max results (default 10)
   --category, -c <name>     only this category (withicons categories)
   --style, -s <style>       style for the suggested command: ${st}
-  --format, -f <format>     snippet format in --json (default react)
+  --format, -f <format>     snippet format in --json (default react); none = names only, no snippet
   --json                    machine-readable output
 Exit codes: 0 found, 1 nothing found, 2 usage error
 
@@ -219,7 +219,11 @@ Colours
 ${COLOUR_OPTS}
   --strict                  with --palette and several icons: fail (writing nothing) when an icon lacks the
                             palette. Default: such icons borrow the palette's colours from the first icon that
-                            has it, and a warning names them.
+                            has it, matched by part size, and a warning names them.
+  --theme <colours>         brand colours on each icon's own parts, largest first, in any style:
+                              --theme "#0ea5e9,#f59e0b" (primary, secondary[, tertiary]) or "#0ea5e9,ink=#111827"
+  --per-icon <icon=…,…>     colours for single icons over --theme ("/" between one icon's colours; role keys too):
+                              --per-icon "heart=#e11d48,star=#f59e0b/#fde68a,avatar-woman=c1:#f6d2b6"
 
 Motion (gif, apng, animated-svg, pptx-animated, lottie, dotlottie, code formats)
   --motion <m>              loop (default), hover, once, none, swap, or a preset (ring, spin, …; hover:ring)
@@ -329,7 +333,7 @@ const FLAGS = { s: 'style', f: 'format', n: 'limit', c: 'category', fw: 'framewo
   o: 'out', formats: 'format', bg: 'background', 'all-style': 'all-styles', 'every-style': 'all-styles' }
 const BOOL = new Set(['json', 'version', 'help', 'raw', 'no-color', 'global', 'dry-run', 'force', 'no-mcp', 'no-skill', 'print', 'path', 'zip', 'list', 'flat', 'all-styles', 'strict'])
 const VALUE = new Set(['style', 'format', 'framework', 'size', 'stroke-width', 'color', 'trigger', 'preset', 'to', 'effect', 'duration', 'limit',
-  'category', 'mcp', 'out', 'palette', 'colors', 'tag', 'background', 'motion', 'padding', 'fps', 'seconds', 'loop', 'matte', 'hold', 'name', 'name-map', 'for', 'use', 'icon', ...ROLES])
+  'category', 'mcp', 'out', 'palette', 'colors', 'tag', 'background', 'motion', 'padding', 'fps', 'seconds', 'loop', 'matte', 'hold', 'name', 'name-map', 'for', 'use', 'icon', 'theme', 'per-icon', ...ROLES])
 class UsageError extends Error {}
 const near = (k, list) => list.find(x => x.startsWith(k.slice(0, 3)) || k.startsWith(x.slice(0, 3)))
 function parseArgs(argv) {
@@ -436,12 +440,23 @@ async function run(argv) {
         if (!query.trim()) return usage('withicons search: give some words, e.g. withicons search "throw away"')
         const r = lib.searchIcons({ query, limit: num(o, 'limit', { int: true }) || 10, style: o.style, category: o.category, format: o.format || o.framework || 'react' })
         if (o.json) { out(r); return r.count ? 0 : 1 }
+        // similar icons (loosely related, not exact matches), apart from the matches
+        const extra = r.additional || []
+        const listExtra = () => {
+          const aw = Math.max(...extra.map(x => x.name.length))
+          console.log('Additional results (loosely related, not exact matches):')
+          for (const x of extra) console.log(`  ${x.name.padEnd(aw)}  ${dim(x.category.padEnd(13))} ${dim(x.reason)}`)
+        }
         if (!r.count) {
-          console.log(`No icons for "${query}".` + (r.suggestions.length ? ` Did you mean: ${r.suggestions.map(cyan).join(', ')}?` : ''))
+          if (!extra.length) { console.log(`No icons for "${query}".` + (r.suggestions.length ? ` Did you mean: ${r.suggestions.map(cyan).join(', ')}?` : '')); return 1 }
+          console.log(`No exact match for "${query}".\n`)
+          listExtra()
+          console.log(dim('\n  Use one only if it fits, or try a simpler or more general word.'))
           return 1
         }
         const w = Math.max(...r.results.map(x => x.name.length))
         for (const x of r.results) console.log(`  ${bold(x.name.padEnd(w))}  ${dim(x.category.padEnd(13))} ${dim(x.reason)}`)
+        if (extra.length) { console.log(); listExtra() }
         console.log(dim(`\n  withicons get ${r.results[0].name}${r.style !== 'line' ? ' --style ' + r.style : ''} --format react   ·   ${r.results[0].url}`))
         return 0
       }
@@ -676,7 +691,7 @@ async function exportCmd(lib, args, o, usage) {
     if (padding !== undefined && !(padding >= 0 && padding <= 0.6)) throw new UsageError(`--padding must be between 0 and 0.6 (a share of the icon size), got "${o.padding}"`)
     r = await X.exportIcons(lib, {
       names: args, format: o.format, style: o.style, allStyles: !!o['all-styles'], size: num(o, 'size', { int: true }), padding, strokeWidth: num(o, 'stroke-width'),
-      background: o.background, palette: o.palette, colors, motion: o.motion, duration: num(o, 'duration'), out: o.out,
+      background: o.background, palette: o.palette, colors, theme: o.theme, perIcon: o['per-icon'], motion: o.motion, duration: num(o, 'duration'), out: o.out,
       filename: o.name, nameMap: o['name-map'], strictPalette: !!o.strict,
       fps: o.fps, seconds: o.seconds, loop: o.loop, matte: o.matte, to: o.to, effect: o.effect, hold: o.hold === undefined ? undefined : num(o, 'hold', { min: -1 }),
     })
@@ -696,7 +711,7 @@ async function exportCmd(lib, args, o, usage) {
     return 0
   }
   if (o.json) {
-    console.log(JSON.stringify({ count: r.files.length, notes: r.notes, warnings: r.warnings || [], files: r.files.map(({ data, ...f }) => f) }, null, 2))
+    console.log(JSON.stringify({ count: r.files.length, notes: r.notes, warnings: r.warnings || [], ...(r.colorReport && r.colorReport.length ? { colorReport: r.colorReport } : {}), files: r.files.map(({ data, ...f }) => f) }, null, 2))
     return 0
   }
   const w = Math.max(...r.files.map(f => path.relative(process.cwd(), f.file).length))

@@ -1,6 +1,6 @@
 # withicons
 
-**with icons** from the terminal — search 734 icons x 34 styles in plain English, print SVG, framework or animation code,
+**with icons** from the terminal — search 750 icons x 34 styles in plain English, print SVG, framework or animation code,
 and get import lines. Works offline; everything ships in the package.
 
 ```sh

@@ -1,0 +1,1753 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Last Rooftop of the Season (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: Dee, Marcus and the 4C crew are throwing the last rooftop party of the season: Saturday 17 October, 7 pm to midnight, 9 Foundry Street. Four sets, a bring-sheet, blankets, and a silent disco after 11.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#08061c">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens ============ */
+:root{
+  --night:#08061c; --deep:#120d33; --panel:#1a1448;
+  --violet:#8b6bff; --violet-soft:#b9a6ff; --pink:#ff4fa3; --pink-soft:#ff8cc4; --orange:#ffa14a;
+  --text:#f7f4ff; --muted:#c3bce3; --faint:#9890c4; --line:rgba(255,255,255,.15);
+  --r:24px;
+  --disp:"Syne","Space Grotesk",system-ui,sans-serif; --body:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  /* the page's own palette for the default style (liquid) and the recommended multi-colour styles */
+  --with-liquid-c1:#8b6bff; --with-liquid-c2:#ff5fae; --with-liquid-c3:#3a2aa8; --with-liquid-c4:#ffa14a; --with-liquid-accent:#ff4fa3;
+  --with-liquid-edge:#e6dcff; --with-liquid-tint:#ffd9c2; --with-liquid-shadow:#120a4a;
+  --with-chrome-accent:#ff4fa3; --with-chrome-c4:#ffb36b;
+  --with-glass-c1:#8b6bff; --with-glass-c2:#ff5fae; --with-glass-accent:#ffa14a;
+  --with-sticker-c1:#8b6bff; --with-sticker-c2:#ff4fa3; --with-sticker-accent:#ffa14a;
+  --with-bauhaus-c1:#ff4fa3; --with-bauhaus-c2:#8b6bff; --with-bauhaus-accent:#ffa14a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:88px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--night);color:var(--text);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%}
+[hidden]{display:none!important}
+h1,h2,h3,h4{font-family:var(--disp);line-height:1.08;margin:0;letter-spacing:-.01em}
+p{margin:0}
+a{color:inherit}
+ul,ol{margin:0;padding:0}
+:focus-visible{outline:3px solid var(--pink-soft);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1180px,calc(100% - 32px));margin-inline:auto}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:#fff;color:#111;padding:10px 16px;border-radius:10px;font-weight:700}
+.skip:focus{top:12px}
+
+/* ============ pieces ============ */
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.115),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+  backdrop-filter:blur(16px) saturate(1.35);-webkit-backdrop-filter:blur(16px) saturate(1.35);box-shadow:0 24px 60px rgba(3,1,20,.45),inset 0 1px 0 rgba(255,255,255,.14)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;border:1px solid transparent;background:none;color:var(--text);
+  font:700 .98rem/1 var(--body);text-decoration:none;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.btn:active{transform:scale(.97)}
+.btn-pri{background:linear-gradient(135deg,var(--pink),var(--orange));color:#1b0a2a;box-shadow:0 10px 30px rgba(255,79,163,.34)}
+.btn-pri:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(255,79,163,.5)}
+.btn-ghost{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);color:var(--text)}
+.btn-ghost:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
+.btn-sm{min-height:44px;padding:0 18px;font-size:.92rem}
+.btn-lg{min-height:56px;padding:0 32px;font-size:1.05rem}
+.btn[disabled]{opacity:.55;cursor:not-allowed;transform:none}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font:600 .9rem/1 var(--body);cursor:pointer;transition:background .15s}
+.chip:hover{background:rgba(255,255,255,.14)}
+.chip[aria-pressed="true"]{background:var(--text);color:#150d33;border-color:var(--text)}
+.ib{display:inline-grid;place-items:center;width:64px;height:64px;border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);color:var(--pink-soft);flex:none}
+.ib-violet{color:var(--violet-soft)}
+.ib-pink{color:var(--pink-soft)}
+.kicker{font:700 .78rem/1 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--pink-soft);margin-bottom:14px}
+.sec{position:relative;isolation:isolate;padding:clamp(60px,7.5vw,104px) 0;overflow:clip}
+.sec-h{max-width:760px;margin-bottom:clamp(28px,4vw,48px)}
+.sec-h h2{font-size:clamp(1.85rem,4.4vw,3.2rem);font-weight:700;line-height:1.04;letter-spacing:-.02em}
+.lead{color:var(--muted);font-size:clamp(1rem,1.5vw,1.12rem);margin-top:16px;max-width:60ch}
+.lead b{color:var(--text)}
+.sec-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.f{display:grid;gap:7px;align-content:start;min-width:0}
+.f label,.f-set legend{font:600 .86rem/1.2 var(--body);color:var(--text)}
+.opt{color:var(--faint);font-weight:500}
+input,select,textarea{width:100%;min-height:48px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,255,255,.24);background:rgba(8,6,28,.6);color:var(--text);font:500 1rem/1.2 var(--body)}
+input::placeholder{color:#8c84b8}
+input:focus,select:focus{border-color:var(--pink-soft);outline:none;box-shadow:0 0 0 3px rgba(255,79,163,.32)}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,#cfc7f5 50%),linear-gradient(135deg,#cfc7f5 50%,transparent 50%);background-position:calc(100% - 20px) 21px,calc(100% - 14px) 21px;background-size:6px 6px;background-repeat:no-repeat;padding-right:36px}
+select option{background:#150f40;color:#fff}
+input[aria-invalid="true"]{border-color:#ff8f8f;box-shadow:0 0 0 3px rgba(255,100,100,.22)}
+.f-err{min-height:0;color:#ffb0b0;font-size:.84rem;font-weight:600}
+.f-err:empty{display:none}
+.f-row{display:grid;gap:16px}
+.f-fine{color:var(--faint);font-size:.82rem;margin-top:14px}
+.toast{position:fixed;left:16px;bottom:16px;z-index:90;max-width:min(340px,calc(100vw - 32px));padding:12px 18px;border-radius:14px;background:#fff;color:#150d33;font-weight:700;font-size:.92rem;box-shadow:0 18px 40px rgba(0,0,0,.4);
+  opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .2s,transform .2s}
+.toast.on{opacity:1;transform:none}
+
+/* ============ header ============ */
+.top{position:sticky;top:10px;z-index:80;height:0}
+.top-in{position:relative;width:min(1180px,calc(100% - 20px));margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 8px 8px 12px;border-radius:999px;
+  background:rgba(12,8,40,.62);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 12px 40px rgba(2,0,16,.4)}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:800 1rem/1 var(--disp);letter-spacing:.02em;margin-right:auto;white-space:nowrap}
+.brand-mark{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--pink),var(--violet));color:#fff;font:800 .9rem/1 var(--disp)}
+.nav{display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;padding:10px;border-radius:24px;background:rgba(12,8,38,.985);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.16);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.nav.open{display:flex}
+.nav a{padding:13px 16px;border-radius:14px;text-decoration:none;font-weight:600;color:var(--muted)}
+.nav a:hover,.nav a.on{background:rgba(255,255,255,.1);color:#fff}
+.menu-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--text);display:inline-grid;place-items:center;cursor:pointer;padding:0}
+.top-cta{white-space:nowrap}
+
+/* ============ hero ============ */
+.hero{position:relative;isolation:isolate;min-height:max(100svh,780px);display:flex;align-items:flex-end;padding:132px 0 36px;overflow:hidden}
+.hero-photo{position:absolute;inset:0;z-index:-2}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 68%}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(60% 46% at 84% 66%,rgba(255,79,163,.34),transparent 72%),
+  radial-gradient(70% 52% at 8% 74%,rgba(139,107,255,.34),transparent 72%),
+  linear-gradient(180deg,rgba(8,6,28,.9) 0%,rgba(28,14,84,.58) 34%,rgba(118,38,146,.30) 60%,rgba(255,138,74,.22) 80%,var(--night) 100%)}
+.hero-in{display:grid;gap:24px;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;justify-self:start;padding:8px 16px 8px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
+  font:600 .9rem/1 var(--body);letter-spacing:.04em;color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.eyebrow [data-ico]{color:var(--pink-soft)}
+.h1{font:800 min(7.4rem,10.6vw)/.94 var(--disp);text-transform:uppercase;letter-spacing:-.025em;text-shadow:0 6px 50px rgba(8,6,28,.6)}
+.h1-a{display:block}
+.h1-b{display:flex;align-items:center;gap:.9em;font-size:.34em;letter-spacing:.07em;margin-top:.7em;font-weight:700;color:rgba(255,255,255,.94)}
+.h1-b::before{content:"";width:2.4em;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--pink),var(--orange))}
+.neon{font-style:normal;text-shadow:none;background:linear-gradient(95deg,#ff7cc0 0%,#ff4fa3 38%,#ffa14a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 26px rgba(255,79,163,.5))}
+.hero-row{display:grid;gap:22px;align-items:end}
+.lede{font-size:clamp(1.05rem,1.7vw,1.25rem);color:#ece8ff;max-width:52ch;text-shadow:0 2px 24px rgba(8,6,28,.8)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.strip{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;padding:14px 12px;margin-top:6px}
+.strip-i{display:flex;align-items:center;gap:12px;padding:6px;min-width:0}
+.strip-i div{min-width:0}
+.strip-i b{display:block;font:700 1rem/1.2 var(--disp)}
+.strip-i div span{display:block;color:var(--muted);font-size:.86rem;line-height:1.3;margin-top:3px}
+.hc-ico{color:#fff;flex:none}
+.hc-pin{color:var(--pink-soft)}
+.hero-credit{font-size:.78rem;color:var(--muted)}
+.hero-credit a{color:#e9e3ff}
+.h1-wrap,.sec>.wrap,.so-in{position:relative}
+.sec-orn{position:absolute;right:0;display:none!important;pointer-events:none;color:var(--pink-soft)}
+@media (min-width:900px){.sec-orn{display:inline-flex!important}}
+.so-orn{position:absolute;right:6%;top:22%;display:none!important;pointer-events:none;color:var(--orange)}
+@media (min-width:900px){.so-orn{display:inline-flex!important}}
+.orn{position:absolute;pointer-events:none;color:var(--pink-soft);display:none!important}
+@media (min-width:900px){.orn{display:inline-flex!important}}
+.orn-1{top:-6%;right:9%}.orn-2{top:10%;right:30%;color:var(--orange)}.orn-3{top:34%;right:1%;color:var(--violet-soft)}
+
+/* ============ ticker ============ */
+.ticker{overflow:hidden;background:linear-gradient(90deg,var(--pink),var(--orange));color:#1b0a2a;padding:13px 0;border-block:1px solid rgba(255,255,255,.3)}
+.ticker-track{display:flex;width:max-content;animation:tick 46s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.tk{display:inline-flex;align-items:center;gap:10px;padding:0 0 0 28px;font:800 .8rem/1 var(--disp);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.tk::after{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.45;margin-left:28px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ============ plan ============ */
+.plan-grid{display:grid;gap:20px}
+.plan-photo{margin:0;position:relative;border-radius:var(--r);overflow:hidden;min-height:300px;border:1px solid rgba(255,255,255,.14)}
+.plan-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.plan-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,28,0) 45%,rgba(8,6,28,.82) 100%),linear-gradient(120deg,rgba(139,107,255,.35),rgba(255,79,163,.12) 60%)}
+.plan-photo figcaption{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;display:flex;align-items:center;gap:10px;font-weight:600;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.plan-photo figcaption [data-ico]{color:#ffd98a}
+.plan-cards{display:grid;gap:14px}
+.card{padding:22px;display:grid;gap:10px;align-content:start}
+.card h3{font-size:1.3rem;font-weight:700}
+.card p{color:var(--muted)}
+.facts{list-style:none;margin:28px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.facts li{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"i b" "i s";column-gap:14px;align-items:center;padding:16px;border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+.facts li>[data-ico]{grid-area:i;color:var(--violet-soft)}
+.facts b{grid-area:b;font:800 1.7rem/1 var(--disp);align-self:end}
+.facts li>span:last-child{grid-area:s;color:var(--muted);font-size:.86rem;align-self:start}
+
+/* ============ forecast ============ */
+.forecast{background:linear-gradient(180deg,var(--night),#14093c 50%,var(--night))}
+.forecast .sec-bg{opacity:.5;object-position:50% 40%;mix-blend-mode:screen}
+.forecast::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 50% at 70% 30%,rgba(139,107,255,.35),transparent 70%),linear-gradient(180deg,var(--night) 0%,rgba(20,9,60,.4) 40%,var(--night) 100%)}
+.fc-grid{display:grid;gap:20px}
+.fc{padding:clamp(18px,2.4vw,28px);display:grid;gap:20px}
+.fc-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.fc-label{display:inline-flex;align-items:center;gap:10px;font-weight:700;color:var(--muted)}
+.fc-label [data-ico]{color:var(--orange)}
+.seg{display:inline-flex;padding:4px;border-radius:999px;background:rgba(8,6,28,.6);border:1px solid var(--line)}
+.seg-b{min-height:40px;min-width:56px;padding:0 16px;border:0;border-radius:999px;background:none;color:var(--muted);font:700 .92rem/1 var(--body);cursor:pointer}
+.seg-b[aria-pressed="true"]{background:var(--text);color:#150d33}
+.fc-tabs{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(max-content,1fr);gap:10px;overflow-x:auto;padding:2px}
+.fc-tab{display:grid;justify-items:center;gap:4px;min-width:0;padding:12px 4px 10px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);cursor:pointer;font:inherit;transition:background .2s,border-color .2s,transform .2s}
+.fc-tab:hover{background:rgba(255,255,255,.1)}
+.fc-tab[aria-selected="true"]{background:linear-gradient(160deg,rgba(255,79,163,.3),rgba(139,107,255,.26));border-color:rgba(255,160,210,.7);box-shadow:0 0 0 1px rgba(255,79,163,.4),0 14px 40px rgba(255,79,163,.22)}
+.fc-hr{font:700 .82rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fc-tab[aria-selected="true"] .fc-hr{color:#fff}
+.wx,.wx-big,.wx-mini{color:#fff}
+.wx .kit-fb{font:700 .95rem/1.2 var(--body)}
+.fc-panel{display:grid;gap:18px;align-items:center;padding:20px;border-radius:22px;background:rgba(8,6,28,.42);border:1px solid rgba(255,255,255,.1)}
+.wx-big{justify-self:center;filter:drop-shadow(0 0 40px rgba(255,160,90,.28))}
+.wx-big .kit-fb{font:800 2.4rem/1.1 var(--disp)}
+.fc-copy h3{font-size:1.6rem;font-weight:800;margin-bottom:8px}
+.fc-copy>p{color:var(--muted)}
+.fc-stats{list-style:none;display:grid;gap:10px;margin-top:18px}
+.fc-stats li{display:flex;align-items:center;gap:14px}
+.fc-stats li>span:last-child{display:grid;line-height:1.25}
+.fc-stats b{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.fc-stats li>span:last-child span{font-weight:600}
+.fc-stats [data-ico]{color:var(--violet-soft)}
+.wear{padding:clamp(20px,2.4vw,28px);display:grid;gap:16px;align-content:start}
+.wear-head{display:flex;align-items:center;gap:14px}
+.wear-head h3{font-size:1.5rem;font-weight:800}
+.wear-tip{font:700 1.18rem/1.35 var(--disp);color:#fff;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,rgba(255,79,163,.22),rgba(255,161,74,.14));border:1px solid rgba(255,160,210,.35)}
+.wear-list{list-style:none;display:grid;gap:8px}
+.wear-list li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;color:var(--faint);border:1px dashed rgba(255,255,255,.14);transition:all .25s}
+.wear-list li [data-ico]{color:var(--faint)}
+.wear-list li.on{color:#fff;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07)}
+.wear-list li.on [data-ico]{color:var(--pink-soft)}
+.wear-note{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:.92rem}
+
+/* ============ lineup ============ */
+.lineup{background:#0a0620}
+.lineup .sec-bg{object-position:50% 56%;opacity:.55}
+.lineup::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--night) 0%,rgba(14,6,44,.78) 14%,rgba(34,8,70,.72) 52%,var(--night) 100%)}
+.lu-grid{display:grid;gap:24px}
+.lu-main{display:grid;gap:16px;align-content:start;min-width:0}
+.scrub{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;padding:18px 20px}
+.scrub-clock{color:#fff}
+.hc-ico:not(.hc-pin) .kit-fb{font:800 2.4rem/1 var(--disp)}
+.hc-ico.hc-date .kit-fb{font:800 1.25rem/1.05 var(--disp);white-space:nowrap}
+.scrub-clock .kit-fb{font-size:3.2rem;line-height:1}
+.set-clock .kit-fb{font-size:2.4rem;line-height:1}
+.scrub-body{display:grid;gap:10px;min-width:0}
+.scrub-body label{display:flex;justify-content:space-between;gap:10px;font-weight:700}
+.scrub-body output{color:var(--orange);font-variant-numeric:tabular-nums}
+.scrub-now{color:var(--muted);font-size:.95rem;min-height:2.9em}
+input[type=range]{padding:0;border:0;background:none;min-height:36px;accent-color:var(--pink);appearance:none;-webkit-appearance:none;width:100%}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:8px;background:linear-gradient(90deg,var(--violet),var(--pink),var(--orange))}
+input[type=range]::-moz-range-track{height:8px;border-radius:8px;background:linear-gradient(90deg,var(--violet),var(--pink),var(--orange))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:#fff;border:3px solid var(--pink);box-shadow:0 0 0 5px rgba(255,79,163,.28)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--pink)}
+input[type=range]:focus-visible{outline-offset:6px}
+.sets{list-style:none;display:grid;gap:12px}
+.set{position:relative;display:grid;grid-template-columns:auto 1fr;gap:16px;padding:18px;border-radius:22px;background:rgba(14,8,44,.6);border:1px solid rgba(255,255,255,.12);overflow:hidden;transition:background .3s,border-color .3s,opacity .3s,transform .3s}
+.set-clock{color:#fff;align-self:start}
+.set-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.set h3{font-size:1.35rem;font-weight:800}
+.set-state{font:700 .72rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--muted);white-space:nowrap}
+.set-vibe{font-weight:700;color:var(--pink-soft);margin:6px 0 8px;font-size:.92rem}
+.set-body>p:not(.set-vibe):not(.tags){color:var(--muted);font-size:.96rem}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tags span{padding:5px 11px;border-radius:999px;border:1px solid var(--line);font-size:.78rem;font-weight:600;color:#e6e0ff}
+.set-bar{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.06);opacity:0}
+.set-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--pink),var(--orange))}
+.set.is-now{background:linear-gradient(150deg,rgba(255,79,163,.24),rgba(139,107,255,.2));border-color:rgba(255,160,210,.7);box-shadow:0 0 0 1px rgba(255,79,163,.35),0 20px 50px rgba(255,79,163,.18);transform:translateY(-2px)}
+.set.is-now .set-state{background:var(--pink);color:#1b0a2a}
+.set.is-now .set-bar{opacity:1}
+.set.is-done{opacity:.55}
+.set.is-next .set-state{background:rgba(255,161,74,.22);color:#ffd2a1}
+.lu-side{display:grid;gap:16px;align-content:start}
+.dj-card{margin:0;position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;border:1px solid rgba(255,255,255,.16)}
+.dj-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%}
+.dj-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,28,.1) 30%,rgba(8,6,28,.9) 100%),linear-gradient(90deg,rgba(255,79,163,.22),transparent 60%)}
+.dj-card figcaption{position:absolute;z-index:2;left:18px;right:18px;bottom:16px;display:grid;gap:3px}
+.dj-card b{font:800 1.7rem/1.05 var(--disp)}
+.dj-card figcaption>span:last-child{color:#e6e0ff}
+.dj-badge{display:inline-flex;align-items:center;gap:8px;justify-self:start;padding:6px 12px 6px 8px;border-radius:999px;background:rgba(8,6,28,.7);border:1px solid rgba(255,255,255,.2);font:700 .72rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.dj-badge [data-ico]{color:var(--orange)}
+.lu-notes{list-style:none;display:grid;gap:10px}
+.lu-notes li{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:18px;background:rgba(14,8,44,.6);border:1px solid var(--line);color:#e6e0ff;font-size:.95rem}
+.lu-notes [data-ico]{color:var(--pink-soft)}
+.req-grid{display:grid;gap:20px;margin-top:clamp(40px,6vw,72px)}
+.req{padding:clamp(20px,2.4vw,28px);display:grid;gap:16px;align-content:start}
+.req-head{display:flex;gap:16px;align-items:flex-start}
+.req-head h3{font-size:1.5rem;font-weight:800;margin-bottom:6px}
+.req-head p{color:var(--muted);font-size:.95rem}
+.queue{padding:clamp(20px,2.4vw,28px)}
+.queue-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.queue-head h3{font-size:1.5rem;font-weight:800}
+.queue-count{font:700 .78rem/1 var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--orange)}
+.queue-list{list-style:none;display:grid;gap:8px}
+.q-item{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:center;padding:10px 10px 10px 12px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+.q-rank{font:800 1.1rem/1 var(--disp);color:var(--faint);text-align:center}
+.q-item:nth-child(-n+3) .q-rank{color:var(--orange)}
+.q-t{min-width:0}
+.q-t b{display:block;line-height:1.25;overflow-wrap:anywhere}
+.q-t span{display:block;color:var(--muted);font-size:.82rem;line-height:1.3;margin-top:2px}
+.q-vote{display:inline-flex;align-items:center;gap:8px;min-height:44px;min-width:64px;justify-content:center;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--text);font:700 .95rem/1 var(--body);cursor:pointer;font-variant-numeric:tabular-nums}
+.q-vote:hover{background:rgba(255,255,255,.14)}
+.q-vote[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);color:#1b0a2a}
+.q-item.is-new{animation:pop .5s ease}
+@keyframes pop{0%{transform:scale(.96);background:rgba(255,79,163,.35)}100%{transform:none}}
+.queue-foot{display:flex;gap:10px;align-items:center;margin-top:16px;color:var(--faint);font-size:.86rem}
+
+/* ============ bring-sheet ============ */
+.bring{background:linear-gradient(180deg,var(--night),#100a34 55%,var(--night))}
+.bs-bar{display:grid;gap:18px 28px;padding:clamp(16px,2.2vw,24px);margin-bottom:20px}
+.bs-name input{max-width:440px}
+.bs-prog{display:flex;align-items:center;gap:16px}
+.bs-prog b{display:block;font:800 1.2rem/1.2 var(--disp)}
+.bs-prog div span{display:block;color:var(--muted);font-size:.9rem}
+#bs-ring{color:#fff}
+.bs-filters{display:flex;flex-wrap:wrap;gap:8px}
+.bs-cols{display:grid;gap:18px;align-items:start}
+.bs-col{overflow:hidden;padding-bottom:6px}
+.bs-photo{position:relative;height:150px}
+.bs-photo img{width:100%;height:100%;object-fit:cover;object-position:45% 50%}
+.bs-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,28,0) 40%,rgba(18,12,56,.95) 100%)}
+.bs-photo-art{display:grid;place-items:center;background:radial-gradient(70% 90% at 50% 30%,rgba(255,79,163,.4),transparent 70%),linear-gradient(135deg,#2c1a7a,#5a2a9a 55%,#8a3a9a);color:#ffe3a8}
+.bs-photo-art .kit-fb{font-size:84px}
+.bs-col-h{display:flex;gap:14px;align-items:center;padding:0 16px;margin-top:-26px;position:relative;z-index:2}
+.bs-col-h .ib{width:56px;height:56px;background:rgba(20,12,60,.92)}
+.bs-col-h h3{font-size:1.45rem;font-weight:800}
+.bs-col-h p{color:var(--muted);font-size:.86rem;line-height:1.35}
+.bs-list{list-style:none;display:grid;gap:10px;padding:16px 14px 12px}
+.bs-item{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:12px;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);transition:border-color .2s,background .2s}
+.bs-item.is-mine{border-color:rgba(255,120,190,.75);background:rgba(255,79,163,.12)}
+.bs-item.is-full:not(.is-mine){opacity:.72}
+.bs-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.08);color:var(--pink-soft)}
+.bs-main{min-width:0}
+.bs-main b{display:block;line-height:1.25}
+.bs-main small{display:block;color:var(--muted);font-size:.82rem;line-height:1.35;margin-top:3px}
+.bs-meta{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;margin-top:10px}
+.bs-info{display:grid;gap:3px;min-width:0}
+.bs-who{color:#e6e0ff;font-size:.82rem;line-height:1.3;min-width:0}
+.bs-who em{font-style:normal;color:var(--faint)}
+.bs-count{font:700 .74rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--orange);white-space:nowrap}
+.btn-claim{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font:700 .88rem/1 var(--body);cursor:pointer;white-space:nowrap}
+.btn-claim:hover:not([disabled]){background:rgba(255,255,255,.18)}
+.btn-claim[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);color:#1b0a2a}
+.btn-claim[disabled]{opacity:.5;cursor:not-allowed}
+.covered{margin:6px 14px 14px;padding:16px;border-radius:18px;border:1px dashed rgba(255,255,255,.28);color:var(--muted);font-size:.9rem}
+.covered h4{display:flex;align-items:center;gap:8px;color:#fff;font:700 1rem/1.2 var(--disp);margin-bottom:8px}
+.covered h4 [data-ico]{color:#8dffd0}
+.bs-col[hidden],.bs-item[hidden]{display:none}
+.bs-empty{padding:18px;color:var(--muted);text-align:center}
+
+/* ============ guests ============ */
+.guests-grid{display:grid;gap:28px;align-items:start}
+.guest-photo{margin:0;position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;border:1px solid rgba(255,255,255,.16)}
+.guest-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.guest-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,28,.0) 50%,rgba(8,6,28,.85) 100%)}
+.guest-photo figcaption{position:absolute;z-index:2;left:16px;bottom:14px;display:flex;align-items:center;gap:10px;font-weight:600;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.guest-photo figcaption [data-ico]{color:#ffd98a}
+.g-meter{display:grid;gap:8px;margin:-8px 0 22px}
+.g-bar{height:10px;border-radius:10px;background:rgba(255,255,255,.1);overflow:hidden}
+.g-bar i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,var(--violet),var(--pink),var(--orange));transition:width .5s ease}
+.g-meter p{color:var(--muted);font-size:.92rem}
+.g-meter b{color:#fff}
+.g-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.g-card{display:grid;justify-items:center;align-content:start;gap:6px;padding:14px 6px 12px;border-radius:20px;text-align:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);min-width:0}
+.g-card.is-you{border-color:rgba(255,120,190,.8);background:linear-gradient(160deg,rgba(255,79,163,.22),rgba(139,107,255,.16))}
+.g-card.is-maybe{opacity:.85}
+.g-av{color:#fff}
+.g-name{font-weight:700;font-size:.92rem;line-height:1.2;overflow-wrap:anywhere}
+.g-tag{font:700 .64rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--orange)}
+.g-note{font-size:.78rem;color:var(--muted);line-height:1.3}
+.g-more,.g-spot{border-style:dashed;background:transparent}
+.g-more .g-name{font-size:1.1rem}
+.g-spot{text-decoration:none;color:var(--pink-soft)}
+.g-spot:hover{background:rgba(255,255,255,.07)}
+.g-spot .ib{width:56px;height:56px;border-radius:50%}
+.g-foot{display:flex;gap:12px;align-items:center;margin-top:22px;color:var(--muted);font-size:.95rem}
+.g-foot [data-ico]{color:var(--violet-soft)}
+/* basic-level avatars: a plain initials circle */
+.g-av .kit-fb,.av .kit-fb{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;font:800 1rem/1 var(--disp)}
+
+/* ============ rules ============ */
+.rules{padding-top:0}
+.band{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:360px;padding:clamp(70px,9vw,110px) 0 56px}
+.band>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%;z-index:-2}
+.band::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,6,28,.78) 0%,rgba(8,6,28,.35) 60%,rgba(8,6,28,.1) 100%),linear-gradient(180deg,var(--night) 0%,rgba(8,6,28,.25) 22%,rgba(20,8,60,.7) 72%,var(--night) 100%)}
+.band .sec-h{margin-bottom:0}
+.rule-grid{list-style:none;display:grid;gap:14px;margin-top:clamp(8px,2vw,24px)}
+.rule{padding:22px;display:grid;gap:10px;align-content:start}
+.rule h3{font-size:1.25rem;font-weight:700}
+.rule p{color:var(--muted);font-size:.96rem}
+
+/* ============ getting in ============ */
+.gi-grid{display:grid;gap:22px;align-items:start}
+.steps{list-style:none;display:grid;gap:12px}
+.step{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:18px;border-radius:22px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.step-n{color:var(--pink-soft)}
+.step-n .kit-fb{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--violet);color:#fff;font:800 1.1rem/1 var(--disp)}
+.step h3{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.step h3 [data-ico]{color:var(--violet-soft);flex:none}
+.step p{color:var(--muted);font-size:.96rem}
+.map{padding:14px;display:grid;gap:14px}
+.map-art{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:600/420;border:1px solid rgba(255,255,255,.12)}
+.map-art svg{position:absolute;inset:0;width:100%;height:100%}
+.pin{position:absolute;transform:translate(-50%,-100%);color:var(--pink);transition:transform .2s,filter .2s;z-index:2}
+.pin-1{left:50%;top:41%}.pin-2{left:28.4%;top:48.6%}.pin-3{left:75%;top:78.4%}.pin-4{left:50%;top:78.4%}
+.pin .kit-fb{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--pink);color:#1b0a2a;font:800 .9rem/1 var(--disp);box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.pin.is-hot{transform:translate(-50%,-100%) scale(1.22);filter:drop-shadow(0 0 14px rgba(255,79,163,.9));z-index:4}
+.map-legend{list-style:none;display:grid;gap:8px}
+.map-legend li{display:flex;align-items:center;gap:12px;padding:8px 10px;border-radius:14px;color:var(--muted);font-size:.9rem;line-height:1.35;transition:background .2s}
+.map-legend li[data-pin]:hover,.map-legend li.is-hot{background:rgba(255,255,255,.09)}
+.map-legend b{color:#fff}
+.map-legend [data-ico]{color:var(--violet-soft)}
+.map-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ============ rsvp ============ */
+.rsvp{background:radial-gradient(60% 60% at 80% 20%,rgba(255,79,163,.18),transparent 70%),radial-gradient(60% 60% at 10% 90%,rgba(139,107,255,.22),transparent 70%)}
+.rsvp-card{display:grid;overflow:hidden}
+.rsvp-photo{margin:0;position:relative;min-height:240px;aspect-ratio:16/9}
+.rsvp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rsvp-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,28,0) 30%,rgba(8,6,28,.82) 100%)}
+.rsvp-photo figcaption{position:absolute;z-index:2;left:20px;bottom:18px;font:800 clamp(1.5rem,3vw,2.1rem)/1.05 var(--disp);text-shadow:0 3px 24px rgba(0,0,0,.6)}
+.rsvp-main{padding:clamp(22px,4vw,48px)}
+.rsvp-main .sec-h{margin-bottom:26px}
+.rsvp-main form{display:grid;gap:20px}
+.f-set{border:0;padding:0;margin:0;display:grid;gap:10px;min-width:0}
+.opts{display:grid;gap:10px}
+.choice{position:relative;display:block;color:var(--text);font-weight:600}
+.choice input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0;min-height:0}
+.choice>span{display:flex;align-items:center;gap:12px;min-height:56px;padding:0 16px;border-radius:16px;border:1px solid rgba(255,255,255,.22);background:rgba(8,6,28,.5);transition:all .2s}
+.choice input:checked+span{border-color:var(--pink-soft);background:linear-gradient(135deg,rgba(255,79,163,.28),rgba(139,107,255,.22));box-shadow:0 0 0 1px rgba(255,79,163,.5)}
+.choice input:focus-visible+span{outline:3px solid var(--pink-soft);outline-offset:3px}
+.choice [data-ico]{color:var(--pink-soft)}
+.f-plus{display:grid;gap:14px}
+.switch{display:flex;align-items:center;gap:14px;cursor:pointer;min-height:48px;position:relative}
+.switch input{position:absolute;opacity:0;width:52px;height:30px;margin:0;cursor:pointer;min-height:0}
+.sw{flex:none;width:52px;height:30px;border-radius:30px;background:rgba(255,255,255,.18);position:relative;transition:background .2s}
+.sw::after{content:"";position:absolute;left:4px;top:4px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s}
+.switch input:checked+.sw{background:var(--pink)}
+.switch input:checked+.sw::after{transform:translateX(22px)}
+.switch input:focus-visible+.sw{outline:3px solid var(--pink-soft);outline-offset:3px}
+.sw-t{display:flex;align-items:center;gap:10px;font-weight:600}
+.sw-t [data-ico]{color:var(--pink-soft)}
+.rsvp-done{display:grid;gap:14px;justify-items:start;padding:8px 0}
+.rsvp-done[hidden]{display:none}
+.rsvp-done:focus{outline:none}
+.done-ticket{color:#fff}
+.done-ticket .kit-fb{font:800 2.2rem/1 var(--disp)}
+.rsvp-done h3{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:800}
+.rsvp-done p{color:var(--muted);max-width:52ch}
+.done-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+
+/* ============ faq ============ */
+.faq-wrap{display:grid;gap:12px;max-width:900px}
+.faq-list{display:grid;gap:10px}
+.faq details{border-radius:20px;border:1px solid var(--line);background:rgba(255,255,255,.05);transition:background .2s,border-color .2s}
+.faq details[open]{background:rgba(255,255,255,.09);border-color:rgba(255,160,210,.5)}
+.faq summary{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;min-height:64px;padding:12px 18px;cursor:pointer;list-style:none;font-weight:700;font-size:1.05rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary [data-ico]:first-child{color:var(--pink-soft)}
+.chev{color:var(--muted);transition:transform .25s}
+.faq details[open] .chev{transform:rotate(180deg)}
+.faq details>p{padding:0 20px 20px 58px;color:var(--muted)}
+
+/* ============ sign-off, credits, footer ============ */
+.signoff{position:relative;isolation:isolate;padding:clamp(90px,12vw,170px) 0;overflow:hidden}
+.signoff>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 45%;z-index:-2}
+.signoff::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(8,6,28,.62) 0%,rgba(8,6,28,.28) 55%,rgba(8,6,28,0) 100%),linear-gradient(180deg,var(--night) 0%,transparent 22%,transparent 62%,var(--night) 100%)}
+.so-in{display:grid;gap:18px;justify-items:start}
+.so-in h2{font:800 min(6.4rem,11vw)/.92 var(--disp);text-transform:uppercase;letter-spacing:-.025em;text-shadow:0 4px 40px rgba(8,6,28,.55)}
+.so-sign{display:flex;align-items:center;gap:12px;font:700 1.3rem/1.2 var(--disp)}
+.so-sign [data-ico]{color:var(--pink)}
+.so-ps{color:#e6e0ff;max-width:46ch}
+.credits{padding:64px 0 28px;border-top:1px solid var(--line);color:var(--muted);font-size:.86rem}
+.credits h2{font-size:1.1rem;color:#fff;margin-bottom:14px}
+.credits ul{list-style:none;display:grid;gap:6px;margin-bottom:16px}
+.credits a{color:#e9e3ff}
+.foot{padding:28px 0 96px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+.foot-in{display:grid;gap:16px}
+.foot-brand{display:flex;align-items:center;gap:12px;font:800 1.05rem/1 var(--disp);color:#fff;margin-bottom:10px}
+.foot-demo{color:var(--faint)}
+.foot a{color:#e9e3ff}
+
+/* ============ responsive ============ */
+.plan-grid,.fc-grid,.lu-grid,.req-grid,.guests-grid,.gi-grid,.rsvp-card,.bs-cols,.rule-grid,.plan-cards,.rsvp-main form,.faq-wrap,.foot-in{grid-template-columns:minmax(0,1fr)}
+.rsvp-main,.guests-main,.lu-side,.map,.fc,.wear{min-width:0}
+@media (max-width:639px){
+  .strip-i{flex-direction:column;align-items:flex-start;gap:8px}
+}
+@media (min-width:640px){
+  .f-row{grid-template-columns:1fr 1fr}
+  .opts{grid-template-columns:repeat(3,1fr)}
+  .facts{grid-template-columns:repeat(4,1fr)}
+  .plan-cards{grid-template-columns:1fr 1fr}
+  .rule-grid{grid-template-columns:1fr 1fr}
+  .g-grid{grid-template-columns:repeat(4,1fr)}
+  .fc-panel{grid-template-columns:auto 1fr}
+  .bs-bar{grid-template-columns:1fr auto;align-items:end}
+  .bs-filters{grid-column:1/-1}
+}
+@media (min-width:900px){
+  .dj-card{aspect-ratio:4/3}
+  .brand{margin-right:0}
+  .nav{display:flex;position:static;flex-direction:row;margin:0 auto;padding:0;background:none;border:0;box-shadow:none;gap:0}
+  .nav a{padding:10px 12px;font-size:.9rem}
+  .menu-btn{display:none}
+  .strip{grid-template-columns:repeat(4,1fr)}
+  .hero-row{grid-template-columns:1.2fr auto;gap:40px}
+  .hero-cta{justify-content:flex-end}
+  .plan-grid{grid-template-columns:.95fr 1.05fr;align-items:stretch}
+  .plan-photo{min-height:420px}
+  .fc-grid{grid-template-columns:1.5fr 1fr;align-items:start}
+  .lu-grid{grid-template-columns:1.25fr .75fr;align-items:start}
+  .lu-side{position:sticky;top:96px}
+  .req-grid{grid-template-columns:1fr 1fr;align-items:start}
+  .bs-cols{grid-template-columns:repeat(3,1fr)}
+  .guests-grid{grid-template-columns:.7fr 1.3fr;gap:44px}
+  .guest-photo{aspect-ratio:3/4;position:sticky;top:96px}
+  .g-grid{grid-template-columns:repeat(4,1fr)}
+  .rule-grid{grid-template-columns:repeat(3,1fr)}
+  .gi-grid{grid-template-columns:1fr 1.05fr}
+  .map{position:sticky;top:96px}
+  .rsvp-card{grid-template-columns:.75fr 1.25fr}
+  .rsvp-photo{aspect-ratio:auto;min-height:100%}
+  .foot-in{grid-template-columns:1.4fr 1fr;align-items:end}
+  .foot-demo{text-align:right}
+}
+@media (min-width:1100px){
+  .strip-i{gap:14px;padding:6px 10px}
+}
+@media (max-width:420px){
+  .brand-name{display:none}
+  .top-cta{padding:0 14px}
+  .scrub{grid-template-columns:1fr;justify-items:center;text-align:center}
+}
+
+/* ============ levels ============ */
+html[data-level="0"] .kit-ico,html[data-level="0"] .kit-live{min-width:0!important;min-height:0!important}
+html[data-level="0"] .glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:#1b1450;box-shadow:none}
+html[data-level="0"] .neon{background:none;color:var(--pink);filter:none}
+html[data-level="0"] .ib{background:rgba(255,255,255,.08);border-color:transparent}
+html[data-level="0"] .wx-big .kit-fb{font-size:2.8rem}
+html[data-level="0"] .wx-mini{display:none}
+html[data-level="0"] .bs-photo-art .kit-fb{font-size:72px}
+
+/* ============ motion preferences ============ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track{animation:none}
+  *,*::before,*::after{transition-duration:.001ms!important;animation-duration:.001ms!important;animation-iteration-count:1!important}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Last Rooftop of the Season","description":"A house party on the roof: four sets, a bring-sheet, blankets, and a silent disco after 11. Fictional demo event.","startDate":"2026-10-17T19:00","endDate":"2026-10-18T00:00","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled","isAccessibleForFree":true,"location":{"@type":"Place","name":"The roof at 9 Foundry Street, apt 4C (fictional)","address":"9 Foundry Street, apt 4C"},"organizer":{"@type":"Person","name":"Dee Park and Marcus Bell"}}</script>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> Last Rooftop of the Season is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+<a class="skip" href="#main">Skip to the party details</a>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#top" aria-label="Last Rooftop of the Season, back to the top">
+      <span class="brand-mark" aria-hidden="true">4C</span>
+      <span class="brand-name">Roof party</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#plan">Plan</a>
+      <a href="#forecast">Forecast</a>
+      <a href="#lineup">Sets</a>
+      <a href="#bring">Bring-sheet</a>
+      <a href="#guests">Guests</a>
+      <a href="#rules">Rules</a>
+      <a href="#getting-in">Getting in</a>
+    </nav>
+    <a class="btn btn-pri btn-sm top-cta" href="#rsvp"><span data-ico="ticket" data-size="18">🎟️</span> RSVP</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Open the menu"><span data-ico="menu" data-size="22" data-fixed-style="line">☰</span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-photo">
+    <img src="_img/rooftop-house-party/photo-1757445060456-c2194994d381-1600.jpg" width="1200" height="800" fetchpriority="high" decoding="async"
+         alt="A high-rise city skyline seen from above at night, with lit towers, glowing streets and the lake edge under a deep blue dusk sky.">
+  </div>
+  <div class="wrap hero-in">
+    <p class="eyebrow"><span data-ico="party-popper" data-size="20" data-motion="hover">🎉</span> House party &middot; Saturday 17 October</p>
+    <div class="h1-wrap">
+      <span class="orn orn-1" data-ico="sparkles" data-size="84" data-min-level="2" data-motion="loop" aria-hidden="true"></span>
+      <span class="orn orn-2" data-ico="star" data-size="44" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+      <span class="orn orn-3" data-ico="balloon" data-size="64" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+      <h1 class="h1"><span class="h1-a">Last <em class="neon">Rooftop</em></span> <span class="h1-b">of the Season</span></h1>
+    </div>
+    <div class="hero-row">
+      <p class="lede">Sunset to skyline on the roof at 9 Foundry Street, before the cold comes for good. Four sets, a taco table, twelve blankets, and a silent disco after eleven because we like our neighbours.</p>
+      <div class="hero-cta">
+        <a class="btn btn-pri" href="#rsvp"><span data-ico="ticket" data-size="20">🎟️</span> RSVP for you + 1</a>
+        <button class="btn btn-ghost" type="button" data-cal><span data-ico="calendar-plus" data-size="20" data-motion="hover">📅</span> Add to calendar</button>
+      </div>
+    </div>
+
+    <div class="strip glass" role="list" aria-label="The essentials">
+      <div class="strip-i" role="listitem">
+        <span class="hc-ico hc-date" data-live="calendar-date" data-p-day="17" data-p-month="OCT" data-size="72" data-label="Saturday 17 October">17 OCT</span>
+        <div><b>Saturday</b><span>17 October 2026</span></div>
+      </div>
+      <div class="strip-i" role="listitem">
+        <span class="hc-ico" data-live="digital-clock" data-p-time="19:00" data-p-format="12h" data-size="72" data-label="7 pm">🕖</span>
+        <div><b>7 pm to midnight</b><span>Sunset is at 6:12 pm</span></div>
+      </div>
+      <div class="strip-i" role="listitem">
+        <span class="hc-ico hc-pin" data-ico="map-pin" data-size="48">📍</span>
+        <div><b>9 Foundry Street</b><span>Apt 4C: buzz, then stairs</span></div>
+      </div>
+      <div class="strip-i" role="listitem">
+        <span class="hc-ico" id="cd-ring" data-live="timer-ring" data-p-left="6" data-p-total="30" data-size="72" data-label="6 days to go">⏳</span>
+        <div><b id="cd-main">6 days to go</b><span id="cd-sub">Doors at 7 pm sharp</span></div>
+      </div>
+    </div>
+    <p class="hero-credit">Photo: <a href="https://unsplash.com/@cr029?utm_source=withicons_demos&utm_medium=referral" rel="noopener">CR</a> on <a href="https://unsplash.com/photos/city-skyline-illuminated-at-night-with-a-dark-blue-sky-1G7oszlOqcM?utm_source=withicons_demos&utm_medium=referral" rel="noopener">Unsplash</a></p>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker-track">
+    <span class="tk"><span data-ico="sunset" data-size="20">🌇</span> Sunset 6:12 pm</span>
+    <span class="tk"><span data-ico="disc" data-size="20">💿</span> Sets from 7</span>
+    <span class="tk"><span data-ico="bed" data-size="20">🛏️</span> Blankets provided</span>
+    <span class="tk"><span data-ico="beer" data-size="20">🍺</span> BYOB</span>
+    <span class="tk"><span data-ico="moon" data-size="20">🌙</span> Quiet after 11</span>
+    <span class="tk"><span data-ico="chevrons-up" data-size="20">⬆️</span> Stairs only</span>
+  </div>
+</div>
+
+<!-- ============ THE PLAN ============ -->
+<section class="sec" id="plan" aria-labelledby="plan-h">
+  <div class="wrap">
+    <header class="sec-h">
+      <p class="kicker">The plan</p>
+      <h2 id="plan-h">Sunset in, headphones out.</h2>
+      <p class="lead">Doors on the roof open at 7, but the real show is the 6:12 sunset, so earlier is better. Here is the shape of the night.</p>
+    </header>
+
+    <div class="plan-grid">
+      <figure class="plan-photo">
+        <img src="_img/rooftop-house-party/4881662-1000.jpg" width="1200" height="800" loading="lazy" decoding="async"
+             alt="A string of warm filament bulbs stretched across a rooftop at dusk, with a blue twilight sky and neighbouring apartment buildings behind.">
+        <figcaption><span data-ico="lightbulb" data-size="22" data-motion="hover">💡</span> The roof at 6:30: string lights on, sky still blue.</figcaption>
+      </figure>
+
+      <div class="plan-cards">
+        <article class="card glass">
+          <span class="ib"><span data-ico="calendar" data-size="36">📅</span></span>
+          <h3>When</h3>
+          <p>Saturday 17 October, 7 pm to midnight. Come for the 6:12 sunset; the string lights go on at 6:30.</p>
+        </article>
+        <article class="card glass">
+          <span class="ib"><span data-ico="map-pin" data-size="36">📍</span></span>
+          <h3>Where</h3>
+          <p>The roof at 9 Foundry Street, apt 4C. Buzz 4C, then take the stairs. All of them.</p>
+        </article>
+        <article class="card glass">
+          <span class="ib"><span data-ico="music-note" data-size="36" data-motion="hover">🎵</span></span>
+          <h3>What is on</h3>
+          <p>Three DJ sets, a request box, tacos off the grill from 7:30, and a silent disco from 11 to midnight.</p>
+        </article>
+        <article class="card glass">
+          <span class="ib"><span data-ico="wine" data-size="36">🍷</span></span>
+          <h3>What to bring</h3>
+          <p>BYOB and something to share. Claim an item on the bring-sheet so we do not end up with nine bags of chips.</p>
+        </article>
+      </div>
+    </div>
+
+    <ul class="facts">
+      <li><span data-ico="users" data-size="44">👥</span><b>40</b><span>max on the roof</span></li>
+      <li><span data-ico="headphones" data-size="44">🎧</span><b>4</b><span>sets in five hours</span></li>
+      <li><span data-ico="bed" data-size="44">🛏️</span><b>12</b><span>blankets in the bin</span></li>
+      <li><span data-ico="volume-off" data-size="44">🔇</span><b>11 pm</b><span>speakers off</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ FORECAST ============ -->
+<section class="sec forecast" id="forecast" aria-labelledby="fc-h">
+  <img class="sec-bg" src="_img/rooftop-house-party/33668125-1000.jpg" width="1200" height="799" loading="lazy" decoding="async"
+       alt="Thin strands of tiny warm lights running diagonally across a deep indigo twilight sky.">
+  <div class="wrap">
+    <span class="sec-orn" style="top:-4px;right:6%;color:var(--violet-soft)" data-ico="moon" data-size="132" data-min-level="2" data-motion="loop" aria-hidden="true"></span>
+    <span class="sec-orn" style="top:92px;right:24%;color:var(--orange)" data-ico="sparkles" data-size="52" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+    <header class="sec-h">
+      <p class="kicker">Saturday forecast</p>
+      <h2 id="fc-h">Cold enough for blankets, clear enough for the skyline.</h2>
+      <p class="lead">Dry and calm, with a breeze at the ledge after ten. Forecast refreshed Tuesday morning; we will update this page if it turns.</p>
+    </header>
+
+    <div class="fc-grid">
+      <div class="fc glass">
+        <div class="fc-bar">
+          <p class="fc-label"><span data-ico="sunset" data-size="22" data-motion="hover">🌇</span> Pick an hour</p>
+          <div class="seg" role="group" aria-label="Temperature unit">
+            <button type="button" class="seg-b" data-unit="F" aria-pressed="true">&deg;F</button>
+            <button type="button" class="seg-b" data-unit="C" aria-pressed="false">&deg;C</button>
+          </div>
+        </div>
+
+        <div class="fc-tabs" role="tablist" aria-label="Forecast hours" id="fc-tabs">
+          <button type="button" class="fc-tab" role="tab" id="tab-0" aria-selected="true" aria-controls="fc-panel" data-i="0">
+            <span class="wx" data-live="weather" data-p-condition="partly" data-p-temperature="58" data-p-unit="fahrenheit" data-size="64" data-label="Partly cloudy, 58 degrees">🌤️ 58&deg;</span>
+            <span class="fc-hr">6 PM</span>
+          </button>
+          <button type="button" class="fc-tab" role="tab" id="tab-1" aria-selected="false" aria-controls="fc-panel" data-i="1" tabindex="-1">
+            <span class="wx" data-live="weather" data-p-condition="night" data-p-temperature="53" data-p-unit="fahrenheit" data-size="64" data-label="Clear night, 53 degrees">🌙 53&deg;</span>
+            <span class="fc-hr">8 PM</span>
+          </button>
+          <button type="button" class="fc-tab" role="tab" id="tab-2" aria-selected="false" aria-controls="fc-panel" data-i="2" tabindex="-1">
+            <span class="wx" data-live="weather" data-p-condition="cloudy" data-p-temperature="49" data-p-unit="fahrenheit" data-size="64" data-label="Cloudy, 49 degrees">☁️ 49&deg;</span>
+            <span class="fc-hr">10 PM</span>
+          </button>
+          <button type="button" class="fc-tab" role="tab" id="tab-3" aria-selected="false" aria-controls="fc-panel" data-i="3" tabindex="-1">
+            <span class="wx" data-live="weather" data-p-condition="night" data-p-temperature="46" data-p-unit="fahrenheit" data-size="64" data-label="Clear night, 46 degrees">🌙 46&deg;</span>
+            <span class="fc-hr">Midnight</span>
+          </button>
+        </div>
+
+        <div class="fc-panel" id="fc-panel" role="tabpanel" aria-labelledby="tab-0" aria-live="polite">
+          <span class="wx-big" id="fc-big" data-live="weather" data-p-condition="partly" data-p-temperature="58" data-p-unit="fahrenheit" data-size="168" data-label="Partly cloudy, 58 degrees">🌤️ 58&deg;F</span>
+          <div class="fc-copy">
+            <h3 id="fc-title">Golden hour, light layers</h3>
+            <p id="fc-text">The sun is still on the roof until 6:12. Warm for October, so a light jacket does it.</p>
+            <ul class="fc-stats">
+              <li><span class="wx-mini" id="fc-wind" data-live="wind-speed" data-p-speed="6" data-p-unit="mph" data-size="64" data-label="Wind 6 miles per hour">6 mph</span><span><b>Wind</b><span id="fc-wind-t">6 mph, from the lake</span></span></li>
+              <li><span data-ico="droplets" data-size="40">💧</span><span><b>Rain</b><span id="fc-rain">5% chance</span></span></li>
+              <li><span data-ico="thermometer" data-size="40">🌡️</span><span><b>Feels like</b><span id="fc-feels">56&deg;F</span></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <aside class="wear glass" aria-labelledby="wear-h">
+        <div class="wear-head">
+          <span class="ib ib-pink"><span data-ico="layers" data-size="32">🧥</span></span>
+          <h3 id="wear-h">What to wear</h3>
+        </div>
+        <p class="wear-tip" id="wear-tip">Light jacket. Sunglasses until 6:12, then they are just a look.</p>
+        <ul class="wear-list" id="wear-list">
+          <li data-slots="0"><span data-ico="sun-dim" data-size="28">🕶️</span><span>Sunglasses for the first hour</span></li>
+          <li data-slots="0 1 2 3"><span data-ico="layers" data-size="28">🧥</span><span>A jacket or hoodie you can zip</span></li>
+          <li data-slots="2 3"><span data-ico="wind" data-size="28">🌬️</span><span>A windbreaker for the ledge side</span></li>
+          <li data-slots="1 2 3"><span data-ico="bed" data-size="28">🛏️</span><span>A blanket: twelve are on the roof, first come first wrapped</span></li>
+          <li data-slots="2 3"><span data-ico="hot-cocoa" data-size="28">☕</span><span>Hot cider (zero proof) from the tap at 10:15</span></li>
+        </ul>
+        <p class="wear-note"><span data-ico="umbrella" data-size="22">☂️</span> No umbrella needed. If it does rain, the party moves into 4C.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LINEUP ============ -->
+<section class="sec lineup" id="lineup" aria-labelledby="lu-h">
+  <img class="sec-bg" src="_img/rooftop-house-party/11481894-1400.jpg" width="1200" height="857" loading="lazy" decoding="async"
+       alt="A crowd seen from behind dancing in front of a DJ booth, with the DJ in silhouette and the whole room washed in hot-pink light and haze.">
+  <div class="wrap">
+    <span class="sec-orn" style="top:-6px;right:5%" data-ico="headphones" data-size="124" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+    <span class="sec-orn" style="top:100px;right:26%;color:var(--orange)" data-ico="music-note" data-size="56" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+    <header class="sec-h">
+      <p class="kicker">Set times</p>
+      <h2 id="lu-h">Four sets. One roof. Speakers off at 11.</h2>
+      <p class="lead">Music starts at 7 on the dot. Slide through the night to see who is on and when.</p>
+    </header>
+
+    <div class="lu-grid">
+      <div class="lu-main">
+        <div class="scrub glass">
+          <span class="scrub-clock" id="scrub-clock" data-live="clock-time" data-p-time="19:00" data-size="96" data-label="7:00 pm">🕖</span>
+          <div class="scrub-body">
+            <label for="scrub">Slide through the night <output id="scrub-out" for="scrub">7:00 pm</output></label>
+            <input type="range" id="scrub" min="1140" max="1440" step="5" value="1140" aria-describedby="scrub-now">
+            <p class="scrub-now" id="scrub-now">Doors are open and Marcus is warming up the roof.</p>
+          </div>
+        </div>
+
+        <ol class="sets" id="sets">
+          <li class="set" data-start="1140" data-end="1230" data-dj="Marcus Bell" data-vibe="Sunset warm-up">
+            <span class="set-clock" data-live="digital-clock" data-p-time="19:00" data-p-format="12h" data-size="60" data-label="7 pm">🕖</span>
+            <div class="set-body">
+              <div class="set-top"><h3>Marcus Bell</h3><span class="set-state" data-state>Later</span></div>
+              <p class="set-vibe">Sunset warm-up &middot; 7:00 to 8:30 pm</p>
+              <p>Soul, disco edits and a little bossa nova while the sky turns. Marcus has been planning this set since August, mostly in the shower.</p>
+              <p class="tags"><span>Soul</span><span>Disco edits</span><span>Bossa nova</span></p>
+            </div>
+            <div class="set-bar" aria-hidden="true"><i></i></div>
+          </li>
+          <li class="set" data-start="1230" data-end="1320" data-dj="Tala Reyes" data-vibe="Skyline house">
+            <span class="set-clock" data-live="digital-clock" data-p-time="20:30" data-p-format="12h" data-size="60" data-label="8:30 pm">🕣</span>
+            <div class="set-body">
+              <div class="set-top"><h3>Tala Reyes</h3><span class="set-state" data-state>Later</span></div>
+              <p class="set-vibe">Skyline house &middot; 8:30 to 10:00 pm</p>
+              <p>Four-on-the-floor at 122 BPM, built for the hour when the city lights come up. Tala runs Saturdays at a basement club two stops away.</p>
+              <p class="tags"><span>House</span><span>Garage</span><span>122 BPM</span></p>
+            </div>
+            <div class="set-bar" aria-hidden="true"><i></i></div>
+          </li>
+          <li class="set" data-start="1320" data-end="1380" data-dj="Kofi &amp; June" data-vibe="Last-call singalongs">
+            <span class="set-clock" data-live="digital-clock" data-p-time="22:00" data-p-format="12h" data-size="60" data-label="10 pm">🕙</span>
+            <div class="set-body">
+              <div class="set-top"><h3>Kofi &amp; June</h3><span class="set-state" data-state>Later</span></div>
+              <p class="set-vibe">Last-call singalongs &middot; 10:00 to 11:00 pm</p>
+              <p>Early-2000s R&amp;B and pop you will absolutely know the words to. Whatever tops the request queue gets played first.</p>
+              <p class="tags"><span>R&amp;B</span><span>Pop</span><span>Your requests</span></p>
+            </div>
+            <div class="set-bar" aria-hidden="true"><i></i></div>
+          </li>
+          <li class="set" data-start="1380" data-end="1440" data-dj="Tala &amp; Marcus" data-vibe="Headphone hour">
+            <span class="set-clock" data-live="digital-clock" data-p-time="23:00" data-p-format="12h" data-size="60" data-label="11 pm">🕚</span>
+            <div class="set-body">
+              <div class="set-top"><h3>Tala &amp; Marcus</h3><span class="set-state" data-state>Later</span></div>
+              <p class="set-vibe">Headphone hour &middot; 11:00 pm to midnight</p>
+              <p>Speakers off, wireless headphones on: 24 pairs, three channels (pink, violet, orange). Same party, zero noise complaints.</p>
+              <p class="tags"><span>Silent disco</span><span>3 channels</span><span>24 headphones</span></p>
+            </div>
+            <div class="set-bar" aria-hidden="true"><i></i></div>
+          </li>
+        </ol>
+      </div>
+
+      <aside class="lu-side" aria-label="On the decks">
+        <figure class="dj-card">
+          <img src="_img/rooftop-house-party/9789246-900.jpg" width="1200" height="800" loading="lazy" decoding="async"
+               alt="A DJ in a denim jacket resting both hands on a spinning vinyl record on a turntable, next to a mixer with knobs and faders.">
+          <figcaption>
+            <span class="dj-badge"><span data-ico="disc" data-size="22" data-motion="loop">💿</span> On the decks</span>
+            <b id="dj-now">Marcus Bell</b>
+            <span id="dj-sub">Sunset warm-up</span>
+          </figcaption>
+        </figure>
+        <ul class="lu-notes">
+          <li><span data-ico="speaker" data-size="28">🔊</span><span>Speakers are on until 11 pm sharp.</span></li>
+          <li><span data-ico="headphones" data-size="28">🎧</span><span>Headphones are handed out at the roof door from 10:45.</span></li>
+          <li><span data-ico="mic-vocal" data-size="28">🎤</span><span>No open mic. Sing along from the dance floor.</span></li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="req-grid">
+      <form class="req glass" id="req-form" action="#" novalidate>
+        <div class="req-head">
+          <span class="ib ib-pink"><span data-ico="list-music" data-size="34" data-motion="hover">🎶</span></span>
+          <div><h3>Request a song</h3><p>Add yours, then vote for what you want to hear. The top three go to the DJ at the start of each set.</p></div>
+        </div>
+        <div class="f"><label for="req-song">Song</label><input id="req-song" name="song" required autocomplete="off" placeholder="September"></div>
+        <div class="f"><label for="req-artist">Artist <span class="opt">(optional)</span></label><input id="req-artist" name="artist" autocomplete="off" placeholder="Earth, Wind &amp; Fire"></div>
+        <div class="f"><label for="req-set">For which set?</label>
+          <select id="req-set" name="set">
+            <option>Any set</option><option>Sunset warm-up</option><option>Skyline house</option><option>Last-call singalongs</option><option>Headphone hour</option>
+          </select>
+        </div>
+        <p class="f-err" id="req-err" role="alert"></p>
+        <button class="btn btn-pri" type="submit"><span data-ico="send" data-size="20">➤</span> Add to the queue</button>
+      </form>
+
+      <div class="queue glass">
+        <div class="queue-head"><h3>The queue</h3><span class="queue-count" id="queue-count" aria-live="polite">5 requests</span></div>
+        <ol class="queue-list" id="queue-list"></ol>
+        <p class="queue-foot"><span data-ico="info-circle" data-size="18">ℹ️</span> One vote per song. The hosts keep a veto on anything already played twice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BRING-SHEET ============ -->
+<section class="sec bring" id="bring" aria-labelledby="bs-h">
+  <div class="wrap">
+    <header class="sec-h">
+      <p class="kicker">Bring-sheet</p>
+      <h2 id="bs-h">Claim something. Nine bags of chips is not a party.</h2>
+      <p class="lead">Tap <b>I'll bring it</b> on anything still open. Your picks are saved for this session and show up next to your name on the guest list.</p>
+    </header>
+
+    <div class="bs-bar glass">
+      <div class="f bs-name">
+        <label for="guest-name">Your name <span class="opt">(so everyone knows who has the ice)</span></label>
+        <input id="guest-name" name="guest" autocomplete="given-name" placeholder="First name is fine" maxlength="24">
+        <p class="f-err" id="name-err" role="alert"></p>
+      </div>
+      <div class="bs-prog">
+        <span id="bs-ring" data-live="progress-ring" data-p-value="44" data-size="88" data-label="44 percent of the bring-sheet is claimed">44%</span>
+        <div><b id="bs-count">18 of 41 spots claimed</b><span id="bs-left">23 still open</span></div>
+      </div>
+      <div class="bs-filters" role="group" aria-label="Filter the sheet">
+        <button type="button" class="chip" data-f="all" aria-pressed="true">All</button>
+        <button type="button" class="chip" data-f="snacks" aria-pressed="false"><span data-ico="popcorn" data-size="20">🍿</span> Snacks</button>
+        <button type="button" class="chip" data-f="drinks" aria-pressed="false"><span data-ico="cup-soda" data-size="20">🥤</span> Drinks</button>
+        <button type="button" class="chip" data-f="supplies" aria-pressed="false"><span data-ico="plug" data-size="20">🔌</span> Supplies</button>
+        <button type="button" class="chip" data-f="open" aria-pressed="false"><span data-ico="list-checks" data-size="20">☑️</span> Still open</button>
+      </div>
+    </div>
+
+    <div class="bs-cols" id="bs-cols">
+      <noscript><p class="bs-empty glass">The bring-sheet needs JavaScript. Without it, text Dee on 555-0142 and she will pencil you in.</p></noscript>
+      <section class="bs-col glass" data-cat="snacks" aria-labelledby="col-snacks">
+        <div class="bs-photo">
+          <img src="_img/rooftop-house-party/4958730-800.jpg" width="1200" height="800" loading="lazy" decoding="async"
+               alt="Top-down view of tacos on plates and a wooden board with lime wedges, cilantro, chilli flakes, pomegranate seeds and an orange drink on a dark rustic table.">
+        </div>
+        <div class="bs-col-h"><span class="ib ib-pink"><span data-ico="popcorn" data-size="30">🍿</span></span><div><h3 id="col-snacks">Snacks</h3><p>The tacos are on us. The rest is on you.</p></div></div>
+        <ul class="bs-list" data-list="snacks"></ul>
+      </section>
+      <section class="bs-col glass" data-cat="drinks" aria-labelledby="col-drinks">
+        <div class="bs-photo">
+          <img src="_img/rooftop-house-party/photo-1745052818593-3aa7b29850d2-800.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:38% 62%"
+               alt="Three crimson cocktails garnished with orange marigold flowers on a pale bar top at night, with hands setting them down and a green cocktail beside them.">
+        </div>
+        <div class="bs-col-h"><span class="ib ib-pink"><span data-ico="cup-soda" data-size="30">🥤</span></span><div><h3 id="col-drinks">Drinks</h3><p>BYOB, and one bottle each for the table.</p></div></div>
+        <ul class="bs-list" data-list="drinks"></ul>
+      </section>
+      <section class="bs-col glass" data-cat="supplies" aria-labelledby="col-supplies">
+        <div class="bs-photo bs-photo-art" aria-hidden="true">
+          <span data-ico="lightbulb" data-size="120" data-motion="hover">💡</span>
+        </div>
+        <div class="bs-col-h"><span class="ib ib-pink"><span data-ico="plug" data-size="30">🔌</span></span><div><h3 id="col-supplies">Supplies</h3><p>The boring things that make the night work.</p></div></div>
+        <ul class="bs-list" data-list="supplies"></ul>
+        <div class="covered">
+          <h4><span data-ico="check-circle" data-size="22">✅</span> Already covered by 4C</h4>
+          <p>Tacos al pastor and veggie tinga with rice and beans, a grill, 40 cups and a recycling bin, twelve blankets, the string lights, speakers, turntables and 24 silent-disco headphones.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUESTS ============ -->
+<section class="sec guests" id="guests" aria-labelledby="guests-h">
+  <div class="wrap guests-grid">
+    <figure class="guest-photo">
+      <img src="_img/rooftop-house-party/5638750-800.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:55% 50%"
+           alt="Friends' hands clinking wine glasses and orange juice over a candlelit table at dusk, with warm filament bulbs strung overhead against a blue evening sky.">
+      <figcaption><span data-ico="champagne-toast" data-size="26" data-motion="hover">🥂</span> Cheers at 8:15, give or take.</figcaption>
+    </figure>
+
+    <div class="guests-main">
+      <header class="sec-h">
+        <p class="kicker">Who is coming</p>
+        <h2 id="guests-h"><span id="going-n">23</span> going, <span id="maybe-n">3</span> maybe, one roof.</h2>
+        <p class="lead">RSVP and you land at the front of this list. A dot on the avatar means a confirmed yes; no dot means a maybe.</p>
+      </header>
+      <div class="g-meter" aria-hidden="false">
+        <div class="g-bar" role="img" aria-label="Roof capacity"><i id="g-fill" style="width:58%"></i></div>
+        <p id="g-left"><b>17</b> of 40 spots left</p>
+      </div>
+      <ul class="g-grid" id="g-grid"></ul>
+      <p class="g-foot"><span data-ico="messages" data-size="22">💬</span> Everyone who says yes is added to the &ldquo;Roof Crew&rdquo; group chat on Wednesday.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOUSE RULES ============ -->
+<section class="sec rules" id="rules" aria-labelledby="rules-h">
+  <div class="band">
+    <img src="_img/rooftop-house-party/photo-1513201025652-45a8a3f21311-1600.jpg" width="1200" height="803" loading="lazy" decoding="async"
+         alt="Strings of small white festoon lights crisscrossing a city street at dusk under a deep navy sky with an orange glow on the horizon.">
+    <div class="wrap band-in">
+      <header class="sec-h">
+        <p class="kicker">House rules</p>
+        <h2 id="rules-h">Drafted by the neighbours, edited by us.</h2>
+        <p class="lead">Seven other flats live in this building and two of them have babies. Be the guest they would invite back.</p>
+      </header>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="rule-grid">
+      <li class="rule glass">
+        <span class="ib ib-violet"><span data-ico="moon" data-size="36" data-motion="hover">🌙</span></span>
+        <h3>Quiet after 11</h3>
+        <p>Speakers go off at 11 sharp and the last hour is a silent disco on headphones. Keep it low in the stairwell, too: it carries.</p>
+      </li>
+      <li class="rule glass">
+        <span class="ib ib-violet"><span data-ico="chevrons-up" data-size="36">⬆️</span></span>
+        <h3>Stairs only</h3>
+        <p>Five flights to the roof and no elevator on that route. Hold the rail, take your time, and tell Dee if stairs are a problem.</p>
+      </li>
+      <li class="rule glass">
+        <span class="ib ib-violet"><span data-ico="ban" data-size="36">🚫</span></span>
+        <h3>Nothing over the ledge</h3>
+        <p>Stay behind the low wall. No glass within six feet of the edge: cans and the plastic cups in the bin only.</p>
+      </li>
+      <li class="rule glass">
+        <span class="ib ib-violet"><span data-ico="flame" data-size="36">🔥</span></span>
+        <h3>No flames, no smoking</h3>
+        <p>The string lights are LED and the roof is tar. Smokers have the Pike Street side door, two minutes away.</p>
+      </li>
+      <li class="rule glass">
+        <span class="ib ib-violet"><span data-ico="recycle" data-size="36" data-motion="hover">♻️</span></span>
+        <h3>Leave it nicer</h3>
+        <p>Blue bin for cans and bottles, black for everything else. There are bags by the roof door and a cleanup crew at midnight.</p>
+      </li>
+      <li class="rule glass">
+        <span class="ib ib-violet"><span data-ico="door-closed" data-size="36">🚪</span></span>
+        <h3>Do not prop the street door</h3>
+        <p>Buzz and wait. If the door is open when you arrive, close it behind you. Everyone who lives here has a key.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ GETTING IN ============ -->
+<section class="sec" id="getting-in" aria-labelledby="gi-h">
+  <div class="wrap">
+    <header class="sec-h">
+      <p class="kicker">Getting in</p>
+      <h2 id="gi-h">Buzz 4C. Then climb.</h2>
+      <p class="lead">Four steps from the sidewalk to the sky. Allow ten minutes the first time, five if you have done stairs before.</p>
+    </header>
+
+    <div class="gi-grid">
+      <ol class="steps">
+        <li class="step">
+          <span class="step-n" data-live="step-number" data-p-step="1" data-size="64" data-label="Step 1">1</span>
+          <div>
+            <h3><span data-ico="door-closed" data-size="24">🚪</span> Find the green door</h3>
+            <p>No. 9 sits between the laundromat and Pike&rsquo;s Bakery. A bike with a flat tyre chained to the railing means you are in the right place.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-n" data-live="step-number" data-p-step="2" data-size="64" data-label="Step 2">2</span>
+          <div>
+            <h3><span data-ico="bell-ring" data-size="24" data-motion="hover">🔔</span> Buzz 4C</h3>
+            <p>The panel is on the left. Hold the button for a full second: it is old. No answer? Text or call Dee on 555-0142.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-n" data-live="step-number" data-p-step="3" data-size="64" data-label="Step 3">3</span>
+          <div>
+            <h3><span data-ico="chevrons-up" data-size="24">⬆️</span> Take the stairs, all of them</h3>
+            <p>Stairs only: five flights up to the roof door. The elevator stops at 4 and the roof is not on its route. Save the singing for the top.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step-n" data-live="step-number" data-p-step="4" data-size="64" data-label="Step 4">4</span>
+          <div>
+            <h3><span data-ico="door-open" data-size="24">🚪</span> Mind the step at the roof door</h3>
+            <p>It is propped open with a brick. The roof is gravel, so flats beat heels. Coats go on the pegs to the left.</p>
+          </div>
+        </li>
+      </ol>
+
+      <div class="map glass">
+        <div class="map-art" id="map-art">
+          <svg viewBox="0 0 600 420" role="img" aria-label="Sketch map: 9 Foundry Street between 3rd Avenue and Mercer Street, with a bus stop on 3rd, the train on Mercer and the rideshare drop-off on Pike Street" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="mp-lake" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b5bff" stop-opacity=".30"/><stop offset="1" stop-color="#ff4fa3" stop-opacity=".14"/></linearGradient>
+              <radialGradient id="mp-glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff4fa3" stop-opacity=".55"/><stop offset="1" stop-color="#ff4fa3" stop-opacity="0"/></radialGradient>
+            </defs>
+            <rect width="600" height="420" fill="#0f0a33"/>
+            <path d="M505 0C540 70 520 150 600 215V0Z" fill="url(#mp-lake)"/>
+            <g fill="rgba(255,255,255,.045)">
+              <rect x="20" y="20" width="120" height="50" rx="8"/><rect x="200" y="20" width="90" height="50" rx="8"/><rect x="330" y="20" width="100" height="50" rx="8"/>
+              <rect x="20" y="115" width="120" height="75" rx="8"/><rect x="200" y="115" width="60" height="75" rx="8"/><rect x="340" y="115" width="90" height="48" rx="8"/><rect x="470" y="115" width="110" height="75" rx="8"/>
+              <rect x="20" y="238" width="120" height="70" rx="8"/><rect x="330" y="238" width="100" height="70" rx="8"/><rect x="470" y="238" width="110" height="70" rx="8"/>
+              <rect x="20" y="352" width="120" height="50" rx="8"/><rect x="200" y="352" width="100" height="50" rx="8"/><rect x="330" y="352" width="100" height="50" rx="8"/><rect x="470" y="352" width="110" height="50" rx="8"/>
+            </g>
+            <rect x="192" y="236" width="98" height="76" rx="16" fill="rgba(90,230,190,.13)"/>
+            <g stroke="rgba(255,255,255,.14)" stroke-linecap="round" fill="none">
+              <path d="M0 210H600" stroke-width="20"/><path d="M0 330H600" stroke-width="14"/><path d="M0 92H600" stroke-width="9"/>
+              <path d="M170 0V420" stroke-width="14"/><path d="M450 0V420" stroke-width="20"/><path d="M310 0V420" stroke-width="8"/><path d="M60 0V420" stroke-width="8"/>
+            </g>
+            <path d="M0 210H600" stroke="rgba(255,79,163,.45)" stroke-width="2" stroke-dasharray="2 12" stroke-linecap="round" fill="none"/>
+            <ellipse cx="300" cy="188" rx="70" ry="44" fill="url(#mp-glow)"/>
+            <rect x="268" y="168" width="64" height="30" rx="6" fill="#ff4fa3" fill-opacity=".85"/>
+            <g font-family="Space Grotesk, system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.62)">
+              <text x="16" y="215">FOUNDRY ST</text>
+              <text x="478" y="335">PIKE ST</text>
+              <text transform="translate(165 400) rotate(-90)">3RD AVE</text>
+              <text transform="translate(445 400) rotate(-90)">MERCER ST</text>
+              <text x="198" y="278" fill="rgba(160,255,225,.7)">CINDER PARK</text>
+              <text x="530" y="40" fill="rgba(200,190,255,.7)">THE LAKE</text>
+            </g>
+          </svg>
+          <span class="pin pin-1" data-pin="1" data-live="map-pin-number" data-p-param-label="1" data-size="52" data-label="1: the roof at 9 Foundry Street">1</span>
+          <span class="pin pin-2" data-pin="2" data-live="map-pin-number" data-p-param-label="2" data-size="44" data-label="2: Bus 14 stop at Foundry and 3rd">2</span>
+          <span class="pin pin-3" data-pin="3" data-live="map-pin-number" data-p-param-label="3" data-size="44" data-label="3: Mercer Street train station">3</span>
+          <span class="pin pin-4" data-pin="P" data-live="map-pin-number" data-p-param-label="P" data-size="44" data-label="P: rideshare drop-off on Pike Street">P</span>
+        </div>
+        <ul class="map-legend">
+          <li data-pin="1"><span data-ico="building" data-size="22">🏢</span><span><b>The roof</b> 9 Foundry St, apt 4C</span></li>
+          <li data-pin="2"><span data-ico="bus" data-size="22">🚌</span><span><b>Bus 14</b> Foundry &amp; 3rd, a 2 minute walk. Last bus 12:40 am</span></li>
+          <li data-pin="3"><span data-ico="train" data-size="22">🚆</span><span><b>Mercer St train</b> 6 minutes on foot. Last train 1:20 am</span></li>
+          <li data-pin="P"><span data-ico="taxi" data-size="22">🚕</span><span><b>Rideshare</b> Pike St pick-up, one minute away</span></li>
+          <li><span data-ico="bike" data-size="22">🚲</span><span><b>Bikes</b> rack out front, helmets in the hall</span></li>
+        </ul>
+        <div class="map-actions">
+          <button class="btn btn-ghost" type="button" id="copy-addr"><span data-ico="copy" data-size="20">📋</span> Copy address</button>
+          <a class="btn btn-ghost" href="tel:5550142"><span data-ico="phone" data-size="20">📞</span> Dee: 555-0142</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RSVP ============ -->
+<section class="sec rsvp" id="rsvp" aria-labelledby="rsvp-h">
+  <div class="wrap">
+    <div class="rsvp-card glass">
+      <figure class="rsvp-photo">
+        <img src="_img/rooftop-house-party/32163386-800.jpg" width="1200" height="1800" loading="lazy" decoding="async" style="object-position:55% 62%"
+             alt="A hand raising a rimmed champagne flute of pink cocktail on a rooftop at blue hour, with a lit tower and string-light bokeh softly blurred behind.">
+        <figcaption>Bring a glass.<br>We bring the roof.</figcaption>
+      </figure>
+
+      <div class="rsvp-main">
+        <header class="sec-h">
+          <p class="kicker">RSVP</p>
+          <h2 id="rsvp-h">Count me in.</h2>
+          <p class="lead">Reply by Wednesday 14 October so Dee can order the right number of pizzas.</p>
+        </header>
+
+        <form id="rsvp-form" action="#" novalidate>
+          <div class="f-row">
+            <div class="f"><label for="r-name">Your name</label><input id="r-name" name="name" autocomplete="name" required placeholder="Alex Rivera" maxlength="40"><p class="f-err" data-err="name" role="alert"></p></div>
+            <div class="f"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email" required placeholder="alex@example.com" maxlength="80"><p class="f-err" data-err="email" role="alert"></p></div>
+          </div>
+
+          <fieldset class="f-set">
+            <legend>Are you coming?</legend>
+            <div class="opts">
+              <label class="choice"><input type="radio" name="status" value="yes" checked><span><span data-ico="party-popper" data-size="26">🎉</span> Yes, I am in</span></label>
+              <label class="choice"><input type="radio" name="status" value="maybe"><span><span data-ico="help-circle" data-size="26">🤔</span> Maybe</span></label>
+              <label class="choice"><input type="radio" name="status" value="no"><span><span data-ico="door-closed" data-size="26">🚪</span> Cannot make it</span></label>
+            </div>
+          </fieldset>
+
+          <div class="f-plus" id="plus-block">
+            <label class="switch"><input type="checkbox" id="r-plus" name="plus"><span class="sw" aria-hidden="true"></span><span class="sw-t"><span data-ico="user-plus" data-size="24">➕</span> I am bringing a plus-one</span></label>
+            <div class="f" id="plus-wrap" hidden><label for="r-plus-name">Plus-one&rsquo;s name</label><input id="r-plus-name" name="plusname" autocomplete="off" placeholder="Their first name is plenty" maxlength="40"></div>
+          </div>
+
+          <div class="f-row">
+            <div class="f"><label for="r-diet">Food notes</label>
+              <select id="r-diet" name="diet">
+                <option>Nothing to flag</option><option>Vegetarian</option><option>Vegan</option><option>Gluten-free</option><option>Nut allergy</option><option>Something else (see note)</option>
+              </select>
+            </div>
+            <div class="f"><label for="r-note">A note for the hosts <span class="opt">(optional)</span></label><input id="r-note" name="note" autocomplete="off" placeholder="Stairs, allergies, a song you will fight for" maxlength="120"></div>
+          </div>
+
+          <button class="btn btn-pri btn-lg" type="submit"><span data-ico="check-circle" data-size="22">✅</span> Count me in</button>
+          <p class="f-fine">Your details stay on this page: this is a demo, nothing is sent anywhere.</p>
+        </form>
+
+        <div class="rsvp-done" id="rsvp-done" hidden aria-live="polite" tabindex="-1">
+          <span class="done-ticket" id="done-ticket" data-live="ticket-number" data-p-number="24" data-p-hash="true" data-size="112" data-label="Guest number 24">#24</span>
+          <h3 id="done-h">You are on the list.</h3>
+          <p id="done-p">We will see you on the roof.</p>
+          <div class="done-actions">
+            <button class="btn btn-pri" type="button" data-cal><span data-ico="calendar-plus" data-size="20">📅</span> Add to calendar</button>
+            <a class="btn btn-ghost" href="#bring"><span data-ico="list-checks" data-size="20">☑️</span> Claim something to bring</a>
+            <button class="btn btn-ghost" type="button" id="rsvp-edit"><span data-ico="arrow-right" data-size="20" style="transform:scaleX(-1)">↩</span> Change my answer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec faq" id="faq" aria-labelledby="faq-h">
+  <div class="wrap faq-wrap">
+    <header class="sec-h">
+      <p class="kicker">Questions</p>
+      <h2 id="faq-h">Everything people text Dee about.</h2>
+      <p class="lead">Still stuck? Call or text 555-0142 and she will answer between the grocery run and the stairs.</p>
+    </header>
+    <div class="faq-list">
+      <details name="faq" open>
+        <summary><span data-ico="umbrella" data-size="26">☂️</span><span class="q">What if it rains?</span><span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">⌄</span></summary>
+        <p>Then it becomes an indoor party in apt 4C and the fourth-floor hallway, with the same sets and the same tacos. We will message the Roof Crew chat by 4 pm on Saturday, and we only call it for rain or lightning. Right now the chance is 5%.</p>
+      </details>
+      <details name="faq">
+        <summary><span data-ico="user-plus" data-size="26">➕</span><span class="q">Can I bring a plus-one?</span><span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">⌄</span></summary>
+        <p>Yes, one, please. Add them on the RSVP form so we can count blankets and tacos. A bigger group? Message Dee first: the roof tops out at 40 people.</p>
+      </details>
+      <details name="faq">
+        <summary><span data-ico="shield-alert" data-size="26">🛡️</span><span class="q">Kids? Dogs?</span><span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">⌄</span></summary>
+        <p>Adults only, sorry: the ledge is low and the night runs late. Calm dogs are welcome before 9 pm if you tell us in advance, but the stairs are long and the gravel is hard on paws.</p>
+      </details>
+      <details name="faq">
+        <summary><span data-ico="chevrons-up" data-size="26">⬆️</span><span class="q">Is the roof accessible?</span><span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">⌄</span></summary>
+        <p>Honestly, not very: it is five flights of stairs and no elevator to the roof. If that is a problem, tell Dee. We will put a seat by the window in 4C, which has an almost-as-good skyline view, and a speaker on the same set list.</p>
+      </details>
+      <details name="faq">
+        <summary><span data-ico="taxi" data-size="26">🚕</span><span class="q">How do I get home?</span><span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">⌄</span></summary>
+        <p>The last bus (14) leaves Foundry &amp; 3rd at 12:40 am and the last Mercer Street train is at 1:20. Rideshares pick up on Pike Street, which is quieter than the front door. Please do not drive if you have been drinking; the couch in 4C is real.</p>
+      </details>
+      <details name="faq">
+        <summary><span data-ico="pizza" data-size="26">🍕</span><span class="q">Is it free? What about the pizza?</span><span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">⌄</span></summary>
+        <p>It is free. Please bring a drink and claim something on the bring-sheet. At 9 pm two people collect four pizzas from the place on Pike; we split the bill, about $8 a head if you are eating.</p>
+      </details>
+      <details name="faq">
+        <summary><span data-ico="headphones" data-size="26">🎧</span><span class="q">What is the headphone hour?</span><span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">⌄</span></summary>
+        <p>A silent disco. At 11 the speakers go off and 24 wireless headphones come out, on three channels you can switch between: pink for house, violet for pop, orange for whatever Marcus feels like. First come, first headphoned; the rest can dance to the quiet.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGN-OFF ============ -->
+<section class="signoff" aria-labelledby="so-h">
+  <img src="_img/rooftop-house-party/5935231-1400.jpg" width="1200" height="800" loading="lazy" decoding="async"
+       alt="Silhouettes of four women dancing with raised arms on a rooftop ledge against a glowing orange sunset with wispy clouds.">
+  <div class="wrap so-in">
+    <span class="so-orn" data-ico="party-popper" data-size="120" data-min-level="2" data-motion="hover" aria-hidden="true"></span>
+    <p class="kicker">Last one of the year</p>
+    <h2 id="so-h">See you up there.</h2>
+    <p class="so-sign"><span data-ico="heart" data-size="28" data-motion="hover">❤️</span> Dee, Marcus &amp; the 4C crew</p>
+    <p class="so-ps">P.S. If you read all the way down here: yes, there will be a shared playlist afterwards, and yes, it is far too long.</p>
+    <a class="btn btn-pri btn-lg" href="#rsvp"><span data-ico="ticket" data-size="22">🎟️</span> Save my spot</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ CREDITS + FOOTER ============ -->
+<section id="credits" class="credits" aria-labelledby="credits-h">
+  <div class="wrap">
+    <h2 id="credits-h">Photo credits</h2>
+    <ul>
+      <li>Skyline at night, hero: Photo by <a href="https://unsplash.com/@cr029?utm_source=withicons_demos&utm_medium=referral" rel="noopener">CR</a> on <a href="https://unsplash.com/photos/city-skyline-illuminated-at-night-with-a-dark-blue-sky-1G7oszlOqcM?utm_source=withicons_demos&utm_medium=referral" rel="noopener">Unsplash</a></li>
+      <li>String lights on the roof, the plan: Photo by <a href="https://www.pexels.com/@cottonbro" rel="noopener">cottonbro studio</a> on <a href="https://www.pexels.com/photo/4881662/" rel="noopener">Pexels</a></li>
+      <li>Strands of lights over indigo sky, forecast: Photo by <a href="https://www.pexels.com/@faceless" rel="noopener">Kirill Moiseev</a> on <a href="https://www.pexels.com/photo/33668125/" rel="noopener">Pexels</a></li>
+      <li>Crowd in pink light, set times: Photo by <a href="https://www.pexels.com/@lloyd-james-189552887/" rel="noopener">Lloyd James</a> on <a href="https://www.pexels.com/photo/11481894/" rel="noopener">Pexels</a></li>
+      <li>DJ hands on vinyl, set times: Photo by <a href="https://www.pexels.com/@koprivakart" rel="noopener">Jan Kopřiva</a> on <a href="https://www.pexels.com/photo/9789246/" rel="noopener">Pexels</a></li>
+      <li>Tacos, bring-sheet snacks: Photo by <a href="https://www.pexels.com/@roman-odintsov" rel="noopener">Roman Odintsov</a> on <a href="https://www.pexels.com/photo/4958730/" rel="noopener">Pexels</a></li>
+      <li>Crimson cocktails, bring-sheet drinks: Photo by <a href="https://unsplash.com/@createasea?utm_source=withicons_demos&utm_medium=referral" rel="noopener">Createasea</a> on <a href="https://unsplash.com/photos/a-bartender-holds-colorful-garnished-cocktails-LX7xP75YS1Y?utm_source=withicons_demos&utm_medium=referral" rel="noopener">Unsplash</a></li>
+      <li>Friends toasting at dusk, guest list: Photo by <a href="https://www.pexels.com/@askar-abayev/" rel="noopener">Askar Abayev</a> on <a href="https://www.pexels.com/photo/5638750/" rel="noopener">Pexels</a></li>
+      <li>Festoon lights at dusk, house rules: Photo by <a href="https://unsplash.com/@ojodeatronauta?utm_source=withicons_demos&utm_medium=referral" rel="noopener">Alonso Navarro</a> on <a href="https://unsplash.com/photos/string-lights-during-night-time-Bwg5L-sks3g?utm_source=withicons_demos&utm_medium=referral" rel="noopener">Unsplash</a></li>
+      <li>Pink cocktail on a rooftop, RSVP: Photo by <a href="https://www.pexels.com/@nguyendesigner/" rel="noopener">Pew Nguyen</a> on <a href="https://www.pexels.com/photo/32163386/" rel="noopener">Pexels</a></li>
+      <li>Silhouettes dancing at sunset, sign-off: Photo by <a href="https://www.pexels.com/@kampus" rel="noopener">Kampus Production</a> on <a href="https://www.pexels.com/photo/5935231/" rel="noopener">Pexels</a></li>
+    </ul>
+    <p>Icons: <a href="https://withicons.com" rel="noopener">with icons</a> (withicons.com), MIT. Typefaces: Syne and Space Grotesk via Google Fonts.</p>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div>
+      <p class="foot-brand"><span class="brand-mark" aria-hidden="true">4C</span> Last Rooftop of the Season</p>
+      <p class="foot-line">Saturday 17 October 2026 &middot; 7 pm to midnight &middot; 9 Foundry Street, apt 4C. Questions? Call or text Dee on 555-0142.</p>
+    </div>
+    <p class="foot-demo">Demo page made with <a href="https://withicons.com" rel="noopener">with icons</a>. Names, places and products are fictional.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="_kit/demo-kit.js" data-style="liquid" data-recommend="liquid,chrome,glass,brutal,sticker,pixel,bauhaus,solid" data-level="2" defer></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------------------------------------------------------- helpers */
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+  var store = {
+    get: function (k) { try { var v = sessionStorage.getItem('rooftop:' + k); return v == null ? null : JSON.parse(v); } catch (e) { return null; } },
+    set: function (k, v) { try { sessionStorage.setItem('rooftop:' + k, JSON.stringify(v)); } catch (e) {} },
+    del: function (k) { try { sessionStorage.removeItem('rooftop:' + k); } catch (e) {} }
+  };
+  var toastTimer = 0;
+  function toast(msg) {
+    var t = $('#toast'); if (!t) return;
+    t.textContent = msg; t.classList.add('on');
+    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('on'); }, 2600);
+  }
+  // Basic level shows the emoji: size it like the icon would be
+  function fitEmoji(root) {
+    $$('[data-ico]', root || document).forEach(function (el) {
+      if (el.style.fontSize) return;
+      var s = parseFloat(el.getAttribute('data-size')) || 24;
+      el.style.fontSize = Math.round(s * 0.8) + 'px';
+    });
+  }
+  // update a live icon: before the kit boots only the attributes + fallback text change, afterwards the kit does the work
+  function live(el, params, fb, label) {
+    if (!el) return;
+    var p = {};
+    Object.keys(params).forEach(function (k) { p[k] = params[k]; });
+    if (label != null) p.label = label;
+    var ready = window.WithKit && el._kit && el._kit.live;
+    if (ready) {
+      window.WithKit.setLive(el, p);
+      if (fb != null) { el._kit.fb = fb; var f = el.querySelector('.kit-fb'); if (f) f.textContent = fb; }
+    } else {
+      Object.keys(p).forEach(function (k) { el.setAttribute((k === 'label' ? 'data-label' : 'data-p-' + k.replace(/[A-Z]/g, function (c) { return '-' + c.toLowerCase(); })), p[k]); });
+      if (fb != null) el.textContent = fb;
+    }
+  }
+  function refresh(root) { fitEmoji(root); if (window.WithKit) window.WithKit.refresh(root); }
+
+  $$('.fc-tab .wx').forEach(function (el) { el.setAttribute('data-size', window.innerWidth >= 640 ? '88' : '60'); });
+
+  /* ---------------------------------------------------------------- ticker (cloned before the kit upgrades the slots) */
+  (function () {
+    var track = $('#ticker-track'); if (!track) return;
+    var kids = Array.prototype.slice.call(track.children);
+    for (var i = 0; i < 3; i++) kids.forEach(function (k) { track.appendChild(k.cloneNode(true)); });
+  })();
+
+  /* ---------------------------------------------------------------- nav */
+  (function () {
+    var btn = $('#menu-btn'), nav = $('#nav');
+    function setOpen(o) { nav.classList.toggle('open', o); btn.setAttribute('aria-expanded', String(o)); btn.setAttribute('aria-label', o ? 'Close the menu' : 'Open the menu'); }
+    btn.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+    nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { setOpen(false); btn.focus(); } });
+    if ('IntersectionObserver' in window) {
+      var links = {};
+      $$('a', nav).forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { Object.keys(links).forEach(function (k) { links[k].classList.toggle('on', k === en.target.id); }); }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      $$('main > section[id]').forEach(function (sec) { io.observe(sec); });
+    }
+  })();
+
+  /* ---------------------------------------------------------------- the date */
+  var START = new Date(2026, 9, 17, 19, 0, 0), END = new Date(2026, 9, 18, 0, 0, 0);
+
+  /* ---------------------------------------------------------------- countdown */
+  function tickCountdown() {
+    var now = new Date(), main = $('#cd-main'), sub = $('#cd-sub'), ring = $('#cd-ring');
+    var ms = START - now, left, total, num = true, fb, lab, m1, s1;
+    if (now >= END) { m1 = 'That was the last roof'; s1 = 'Thank you for coming. See you in spring.'; left = 0; total = 30; num = false; fb = '👋'; lab = 'The party is over'; }
+    else if (now >= START) { m1 = 'The roof is open'; s1 = 'Doors opened at 7 pm. Come on up.'; left = 30; total = 30; num = false; fb = '🎉'; lab = 'The party is on now'; }
+    else {
+      var d = Math.floor(ms / 864e5), h = Math.floor((ms % 864e5) / 36e5), mi = Math.floor((ms % 36e5) / 6e4);
+      if (d >= 1) { m1 = d + (d === 1 ? ' day to go' : ' days to go'); left = Math.min(d, 99); total = 30; fb = '⏳'; lab = d + (d === 1 ? ' day' : ' days') + ' to go'; }
+      else { m1 = (h ? h + ' h ' : '') + mi + ' min to go'; left = h; total = 24; fb = '⏳'; lab = h + ' hours to go'; }
+      s1 = (d ? d + 'd ' : '') + pad(h) + 'h ' + pad(mi) + 'm until doors';
+    }
+    main.textContent = m1; sub.textContent = s1;
+    live(ring, { left: left, total: total, number: num }, fb, lab);
+  }
+  tickCountdown(); setInterval(tickCountdown, 30000);
+
+  /* ---------------------------------------------------------------- calendar file */
+  function icsText() {
+    function e(s) { return s.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n'); }
+    function fold(l) { var out = [], s = l; while (s.length > 73) { out.push(s.slice(0, 73)); s = ' ' + s.slice(73); } out.push(s); return out.join('\r\n'); }
+    var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    return [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//with icons demo//Last Rooftop of the Season//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+      'BEGIN:VEVENT', 'UID:rooftop-20261017@withicons-demo', 'DTSTAMP:' + stamp,
+      'DTSTART:20261017T190000', 'DTEND:20261018T000000',
+      'SUMMARY:' + e('Last Rooftop of the Season'),
+      'LOCATION:' + e('The roof at 9 Foundry Street, apt 4C (fictional)'),
+      'DESCRIPTION:' + e('Buzz 4C, then take the stairs to the roof. BYOB: claim something on the bring-sheet. Sunset is at 6:12 pm, speakers go off at 11 and the last hour is a silent disco. Questions: Dee, 555-0142.'),
+      'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:Last Rooftop of the Season starts in 3 hours', 'TRIGGER:-PT3H', 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].map(fold).join('\r\n') + '\r\n';
+  }
+  function downloadIcs() {
+    var blob = new Blob([icsText()], { type: 'text/calendar;charset=utf-8' });
+    var url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href = url; a.download = 'last-rooftop-of-the-season.ics'; a.setAttribute('data-ics', 'saved');
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    toast('Calendar file saved: 17 Oct, 7 pm to midnight');
+  }
+  document.addEventListener('click', function (e) { if (e.target.closest('[data-cal]')) downloadIcs(); });
+
+  /* ---------------------------------------------------------------- forecast */
+  var WX = [
+    { c: 'partly', f: 58, mph: 6, rain: 5, feels: 56, em: '🌤️', lab: 'Partly cloudy', hr: '6 PM',
+      title: 'Golden hour, light layers', text: 'The sun is still on the roof until 6:12. Warm for October, so a light jacket does it.',
+      tip: 'Light jacket. Sunglasses until 6:12, then they are just a look.', wind: 'from the lake' },
+    { c: 'night', f: 53, mph: 8, rain: 5, feels: 49, em: '🌙', lab: 'Clear night', hr: '8 PM',
+      title: 'Clear and crisp', text: 'Stars are out over the lake and the skyline is at its best. Cool, calm, and dry.',
+      tip: 'Add a mid-layer. The blanket bin opens at 7:30, so you are not the first to ask.', wind: 'a light breeze' },
+    { c: 'cloudy', f: 49, mph: 11, rain: 10, feels: 44, em: '☁️', lab: 'Cloudy', hr: '10 PM',
+      title: 'Breezy, a few clouds', text: 'A few clouds drift in and the wind picks up at the ledge. Still dry, still lovely.',
+      tip: 'Hoodie plus windbreaker, and grab a blanket. Zero-proof hot cider from 10:15.', wind: 'gusting at the ledge' },
+    { c: 'night', f: 46, mph: 12, rain: 5, feels: 40, em: '🌙', lab: 'Clear night', hr: 'Midnight',
+      title: 'Cold, calm and very quiet', text: 'The last hour is a silent disco, so you will be dancing. The roof is cold the moment you stop.',
+      tip: 'Everything you own, plus a blanket cape. Nobody will judge.', wind: 'steady from the north' }
+  ];
+  var wx = { i: 0, unit: 'F' };
+  function T(f) { return wx.unit === 'F' ? f : Math.round((f - 32) * 5 / 9); }
+  function windVal(mph) { return wx.unit === 'F' ? mph : Math.round(mph * 1.609); }
+  function windUnit() { return wx.unit === 'F' ? 'mph' : 'kmh'; }
+  function windText(mph) { return windVal(mph) + (wx.unit === 'F' ? ' mph' : ' km/h'); }
+  function paintForecast() {
+    var u = wx.unit === 'F' ? 'fahrenheit' : 'celsius', sym = '\u00B0' + wx.unit;
+    $$('.fc-tab').forEach(function (b, i) {
+      var d = WX[i], sel = i === wx.i;
+      b.setAttribute('aria-selected', String(sel)); b.setAttribute('tabindex', sel ? '0' : '-1');
+      live($('.wx', b), { condition: d.c, temperature: T(d.f), unit: u }, d.em + ' ' + T(d.f) + '\u00B0', d.lab + ', ' + T(d.f) + ' degrees');
+    });
+    var d = WX[wx.i];
+    $('#fc-panel').setAttribute('aria-labelledby', 'tab-' + wx.i);
+    live($('#fc-big'), { condition: d.c, temperature: T(d.f), unit: u }, d.em + ' ' + T(d.f) + sym, d.lab + ', ' + T(d.f) + ' degrees at ' + d.hr);
+    $('#fc-title').textContent = d.title; $('#fc-text').textContent = d.text;
+    live($('#fc-wind'), { speed: windVal(d.mph), unit: windUnit() }, windText(d.mph), 'Wind ' + windText(d.mph));
+    $('#fc-wind-t').textContent = windText(d.mph) + ', ' + d.wind;
+    $('#fc-rain').textContent = d.rain + '% chance of rain';
+    $('#fc-feels').textContent = T(d.feels) + sym;
+    $('#wear-tip').textContent = d.tip;
+    $$('#wear-list li').forEach(function (li) { li.classList.toggle('on', li.getAttribute('data-slots').split(' ').indexOf(String(wx.i)) > -1); });
+    $$('.seg-b').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-unit') === wx.unit)); });
+  }
+  $('#fc-tabs').addEventListener('click', function (e) { var b = e.target.closest('.fc-tab'); if (b) { wx.i = +b.getAttribute('data-i'); paintForecast(); } });
+  $('#fc-tabs').addEventListener('keydown', function (e) {
+    var k = e.key, n = WX.length, i = wx.i;
+    if (k === 'ArrowRight' || k === 'ArrowDown') i = (i + 1) % n; else if (k === 'ArrowLeft' || k === 'ArrowUp') i = (i + n - 1) % n; else if (k === 'Home') i = 0; else if (k === 'End') i = n - 1; else return;
+    e.preventDefault(); wx.i = i; paintForecast(); $('#tab-' + i).focus();
+  });
+  $$('.seg-b').forEach(function (b) { b.addEventListener('click', function () { wx.unit = b.getAttribute('data-unit'); paintForecast(); }); });
+  paintForecast();
+
+  /* ---------------------------------------------------------------- set times */
+  var SETS = $$('.set'), scrub = $('#scrub');
+  var NOW_MSG = [
+    'Marcus has the decks. The sky is still orange and the tacos come off the grill at 7:30.',
+    'Tala takes over at 8:30. The skyline is at its best and the blankets are out.',
+    'Kofi & June are on. Whatever tops the request queue gets played first.',
+    'Speakers are off. Headphones on, three channels: pink, violet, orange.',
+    'That is the night. Cleanup crew at midnight, last train home at 1:20.'
+  ];
+  function fmt(min) {
+    if (min >= 1440) return '12:00 am';
+    var h = Math.floor(min / 60), m = min % 60;
+    return (h % 12 || 12) + ':' + pad(m) + ' ' + (h >= 12 ? 'pm' : 'am');
+  }
+  function clockEmoji(min) {
+    var half = Math.round(min / 30), h = Math.floor(half / 2) % 12, isHalf = half % 2 === 1;
+    return (isHalf ? ['🕧', '🕜', '🕝', '🕞', '🕟', '🕠', '🕡', '🕢', '🕣', '🕤', '🕥', '🕦'] : ['🕛', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚'])[h];
+  }
+  function paintNight() {
+    var t = +scrub.value, cur = -1, next = -1;
+    SETS.forEach(function (s, i) {
+      var a = +s.getAttribute('data-start'), b = +s.getAttribute('data-end');
+      if (t >= a && t < b) cur = i;
+    });
+    if (cur < 0) { for (var j = 0; j < SETS.length; j++) { if (+SETS[j].getAttribute('data-start') > t) { next = j; break; } } } else next = cur + 1 < SETS.length ? cur + 1 : -1;
+    SETS.forEach(function (s, i) {
+      var a = +s.getAttribute('data-start'), b = +s.getAttribute('data-end'), st = $('[data-state]', s), bar = $('.set-bar i', s);
+      s.classList.toggle('is-now', i === cur); s.classList.toggle('is-done', t >= b); s.classList.toggle('is-next', i === next);
+      st.textContent = i === cur ? 'On now' : t >= b ? 'Done' : i === next ? 'Up next' : 'Later';
+      bar.style.width = i === cur ? Math.round((t - a) / (b - a) * 100) + '%' : '0';
+    });
+    $('#scrub-out').textContent = fmt(t);
+    $('#scrub-now').textContent = NOW_MSG[cur < 0 ? 4 : cur];
+    var hh = t >= 1440 ? '00:00' : pad(Math.floor(t / 60)) + ':' + pad(t % 60);
+    live($('#scrub-clock'), { time: hh }, clockEmoji(t), fmt(t));
+    $('#dj-now').textContent = cur < 0 ? 'Lights up' : SETS[cur].getAttribute('data-dj').replace(/&amp;/g, '&');
+    $('#dj-sub').textContent = cur < 0 ? 'That was the night' : SETS[cur].getAttribute('data-vibe');
+    scrub.setAttribute('aria-valuetext', fmt(t));
+  }
+  (function () {
+    var n = new Date();
+    if (n >= START && n < END) scrub.value = Math.max(1140, Math.min(1440, n.getHours() * 60 + Math.round(n.getMinutes() / 5) * 5));
+    scrub.addEventListener('input', paintNight);
+    paintNight();
+  })();
+
+  /* ---------------------------------------------------------------- guest name + bring-sheet state */
+  var me = { name: store.get('guest') || '', mine: store.get('mine') || [] };
+  var ITEMS = [
+    { id: 'popcorn', cat: 'snacks', icon: 'popcorn', em: '🍿', name: 'Popcorn or chips, big bowls', short: 'popcorn', note: 'Two big bowls beat six small bags.', need: 3, seed: ['Priya', 'Dev'] },
+    { id: 'veggie', cat: 'snacks', icon: 'salad', em: '🥗', name: 'Veggie platter with dip', short: 'veggies', note: 'Hummus and something green, please.', need: 2, seed: ['Nadia'] },
+    { id: 'pizza', cat: 'snacks', icon: 'pizza', em: '🍕', name: 'Pizza pick-up crew', short: 'the pizza run', note: 'Two people collect four pies from Pike Street at 9 pm.', need: 2, seed: ['Marcus', 'Tariq'] },
+    { id: 'dessert', cat: 'snacks', icon: 'donut', em: '🍩', name: 'Dessert to share', short: 'dessert', note: 'Brownies, churros or donuts. Anything you can eat one-handed.', need: 3, seed: ['Mei'] },
+    { id: 'fruit', cat: 'snacks', icon: 'apple', em: '🍎', name: 'Fruit and limes', short: 'fruit', note: 'For the drinks and for the sensible people.', need: 1, seed: [] },
+    { id: 'beer', cat: 'drinks', icon: 'beer', em: '🍺', name: 'Beer or hard seltzer', short: 'beer', note: 'A six-pack for the cooler.', need: 5, seed: ['Sam', 'Jo', 'Luis'] },
+    { id: 'wine', cat: 'drinks', icon: 'wine', em: '🍷', name: 'Wine, red or white', short: 'wine', note: 'One bottle. Screw caps welcome: we own one corkscrew.', need: 4, seed: ['Priya', 'Hannah'] },
+    { id: 'mixers', cat: 'drinks', icon: 'cup-soda', em: '🥤', name: 'Mixers', short: 'mixers', note: 'Tonic, ginger beer or soda water.', need: 3, seed: ['Dee'] },
+    { id: 'bubbly', cat: 'drinks', icon: 'champagne-toast', em: '🥂', name: 'Zero-proof bubbly', short: 'bubbly', note: 'Something fizzy for the designated drivers.', need: 2, seed: [] },
+    { id: 'ice', cat: 'drinks', icon: 'snowflake', em: '🧊', name: 'Ice, 10 lb bags', short: 'ice', note: 'The cooler lives on the roof and the ice goes fast.', need: 3, seed: ['Tariq'] },
+    { id: 'blankets', cat: 'supplies', icon: 'bed', em: '🛏️', name: 'Extra blankets or throws', short: 'blankets', note: 'Twelve is not enough for forty.', need: 6, seed: ['Mei', 'Hannah'] },
+    { id: 'power', cat: 'supplies', icon: 'plug', em: '🔌', name: 'Power strip and long cord', short: 'a power strip', note: 'The nearest outlet is two floors down.', need: 1, seed: ['Marcus'] },
+    { id: 'plates', cat: 'supplies', icon: 'utensils', em: '🍴', name: 'Napkins and paper plates', short: 'plates', note: 'For the tacos. Compostable if you can.', need: 2, seed: ['Dee'] },
+    { id: 'bags', cat: 'supplies', icon: 'recycle', em: '♻️', name: 'Trash and recycling bags', short: 'trash bags', note: 'The big black ones. We always run out.', need: 1, seed: [] },
+    { id: 'lanterns', cat: 'supplies', icon: 'lightbulb', em: '💡', name: 'Battery lanterns', short: 'lanterns', note: 'For the dark corner by the water tank.', need: 3, seed: ['Jo'] }
+  ];
+  var ITEM_BY_ID = {}; ITEMS.forEach(function (it) { ITEM_BY_ID[it.id] = it; });
+  function lc(s) { return String(s || '').trim().toLowerCase(); }
+  function claimers(it) {
+    var names = it.seed.slice();
+    if (me.name && me.mine.indexOf(it.id) > -1 && names.map(lc).indexOf(lc(me.name)) < 0) names.push(me.name);
+    return names;
+  }
+  function iClaimed(it) { return !!me.name && me.mine.indexOf(it.id) > -1; }
+
+  /* ---------------------------------------------------------------- bring-sheet */
+  var filter = 'all';
+  function itemHtml(it) {
+    return `<li class="bs-item" data-id="${it.id}">
+      <span class="bs-ico"><span data-ico="${it.icon}" data-size="32">${it.em}</span></span>
+      <div class="bs-main"><b>${esc(it.name)}</b><small>${esc(it.note)}</small>
+      <div class="bs-meta"><span class="bs-info"><span class="bs-who"></span><span class="bs-count"></span></span>
+      <button type="button" class="btn-claim" aria-pressed="false" aria-label="Claim: ${esc(it.name)}"></button></div></div></li>`;
+  }
+  function patchItem(it) {
+    var li = $('.bs-item[data-id="' + it.id + '"]'); if (!li) return;
+    var names = claimers(it), n = names.length, mine = iClaimed(it), full = n >= it.need;
+    li.classList.toggle('is-mine', mine); li.classList.toggle('is-full', full);
+    var who = names.map(function (x) { return (me.name && lc(x) === lc(me.name)) ? 'You' : x; });
+    $('.bs-who', li).innerHTML = who.length ? esc(who.join(', ')) : '<em>Nobody yet</em>';
+    $('.bs-count', li).textContent = Math.min(n, it.need) + ' of ' + it.need;
+    var b = $('.btn-claim', li);
+    b.setAttribute('aria-pressed', String(mine));
+    b.setAttribute('aria-label', (mine ? 'Remove yourself from: ' : 'Claim: ') + it.name);
+    b.disabled = full && !mine;
+    b.textContent = mine ? '\u2713 Bringing it' : full ? 'Covered' : 'I\u2019ll bring it';
+    li.hidden = filter === 'open' && full && !mine;
+  }
+  function paintProgress() {
+    var need = 0, got = 0;
+    ITEMS.forEach(function (it) { need += it.need; got += Math.min(claimers(it).length, it.need); });
+    var pct = Math.round(got / need * 100);
+    live($('#bs-ring'), { value: pct }, pct + '%', pct + ' percent of the bring-sheet is claimed');
+    $('#bs-count').textContent = got + ' of ' + need + ' spots claimed';
+    $('#bs-left').textContent = (need - got) + ' still open';
+  }
+  function paintColumns() {
+    $$('.bs-col').forEach(function (col) {
+      var cat = col.getAttribute('data-cat');
+      col.hidden = !(filter === 'all' || filter === 'open' || filter === cat);
+      var vis = $$('.bs-item', col).filter(function (li) { return !li.hidden; }).length, ul = $('.bs-list', col), empty = $('.bs-empty', col);
+      if (!vis && !empty) { empty = document.createElement('li'); empty.className = 'bs-empty'; empty.textContent = 'Everything in here is claimed. Thank you.'; ul.appendChild(empty); }
+      else if (vis && empty) empty.remove();
+    });
+  }
+  function paintSheet() { ITEMS.forEach(patchItem); paintColumns(); paintProgress(); }
+  $$('.bs-list').forEach(function (ul) {
+    ul.innerHTML = ITEMS.filter(function (it) { return it.cat === ul.getAttribute('data-list'); }).map(itemHtml).join('');
+  });
+  fitEmoji($('#bs-cols'));
+  var nameIn = $('#guest-name'), nameErr = $('#name-err');
+  nameIn.value = me.name;
+  nameIn.addEventListener('input', function () {
+    me.name = nameIn.value.trim(); store.set('guest', me.name); nameErr.textContent = ''; nameIn.removeAttribute('aria-invalid');
+    paintSheet(); paintGuestNotes();
+  });
+  $('#bs-cols').addEventListener('click', function (e) {
+    var b = e.target.closest('.btn-claim'); if (!b || b.disabled) return;
+    var it = ITEM_BY_ID[b.closest('.bs-item').getAttribute('data-id')];
+    if (!me.name) {
+      nameErr.textContent = 'Add your name first, so everyone knows who is bringing the ice.';
+      nameIn.setAttribute('aria-invalid', 'true'); nameIn.focus();
+      nameIn.scrollIntoView({ block: 'center', behavior: 'smooth' }); return;
+    }
+    var i = me.mine.indexOf(it.id);
+    if (i > -1) { me.mine.splice(i, 1); toast('Removed: ' + it.name); }
+    else { me.mine.push(it.id); toast('Thank you, ' + me.name.split(' ')[0] + '. You are bringing ' + it.short + '.'); }
+    store.set('mine', me.mine);
+    paintSheet(); paintGuestNotes();
+  });
+  $$('.bs-filters .chip').forEach(function (c) {
+    c.addEventListener('click', function () {
+      filter = c.getAttribute('data-f');
+      $$('.bs-filters .chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+      paintSheet();
+    });
+  });
+
+  /* ---------------------------------------------------------------- guests */
+  var GUESTS = [
+    { n: 'Dee Park', s: 'yes', host: 1 }, { n: 'Marcus Bell', s: 'yes', host: 1 }, { n: 'Priya Nair', s: 'yes' }, { n: 'Dev Mehta', s: 'yes', plus: 1 },
+    { n: 'Nadia Haddad', s: 'yes' }, { n: 'Sam Okafor', s: 'yes', plus: 1 }, { n: 'Jo Whitfield', s: 'yes' }, { n: 'Tariq Aziz', s: 'yes' },
+    { n: 'Mei Lin', s: 'yes', plus: 1 }, { n: 'Luis Ortega', s: 'yes' }, { n: 'Hannah Cole', s: 'yes' },
+    { n: 'Ines Duarte', s: 'maybe' }, { n: 'Theo Brandt', s: 'maybe' }, { n: 'Omar Saleh', s: 'maybe' }
+  ];
+  var HIDDEN_GOING = 9, CAP = 40;
+  var rsvp = store.get('rsvp');
+  function initialsOf(n) { var p = n.trim().split(/\s+/); return ((p[0] || '?').charAt(0) + (p.length > 1 ? p[p.length - 1].charAt(0) : '')).toUpperCase(); }
+  function firstOf(n) { return n.trim().split(/\s+/)[0]; }
+  function bringing(first) {
+    var got = ITEMS.filter(function (it) { return it.seed.map(lc).indexOf(lc(first)) > -1; });
+    return got.map(function (it) { return it.short; });
+  }
+  function noteFor(g) {
+    var bits = [];
+    if (g.you) { var mine = ITEMS.filter(function (it) { return me.mine.indexOf(it.id) > -1; }).map(function (it) { return it.short; }); if (mine.length) bits.push('Bringing ' + mine.slice(0, 2).join(', ') + (mine.length > 2 ? ' +' + (mine.length - 2) : '')); }
+    else { var b = bringing(firstOf(g.n)); if (b.length) bits.push('Bringing ' + b.slice(0, 2).join(', ') + (b.length > 2 ? ' +' + (b.length - 2) : '')); }
+    if (g.plus) bits.push(g.plusName ? '+ ' + g.plusName : '+1 guest');
+    if (!bits.length) bits.push(g.s === 'maybe' ? 'Maybe' : g.host ? 'Hosting' : 'Going');
+    return bits.join(' · ');
+  }
+  function totals() {
+    var going = HIDDEN_GOING, maybe = 0;
+    GUESTS.concat(rsvp && rsvp.s !== 'no' ? [Object.assign({ you: 1 }, rsvp)] : []).forEach(function (g) {
+      if (g.s === 'yes') going += 1 + (g.plus ? 1 : 0); else if (g.s === 'maybe') maybe += 1;
+    });
+    return { going: going, maybe: maybe };
+  }
+  function cardHtml(g) {
+    var ini = initialsOf(g.n), yes = g.s === 'yes';
+    return '<li class="g-card' + (g.s === 'maybe' ? ' is-maybe' : '') + (g.you ? ' is-you' : '') + '" data-first="' + esc(firstOf(g.n)) + '"' + (g.you ? ' data-you' : '') + '>' +
+      '<span class="g-av" data-live="avatar-initials" data-p-initials="' + esc(ini) + '" data-p-status="' + (yes ? 'online' : 'none') + '" data-size="64" data-label="' + esc(g.n + (g.you ? ' (you)' : '') + ', ' + (yes ? 'going' : 'maybe')) + '">' + esc(ini) + '</span>' +
+      '<span class="g-name">' + esc(g.you ? firstOf(g.n) + ' (you)' : firstOf(g.n)) + '</span>' +
+      (g.host ? '<span class="g-tag">Host</span>' : '') +
+      '<span class="g-note" data-note>' + esc(noteFor(g)) + '</span></li>';
+  }
+  function paintGuests() {
+    var list = [], html = '';
+    if (rsvp && rsvp.s !== 'no') list.push(Object.assign({ you: 1 }, rsvp));
+    GUESTS.filter(function (g) { return g.s === 'yes'; }).concat(GUESTS.filter(function (g) { return g.s === 'maybe'; })).forEach(function (g) { list.push(g); });
+    list.forEach(function (g) { html += cardHtml(g); });
+    html += '<li class="g-card g-more"><span class="g-av" data-live="avatar-initials" data-p-initials="+' + HIDDEN_GOING + '" data-p-shape="square" data-size="64" data-label="' + HIDDEN_GOING + ' more guests are going">+' + HIDDEN_GOING + '</span><span class="g-name">and more</span><span class="g-note">' + HIDDEN_GOING + ' friends of friends</span></li>';
+    if (!rsvp || rsvp.s === 'no') html += '<li class="g-card g-spot"><a class="g-spot-a" href="#rsvp" style="display:grid;justify-items:center;gap:6px;text-decoration:none;color:inherit"><span class="ib"><span data-ico="user-plus" data-size="30">➕</span></span><span class="g-name">Your spot</span><span class="g-note">RSVP to join the list</span></a></li>';
+    $('#g-grid').innerHTML = html;
+    refresh($('#g-grid'));
+    paintTotals();
+  }
+  function paintGuestNotes() {
+    $$('#g-grid .g-card[data-first]').forEach(function (li) {
+      var f = li.getAttribute('data-first'), isYou = li.hasAttribute('data-you');
+      var g = isYou ? Object.assign({ you: 1 }, rsvp) : GUESTS.filter(function (x) { return firstOf(x.n) === f; })[0];
+      if (g) $('[data-note]', li).textContent = noteFor(g);
+    });
+  }
+  function paintTotals() {
+    var t = totals();
+    $('#going-n').textContent = t.going; $('#maybe-n').textContent = t.maybe;
+    var left = Math.max(0, CAP - t.going);
+    $('#g-left').innerHTML = '<b>' + left + '</b> of ' + CAP + ' spots left';
+    $('#g-fill').style.width = Math.min(100, Math.round(t.going / CAP * 100)) + '%';
+  }
+  paintGuests();
+
+  /* ---------------------------------------------------------------- song requests */
+  var REQ_SEED = [
+    { id: 's1', song: 'September', artist: 'Earth, Wind & Fire', set: 'Sunset warm-up', votes: 14, by: 'Priya' },
+    { id: 's2', song: 'Dancing On My Own', artist: 'Robyn', set: 'Last-call singalongs', votes: 11, by: 'Nadia' },
+    { id: 's3', song: 'Murder on the Dancefloor', artist: 'Sophie Ellis-Bextor', set: 'Any set', votes: 9, by: 'Dev' },
+    { id: 's4', song: 'Rhythm Is a Dancer', artist: 'Snap!', set: 'Skyline house', votes: 7, by: 'Tariq' },
+    { id: 's5', song: 'Valerie', artist: 'Amy Winehouse', set: 'Sunset warm-up', votes: 6, by: 'Jo' }
+  ];
+  var reqs = store.get('requests') || REQ_SEED.map(function (r) { return Object.assign({}, r); });
+  var voted = store.get('voted') || {};
+  var qList = $('#queue-list'), qNodes = {}, lastAdded = '';
+  function saveReqs() { store.set('requests', reqs); store.set('voted', voted); }
+  function qNode(r) {
+    var li = document.createElement('li'); li.className = 'q-item'; li.setAttribute('data-id', r.id);
+    li.innerHTML = '<span class="q-rank"></span><div class="q-t"><b></b><span></span></div>' +
+      '<button type="button" class="q-vote" aria-pressed="false"><span data-ico="thumbs-up" data-size="20" data-motion="hover">👍</span><span class="q-n"></span></button>';
+    $('b', li).textContent = r.song;
+    $('.q-t span', li).textContent = (r.artist ? r.artist + ' · ' : '') + r.set + ' · asked by ' + r.by;
+    fitEmoji(li);
+    return li;
+  }
+  function paintQueue() {
+    var sorted = reqs.map(function (r, i) { return { r: r, i: i }; }).sort(function (a, b) { return (b.r.votes - a.r.votes) || (a.i - b.i); }).map(function (x) { return x.r; });
+    var shown = sorted.slice(0, 8);
+    $$('.q-item', qList).forEach(function (li) { if (!shown.some(function (r) { return r.id === li.getAttribute('data-id'); })) li.remove(); });
+    shown.forEach(function (r, i) {
+      var li = qNodes[r.id];
+      if (!li || !li.isConnected) { li = qNodes[r.id] = qNode(r); }
+      $('.q-rank', li).textContent = i + 1;
+      var b = $('.q-vote', li), v = !!voted[r.id];
+      b.setAttribute('aria-pressed', String(v));
+      b.setAttribute('aria-label', (v ? 'Remove your vote for ' : 'Vote for ') + r.song + ', ' + r.votes + ' votes');
+      $('.q-n', li).textContent = r.votes;
+      if (qList.children[i] !== li) qList.insertBefore(li, qList.children[i] || null);
+      if (r.id === lastAdded) { li.classList.remove('is-new'); void li.offsetWidth; li.classList.add('is-new'); }
+    });
+    lastAdded = '';
+    $('#queue-count').textContent = reqs.length + (reqs.length === 1 ? ' request' : ' requests');
+  }
+  qList.addEventListener('click', function (e) {
+    var b = e.target.closest('.q-vote'); if (!b) return;
+    var id = b.closest('.q-item').getAttribute('data-id'), r = reqs.filter(function (x) { return x.id === id; })[0];
+    if (voted[id]) { delete voted[id]; r.votes -= 1; } else { voted[id] = 1; r.votes += 1; }
+    saveReqs(); paintQueue();
+    var nb = $('.q-item[data-id="' + id + '"] .q-vote'); if (nb) nb.focus();
+  });
+  $('#req-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var song = $('#req-song'), artist = $('#req-artist'), set = $('#req-set'), err = $('#req-err');
+    var s = song.value.trim().replace(/\s+/g, ' ');
+    err.textContent = ''; song.removeAttribute('aria-invalid');
+    if (s.length < 2) { err.textContent = 'Give us a song title to work with.'; song.setAttribute('aria-invalid', 'true'); song.focus(); return; }
+    var dupe = reqs.filter(function (r) { return lc(r.song) === lc(s); })[0];
+    if (dupe) {
+      err.textContent = '\u201C' + dupe.song + '\u201D is already in the queue. Give it a vote instead.';
+      song.setAttribute('aria-invalid', 'true'); lastAdded = dupe.id; paintQueue(); return;
+    }
+    var id = 'u' + Date.now();
+    reqs.push({ id: id, song: s, artist: artist.value.trim(), set: set.value, votes: 1, by: me.name ? firstOf(me.name) : 'a guest' });
+    voted[id] = 1; lastAdded = id; saveReqs(); paintQueue();
+    song.value = ''; artist.value = ''; set.selectedIndex = 0;
+    toast('Added to the queue: ' + s);
+  });
+  paintQueue();
+
+  /* ---------------------------------------------------------------- map legend <-> pins */
+  (function () {
+    function hot(k, on) { $$('.pin[data-pin="' + k + '"]').forEach(function (p) { p.classList.toggle('is-hot', on); }); $$('.map-legend li[data-pin="' + k + '"]').forEach(function (l) { l.classList.toggle('is-hot', on); }); }
+    $$('.map-legend li[data-pin]').forEach(function (li) {
+      var k = li.getAttribute('data-pin');
+      li.addEventListener('mouseenter', function () { hot(k, true); }); li.addEventListener('mouseleave', function () { hot(k, false); });
+    });
+    $$('.pin').forEach(function (p) {
+      var k = p.getAttribute('data-pin');
+      p.addEventListener('mouseenter', function () { hot(k, true); }); p.addEventListener('mouseleave', function () { hot(k, false); });
+    });
+  })();
+  $('#copy-addr').addEventListener('click', function () {
+    var txt = '9 Foundry Street, apt 4C. Buzz 4C, then take the stairs to the roof.';
+    function ok() { toast('Address copied. Buzz 4C when you arrive.'); }
+    function fallback() {
+      var t = document.createElement('textarea'); t.value = txt; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;left:-9999px;top:0';
+      document.body.appendChild(t); t.select(); try { document.execCommand('copy'); ok(); } catch (e) { toast(txt); } t.remove();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(ok, fallback); else fallback();
+  });
+
+  /* ---------------------------------------------------------------- RSVP */
+  var form = $('#rsvp-form'), done = $('#rsvp-done');
+  var plus = $('#r-plus'), plusWrap = $('#plus-wrap');
+  plus.addEventListener('change', function () { plusWrap.hidden = !plus.checked; if (plus.checked) $('#r-plus-name').focus(); });
+  function setErr(name, msg) {
+    var f = $('[data-err="' + name + '"]'), input = $('#r-' + name);
+    f.textContent = msg || '';
+    if (msg) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+  }
+  ['name', 'email'].forEach(function (n) { $('#r-' + n).addEventListener('input', function () { setErr(n, ''); }); });
+  function showDone() {
+    if (!rsvp) { done.hidden = true; form.hidden = false; return; }
+    var first = firstOf(rsvp.n), h = $('#done-h'), p = $('#done-p'), tk = $('#done-ticket');
+    form.hidden = true; done.hidden = false;
+    if (rsvp.s === 'yes') {
+      tk.hidden = false;
+      live(tk, { number: rsvp.no }, '#' + rsvp.no, 'Guest number ' + rsvp.no);
+      h.textContent = 'You are on the list, ' + first + '.';
+      p.textContent = 'Guest #' + rsvp.no + ' of ' + CAP + '. Doors at 7, sunset at 6:12, speakers off at 11.' +
+        (rsvp.plus ? ' ' + (rsvp.plusName || 'Your plus-one') + ' is on the list too.' : '') + ' Add the night to your calendar and claim something on the bring-sheet.';
+    } else if (rsvp.s === 'maybe') {
+      tk.hidden = true;
+      h.textContent = 'Penciled in, ' + first + '.';
+      p.textContent = 'We will keep a blanket warm for you. Tell Dee by Wednesday 14 October if it turns into a yes, so the pizza maths works.';
+    } else {
+      tk.hidden = true;
+      h.textContent = 'We will miss you, ' + first + '.';
+      p.textContent = 'Thanks for letting us know. There will be another roof in spring, and the party playlist is on its way to you.';
+    }
+  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = $('#r-name').value.trim().replace(/\s+/g, ' '), email = $('#r-email').value.trim(), bad = false;
+    setErr('name', ''); setErr('email', '');
+    if (name.length < 2) { setErr('name', 'Tell us your name so we can put it on the list.'); bad = true; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { setErr('email', email ? 'That email does not look right. Check for a typo?' : 'We need an email to send the roof reminder.'); if (!bad) $('#r-email').focus(); bad = true; }
+    if (bad) { if (!$('#r-name').value.trim() || name.length < 2) $('#r-name').focus(); return; }
+    var status = $('input[name="status"]:checked', form).value;
+    var t = totals();
+    rsvp = { n: name, s: status, plus: status !== 'no' && plus.checked ? 1 : 0, plusName: plus.checked ? $('#r-plus-name').value.trim() : '', diet: $('#r-diet').value, no: t.going + 1 };
+    store.set('rsvp', rsvp);
+    if (!me.name) { me.name = firstOf(name); store.set('guest', me.name); nameIn.value = me.name; paintSheet(); }
+    paintGuests(); showDone();
+    done.focus(); done.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  });
+  $('#rsvp-edit').addEventListener('click', function () {
+    if (rsvp) { $('#r-name').value = rsvp.n; $('input[name="status"][value="' + rsvp.s + '"]', form).checked = true; plus.checked = !!rsvp.plus; plusWrap.hidden = !rsvp.plus; $('#r-plus-name').value = rsvp.plusName || ''; }
+    rsvp = null; store.del('rsvp'); paintGuests(); showDone(); $('#r-name').focus();
+  });
+  showDone();
+
+  /* ---------------------------------------------------------------- go */
+  fitEmoji(document);
+  paintSheet(); paintGuestNotes();
+  window.RoofParty = { ics: icsText, state: function () { return { me: me, rsvp: rsvp, reqs: reqs, wx: wx, totals: totals() }; } };
+})();
+</script>
+</body>
+</html>

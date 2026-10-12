@@ -2,7 +2,7 @@
 
 Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass the loop or hover preset as `preset` (or `wm-p-<preset>`) to play it on another trigger; in a 3D style each plays as its 3D counterpart (motion.md).
 
-734 icons have a tuned animation (any icon can use any preset).
+750 icons have a tuned animation (any icon can use any preset).
 
 | icon | loop | hover | swaps to | what it says |
 |---|---|---|---|---|
@@ -67,6 +67,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `avatar-penguin` | rock | jelly | `avatar-owl`, `avatar-penguin@solid` | waddles side to side like a happy penguin |
 | `avatar-person-glasses` | breathe | tilt | `avatar-person`, `avatar-person-glasses@solid` | breathes calmly; a thoughtful tilt on hover |
 | `avatar-person-headphones` | nod | nod | `headphones`, `avatar-person-headphones@solid` | nods along to the music; bops on hover |
+| `avatar-person-wheelchair` | breathe | nod | `avatar-person`, `avatar-person-wheelchair@solid` | breathes calmly; nods hello on hover, or rolls forward a touch |
 | `avatar-person` | breathe | nod | `user-round`, `avatar-person@solid` | breathes calmly; nods hello on hover |
 | `avatar-robot` | float | nod | `bot`, `avatar-alien`, `avatar-robot@solid` | nods like an assistant ready to help, antenna blinking |
 | `avatar-teen` | breathe | tilt | `avatar-person`, `avatar-teen@solid` | breathes easy; a laid-back tilt on hover |
@@ -76,13 +77,16 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `avatar-woman-braids` | breathe | tilt | `avatar-woman`, `avatar-woman-braids@solid` | breathes calmly; a playful tilt on hover |
 | `avatar-woman-bun` | breathe | nod | `avatar-woman`, `avatar-woman-bun@solid` | breathes calmly; nods hello on hover |
 | `avatar-woman-curly` | breathe | nod | `avatar-man-afro`, `avatar-woman-curly@solid` | breathes calmly; nods hello on hover |
+| `avatar-woman-hijab` | breathe | nod | `avatar-woman`, `avatar-woman-hijab@solid` | breathes calmly; nods hello on hover |
 | `avatar-woman` | breathe | nod | `avatar-man`, `avatar-woman@solid` | breathes calmly; nods hello on hover |
 | `award` | glow | pop | `award@solid`, `badge-check` | medal shines while its ribbon flutters; pops proudly on hover |
+| `baby-bottle` | sway | shake | `baby`, `baby-bottle@solid` | tips softly as if feeding, gets a quick shake to mix on hover |
 | `baby` | rock | jelly | `smile` | rocks gently like a cradle |
 | `backpack` | sway | sway |  | hangs from its top handle and swings, pocket a beat behind |
 | `badge-check` | rock | pop | `badge-check@solid` | the seal sways gently while its check stays proud |
 | `badge-dollar-sign` | rock | spin-once | `badge-percent`, `dollar-sign` | the price badge rocks gently; spins like a coin on hover |
 | `badge-percent` | rock | spin-once | `percent`, `badge-check`, `badge-percent@solid` | the sale badge rocks gently while its percent pulses; turns on hover |
+| `baguette` | rock | wiggle | `baguette@solid`, `bread`, `croissant` | the crusty baguette rocks gently like it is tucked under an arm |
 | `balloon` | float | rise | `balloon@solid`, `party-popper` | bobs gently in the air, then floats up and away on hover |
 | `bamboo` | sway | sway |  | bamboo stalks bend in the wind |
 | `ban` | pulse | shake | `check-circle` | a steady stop sign that pulses calmly, shakes no on hover |
@@ -121,6 +125,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `braces` | pulse | jelly | `code`, `terminal` | swells softly like a code block wrapping its content |
 | `brain-circuit` | pulse | pop | `brain`, `cpu`, `bot` | the brain thinks while signals pulse out along its circuit traces |
 | `brain` | pulse | glow | `bot`, `lightbulb`, `sparkles` | swells calmly while its folds spark like thoughts firing |
+| `bread` | pulse | jelly | `bread@solid`, `baguette`, `croissant` | the loaf rises slowly like dough proving in a warm kitchen |
 | `briefcase-business` | sway | bounce | `briefcase`, `briefcase-business@solid` | the work case swings gently from its handle |
 | `briefcase-medical` | sway | sway | `briefcase`, `briefcase-medical@solid` | swings from its handle like a kit being carried to help |
 | `briefcase` | rock | ring | `briefcase@solid` | swings from its handle like a bag being carried |
@@ -229,7 +234,9 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `corner-down-left` | nudge | nudge | `check`, `corner-down-right` | presses left like the Enter key, the head leading |
 | `corner-down-right` | nudge | nudge | `reply`, `corner-down-left` | tucks right under its thread, the head leading like a reply |
 | `cpu` | pulse | glow | `server`, `cpu@solid` | the core glows with work while the chip hums |
+| `crayon` | sway | wiggle | `palette`, `pencil`, `crayon@solid` | sways on its tip like it is colouring in, scribbles on hover |
 | `credit-card` | float | flip | `check`, `wallet`, `credit-card@solid` | hovers like a card held to a reader; flips over on hover |
+| `croissant` | breathe | pop | `croissant@solid`, `coffee`, `bread` | the flaky croissant puffs up, warm and fresh from the oven |
 | `crop` | zoom | pop | `maximize`, `image` | the frame tightens around the picture like a crop being set |
 | `crosshair` | pulse | zoom | `target`, `map-pin` | the sight holds steady while the centre dot pulses, locked on |
 | `crown` | float | tada | `crown@solid` | floats proudly among sparkles, then celebrates a win |
@@ -240,6 +247,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `cursor` | tilt | nudge | `mouse` | leans on its tip, then pokes forward like a click |
 | `database-zap` | breathe | pop | `database`, `zap` | data crackles with a burst of speed |
 | `database` | jelly | jelly | `server` | stack squashes on its base, the middle band lagging like data settling |
+| `dental-chair` | pulse | tilt | `tooth`, `dental-chair@solid` | the chair reclines a touch while its overhead light swings into place |
 | `dhak` | beat | jelly | `dholak` | the drum keeps the beat while its feather plume sways |
 | `dholak` | beat | wiggle | `dhak` | the drum thumps in time for a wedding song |
 | `dices` | rock | spin-once |  | tumble like a fresh roll of the dice |
@@ -456,6 +464,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `moon` | breathe | tilt | `sun`, `moon@solid` | glows softly in a calm night sky, rocks on its crescent when touched |
 | `more-horizontal` | pulse | jelly | `more-vertical`, `close` | dots swell softly like more is waiting |
 | `more-vertical` | pulse | jelly | `more-horizontal`, `close` | dots swell softly like more options are waiting |
+| `mosque` | breathe | glow | `moon`, `mosque@solid` | stands serene while the crescent on its dome glints |
 | `motorcycle` | float | tilt | `car`, `truck`, `motorcycle@solid` | idles with a light engine purr, pops a wheelie on hover |
 | `mountain` | pulse | pop | `flag` | stands calm on the horizon, its peaks rising on hover |
 | `mouse-pointer-click` | pulse | pop | `cursor`, `check` | presses down like a click while the rays flash |
@@ -470,6 +479,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `notebook` | rock | flip | `book-open`, `notepad-text`, `notebook@solid` | rocks on its spine, the spiral rings trailing, flips open on hover |
 | `notepad-text` | type | draw | `sticky-note`, `pencil`, `notepad-text@solid` | the lines jitter like notes being jotted, they write on when hovered |
 | `nutcracker` | rock | nod | `nutcracker@solid` | the toy soldier marches in place and snaps its jaw |
+| `oven` | glow | bounce | `oven@solid`, `bread`, `cooking-pot` | the oven glows warm while its window flickers with baking heat |
 | `package-open` | pulse | jelly | `package`, `package-open@solid` | the opened box swells from its base, wobbles as you unpack it |
 | `package` | bounce | bounce | `check-circle`, `truck`, `package@solid` | hops softly like a parcel being delivered |
 | `paintbrush` | sway | wiggle | `palette`, `pencil` | sweeps from the grip like it is painting a stroke |
@@ -512,6 +522,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `plane-takeoff` | nudge | pass | `plane-landing`, `plane` | climbs away on departure while the runway streams below |
 | `plane` | float | pass | `send` | cruises on steady air and takes off on hover |
 | `play` | nudge | nudge | `pause`, `stop`, `play@solid` | leans forward, ready to start playing |
+| `playground` | bounce | jelly | `school`, `playground@solid` | hops like a child at play, then wobbles with glee on hover |
 | `plug-zap` | float | nudge | `plug`, `zap`, `power` | the plug hangs steady while its bolt flickers with live power |
 | `plug` | nudge | nudge | `zap`, `battery-charging`, `puzzle-piece`, `plug@solid` | pushes up into the socket and eases back out |
 | `plum-blossom` | sway | twinkle | `flower` | a plum branch sways while the blossom sparkles |
@@ -551,6 +562,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `rewind` | nudge | pass | `fast-forward`, `skip-back` | rushes back like scrubbing a video backward |
 | `ring-box` | twinkle | pop | `gem`, `heart` | the ring sparkles in its open box |
 | `rocket` | nudge | pass | `rocket@solid` | hums on the launchpad, then blasts off up and away |
+| `rolling-pin` | nudge | nudge | `rolling-pin@solid`, `cookie`, `croissant` | rolls back and forth as if flattening dough on the counter |
 | `rose-bouquet` | sway | tada | `rose`, `flower` | the roses sway gently in their wrap |
 | `rose` | sway | tada | `flower`, `rose-bouquet`, `rose@solid` | the rose sways on its stem |
 | `rotate-ccw` | tilt | tilt | `rotate-cw`, `undo` | leans back counter-clockwise, like undoing a turn |
@@ -640,6 +652,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `stop` | pulse | jelly | `play`, `pause` | stands by with a slow pulse, squashes like a pressed button |
 | `store` | pulse | jelly | `store@solid`, `building`, `shopping-bag` | the shop stands calm while its door and awning stripes swell in welcome |
 | `strikethrough` | nudge | nudge | `underline`, `bold`, `eraser` | the strike swipes through the letter, marking it done |
+| `stroller` | rock | pass | `baby`, `stroller@solid` | rocks gently like a pram lulling a baby, rolls off and back on hover |
 | `subscript` | nudge | nudge | `superscript`, `type` | the small 2 dips below the line, like the 2 in H2O |
 | `sun-dim` | breathe | spin-once | `sun`, `moon` | glows softly like a dimmed light |
 | `sun-moon` | rock | spin-once | `moon`, `sun`, `sun-moon@solid` | rocks gently between day and night, turns over when touched |
@@ -671,6 +684,7 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `toggle` | jelly | jelly | `toggle@solid`, `sliders` | the knob slides across the track like a switch being flipped |
 | `toilet` | jelly | jelly | `bath`, `droplet`, `toilet@solid` | wobbles softly on its base, like a flush just finished |
 | `tombstone` | breathe | wiggle | `ghost`, `coffin`, `tombstone@solid` | stands still in the graveyard, swaying with the mist |
+| `tooth-crown` | float | twinkle | `tooth`, `sparkles`, `tooth-crown@solid` | the crown cap hovers above the tooth and settles, gleams on hover |
 | `tooth` | glow | jelly | `smile`, `sparkles`, `tooth@solid` | gleams like a freshly brushed tooth, wobbles when tapped |
 | `toran` | sway | ring |  | the garland sways gently in the doorway breeze |
 | `traffic-cone` | jelly | jelly | `alert-triangle`, `ban`, `traffic-cone@solid` | wobbles on its base now and then, jiggles when bumped |
@@ -726,12 +740,14 @@ Generated, do not edit by hand. How to use these: [motion.md](motion.md). Pass t
 | `water-balloon` | jelly | bounce | `holi-splash` | the full balloon wobbles, ready to be thrown |
 | `webcam` | sway | zoom | `camera-off`, `video-off`, `video-camera` | looks around on its stand; the lens focuses when you look |
 | `webhook` | spin | spin-once | `link` | slowly circles its three hooks like events passing round |
+| `wheat` | sway | sway | `wheat@solid`, `bread`, `sprout` | the ear of wheat sways on its stalk in a summer breeze |
 | `wifi-off` | flicker | shake | `wifi`, `signal` | arcs flicker like a dropping connection while the slash holds |
 | `wifi` | fill | fill | `wifi-off`, `signal` | arcs light up from the dot like a signal reaching you |
 | `wind` | nudge | pass | `cloud`, `leaf` | gusts stream to the right in staggered waves |
 | `wine` | rock | rock |  | swirls gently on its stem, the wine sloshing a beat behind |
 | `witch-hat` | sway | tada | `broom`, `cauldron`, `witch-hat@solid` | the bent tip sways like the hat is about to cast a spell |
 | `workflow` | pulse | draw | `git-branch`, `network`, `zap` | steps run in order as the connector draws from one box to the next |
+| `worried` | pulse | wiggle | `smile`, `frown`, `worried@solid` | fidgets nervously as a bead of sweat drips, trembles on hover |
 | `wrap-text` | nudge | nudge | `align-left`, `corner-down-left`, `pilcrow` | the long line bends round and settles onto the next row |
 | `wreath` | breathe | tada | `wreath@solid` | the wreath breathes on the door, its bow bouncing |
 | `wrench` | rock | tilt | `settings`, `hammer` | turns about the nut in its jaw like tightening a bolt |

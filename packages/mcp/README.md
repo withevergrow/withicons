@@ -1,10 +1,10 @@
 # @withicons/mcp
 
-An [MCP](https://modelcontextprotocol.io) server for **with icons** — 734 MIT icons, each drawn in 34 styles
+An [MCP](https://modelcontextprotocol.io) server for **with icons** — 750 MIT icons, each drawn in 34 styles
 (line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine). Your AI assistant can search icons in plain English
 ("throw away", "settigns", "money", "cute heart", "8-bit star") and get paste-ready SVG, React, Vue, Svelte, Angular,
 Solid, web-component, CSS-class or data-URI code, plus animation code for the optional `@withicons/motion` package
-(734 icons have a tuned animation; every icon can use any preset), every icon's 20-30 hand-picked colour
+(750 icons have a tuned animation; every icon can use any preset), every icon's 20-30 hand-picked colour
 palettes for the multi-colour styles, a style recommender (`recommend_styles`: "Diwali sale banner", "avatar picker for
 a kids app", "AI landing page" -> the best styles with packages, snippets, presets and palettes), and **files**: SVG, PNG, PDF, PowerPoint, Word, Lottie, app assets and animated
 GIF / APNG / SVG / PowerPoint for slides and docs (`export_icon`).
@@ -16,19 +16,20 @@ animated files use `@resvg/resvg-js`, an optional dependency installed with the 
 
 | tool | arguments | returns |
 |---|---|---|
-| `search_icons` | `query`, `limit?` (10), `style?`, `category?`, `format?` (react) | ranked names, why each matched (`matched alias "bin"`, typo-tolerant), a ready snippet, a link |
-| `get_icon` | `name` (name **or alias**), `style?` (line), `format?` (svg), `size?` (24), `color?`, `flat?`, `palette?`, `colors?` | the code: `svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`; for multi-colour styles the icon's colour variables (role + default) and its palette ids; with `palette` / `colors`, the code recoloured (every colour, not just one) plus the CSS; a `motion` summary when the icon has a tuned animation |
-| `recommend_styles` | `for?` (what you are making, plain words), `use?` (app · slides · saas · ai · brand · kids · print · festive), `icon?`, `limit?` (6) | the best styles for the job, best first, each with its group, what it is good for, the React import, `<with-icon>` and class snippets, the npm packages holding its raw files, its download-all zip, 3D motion support, holiday palettes (holiday styles) and the Duo presets (duo); festival icon categories, avatar advice (inclusive skin-tone palettes) and notes. Nothing recognised: every use and group |
-| `list_palettes` | `name`, `style?`, `tag?`, `limit?` | the icon's 20-30 palettes (id, name, tags, ten role colours); with `style`, the exact `--with-*` variables and a CSS rule per palette |
+| `search_icons` | `query`, `limit?` (10), `style?`, `category?`, `format?` (react, or `none` for names only) | ranked exact matches, why each matched (`matched alias "bin"`, typo-tolerant), a ready snippet, a link. Every exact match carries a snippet in `structuredContent` and the text shows the first one only; `format: "none"` leaves the snippets out of both (name, title, category, confidence, reason, url), which is what to use for long lists and the large `svg` snippets. `suggestions` (names a typo away) appear only when a name really is close. When no icon carries the words: `noExactMatch: true` and up to 5 similar icons in `additional` (loosely related, no snippet), never padded into `results` |
+| `get_icon` | `name` (name **or alias**), `style?` (line), `format?` (svg), `size?` (24), `color?`, `flat?`, `palette?`, `colors?`, `theme?` | the code: `svg`, `react`, `vue`, `svelte`, `angular`, `solid`, `html-class`, `web-component`, `data-uri`; for multi-colour styles the icon's colour variables (role + default), `mainRole` and `roleAreas` (measured on the render) and its palette ids; with `palette` / `colors` / `theme`, the code recoloured (every colour, not just one) plus the CSS, `warnings` for colours that change nothing in that style and `notes` for a colour it paints only as a see-through tone; a `motion` summary when the icon has a tuned animation |
+| `recommend_styles` | `for?` (what you are making, plain words), `use?` (app · slides · saas · ai · brand · kids · print · festive), `icon?`, `limit?` (6), `compact?` | the best styles for the job, best first (several festivals named: by how many each style covers; "exact brand colours" or a hex: flat styles first, with `exactColours` on each entry and a note that gradient and shadow styles cannot match a hex), each with its group, what it is good for, the React import, `<with-icon>` and class snippets, the npm packages holding its raw files, its download-all zip, 3D motion support, holiday palettes (holiday styles) and the Duo presets (duo); festival icon categories, avatar advice (inclusive skin-tone palettes) and notes. `compact: true` returns only name, group, what it suits and the React / `<with-icon>` snippets (about a third of the size). Nothing recognised: every use and group |
+| `list_palettes` | `name`, `style?`, `tag?`, `limit?` | the icon's 20-30 palettes (id, name, tags, ten role colours); with `style`, the exact `--with-*` variables and a CSS rule per palette, `mainRole` (the colour role that paints the largest part, measured on the render) and `roleAreas` (every role's share) |
 | `animate_icon` | `name`, `trigger?` (`loop` · `hover` · `once` · `inview` · `swap`), `preset?`, `to?`, `effect?`, `style?`, `format?` (html), `duration?` | paste-ready animation code (`html`, `react`, `vue`, `svelte`, `solid`, `angular`, `web-component`, `js`), the icon's motion spec and install lines. `inview` and the `draw` preset come wired to the JS runtime (`motion(el, name, options)` in a mount hook / module script). In a 3D style (clay, glass, liquid, chrome, soft3d, luxe, skeuo, dock, plush) the motion plays in 3D: the code adds `wm-3d` (or `style` to `motion()`), and the result has `motion3d` and `moves` (the moves the icon offers in that style; soft3d 3-5: its own, then `pop-up` / `press`, then `hop`, `turn`, `gleam` …) |
-| `export_icon` | `name`, `style?`, `format?` (svg; one or a comma list), `size?`, `background?`, `matte?`, `palette?`, `colors?`, `color?`, `motion?` (loop · hover · once · swap · none · a preset), `to?`, `effect?`, `fps?`, `seconds?`, `loop?`, `all_styles?`, `out_dir?`, `inline?` (local), `cursor?` (remote) | files: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, the code formats, and animated `gif`, `apng`, `animated-svg`, `pptx-animated`. Saved to `out_dir` when given; small files also come back inline (PNG / GIF as image content, text as text, the rest as base64 resources). The remote server makes the vector, code and Lottie formats and answers PNG-based / animated ones with the exact `npx withicons export …` command; large remote exports come in pages (`next: { cursor, remaining }`: call again with `cursor`), and plain `svg-flat` files then come back as `urls[]` to jsDelivr `@withicons/static` |
-| `list_styles` | — | the 34 styles with their group (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays) and what they are good for, what they look like, `minSize`, `onDark`, and the colour variables of palette styles; plus `groups` and `uses` (the "What are you making?" picks) |
+| `export_icon` | `name`, `style?`, `format?` (svg; one or a comma list), `size?`, `background?`, `matte?`, `palette?`, `colors?`, `color?`, `theme?`, `per_icon?`, `motion?` (loop · hover · once · swap · none · a preset), `to?`, `effect?`, `fps?`, `seconds?`, `loop?`, `all_styles?`, `out_dir?`, `inline?` (local), `cursor?` (remote) | files: `svg`, `svg-flat`, `pdf`, `eps`, `png`, `png-set`, `ico`, `favicon-pack`, `android`, `ios`, `pptx`, `pptx-sheet`, `docx`, `lottie`, `dotlottie`, the code formats, and animated `gif`, `apng`, `animated-svg`, `pptx-animated`. Saved to `out_dir` when given; small files also come back inline (PNG / GIF as image content, text as text, the rest as base64 resources). The remote server makes PNG and every other still format, `animated-svg` and Lottie itself (files inline as base64 resources) and answers `gif`, `apng`, `pptx-animated` and `pptx-sheet` with the exact `npx withicons export …` command; large remote exports come in pages (`next: { cursor, remaining }`: call again with `cursor`), and plain `svg-flat` files then come back as `urls[]` to jsDelivr `@withicons/static`. `colorReport`: per icon and style, the colours that changed nothing there (`ignored`), where the `theme` colours went (`exact`: primary shows unmixed) and which donor colours a borrowed palette put on which part; `warnings` come first |
+| `preview_icons` | `names` (1-24, name or alias), `styles?` (1-6, default `line`), `size?` (12-256, 64), `background?` (`light` · `dark` · `#hex`), `labels?`, `columns?` (one style), `palette?`, `colors?`, `format?` (`png` local, `svg` hosted), `out_dir?` (local) | **one labelled picture to look at before choosing**: rows are icons, columns are styles (one style: a gallery with the name under each icon), palette styles in their default colours (or a `palette` / `colors` brand preview), outlines drawn light on a `dark` page. Local server: a PNG as image content (and a file in `out_dir`); hosted server: one self-contained SVG sheet as text (no external references, gradient ids unique per sheet). A style below its `minSize` still renders, with a `notes` entry; unknown icons or styles come back with the nearest names |
+| `list_styles` | — | the 34 styles with their group (Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays) and what they are good for, what they look like, `minSize`, `onDark`, the colour variables of palette styles, and `colours` for every style: the roles its icons really paint (read from the rendered icons: variables, solid / see-through tone / gradient, on how many icons) and `exact` (whether a brand hex shows unmixed); plus `groups` and `uses` (the "What are you making?" picks) |
 | `list_categories` | `category?` | categories with counts, or every icon in one category (festivals: `indian-festivals`, `christmas`, `lunar-new-year`, `valentines`, `halloween`; `avatars`; `ai` …) |
 | `resolve_icon` | `name` | `resolved` (+ via alias), `ambiguous` (+ candidates) or `unknown` (+ nearest) |
 
 ## Colours and palettes
 
-Every style except `line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint` and `sketch` paints several colours (`list_styles` marks them `palette: true`), and `duo` (tint `--with-duo` + one accent detail `--with-duo-accent`) and `blueprint` have accent colours. Every
+Every style except `line`, `solid`, `duo`, `gloss`, `engrave`, `blueprint` and `sketch` paints several colours (`list_styles` marks them `palette: true`), and `duo` (`c1` as a see-through tone, `--with-duo`, plus an accent detail `--with-duo-accent` on some icons) and `blueprint` (`c1`, its construction lines) have colour roles too; `list_styles` gives each style's roles as its icons paint them. Every
 colour is a CSS variable with a default (`var(--with-retro-1, #F4B53F)`); the outline follows `currentColor`. A palette gives a
 colour to each of ten roles, and the server maps the roles onto the variables that icon actually uses in that style:
 
@@ -41,6 +42,9 @@ colour to each of ten roles, and the server maps the roles onto the variables th
 - `get_icon({ name: 'heart', style: 'sticker', palette: 'neon-love' })`: one of the icon's palettes (ids are in `colors.suggestions`).
 - `get_icon({ name: 'heart', style: 'retro', colors: { c1: '#22c55e', c2: '#facc15', ink: '#111827' } })`: change any colour
   (merged over `palette` when both are given; `--with-*` variable names work too).
+- `export_icon({ names: ['tooth', 'heart', 'camera'], style: 'clay', theme: { primary: '#0ea5e9', secondary: '#f59e0b' } })`: brand colours
+  on each icon's own parts, largest first, in any style (`get_icon` takes `theme` too); `per_icon: { heart: '#e11d48' }` colours single
+  icons. Flat styles show the hex exactly; gradient, tone and shaded styles make it one tone of several (the `theme` description lists both).
 - `svg` keeps the variables and sets them on the root `<svg style="…">` (add `flat: true` to bake them in, for `<img>` and design tools);
   `data-uri` is always baked; `web-component` gets an inline `style`; React, Vue, Svelte, Solid and Angular get a class plus the CSS rule
   (`.icon-heart-neon-love { color: …; --with-sticker-bubblegum: …; }`). CSS-class icons bake their palette into a data URI, so only the ink applies.
@@ -55,6 +59,15 @@ CSS variable sets) and `list_categories({ category: 'indian-festivals' })` for t
 (`list_palettes({ name: 'avatar-woman', tag: 'true-to-life' })`); offer several. Every style also ships as one zip:
 `https://withicons.com/downloads/with-icons-<style>.zip` (every SVG plus an offline searchable viewer) and
 `with-icons-all.zip`.
+
+## Icons for slides and docs
+
+`recommend_styles({ use: 'slides' })`, then the whole set in one call:
+`export_icon({ names: ['rocket', 'users', 'chart-line'], style: 'solid', format: 'png', size: 512, color: '#1d4ed8', out_dir: 'slides/icons' })`
+(transparent background; the hosted server returns the PNGs inline instead). Embed the PNGs, not SVG, with pptxgenjs
+(`slide.addImage({ path })`) or python-pptx (`add_picture`): 512 px stays crisp from 0.5 to 3 inches on a slide. `pptx` is a
+one-slide deck to copy an icon from, `pptx-sheet` one icon in every style; neither merges into your deck. Single-colour styles
+(`solid`, `line`) match a brand hex exactly; gradient and shadow styles shade the colours you give.
 
 ## Animated icons for slides and docs
 
@@ -178,9 +191,10 @@ import { Heart as HeartKawaii } from '@withicons/vue/kawaii'
 
 ## HTTP API
 
-The hosted endpoint at https://withicons.com also answers plain GET requests (JSON, CORS open). The remote MCP server
-and this API make vector, code and Lottie files; for PNG and animated formats `export_icon` answers with the
-`npx withicons export …` command to run locally. Large remote exports come in pages: a result with `next: { cursor, remaining }` has more to come, so call `export_icon` again with the same arguments plus `cursor`. Plain `svg-flat` files (no colour or size options) then come back as `urls[]` to the prebuilt `@withicons/static` SVGs on jsDelivr (colours baked in, ink follows `currentColor`, no `<title>`).
+The hosted endpoint at https://withicons.com also answers plain GET requests (JSON, CORS open). The remote MCP server's
+`export_icon` makes PNG (rendered with `@resvg/resvg-wasm`, the same renderer as the local server, byte for byte), every other
+still format, `animated-svg` and Lottie; for `gif`, `apng`, `pptx-animated` and `pptx-sheet` (dozens of frames, too slow for one
+request) it answers with the `npx withicons export …` command to run locally. Large remote exports come in pages: a result with `next: { cursor, remaining }` has more to come, so call `export_icon` again with the same arguments plus `cursor`. Plain `svg-flat` files (no colour or size options) then come back as `urls[]` to the prebuilt `@withicons/static` SVGs on jsDelivr (colours baked in, ink follows `currentColor`, no `<title>`).
 
 Routes:
 

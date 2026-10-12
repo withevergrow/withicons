@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Reunion Dinner (demo) · with icons</title>
+<meta name="description" content="Demo page with a fictional event, made to show the with icons library: Grace and Daniel Lam invite you to a Lunar New Year reunion dinner: lanterns, red envelopes, eight lucky dishes and a lion dance at the door. Saturday 6 February 2027.">
+<meta name="robots" content="noindex, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#a80f27;--red-d:#6e0718;--red-dd:#3d030d;--gold:#e0ae45;--gold-l:#f4d98c;--gold-d:#8a6417;--jade:#1f6b58;--jade-l:#d9ece4;
+  --cream:#fcf4e3;--paper:#f6e9cc;--ink:#2b0b10;--mute:#6b4a47;
+  --serif:'Cormorant Garamond','Noto Serif',Georgia,serif;--sans:'Hanken Grotesk',system-ui,sans-serif;
+  --lat:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 2 38 20 20 38 2 20Z M20 10 30 20 20 30 10 20Z' fill='none' stroke='%23e0ae45' stroke-opacity='.22' stroke-width='1'/%3E%3C/svg%3E");
+  --with-lunar-c1:#c4152f;--with-lunar-accent:#e6b24a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;font:400 17px/1.6 var(--sans);color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--red)}
+h1,h2,h3{font-family:var(--serif);line-height:1.05;margin:0;font-weight:700}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-d)}
+.sec{padding:84px 0;position:relative}
+.sec h2{font-size:clamp(36px,5vw,58px);margin:12px 0 14px}
+.lede{max-width:60ch;color:var(--mute);font-size:19px}
+.center{text-align:center}.center .lede{margin-inline:auto}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border:0;border-radius:999px;font:600 16px var(--sans);cursor:pointer;text-decoration:none;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s,background .2s}
+.btn-gold{background:linear-gradient(180deg,var(--gold-l),var(--gold));color:var(--red-dd);box-shadow:0 6px 0 var(--gold-d),0 14px 24px rgba(0,0,0,.25)}
+.btn-gold:hover{transform:translateY(-2px)}.btn-gold:active{transform:translateY(4px);box-shadow:0 2px 0 var(--gold-d)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 6px 0 var(--red-dd)}
+.btn-red:hover{transform:translateY(-2px)}.btn-red:active{transform:translateY(4px);box-shadow:0 2px 0 var(--red-dd)}
+.btn-ghost{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+/* announcement + header */
+.ann{background:var(--red-dd);color:var(--gold-l);text-align:center;font-size:14px;padding:9px 16px;display:flex;gap:10px;justify-content:center;align-items:center}
+header.top{position:sticky;top:0;z-index:30;background:rgba(252,244,227,.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(168,15,39,.15)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--red);font:700 24px var(--serif)}
+.brand small{display:block;font:500 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+nav.main{display:flex;gap:4px}
+nav.main a{display:inline-flex;align-items:center;gap:7px;padding:10px 12px;border-radius:999px;text-decoration:none;color:var(--ink);font-weight:500;font-size:15px;min-height:44px;transition:background .2s}
+nav.main a:hover{background:rgba(168,15,39,.08)}
+.menu-btn{display:none;min-width:44px;min-height:44px;border:0;background:none;color:var(--red);cursor:pointer}
+@media(max-width:940px){nav.main{display:none;position:absolute;left:0;right:0;top:68px;background:var(--cream);flex-direction:column;padding:12px 20px 20px;border-bottom:2px solid var(--red)}nav.main.open{display:flex}.menu-btn{display:inline-flex;align-items:center;justify-content:center}.top .btn{display:none}}
+/* hero */
+.hero{position:relative;color:#fff;overflow:hidden;background:var(--red-dd);isolation:isolate}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 40%;z-index:-3}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 50% 45%,rgba(61,3,13,.62),rgba(61,3,13,.82) 72%),linear-gradient(180deg,rgba(61,3,13,.45),rgba(61,3,13,.92))}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:var(--lat);opacity:.9}
+.hero .wrap{padding:150px 0 84px;text-align:center;position:relative}
+.hero h1{font-size:clamp(40px,7vw,92px);letter-spacing:-.01em;text-shadow:0 4px 30px rgba(0,0,0,.45);margin:18px 0 10px}
+.hero h1 em{display:block;font-size:.5em;margin-top:.25em;font-style:italic;color:var(--gold-l);font-weight:600}
+.hero .sub{font:500 clamp(18px,2.2vw,24px)/1.4 var(--serif);max-width:44ch;margin:0 auto 28px;color:#fbe9c8}
+.hero .eyebrow{color:var(--gold-l)}
+.facts{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:30px}
+.fact{display:flex;align-items:center;gap:12px;padding:12px 20px 12px 14px;background:rgba(61,3,13,.55);border:1px solid rgba(244,217,140,.35);border-radius:18px;backdrop-filter:blur(6px);text-align:left}
+.fact b{display:block;font:700 19px var(--serif);color:var(--gold-l)}.fact span.t{font-size:14px;color:#f6dcc0}
+.cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.hang{position:absolute;top:0;z-index:2;display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.hang::before{content:"";width:2px;background:linear-gradient(var(--gold-d),var(--gold));height:var(--len,40px)}
+.hang .glow{position:absolute;bottom:0;width:150%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(255,170,60,.45),transparent 65%);animation:glow 3.2s ease-in-out infinite;z-index:-1}
+@keyframes glow{50%{opacity:.4;transform:scale(.88)}}
+.hang.l1{left:4%;--len:30px}.hang.l2{left:15%;--len:90px}.hang.r1{right:4%;--len:50px}.hang.r2{right:15%;--len:12px}
+.orbit{position:absolute;z-index:1;pointer-events:none}
+.o-coin{left:8%;bottom:90px}.o-fw1{right:9%;bottom:120px}.o-fw2{left:7%;top:42%}.o-st1{right:25%;top:210px}.o-st2{left:38%;top:105px}.o-bell{right:3%;top:42%}
+@media(max-width:760px){.hang.l2,.hang.r2,.o-fw2,.o-st1,.o-st2,.o-bell{display:none!important}.o-coin{left:4%;bottom:30px}.o-fw1{right:4%;bottom:24px}}
+.credit-hero{position:absolute;right:14px;bottom:10px;font-size:11px;color:#fbe9c8;opacity:.8;z-index:3}.credit-hero a{color:inherit}
+/* countdown */
+.count{background:var(--red);color:#fff;position:relative;overflow:hidden}
+.count::before{content:"";position:absolute;inset:0;background:var(--lat);opacity:.8}
+.count .wrap{position:relative;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;padding:34px 0}
+.count h2{font-size:clamp(26px,3.4vw,38px);color:var(--gold-l)}
+.units{display:flex;gap:12px}
+.unit{min-width:84px;padding:12px 10px 10px;border-radius:14px;background:var(--red-dd);border:1px solid rgba(244,217,140,.4);text-align:center}
+.unit b{display:block;font:700 40px/1 var(--serif);font-variant-numeric:tabular-nums;color:var(--gold-l)}.unit i{font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;font-style:normal;opacity:.85}
+.unit b.tick{animation:tick .35s}
+@keyframes tick{0%{transform:translateY(-6px);opacity:.3}100%{transform:none;opacity:1}}
+.count .ring{display:flex;align-items:center;gap:14px}
+@media(max-width:560px){.units{gap:8px}.unit{min-width:70px}.unit b{font-size:32px}}
+/* details */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:42px}
+.dcard{background:#fff;border-radius:24px;padding:28px;border:1px solid rgba(168,15,39,.14);box-shadow:0 18px 40px -26px rgba(110,7,24,.5);position:relative;overflow:hidden}
+.dcard::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(224,174,69,.28),transparent 70%)}
+.dcard h3{font-size:27px;margin:14px 0 6px;color:var(--red)}.dcard p{margin:0;color:var(--mute)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.maprow{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;margin-top:22px}
+.mapcard{position:relative;border-radius:24px;overflow:hidden;min-height:320px;background:#efe0bd;border:1px solid rgba(168,15,39,.2)}
+.mapcard svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.mapcard .pin{position:absolute;left:54%;top:40%;transform:translate(-50%,-100%)}
+.mapcard .label{position:absolute;left:20px;bottom:18px;right:20px;background:rgba(255,255,255,.94);border-radius:16px;padding:14px 16px;font-size:15px}
+.mapcard .label b{font:700 20px var(--serif);display:block;color:var(--red)}
+.know{background:var(--red-dd);color:#fbe9c8;border-radius:24px;padding:28px;display:grid;gap:16px;align-content:start}
+.know h3{color:var(--gold-l);font-size:28px}
+.know li{list-style:none;display:flex;gap:12px;align-items:flex-start}.know ul{margin:0;padding:0;display:grid;gap:14px}
+@media(max-width:860px){.dgrid,.maprow{grid-template-columns:1fr}}
+/* menu */
+.menu{background:var(--paper) var(--lat)}
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:42px}
+.dish{background:var(--cream);border:1px solid rgba(138,100,23,.3);border-radius:22px;padding:22px 20px;position:relative;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.dish:hover{transform:translateY(-6px) rotate(-.4deg);box-shadow:0 24px 30px -20px rgba(110,7,24,.6)}
+.dish .n{position:absolute;right:16px;top:14px;font:700 15px var(--serif);color:var(--gold-d)}
+.dish h3{font-size:24px;margin:12px 0 4px;color:var(--red)}.dish .zh{font:600 12px var(--sans);letter-spacing:.12em;color:var(--gold-d);text-transform:uppercase}
+.dish p{margin:8px 0 0;font-size:15px;color:var(--mute)}
+.dish .mean{margin-top:12px;padding-top:10px;border-top:1px dashed rgba(138,100,23,.5);color:var(--jade);font-weight:600;font-size:14px}
+.dish.photo{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.dish.photo img{aspect-ratio:16/10;object-fit:cover;width:100%}.dish.photo .in{padding:14px 20px 22px}
+@media(max-width:1000px){.mgrid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.mgrid{grid-template-columns:1fr}}
+/* fortunes */
+.fort{background:linear-gradient(180deg,var(--red-d),var(--red-dd));color:#fff;overflow:hidden}
+.fort::before{content:"";position:absolute;inset:0;background:var(--lat)}
+.fort .wrap{position:relative}
+.fort .lede{color:#f0cfc0}.fort .eyebrow{color:var(--gold-l)}.fort h2{color:var(--gold-l)}
+.fgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:42px;position:relative}
+.card{perspective:900px;aspect-ratio:3/4.2;border:0;background:none;padding:0;cursor:pointer;color:inherit;font:inherit;position:relative}
+.card .in{position:absolute;inset:0;transition:transform .7s cubic-bezier(.3,1.3,.5,1);transform-style:preserve-3d}
+.card.flip .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;text-align:center}
+.face.f{background:linear-gradient(160deg,#c3162f,#8e0b21);border:2px solid var(--gold);box-shadow:inset 0 0 0 5px var(--red-d),inset 0 0 0 6px rgba(224,174,69,.6)}
+.face.f b{font:700 22px var(--serif);color:var(--gold-l)}.face.f small{font-size:12px;opacity:.85;letter-spacing:.1em;text-transform:uppercase}
+.face.b{transform:rotateY(180deg);background:var(--cream);color:var(--ink);border:2px solid var(--gold);justify-content:flex-start;padding-top:18px;gap:6px}
+.face.b b{font:700 20px var(--serif);color:var(--red)}.face.b p{margin:0;font-size:13.5px;line-height:1.4;color:var(--mute)}.face.b .y{font-size:12px;font-weight:600;color:var(--jade)}
+@media(max-width:1000px){.fgrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:560px){.fgrid{grid-template-columns:repeat(2,1fr)}.face.b p{font-size:12.5px}}
+.flipall{margin-top:26px;position:relative}
+/* schedule */
+.sched{background:var(--cream)}
+.srow{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;margin-top:42px;align-items:start}
+.tl{position:relative;display:grid;gap:6px}
+.tl::before{content:"";position:absolute;left:31px;top:30px;bottom:30px;width:2px;background:repeating-linear-gradient(var(--gold) 0 8px,transparent 8px 14px)}
+.ev{display:grid;grid-template-columns:64px 1fr;gap:18px;padding:12px 0;position:relative}
+.ev .dot{width:64px;height:64px;border-radius:50%;background:var(--cream);display:grid;place-items:center;border:2px solid var(--gold);z-index:1;transition:transform .3s,background .3s}
+.ev:hover .dot{transform:scale(1.1);background:#fff}
+.ev time{font:700 14px var(--sans);letter-spacing:.14em;color:var(--red)}
+.ev h3{font-size:26px;color:var(--ink);margin:2px 0}.ev p{margin:0;color:var(--mute);font-size:15.5px}
+.collage{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.collage figure{margin:0;border-radius:22px;overflow:hidden;position:relative}
+.collage figure:first-child{grid-column:1/-1}
+.collage img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;transition:transform .8s}
+.collage figure:hover img{transform:scale(1.05)}
+.collage figcaption{position:absolute;left:12px;bottom:12px;background:rgba(61,3,13,.8);color:var(--gold-l);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;display:flex;gap:8px;align-items:center}
+@media(max-width:900px){.srow{grid-template-columns:1fr}}
+/* etiquette + envelope game */
+.etq{background:var(--paper) var(--lat)}
+.erow{display:grid;grid-template-columns:1fr 1fr;gap:44px;margin-top:42px;align-items:start}
+.steps{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.steps li{display:grid;grid-template-columns:56px 1fr;gap:16px;background:var(--cream);border:1px solid rgba(138,100,23,.3);border-radius:20px;padding:16px 18px;align-items:center}
+.steps h3{font-size:22px;color:var(--red)}.steps p{margin:2px 0 0;font-size:15px;color:var(--mute)}
+.game{background:var(--red);color:#fff;border-radius:28px;padding:30px;position:relative;overflow:hidden;text-align:center;box-shadow:0 30px 50px -30px rgba(61,3,13,.8)}
+.game::before{content:"";position:absolute;inset:0;background:var(--lat)}
+.game>*{position:relative}
+.game h3{font-size:34px;color:var(--gold-l)}
+.envs{display:flex;gap:14px;justify-content:center;margin:22px 0 18px}
+.env{width:min(30%,120px);aspect-ratio:3/4.2;border:0;border-radius:12px;background:linear-gradient(170deg,#d51f3a,#9a0c22);border:2px solid var(--gold);cursor:pointer;color:var(--gold-l);display:grid;place-items:center;position:relative;transition:transform .3s cubic-bezier(.3,1.5,.5,1);padding:0;overflow:hidden}
+.env:hover{transform:translateY(-8px) rotate(-3deg)}
+.env.open{transform:translateY(-14px) scale(1.06);background:linear-gradient(170deg,var(--gold-l),var(--gold));color:var(--red)}
+.env.shut{opacity:.45;transform:scale(.94)}
+.env .fl{position:absolute;top:0;left:0;right:0;height:38%;background:rgba(0,0,0,.18);clip-path:polygon(0 0,100% 0,50% 100%)}
+.blessing{min-height:84px;font:600 24px/1.25 var(--serif);color:#fff;max-width:30ch;margin:0 auto}
+.blessing small{display:block;font:600 12px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);margin-bottom:6px}
+.burst{position:absolute;left:50%;top:44%;width:0;height:0;pointer-events:none}
+.burst i{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold-l);animation:fly .9s cubic-bezier(.1,.8,.3,1) forwards;transform:rotate(var(--a)) translateX(0)}
+@keyframes fly{to{transform:rotate(var(--a)) translateX(var(--d));opacity:0}}
+@media(max-width:900px){.erow{grid-template-columns:1fr}}
+/* dress */
+.dress{background:var(--jade);color:#fff;overflow:hidden}
+.dress::before{content:"";position:absolute;inset:0;background:var(--lat);opacity:.5}
+.dress .wrap{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
+.dress h2{color:var(--gold-l)}.dress .eyebrow{color:var(--gold-l)}.dress .lede{color:#d4ebe2}
+.sw{display:flex;flex-wrap:wrap;gap:14px;margin-top:24px}
+.sw div{text-align:center;font-size:13px;font-weight:600;width:84px}
+.sw span{display:block;width:84px;height:84px;border-radius:50%;margin-bottom:8px;border:3px solid rgba(255,255,255,.7)}
+.sw .no span{position:relative;opacity:.8}.sw .no span::after{content:"";position:absolute;left:-3px;right:-3px;top:50%;height:4px;background:#c4152f;transform:rotate(-45deg);border-radius:4px}
+.dpics{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.dpics figure{margin:0;border-radius:22px;overflow:hidden}.dpics img{aspect-ratio:3/4;object-fit:cover;width:100%;height:100%}
+.dpics figure:nth-child(2){margin-top:34px}
+@media(max-width:900px){.dress .wrap{grid-template-columns:1fr}}
+/* rsvp */
+.rsvp{background:var(--cream)}
+.rcol{display:grid;grid-template-columns:1fr 1.15fr;gap:44px;margin-top:42px;align-items:start}
+.rside{display:grid;gap:16px}
+.rside img{border-radius:24px;aspect-ratio:4/3;object-fit:cover;width:100%}
+.form{background:#fff;border-radius:28px;padding:34px;border:1px solid rgba(168,15,39,.18);box-shadow:0 30px 50px -34px rgba(110,7,24,.6);position:relative}
+.fld{display:grid;gap:6px;margin-bottom:18px}
+.fld label,.fld legend{font-weight:600;font-size:15px;display:flex;align-items:center;gap:8px}
+.fld input[type=text],.fld input[type=email],.fld textarea{font:inherit;padding:12px 14px;border:1.5px solid #d9c7a3;border-radius:12px;background:var(--cream);min-height:48px;width:100%;color:var(--ink)}
+.fld input:focus,.fld textarea:focus{outline:3px solid rgba(224,174,69,.6);border-color:var(--gold-d)}
+.fld .err{color:#b3122a;font-size:13.5px;min-height:0;display:none}.fld.bad .err{display:block}.fld.bad input{border-color:#b3122a}
+fieldset.fld{border:0;padding:0;margin:0 0 18px}
+.opts{display:flex;flex-wrap:wrap;gap:10px}
+.opts label{position:relative;cursor:pointer}
+.opts input{position:absolute;opacity:0;inset:0}
+.opts span.pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1.5px solid #d9c7a3;border-radius:999px;font-weight:500;background:var(--cream);transition:all .2s}
+.opts input:checked+span.pill{background:var(--red);border-color:var(--red);color:#fff}
+.opts input:focus-visible+span.pill{outline:3px solid var(--gold);outline-offset:2px}
+.step{display:inline-flex;align-items:center;gap:6px;background:var(--cream);border:1.5px solid #d9c7a3;border-radius:999px;padding:4px;width:max-content}
+.step button{width:44px;height:44px;border-radius:50%;border:0;background:var(--red);color:#fff;cursor:pointer;display:grid;place-items:center}
+.step output{min-width:60px;text-align:center;font:700 26px var(--serif)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.row2{grid-template-columns:1fr}.form{padding:22px}}
+.thanks{display:none;text-align:center;padding:20px 0}
+.thanks.show{display:block;animation:rise .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}}
+.thanks h3{font-size:36px;color:var(--red);margin:10px 0}.thanks p{color:var(--mute);margin:0 auto 18px;max-width:40ch}
+.form.done form{display:none}
+/* faq */
+.faq{background:var(--paper) var(--lat)}
+.faq details{background:var(--cream);border:1px solid rgba(138,100,23,.35);border-radius:18px;margin-bottom:12px;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 20px;font:700 22px var(--serif);min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .chev{margin-left:auto;transition:transform .3s}
+.faq details[open] .chev{transform:rotate(180deg)}
+.faq details p{margin:0;padding:0 20px 18px 58px;color:var(--mute)}
+.faqwrap{max-width:820px;margin:42px auto 0}
+/* host */
+.host{background:var(--red-dd);color:#fbe9c8;text-align:center;position:relative;overflow:hidden}
+.host::before{content:"";position:absolute;inset:0;background:var(--lat)}
+.host .wrap{position:relative}
+.host h2{color:var(--gold-l)}
+.host .sign{font:italic 600 34px var(--serif);color:var(--gold-l);margin-top:12px}
+.host .garland{display:flex;justify-content:center;gap:clamp(10px,4vw,46px);margin-bottom:12px}
+/* credits + footer */
+#credits{background:#2b0b10;color:#e8cfc0;padding:48px 0 24px;font-size:14px}
+#credits h2{font-size:28px;color:var(--gold-l);margin-bottom:12px}
+#credits ul{margin:0;padding:0;list-style:none;display:grid;gap:5px;columns:2}
+#credits a{color:var(--gold-l)}
+@media(max-width:760px){#credits ul{columns:1}}
+footer{background:#2b0b10;color:#c7a99d;padding:10px 0 96px;font-size:14px}
+footer .wrap{border-top:1px solid rgba(244,217,140,.2);padding-top:20px;display:flex;flex-wrap:wrap;gap:12px 30px;justify-content:space-between;align-items:center}
+/* motion moments */
+.fw{position:absolute;pointer-events:none;width:6px;height:6px}
+.fw i{position:absolute;left:0;top:0;width:4px;height:14px;border-radius:3px;background:linear-gradient(var(--gold-l),transparent);transform-origin:50% 0;transform:rotate(var(--a)) translateY(0);opacity:0;animation:spark 2.6s ease-out infinite;animation-delay:var(--dl,0s)}
+@keyframes spark{0%{opacity:0;transform:rotate(var(--a)) translateY(0) scaleY(.4)}12%{opacity:1}60%{opacity:.9;transform:rotate(var(--a)) translateY(46px) scaleY(1)}100%{opacity:0;transform:rotate(var(--a)) translateY(62px) scaleY(.2)}}
+.shine{position:relative;overflow:hidden}.shine::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.55) 50%,transparent 60%);transform:translateX(-120%);animation:shine 4.5s ease-in-out infinite}
+@keyframes shine{40%,100%{transform:translateX(120%)}}
+.marquee{overflow:hidden;background:var(--gold);color:var(--red-dd);padding:12px 0;font:700 22px var(--serif)}
+.marquee .tr{display:flex;gap:36px;width:max-content;animation:mq 38s linear infinite}
+.marquee span{display:inline-flex;align-items:center;gap:36px;white-space:nowrap}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}.marquee .tr{animation:none}}
+html[data-level="0"] .hero::after,html[data-level="0"] .hang,html[data-level="0"] .fw{display:none}
+html[data-level="0"] .btn{box-shadow:none}
+</style>
+</head>
+<body>
+<!-- with-demo-note -->
+<aside aria-label="About this page" style="position:relative;z-index:1;margin:0;padding:7px 16px;background:#111318;color:#f4f1ea;font:500 13px/1.45 system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;letter-spacing:0">
+  <strong style="font-weight:700">Demo:</strong> The Reunion Dinner is a fictional event, made to show the with icons library.
+  <a href="index.html" style="color:#ffd76a;text-decoration:underline">All demos</a> · <a href="https://withicons.com/" style="color:#ffd76a;text-decoration:underline">withicons.com</a>
+</aside>
+<!-- /with-demo-note -->
+
+<div class="ann"><span data-ico="sparkles" data-size="18" data-min-level="1" data-motion="loop"></span><span>Saturday 6 February 2027 &middot; Please reply by 24 January so Grandma Mei can count the dumplings</span><span data-ico="sparkles" data-size="18" data-min-level="1" data-motion="loop"></span></div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="The Lam Reunion Dinner, top of page"><span data-ico="lion-head" data-size="38" data-motion="hover" data-sample>🦁</span><span>The Lam Reunion<small>Lunar New Year 2027</small></span></a>
+    <button class="menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span data-ico="menu" data-size="26" data-fixed-style="line">☰</span></button>
+    <nav class="main" id="nav" aria-label="Sections">
+      <a href="#menu"><span data-ico="utensils" data-size="20" data-motion="hover">🍴</span>Menu</a>
+      <a href="#fortunes"><span data-ico="crystal-ball" data-size="20" data-motion="hover">🔮</span>Fortunes</a>
+      <a href="#schedule"><span data-ico="clock" data-size="20" data-motion="hover">🕕</span>Schedule</a>
+      <a href="#etiquette"><span data-ico="red-envelope" data-size="20" data-motion="hover">🧧</span>Envelopes</a>
+      <a href="#rsvp"><span data-ico="mail" data-size="20" data-motion="hover">✉️</span>RSVP</a>
+      <a href="#faq"><span data-ico="help-circle" data-size="20" data-motion="hover">❓</span>FAQ</a>
+    </nav>
+    <a class="btn btn-red" href="#rsvp"><span data-ico="send" data-size="18" data-motion="hover" data-min-level="1"></span>Reply now</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" aria-labelledby="h1">
+  <img src="_img/lunar-reunion/37272344-1600.jpg" width="1200" height="800" alt="Rows of glowing red Chinese lanterns lighting up a night festival." fetchpriority="high">
+  <div class="hang l1" data-min-level="1"><span class="glow"></span><span data-ico="red-lantern" data-size="84" data-motion="loop" data-label="Swinging red lantern">🏮</span></div>
+  <div class="hang l2" data-min-level="1"><span class="glow"></span><span data-ico="red-lantern" data-size="64" data-motion="loop" data-label="Swinging red lantern">🏮</span></div>
+  <div class="hang r1" data-min-level="1"><span class="glow"></span><span data-ico="red-lantern" data-size="84" data-motion="loop" data-label="Swinging red lantern">🏮</span></div>
+  <div class="hang r2" data-min-level="1"><span class="glow"></span><span data-ico="sky-lantern" data-size="64" data-motion="loop" data-label="Floating lantern">🏮</span></div>
+  <span class="orbit o-coin" data-ico="lucky-coin" data-size="76" data-min-level="1" data-motion="loop" data-label="Spinning lucky coin"></span>
+  <span class="orbit o-fw1" data-ico="firecracker-string" data-size="88" data-min-level="1" data-motion="loop" data-label="Firecrackers"></span>
+  <span class="orbit o-fw2" data-ico="sparkler" data-size="58" data-min-level="1" data-motion="loop" data-label="Sparkler"></span>
+  <span class="orbit o-st1" data-ico="sparkles" data-size="34" data-min-level="1" data-motion="loop"></span>
+  <span class="orbit o-st2" data-ico="star" data-size="26" data-min-level="1" data-motion="loop"></span>
+  <span class="orbit o-bell" data-ico="bell-ring" data-size="40" data-min-level="1" data-motion="loop" data-label="Ringing bell"></span>
+  <div class="credit-hero">Photo by <a href="https://www.pexels.com/@heru-dharma-2148751843">Heru Dharma</a> on <a href="https://www.pexels.com/photo/37272344/">Pexels</a></div>
+  <div class="wrap">
+    <span class="eyebrow"><span data-ico="chinese-knot" data-size="22" data-min-level="1" data-motion="hover"></span>Grace &amp; Daniel Lam invite you<span data-ico="chinese-knot" data-size="22" data-min-level="1" data-motion="hover"></span></span>
+    <h1 id="h1">The Reunion Dinner<br><em>Farewell Horse, welcome Goat</em></h1>
+    <p class="sub">A Lunar New Year feast with lanterns, red envelopes and a lion dance at the door. Come hungry, come in red, come home.</p>
+    <div class="facts">
+      <div class="fact"><span data-live="calendar-date" data-p-day="6" data-p-month="FEB" data-size="52" data-label="Saturday 6 February 2027" data-motion="hover">6</span><span><b>Saturday, 6 Feb</b><span class="t">Lunar New Year's Day, 2027</span></span></div>
+      <div class="fact"><span data-live="clock-time" data-p-time="18:00" data-size="52" data-label="6 pm" data-motion="hover">6pm</span><span><b>6:00 to 10:30 pm</b><span class="t">Lion dance at 6:15 sharp</span></span></div>
+      <div class="fact"><span data-ico="home" data-size="48" data-motion="hover" data-label="Home">🏠</span><span><b>18 Plum Blossom Court</b><span class="t">The Lam family home</span></span></div>
+    </div>
+    <div class="cta">
+      <a class="btn btn-gold" href="#rsvp"><span data-ico="party-popper" data-size="22" data-motion="hover">🎉</span>Save our seats</a>
+      <button class="btn btn-ghost" type="button" id="ics-top"><span data-ico="calendar-plus" data-size="22" data-motion="hover">📅</span>Add to calendar</button>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true" data-min-level="1"><div class="tr" id="mq"></div></div>
+
+<section class="count" aria-label="Countdown">
+  <div class="wrap">
+    <div class="ring"><span data-live="progress-ring" data-p-value="0" id="ring" data-size="72" data-label="Progress toward the dinner" data-motion="hover">⏳</span><div><h2>Until the first lantern is lit</h2><span id="cd-msg" style="color:#f6dcc0;font-size:15px">Counting down to 6:00 pm, 6 February 2027</span></div></div>
+    <div class="units" role="timer" aria-live="off">
+      <div class="unit"><b id="cd-d">00</b><i>Days</i></div>
+      <div class="unit"><b id="cd-h">00</b><i>Hours</i></div>
+      <div class="unit"><b id="cd-m">00</b><i>Mins</i></div>
+      <div class="unit"><b id="cd-s">00</b><i>Secs</i></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec details" id="details" style="background:var(--cream)">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow"><span data-ico="sparkles" data-size="18" data-min-level="1" data-motion="inview"></span>The practical bits<span data-ico="sparkles" data-size="18" data-min-level="1" data-motion="inview"></span></span>
+    <h2>Everything you need to know</h2><p class="lede">Reunion dinner is the most important meal of the year: everyone comes home, everyone eats too much, nobody leaves empty-handed.</p></div>
+    <div class="dgrid">
+      <article class="dcard reveal"><span data-live="calendar-weekday" data-p-weekday="SAT" data-p-day="6" data-size="64" data-label="Saturday the 6th" data-motion="inview">Sat 6</span><h3>Arrive by 6:00 pm</h3><p>The lion dance greets every guest at the gate at 6:15. Come early for tea, tangerines and a family photo under the lanterns.</p></article>
+      <article class="dcard reveal"><span data-ico="shirt" data-size="64" data-motion="inview" data-label="Dress code">👕</span><h3>Wear red</h3><p>Red keeps bad luck away. Gold and jade are welcome too. Please skip all-black and all-white, which are for mourning.</p></article>
+      <article class="dcard reveal"><span data-ico="gift" data-size="64" data-motion="inview" data-label="Gifts">🎁</span><h3>Bring in pairs</h3><p>Fruit, tea or sweets, always two of everything. No clocks, no pears, no sharp gifts. Red envelopes for the little ones, please.</p></article>
+    </div>
+    <div class="maprow">
+      <div class="mapcard reveal" role="img" aria-label="Styled map: Plum Blossom Court between Lantern Road and Jade Canal, the Lam house marked with a pin.">
+        <svg class="bg" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="320" fill="#efe0bd"/><path d="M-10 90 C120 70 200 140 410 110" stroke="#fff" stroke-width="22" fill="none"/><path d="M130 -10 C150 100 120 200 170 330" stroke="#fff" stroke-width="16" fill="none"/><path d="M-10 230 C100 210 260 260 410 220" stroke="#8ec3b3" stroke-width="26" fill="none" opacity=".7"/><path d="M230 -10 C250 80 300 90 300 160" stroke="#fff" stroke-width="10" fill="none"/><g fill="#d8c394"><rect x="190" y="130" width="60" height="36" rx="6"/><rect x="260" y="180" width="70" height="30" rx="6"/><rect x="40" y="130" width="70" height="60" rx="6"/><rect x="300" y="30" width="60" height="50" rx="6"/></g><text x="30" y="82" font-family="sans-serif" font-size="11" fill="#6b4a47" letter-spacing="2">LANTERN ROAD</text><text x="236" y="256" font-family="sans-serif" font-size="11" fill="#1f6b58" letter-spacing="2">JADE CANAL</text></svg>
+        <span class="pin" data-ico="map-pin" data-size="64" data-motion="loop" data-label="The Lam house">📍</span>
+        <div class="label"><b>18 Plum Blossom Court</b>Red gate with two paper lanterns. Street parking on Lantern Road, or the free lot behind the temple.</div>
+      </div>
+      <div class="know reveal">
+        <h3>Getting here</h3>
+        <ul>
+          <li><span data-ico="car-front" data-size="30" data-motion="hover">🚗</span><span>By car: 7 minutes from the ring road. Free parking after 5 pm on Lantern Road.</span></li>
+          <li><span data-ico="train" data-size="30" data-motion="hover">🚆</span><span>By train: Jade Canal station, then a 6 minute walk past the tea house.</span></li>
+          <li><span data-ico="phone" data-size="30" data-motion="hover">📞</span><span>Lost? Call Daniel on 555-0142 and he will wave from the gate.</span></li>
+          <li><span data-ico="baby" data-size="30" data-motion="hover">👶</span><span>Little ones welcome: high chairs, a kids' table, and a quiet room upstairs.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec menu" id="menu">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow"><span data-ico="gold-ingot" data-size="20" data-min-level="1" data-motion="inview"></span>Eight lucky dishes<span data-ico="gold-ingot" data-size="20" data-min-level="1" data-motion="inview"></span></span>
+    <h2>The banquet menu</h2><p class="lede">Every dish at a reunion table carries a wish. Eight is the luckiest number, so Grandma Mei is cooking eight, plus too much rice.</p></div>
+    <div class="mgrid">
+      <article class="dish photo reveal"><img src="_img/lunar-reunion/11830203-700.jpg" width="700" height="465" alt="A steamed fish dish garnished with herbs and spring onion, served with rice." loading="lazy" decoding="async" style="object-position:50% 50%"><div class="in"><span class="n">01</span><span data-ico="fish" data-size="52" data-motion="hover" data-label="Fish">🐟</span><h3>Steamed sea bass</h3><span class="zh">Nian nian you yu</span><p>Whole, with ginger, scallion and hot soy oil. Head toward the eldest guest.</p><div class="mean">Surplus: may there be more every year.</div></div></article>
+      <article class="dish photo reveal"><img src="_img/lunar-reunion/34912738-700.jpg" width="700" height="510" alt="Steamed dumplings garnished with scallions on a dark plate." loading="lazy" decoding="async" style="object-position:50% 40%"><div class="in"><span class="n">02</span><span data-ico="dumpling" data-size="52" data-motion="hover" data-label="Dumpling">🥟</span><h3>Pork &amp; chive dumplings</h3><span class="zh">Zhao cai jin bao</span><p>Folded by hand on the 5th, one coin hidden inside a single lucky dumpling.</p><div class="mean">Wealth: shaped like old silver ingots.</div></div></article>
+      <article class="dish reveal"><span class="n">03</span><span data-ico="gold-ingot" data-size="52" data-motion="hover" data-label="Gold ingot">🪙</span><h3>Golden spring rolls</h3><span class="zh">Huang jin wan liang</span><p>Shredded cabbage, shiitake and bamboo shoot in a crackling wrapper.</p><div class="mean">Fortune: they look like gold bars.</div></article>
+      <article class="dish reveal"><span class="n">04</span><span data-ico="soup" data-size="52" data-motion="hover" data-label="Noodles">🍜</span><h3>Longevity noodles</h3><span class="zh">Chang shou mian</span><p>One uncut strand per bowl in a clear chicken broth. Do not bite them short.</p><div class="mean">Long life: the longer the noodle, the better.</div></article>
+      <article class="dish reveal"><span class="n">05</span><span data-ico="lion-head" data-size="52" data-motion="hover" data-label="Lion">🦁</span><h3>Lion's head meatballs</h3><span class="zh">Shi zi tou</span><p>Fist-sized braised pork and water-chestnut meatballs on a bed of napa cabbage.</p><div class="mean">Strength and a family that stays together.</div></article>
+      <article class="dish reveal"><span class="n">06</span><span data-ico="cake" data-size="52" data-motion="hover" data-label="Cake">🍰</span><h3>Nian gao honey cake</h3><span class="zh">Nian nian gao sheng</span><p>Sticky rice cake, steamed overnight and pan-fried until the edges turn amber.</p><div class="mean">Progress: higher each year.</div></article>
+      <article class="dish reveal"><span class="n">07</span><span data-ico="heart-pair" data-size="52" data-motion="hover" data-label="Hearts">💞</span><h3>Tangyuan in ginger syrup</h3><span class="zh">Tuan tuan yuan yuan</span><p>Black sesame rice balls, round like the full moon and served warm.</p><div class="mean">Reunion: round for a family made whole.</div></article>
+      <article class="dish reveal"><span class="n">08</span><span data-ico="mandarin-orange" data-size="52" data-motion="hover" data-label="Mandarin orange">🍊</span><h3>Mandarins, leaves on</h3><span class="zh">Da ji da li</span><p>A pyramid on every table. Take two when you leave, and give two back.</p><div class="mean">Luck: the word sounds like gold.</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec fort" id="fortunes">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow"><span data-ico="sparkles" data-size="20" data-min-level="1" data-motion="inview"></span>Your year ahead<span data-ico="sparkles" data-size="20" data-min-level="1" data-motion="inview"></span></span>
+    <h2>Flip your fortune card</h2><p class="lede">Find your zodiac animal and tap to turn the card. Born in 2027? You are a Goat; Grandma Mei is reading those at the table.</p></div>
+    <div class="fgrid" id="fgrid">
+      <button class="card" type="button" aria-pressed="false" aria-label="Rat fortune card"><span class="in"><span class="face f"><span data-ico="mouse" data-size="64" data-motion="hover">🐭</span><b>Rat</b><small>Tap to flip</small></span><span class="face b"><b>Rat</b><span class="y">1996 &middot; 2008 &middot; 2020</span><p>Quick wits open a door that was never locked. Say yes to the invitation that scares you a little.</p><span data-ico="lucky-coin" data-size="34" data-motion="hover">🪙</span></span></span></button>
+      <button class="card" type="button" aria-pressed="false" aria-label="Tiger fortune card"><span class="in"><span class="face f"><span data-ico="avatar-tiger" data-size="64" data-motion="hover">🐯</span><b>Tiger</b><small>Tap to flip</small></span><span class="face b"><b>Tiger</b><span class="y">1998 &middot; 2010 &middot; 2022</span><p>Courage pays off by spring. Rest before the summer sprint, and let someone else carry the heavy dish.</p><span data-ico="flame" data-size="34" data-motion="hover">🔥</span></span></span></button>
+      <button class="card" type="button" aria-pressed="false" aria-label="Rabbit fortune card"><span class="in"><span class="face f"><span data-ico="rabbit" data-size="64" data-motion="hover">🐰</span><b>Rabbit</b><small>Tap to flip</small></span><span class="face b"><b>Rabbit</b><span class="y">1999 &middot; 2011 &middot; 2023</span><p>A calm year of small, sweet wins. Plant something, finish a book, forgive an old text message.</p><span data-ico="leaf" data-size="34" data-motion="hover">🌿</span></span></span></button>
+      <button class="card" type="button" aria-pressed="false" aria-label="Dragon fortune card"><span class="in"><span class="face f"><span data-ico="dragon-head" data-size="64" data-motion="hover">🐉</span><b>Dragon</b><small>Tap to flip</small></span><span class="face b"><b>Dragon</b><span class="y">2000 &middot; 2012 &middot; 2024</span><p>Big energy, big ideas. Share the credit and the luck will come back doubled by autumn.</p><span data-ico="sparkles" data-size="34" data-motion="hover">✨</span></span></span></button>
+      <button class="card" type="button" aria-pressed="false" aria-label="Dog fortune card"><span class="in"><span class="face f"><span data-ico="dog" data-size="64" data-motion="hover">🐶</span><b>Dog</b><small>Tap to flip</small></span><span class="face b"><b>Dog</b><span class="y">2006 &middot; 2018 &middot; 2030</span><p>Loyalty is noticed this year. A friend you stood by returns the favour with a very good table.</p><span data-ico="heart" data-size="34" data-motion="hover">❤️</span></span></span></button>
+      <button class="card" type="button" aria-pressed="false" aria-label="Pig fortune card"><span class="in"><span class="face f"><span data-ico="piggy-bank" data-size="64" data-motion="hover">🐷</span><b>Pig</b><small>Tap to flip</small></span><span class="face b"><b>Pig</b><span class="y">2007 &middot; 2019 &middot; 2031</span><p>Comfort and plenty. Budget for one splendid indulgence and let the rest quietly grow.</p><span data-ico="coins" data-size="34" data-motion="hover">🪙</span></span></span></button>
+    </div>
+    <div class="center flipall"><button class="btn btn-gold" type="button" id="flipall"><span data-ico="crystal-ball" data-size="22" data-motion="hover">🔮</span><span id="flipall-t">Reveal every fortune</span></button></div>
+  </div>
+</section>
+
+<section class="sec sched" id="schedule">
+  <div class="wrap">
+    <div><span class="eyebrow"><span data-ico="hourglass" data-size="20" data-min-level="1" data-motion="inview"></span>Saturday evening</span>
+    <h2>Run of the night</h2><p class="lede">Dinner is a marathon. Pace yourself, leave room for noodles, and save your energy for the fireworks.</p></div>
+    <div class="srow">
+      <div class="tl">
+        <div class="ev reveal"><span class="dot"><span data-ico="lion-head" data-size="40" data-motion="inview">🦁</span></span><div><time>6:15 PM</time><h3>Lion dance at the gate</h3><p>The lion eats a lettuce, spits out the leaves and blesses the house. Let the little ones feed it.</p></div></div>
+        <div class="ev reveal"><span class="dot"><span data-ico="champagne-toast" data-size="40" data-motion="inview">🥂</span></span><div><time>6:45 PM</time><h3>Yum seng toast</h3><p>Grandpa Wen stands, glass up, and we lift raw-fish salad high with chopsticks: the higher you toss, the better the year.</p></div></div>
+        <div class="ev reveal"><span class="dot"><span data-ico="utensils" data-size="40" data-motion="inview">🍴</span></span><div><time>7:00 PM</time><h3>The eight-dish banquet</h3><p>Round tables, lazy Susans, endless tea. Dishes arrive in order of luck.</p></div></div>
+        <div class="ev reveal"><span class="dot"><span data-ico="red-envelope" data-size="40" data-motion="inview">🧧</span></span><div><time>8:30 PM</time><h3>Red envelopes</h3><p>Married guests give, unmarried guests receive. Open yours later, never at the table.</p></div></div>
+        <div class="ev reveal"><span class="dot"><span data-ico="dices" data-size="40" data-motion="inview">🎲</span></span><div><time>9:00 PM</time><h3>Mahjong and tea</h3><p>Two tables, one grudge. Beginners seated next to Aunt Rose, who will explain everything twice.</p></div></div>
+        <div class="ev reveal"><span class="dot"><span data-ico="firecracker-string" data-size="40" data-motion="inview">🧨</span></span><div><time>10:00 PM</time><h3>Fireworks on the green</h3><p>Safe, licensed, and loud enough to scare away the Nian beast. Bring earmuffs for toddlers.</p></div></div>
+      </div>
+      <div class="collage">
+        <figure class="reveal"><img src="_img/lunar-reunion/30711027-1000.jpg" width="1000" height="667" alt="Lion dance performers in red and yellow costumes at a festival with lanterns behind." loading="lazy" decoding="async" style="object-position:30% 50%"><figcaption><span data-ico="lion-head" data-size="20" data-motion="hover">🦁</span>Lion dance, 6:15 pm</figcaption></figure>
+        <figure class="reveal"><img src="_img/lunar-reunion/photo-1729194292689-be924899456d-600.jpg" width="600" height="450" alt="Red and gold fireworks bursting in a dark night sky." loading="lazy" decoding="async"><figcaption><span data-ico="sparkler" data-size="20" data-motion="hover">🎇</span>Fireworks</figcaption></figure>
+        <figure class="reveal"><img src="_img/lunar-reunion/13712532-600.jpg" width="600" height="400" alt="Colourful mahjong tiles spread across green felt." loading="lazy" decoding="async"><figcaption><span data-ico="dices" data-size="20" data-motion="hover">🎲</span>Mahjong</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec etq" id="etiquette">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow"><span data-ico="red-envelope" data-size="20" data-min-level="1" data-motion="inview"></span>Hongbao etiquette<span data-ico="red-envelope" data-size="20" data-min-level="1" data-motion="inview"></span></span>
+    <h2>How to give a red envelope</h2><p class="lede">A few small rules keep the luck flowing in the right direction.</p></div>
+    <div class="erow">
+      <div>
+        <img class="reveal" src="_img/lunar-reunion/photo-1516842584751-c6558640efb2-1000.jpg" width="1000" height="667" alt="A hand holding a fan of red and gold Chinese red envelopes." loading="lazy" decoding="async" style="border-radius:24px;margin-bottom:22px;aspect-ratio:3/2;object-fit:cover;width:100%;object-position:50% 40%">
+        <ol class="steps">
+          <li class="reveal"><span data-live="step-number" data-p-step="1" data-size="48" data-label="Step 1" data-motion="inview">1</span><div><h3>Use crisp new notes</h3><p>Fresh bills, never torn or folded. Even amounts only; avoid anything with a 4.</p></div></li>
+          <li class="reveal"><span data-live="step-number" data-p-step="2" data-size="48" data-label="Step 2" data-motion="inview">2</span><div><h3>Two hands, a small bow</h3><p>Offer with both hands and a warm blessing: gong xi fa cai, or simply happy new year.</p></div></li>
+          <li class="reveal"><span data-live="step-number" data-p-step="3" data-size="48" data-label="Step 3" data-motion="inview">3</span><div><h3>Receive with both hands</h3><p>Say thank you and a blessing back. Keep it closed until you are alone.</p></div></li>
+          <li class="reveal"><span data-live="step-number" data-p-step="4" data-size="48" data-label="Step 4" data-motion="inview">4</span><div><h3>Married guests give</h3><p>Unmarried guests, children and our favourite students receive. Pass it on later.</p></div></li>
+        </ol>
+      </div>
+      <div class="game reveal" id="game">
+        <span data-ico="red-envelope" data-size="56" data-motion="loop" data-min-level="1" data-label="Red envelope"></span>
+        <h3>Pick an envelope</h3><p style="margin:6px auto 0;max-width:34ch;color:#f6dcc0">Choose one of three. Inside is this year's blessing for you (the money is imaginary, the wishes are real).</p>
+        <div class="envs" id="envs">
+          <button class="env" type="button" aria-label="Envelope one"><span class="fl"></span><span data-ico="lucky-coin" data-size="44" data-motion="hover">🧧</span></button>
+          <button class="env" type="button" aria-label="Envelope two"><span class="fl"></span><span data-ico="gold-ingot" data-size="44" data-motion="hover">🧧</span></button>
+          <button class="env" type="button" aria-label="Envelope three"><span class="fl"></span><span data-ico="chinese-knot" data-size="44" data-motion="hover">🧧</span></button>
+        </div>
+        <div class="blessing" id="blessing" aria-live="polite"><small>Your blessing</small>Tap an envelope to open it.</div>
+        <button class="btn btn-gold" id="again" type="button" style="margin-top:18px;display:none"><span data-ico="refresh" data-size="20" data-motion="hover">🔄</span>Try another</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec dress" id="dress">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow"><span data-ico="shirt" data-size="20" data-min-level="1" data-motion="inview"></span>Dress code</span>
+      <h2>Wear red. Wear a lot of it.</h2>
+      <p class="lede">Red is the colour of luck, fire and good company. Gold and jade green are welcome, and bright florals will blend right in with the blossoms.</p>
+      <div class="sw" role="list">
+        <div role="listitem"><span style="background:#c4152f"></span>Lucky red</div>
+        <div role="listitem"><span style="background:#e0ae45"></span>Gold</div>
+        <div role="listitem"><span style="background:#e8788a"></span>Blossom pink</div>
+        <div role="listitem"><span style="background:#2a8a70"></span>Jade</div>
+        <div class="no" role="listitem"><span style="background:#111"></span>All black</div>
+        <div class="no" role="listitem"><span style="background:#fff"></span>All white</div>
+      </div>
+      <p style="margin-top:22px;display:flex;gap:12px;align-items:center;color:#d4ebe2"><span data-ico="gem" data-size="34" data-motion="hover" data-min-level="1"></span>Heirloom jewellery and new shoes are a lovely touch: new year, new steps.</p>
+    </div>
+    <div class="dpics">
+      <figure class="reveal"><img src="_img/lunar-reunion/5982949-600.jpg" width="600" height="400" alt="Red Chinese lanterns with gold symbols hanging in front of a building." loading="lazy" decoding="async" style="object-position:75% 40%"></figure>
+      <figure class="reveal"><img src="_img/lunar-reunion/photo-1707541124067-4878d84b9e47-600.jpg" width="600" height="400" alt="Plum blossom branches with white flowers against a blue sky." loading="lazy" decoding="async" style="object-position:40% 50%"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec rsvp" id="rsvp">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow"><span data-ico="mail" data-size="20" data-min-level="1" data-motion="inview"></span>Reply by 24 January<span data-ico="mail" data-size="20" data-min-level="1" data-motion="inview"></span></span>
+    <h2>Save your seat at the table</h2><p class="lede">Tell us how many are coming and what Grandma Mei should leave out of the pot.</p></div>
+    <div class="rcol">
+      <div class="rside">
+        <img class="reveal" src="_img/lunar-reunion/7363743-1000.jpg" width="1000" height="667" alt="A family gathered around a table sharing a traditional Lunar New Year meal." loading="lazy" decoding="async" style="object-position:40% 40%">
+        <div class="dcard reveal" style="display:flex;gap:16px;align-items:center"><span data-live="ticket-number" data-p-number="18" data-size="64" data-label="House number 18" data-motion="hover">18</span><div><h3 style="margin:0">Table for the whole family</h3><p style="margin:2px 0 0">Seating for 36 across four round tables. Eight is lucky; we try to seat everyone in eights.</p></div></div>
+        <button class="btn btn-red" type="button" id="ics-rsvp"><span data-ico="calendar-plus" data-size="22" data-motion="hover" data-min-level="1"></span>Add to my calendar (.ics)</button>
+      </div>
+      <div class="form reveal" id="form-box">
+        <form id="rsvp-form" novalidate action="#">
+          <div class="row2">
+            <div class="fld" id="f-name"><label for="name"><span data-ico="user-plus" data-size="20" data-motion="hover">👤</span>Your name</label><input id="name" type="text" autocomplete="name" placeholder="Mei Ling Chen" required><span class="err">Please tell us who is coming.</span></div>
+            <div class="fld" id="f-email"><label for="email"><span data-ico="mail" data-size="20" data-motion="hover">✉️</span>Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required><span class="err">Please use an email we can reach you on.</span></div>
+          </div>
+          <fieldset class="fld" id="f-att"><legend><span data-ico="heart" data-size="20" data-motion="hover">❤️</span>Will you join us?</legend>
+            <div class="opts"><label><input type="radio" name="att" value="yes"><span class="pill">Yes, we will be there</span></label><label><input type="radio" name="att" value="no"><span class="pill">Sadly, we cannot</span></label></div><span class="err">Please choose one.</span></fieldset>
+          <div class="fld" id="f-count"><label for="cnt-out"><span data-ico="users" data-size="20" data-motion="hover">👥</span>Headcount (including you)</label>
+            <div class="step"><button type="button" id="minus" aria-label="One fewer guest"><span data-ico="minus" data-size="20" data-fixed-style="line">−</span></button><output id="cnt-out" for="minus plus">2</output><button type="button" id="plus" aria-label="One more guest"><span data-ico="plus" data-size="20" data-fixed-style="line">+</span></button></div>
+            <span id="seatnote" style="font-size:14px;color:var(--mute)">That is 2 seats. One more would make a lucky 3? We will find a stool.</span></div>
+          <fieldset class="fld"><legend><span data-ico="leaf" data-size="20" data-motion="hover">🥬</span>Dietary needs</legend>
+            <div class="opts">
+              <label><input type="checkbox" name="diet" value="Vegetarian"><span class="pill">Vegetarian</span></label>
+              <label><input type="checkbox" name="diet" value="No shellfish"><span class="pill">No shellfish</span></label>
+              <label><input type="checkbox" name="diet" value="Gluten-free"><span class="pill">Gluten-free</span></label>
+              <label><input type="checkbox" name="diet" value="No pork"><span class="pill">No pork</span></label>
+              <label><input type="checkbox" name="diet" value="Nut allergy"><span class="pill">Nut allergy</span></label>
+            </div></fieldset>
+          <div class="fld"><label for="note"><span data-ico="message-circle" data-size="20" data-motion="hover">💬</span>A note for the hosts (optional)</label><textarea id="note" rows="3" placeholder="We are bringing two bags of mandarins."></textarea></div>
+          <button class="btn btn-gold" type="submit" style="width:100%"><span data-ico="send" data-size="22" data-motion="hover">📨</span>Send our reply</button>
+        </form>
+        <div class="thanks" id="thanks" role="status" tabindex="-1">
+          <span data-ico="party-popper" data-size="96" data-motion="loop" data-label="Celebration">🎉</span>
+          <h3 id="th-h">Thank you, we will save you a seat!</h3><p id="th-p"></p>
+          <button class="btn btn-red" type="button" id="ics-th"><span data-ico="calendar-plus" data-size="22" data-motion="hover">📅</span>Add to calendar</button>
+          <button class="btn btn-ghost" type="button" id="redo" style="color:var(--red)">Change my reply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow"><span data-ico="help-circle" data-size="20" data-min-level="1" data-motion="inview"></span>Good questions</span><h2>Frequently asked</h2></div>
+    <div class="faqwrap">
+      <details open><summary><span data-ico="users" data-size="30" data-motion="hover">👥</span>Can I bring a friend or a plus one?<span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">▾</span></summary><p>Of course. Just add them to your headcount in the RSVP. A reunion dinner is better with strays.</p></details>
+      <details><summary><span data-ico="leaf" data-size="30" data-motion="hover">🥬</span>Is there food for vegetarians and allergies?<span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">▾</span></summary><p>Yes. Tell us in the form and Grandma Mei makes a vegetarian version of the dumplings and noodles. Menu cards on the tables list the common allergens.</p></details>
+      <details><summary><span data-ico="baby" data-size="30" data-motion="hover">👶</span>Are children welcome?<span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">▾</span></summary><p>Very. There is a kids' table, a quiet room upstairs, and every child gets a red envelope from the hosts.</p></details>
+      <details><summary><span data-ico="red-envelope" data-size="30" data-motion="hover">🧧</span>How much should I put in a red envelope?<span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">▾</span></summary><p>Whatever feels warm and comfortable, in an even amount and never a 4. Gifts for the hosts are not expected; your company is the gift.</p></details>
+      <details><summary><span data-ico="car-front" data-size="30" data-motion="hover">🚗</span>Where do I park?<span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">▾</span></summary><p>Street parking on Lantern Road is free after 5 pm, and the temple lot behind the house has 20 spaces. Please carpool; the fireworks traffic is real.</p></details>
+      <details><summary><span data-ico="firecracker-string" data-size="30" data-motion="hover">🧨</span>What happens if it rains?<span class="chev" data-ico="chevron-down" data-size="22" data-fixed-style="line">▾</span></summary><p>Rain is lucky. The lion dance moves into the courtyard and the fireworks slide to 10:30 pm or the following night if it is stormy. We will text everyone by 4 pm.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec host">
+  <div class="wrap">
+    <div class="garland" aria-hidden="true" data-min-level="1"><span data-ico="red-lantern" data-size="56" data-motion="hover"></span><span data-ico="chinese-knot" data-size="56" data-motion="hover"></span><span data-ico="gold-ingot" data-size="56" data-motion="hover"></span><span data-ico="chinese-knot" data-size="56" data-motion="hover"></span><span data-ico="red-lantern" data-size="56" data-motion="hover"></span></div>
+    <h2>Gong xi fa cai</h2>
+    <p class="lede" style="margin:12px auto;color:#fbe9c8">Thank you for travelling home with us. We hope the year ahead brings you more luck, more family, and at least one more helping of noodles.</p>
+    <div class="sign">With love, Grace &amp; Daniel Lam, Grandma Mei and Grandpa Wen</div>
+  </div>
+</section>
+</main>
+
+<section id="credits" aria-labelledby="cr-h">
+  <div class="wrap">
+    <h2 id="cr-h">Photo credits</h2>
+    <ul>
+      <li>Hero, night lanterns: Photo by <a href="https://www.pexels.com/@heru-dharma-2148751843">Heru Dharma</a> on <a href="https://www.pexels.com/photo/37272344/">Pexels</a></li>
+      <li>Lanterns with gold symbols: Photo by <a href="https://www.pexels.com/@hong-zhu-3920372">Hong Zhu</a> on <a href="https://www.pexels.com/photo/5982949/">Pexels</a></li>
+      <li>Dumplings: Photo by <a href="https://www.pexels.com/@noam-k-lna-626381151">Noam K Lna</a> on <a href="https://www.pexels.com/photo/34912738/">Pexels</a></li>
+      <li>Steamed fish: Photo by <a href="https://www.pexels.com/@jankao-11830203">Jankao</a> on <a href="https://www.pexels.com/photo/11830203/">Pexels</a></li>
+      <li>Red envelopes: Photo by <a href="https://unsplash.com/@chuttersnap?utm_source=withicons_demos&amp;utm_medium=referral">CHUTTERSNAP</a> on <a href="https://unsplash.com/photos/u9FHVwGBV5I?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Lion dance: Photo by <a href="https://www.pexels.com/@tuan-vy-903011268">Tuan Vy</a> on <a href="https://www.pexels.com/photo/30711027/">Pexels</a></li>
+      <li>Fireworks: Photo by <a href="https://unsplash.com/@illes_cristi?utm_source=withicons_demos&amp;utm_medium=referral">Iuliu Illes</a> on <a href="https://unsplash.com/photos/fireworks-are-lit-up-in-the-night-sky-rrBxNM6pgl4?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+      <li>Mahjong tiles: Photo by <a href="https://www.pexels.com/@jimbear-13712532">Jimbear</a> on <a href="https://www.pexels.com/photo/13712532/">Pexels</a></li>
+      <li>Family meal: Photo by <a href="https://www.pexels.com/@angela-roma">Angela Roma</a> on <a href="https://www.pexels.com/photo/7363743/">Pexels</a></li>
+      <li>Plum blossom: Photo by <a href="https://unsplash.com/@ziro1005?utm_source=withicons_demos&amp;utm_medium=referral">Kanae Kanesaki</a> on <a href="https://unsplash.com/photos/the-branches-of-a-tree-with-white-flowers-against-a-blue-sky-NBicygNxy2Q?utm_source=withicons_demos&amp;utm_medium=referral">Unsplash</a></li>
+    </ul>
+    <p style="margin-top:14px">Icons: <a href="https://withicons.com">with icons</a> (withicons.com), MIT.</p>
+  </div>
+</section>
+<footer>
+  <div class="wrap"><span>Demo page made with with icons. Names, places and products are fictional.</span><span>&copy; 2027 The Lam family (fictional) &middot; 555-0142</span></div>
+</footer>
+
+<script src="_kit/demo-kit.js" data-style="lunar" data-recommend="lunar,utsav,sticker,clay,soft3d,luxe,kawaii,line" data-level="2" defer></script>
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* marquee */
+  var words=[['red-lantern','Gong xi fa cai'],['dumpling','Wealth in every fold'],['lucky-coin','Prosperity'],['lion-head','Courage and joy'],['gold-ingot','Good fortune'],['mandarin-orange','Sweet luck']];
+  var h='';for(var k=0;k<2;k++)words.forEach(function(w,i){h+='<span><span data-'+'ico="'+w[0]+'" data-size="30" data-motion="'+(i%2?'hover':'loop')+'"></span>'+w[1]+'</span>'});
+  $('#mq').innerHTML=h;if(window.WithKit)WithKit.refresh($('#mq'));
+  /* menu */
+  var mb=$('#menu-btn'),nav=$('#nav');
+  mb.addEventListener('click',function(){var o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o)});
+  $$('#nav a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');mb.setAttribute('aria-expanded','false')})});
+  /* reveal */
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});$$('.reveal').forEach(function(el){io.observe(el)})}else{$$('.reveal').forEach(function(el){el.classList.add('in')})}
+  /* countdown: 6 Feb 2027, 18:00 local time */
+  var T=new Date(2027,1,6,18,0,0),START=new Date(2026,10,1).getTime(),lastRing=-1,prev={};
+  function pad(n){return n<10?'0'+n:''+n}
+  function set(id,v){var el=$('#'+id);if(el.textContent!==v){el.textContent=v;if(prev[id]!==undefined&&!reduce){el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick')}prev[id]=v}}
+  function tick(){
+    var ms=T-new Date();
+    if(ms<=0){var ended=new Date()-T>5*3600e3;set('cd-d','00');set('cd-h','00');set('cd-m','00');set('cd-s','00');$('#cd-msg').textContent=ended?'The lanterns have been lit. Thank you for coming home with us!':'Happy new year! The lion is at the gate.';return}
+    var s=Math.floor(ms/1000);set('cd-d',pad(Math.floor(s/86400)));set('cd-h',pad(Math.floor(s%86400/3600)));set('cd-m',pad(Math.floor(s%3600/60)));set('cd-s',pad(s%60));
+    var p=Math.max(0,Math.min(100,Math.round((1-ms/(T-START))*100)));
+    if(p!==lastRing&&window.WithKit){lastRing=p;var r=$('#ring');try{WithKit.setLive(r,{value:p})}catch(e){}}
+  }
+  tick();setInterval(tick,1000);
+  /* fortune cards */
+  var cards=$$('.card');
+  cards.forEach(function(c){c.addEventListener('click',function(){var f=c.classList.toggle('flip');c.setAttribute('aria-pressed',f);sync()})});
+  function sync(){var all=cards.every(function(c){return c.classList.contains('flip')});$('#flipall-t').textContent=all?'Hide the fortunes':'Reveal every fortune'}
+  $('#flipall').addEventListener('click',function(){var all=cards.every(function(c){return c.classList.contains('flip')});cards.forEach(function(c,i){setTimeout(function(){c.classList.toggle('flip',!all);c.setAttribute('aria-pressed',!all);sync()},reduce?0:i*110)})});
+  /* red envelopes */
+  var wishes=['May every table you sit at be round and full.','A lucky coin is on its way: say yes to the next small invitation.','Health in the first half of the year, wealth in the second.','May your inbox hold good news and your fridge hold leftovers.','Someone you miss will call before the lanterns come down.','Ten thousand things go your way; may two of them be dumplings.','Peace at home, laughter at work, and a parking space close by.','May you be as fortunate as the last dumpling with the coin in it.'];
+  var envs=$$('.env'),bl=$('#blessing'),again=$('#again'),opened=false;
+  function burst(el){if(reduce)return;var b=document.createElement('div');b.className='burst';for(var i=0;i<16;i++){var d=document.createElement('i');d.style.setProperty('--a',(i*22.5)+'deg');d.style.setProperty('--d',(60+Math.random()*50)+'px');b.appendChild(d)}el.appendChild(b);setTimeout(function(){b.remove()},1000)}
+  envs.forEach(function(e){e.addEventListener('click',function(){if(opened)return;opened=true;e.classList.add('open');envs.forEach(function(o){if(o!==e)o.classList.add('shut')});var w=wishes[Math.floor(Math.random()*wishes.length)];bl.innerHTML='<small>Your blessing</small>'+w;burst($('#game'));again.style.display='inline-flex'})});
+  again.addEventListener('click',function(){opened=false;envs.forEach(function(e){e.classList.remove('open','shut')});bl.innerHTML='<small>Your blessing</small>Tap an envelope to open it.';again.style.display='none'});
+  /* headcount */
+  var cnt=2,out=$('#cnt-out'),note=$('#seatnote');
+  function setCnt(n){cnt=Math.max(1,Math.min(12,n));out.textContent=cnt;note.textContent=cnt===8?'Eight seats: the luckiest number. Perfect.':cnt+(cnt===1?' seat. ':' seats. ')+(cnt===12?'That is our maximum per reply; call Daniel for more.':'We will set a place for each of you.')}
+  $('#minus').addEventListener('click',function(){setCnt(cnt-1)});$('#plus').addEventListener('click',function(){setCnt(cnt+1)});
+  /* rsvp */
+  var form=$('#rsvp-form'),box=$('#form-box'),th=$('#thanks');
+  function bad(id,on){$('#'+id).classList.toggle('bad',on);return on}
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=$('#name').value.trim(),em=$('#email').value.trim(),att=form.att.value;
+    var b1=bad('f-name',!name),b2=bad('f-email',!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)),b3=bad('f-att',!att);
+    if(b1||b2||b3){(b1?$('#name'):b2?$('#email'):$('#f-att input')).focus();return}
+    var diet=$$('input[name=diet]:checked').map(function(i){return i.value}),first=name.split(' ')[0];
+    if(att==='yes'){$('#th-h').textContent='Thank you, '+first+'. We will save you a seat!';$('#th-p').textContent=cnt+(cnt===1?' seat is':' seats are')+' reserved at the Lam table for Saturday 6 February, 6:00 pm.'+(diet.length?' Noted for the kitchen: '+diet.join(', ').toLowerCase()+'.':'')+' A confirmation is on its way to '+em+'.'}
+    else{$('#th-h').textContent='We will miss you, '+first+'.';$('#th-p').textContent='Thank you for letting us know. We will send a box of nian gao your way, and a seat is always open next year.'}
+    box.classList.add('done');th.classList.add('show');th.focus();box.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});
+  });
+  $$('#f-name input,#f-email input').forEach(function(i){i.addEventListener('input',function(){i.parentNode.classList.remove('bad')})});
+  $('#redo').addEventListener('click',function(){box.classList.remove('done');th.classList.remove('show')});
+  /* calendar */
+  function ics(){
+    var t=function(d){return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z'};
+    var s=new Date(2027,1,6,18,0),e=new Date(2027,1,6,22,30);
+    var L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//with icons demo//Lunar Reunion//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:lam-reunion-2027@withicons-demo.example','DTSTAMP:'+t(new Date()),'DTSTART:'+t(s),'DTEND:'+t(e),'SUMMARY:The Lam Reunion Dinner (Lunar New Year)','LOCATION:The Lam family home\\, 18 Plum Blossom Court (fictional)','DESCRIPTION:Lion dance at 6:15\\, banquet at 7:00\\, fireworks at 10:00. Wear red! Hosts: Grace & Daniel Lam.','BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Reunion dinner tomorrow! Wear red.','END:VALARM','END:VEVENT','END:VCALENDAR'];
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar'}));a.download='lam-reunion-dinner-2027.ics';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500)
+  }
+  ['ics-top','ics-rsvp','ics-th'].forEach(function(id){$('#'+id).addEventListener('click',ics)});
+})();
+</script>
+</body></html>

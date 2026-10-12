@@ -1,0 +1,214 @@
+{
+  "slug": "nani-turns-80",
+  "photos": [
+    {
+      "slot": "hero",
+      "src": "unsplash",
+      "id": "MMhazsT2wtM",
+      "page": "https://unsplash.com/photos/MMhazsT2wtM",
+      "url": "https://images.unsplash.com/photo-1616286608358-0e1b143f7d2f",
+      "photographer": "Tatiana Zanon",
+      "photographerUrl": "https://unsplash.com/@tatizanon",
+      "alt": "A grey-haired older woman in a soft grey cardigan and floral top laughs warmly, looking off to the right, against a softly blurred communal hall.",
+      "colors": "soft grey, warm skin tone, muted taupe",
+      "focal": "46% 40%",
+      "notes": "3:2 landscape. Subject is centred-left and fills the middle; the right third is a blurred hall with a dark doorway and a table, so set the headline on a cream or translucent panel rather than straight on the photo. For a tall mobile crop keep object-position near 46% so her face stays in frame. Genuine laugh, the emotional anchor of the page. Slightly cool and soft, so warm it with a gentle cream or sepia overlay to sit with the palette.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/nani-turns-80/photo-1616286608358-0e1b143f7d2f-1000.jpg"
+      }
+    },
+    {
+      "slot": "cake",
+      "src": "unsplash",
+      "id": "2O4va26lBEI",
+      "page": "https://unsplash.com/photos/2O4va26lBEI",
+      "url": "https://images.unsplash.com/photo-1694043325785-d841a964257f",
+      "photographer": "Shaylyn",
+      "photographerUrl": "https://unsplash.com/@mpadb",
+      "alt": "A small pink tiered birthday cake with piped frosting, rainbow sprinkles and tall unlit candles in blue, green, orange, purple and magenta, on a wooden board against a green striped wall.",
+      "colors": "rose pink, cream, bright candle accents",
+      "focal": "50% 42%",
+      "notes": "Portrait 2:3. The candles are not lit. They start about a fifth of the way down, so use a tall frame or object-position 50% 30% when cropping to a square. The pink and sprinkles suit coquette/pastel/valentine palettes; use it beside the RSVP or the menu.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/nani-turns-80/photo-1694043325785-d841a964257f-700.jpg"
+      }
+    },
+    {
+      "slot": "flowers",
+      "src": "pexels",
+      "id": "34463054",
+      "page": "https://www.pexels.com/photo/34463054/",
+      "url": "https://images.pexels.com/photos/34463054/pexels-photo-34463054.jpeg",
+      "photographer": "betül nur akyürek",
+      "photographerUrl": "https://www.pexels.com/@cileklipalet",
+      "alt": "A full bouquet of pink carnations, white freesia and baby's breath in a ribbed glass vase on a weathered green painted table with old book pages, beside a sheer curtain.",
+      "colors": "blush pink, white, deep green",
+      "focal": "50% 38%",
+      "notes": "Landscape 3:2. Bouquet sits centre-top; the table below is a distressed teal-green with loose book pages, which feels vintage. Crop to a square around the blooms (object-position 50% 38%). Good for a decor / table-setting card or a sticker-style cutout.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "600": "_img/nani-turns-80/34463054-600.jpg"
+      }
+    },
+    {
+      "slot": "grandchild",
+      "src": "unsplash",
+      "id": "L4nwL3195U0",
+      "page": "https://unsplash.com/photos/L4nwL3195U0",
+      "url": "https://images.unsplash.com/photo-1593100126453-19b562a800c1",
+      "photographer": "Ekaterina Shakharova",
+      "photographerUrl": "https://unsplash.com/@minigirl",
+      "alt": "An elderly woman with white hair and glasses hugs and is kissed on the cheek by a young child, both lit by a warm golden glow against a dark background.",
+      "colors": "warm amber, deep black, soft white hair",
+      "focal": "45% 42%",
+      "notes": "Landscape. A tender, warm-lit moment on a near-black background; the young child is shown in profile, eyes closed, kissing the grandmother's cheek. Dark surround takes a light-coloured caption well. Works as a full-bleed band or a large rounded card; pair with the gift note or the memory wall. Slightly grainy in the shadows, so avoid enlarging past about 1400px.",
+      "width": 1200,
+      "height": 803,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/nani-turns-80/photo-1593100126453-19b562a800c1-700.jpg"
+      }
+    },
+    {
+      "slot": "tea",
+      "src": "pexels",
+      "id": "8086980",
+      "page": "https://www.pexels.com/photo/8086980/",
+      "url": "https://images.pexels.com/photos/8086980/pexels-photo-8086980.jpeg",
+      "photographer": "Yaroslav Shuraev",
+      "photographerUrl": "https://www.pexels.com/@yaroslav-shuraev",
+      "alt": "Overhead view of a round white table set with dark gold-rimmed floral china, tea cups, small plated cakes and a vase of purple lilac while hands pour and pass tea.",
+      "colors": "cream white, gold, lilac, tea amber",
+      "focal": "50% 50%",
+      "notes": "Landscape 3:2, looks down onto the table so any crop works. Only hands are shown, no faces. Matches the cream paper and faded gold of the page; use for the menu or the arrival-and-tea section. A few confetti pieces on the floor at the top right give it a party feel.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/nani-turns-80/8086980-1000.jpg"
+      }
+    },
+    {
+      "slot": "lunch",
+      "src": "pexels",
+      "id": "8507666",
+      "page": "https://www.pexels.com/photo/8507666/",
+      "url": "https://images.pexels.com/photos/8507666/pexels-photo-8507666.jpeg",
+      "photographer": "Kampus Production",
+      "photographerUrl": "https://www.pexels.com/@kampus",
+      "alt": "Three generations of a family sit smiling at one long wooden table laden with bowls of salad and fruit, in a warm kitchen-dining room.",
+      "colors": "warm wood brown, brick red, cream",
+      "focal": "55% 42%",
+      "notes": "Landscape 3:2. Faces run along the upper half and the table fills the lower third; crop to 16:9 from the top. Shows grandparents plus children, so it works for the \"who is coming\" or the menu section.",
+      "width": 1200,
+      "height": 801,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/nani-turns-80/8507666-700.jpg"
+      }
+    },
+    {
+      "slot": "album",
+      "src": "pexels",
+      "id": "8848784",
+      "page": "https://www.pexels.com/photo/8848784/",
+      "url": "https://images.pexels.com/photos/8848784/pexels-photo-8848784.jpeg",
+      "photographer": "cottonbro studio",
+      "photographerUrl": "https://www.pexels.com/@cottonbro",
+      "alt": "Two hands lift old snapshots out of an open vintage photo album: a black-and-white portrait of a baby and a faded colour photo of a toddler.",
+      "colors": "sepia brown, warm black and white, skin tones",
+      "focal": "50% 50%",
+      "notes": "Landscape 3:2. Warm, nostalgic and intimate; ideal next to the 1946 to 2026 timeline or the memory-wall form. Apply a slight sepia if the page palette is sepia-leaning.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/nani-turns-80/8848784-700.jpg"
+      }
+    },
+    {
+      "slot": "hobby",
+      "src": "pexels",
+      "id": "5585241",
+      "page": "https://www.pexels.com/photo/5585241/",
+      "url": "https://images.pexels.com/photos/5585241/pexels-photo-5585241.jpeg",
+      "photographer": "cottonbro studio",
+      "photographerUrl": "https://www.pexels.com/@cottonbro",
+      "alt": "An older woman's hands knit a grey ribbed piece in natural window light, her floral blouse with ruffled cuffs beside a ball of grey yarn on a cream cloth.",
+      "colors": "soft grey, cream, muted floral",
+      "focal": "45% 42%",
+      "notes": "Portrait 2:3. Light and airy, and the floral sleeve echoes the vintage palette. Works as a tall side image beside the \"she taught us\" story or the recipe-card gift note.",
+      "width": 1200,
+      "height": 1800,
+      "orientation": "portrait",
+      "local": {
+        "700": "_img/nani-turns-80/5585241-700.jpg"
+      }
+    },
+    {
+      "slot": "spare-1",
+      "src": "unsplash",
+      "id": "M3MZ3NRpvPk",
+      "page": "https://unsplash.com/photos/M3MZ3NRpvPk",
+      "url": "https://images.unsplash.com/photo-1719037108848-685e9e599827",
+      "photographer": "Raymond Petrik",
+      "photographerUrl": "https://unsplash.com/@raymondpetrik",
+      "alt": "A serene elderly woman with white hair, a blue-grey wool coat and a patterned scarf smiles gently at the camera against golden autumn bokeh.",
+      "colors": "autumn amber, slate blue, white hair",
+      "focal": "49% 38%",
+      "notes": "Second hero candidate. Landscape ~3:2; warm autumn film look suits the vintage mood. The subject is centred, so text needs a panel, and a blurred passer-by at the right edge is the only distraction. Quieter and more formal than the main hero.",
+      "width": 1200,
+      "height": 791,
+      "orientation": "landscape",
+      "local": {
+        "800": "_img/nani-turns-80/photo-1719037108848-685e9e599827-800.jpg"
+      }
+    },
+    {
+      "slot": "spare-2",
+      "src": "pexels",
+      "id": "6274899",
+      "page": "https://www.pexels.com/photo/6274899/",
+      "url": "https://images.pexels.com/photos/6274899/pexels-photo-6274899.jpeg",
+      "photographer": "Thiago José Amaral",
+      "photographerUrl": "https://www.pexels.com/@thiago-jose-amaral-3362454",
+      "alt": "Open vintage photo albums and loose black-and-white family portraits scattered across a table.",
+      "colors": "faded grey, sepia, cream",
+      "focal": "50% 50%",
+      "notes": "Texture / detail shot. Landscape 3:2, busy, so best behind a translucent panel or as a small framed polaroid in the timeline strip.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "700": "_img/nani-turns-80/6274899-700.jpg"
+      }
+    },
+    {
+      "slot": "spare-3",
+      "src": "unsplash",
+      "id": "y0OAmd_COUM",
+      "page": "https://unsplash.com/photos/y0OAmd_COUM",
+      "url": "https://images.unsplash.com/photo-1534768654272-e97681c3a2c7",
+      "photographer": "Rod Long",
+      "photographerUrl": "https://unsplash.com/@rodlong",
+      "alt": "In a dark, near-monochrome sepia photograph a baby's tiny hand rests on an older woman's wrinkled, ringed hand.",
+      "colors": "sepia, warm black, soft cream",
+      "focal": "50% 50%",
+      "notes": "Atmosphere / detail shot. Landscape 3:2, faces not shown, very tender; a good divider band between the timeline and the memory wall, or the closing \"love\" section.",
+      "width": 1200,
+      "height": 800,
+      "orientation": "landscape",
+      "local": {
+        "1000": "_img/nani-turns-80/photo-1534768654272-e97681c3a2c7-1000.jpg"
+      }
+    }
+  ]
+}

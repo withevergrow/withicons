@@ -49,5 +49,7 @@ export const TUNE = {
   'paper-fan': CREAM, 'love-letter': CREAM,
   // leaves on fruit and flowers
   apple: LEAFY, 'plum-blossom': { parts: 'jade', signal: 'gold' }, lotus: LEAFY, rose: LEAFY,
+  // run 14: golden wheat, a gold crown over a jade tooth like tooth, a jade mosque with a gold minaret and crescent
+  wheat: GOLD, 'tooth-crown': { body: 'gold', parts: 'jade' }, mosque: { body: 'jade', parts: 'gold', signal: 'gold' },
 }
 export const tuneFor = (name, category) => ({ ...(CATEGORY[category] || {}), ...(TUNE[name] || {}) })

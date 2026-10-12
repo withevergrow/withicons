@@ -1,11 +1,11 @@
 ---
 name: with-icons
-description: Icons for any web, app or UI project from the "with icons" library (withicons.com, npm @withicons/*), 734 MIT-licensed icons in 34 styles: line, solid, duo, office suite, 3D (clay, glass, liquid glass, chrome, soft 3D, luxe, skeuomorphic), brand (bento, app-dock tiles, neo-brutalism, bauhaus), playful (kawaii, plush, sticker, pastel, pixel, retro), artistic (sketch, engrave, blueprint, anime, gothic, coquette) and holiday styles (Diwali, Holi, Halloween, Christmas, Lunar New Year, Valentine's). React, Vue, Svelte, Angular, SolidJS, web component, CSS classes, sprites, CDN, download-all zips. Festival icons, inclusive avatars, animated and 3D icons (@withicons/motion), live date or count icons (@withicons/dynamic), files for slides, print, email and social (SVG, PNG, PDF, PowerPoint, GIF, Lottie). Use it whenever a task needs an icon, icon set or avatar, the right icon name or style for a job, icon search over MCP, or to replace emoji, inline SVG or another set (Lucide, Heroicons, Font Awesome).
+description: Icons for any web, app or UI project from the "with icons" library (withicons.com, npm @withicons/*), 750 MIT-licensed icons in 34 styles: line, solid, duo, office suite, 3D (clay, glass, liquid glass, chrome, soft 3D, luxe, skeuomorphic), brand (bento, app-dock tiles, neo-brutalism, bauhaus), playful (kawaii, plush, sticker, pastel, pixel, retro), artistic (sketch, engrave, blueprint, anime, gothic, coquette) and holiday styles (Diwali, Holi, Halloween, Christmas, Lunar New Year, Valentine's). React, Vue, Svelte, Angular, SolidJS, web component, CSS classes, sprites, CDN, download-all zips. Festival icons, inclusive avatars, animated and 3D icons (@withicons/motion), live date or count icons (@withicons/dynamic), files for slides, print, email and social (SVG, PNG, PDF, PowerPoint, GIF, Lottie). Use it whenever a task needs an icon, icon set or avatar, the right icon name or style for a job, icon search over MCP, or to replace emoji, inline SVG or another set (Lucide, Heroicons, Font Awesome).
 ---
 
 # with icons
 
-734 icons, each drawn once and rendered in 34 styles. The ink is `currentColor`, the grid 24x24, the default size 24.
+750 icons, each drawn once and rendered in 34 styles. The ink is `currentColor`, the grid 24x24, the default size 24.
 Site https://withicons.com · repo https://github.com/withevergrow/withicons · MIT. Detail lives in `reference/`; read
 the file a rule links to before going beyond the rule.
 
@@ -85,7 +85,7 @@ Looks, minimum sizes, every variable, holiday palettes and Duo presets: [referen
 - Canonical names are kebab-case (`arrow-right`); components are PascalCase, exported as `ArrowRight` and `ArrowRightIcon`.
 - **Aliases** (`bin`, `house`, `gear`) resolve in name-based APIs (`<with-icon name>`, `<Icon name>`, `resolve()`,
   search, MCP) but **are not exports**: `import { Bin }` fails, use `Trash`.
-- Look every name up before writing it (section 5) or read [reference/icons.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/icons.md) (all 734 names,
+- Look every name up before writing it (section 5) or read [reference/icons.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/icons.md) (all 750 names,
   categories, aliases). Common: delete/bin -> `trash`, gear -> `settings`, x/dismiss -> `close`, hamburger -> `menu`,
   house -> `home`, magnifier -> `search`, profile picture -> `user-circle` or an `avatar-*` icon.
 
@@ -102,10 +102,11 @@ More in [reference/frameworks.md](https://github.com/withevergrow/withicons/blob
 
 ## 5. Find the right icon
 
-- **MCP** (best for agents): remote `https://withicons.com/mcp` (about 200 requests per IP per 5 minutes, then HTTP 429),
+- **MCP** (best for agents): remote `https://withicons.com/mcp` (about 1,000 requests per IP per 5 minutes, then HTTP 429),
   local and unlimited `npx -y @withicons/mcp` (prefer it for batch work). Tools: `search_icons`, `get_icon`,
   `resolve_icon`, `recommend_styles` (best styles for a job, a festival or an audience, with packages, presets and
-  palettes), `animate_icon`, `export_icon`, `list_palettes`, `list_styles` (grouped), `list_categories`; confirm with
+  palettes), `preview_icons` (one labelled picture of icons x styles: look before you choose), `animate_icon`, `export_icon`,
+  `list_palettes`, `list_styles` (grouped), `list_categories`; confirm with
   `tools/list`. Not connected? `npx withicons init` adds the skill and the server to the project's AI tools (`--dry-run` first).
 - **CLI** `npx withicons search "throw away"` · **HTTP** `https://withicons.com/api/search?q=throw+away&limit=5` (on a
   timeout retry once, or read `https://withicons.com/icons.json`) · **offline** [reference/icons.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/icons.md)
@@ -154,10 +155,11 @@ npx withicons export bell --format gif --background "#ffffff" --out slides      
 npx withicons export rocket --style luxe --format pptx-animated --background "#0f172a" --color "#ffffff"
 ```
 
-MCP `export_icon` takes the same options in snake_case (`out_dir` on the local server). The remote server answers
-PNG-based and animated formats with the `npx withicons export …` command to run.
+MCP `export_icon` takes the same options in snake_case (`out_dir` on the local server). The remote server makes PNG and
+the other still formats itself (inline, base64) and answers `gif`, `apng`, `pptx-animated` and `pptx-sheet` with the
+`npx withicons export …` command to run.
 
-- Slides and design tools: `svg-flat` or `png`; print: `pdf`, `eps` or `svg-flat` (never PNG); email: PNG at 2x,
+- Slides and docs: `png` at 512 px, transparent, embedded as a picture (PNG, not SVG); design tools: `svg-flat`; print: `pdf`, `eps` or `svg-flat` (never PNG); email: PNG at 2x,
   hosted on your https URLs (never SVG); a moving icon: `gif` (plays in PowerPoint, Keynote, Google Slides, Gmail, Slack).
 - Colours are baked in; a `currentColor` ink becomes black (role-named styles keep their own ink colour): on dark backgrounds pass `--color "#ffffff"` and the slide colour
   as `--background` (GIF), and pick an `on-dark` palette for multi-colour styles. Quote colours (`#` starts a comment).

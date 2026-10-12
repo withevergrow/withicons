@@ -4,10 +4,11 @@
 //   packages/mcp/dist/lib.mjs       library used by the CLI (search, get, snippets)
 //   packages/mcp/dist/lambda.mjs    `handler` for a Lambda Function URL: code + small data inlined (~1.8 MB); the per-style SVG maps and
 //                                   the palettes are read from ./data/ by byte range on demand (scripts/deploy.mjs zips lambda.mjs + those files)
+//   packages/mcp/dist/resvg.wasm    the Lambda's PNG renderer (@resvg/resvg-wasm, loaded on the first PNG export; zipped next to lambda.mjs)
 //   packages/cli/dist/cli.mjs       bin `withicons` (bundles site/js/export/*.js for `withicons export`; @resvg/resvg-js stays
 //                                   an external, optional dependency loaded only for PNG-based and animated formats)
 //   The export engine (packages/cli/src/export.mjs + @withicons/motion's frame code) is in stdio.mjs and lambda.mjs too, for
-//   the export_icon tool; the Lambda never loads resvg (remote export_icon makes vector / code / Lottie files only).
+//   the export_icon tool; the Lambda renders its PNG-based files with @resvg/resvg-wasm (src/resvg-wasm.mjs) instead of the native resvg.
 // Bundling needs esbuild from packages/mcp/node_modules (cd packages/mcp && npm install). Without it the data
 // and package files are still written and the previous bundles are kept.
 import fs from 'fs'
@@ -133,9 +134,28 @@ export async function bundle({ root = ROOT, version = '0.1.0', styles } = {}) {
     }
     return 'export const multiRaw = ' + JSON.stringify(JSON.stringify(multi)) + '\nexport const rangesRaw = ' + JSON.stringify(JSON.stringify(ranges)) + '\n'
   }
+  // '#style-roles' (every bundle): each style's colour roles, read from every icon it renders, plus how exactly a brand
+  // colour shows in it (packages/mcp/src/colour-model.mjs styleColourTable; list_styles, the theme docs). Built once.
+  let styleRolesJs = null
+  const styleRoles = async () => {
+    if (styleRolesJs) return styleRolesJs
+    const dataDir = path.join(mcpDir, 'dist', 'data')
+    const meta = JSON.parse(fs.readFileSync(path.join(dataDir, 'meta.json'), 'utf8'))
+    const { styleColourTable } = await import(pathToFileURL(path.join(mcpDir, 'src', 'colour-model.mjs')).href)
+    const names = meta.icons.map(i => i.name), every = Math.max(1, Math.floor(names.length / 16))
+    const sample = names.filter((_, i) => i % every === 0)
+    const table = {}
+    for (const s of meta.styles) {
+      const f = path.join(dataDir, 'svg-' + s.name + '.json')
+      if (fs.existsSync(f)) table[s.name] = styleColourTable(JSON.parse(fs.readFileSync(f, 'utf8')), { sample, inkDraws: !s.palette })
+    }
+    return (styleRolesJs = 'export default JSON.parse(' + JSON.stringify(JSON.stringify(table)) + ')\n')
+  }
   const dataPlugin = file => ({
     name: 'data', setup(b) {
       b.onResolve({ filter: /^#data$/ }, () => ({ path: path.join(mcpDir, 'src', file) }))
+      b.onResolve({ filter: /^#style-roles$/ }, () => ({ path: 'style-roles', namespace: 'style-roles' }))
+      b.onLoad({ filter: /.*/, namespace: 'style-roles' }, async () => ({ contents: await styleRoles(), loader: 'js' }))
       b.onResolve({ filter: /^#lambda-index$/ }, () => ({ path: 'lambda-index', namespace: 'lambda-index' }))
       b.onLoad({ filter: /.*/, namespace: 'lambda-index' }, () => ({ contents: lambdaIndex(), loader: 'js' }))
       // "<file>.json?text" -> export default "<file contents as one string>"
@@ -164,7 +184,13 @@ export async function bundle({ root = ROOT, version = '0.1.0', styles } = {}) {
   }
   await run('stdio.mjs', path.join(mcpDir, 'dist', 'stdio.mjs'), 'data-fs.mjs', { minify: true, banner: { js: `#!/usr/bin/env node\n${common.banner.js}` } })
   await run('lib.mjs', path.join(mcpDir, 'dist', 'lib.mjs'), 'data-fs.mjs')
-  await run('lambda.mjs', path.join(mcpDir, 'dist', 'lambda.mjs'), 'data-inline.mjs', { minify: true })
+  // the Lambda renders PNG with @resvg/resvg-wasm: '@resvg/resvg-js' (the native renderer the export engine loads) is
+  // aliased to src/resvg-wasm.mjs, and the .wasm ships next to the bundle as dist/resvg.wasm (not on npm: see files)
+  let wasm
+  try { wasm = req.resolve('@resvg/resvg-wasm/index_bg.wasm') } catch { throw new Error('packages/mcp needs its devDependency @resvg/resvg-wasm for dist/lambda.mjs (hosted PNG export): run npm install') }
+  await run('lambda.mjs', path.join(mcpDir, 'dist', 'lambda.mjs'), 'data-inline.mjs', { minify: true, external: [], alias: { '@resvg/resvg-js': path.join(mcpDir, 'src', 'resvg-wasm.mjs') } })
+  fs.copyFileSync(wasm, path.join(mcpDir, 'dist', 'resvg.wasm'))
+  out.push(`resvg.wasm ${(fs.statSync(wasm).size / 1024).toFixed(0)} KB`)
   fs.copyFileSync(path.join(mcpDir, 'src', 'lib.d.ts'), path.join(mcpDir, 'dist', 'lib.d.ts'))
   const cliDir = path.join(root, 'packages', 'cli')
   if (fs.existsSync(path.join(cliDir, 'src', 'cli.mjs'))) {
@@ -302,8 +328,9 @@ export default async function emit(ctx) {
       './data/*': './dist/data/*',
       './package.json': './package.json',
     },
-    // dist/lambda.mjs (the site's API; reads dist/data/svg-*.json at run time) is deployed by scripts/deploy.mjs, not shipped on npm
-    files: ['dist', '!dist/lambda.mjs', 'README.md', 'LICENSE'],
+    // dist/lambda.mjs (the site's API; reads dist/data/svg-*.json at run time) and its PNG renderer dist/resvg.wasm are
+    // deployed by scripts/deploy.mjs, not shipped on npm
+    files: ['dist', '!dist/lambda.mjs', '!dist/resvg.wasm', 'README.md', 'LICENSE'],
     // the bin runs code on import; the library does not
     sideEffects: ['./dist/stdio.mjs'],
     publishConfig: { access: 'public' },

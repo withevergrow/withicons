@@ -1,0 +1,76 @@
+{
+  "name": "tooth-crown",
+  "category": "health",
+  "description": "A tooth with its dental crown cap lifted off, for crowns, caps, restorations and dental treatments.",
+  "aliases": [
+    "dental-crown",
+    "tooth-cap",
+    "dental-cap",
+    "crown-tooth",
+    "crowned-tooth",
+    "dental-restoration",
+    "tooth-restoration",
+    "porcelain-crown",
+    "ceramic-crown",
+    "cap-tooth"
+  ],
+  "tags": [
+    "health",
+    "dental",
+    "dentist",
+    "crown",
+    "tooth",
+    "restoration"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 9.5 C3.75 7 4.25 4.25 6.75 3.25 C8.5 2.5 10.5 3.25 12 4.5 C13.5 3.25 15.5 2.5 17.25 3.25 C19.75 4.25 20.25 7 19.5 9.5 C17 10.5 7 10.5 4.5 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 13.25 C8.5 14.25 15.5 14.25 18 13.25 C17.75 15.5 17.25 17.5 16.75 19 C16.5 20.25 16 21 15.25 21 C14.25 21 13.75 19.75 13.5 18.5 C13.25 17.25 12.75 16.5 12 16.5 C11.25 16.5 10.75 17.25 10.5 18.5 C10.25 19.75 9.75 21 8.75 21 C8 21 7.5 20.25 7.25 19 C6.75 17.5 6.25 15.5 6 13.25 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 9.5 C3.75 7 4.25 4.25 6.75 3.25 C8.5 2.5 10.5 3.25 12 4.5 C13.5 3.25 15.5 2.5 17.25 3.25 C19.75 4.25 20.25 7 19.5 9.5 C17 10.5 7 10.5 4.5 9.5 Z",
+    "M6 13.25 C8.5 14.25 15.5 14.25 18 13.25 C17.75 15.5 17.25 17.5 16.75 19 C16.5 20.25 16 21 15.25 21 C14.25 21 13.75 19.75 13.5 18.5 C13.25 17.25 12.75 16.5 12 16.5 C11.25 16.5 10.75 17.25 10.5 18.5 C10.25 19.75 9.75 21 8.75 21 C8 21 7.5 20.25 7.25 19 C6.75 17.5 6.25 15.5 6 13.25 Z"
+  ],
+  "cutouts": [
+    "M7 7.5 A2 2 0 0 1 8.5 5.5"
+  ],
+  "synonyms": [
+    "crown",
+    "crowns",
+    "dental crowns",
+    "same day crown",
+    "same-day crowns",
+    "cap",
+    "caps",
+    "tooth caps",
+    "dental caps",
+    "veneer",
+    "veneers",
+    "implant",
+    "dental implant",
+    "bridge",
+    "dental bridge",
+    "restoration",
+    "restorative dentistry",
+    "cosmetic dentistry",
+    "prosthodontics",
+    "dental work",
+    "root canal",
+    "crown fitting",
+    "onlay",
+    "inlay",
+    "porcelain",
+    "zirconia",
+    "broken tooth",
+    "chipped tooth",
+    "tooth repair",
+    "dentist",
+    "dental",
+    "molar"
+  ]
+}

@@ -43,6 +43,8 @@ export const PART = {
   'poinsettia': 'c4', 'nutcracker': 'c2', 'christmas-candle': 'c3', 'fireplace': 'c3', 'snow-globe': 'c2',
   'sleigh': 'c3', 'gift-stack': 'c3', 'north-star': 'c3', 'gift': 'c3', 'tree-pine': 'c3', 'cloud-snow': 'tint',
   'piggy-bank': 'c4',
+  // run 14: a tooth-crown's roots in the cranberry of tooth, a gold minaret on a pine mosque
+  'tooth-crown': 'c1', 'mosque': 'c3',
 }
 // body overrides for festive icons whose real colour is not the family default
 export const BODY = {
@@ -50,6 +52,8 @@ export const BODY = {
   'gingerbread-man': 'c3', 'reindeer': 'c3', 'sleigh': 'c1', 'nutcracker': 'c1', 'stocking': 'c1', 'santa-hat': 'c1',
   'poinsettia': 'c1', 'bauble': 'c1', 'fireplace': 'c1', 'snow-globe': 'tint', 'christmas-candle': 'c1', 'snowman': 'c4', 'gift-stack': 'c1', 'gift': 'c1',
   'piggy-bank': 'c1',
+  // run 14: gold bakes like the gingerbread man, a gold crown, a pine-green mosque
+  'bread': 'c3', 'baguette': 'c3', 'croissant': 'c3', 'wheat': 'c3', 'tooth-crown': 'c3', 'mosque': 'c2',
 }
 // how steep a top may be and still hold snow (1 = default; evergreens hold snow on their tiers)
 export const STEEP = { 'christmas-tree': 1.9, 'tree-pine': 1.9, 'trees': 1.6, 'tree': 1.4, 'santa-hat': 1.5, 'mountain': 1.5, 'mountain-snow': 1.5, 'tent': 1.3 }
@@ -71,4 +75,6 @@ export const FEST = {
   'christmas-candle': { S: 'c3' },
   'holly': { snow: false, holly: false },
   'bauble': { holly: false },
+  'mosque': { S: 'c3' },   // run 14: a gold crescent over the pine mosque
+  'worried': { S: 'c4' },  // run 14: a snow-cream sweat drop, not a red one
 }

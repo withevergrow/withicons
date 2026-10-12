@@ -29,6 +29,10 @@ const TUNE = {
   // a pink piggy bank: a deeper pink snout in front (A) with two nostril pits, a slimmer gold coin dropping in (S)
   'piggy-bank': { family: 'pink', colors: { c2: '#FF5E9C', c3: '#FFC53D' }, aFront: true, scale: 0.94, ws: 1.5,
     eyes: [[19.1, 13.4, 0.4, 0.6], [20.4, 13.4, 0.4, 0.6]] },
+  // a gold crown over a tooth in the tooth's own teal; a sky-blue sweat drop; a gold crescent on the mosque
+  'tooth-crown': { colors: { c2: '#2CCDB6', c3: '#2CCDB6' } },
+  worried: { colors: { c3: '#4EA8FF' } },
+  mosque: { colors: { c3: '#FFC53D' } },
 }
 
 const PEOPLE = /^avatar-(man|woman|person|boy|girl|baby|teen|older)/
