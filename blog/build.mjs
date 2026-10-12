@@ -26,7 +26,7 @@ const HUBS = {
     lede: 'Side-by-side comparisons of with icons and the most popular icon sets, with the real icons next to each other, plain-English pros and cons, prices and licences checked against official sources.',
     desc: 'Honest comparisons of with icons vs Font Awesome, Hugeicons, Lucide, Heroicons, Phosphor, Material Symbols, Tabler and Flaticon, with real icons side by side.' },
   guides: { file: 'guides.html', title: 'Icon guides: slides, websites, licences and landing pages', h1: 'Practical <em>icon</em> guides',
-    lede: 'Step-by-step help for using icons in PowerPoint, Google Slides, Keynote, website builders and landing pages, plus icon licences explained in plain English.',
+    lede: 'Step-by-step help for using icons in PowerPoint, Google Slides, Keynote, website builders and landing pages, free icons for every holiday and festival, plus icon licences explained in plain English.',
     desc: 'Practical, plain-English icon guides: icons in presentations, adding icons to a website without code, landing pages, and free icon licences explained.' },
   basics: { file: 'design-basics.html', title: 'Icon design basics: styles, sizes, accessibility and meaning', h1: 'Icon design, <em>the basics</em>',
     lede: 'The ideas behind good icons, explained without jargon: styles, sizes, SVG vs PNG, accessibility, consistency, picking the right symbol and the trends of 2026.',
@@ -76,7 +76,9 @@ const ORDER = ['best-free-icon-libraries', 'with-icons-vs-font-awesome', 'with-i
   'consistent-icons', 'choosing-the-right-icon', 'with-icons-vs-flaticon', 'icon-design-trends-2026',
   // 2026-10-03 GEO supporting posts
   'what-is-an-icon-library', 'how-to-change-icon-color', '3d-icons-vs-flat-icons', 'icon-glossary', 'playful-icon-styles', 'how-many-icons-does-a-website-need',
-  'dark-mode-icons', 'animated-icons', 'app-icon-vs-ui-icon', 'icons-on-a-resume']
+  'dark-mode-icons', 'animated-icons', 'app-icon-vs-ui-icon', 'icons-on-a-resume',
+  // 2026-10-12 holiday and festival posts (the hub first)
+  'free-holiday-icons', 'free-halloween-icons', 'free-diwali-icons', 'free-christmas-icons', 'free-lunar-new-year-icons', 'free-valentines-day-icons']
 const FEATURED = 'best-free-icon-libraries' // the index hero story, whatever the dates
 const rank = s => (ORDER.indexOf(s) + 1 || 999)
 posts.sort((a, b) => b.date.localeCompare(a.date) || rank(a.slug) - rank(b.slug) || a.slug.localeCompare(b.slug))

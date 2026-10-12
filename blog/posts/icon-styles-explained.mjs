@@ -165,6 +165,7 @@ ${ul([
   `<strong>${L.style('lunar', 'Lunar')}:</strong> lucky red lacquer and gold for Lunar New Year, with no text or characters.`,
   `<strong>${L.style('valentine', 'Valentine')}:</strong> cute pink-to-red shapes with polka dots and floating hearts.`,
 ])}
+${p(`Our ${L.post('free-holiday-icons', 'guide to free holiday and festival icons')} shows each one in use, with a calendar of when to bring them out.`)}
 
 ${h2('Why should creative styles be used at 32px or larger?')}
 ${p('Creative styles have extra details: highlights, hatching, construction lines, stitches, little faces. At large sizes those details are the whole point. At tiny sizes they get squeezed into a few pixels and turn into fuzz. Here is the blueprint style at five sizes:')}
