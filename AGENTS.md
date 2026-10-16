@@ -25,11 +25,11 @@ forge/styles/<style>.mjs    one deterministic renderer per style, in this order 
                             (palette colours are var(--with-<style>-<role>, #hex), ink stays currentColor)
 forge/dynamic/<name>.mjs    live icon generators: params -> skeleton, rendered by every style (forge/DYNAMIC.md);
                             ships as @withicons/dynamic (emit-dynamic) and site/vendor/dynamic/dynamic.js (live.html)
-forge/kernel/**             geometry + boolean ops shared by renderers
-forge/lib/load.mjs          loads/prepares skeletons
 forge/loaders/<name>.mjs    animated loaders (50: common / creative / festival): parts = skeletons + CSS keyframe motion, drawn by
                             every style; _morphs.mjs = icon morph presets; contract: forge/LOADERS.md; compiler forge/lib/loader-compile.mjs;
                             ships as @withicons/loaders (emit-loaders) + site/loaders.html (Loader Studio) + MCP get_loader
+forge/kernel/**             geometry + boolean ops shared by renderers
+forge/lib/load.mjs          loads/prepares skeletons
 forge/lib/emit-*.mjs        one emitter per package -> packages/*/dist (generated, gitignored); emit-motion -> packages/motion
                             emit-core also exports the shared helpers: STYLE_ORDER, flattenVars, countText, paletteDoc, motionDoc
 forge/tools/site-data.mjs   site data (site/data/meta.js, style-<name>.js); build.mjs calls its build(ctx)
@@ -60,11 +60,11 @@ node forge/tools/check-palettes.mjs [names] [--quiet] # validate forge/palettes/
 node forge/tools/preview.mjs --styles line,solid --icons home,lock --size 56 --small --out .preview/<agent>-x.png   # add --dark for palette styles
 node forge/tools/serve.mjs               # http://localhost:4321 (site/)
 npm test --workspaces --if-present       # package tests (incl. packages/search)
-node scripts/skill-sync.mjs [--check]    # regenerate the skill's icons.md, palette + motion tables, counts, site/skill/SKILL.md
-node scripts/deploy.mjs --dry-run        # deploy plan; never run without --dry-run unless asked
 node forge/tools/check-loaders.mjs [names] [--styles a,b]   # validate loader specs, compile every style, size, determinism
 node forge/tools/preview-loaders.mjs --loaders spinner,orbit --styles line,glass --frames 8   # frame strips (motion on a PNG)
 node forge/lib/emit-loaders.mjs [--styles line,glass]        # @withicons/loaders + site loader files only (~2 min)
+node scripts/skill-sync.mjs [--check]    # regenerate the skill's icons.md, palette + motion tables, counts, site/skill/SKILL.md
+node scripts/deploy.mjs --dry-run        # deploy plan; never run without --dry-run unless asked
 node scripts/publish.mjs --dry-run       # npm pack check (warns if v<version> is already tagged elsewhere); never publish unless asked
 ```
 
