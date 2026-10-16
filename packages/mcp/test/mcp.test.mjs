@@ -27,9 +27,9 @@ describe('stdio server (SDK client)', () => {
   })
   after(async () => { await client.close() })
 
-  test('lists the ten tools', async () => {
+  test('lists the eleven tools', async () => {
     const { tools } = await client.listTools()
-    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'export_icon', 'get_icon', 'list_categories', 'list_palettes', 'list_styles', 'preview_icons', 'recommend_styles', 'resolve_icon', 'search_icons'])
+    assert.deepEqual(tools.map(t => t.name).sort(), ['animate_icon', 'export_icon', 'get_icon', 'get_loader', 'list_categories', 'list_palettes', 'list_styles', 'preview_icons', 'recommend_styles', 'resolve_icon', 'search_icons'])
     const x = tools.find(t => t.name === 'export_icon')
     for (const k of ['name', 'format', 'motion', 'background', 'out_dir', 'to', 'fps']) assert.ok(x.inputSchema.properties[k], k)
     assert.match(x.description, /gif/)
@@ -517,7 +517,7 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.equal(JSON.parse(init.body).result.serverInfo.name, 'withicons')
     const list = await handler(rpc(2, 'tools/list', {}))
     const tools = JSON.parse(list.body).result.tools
-    assert.equal(tools.length, 10)
+    assert.equal(tools.length, 11)
     // remote: no out_dir (nothing to write to), raster / animated formats answer with the command
     assert.ok(!tools.find(t => t.name === 'export_icon').inputSchema.properties.out_dir)
     const call = await handler(rpc(3, 'tools/call', { name: 'search_icons', arguments: { query: 'throw away' } }))
@@ -613,4 +613,15 @@ describe('Lambda handler (Function URL payload v2)', () => {
     assert.ok(JSON.parse((await handler(ev('GET', '/'))).body).icons >= 300)
     assert.equal((await handler(ev('GET', '/wat'))).statusCode, 404)
   })
+})
+
+test('get_loader: a query becomes one URL and one line of code', async () => {
+  const { getLoader, findLoaders } = await import('../src/loaders-tool.mjs')
+  const r = getLoader({ query: 'ai thinking', style: 'glass' })
+  assert.ok(findLoaders('ai thinking').length >= 1)
+  assert.match(r.url, /\/dist\/svg\/glass\/[a-z-]+\.svg$/)
+  assert.match(r.code, /^<img src="https:\/\/cdn\.jsdelivr\.net\/npm\/@withicons\/loaders@latest\/dist\/svg\/glass\//)
+  const m = getLoader({ morph: ['package', 'truck', 'home'], format: 'html', effect: 'slide-left' })
+  assert.match(m.code, /<with-loader morph="package,truck,home" effect="slide-left"/)
+  assert.throws(() => getLoader({ name: 'spinner', style: 'no-such-style' }))
 })

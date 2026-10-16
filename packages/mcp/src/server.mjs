@@ -3,6 +3,7 @@ import { McpServer, ResourceTemplate } from '@modelcontextprotocol/sdk/server/mc
 import { z } from 'zod'
 import { exportIcon, EXPORT_FORMATS } from './export-tool.mjs'
 import { registerPreviewTool } from './preview-tool.mjs'
+import { registerLoaderTool } from './loaders-tool.mjs'
 import { FORMATS, IconError, data, getIcon, info, listCategories, listStyles, resolveIcon, searchIcons, svgOf, checkStyle, resolveName, animateIcon, listMotion, motionData, TRIGGERS, MOTION_FORMATS, listPalettes, PALETTE_ROLES, recommendStyles, styleGroups, styleUses, iconMotions, styleColours, brandExactness } from './lib.mjs'
 
 export const SERVER_NAME = 'withicons'
@@ -41,6 +42,7 @@ Colours: ${cf.one.length ? `${cf.one.join(', ')} draw in one colour (currentColo
 `Each icon has 20-30 colour palettes picked for it: list_palettes(name, style) shows them; get_icon / export_icon take palette: "<id>" or colors: { c1, c2, ink, ... }. ` +
 `Brand colours: theme: { primary, secondary?, tertiary?, ink? } (hex) puts them on each icon's own parts, largest first, in any style (per_icon on export_icon colours single icons); the hex shows exactly in ${cf.exact.join(', ')}, shaded in the rest.
 Animation: animate_icon(name, trigger loop|hover|once|inview|swap, format, style) returns code for the optional @withicons/motion package (loops, hover effects, icon-to-icon swaps); 3D styles (clay, glass, liquid, chrome, soft3d, luxe, skeuo ...) play it in 3D and soft3d returns 3-5 moves per icon.
+Loading states: get_loader(query or name, style) returns an animated loader (spinners, dots, creative, festival, icon morph sequences) as one URL / one line of code (@withicons/loaders, no JS).
 Whole styles as files: https://withicons.com/downloads/with-icons-<style>.zip (every SVG + an offline viewer) and with-icons-all.zip.
 Files: export_icon(name, style, format) makes files: svg, pdf, png, pptx, docx, favicons, app assets, Lottie, and animated ones for slides and docs: gif (plays in PowerPoint, Keynote, Google Slides, email, chat), apng, animated-svg, pptx-animated (a slide with the moving icon). Set background to the slide colour for GIFs. ${remote ? 'This hosted server makes PNG, every still format, animated-svg and Lottie itself and returns the files inline (base64 resources named by filename); gif, apng, pptx-animated and pptx-sheet come back as the exact `npx withicons export ...` command to run.' : 'Pass out_dir to save files to disk.'}
 ${slideRecipe(remote)}
@@ -264,6 +266,7 @@ export function createServer(opts = {}) {
   }, safe(a => exportIcon(a, { remote })))
 
   registerPreviewTool(server, { remote })
+  registerLoaderTool(server, { json, safe, ro })
 
   // icon://<style>/<name>.svg
   server.registerResource('icon', new ResourceTemplate('icon://{style}/{name}.svg', {

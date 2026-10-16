@@ -10,7 +10,7 @@
 //
 // Packages (lockstep, one version): core core-plus soft3d holiday react vue svelte angular solid web web-plus classes classes-plus static
 // static-plus search mcp
-// motion dynamic + the `withicons` CLI. core-plus, classes-plus, web-plus, static-plus, soft3d and holiday are companions holding the newest styles (jsDelivr's
+// motion dynamic loaders + the `withicons` CLI. core-plus, classes-plus, web-plus, static-plus, soft3d and holiday are companions holding the newest styles (jsDelivr's
 // 150 MB package limit): core-plus, soft3d and holiday depend on core, web on web-plus; classes goes out after its companions, since its loader links them.
 // The run fails when one of them is missing or on another version, and (outside --dry-run, where it warns) when the
 // git tag v<version> already exists on a different commit: that version was released with other content, so bump first.
@@ -50,7 +50,7 @@ const only = opt('only')?.split(',')
 const names = new Set(pkgs.map(p => p.json.name))
 // every package of the lockstep release; a missing one means its emitter did not run (node forge/build.mjs)
 const EXPECTED = ['@withicons/core', '@withicons/core-plus', '@withicons/soft3d', '@withicons/holiday', '@withicons/classes-plus', '@withicons/web-plus', '@withicons/static-plus', '@withicons/react', '@withicons/vue', '@withicons/svelte', '@withicons/angular', '@withicons/solid',
-  '@withicons/web', '@withicons/classes', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', '@withicons/dynamic', 'withicons']
+  '@withicons/web', '@withicons/classes', '@withicons/static', '@withicons/search', '@withicons/mcp', '@withicons/motion', '@withicons/dynamic', '@withicons/loaders', 'withicons']
 const missing = EXPECTED.filter(n => !names.has(n))
 
 // --- order: every internal dependency (dependencies, peer, optional, bundled) before its dependents, the `withicons`

@@ -1039,6 +1039,14 @@
         live.href = first.getAttribute('href').replace(/icons.html.*$/, 'live.html'); live.innerHTML = 'Live icons<span class="nav-new">New</span>'
         if (/live.html$/.test(sitePath(live.getAttribute('href'))) && first.nextSibling) nav.insertBefore(live, first.nextSibling)
       }
+      // ... and the Loaders link after it (pages generated before loaders existed)
+      var liveA = $('a[href$="live.html"]', nav)
+      if (liveA && !$('a[href$="loaders.html"]', nav)) {
+        var ld = doc.createElement('a'); ld.className = 'nav-loaders'
+        ld.href = liveA.getAttribute('href').replace(/live\.html.*$/, 'loaders.html'); ld.innerHTML = 'Loaders<span class="nav-new">New</span>'
+        $$('.nav-new', liveA).forEach(function (t) { t.parentNode.removeChild(t) })
+        nav.insertBefore(ld, liveA.nextSibling)
+      }
       var links = $$('a', nav)
       links.forEach(function (a, i) { a.style.setProperty('--style', 'var(--c-' + NAV_STYLE[i % NAV_STYLE.length] + ')') })
       var cur = markCurrent(links)

@@ -261,7 +261,7 @@ async function main() {
   if (!HEADER) HEADER = `<a class="skip-link" href="#main">Skip to content</a>\n<header class="site-header" data-header><a class="logo" href="index.html" aria-label="with icons, home"><span class="logo-morph" aria-hidden="true" data-logo-morph></span><span class="logo-type"><span class="logo-words"><span class="logo-with">with</span><span class="logo-icons">icons</span></span><span class="logo-by">powered by <b>evergrow</b></span></span></a><nav class="site-nav" aria-label="Primary"><a href="icons.html">Icons</a><a href="live.html" class="nav-live">Live icons<span class="nav-new">New</span></a><a href="guides/index.html">How to use</a><a href="developers.html">Developers</a><a href="ai.html">For AI</a><a href="about.html">About</a></nav><div class="site-actions"><button class="search-trigger" type="button" data-search-open aria-label="Search icons"><kbd>/</kbd></button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode"></button><a class="cta" href="icons.html">Browse icons</a></div></header>`
   if (!FOOTER) FOOTER = `<footer class="site-footer"><div class="foot-inner"><div class="foot-base"><span>© 2026 with icons · MIT License</span><a class="evergrow-link" href="https://withevergrow.com"><span data-evergrow-mark></span>Powered by Evergrow</a></div></div></footer>`
   HEADER = HEADER.replace(/ aria-current="[^"]*"/g, '')
-  if (!/href="live\.html"/.test(HEADER)) HEADER = HEADER.replace(/(<a href="icons\.html">Icons<\/a>)/, '$1<a href="live.html" class="nav-live">Live icons<span class="nav-new">New</span></a>')
+  if (!/href="live\.html"/.test(HEADER)) HEADER = HEADER.replace(/(<a href="icons\.html">Icons<\/a>)/, '$1<a href="live.html" class="nav-live">Live icons</a><a href="loaders.html" class="nav-loaders">Loaders<span class="nav-new">New</span></a>')
   HEADER = HEADER.replace(/<a href="live\.html"/, '<a href="live.html" aria-current="true"')
   FOOTER = FOOTER.replace(/ aria-current="[^"]*"/g, '')
   const prefixed = (html, pre) => !pre ? html : html.replace(/(href|src|srcset)="(?!https?:|#|\/|mailto:|data:)([^"]*)"/g, (m, k, v) => `${k}="${k === 'srcset' ? v.split(/,\s*/).map(x => pre + x).join(', ') : pre + v}"`)
@@ -354,6 +354,25 @@ ${scripts}<script src="${P}js/site.js" defer></script>
   const SB_GROUPS = STYLE_GROUPS.map(g => ({ ...g, styles: g.styles.filter(s => STYLE[s]) })).filter(g => g.styles.length)
   const styleSwitcher = (sample, o = {}) => `<div class="lv-sb${o.cls ? ' ' + o.cls : ''}" data-lv-styles data-icon="${esc(sample)}" data-label="${esc(o.label || 'Style')}">${o.gallery ? `<a class="lv-sb-nojs" href="#styles">See all ${NS} styles</a>` : ''}</div>`
 
+  // a band that leads to the Loaders (forge/LOADERS.md): plain <img> of the standalone loader files (no script needed)
+  const LOADER_BAND = () => {
+    let cat = []
+    try { cat = JSON.parse(fs.readFileSync(path.join(ROOT, 'packages', 'loaders', 'dist', 'catalog.json'), 'utf8')) } catch { return '' }
+    const have = new Set(cat.map(l => l.name))
+    const picks = [['spinner', 'glass'], ['ai-sparkle', 'kawaii'], ['orbit', 'clay'], ['diya', 'utsav'], ['ghost', 'halloween'], ['dots-bounce', 'dock'], ['morph-upload', 'duo'], ['hearts', 'valentine']]
+      .filter(([n, s]) => have.has(n) && fs.existsSync(path.join(ROOT, 'site', 'loaders', 'svg', s, n + '.svg'))).slice(0, 6)
+    if (!picks.length) return ''
+    const n = cat.filter(l => l.group !== 'morph').length
+    return `<section class="section lv-ldb-sec" aria-labelledby="h-ldb">
+  <div class="wrap lv-ldb">
+    <div class="lv-ldb-copy"><p class="eyebrow">New: loaders</p><h2 id="h-ldb" class="h2">Live icons that never sit still.</h2>
+      <p class="lede">${n} animated loaders (everyday spinners, creative little stories, festival specials) and icon morph sequences, in every style. Each is one small SVG that animates itself: no code.</p>
+      <a class="btn btn-ink" href="loaders.html">Open the Loader Studio ${arrow}</a></div>
+    <div class="lv-ldb-row">${picks.map(([nm, st]) => `<a class="lv-ldb-t" href="loaders.html?l=${nm}&amp;s=${st}#studio"><img src="loaders/svg/${st}/${nm}.svg" width="56" height="56" alt="${esc(cat.find(l => l.name === nm).title)} loader, ${st} style" loading="lazy" decoding="async"></a>`).join('')}</div>
+  </div>
+</section>
+`
+  }
   /* ───────────── the library: site/live.html ───────────── */
   const HERO = [
     { n: 'calendar-date', s: 'luxe', p: { day: 17, month: 'MAR' }, say: ['day', 'month'] },
@@ -446,7 +465,7 @@ ${sections}
     <p class="muted"><button type="button" class="lv-linkbtn" data-lv-clear>Clear the search</button> or <a href="icons.html" data-lv-all>search the static icons</a>.</p>
   </div>
 </div>
-<section class="section lv-how">
+${LOADER_BAND()}<section class="section lv-how">
   <div class="wrap">
     <p class="eyebrow">How it works</p>
     <h2 class="h2">Three steps. <span class="hand lv-accent">No design tools.</span></h2>

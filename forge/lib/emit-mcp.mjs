@@ -20,7 +20,7 @@ import { fill } from './emit-search.mjs'
 
 // search writes the index we ship; motion (when present) writes the animation specs we expose;
 // palettes writes the per-icon colour palettes (packages/core/dist/palettes) we expose
-export const after = ['search', 'motion', 'palettes']
+export const after = ['search', 'motion', 'palettes', 'loaders']
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 
 // skills/with-icons/** -> packages/cli/src/skill-data.mjs (strings), so `withicons init` / `withicons skill` work offline

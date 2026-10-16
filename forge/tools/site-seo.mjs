@@ -162,6 +162,9 @@ async function main() {
   // the headline total, "over 25,000": every icon in every style plus the live icons (forge/dynamic generators, each in every
   // style), rounded DOWN to a whole 5,000 (same rule as site.js counts().over and site-data.mjs pageCounts)
   const N_LIVE = (() => { try { return fs.readdirSync(path.join(ROOT, 'forge', 'dynamic')).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).length } catch { return 0 } })()
+  // animated loaders (forge/LOADERS.md): the catalogue emit-loaders wrote, when present
+  const LOADERS = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'packages', 'loaders', 'dist', 'catalog.json'), 'utf8')) } catch { return [] } })()
+  const LOADERS_MAIN = LOADERS.filter(l => l.group !== 'morph'), LOADER_MORPHS = LOADERS.filter(l => l.group === 'morph')
   const overText = () => 'over ' + (Math.floor((ICONS.length + N_LIVE) * NS / 5000) * 5000).toLocaleString('en-US')
   // Choosing a style (site/STYLE-PICKER.md): FEATURED (the short row), USES ("What are you making?") and NEW_STYLES
   // have one source of truth, site/js/site.js, read here the same way style-groups.mjs reads GROUPS.
@@ -455,7 +458,7 @@ async function main() {
     </span>
   </a>
   <nav class="site-nav" aria-label="Primary">
-    <a href="icons.html">Icons</a><a href="live.html" class="nav-live">Live icons<span class="nav-new">New</span></a><a href="guides/index.html">How to use</a>
+    <a href="icons.html">Icons</a><a href="live.html" class="nav-live">Live icons</a><a href="loaders.html" class="nav-loaders">Loaders<span class="nav-new">New</span></a><a href="guides/index.html">How to use</a>
     <a href="developers.html">Developers</a><a href="ai.html">For AI</a><a href="about.html">About</a>
   </nav>
   <div class="site-actions">
@@ -1564,7 +1567,24 @@ A separate set of live icons draws a value inside the icon (a calendar's date, a
 
 React / Vue: \`import { LiveIcon } from '${SCOPE}/dynamic/react'\` (or \`/vue\`), then \`<LiveIcon name="calendar-date" today label="Today" />\`. Pure function: \`render(name, params, style)\` from \`${SCOPE}/dynamic\` never reads the clock (pass \`now()\`). Vite: set \`worker: { format: 'es' }\` (the default iife worker inlines every style). React: change props to animate, never the \`key\` (a remount jumps). Every live icon: ${BASE}/live.html
 
-## Props (identical in React, Vue, Svelte, Angular, Solid)
+${LOADERS.length ? `## Loaders (\`${SCOPE}/loaders\`)
+
+${LOADERS_MAIN.length} animated loaders (${['common', 'creative', 'festival'].map(g => `${LOADERS_MAIN.filter(l => l.group === g).length} ${g === 'common' ? 'everyday' : g}`).join(', ')}) and ${LOADER_MORPHS.length} morph sequences (library icons that keep turning into one another), each one self-contained animated SVG in all ${NS} styles. No JavaScript: CSS transform/opacity only, slows (never freezes) for reduced motion, labelled "Loading".
+
+\`\`\`html
+<img src="${CDN}/${SCOPE}/loaders@latest/dist/svg/<style>/<name>.svg" width="32" height="32" alt="Loading">
+<script src="${CDN}/${SCOPE}/loaders@latest/dist/cdn/loaders.js"></script>
+<with-loader name="orbit" variant="glass" color="#7c5cff" speed="1.2"></with-loader>
+<with-loader morph="file,cloud-upload,check-circle" effect="slide-up"></with-loader>   <!-- any library icons -->
+\`\`\`
+
+\`el.done('check-circle')\` turns a running \`<with-loader>\` into a finished icon. React / Vue: \`import { Loader, Morph } from '${SCOPE}/loaders/react'\` (or \`/vue\`). JS: \`svg(name, { style, size, color, speed })\`, \`search('ai thinking')\`, \`url(name, style)\`, \`morphAsync(['package', 'truck', 'home'], { effect })\`. Inline speed and pause: CSS \`--wl-speed: 2\`, \`--wl-state: paused\`. Morph effects: bloom, spin, flip, slide-up, slide-left, drop, zoom, fade. Catalogue: ${CDN}/${SCOPE}/loaders@latest/dist/catalog.json. Studio: ${BASE}/loaders.html
+
+| name | group | says |
+|---|---|---|
+${LOADERS.map(l => `| \`${l.name}\` | ${l.group} | ${(l.intent || l.description).replace(/\|/g, '/')} |`).join('\n')}
+
+` : ''}## Props (identical in React, Vue, Svelte, Angular, Solid)
 
 - \`size\` number | string, default 24
 - \`color\` string, default \`currentColor\`
@@ -1620,7 +1640,7 @@ This is the short index. The full reference (usage, every style, motion, live ic
 ## Find an icon
 
 - Search API (JSON, understands synonyms and typos): \`${BASE}/api/search?q=<words>\`; also \`/api/icon/<name>?style=&format=\`, \`/api/icon/<name>.svg\`, \`/api/palettes/<name>\`, \`/api/motion/<name>\`.
-- MCP server: remote \`${BASE}/mcp\` (Streamable HTTP, about 1,000 requests per IP per 5 minutes), local and unlimited \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, resolve_icon, animate_icon, export_icon, preview_icons, list_palettes, list_styles, list_categories.
+- MCP server: remote \`${BASE}/mcp\` (Streamable HTTP, about 1,000 requests per IP per 5 minutes), local and unlimited \`npx -y ${SCOPE}/mcp\`. Tools: search_icons, get_icon, resolve_icon, animate_icon, export_icon, preview_icons, get_loader, list_palettes, list_styles, list_categories.
 - Set up an AI coding tool (skill + MCP): \`npx withicons init\` (Claude Code, Codex, Cursor, OpenCode, VS Code, Windsurf; \`--dry-run\` first).
 - CLI: \`npx withicons search "<words>"\`, \`npx withicons get <name> --style <style> --format react\`.
 - Static data (no server): ${BASE}/icons.json and \`${BASE}/icons/<name>.html\`. Library: \`${BASE}/icons.html?q=<words>\`.
@@ -1632,7 +1652,8 @@ This is the short index. The full reference (usage, every style, motion, live ic
 - Icon classes: \`<script src="${CLASSES_LOADER}" defer></script>\` then \`<i class="with with-home" aria-hidden="true"></i>\`.
 - SVG sprites and files: \`npm i ${SCOPE}/static\`; one SVG: \`${BASE}/api/icon/<name>.svg?style=<style>\`.
 - Animation: \`${SCOPE}/motion\` (${Object.keys(MOTION).length} icons with a tuned loop and hover; ${MOTION_PRESETS.length} presets for any icon).
-- Live icons (a date, time, count or label you set): \`${SCOPE}/dynamic\`, ${BASE}/live.html.
+- Live icons (a date, time, count or label you set): \`${SCOPE}/dynamic\`, ${BASE}/live.html.${LOADERS.length ? `
+- Loaders (${LOADERS_MAIN.length} animated loaders + ${LOADER_MORPHS.length} icon morph sequences, one SVG each, no JS): \`<img src="${CDN}/${SCOPE}/loaders@latest/dist/svg/<style>/<name>.svg" width="32" alt="Loading">\`. Names: ${LOADERS.map(l => l.name).join(', ')}. Themeable tag, React, Vue: ${BASE}/loaders.html` : ''}
 - Files for slides, print, email and social: \`npx withicons export <name> --format svg-flat,png,pdf,gif,pptx-animated\`, or the Copy image / Download buttons on each icon page.
 - Accessibility: icons are \`aria-hidden\` by default; put \`aria-label\` on icon-only buttons; \`title\` (components) or \`label\` (web component) for a meaningful standalone icon.
 

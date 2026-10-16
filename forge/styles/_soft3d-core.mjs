@@ -210,7 +210,12 @@ export function build(icon, lite = 0) {
   const sh = { cx: (sb[0] + sb[2]) / 2, cy: (sb[1] + sb[3]) / 2, rx: (sb[2] - sb[0]) / 2 * 0.98 + 0.3, ry: Math.max((sb[3] - sb[1]) / 2, 0.7) * 1.05 + 0.25 }
   if (mode === 'front') { sh.cy += 0.55; sh.ry = Math.max(0.9, (all[2] - all[0]) * 0.09); sh.rx = (all[2] - all[0]) * 0.5 }
   sample.push([sh.cx - sh.rx, sh.cy - sh.ry], [sh.cx + sh.rx, sh.cy + sh.ry])
-  const fb = bboxOf([[sample]])
+  // loader parts (forge/LOADERS.md) share one fixed frame, the whole 24 grid, so parts drawn one by one line up
+  const fb = icon && icon.category === 'loader' ? (() => {
+    const ref = []
+    for (const x of [2, 22]) for (const y of [2, 22]) for (const z of [0, mode === 'object' ? D : V.DF]) ref.push(cam.P(x, y, z))
+    return bboxOf([[ref]])
+  })() : bboxOf([[sample]])
   const k = Math.min(V.KMAX, V.W / Math.max(fb[2] - fb[0], 0.01), V.H / Math.max(fb[3] - fb[1], 0.01))
   const ox = 12 - (fb[0] + fb[2]) / 2 * k, oy = 12 - (fb[1] + fb[3]) / 2 * k
   const P = (x, y, z) => { const q = cam.P(x, y, z); return [q[0] * k + ox, q[1] * k + oy] }

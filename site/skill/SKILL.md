@@ -26,6 +26,7 @@ the file a rule links to before going beyond the rule.
 | Node, name lookup | `npm i @withicons/core` | `resolve('bin').name` is `'trash'` |
 | animation (also 3D) | `npm i @withicons/motion` | section 6 |
 | live icons (date, count …) | `npm i @withicons/dynamic` | section 8 |
+| loaders, spinners, loading states | `<img src>` of a CDN SVG, or `npm i @withicons/loaders` | section 9 |
 
 Every framework package, `<with-icon>` and the class loader carry all 34 styles (they fetch companions themselves).
 Only raw files are split: the newest styles' SVGs and node data are in `@withicons/core-plus`, `soft3d` and `holiday`,
@@ -188,7 +189,28 @@ Pure function: `render(name, params, style)` from `@withicons/dynamic` (never re
 value by setting the attribute or prop; in React never change the `key` to replay. Vite needs `worker: { format: 'es' }`.
 Every live icon with its params, sizes and recipes: [reference/live.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/live.md).
 
-## 9. Pitfalls
+## 9. Loaders (loading states, `@withicons/loaders`)
+
+Animated loaders in every style: everyday spinners and dots, creative ones (ai-sparkle, rocket, coffee, atom …),
+festival ones (diya, fireworks, ghost, lantern …) and morph sequences of library icons (file → cloud → check). Each is one
+self-contained SVG animated with CSS: no JavaScript, 60 fps, slows for reduced motion, labelled "Loading". Cheapest form:
+
+```html
+<img src="https://cdn.jsdelivr.net/npm/@withicons/loaders@latest/dist/svg/line/spinner.svg" width="32" height="32" alt="Loading">
+```
+
+Colour, speed, custom sequences, a finished state: the tag (or `Loader` / `Morph` from `@withicons/loaders/react` or `/vue`).
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@withicons/loaders@latest/dist/cdn/loaders.js"></script>
+<with-loader name="orbit" variant="glass" color="#7c5cff" speed="1.2"></with-loader>
+<with-loader morph="file,cloud-upload,check-circle" effect="slide-up"></with-loader>  <!-- then el.done() -->
+```
+
+Pick by what is loading (MCP `get_loader(query)` answers with the URL and code). Every name and what it says:
+[reference/loaders.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/loaders.md).
+
+## 10. Pitfalls
 
 - The generic `<Icon name=…>` renders line at once and loads other styles on first use (React/Solid: wrap in `<Suspense>`; sync SSR: `await preloadStyles(...)` first): only for truly dynamic names; otherwise named imports.
 - `<img src="….svg">` cannot follow `currentColor` and renders black; inline, use a component, sprite or classes.
@@ -203,7 +225,7 @@ Every live icon with its params, sizes and recipes: [reference/live.md](https://
 
 Details for each: [reference/frameworks.md](https://github.com/withevergrow/withicons/blob/main/skills/with-icons/reference/frameworks.md).
 
-## 10. From a chat assistant (no tools, no install)
+## 11. From a chat assistant (no tools, no install)
 
 Briefs from withicons.com's "Ask AI" buttons start by sending you here and carry a `MY TASK:` line (find, code, set,
 fit, slides). Do that task, search before naming anything, link `https://withicons.com/icons/<name>.html` for every

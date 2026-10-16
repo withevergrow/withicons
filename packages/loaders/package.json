@@ -1,0 +1,101 @@
+{
+  "name": "@withicons/loaders",
+  "version": "0.5.0",
+  "description": "50 animated loaders (common, creative, festival) + icon morph sequences in all 34 with icons styles. One self-contained SVG each: works as <img>, inline, <with-loader>, React or Vue. Pure CSS animation, zero dependencies.",
+  "license": "MIT",
+  "author": {
+    "name": "with icons — powered by Evergrow",
+    "url": "https://withevergrow.com"
+  },
+  "homepage": "https://withicons.com/loaders.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withevergrow/withicons.git",
+    "directory": "packages/loaders"
+  },
+  "bugs": {
+    "url": "https://github.com/withevergrow/withicons/issues"
+  },
+  "keywords": [
+    "loader",
+    "loaders",
+    "spinner",
+    "spinners",
+    "loading",
+    "loading-indicator",
+    "activity-indicator",
+    "animated-svg",
+    "svg-animation",
+    "css-animation",
+    "skeleton",
+    "progress",
+    "morph",
+    "icons",
+    "withicons",
+    "with-icons",
+    "web-components",
+    "react",
+    "vue",
+    "reduced-motion",
+    "ai-agents"
+  ],
+  "type": "module",
+  "sideEffects": [
+    "./dist/element.js",
+    "./dist/styles/*.js",
+    "./dist/index.js",
+    "./dist/react.js",
+    "./dist/vue.js"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./element": {
+      "types": "./dist/element.d.ts",
+      "default": "./dist/element.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "default": "./dist/vue.js"
+    },
+    "./styles/*": "./dist/styles/*.js",
+    "./svg/*": "./dist/svg/*",
+    "./catalog.json": "./dist/catalog.json",
+    "./cdn": "./dist/cdn/loaders.js",
+    "./package.json": "./package.json"
+  },
+  "jsdelivr": "./dist/cdn/loaders.js",
+  "unpkg": "./dist/cdn/loaders.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "vue": ">=3"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  }
+}

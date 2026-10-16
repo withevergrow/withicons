@@ -131,7 +131,7 @@ export function rawSvg(name, style = 'line', size = 24) {
 }
 
 export function header(p, current) {
-  const nav = [['icons.html', 'Icons', 'icons'], ['live.html', 'Live icons<span class="nav-new">New</span>', 'live'], ['guides/index.html', 'How to use', 'guides'], ['developers.html', 'Developers', 'developers'], ['ai.html', 'For AI', 'ai'], ['about.html', 'About', 'about']]
+  const nav = [['icons.html', 'Icons', 'icons'], ['live.html', 'Live icons', 'live'], ['loaders.html', 'Loaders<span class="nav-new">New</span>', 'loaders'], ['guides/index.html', 'How to use', 'guides'], ['developers.html', 'Developers', 'developers'], ['ai.html', 'For AI', 'ai'], ['about.html', 'About', 'about']]
   return `<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header>
   <a class="logo" href="${p}index.html" aria-label="with icons, home">

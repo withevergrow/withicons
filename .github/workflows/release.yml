@@ -53,6 +53,7 @@ jobs:
       - run: node forge/tools/check.mjs
       - run: node forge/tools/check-motion.mjs
       - run: node forge/tools/check-dynamic.mjs   # Live icons (@withicons/dynamic): every generator x every style
+      - run: node forge/tools/check-loaders.mjs --quiet   # Loaders (@withicons/loaders): every loader x every style
       - run: node forge/tools/check-palettes.mjs --quiet
       - run: node scripts/skill-sync.mjs --check
       - run: npm test --workspaces --if-present   # every package, @withicons/dynamic included

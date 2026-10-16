@@ -27,6 +27,9 @@ forge/dynamic/<name>.mjs    live icon generators: params -> skeleton, rendered b
                             ships as @withicons/dynamic (emit-dynamic) and site/vendor/dynamic/dynamic.js (live.html)
 forge/kernel/**             geometry + boolean ops shared by renderers
 forge/lib/load.mjs          loads/prepares skeletons
+forge/loaders/<name>.mjs    animated loaders (50: common / creative / festival): parts = skeletons + CSS keyframe motion, drawn by
+                            every style; _morphs.mjs = icon morph presets; contract: forge/LOADERS.md; compiler forge/lib/loader-compile.mjs;
+                            ships as @withicons/loaders (emit-loaders) + site/loaders.html (Loader Studio) + MCP get_loader
 forge/lib/emit-*.mjs        one emitter per package -> packages/*/dist (generated, gitignored); emit-motion -> packages/motion
                             emit-core also exports the shared helpers: STYLE_ORDER, flattenVars, countText, paletteDoc, motionDoc
 forge/tools/site-data.mjs   site data (site/data/meta.js, style-<name>.js); build.mjs calls its build(ctx)
@@ -59,6 +62,9 @@ node forge/tools/serve.mjs               # http://localhost:4321 (site/)
 npm test --workspaces --if-present       # package tests (incl. packages/search)
 node scripts/skill-sync.mjs [--check]    # regenerate the skill's icons.md, palette + motion tables, counts, site/skill/SKILL.md
 node scripts/deploy.mjs --dry-run        # deploy plan; never run without --dry-run unless asked
+node forge/tools/check-loaders.mjs [names] [--styles a,b]   # validate loader specs, compile every style, size, determinism
+node forge/tools/preview-loaders.mjs --loaders spinner,orbit --styles line,glass --frames 8   # frame strips (motion on a PNG)
+node forge/lib/emit-loaders.mjs [--styles line,glass]        # @withicons/loaders + site loader files only (~2 min)
 node scripts/publish.mjs --dry-run       # npm pack check (warns if v<version> is already tagged elsewhere); never publish unless asked
 ```
 
@@ -99,7 +105,8 @@ real 16/24px (`--small`), on light and `--dark`.
 - **Generated files are not edited by hand**: `packages/*/dist`, `site/data/*`, `site/icons/*.html`, `site/categories/`,
   `site/styles/`, `site/og/`, `sitemap.xml`, `llms*.txt`, `icons.json`, `skills/with-icons/reference/icons.md`,
   `site/skill/SKILL.md`, `packages/motion/dist`, `site/vendor/motion/*`, `site/data/motion.js`, `packages/cli/src/skill-data.mjs`,
-  `packages/mcp/src/data-inline.mjs`. Change the generator and rebuild.
+  `packages/mcp/src/data-inline.mjs`, `packages/loaders/dist`, `packages/loaders/{package.json,README.md}`,
+  `packages/mcp/src/loaders-data.mjs`, `site/data/loaders.js`, `site/vendor/loaders/*`, `site/loaders/svg/*`, `skills/with-icons/reference/loaders.md` (the table). Change the generator and rebuild.
 - **Names**: kebab-case canonical names. `aliases` (3-15) are what people guess. An alias may not equal another icon's name.
   `synonyms` are extra search words. Renaming an icon is a breaking change: keep the old name as an alias.
 - **Brand**: the product is **with icons** (lowercase wordmark), domain withicons.com, "Powered by Evergrow".

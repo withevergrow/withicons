@@ -259,6 +259,23 @@ const motionIconsBody = `# with icons: every icon's tuned animation\n\nGenerated
 outputs.push([path.join(SKILL, 'reference', 'motion-icons.md'), motionIconsBody])
 if (read(motionFile)) outputs.push([motionFile, block(counts(read(motionFile)), 'motion', `${specs.length} icons have a tuned animation (any icon can use any preset). The table (icon, loop, hover, swaps, what it says) is in [motion-icons.md](motion-icons.md); grep it for one icon.\n`)])
 if (read(liveFile)) outputs.push([liveFile, block(counts(read(liveFile)), 'live', liveBody)])
+// loaders (forge/loaders/*.mjs + morph presets): one row each, grouped, from the specs themselves
+const loadersFile = path.join(SKILL, 'reference', 'loaders.md')
+if (read(loadersFile)) {
+  const LC = await import(pathToFileURL(path.join(ROOT, 'forge', 'lib', 'loader-compile.mjs')).href)
+  const ld = [...await LC.loadLoaders(), ...await LC.loadMorphs()]
+  const GT = { common: 'Everyday', creative: 'Creative', festival: 'Festival', morph: 'Morph sequences (library icons, in order)' }
+  const body = `${ld.filter(l => l.group !== 'morph').length} loaders + ${ld.filter(l => l.group === 'morph').length} morph sequences, each in all ${styles.length} styles.
+` +
+    Object.keys(GT).map(g => `
+### ${GT[g]}
+
+| name | says | also |
+|---|---|---|
+` +
+      ld.filter(l => l.group === g).map(l => `| \`${l.name}\` | ${cell(l.morph.length && g === 'morph' ? l.morph.join(' → ') + ': ' + l.intent : l.intent || l.description)} | ${l.aliases.slice(0, 4).join(', ')} |`).join('\n') + '\n').join('')
+  outputs.push([loadersFile, block(counts(read(loadersFile)), 'loaders', body)])
+}
 let stale = 0
 for (const [file, text] of outputs) {
   const cur = read(file)
