@@ -1,0 +1,62 @@
+{
+  "name": "magnet",
+  "category": "objects",
+  "description": "A horseshoe magnet with marked pole tips, for attraction, snapping and sticking, lead magnets and physics.",
+  "aliases": [
+    "horseshoe-magnet",
+    "magnetic",
+    "attract",
+    "attraction",
+    "lead-magnet",
+    "snap-to",
+    "magnetism"
+  ],
+  "tags": [
+    "physics",
+    "attract",
+    "force",
+    "marketing",
+    "snap"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 4.5 A1 1 0 0 1 4.5 3.5 H7.5 A1 1 0 0 1 8.5 4.5 V12 A3.5 3.5 0 0 0 15.5 12 V4.5 A1 1 0 0 1 16.5 3.5 H19.5 A1 1 0 0 1 20.5 4.5 V12 A8.5 8.5 0 0 1 3.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 8 H8.5 M15.5 8 H20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 4.5 A1 1 0 0 1 4.5 3.5 H7.5 A1 1 0 0 1 8.5 4.5 V12 A3.5 3.5 0 0 0 15.5 12 V4.5 A1 1 0 0 1 16.5 3.5 H19.5 A1 1 0 0 1 20.5 4.5 V12 A8.5 8.5 0 0 1 3.5 12 Z"
+  ],
+  "cutouts": [
+    "M3.5 8 H8.5",
+    "M15.5 8 H20.5"
+  ],
+  "synonyms": [
+    "pull",
+    "draw in",
+    "stick",
+    "sticky",
+    "snap",
+    "snapping",
+    "snap to grid",
+    "align",
+    "magnetic field",
+    "north pole",
+    "south pole",
+    "polarity",
+    "physics",
+    "lead generation",
+    "lead gen",
+    "customer attraction",
+    "inbound marketing",
+    "retention",
+    "fridge magnet",
+    "u magnet",
+    "magnit",
+    "magent"
+  ]
+}

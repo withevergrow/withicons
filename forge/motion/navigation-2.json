@@ -1,0 +1,32 @@
+{
+  "name": "navigation-2",
+  "intent": "pushes forward along your heading",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270
+  },
+  "alt": [
+    {
+      "preset": "tilt"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "navigation",
+      "effect": "rotate"
+    },
+    {
+      "to": "compass",
+      "effect": "fade"
+    }
+  ]
+}

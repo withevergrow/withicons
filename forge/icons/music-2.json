@@ -1,0 +1,58 @@
+{
+  "name": "music-2",
+  "category": "media",
+  "description": "Two eighth notes joined by a beam, for music, songs, playlists and audio content.",
+  "aliases": [
+    "music-notes",
+    "beamed-notes",
+    "eighth-notes",
+    "quavers",
+    "double-note",
+    "two-notes",
+    "melody-notes",
+    "beamed-eighth-notes"
+  ],
+  "tags": [
+    "music",
+    "audio",
+    "sound",
+    "song",
+    "media"
+  ],
+  "paths": [
+    {
+      "d": "M9 18 A2.5 2.5 0 1 1 4 18 A2.5 2.5 0 1 1 9 18 Z M19 16 A2.5 2.5 0 1 1 14 16 A2.5 2.5 0 1 1 19 16 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 18 V5.5 L19 3.5 V16",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M9 18 A2.5 2.5 0 1 1 4 18 A2.5 2.5 0 1 1 9 18 Z",
+    "M19 16 A2.5 2.5 0 1 1 14 16 A2.5 2.5 0 1 1 19 16 Z",
+    "M9 5.5 L19 3.5 V5 L9 7 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "song",
+    "melody",
+    "tune",
+    "sound",
+    "audio",
+    "playlist",
+    "track",
+    "sing",
+    "singing",
+    "rhythm",
+    "beat",
+    "sheet music",
+    "concert",
+    "composer",
+    "soundtrack",
+    "ringtone",
+    "karaoke",
+    "musical notes"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "name": "flag-off",
+  "category": "status",
+  "description": "A flag struck through by a slash for unflagging, withdrawing a report or clearing a marker.",
+  "aliases": [
+    "unflag",
+    "flag-slash",
+    "remove-flag",
+    "unflagged",
+    "unreport",
+    "flag-remove",
+    "clear-flag",
+    "no-flag",
+    "unmark"
+  ],
+  "synonyms": [
+    "unflag message",
+    "remove report",
+    "clear marker",
+    "not flagged",
+    "resolved report",
+    "dismiss report",
+    "report removed",
+    "flag off",
+    "hide flag",
+    "mute report",
+    "milestone removed",
+    "cancel flag",
+    "withdraw report"
+  ],
+  "tags": [
+    "flag",
+    "slash",
+    "unflag",
+    "report",
+    "off"
+  ],
+  "paths": [
+    {
+      "d": "M7.3 2.7 C9.03 2.37 10.77 2.63 12.5 3.5 C15 4.75 17.5 4.75 20 3.5 L20 13.5 C19.55 13.72 19.1 13.91 18.65 14.05",
+      "plate": "K"
+    },
+    {
+      "d": "M8 12.6 C7 12.7 6 13 5 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5 21.5 V9.6",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M6.35 2.95 C8.4 2.29 10.45 2.47 12.5 3.5 C15 4.75 17.5 4.75 20 3.5 L20 13.5 C19.23 13.88 18.47 14.15 17.7 14.3 Z",
+    "M9.17 12.57 C7.78 12.5 6.39 12.8 5 13.5 L5 8.4 Z"
+  ],
+  "cutouts": []
+}

@@ -1,0 +1,57 @@
+{
+  "name": "chess",
+  "intent": "the knight hops forward as if making its next move",
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 1
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.4
+    },
+    {
+      "preset": "tada",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chess@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "crown",
+      "effect": "slide-up"
+    },
+    {
+      "to": "trophy",
+      "effect": "fade"
+    }
+  ]
+}

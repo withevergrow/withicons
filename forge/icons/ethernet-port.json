@@ -1,0 +1,60 @@
+{
+  "name": "ethernet-port",
+  "category": "devices",
+  "description": "An RJ45 network socket with its pins and latch notch, for wired internet, LAN ports and network cables.",
+  "aliases": [
+    "rj45",
+    "lan-port",
+    "network-port",
+    "wired-network",
+    "network-jack",
+    "ethernet-jack",
+    "ethernet-socket",
+    "wired-connection"
+  ],
+  "tags": [
+    "network",
+    "port",
+    "wired",
+    "hardware",
+    "connection"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V14.5 A2 2 0 0 1 20 16.5 H17 V18 A2 2 0 0 1 15 20 H9 A2 2 0 0 1 7 18 V16.5 H4 A2 2 0 0 1 2 14.5 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 7.5 V10 M10 7.5 V10 M14 7.5 V10 M18 7.5 V10",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V14.5 A2 2 0 0 1 20 16.5 H17 V18 A2 2 0 0 1 15 20 H9 A2 2 0 0 1 7 18 V16.5 H4 A2 2 0 0 1 2 14.5 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M6 7.5 V10",
+    "M10 7.5 V10",
+    "M14 7.5 V10",
+    "M18 7.5 V10"
+  ],
+  "synonyms": [
+    "lan",
+    "wired",
+    "wired internet",
+    "cable internet",
+    "network cable",
+    "ethernet cable",
+    "cat5",
+    "cat6",
+    "router port",
+    "modem port",
+    "switch port",
+    "patch cable",
+    "internet port",
+    "socket",
+    "plug in cable",
+    "wired lan",
+    "ethernt"
+  ]
+}

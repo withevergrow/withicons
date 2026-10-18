@@ -1,0 +1,44 @@
+{
+  "name": "grid-2x2",
+  "intent": "its four cells swell together, then snap back into a grid",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "amount": 0.5,
+      "duration": 3.4,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "layout-grid",
+      "effect": "morph"
+    },
+    {
+      "to": "columns",
+      "effect": "fade"
+    },
+    {
+      "to": "square",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "git-graph",
+  "intent": "draws the commit history from one lane into the next",
+  "loop": {
+    "preset": "draw",
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.4,
+      "delay": 0.12
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "orbit"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-branch",
+      "effect": "morph"
+    },
+    {
+      "to": "git-commit",
+      "effect": "fade"
+    }
+  ]
+}

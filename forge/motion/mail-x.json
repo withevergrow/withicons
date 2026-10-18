@@ -1,0 +1,54 @@
+{
+  "name": "mail-x",
+  "intent": "the envelope rests while its x shakes no: mail bounced",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "spin-once",
+      "origin": [
+        18,
+        18
+      ],
+      "amount": 0.6,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "fade"
+    },
+    {
+      "to": "mail-check",
+      "effect": "flip"
+    },
+    {
+      "to": "mail-warning",
+      "effect": "scale"
+    }
+  ]
+}

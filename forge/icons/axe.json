@@ -1,0 +1,62 @@
+{
+  "name": "axe",
+  "category": "objects",
+  "description": "A wood axe with a flared, curved blade on a sturdy handle, for chopping, woodwork, cutting costs and survival tools.",
+  "aliases": [
+    "ax",
+    "hatchet",
+    "chop",
+    "wood-axe",
+    "lumberjack",
+    "felling-axe",
+    "woodcutter"
+  ],
+  "tags": [
+    "tool",
+    "wood",
+    "chop",
+    "camping",
+    "outdoor",
+    "cut"
+  ],
+  "paths": [
+    {
+      "d": "M16.19 5.43 L18.98 7.17 A0.94 0.94 32 0 1 19.28 8.47 L17.53 11.26 A0.94 0.94 32 0 1 16.24 11.56 L13.45 9.81 Q11.45 8.57 7.07 10.26 Q7.17 4.78 12.05 2.29 Q13.69 4.98 16.19 5.43 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.65 9.94 L7.67 19.5 A1.65 1.65 32 0 0 10.46 21.25 L16.44 11.68",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M16.19 5.43 L18.98 7.17 A0.94 0.94 32 0 1 19.28 8.47 L17.53 11.26 A0.94 0.94 32 0 1 16.24 11.56 L13.45 9.81 Q11.45 8.57 7.07 10.26 Q7.17 4.78 12.05 2.29 Q13.69 4.98 16.19 5.43 Z",
+    "M13.65 9.94 L7.67 19.5 A1.65 1.65 32 0 0 10.46 21.25 L16.44 11.68 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "chopping",
+    "cut",
+    "cut down",
+    "cut costs",
+    "budget cut",
+    "layoff",
+    "firewood",
+    "logs",
+    "timber",
+    "lumber",
+    "forest",
+    "tree",
+    "woodwork",
+    "camping",
+    "survival",
+    "outdoors",
+    "viking",
+    "tomahawk",
+    "battle axe",
+    "weapon",
+    "split",
+    "the axe",
+    "axes"
+  ]
+}

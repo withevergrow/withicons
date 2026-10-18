@@ -1,0 +1,50 @@
+{
+  "name": "arrow-right-to-line",
+  "intent": "runs right and bumps the edge at the end",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.3,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.7,
+    "duration": 0.55
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.8,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0,
+      "duration": 0.8
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "arrow-left-to-line",
+      "effect": "flip"
+    },
+    {
+      "to": "chevron-last",
+      "effect": "fade"
+    },
+    {
+      "to": "arrow-right",
+      "effect": "slide-right"
+    }
+  ]
+}

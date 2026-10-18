@@ -1,0 +1,72 @@
+{
+  "name": "paint-bucket",
+  "category": "objects",
+  "description": "A tipped paint bucket with its bail handle and a falling drop, for the fill tool, flood fill, paint and colour.",
+  "aliases": [
+    "fill-tool",
+    "bucket-fill",
+    "paint-can",
+    "flood-fill",
+    "paint-pot",
+    "fill-color",
+    "fill-colour",
+    "paint-pail"
+  ],
+  "tags": [
+    "paint",
+    "fill",
+    "color",
+    "design",
+    "tool",
+    "editor"
+  ],
+  "paths": [
+    {
+      "d": "M19.49 11 L11 19.49 L5.12 11.91 A1.5 1.5 135 0 1 5.24 9.93 L9.93 5.24 A1.5 1.5 135 0 1 11.91 5.12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16.7 8.84 L8.84 16.7",
+      "plate": "K"
+    },
+    {
+      "d": "M18.07 6.05 A8.5 10 135 0 0 6.05 18.07",
+      "plate": "A"
+    },
+    {
+      "d": "M19.5 15.5 C20.5 17 21.5 18.25 21.5 19.5 A2 2 0 0 1 17.5 19.5 C17.5 18.25 18.5 17 19.5 15.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M19.49 11 L11 19.49 L5.12 11.91 A1.5 1.5 135 0 1 5.24 9.93 L9.93 5.24 A1.5 1.5 135 0 1 11.91 5.12 Z",
+    "M19.5 15.5 C20.5 17 21.5 18.25 21.5 19.5 A2 2 0 0 1 17.5 19.5 C17.5 18.25 18.5 17 19.5 15.5 Z"
+  ],
+  "cutouts": [
+    "M16.7 8.84 L8.84 16.7"
+  ],
+  "synonyms": [
+    "fill",
+    "paint fill",
+    "flood",
+    "pour",
+    "pouring",
+    "spill",
+    "color",
+    "colour",
+    "background color",
+    "swatch",
+    "theme",
+    "recolor",
+    "recolour",
+    "tin of paint",
+    "can of paint",
+    "pail",
+    "drawing app",
+    "graphics",
+    "photoshop",
+    "ms paint",
+    "fill shape",
+    "paintbucket"
+  ]
+}

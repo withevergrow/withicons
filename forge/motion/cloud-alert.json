@@ -1,0 +1,46 @@
+{
+  "name": "cloud-alert",
+  "intent": "the cloud drifts uneasily while its warning flickers",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "amount": 0.7,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-check",
+      "effect": "rotate"
+    },
+    {
+      "to": "cloud-off",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud",
+      "effect": "fade"
+    }
+  ]
+}

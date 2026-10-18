@@ -1,0 +1,53 @@
+{
+  "name": "bell-dot",
+  "intent": "the bell rings while its unread dot pulses",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      11,
+      6.5
+    ],
+    "amount": 0.7,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      11,
+      6.5
+    ],
+    "amount": 1.2
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        19.5,
+        4.5
+      ],
+      "amount": 1.2,
+      "duration": 2.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "shake",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell",
+      "effect": "fade"
+    },
+    {
+      "to": "bell-ring",
+      "effect": "scale"
+    }
+  ]
+}

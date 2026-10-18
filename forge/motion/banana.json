@@ -1,0 +1,43 @@
+{
+  "name": "banana",
+  "intent": "rocks on its curve like a banana set down on the table",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      19
+    ],
+    "amount": 0.45,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.9
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        18,
+        5.5
+      ]
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "banana@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "apple",
+      "effect": "fade"
+    }
+  ]
+}

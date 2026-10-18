@@ -252,6 +252,17 @@ function candidates(L, ln, icon, sh) {
         if (ok) out.push({ score: 72 - fc - off, mode: 'band', glyph: ko.cells.map(([i, j]) => [i0 + dx + i, j0 + dy + j]), solid, clear: [] })
       }
     }
+    // last resort for a word as wide as the whole canvas (a 4-letter label in a closed 20u frame: the narrowest
+    // bitmap words are 13-14 cells, a frame's inside 12): a STRIPE, the line's rows solid ink edge to edge with the
+    // glyphs cut out of it, so the word is never dropped and the frame reads as a labelled band
+    // (a word of up to 12 cells keeps the canvas's one-cell margin; 13-15 cells, "DOCS" "SALE" "2025", need the full width:
+    // the stripe then runs to the canvas edge, the one place a pixel live icon may touch it)
+    if (R && !badge && s.w <= N - 1) {
+      const j0s = Math.round(centre[1] - s.h / 2), i0s = Math.round((N - s.w) / 2), m = s.w <= N - 4 ? 1 : 0
+      const solid = []
+      for (let j = j0s - 1; j <= j0s + s.h; j++) for (let i = m; i < N - m; i++) if (G.inb(i, j)) solid.push([i, j])
+      out.push({ score: 30 - fc, mode: 'band', glyph: ko.cells.map(([i, j]) => [i0s + i, j0s + j]), solid, clear: [] })
+    }
     // a pill sized to the glyphs, centred on the badge and kept on the grid; a pill wider than its badge may slide a
     // cell along the row, toward where it cuts less of the drawing around it (its moat clears that ink)
     if (badge) {

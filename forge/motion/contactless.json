@@ -1,0 +1,10 @@
+{
+  "name": "contactless",
+  "intent": "the waves light up one after another like a card tapping a reader",
+  "loop": { "preset": "fill", "duration": 1.8 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.7, "duration": 0.6 },
+  "parts": { "A": { "preset": "pulse", "origin": [4, 12], "amount": 0.5, "duration": 1.8, "delay": 0.15 } },
+  "deco": "still",
+  "alt": [{ "preset": "glow" }, { "preset": "pulse", "origin": [4, 12], "amount": 0.6 }],
+  "swap": [{ "to": "credit-card", "effect": "slide-right" }, { "to": "check", "effect": "scale" }, { "to": "wifi", "effect": "rotate" }]
+}

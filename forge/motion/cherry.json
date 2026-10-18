@@ -1,0 +1,55 @@
+{
+  "name": "cherry",
+  "intent": "the pair swings from the shared stem like it was just picked",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      13,
+      3.5
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      13,
+      3.5
+    ],
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        13,
+        3.5
+      ],
+      "amount": 0.3,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cherry@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "apple",
+      "effect": "fade"
+    }
+  ]
+}

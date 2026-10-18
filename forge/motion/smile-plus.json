@@ -4,8 +4,8 @@
   "loop": {
     "preset": "blink",
     "origin": [
-      12,
-      9.5
+      10.5,
+      11
     ],
     "duration": 3.5
   },
@@ -17,8 +17,8 @@
     "S": {
       "preset": "pop",
       "origin": [
-        19,
-        5
+        20,
+        4
       ],
       "amount": 0.8,
       "delay": 0.1

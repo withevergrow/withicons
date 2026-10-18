@@ -1,76 +1,79 @@
 {
-  "name": "candy-bucket",
-  "category": "halloween",
-  "description": "A pumpkin candy bucket, for trick-or-treating.",
-  "aliases": [
-    "trick-or-treat",
-    "treat-bucket",
-    "pumpkin-pail",
-    "candy-pail",
-    "pumpkin-bucket",
-    "treat-bag",
-    "candy-basket",
-    "trick-or-treat-bag"
-  ],
-  "tags": [
-    "halloween",
-    "candy",
-    "pumpkin",
-    "bucket",
-    "treat"
-  ],
-  "paths": [
-    {
-      "d": "M4.5 11 H19.5 L18.25 19.5 A2 2 0 0 1 16.25 21.5 H7.75 A2 2 0 0 1 5.75 19.5 Z",
-      "plate": "K"
-    },
-    {
-      "d": "M4.5 11 C4.5 0 19.5 0 19.5 11",
-      "plate": "A"
-    },
-    {
-      "d": "M7.75 15.25 L9.25 13.25 L10.75 15.25 Z M13.25 15.25 L14.75 13.25 L16.25 15.25 Z M8.5 17.5 C10.5 18.75 13.5 18.75 15.5 17.5",
-      "plate": "A"
-    },
-    {
-      "d": "M13.5 7.5 A1.5 1.5 0 1 1 10.5 7.5 A1.5 1.5 0 1 1 13.5 7.5 Z M10.5 7.5 L8.5 6.25 V8.75 Z M13.5 7.5 L15.5 6.25 V8.75 Z",
-      "plate": "S"
-    }
-  ],
-  "fills": [
-    "M4.5 11 H19.5 L18.25 19.5 A2 2 0 0 1 16.25 21.5 H7.75 A2 2 0 0 1 5.75 19.5 Z",
-    "M13.5 7.5 A1.5 1.5 0 1 1 10.5 7.5 A1.5 1.5 0 1 1 13.5 7.5 Z",
-    "M10.75 7.5 L8.5 6.25 V8.75 Z",
-    "M13.25 7.5 L15.5 6.25 V8.75 Z"
-  ],
-  "cutouts": [
-    "M7.75 15.25 L9.25 13.25 L10.75 15.25 Z",
-    "M13.25 15.25 L14.75 13.25 L16.25 15.25 Z",
-    "M8.5 17.5 C10.5 18.75 13.5 18.75 15.5 17.5"
-  ],
-  "synonyms": [
-    "trick or treat",
-    "trick or treating",
-    "trick-or-treating",
-    "candy",
-    "candies",
-    "sweets",
-    "treats",
-    "loot",
-    "haul",
-    "stash",
-    "goodies",
-    "pail",
-    "bucket",
-    "basket",
-    "jack o lantern bucket",
-    "halloween candy",
-    "kids",
-    "costume",
-    "door to door",
-    "collect",
-    "pumpkin",
-    "halloween",
-    "candy buket"
-  ]
+    "name": "candy-bucket",
+    "category": "halloween",
+    "description": "A plain tapered trick-or-treat pail with a rim band and a thin bail handle, a big wrapped candy and a round lollipop poking above the rim, for Halloween.",
+    "aliases": [
+        "trick-or-treat",
+        "treat-bucket",
+        "pumpkin-pail",
+        "candy-pail",
+        "pumpkin-bucket",
+        "treat-bag",
+        "candy-basket",
+        "trick-or-treat-bag"
+    ],
+    "tags": [
+        "halloween",
+        "candy",
+        "pumpkin",
+        "bucket",
+        "treat"
+    ],
+    "paths": [
+        {
+            "d": "M4.75 15.5 L6.25 20.5 Q6.5 21.5 7.5 21.5 H16.5 Q17.5 21.5 17.75 20.5 L19.25 15.5",
+            "plate": "K"
+        },
+        {
+            "d": "M4.5 12.5 H19.5 A1.5 1.5 0 0 1 19.5 15.5 H4.5 A1.5 1.5 0 0 1 4.5 12.5 Z",
+            "plate": "K"
+        },
+        {
+            "d": "M3.5 12.5 A8.5 10 0 0 1 13 2.5 M20.5 12.5 A8.5 10 0 0 0 20 9.5",
+            "plate": "A"
+        },
+        {
+            "d": "M12.75 8.5 A2.25 1.5 0 1 1 8.25 8.5 A2.25 1.5 0 1 1 12.75 8.5 Z M8.25 8.5 L7 7.5 V9.5 Z M12.75 8.5 L14 7.5 V9.5 Z",
+            "plate": "A"
+        },
+        {
+            "d": "M17.75 7.25 V12.5 M20.25 4.75 A2.5 2.5 0 1 1 15.25 4.75 A2.5 2.5 0 1 1 20.25 4.75 Z",
+            "plate": "A"
+        }
+    ],
+    "fills": [
+        "M4.5 12.5 H19.5 A1.5 1.5 0 0 1 19.5 15.5 H19.25 L17.75 20.5 Q17.5 21.5 16.5 21.5 H7.5 Q6.5 21.5 6.25 20.5 L4.75 15.5 H4.5 A1.5 1.5 0 0 1 4.5 12.5 Z",
+        "M12.75 8.5 A2.25 1.5 0 1 1 8.25 8.5 A2.25 1.5 0 1 1 12.75 8.5 Z",
+        "M8.25 8.5 L7 7.5 V9.5 Z",
+        "M14 7.5 V9.5 L12.75 8.5 Z",
+        "M20.25 4.75 A2.5 2.5 0 1 1 15.25 4.75 A2.5 2.5 0 1 1 20.25 4.75 Z"
+    ],
+    "cutouts": [
+        "M5.5 15.5 H18.5"
+    ],
+    "synonyms": [
+        "trick or treat",
+        "trick or treating",
+        "trick-or-treating",
+        "candy",
+        "candies",
+        "sweets",
+        "treats",
+        "loot",
+        "haul",
+        "stash",
+        "goodies",
+        "pail",
+        "bucket",
+        "basket",
+        "jack o lantern bucket",
+        "halloween candy",
+        "kids",
+        "costume",
+        "door to door",
+        "collect",
+        "pumpkin",
+        "halloween",
+        "candy buket"
+    ]
 }

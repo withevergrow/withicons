@@ -1,6 +1,6 @@
 {
   "name": "captions",
-  "intent": "subtitle lines fade in one after another like live captions",
+  "intent": "the CC mark fills in like captions switching on",
   "loop": {
     "preset": "pulse",
     "origin": [

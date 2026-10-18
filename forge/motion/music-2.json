@@ -1,0 +1,51 @@
+{
+  "name": "music-2",
+  "intent": "the pair of notes bops along to the beat",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.8,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 0.7
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "music-note",
+      "effect": "fade"
+    },
+    {
+      "to": "play",
+      "effect": "scale"
+    },
+    {
+      "to": "headphones",
+      "effect": "morph"
+    }
+  ]
+}

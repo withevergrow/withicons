@@ -1,6 +1,6 @@
 # with icons: the 34 styles
 
-All styles render the same 750 skeletons, so `home` looks like the same house in every style. They come in six groups,
+All styles render the same 1000 skeletons, so `home` looks like the same house in every style. They come in six groups,
 named for what people make (the site, its pickers and MCP `recommend_styles` use the same groups). Line, solid, duo,
 gloss, engrave, blueprint and sketch are single-colour `currentColor` (duo and blueprint add opt-in CSS variables); every
 other style ships a default palette whose colours are CSS variables, while its ink still follows `currentColor`.
@@ -81,7 +81,7 @@ The best styles per job, best first (the same picks as the style picker on withi
 | `sticker` | Playful | Y2K die-cut sticker: thick white border, candy colours, sparkles | social, creator tools, scrapbooks, fandom, playful marketing | 32px | no |
 | `gloss` | Playful | inflated, glossy, pillowy, carved highlights | hero art, app-store style feature grids, playful brands | 32px | no |
 | `pastel` | Playful | soft pastel colour fields (lavender, peach, mint, baby blue, butter, blush) with gentle tonal depth | wellness, planners and journals, baby and lifestyle brands | 32px | no |
-| `pixel` | Playful | hand-tuned 16-bit pixel art: one-pixel outline, shaded body, highlight pixel | games, retro tech, playful dev tools, achievements | 16px (sharpest at 16, 32, 48) | no |
+| `pixel` | Playful | hand-tuned 16-bit pixel art: one-pixel outline, shaded body, highlight pixel | games, retro tech, playful dev tools, achievements | 24px (pixel-perfect at 24, 48, 72) | no |
 | `retro` | Playful | 70s sunset stripes, chunky outline, hard offset shadow | vintage brands, music, food, posters, merch | 32px | no |
 | `sketch` | Artistic | loose double marker strokes, light hachure | whiteboards, education, empty states, informal products | 32px | yes |
 | `engrave` | Artistic | banknote intaglio hatching | finance, legal, premium, editorial, certificates | 40px | no |
@@ -290,7 +290,7 @@ Set skin and hair as two separate choices, or offer the named pairs from `withic
 ## Download a whole style
 
 <!-- downloads:start -->
-Every style as one zip: `https://withicons.com/downloads/with-icons-<style>.zip` (all 750 SVGs with the colours baked in,
+Every style as one zip: `https://withicons.com/downloads/with-icons-<style>.zip` (all 1000 SVGs with the colours baked in,
 an offline searchable viewer `index.html`, LICENSE and README), e.g. `https://withicons.com/downloads/with-icons-line.zip`, `https://withicons.com/downloads/with-icons-solid.zip`, `https://withicons.com/downloads/with-icons-duo.zip`. Every style in one: `https://withicons.com/downloads/with-icons-all.zip` (svg/<style>/<name>.svg, no viewer). Styles: line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine.
 <!-- downloads:end -->
 
@@ -357,27 +357,27 @@ ids unique and keep the CSS variables themable); the zip SVGs have the colours b
 <!-- palettes:start -->
 | style | CSS variables (default) |
 |---|---|
-| `glass` | `--with-glass-accent` #F2679E, `--with-glass-back` #7484FF, `--with-glass-c1` #F07CA2, `--with-glass-c2` #E2577F, `--with-glass-c3` #F5B82E, `--with-glass-c4` #FF8A3D, `--with-glass-etch` #3E3A8C, `--with-glass-frost` #FFFFFF, `--with-glass-pane` #E4E8FF, `--with-glass-shadow` #6A45D6, `--with-glass-shine` #FFFFFF |
+| `glass` | `--with-glass-accent` #F2679E, `--with-glass-back` #7484FF, `--with-glass-c2` #F0506E, `--with-glass-c3` #FFA94D, `--with-glass-c4` #FF8A3D, `--with-glass-etch` #3E3A8C, `--with-glass-frost` #FFFFFF, `--with-glass-pane` #E4E8FF, `--with-glass-shadow` #6A45D6, `--with-glass-shine` #FFFFFF |
 | `kawaii` | `--with-kawaii-accent` #FF5C9A, `--with-kawaii-blush` #FF6F9C, `--with-kawaii-c1` #D4A688, `--with-kawaii-c2` #504948, `--with-kawaii-c4` #85CDC5, `--with-kawaii-fill-1` #FF6FA5, `--with-kawaii-fill-2` #FF9A66, `--with-kawaii-fill-3` #FFD23A, `--with-kawaii-fill-4` #45D99A, `--with-kawaii-fill-5` #5AB4FF, `--with-kawaii-fill-6` #A98BFF, `--with-kawaii-shine` #FFFFFF, `--with-kawaii-sparkle` #FFB627 |
-| `sticker` | `--with-sticker-accent` #FF6FB5, `--with-sticker-bubblegum` #FF6FB5, `--with-sticker-c1` #CD8151, `--with-sticker-c2` #2A2120, `--with-sticker-c4` #22A495, `--with-sticker-edge` #FFFFFF, `--with-sticker-grape` #A98BFF, `--with-sticker-ink` #1D1530, `--with-sticker-lemon` #FFD43B, `--with-sticker-mint` #3FDDA4, `--with-sticker-peach` #FF9563, `--with-sticker-shadow` #1D1530, `--with-sticker-shine` #FFFFFF, `--with-sticker-sky` #5BC6FF |
-| `pixel` | `--with-pixel-accent` #FF8A1F, `--with-pixel-c2` #E53935, `--with-pixel-c3` #B71C1C, `--with-pixel-ink` #23263A, `--with-pixel-shadow` #7A4A2A, `--with-pixel-shine` #FFFFFF, `--with-pixel-tint` #B9D5F3 |
+| `sticker` | `--with-sticker-accent` #FF6FB5, `--with-sticker-bubblegum` #FF6FB5, `--with-sticker-c1` #F9BB89, `--with-sticker-c2` #2A2120, `--with-sticker-c4` #22A495, `--with-sticker-edge` #FFFFFF, `--with-sticker-grape` #A98BFF, `--with-sticker-ink` #1D1530, `--with-sticker-lemon` #FFD43B, `--with-sticker-mint` #3FDDA4, `--with-sticker-peach` #FF9563, `--with-sticker-shadow` #1D1530, `--with-sticker-shine` #FFFFFF, `--with-sticker-sky` #5BC6FF |
+| `pixel` | `--with-pixel-accent` #F2A93B, `--with-pixel-c1` #FFC93C, `--with-pixel-c2` #F5C542, `--with-pixel-c3` #3E8E4F, `--with-pixel-c4` #7A4B2A, `--with-pixel-ink` #23263A, `--with-pixel-shadow` #153816, `--with-pixel-shine` #FFFFFF, `--with-pixel-tint` #FFFFFF |
 | `retro` | `--with-retro-1` #F4B53F, `--with-retro-2` #EF7D2D, `--with-retro-3` #DE4B3A, `--with-retro-4` #178A86, `--with-retro-cream` #FFF3D9, `--with-retro-letter` #2A160E, `--with-retro-shadow` #6B3323, `--with-retro-tint` #FFF3D9 |
 | `luxe` | `--with-luxe-accent` #E3AE47, `--with-luxe-c1` #2039B4, `--with-luxe-c2` #C0174F, `--with-luxe-c3` #16206E, `--with-luxe-c4` #7B4A12, `--with-luxe-edge` #9CC2FF, `--with-luxe-ink` #0B1033, `--with-luxe-shadow` #0A0B26, `--with-luxe-shine` #FFFFFF, `--with-luxe-tint` #FFEFC4 |
-| `bauhaus` | `--with-bauhaus-accent` #2E7A5E, `--with-bauhaus-c1` #E0412E, `--with-bauhaus-c2` #F2B33D, `--with-bauhaus-c3` #2A6BC2, `--with-bauhaus-c4` #2A6BC2, `--with-bauhaus-shadow` #151515, `--with-bauhaus-tint` #F3EBDD |
+| `bauhaus` | `--with-bauhaus-accent` #2E7A5E, `--with-bauhaus-c1` #E0412E, `--with-bauhaus-c2` #F2B33D, `--with-bauhaus-c3` #2A6BC2, `--with-bauhaus-c4` #E9772E, `--with-bauhaus-shadow` #151515, `--with-bauhaus-tint` #F3EBDD |
 | `skeuo` | `--with-skeuo-accent` #F1CF98, `--with-skeuo-c1` #5560E0, `--with-skeuo-c2` #BFC7D0, `--with-skeuo-c3` #E0483A, `--with-skeuo-c4` #1E2B3B, `--with-skeuo-ink` #22160F, `--with-skeuo-shadow` #15110D, `--with-skeuo-shine` #FFFFFF, `--with-skeuo-tint` #FFFFFF |
 | `anime` | `--with-anime-accent` #FF5D78, `--with-anime-c1` #4BA8F5, `--with-anime-c2` #FF8DB6, `--with-anime-c3` #FFC740, `--with-anime-c4` #5FCF8C, `--with-anime-edge` #BFE6FF, `--with-anime-ink` #2B2148, `--with-anime-shadow` #4B2C8F, `--with-anime-shine` #FFFFFF, `--with-anime-tint` #FFF5EC |
 | `gothic` | `--with-gothic-accent` #C79A38, `--with-gothic-c1` #B3163B, `--with-gothic-c2` #2552B4, `--with-gothic-c3` #E6A421, `--with-gothic-c4` #1C8A5F, `--with-gothic-edge` #837A6F, `--with-gothic-ink` #221A26, `--with-gothic-shadow` #140F18, `--with-gothic-shine` #FFF6DE, `--with-gothic-tint` #D3CDC0 |
-| `pastel` | `--with-pastel-accent` #FFC3D7, `--with-pastel-c1` #CDBBF7, `--with-pastel-c2` #CDBBF7, `--with-pastel-c3` #FFE29C, `--with-pastel-c4` #ABE6CD, `--with-pastel-edge` #B6A1EF, `--with-pastel-ink` #6A55B8, `--with-pastel-shadow` #9E87E6, `--with-pastel-shine` #FFFFFF, `--with-pastel-tint` #ECE5FC |
+| `pastel` | `--with-pastel-accent` #FFC3D7, `--with-pastel-c1` #CDBBF7, `--with-pastel-c2` #CDBBF7, `--with-pastel-c3` #FFE29C, `--with-pastel-c4` #B7D6FA, `--with-pastel-edge` #B6A1EF, `--with-pastel-ink` #6A55B8, `--with-pastel-shadow` #9E87E6, `--with-pastel-shine` #FFFFFF, `--with-pastel-tint` #ECE5FC |
 | `coquette` | `--with-coquette-accent` #D9A45B, `--with-coquette-c1` #F8BCCB, `--with-coquette-c2` #EC8DA6, `--with-coquette-c3` #D7385F, `--with-coquette-c4` #FCEADD, `--with-coquette-edge` #FFFBF6, `--with-coquette-ink` #7E2443, `--with-coquette-shadow` #A8345C, `--with-coquette-shine` #FFFFFF, `--with-coquette-tint` #FFE4EB |
 | `plush` | `--with-plush-accent` #FF8DB4, `--with-plush-c1` #F4695E, `--with-plush-c2` #FFC53D, `--with-plush-c3` #4C9FE6, `--with-plush-c4` #4FBF8A, `--with-plush-edge` #FFF9F0, `--with-plush-ink` #4A2C3D, `--with-plush-shadow` #3A1E46, `--with-plush-shine` #FFFFFF, `--with-plush-tint` #FFF0D9 |
-| `clay` | `--with-clay-accent` #E89A1C, `--with-clay-c1` #7B6CFF, `--with-clay-c2` #FFB257, `--with-clay-c3` #FF5C97, `--with-clay-c4` #2CC0A8, `--with-clay-ink` #2A1D5C, `--with-clay-shadow` #24166B, `--with-clay-shine` #FFFFFF, `--with-clay-tint` #E3DEFF |
+| `clay` | `--with-clay-accent` #FFD84A, `--with-clay-c1` #7B6CFF, `--with-clay-c2` #FFB257, `--with-clay-c3` #FF5C97, `--with-clay-c4` #2CC0A8, `--with-clay-ink` #2A1D5C, `--with-clay-shadow` #24166B, `--with-clay-shine` #FFFFFF, `--with-clay-tint` #E3DEFF |
 | `bento` | `--with-bento-accent` #F43F75, `--with-bento-c1` #6366F1, `--with-bento-c2` #2A2120, `--with-bento-c3` #6366F1, `--with-bento-c4` #6366F1, `--with-bento-edge` #EEF0FF, `--with-bento-ink` #1E1B4B, `--with-bento-shadow` #312E81, `--with-bento-shine` #FFFFFF, `--with-bento-tint` #EEF0FF |
 | `suite` | `--with-suite-accent` #FF7A3D, `--with-suite-c1` #3478F6, `--with-suite-c2` #7B61F0, `--with-suite-c3` #15A5B8, `--with-suite-c4` #5C9DFF, `--with-suite-edge` #F2F7FF, `--with-suite-ink` #1F4FB8, `--with-suite-shadow` #0B1E5B, `--with-suite-shine` #FFFFFF, `--with-suite-tint` #E4EEFF |
 | `dock` | `--with-dock-accent` #FF3B30, `--with-dock-c1` #2F7DF6, `--with-dock-c2` #FFC94A, `--with-dock-c4` #E2E2FF, `--with-dock-ink` #14182B, `--with-dock-shadow` #1545C2, `--with-dock-shine` #FFFFFF, `--with-dock-tint` #DCE8FF |
 | `liquid` | `--with-liquid-accent` #FF5F8F, `--with-liquid-c1` #4A9DFF, `--with-liquid-c2` #A77BFF, `--with-liquid-c3` #1C3F9E, `--with-liquid-c4` #FF7EC1, `--with-liquid-edge` #B9E6FF, `--with-liquid-ink` #2A1414, `--with-liquid-shadow` #0C1A3A, `--with-liquid-shine` #FFFFFF, `--with-liquid-tint` #FFE3B0 |
 | `chrome` | `--with-chrome-accent` #FF3E9E, `--with-chrome-c1` #8794AA, `--with-chrome-c2` #5E6A82, `--with-chrome-c3` #3E4556, `--with-chrome-c4` #CDB9A4, `--with-chrome-edge` #F4F7FC, `--with-chrome-ink` #10131B, `--with-chrome-shadow` #1A1E2A, `--with-chrome-shine` #FFFFFF, `--with-chrome-tint` #DCE5F2 |
-| `soft3d` | `--with-soft3d-accent` #FF6A4D, `--with-soft3d-c1` #E5483F, `--with-soft3d-c2` #EEF1F5, `--with-soft3d-c3` #3A404C, `--with-soft3d-c4` #BFC7D2, `--with-soft3d-edge` #FFF8EE, `--with-soft3d-ink` #2A2226, `--with-soft3d-shadow` #1D2130, `--with-soft3d-shine` #FFFFFF, `--with-soft3d-tint` #A9D8F2 |
-| `brutal` | `--with-brutal-accent` #FF8A3D, `--with-brutal-c1` #FFD23F, `--with-brutal-c2` #FF6BA8, `--with-brutal-c3` #4D7CFE, `--with-brutal-c4` #3DDC97, `--with-brutal-shine` #FFFFFF, `--with-brutal-tint` #FBE4D2 |
+| `soft3d` | `--with-soft3d-accent` #FF6A4D, `--with-soft3d-c1` #3D7EE0, `--with-soft3d-c2` #EEF1F5, `--with-soft3d-c3` #3A404C, `--with-soft3d-c4` #BFC7D2, `--with-soft3d-edge` #FFF8EE, `--with-soft3d-ink` #232733, `--with-soft3d-shadow` #1D2130, `--with-soft3d-shine` #FFFFFF, `--with-soft3d-tint` #A9D8F2 |
+| `brutal` | `--with-brutal-accent` #FF8A3D, `--with-brutal-c1` #FFD23F, `--with-brutal-c2` #FF6BA8, `--with-brutal-c3` #4D7CFE, `--with-brutal-c4` #3DDC97, `--with-brutal-ink` #16130F, `--with-brutal-shine` #FFFDF5, `--with-brutal-tint` #DDB89C |
 | `utsav` | `--with-utsav-accent` #D4A017, `--with-utsav-c1` #F59E0B, `--with-utsav-c2` #F97316, `--with-utsav-c3` #E11D74, `--with-utsav-c4` #0F766E, `--with-utsav-edge` #F4C95D, `--with-utsav-ink` #3B0A45, `--with-utsav-shadow` #A9714C, `--with-utsav-shine` #FFF4DC, `--with-utsav-tint` #FFDFBD |
 | `rangoli` | `--with-rangoli-accent` #FFC21A, `--with-rangoli-c1` #FFB21F, `--with-rangoli-c2` #F2462C, `--with-rangoli-c3` #E81F7A, `--with-rangoli-c4` #7B2FE0, `--with-rangoli-edge` #7B2FE0, `--with-rangoli-ink` #2B1660, `--with-rangoli-shadow` #5A1240, `--with-rangoli-shine` #FFFFFF, `--with-rangoli-tint` #FFF3D8 |
 | `halloween` | `--with-halloween-accent` #FFB52E, `--with-halloween-c1` #FF9F2E, `--with-halloween-c2` #E5530F, `--with-halloween-c3` #8B55E0, `--with-halloween-c4` #86D13A, `--with-halloween-edge` #7344C9, `--with-halloween-ink` #1D1029, `--with-halloween-shadow` #2A1642, `--with-halloween-shine` #FFF6E2, `--with-halloween-tint` #FFF1B8 |
@@ -390,4 +390,4 @@ ids unique and keep the CSS variables themable); the zip SVGs have the colours b
 
 - 16px for dense tables and inline text, 20px for buttons and inputs, 24px (default) for nav and toolbars, and 32-64px for feature cards.
 - `absoluteStrokeWidth` keeps a 1.75px stroke at 48px, which matches line icons of different sizes in one row.
-- Pixel icons look sharpest at 16, 32 and 48px (whole multiples of their grid).
+- Pixel icons look sharpest at 24, 48 and 72px (whole multiples of their 24 grid; live icons keep 16×16 sprites).

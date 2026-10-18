@@ -5,7 +5,7 @@
     "preset": "rock",
     "origin": [
       12,
-      3
+      2.5
     ],
     "amount": 0.7,
     "duration": 2.4
@@ -14,18 +14,8 @@
     "preset": "ring",
     "origin": [
       12,
-      3
+      2.5
     ]
-  },
-  "parts": {
-    "S": {
-      "preset": "bounce",
-      "origin": [
-        12,
-        9
-      ],
-      "amount": 0.6
-    }
   },
   "alt": [
     {

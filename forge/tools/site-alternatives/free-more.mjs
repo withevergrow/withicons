@@ -120,15 +120,15 @@ export function moreLanders({ steps, facts, BASE_FACTS, N, T }) {
   S('pixel', {
     slug: 'pixel-icons', short: 'Free pixel art icons', icon: 'gamepad',
     title: 'Free pixel art icons: 8-bit style SVG & PNG · with icons',
-    desc: `Free pixel art icons: ${N} crisp 8-bit style icons drawn on a 16 × 16 pixel grid, as SVG or PNG, for games, retro sites, Discord and stream overlays. MIT licensed.`,
+    desc: `Free pixel art icons: ${N} crisp 8-bit style icons drawn on a 24 × 24 pixel grid, as SVG or PNG, for games, retro sites, Discord and stream overlays. MIT licensed.`,
     h1: ['Free pixel art icons,', 'crisp 8-bit style'], q: 'free pixel art icons',
-    answer: () => `The <b>Pixel</b> style redraws all ${N} icons as crisp pixel art on a 16 × 16 grid, like your favourite old video game. They are real vectors, so the pixels stay perfectly sharp at any size. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit required.`,
+    answer: () => `The <b>Pixel</b> style redraws all ${N} icons as crisp pixel art on a 24 × 24 grid, like your favourite old video game. They are real vectors, so the pixels stay perfectly sharp at any size. Click an icon below to copy the SVG, copy a PNG or download one. Free, MIT licensed, no credit required.`,
     picker: { actions: ['svg', 'png', 'dl'], style: 'pixel', groups: [['Game', pick(SETS.game, 24)], ['Interface', pick(SETS.ui, 12)]] },
     body: p => `
 <section class="ax-split" aria-labelledby="px-where">
   <div><p class="ax-kicker">Where they shine</p><h2 id="px-where">For games, streams and retro vibes</h2>
   <p>Indie game menus and HUDs, itch.io pages, Discord servers and emoji-like badges, Twitch overlays, retro portfolio sites and 8-bit party invites. Because every pixel is a square in the SVG, they never blur, even at 1024 px.</p>
-  ${facts([...BASE_FACTS(p), ['Grid', '16 × 16 pixels inside the usual 24 × 24 icon box, so they line up with every other style'], ['Style family', sib('pixel')]])}</div>
+  ${facts([...BASE_FACTS(p), ['Grid', 'one pixel per unit of the usual 24 × 24 icon box, so they line up with every other style'], ['Style family', sib('pixel')]])}</div>
   ${demo(SETS.game, 'pixel')}
 </section>`,
     faq: p => [

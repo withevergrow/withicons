@@ -15,9 +15,9 @@
       "preset": "pulse",
       "origin": [
         12,
-        18.5
+        12
       ],
-      "amount": 0.7,
+      "amount": 0.5,
       "delay": 0.1
     }
   },
@@ -27,7 +27,7 @@
       "preset": "sway",
       "origin": [
         12,
-        2.5
+        3
       ],
       "amount": 0.5
     },

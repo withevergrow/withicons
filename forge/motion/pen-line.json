@@ -1,0 +1,46 @@
+{
+  "name": "pen-line",
+  "intent": "the pen nib scribbles along the line as if signing",
+  "loop": {
+    "preset": "wiggle",
+    "origin": [
+      3.5,
+      20.5
+    ],
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      3.5,
+      20.5
+    ],
+    "amount": 1,
+    "duration": 0.7
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "pencil",
+      "effect": "fade"
+    },
+    {
+      "to": "signature",
+      "effect": "draw"
+    }
+  ]
+}

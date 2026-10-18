@@ -1,0 +1,47 @@
+{
+  "name": "flashlight",
+  "intent": "the beam glows on and off like a torch searching the dark",
+  "loop": {
+    "preset": "glow",
+    "duration": 2
+  },
+  "hover": {
+    "preset": "flicker",
+    "duration": 0.9
+  },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "amount": 0.8,
+      "duration": 1.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "lightbulb",
+      "effect": "fade"
+    },
+    {
+      "to": "flashlight@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "lamp-desk",
+      "effect": "slide-left"
+    }
+  ]
+}

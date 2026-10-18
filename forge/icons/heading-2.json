@@ -1,0 +1,58 @@
+{
+  "name": "heading-2",
+  "category": "text",
+  "description": "A capital H with a small 2, for the level-two heading or section title in a text editor.",
+  "aliases": [
+    "h2",
+    "heading-two",
+    "heading2",
+    "h2-tag",
+    "heading-level-2",
+    "section-heading",
+    "second-heading",
+    "h2-heading",
+    "sub-heading-2"
+  ],
+  "tags": [
+    "heading",
+    "subheading",
+    "text",
+    "editor",
+    "format",
+    "h2"
+  ],
+  "paths": [
+    {
+      "d": "M3 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H12",
+      "plate": "A"
+    },
+    {
+      "d": "M16 12.5 A2.5 2.5 0 0 1 21 12.5 C21 15.5 16 16.5 16 20 H21",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "heading 2",
+    "level 2",
+    "subheading",
+    "section title",
+    "section",
+    "medium heading",
+    "rich text",
+    "text editor",
+    "markdown heading",
+    "formatting",
+    "font size",
+    "subhead"
+  ]
+}

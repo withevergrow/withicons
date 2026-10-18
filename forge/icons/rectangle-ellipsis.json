@@ -1,0 +1,61 @@
+{
+  "name": "rectangle-ellipsis",
+  "category": "security",
+  "description": "An input field filled with dots and a blinking caret, for password fields, PIN entry and masked input.",
+  "aliases": [
+    "password-field",
+    "password-input",
+    "masked-input",
+    "secret-field",
+    "pin-input",
+    "input-dots",
+    "password-box",
+    "hidden-input"
+  ],
+  "tags": [
+    "security",
+    "password",
+    "input",
+    "form",
+    "field"
+  ],
+  "paths": [
+    {
+      "d": "M4 6.5 H20 A2 2 0 0 1 22 8.5 V15.5 A2 2 0 0 1 20 17.5 H4 A2 2 0 0 1 2 15.5 V8.5 A2 2 0 0 1 4 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 12 V12.01 M10 12 V12.01 M14 12 V12.01",
+      "plate": "A"
+    },
+    {
+      "d": "M18 9.5 V14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 6.5 H20 A2 2 0 0 1 22 8.5 V15.5 A2 2 0 0 1 20 17.5 H4 A2 2 0 0 1 2 15.5 V8.5 A2 2 0 0 1 4 6.5 Z"
+  ],
+  "cutouts": [
+    "M7.25 12 A1.25 1.25 0 1 1 4.75 12 A1.25 1.25 0 1 1 7.25 12 Z",
+    "M11.25 12 A1.25 1.25 0 1 1 8.75 12 A1.25 1.25 0 1 1 11.25 12 Z",
+    "M15.25 12 A1.25 1.25 0 1 1 12.75 12 A1.25 1.25 0 1 1 15.25 12 Z",
+    "M18 9.5 V14.5"
+  ],
+  "synonyms": [
+    "password",
+    "pin code",
+    "passcode",
+    "masked",
+    "dots",
+    "asterisks",
+    "hidden characters",
+    "secret",
+    "credentials",
+    "login field",
+    "sign in",
+    "form input",
+    "text field",
+    "more"
+  ]
+}

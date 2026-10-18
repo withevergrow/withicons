@@ -1,0 +1,53 @@
+{
+  "name": "corner-up-left",
+  "category": "arrows",
+  "description": "An elbow arrow that rises and turns back to the left, for undo, go back and reply.",
+  "aliases": [
+    "turn-up-left",
+    "elbow-up-left",
+    "bend-up-left",
+    "return-up",
+    "back-up-left",
+    "up-left-turn",
+    "curve-up-left",
+    "corner-arrow-up-left"
+  ],
+  "tags": [
+    "arrow",
+    "corner",
+    "turn",
+    "back",
+    "undo",
+    "left"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 20 V13 A4 4 0 0 0 15.5 9 H4.5",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 14 L4.5 9 L9.5 4",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "undo",
+    "back",
+    "go back",
+    "return",
+    "reply",
+    "previous",
+    "revert",
+    "turn left",
+    "route",
+    "direction",
+    "redirect",
+    "detour",
+    "navigate back",
+    "bend",
+    "u-turn",
+    "step back"
+  ]
+}

@@ -25,6 +25,8 @@ export const TUNE = {
   // five bars stay five countable rods
   // piggy-bank: a parting cut rings the snout so the face reads apart from the body
   'piggy-bank': { part: 'M21.6 13.75 A1.85 2.6 0 1 1 17.9 13.75 A1.85 2.6 0 1 1 21.6 13.75 Z' },
+  // five rating stars 7u apart: slim rods keep each star its own piece
+  'rating-stars': { r: 0.7, erodeMax: 0.2, shiftMass: 0.5 },
   'bar-values': { r: 1.1, noRim: true, shiftF: 0, shiftRod: 0, erodeMin: 0, frost: 0.1 },
   // the elapsed sector reads as an empty slice, not a window the colour glows through
   stopwatch: { through: true },

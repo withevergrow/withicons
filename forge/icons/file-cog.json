@@ -1,0 +1,69 @@
+{
+  "name": "file-cog",
+  "category": "files",
+  "description": "A page with a gear for file settings, configuration files and document properties.",
+  "aliases": [
+    "file-settings",
+    "file-config",
+    "document-settings",
+    "file-gear",
+    "configuration-file",
+    "file-preferences",
+    "file-options"
+  ],
+  "tags": [
+    "file",
+    "settings",
+    "config",
+    "gear",
+    "options",
+    "system"
+  ],
+  "paths": [
+    {
+      "d": "M19 11 V7.5 L14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H12",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M18.8 20.48 L18.4 22.01 L16.6 22.01 L16.2 20.48 A3.25 3.25 0 0 1 15.57 20.12 L14.04 20.53 L13.14 18.98 L14.27 17.86 A3.25 3.25 0 0 1 14.27 17.14 L13.14 16.02 L14.04 14.47 L15.57 14.88 A3.25 3.25 0 0 1 16.2 14.52 L16.6 12.99 L18.4 12.99 L18.8 14.52 A3.25 3.25 0 0 1 19.43 14.88 L20.96 14.47 L21.86 16.02 L20.73 17.14 A3.25 3.25 0 0 1 20.73 17.86 L21.86 18.98 L20.96 20.53 L19.43 20.12 A3.25 3.25 0 0 1 18.8 20.48 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.5 17.25 V17.75",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H12 A7 7 0 0 1 19 11 V7.5 Z",
+    "M18.8 20.48 L18.4 22.01 L16.6 22.01 L16.2 20.48 A3.25 3.25 0 0 1 15.57 20.12 L14.04 20.53 L13.14 18.98 L14.27 17.86 A3.25 3.25 0 0 1 14.27 17.14 L13.14 16.02 L14.04 14.47 L15.57 14.88 A3.25 3.25 0 0 1 16.2 14.52 L16.6 12.99 L18.4 12.99 L18.8 14.52 A3.25 3.25 0 0 1 19.43 14.88 L20.96 14.47 L21.86 16.02 L20.73 17.14 A3.25 3.25 0 0 1 20.73 17.86 L21.86 18.98 L20.96 20.53 L19.43 20.12 A3.25 3.25 0 0 1 18.8 20.48 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M19.25 17.5 A1.75 1.75 0 1 1 15.75 17.5 A1.75 1.75 0 1 1 19.25 17.5 Z"
+  ],
+  "synonyms": [
+    "configuration",
+    "config",
+    "properties",
+    "preferences",
+    "options",
+    "setup",
+    "ini",
+    "yaml",
+    "env file",
+    "dotfile",
+    "manage file",
+    "file properties",
+    "system file",
+    "admin",
+    "process document",
+    "automation",
+    "workflow",
+    "build file",
+    "manifest"
+  ]
+}

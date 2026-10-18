@@ -1,0 +1,62 @@
+{
+  "name": "image-sparkles",
+  "intent": "the sparkle twinkles at the corner: a picture made with AI",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.7
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        17.5,
+        17
+      ],
+      "amount": 1,
+      "duration": 1.8,
+      "delay": 0.1
+    },
+    "A": {
+      "preset": "float",
+      "amount": 0.5,
+      "duration": 3.2,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "image",
+      "effect": "scale"
+    },
+    {
+      "to": "sparkles",
+      "effect": "morph"
+    },
+    {
+      "to": "image-plus",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "loader-circle",
+  "category": "status",
+  "description": "An open circular arc that spins while content loads or work is in progress.",
+  "aliases": [
+    "spinner-circle",
+    "loading-circle",
+    "circular-loader",
+    "loader-ring",
+    "circle-spinner",
+    "progress-circle",
+    "busy-circle",
+    "loading-ring",
+    "spinner-arc"
+  ],
+  "synonyms": [
+    "loading",
+    "spinner",
+    "busy",
+    "wait",
+    "waiting",
+    "processing",
+    "in progress",
+    "pending",
+    "working",
+    "buffering",
+    "refreshing",
+    "syncing",
+    "please wait",
+    "throbber",
+    "activity indicator",
+    "progress",
+    "load",
+    "arc",
+    "loader 2"
+  ],
+  "tags": [
+    "loader",
+    "spinner",
+    "loading",
+    "progress",
+    "busy"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 A9.5 9.5 0 1 1 2.5 12",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": []
+}

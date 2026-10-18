@@ -1,0 +1,67 @@
+{
+  "name": "database-backup",
+  "category": "development",
+  "description": "A database with a circular restore arrow, for backups, snapshots and restoring data.",
+  "aliases": [
+    "db-backup",
+    "database-restore",
+    "db-restore",
+    "data-backup",
+    "backup-database",
+    "restore-database",
+    "db-snapshot",
+    "database-snapshot"
+  ],
+  "tags": [
+    "database",
+    "backup",
+    "restore",
+    "data",
+    "storage",
+    "history"
+  ],
+  "paths": [
+    {
+      "d": "M20 5.5 A8 3 0 1 1 4 5.5 A8 3 0 1 1 20 5.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4 5.5 V18.5 A8 3 0 0 0 12 21.5 M20 11 V5.5",
+      "plate": "K"
+    },
+    {
+      "d": "M4 12 A8 3 0 0 0 11 14.98",
+      "plate": "A"
+    },
+    {
+      "d": "M13.5 17.5 A4 4 0 1 0 14.67 14.67",
+      "plate": "S"
+    },
+    {
+      "d": "M14.5 11.5 V14.5 H17.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4 5.5 A8 3 0 0 1 20 5.5 V11 A7 7 0 0 0 12 21.5 A8 3 0 0 1 4 18.5 Z"
+  ],
+  "cutouts": [
+    "M2.5 5.5 H4 A8 3 0 0 0 20 5.5 H21.5",
+    "M2.5 12 H4 A8 3 0 0 0 11 14.98"
+  ],
+  "synonyms": [
+    "backups",
+    "restore",
+    "restore data",
+    "point in time recovery",
+    "snapshot",
+    "disaster recovery",
+    "data recovery",
+    "rollback",
+    "dump",
+    "sql dump",
+    "time machine",
+    "scheduled backup",
+    "recover"
+  ]
+}

@@ -943,15 +943,32 @@
       var picks = exampleValues(k).filter(function (v) { return typeof v === 'string' && v })
       wrap.className = 'lv-field lv-txf'
       wrap.innerHTML = headHtml(id, p, '<span class="lv-count" aria-hidden="true"></span>', true) +
-        '<div class="lv-type" style="--n:' + max + '"><span class="lv-type-cells" aria-hidden="true">' + new Array(max + 1).join('<i></i>') + '</span><input class="lv-type-in" type="text" id="' + id + '" maxlength="' + max + '" autocomplete="off" spellcheck="false" autocapitalize="characters" aria-describedby="' + hintId + '"></div>' +
+        '<div class="lv-type" style="--n:' + max + '"><span class="lv-type-cells" aria-hidden="true">' + new Array(max + 1).join('<i></i>') + '</span><input class="lv-type-in" type="text" id="' + id + '" maxlength="' + max + '" autocomplete="off" autocorrect="off" spellcheck="false" autocapitalize="characters" enterkeyhint="done" inputmode="text" aria-describedby="' + hintId + '"></div>' +
         '<p class="lv-field-hint" id="' + hintId + '">Letters A–Z, numbers 0–9 and % ° : - + / . , ! ? $ € £ ₹ # &amp; * \'</p>' +
         (picks.length > 1 ? '<div class="lv-chips" role="group" aria-label="Ideas">' + picks.map(function (v) { return '<button type="button" class="lv-chip" data-v="' + esc(v) + '">' + esc(v) + '</button>' }).join('') + '</div>' : '')
       var tx = $('input', wrap), cnt = $('.lv-count', wrap), h = $('.lv-field-hint', wrap), okHint = h.innerHTML, box = $('.lv-type', wrap)
+      var cells = $$('.lv-type-cells i', wrap), shown = ''
+      // the cells draw the value (one character each) and the caret: the next empty cell, or the last when full
+      function paintCells(v) {
+        var chars = Array.from(v)
+        cells.forEach(function (c, i) {
+          var ch = chars[i] || ''
+          if (c.textContent !== ch) { c.textContent = ch; if (ch && i >= Array.from(shown).length) { c.classList.remove('is-new'); void c.offsetWidth; c.classList.add('is-new') } }
+          c.classList.toggle('is-full', !!ch)
+          c.classList.toggle('is-caret', i === Math.min(chars.length, max - 1))
+        })
+        shown = v
+      }
+      // the caret always sits at the end: a label is typed and deleted from its end, like a label maker
+      function toEnd() { try { var n = tx.value.length; tx.setSelectionRange(n, n) } catch (e) { } }
+      ;['focus', 'click', 'keyup', 'select'].forEach(function (ev) { tx.addEventListener(ev, function () { setTimeout(toEnd, 0) }) })
+      tx.addEventListener('keydown', function (e) { if (e.key === 'Enter') tx.blur() })
       function check() {
         var v = tx.value.toUpperCase()
-        if (tx.value !== v) { var c = tx.selectionStart; tx.value = v; try { tx.setSelectionRange(c, c) } catch (e) { } }
+        if (tx.value !== v) { tx.value = v; toEnd() }
         cnt.textContent = v.length + ' / ' + max
         box.style.setProperty('--len', v.length)
+        paintCells(v)
         var o = {}; o[k] = v
         var bad = (L.validate ? L.validate(name, o) : []).filter(function (m) { return m.indexOf(k + '=') === 0 })
         var chars = bad.length && /not in the font: (.*)$/.exec(bad[0])
@@ -1093,6 +1110,8 @@
     }
     var hintUsed = false
     function hideHint() { if (hintUsed) return; hintUsed = true; if (hintEl) hintEl.classList.add('is-gone') }
+    // the hint has done its job once the value is set any way at all (the fields, the examples, the chips)
+    ;['input', 'change', 'click'].forEach(function (ev) { ctrls.addEventListener(ev, function (e) { if (e.isTrusted) hideHint() }) })
     if (G) {
       art.setAttribute('data-g', G.mode)
       if (hintEl) { hintEl.innerHTML = '<span>' + esc(hintText()) + '</span>'; hintEl.hidden = false }

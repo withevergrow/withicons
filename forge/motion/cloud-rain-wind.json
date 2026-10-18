@@ -1,0 +1,50 @@
+{
+  "name": "cloud-rain-wind",
+  "intent": "cloud drifts while the wind sweeps the rain sideways",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.45,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pass",
+      "dir": 135,
+      "amount": 0.5,
+      "duration": 1.4,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        9
+      ]
+    },
+    {
+      "preset": "nudge",
+      "dir": 180
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-rain",
+      "effect": "fade"
+    },
+    {
+      "to": "wind",
+      "effect": "slide-left"
+    },
+    {
+      "to": "umbrella",
+      "effect": "blur"
+    }
+  ]
+}

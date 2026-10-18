@@ -1,5 +1,5 @@
 // Live icon: Wi-Fi strength, 0-3 arcs. Unlit arcs stay as dotted ghosts so strength reads without colour.
-import { WIFI, dotsOnArc, sector } from './_parts-power.mjs'
+import { WIFI, dashesOnArc, sector } from './_parts-power.mjs'
 import { arc, circle } from './_layout.mjs'
 import { live } from './_font.mjs'
 
@@ -20,7 +20,7 @@ export default live({
     const paths = [{ d: circle(cx, cy, WIFI.dotR), plate: 'K' }]
     radii.forEach((r, i) => {
       if (i < strength) paths.push({ d: arc(cx, cy, r, -a, a), plate: 'K' })
-      else if (ghost) for (const d of dotsOnArc(cx, cy, r, -a, a, 6)) paths.push({ d, plate: 'A' })
+      else if (ghost) for (const d of dashesOnArc(cx, cy, r, -a, a)) paths.push({ d, plate: 'A' })
     })
     // filled styles: the wedge up to the outermost lit arc, with the white bands between arcs knocked out
     if (!strength) return { paths, fills: [circle(cx, cy, WIFI.dotR + 1)], cutouts: [] }

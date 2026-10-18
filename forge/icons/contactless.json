@@ -1,0 +1,67 @@
+{
+  "name": "contactless",
+  "category": "commerce",
+  "description": "The contactless symbol, four widening arcs, for tap-to-pay cards, NFC payments and wireless card readers.",
+  "aliases": [
+    "tap-to-pay",
+    "nfc",
+    "contactless-payment",
+    "tap-and-pay",
+    "wireless-payment",
+    "rfid",
+    "tap-pay",
+    "nfc-payment"
+  ],
+  "tags": [
+    "payment",
+    "nfc",
+    "tap",
+    "card",
+    "wireless",
+    "contactless"
+  ],
+  "paths": [
+    {
+      "d": "M4 9 A4 4 0 0 1 4 15",
+      "plate": "K"
+    },
+    {
+      "d": "M8 7 A7 7 0 0 1 8 17",
+      "plate": "K"
+    },
+    {
+      "d": "M12 5 A10 10 0 0 1 12 19",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 A13 13 0 0 1 16 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "tap",
+    "tap card",
+    "tap to pay",
+    "near field communication",
+    "mobile payment",
+    "phone payment",
+    "card reader",
+    "pos",
+    "payment terminal",
+    "wave",
+    "signal",
+    "smart card",
+    "contact free",
+    "touch free",
+    "pay",
+    "payment",
+    "rfid tag",
+    "contactless card",
+    "nfc tag",
+    "paypass",
+    "paywave",
+    "contactles"
+  ]
+}

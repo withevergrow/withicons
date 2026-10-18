@@ -1,0 +1,63 @@
+{
+  "name": "chart-network",
+  "category": "charts",
+  "description": "Data points joined into a small network over chart axes, for network graphs, relationships and connected data.",
+  "aliases": [
+    "network-chart",
+    "node-graph",
+    "graph-network",
+    "knowledge-graph",
+    "connection-graph",
+    "relationship-chart",
+    "node-chart",
+    "link-chart"
+  ],
+  "tags": [
+    "chart",
+    "graph",
+    "network",
+    "nodes",
+    "data",
+    "relationships"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3.5 V18.5 A2 2 0 0 0 5.5 20.5 H20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.25 15 A1.75 1.75 0 1 1 6.75 15 A1.75 1.75 0 1 1 10.25 15 Z M13.75 8.5 A1.75 1.75 0 1 1 10.25 8.5 A1.75 1.75 0 1 1 13.75 8.5 Z M17.75 14.5 A1.75 1.75 0 1 1 14.25 14.5 A1.75 1.75 0 1 1 17.75 14.5 Z M21.25 6.5 A1.75 1.75 0 1 1 17.75 6.5 A1.75 1.75 0 1 1 21.25 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.33 13.46 L11.17 10.04 M12.97 9.96 L15.03 13.04 M10.25 14.88 L14.25 14.62 M16.7 12.9 L18.8 8.1",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M10.25 15 A1.75 1.75 0 1 1 6.75 15 A1.75 1.75 0 1 1 10.25 15 Z",
+    "M13.75 8.5 A1.75 1.75 0 1 1 10.25 8.5 A1.75 1.75 0 1 1 13.75 8.5 Z",
+    "M17.75 14.5 A1.75 1.75 0 1 1 14.25 14.5 A1.75 1.75 0 1 1 17.75 14.5 Z",
+    "M21.25 6.5 A1.75 1.75 0 1 1 17.75 6.5 A1.75 1.75 0 1 1 21.25 6.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "edges",
+    "connections",
+    "graph theory",
+    "relationships",
+    "data",
+    "links",
+    "topology",
+    "social graph",
+    "cluster",
+    "dependencies",
+    "mind map",
+    "constellation",
+    "data points",
+    "connected dots",
+    "insights",
+    "graph database",
+    "linked data"
+  ]
+}

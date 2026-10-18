@@ -1,0 +1,51 @@
+{
+  "name": "arrow-big-up",
+  "category": "arrows",
+  "description": "A wide block arrow pointing up, the Shift key, upvotes and strong upward emphasis.",
+  "aliases": [
+    "shift-key",
+    "keyboard-shift",
+    "big-arrow-up",
+    "block-arrow-up",
+    "fat-arrow-up",
+    "thick-arrow-up",
+    "bold-arrow-up",
+    "caps-lock"
+  ],
+  "tags": [
+    "arrow",
+    "up",
+    "shift",
+    "keyboard",
+    "upvote",
+    "bold"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 L21 11.5 H15.5 V19.5 A1.5 1.5 0 0 1 14 21 H10 A1.5 1.5 0 0 1 8.5 19.5 V11.5 H3 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L21 11.5 H15.5 V19.5 A1.5 1.5 0 0 1 14 21 H10 A1.5 1.5 0 0 1 8.5 19.5 V11.5 H3 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "shift",
+    "uppercase",
+    "capital letters",
+    "caps",
+    "capitals",
+    "upvote",
+    "vote up",
+    "increase",
+    "raise",
+    "level up",
+    "boost",
+    "promote",
+    "move up",
+    "important",
+    "keyboard key",
+    "modifier key"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "user-star",
+  "intent": "the person rests while the star twinkles: a favourite member",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 1,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        17.25,
+        16.5
+      ],
+      "amount": 1,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "tada"
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "user",
+      "effect": "fade"
+    },
+    {
+      "to": "star",
+      "effect": "scale"
+    },
+    {
+      "to": "user-heart",
+      "effect": "morph"
+    }
+  ]
+}

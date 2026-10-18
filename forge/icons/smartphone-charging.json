@@ -1,0 +1,60 @@
+{
+  "name": "smartphone-charging",
+  "category": "devices",
+  "description": "A smartphone with a lightning bolt on its screen, for a phone that is charging or plugged in.",
+  "aliases": [
+    "phone-charging",
+    "mobile-charging",
+    "charging-phone",
+    "cellphone-charging",
+    "phone-charge",
+    "mobile-battery-charging",
+    "charge-phone",
+    "phone-power"
+  ],
+  "tags": [
+    "devices",
+    "mobile",
+    "charging",
+    "power",
+    "battery"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 2.5 H15.5 A2.5 2.5 0 0 1 18 5 V19 A2.5 2.5 0 0 1 15.5 21.5 H8.5 A2.5 2.5 0 0 1 6 19 V5 A2.5 2.5 0 0 1 8.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13 6 L10 12 H14 L11 18",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M8.5 2.5 H15.5 A2.5 2.5 0 0 1 18 5 V19 A2.5 2.5 0 0 1 15.5 21.5 H8.5 A2.5 2.5 0 0 1 6 19 V5 A2.5 2.5 0 0 1 8.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M13 6 L10 12 H14 L11 18"
+  ],
+  "synonyms": [
+    "charger",
+    "phone charger",
+    "wireless charging",
+    "fast charge",
+    "quick charge",
+    "power bank",
+    "plug in phone",
+    "recharge",
+    "usb charging",
+    "charging station",
+    "phone battery",
+    "battery charging",
+    "magsafe",
+    "qi charging",
+    "low battery",
+    "power up",
+    "charging cable",
+    "smartphone charging",
+    "mobile power",
+    "charing"
+  ]
+}

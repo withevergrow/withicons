@@ -1,0 +1,56 @@
+{
+  "name": "folders",
+  "category": "files",
+  "description": "Two stacked folders for multiple directories, collections or a group of projects.",
+  "aliases": [
+    "multiple-folders",
+    "folder-stack",
+    "stacked-folders",
+    "all-folders",
+    "directories",
+    "folder-group",
+    "folder-copy",
+    "collections"
+  ],
+  "tags": [
+    "folder",
+    "multiple",
+    "stack",
+    "directories",
+    "collection",
+    "files"
+  ],
+  "paths": [
+    {
+      "d": "M7 11 A2 2 0 0 1 9 9 H12 L14 11 H19 A2 2 0 0 1 21 13 V18.5 A2 2 0 0 1 19 20.5 H9 A2 2 0 0 1 7 18.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 16.5 V5 A2 2 0 0 1 5 3 H8 L10 5 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 11 A2 2 0 0 1 9 9 H12 L14 11 H19 A2 2 0 0 1 21 13 V18.5 A2 2 0 0 1 19 20.5 H9 A2 2 0 0 1 7 18.5 Z",
+    "M3 16.5 V5 A2 2 0 0 1 5 3 H8 L10 5 H17 V7 H5 V16.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "many folders",
+    "several folders",
+    "projects",
+    "albums",
+    "categories",
+    "groups",
+    "workspaces",
+    "copy folder",
+    "duplicate folder",
+    "library",
+    "archive",
+    "file manager",
+    "all files",
+    "organise",
+    "organize",
+    "storage"
+  ]
+}

@@ -9,7 +9,7 @@
 // _brutal-tune.mjs. Flat on purpose: no defs, no gradients.
 //
 // Variables (role-named, see forge/lib/palette-map.mjs):
-//   --with-brutal-ink     currentColor  outlines AND the hard shadow (flips with `color`)
+//   --with-brutal-ink     #16130F       outlines AND the hard shadow (fixed dark, never white)
 //   --with-brutal-c1      #FFD23F       main body (yellow)
 //   --with-brutal-c2      #FF6BA8       secondary parts, doors, keyholes, pupils (pink)
 //   --with-brutal-c3      #4D7CFE       a second separate field (blue)
@@ -20,6 +20,7 @@
 // silhouette, so it stays whole while the object pops); badges, slashes and their
 // shadow are `wm-s`; colour fields and outline are the object (untagged).
 import { build, loopsD, trace, K } from './_brutal-core.mjs'
+import * as F from './_brutal-field.mjs'
 import { isPerson } from './_people.mjs'
 import { buildPerson, personPalette } from './_brutal-people.mjs'
 import { snowman } from './_brutal-snowman.mjs'
@@ -28,7 +29,18 @@ import { dragon } from './_rich-dragon.mjs'
 export const PALETTE = {
   c1: '#FFD23F', c2: '#FF6BA8', c3: '#4D7CFE', c4: '#3DDC97', accent: '#FF8A3D',
 }
-const paint = k => k === 'ink' ? 'var(--with-brutal-ink, currentColor)' : `var(--with-brutal-${k}, ${PALETTE[k]})`
+// ink is a fixed near-black, never currentColor: white outlines on light pages destroyed the icons
+const INK = 'var(--with-brutal-ink, #16130F)'
+const paint = k => k === 'ink' ? INK : `var(--with-brutal-${k}, ${PALETTE[k]})`
+// a light paper keyline behind object + shadow (the sticker edge): invisible on light pages, it keeps the
+// dark ink outline readable on dark ones
+const PAPER = 'var(--with-brutal-shine, #FFFDF5)'
+function halo(sil, off) {
+  if (!sil) return null
+  const s = Math.round(off / F.H)
+  const H = F.union(F.copy(sil), F.shift(sil, s, s))
+  return F.offset(H, -0.7)
+}
 
 // people avatars (forge/styles/_people.mjs): flat skin c1, hair c2, loud clothing c4 (_brutal-people.mjs)
 function drawPerson(icon) {
@@ -65,6 +77,8 @@ function draw(icon) {
     nodes.push(['path', a])
   }
   // the ink outline is traced once; the hard shadow reuses the silhouette moved down-right
+  add(halo(B.shadow || B.ink, K.OFF), PAPER, K.TOL_C, 0.3, 'wm-shadow')
+  if (B.bshadow) add(halo(B.bshadow, K.BOFF), PAPER, K.TOL_C, 0.3, 'wm-s')
   if (B.echo) add(B.echo, paint('c1'), K.TOL, 0.15, 'wm-shadow', K.OFF, K.OFF)
   if (B.shadow) add(B.shadow, paint('ink'), K.TOL_C, 0.2, 'wm-shadow', K.OFF, K.OFF)
   if (!B.tube) for (const f of B.fields) add(f.f, paint(f.c), K.TOL_C, 0.6)
@@ -73,6 +87,8 @@ function draw(icon) {
   if (B.bshadow) add(B.bshadow, paint('ink'), K.TOL_C, 0.2, 'wm-s', K.BOFF, K.BOFF)
   if (B.badge) add(B.badge, paint('c4'), K.TOL_C, 0.3, 'wm-s')
   add(B.inkS, paint('ink'), K.TOL, 0.15, 'wm-s')
+  // live free text: printed ink, no shadow
+  if (B.text) add(B.text, paint('ink'), K.TOL, 0.05, 'wm-a')
   return nodes
 }
 
@@ -82,7 +98,7 @@ export default {
   kind: 'creative',
   description: 'Neo-brutalism: thick black outlines, flat loud colours and a hard offset shadow, like the boldest startup sites.',
   strokeWidth: false,
-  root: { fill: 'currentColor' },
+  root: { fill: INK },
   render(icon) {
     if (icon && icon.name === 'snowman') { try { return snowman() } catch { /* generic below */ } }
     if (icon && icon.name === 'dragon-head') { try { return dragon('brutal') } catch { /* generic below */ } }
@@ -91,7 +107,7 @@ export default {
       if (nodes.length) return nodes
     } catch { /* degrade below */ }
     try {
-      return (icon.paths || []).filter(p => p && p.d).map(p => ['path', { d: p.d, fill: 'none', stroke: 'currentColor', 'stroke-width': K.W, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }])
+      return (icon.paths || []).filter(p => p && p.d).map(p => ['path', { d: p.d, fill: 'none', stroke: INK, 'stroke-width': K.W, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }])
     } catch { return [] }
   },
 }

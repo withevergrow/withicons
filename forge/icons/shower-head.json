@@ -1,0 +1,62 @@
+{
+  "name": "shower-head",
+  "category": "home",
+  "description": "A shower head on a bent pipe with water drops falling, for showers, bathrooms, hygiene and amenities.",
+  "aliases": [
+    "shower",
+    "showerhead",
+    "rain-shower",
+    "take-a-shower",
+    "shower-spray"
+  ],
+  "tags": [
+    "bathroom",
+    "water",
+    "hygiene",
+    "home",
+    "amenity"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 3.5 H9.5 A2 2 0 0 1 11.5 5.5 V7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 13 A7 5.5 0 0 1 18.5 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 16.5 V17.5 M11.5 16.5 V17.5 M15.5 16.5 V17.5 M9.5 20 V21 M13.5 20 V21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 13 A7 5.5 0 0 1 18.5 13 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "bath",
+    "bathroom",
+    "washroom",
+    "restroom",
+    "wash",
+    "washing",
+    "clean",
+    "hygiene",
+    "rinse",
+    "water",
+    "spray",
+    "drops",
+    "plumbing",
+    "faucet",
+    "en suite",
+    "hotel amenity",
+    "gym shower",
+    "spa",
+    "morning routine",
+    "self care",
+    "shower head",
+    "showers",
+    "shwer"
+  ]
+}

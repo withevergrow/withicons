@@ -1,0 +1,61 @@
+{
+  "name": "columns-3",
+  "category": "layout",
+  "description": "A frame split into three vertical columns, for three-column layouts and boards.",
+  "aliases": [
+    "three-columns",
+    "columns-three",
+    "three-column-layout",
+    "tri-column",
+    "triple-column",
+    "three-pane",
+    "three-way-split",
+    "col-3"
+  ],
+  "tags": [
+    "layout",
+    "columns",
+    "split",
+    "panes",
+    "grid",
+    "three"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 3 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M15 3 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M9 2 V22",
+    "M15 2 V22"
+  ],
+  "synonyms": [
+    "three",
+    "layout",
+    "split",
+    "panes",
+    "kanban",
+    "board",
+    "three up",
+    "table columns",
+    "page layout",
+    "newspaper",
+    "magazine",
+    "sections",
+    "triptych",
+    "wireframe",
+    "vertical split"
+  ]
+}

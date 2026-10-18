@@ -1,0 +1,52 @@
+{
+  "name": "regex",
+  "category": "text",
+  "description": "A dot and an asterisk, the .* of a regular expression, for pattern matching and regex search.",
+  "aliases": [
+    "regular-expression",
+    "regexp",
+    "pattern-match",
+    "wildcard",
+    "regex-search",
+    "dot-star",
+    "match-pattern",
+    "use-regex"
+  ],
+  "tags": [
+    "search",
+    "pattern",
+    "code",
+    "developer",
+    "text"
+  ],
+  "paths": [
+    {
+      "d": "M15.5 3 V14 M10.75 5.75 L20.25 11.25 M10.75 11.25 L20.25 5.75",
+      "plate": "K"
+    },
+    {
+      "d": "M6.75 18 A0.75 0.75 0 1 1 5.25 18 A0.75 0.75 0 1 1 6.75 18 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.75 18 A1.75 1.75 0 1 1 4.25 18 A1.75 1.75 0 1 1 7.75 18 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "regular expressions",
+    "pattern matching",
+    "wildcard search",
+    "glob",
+    "grep",
+    "find with pattern",
+    "search pattern",
+    "match any",
+    "asterisk",
+    "star",
+    "advanced search",
+    "expression",
+    "re",
+    "find pattern"
+  ]
+}

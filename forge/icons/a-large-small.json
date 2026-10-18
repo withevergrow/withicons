@@ -1,0 +1,61 @@
+{
+  "name": "a-large-small",
+  "category": "text",
+  "description": "A large A beside a small A, for font size, text size and reading preferences.",
+  "aliases": [
+    "font-size",
+    "text-size",
+    "resize-text",
+    "text-scale",
+    "font-scale",
+    "letter-size",
+    "type-size",
+    "text-zoom",
+    "font-sizes"
+  ],
+  "tags": [
+    "text",
+    "font",
+    "size",
+    "typography",
+    "accessibility",
+    "format"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 19 L7 4 L11.5 19",
+      "plate": "K"
+    },
+    {
+      "d": "M4 14 H10",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 19 L18.5 10 L21.5 19",
+      "plate": "A"
+    },
+    {
+      "d": "M16.5 16 H20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "bigger text",
+    "smaller text",
+    "increase font",
+    "decrease font",
+    "larger text",
+    "enlarge text",
+    "reading size",
+    "accessibility text",
+    "dynamic type",
+    "scale text",
+    "zoom text",
+    "large font",
+    "small font",
+    "text settings",
+    "big a small a"
+  ]
+}

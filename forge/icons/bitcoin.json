@@ -1,0 +1,65 @@
+{
+  "name": "bitcoin",
+  "category": "commerce",
+  "description": "The bitcoin sign, a B with two strokes through the top and bottom, for crypto payments, wallets and prices in BTC.",
+  "aliases": [
+    "btc",
+    "bitcoin-sign",
+    "bitcoin-symbol",
+    "currency-bitcoin",
+    "cryptocurrency",
+    "crypto-currency",
+    "xbt",
+    "money-btc"
+  ],
+  "tags": [
+    "crypto",
+    "money",
+    "finance",
+    "payment",
+    "blockchain"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 5 H12.5 A3.25 3.25 0 0 1 12.5 11.5 H13.5 A3.75 3.75 0 0 1 13.5 19 H4.5 M6.5 5 V19 M6.5 11.5 H12.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 2.5 V5 M12.5 2.5 V5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 19 V21.5 M12.5 19 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "₿",
+    "crypto",
+    "satoshi",
+    "sats",
+    "blockchain",
+    "digital currency",
+    "digital money",
+    "crypto payment",
+    "pay with crypto",
+    "crypto wallet",
+    "web3",
+    "mining",
+    "bitcoin price",
+    "coin",
+    "token",
+    "exchange",
+    "trading",
+    "hodl",
+    "decentralized",
+    "defi",
+    "bit coin",
+    "bitcon",
+    "btc price",
+    "money",
+    "price"
+  ]
+}

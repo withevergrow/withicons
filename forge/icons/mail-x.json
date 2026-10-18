@@ -1,0 +1,66 @@
+{
+  "name": "mail-x",
+  "category": "communication",
+  "description": "An envelope with an x at its corner, for failed, bounced, rejected or deleted email.",
+  "aliases": [
+    "mail-failed",
+    "email-failed",
+    "email-bounced",
+    "mail-bounced",
+    "delete-email",
+    "email-x",
+    "envelope-x",
+    "mail-delete",
+    "email-rejected",
+    "remove-email"
+  ],
+  "tags": [
+    "email",
+    "envelope",
+    "delete",
+    "failed",
+    "error",
+    "remove"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 11.5 V6.5 A2 2 0 0 0 19.5 4.5 H4.5 A2 2 0 0 0 2.5 6.5 V17.5 A2 2 0 0 0 4.5 19.5 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 7 L12 13.5 L21.5 7",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 15.5 L20.5 20.5",
+      "plate": "S"
+    },
+    {
+      "d": "M20.5 15.5 L15.5 20.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V12.5 A7 7 0 0 0 12 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z"
+  ],
+  "cutouts": [
+    "M5 8.71 L12 13.5 L19 8.71"
+  ],
+  "synonyms": [
+    "bounce",
+    "bounced",
+    "undeliverable",
+    "not delivered",
+    "send failed",
+    "delete mail",
+    "discard",
+    "unsubscribe",
+    "cancel email",
+    "invalid email",
+    "wrong address",
+    "blocked sender",
+    "spam",
+    "remove address",
+    "close"
+  ]
+}

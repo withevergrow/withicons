@@ -1,0 +1,50 @@
+{
+  "name": "file-chart",
+  "intent": "the bars inside the report fill in like fresh numbers",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 0.8,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw",
+      "duration": 1.2
+    },
+    {
+      "preset": "nod",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-bar",
+      "effect": "morph"
+    },
+    {
+      "to": "file-text",
+      "effect": "fade"
+    },
+    {
+      "to": "file-spreadsheet",
+      "effect": "flip"
+    }
+  ]
+}

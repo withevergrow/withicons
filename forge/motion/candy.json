@@ -1,0 +1,36 @@
+{
+  "name": "candy",
+  "intent": "the wrapped sweet rocks side to side, twisting in its wrapper",
+  "loop": {
+    "preset": "rock",
+    "amount": 0.4,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "tada",
+    "amount": 0.7
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "twinkle",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "candy@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "lollipop",
+      "effect": "fade"
+    }
+  ]
+}

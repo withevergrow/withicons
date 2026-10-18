@@ -1,0 +1,49 @@
+{
+  "name": "list-x",
+  "intent": "the x shakes as the whole list is cleared",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "wiggle",
+      "origin": [
+        18,
+        18
+      ],
+      "amount": 0.9,
+      "duration": 2.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "list",
+      "effect": "fade"
+    },
+    {
+      "to": "list-plus",
+      "effect": "rotate"
+    },
+    {
+      "to": "list-checks",
+      "effect": "morph"
+    }
+  ]
+}

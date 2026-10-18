@@ -1,0 +1,47 @@
+{
+  "name": "circle-dashed",
+  "intent": "the dashed ring turns slowly, waiting for work to begin",
+  "loop": {
+    "preset": "spin",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.9
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "breathe",
+      "origin": [
+        12,
+        12
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "circle",
+      "effect": "fade"
+    },
+    {
+      "to": "circle-dot",
+      "effect": "scale"
+    },
+    {
+      "to": "circle-check-big",
+      "effect": "morph"
+    }
+  ]
+}

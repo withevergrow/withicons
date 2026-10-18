@@ -1,0 +1,54 @@
+{
+  "name": "mail-warning",
+  "intent": "the exclamation flickers at the corner: check this email first",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "origin": [
+        18,
+        17.5
+      ],
+      "amount": 0.9,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "fade"
+    },
+    {
+      "to": "mail-check",
+      "effect": "scale"
+    },
+    {
+      "to": "mail-x",
+      "effect": "flip"
+    }
+  ]
+}

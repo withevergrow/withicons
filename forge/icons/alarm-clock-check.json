@@ -1,0 +1,76 @@
+{
+  "name": "alarm-clock-check",
+  "category": "time",
+  "description": "An alarm clock with a check mark on its face, for an alarm that is set, a confirmed wake-up time or a finished routine.",
+  "aliases": [
+    "alarm-set",
+    "alarm-check",
+    "alarm-on",
+    "alarm-done",
+    "alarm-confirmed",
+    "alarm-active",
+    "wake-up-set"
+  ],
+  "tags": [
+    "alarm",
+    "check",
+    "time",
+    "set",
+    "reminder",
+    "morning"
+  ],
+  "paths": [
+    {
+      "d": "M19 12.5 A7 7 0 1 1 5 12.5 A7 7 0 1 1 19 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 7 A2.83 2.83 0 0 1 7 3 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17 3 A2.83 2.83 0 0 1 21 7 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7 17.5 L4.5 20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17 17.5 L19.5 20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 13 L11 15 L15 10.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M19 12.5 A7 7 0 1 1 5 12.5 A7 7 0 1 1 19 12.5 Z",
+    "M3 7 A2.83 2.83 0 0 1 7 3 Z",
+    "M17 3 A2.83 2.83 0 0 1 21 7 Z"
+  ],
+  "cutouts": [
+    "M9 13 L11 15 L15 10.5"
+  ],
+  "synonyms": [
+    "set alarm",
+    "alarm enabled",
+    "wake up",
+    "morning routine",
+    "routine done",
+    "habit done",
+    "habit tracker",
+    "reminder set",
+    "scheduled",
+    "time confirmed",
+    "on time",
+    "woke up",
+    "ready",
+    "confirmed",
+    "done",
+    "complete",
+    "checked",
+    "daily task"
+  ]
+}

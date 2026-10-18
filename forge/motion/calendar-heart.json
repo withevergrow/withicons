@@ -1,0 +1,10 @@
+{
+  "name": "calendar-heart",
+  "intent": "the heart beats on the page like a date you look forward to",
+  "loop": { "preset": "pulse", "origin": [12, 13], "amount": 0.25, "duration": 2.4 },
+  "hover": { "preset": "beat", "origin": [12, 15.5], "amount": 0.8 },
+  "parts": { "A": { "preset": "beat", "origin": [12, 15.5], "amount": 0.8, "duration": 1.2, "delay": 0.05 } },
+  "deco": "twinkle",
+  "alt": [{ "preset": "pop" }, { "preset": "tada", "amount": 0.6 }],
+  "swap": [{ "to": "calendar", "effect": "fade" }, { "to": "heart", "effect": "morph" }, { "to": "calendar-heart@solid", "effect": "scale" }]
+}

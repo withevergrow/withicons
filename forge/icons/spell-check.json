@@ -1,0 +1,65 @@
+{
+  "name": "spell-check",
+  "category": "text",
+  "description": "Letters A and B over a check mark, for spell checking, proofreading and grammar tools.",
+  "aliases": [
+    "spellcheck",
+    "spelling",
+    "spell-checker",
+    "proofread",
+    "proofing",
+    "check-spelling",
+    "grammar-check",
+    "typo-check",
+    "abc-check"
+  ],
+  "tags": [
+    "text",
+    "spelling",
+    "grammar",
+    "check",
+    "editor",
+    "proofread"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 13.5 L6 3 L9.5 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 10.5 H8.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 3 H15.5 A2.5 2.5 0 0 1 15.5 8 H16 A2.75 2.75 0 0 1 16 13.5 H12.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 8 H15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 18.5 L13.5 21.5 L21.5 13.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "spelling check",
+    "grammar",
+    "typo",
+    "typos",
+    "correct spelling",
+    "autocorrect",
+    "proofreading",
+    "dictionary",
+    "misspelled",
+    "misspelling",
+    "writing assistant",
+    "review text",
+    "spelling mistakes",
+    "abc",
+    "text correct"
+  ]
+}

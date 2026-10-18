@@ -1,0 +1,60 @@
+{
+  "name": "heart-plus",
+  "intent": "the heart beats and the plus pops as it joins your favourites",
+  "loop": {
+    "preset": "beat",
+    "origin": [
+      12,
+      12.5
+    ],
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      12.5
+    ],
+    "amount": 1.2
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        12,
+        12.5
+      ],
+      "amount": 0.9,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "beat",
+      "origin": [
+        12,
+        12.5
+      ]
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart",
+      "effect": "morph"
+    },
+    {
+      "to": "heart@solid",
+      "effect": "scale"
+    }
+  ]
+}

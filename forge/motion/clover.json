@@ -1,0 +1,45 @@
+{
+  "name": "clover",
+  "intent": "the lucky clover twirls slowly on its stem",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      11.5
+    ],
+    "amount": 0.5,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      12,
+      11.5
+    ],
+    "duration": 0.9
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.7
+    },
+    {
+      "preset": "breathe",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "clover@solid",
+      "effect": "spin"
+    },
+    {
+      "to": "sparkles",
+      "effect": "fade"
+    }
+  ]
+}

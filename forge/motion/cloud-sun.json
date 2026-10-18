@@ -16,8 +16,8 @@
     "A": {
       "preset": "pulse",
       "origin": [
-        9.5,
-        9.5
+        10,
+        10
       ],
       "amount": 0.6,
       "duration": 3.6,

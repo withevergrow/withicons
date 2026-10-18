@@ -11,6 +11,8 @@
 
 import * as G from './_pixel-core.mjs'
 import { pixelText, fitPixelText } from './_pixel-text.mjs'
+import { COUNT_ICONS, countSprite } from './_pixel-counts.mjs'
+import { labelCompose } from './_pixel-labels.mjs'
 
 const pad = rows => { const out = rows.map(r => (r + '.'.repeat(16)).slice(0, 16)); while (out.length < 16) out.push('.'.repeat(16)); return out }
 
@@ -380,11 +382,42 @@ function tagLabel(icon) {
   return { ink, tone, glint, text }
 }
 
+// ── digital clock ───────────────────────────────────────────────────────────────────────────────────────
+// "09:41" is 17 cells in the narrowest bitmap digits, wider than the canvas, so the framed pixel clock is a portrait
+// display on two feet with the hours over the minutes in 4-row digits (ink on a matte face); bare, 5-row digits alone.
+function digitalClock(icon) {
+  const ink = G.grid(), tone = G.grid(), glint = G.grid(), text = G.grid()
+  const put = (g, i, j, v = 1) => { if (G.inb(i, j)) g[G.ix(i, j)] = v }
+  const T = pixelText(icon)
+  if (!T) return null
+  const chars = T.lines.slice().sort((a, b) => a.cy - b.cy).map(l => l.chars).join('').replace(/[^0-9]/g, '')
+  if (chars.length < 3) return null
+  const hh = chars.slice(0, chars.length - 2), mm = chars.slice(-2)
+  const framed = (icon.fills || []).length > 0
+  if (framed) {
+    for (let i = 3; i <= 12; i++) { put(ink, i, 1); put(ink, i, 13) }
+    for (let j = 2; j <= 12; j++) { put(ink, 2, j); put(ink, 13, j); for (let i = 3; i <= 12; i++) put(tone, i, j) }
+    for (const i of [4, 11]) put(ink, i, 14)
+  }
+  // framed: 4-row digits at rows 3..6 and 8..11 inside the 1..13 display (a clear row above, between and below)
+  const rows = framed ? [3, 8] : [2, 9], hRows = framed ? 4 : 5
+  ;[hh, mm].forEach((str, k) => {
+    const t = fitPixelText(str, framed ? 10 : 14, hRows)
+    if (!t) return
+    const i0 = Math.round(8 - t.w / 2)
+    for (const [a, b] of t.cells) { put(ink, i0 + a, rows[k] + b); put(tone, i0 + a, rows[k] + b, 0); put(text, i0 + a, rows[k] + b) }
+  })
+  return { ink, tone, glint, text }
+}
+
 // a composed live icon: { ink, tone, glint, text } before lighting (text: the cells of stamped glyphs; or
 // T + rest when the caller still has to stamp the text), or null
 export function liveCompose(icon) {
   if (!icon || !icon.params) return null
   if (CAL.has(icon.name)) return calendar(icon)
+  if (COUNT_ICONS.has(icon.name)) return countSprite(icon)
+  if (icon.name === 'digital-clock') return digitalClock(icon)
+  if (icon.name === 'folder-label' || icon.name === 'file-type' || icon.name === 'battery-charging-level') return labelCompose(icon)
   if (icon.name === 'thermometer-level') return thermometer(icon)
   if (icon.name === 'dice') return dice(icon)
   if (icon.name === 'uv-index') return uvIndex(icon)

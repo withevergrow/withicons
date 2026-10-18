@@ -1,0 +1,10 @@
+{
+  "name": "chart-bar-increasing",
+  "intent": "the bars stretch longer step by step like growth adding up",
+  "loop": { "preset": "fill", "duration": 2.4 },
+  "hover": { "preset": "nudge", "dir": 0, "amount": 0.6, "duration": 0.6 },
+  "parts": { "A": { "preset": "pulse", "origin": [3.5, 12], "amount": 0.25 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "jelly", "origin": [3.5, 12], "amount": 0.6 }, { "preset": "pop", "origin": [3.5, 12] }],
+  "swap": [{ "to": "chart-bar-decreasing", "effect": "flip" }, { "to": "trending-up", "effect": "fade" }, { "to": "chart-bar-horizontal", "effect": "fade" }]
+}

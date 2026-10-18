@@ -1,0 +1,43 @@
+{
+  "name": "regex",
+  "intent": "the asterisk turns while the dot waits, matching any pattern",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "origin": [
+      15.5,
+      8.5
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "bounce",
+      "amount": 0.4,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "text-search",
+      "effect": "fade"
+    },
+    {
+      "to": "code",
+      "effect": "morph"
+    }
+  ]
+}

@@ -39,6 +39,8 @@ export async function loadMorphs(names) {
   const list = (await import(pathToFileURL(path.join(LOADER_DIR, '_morphs.mjs')).href)).default
   const { icon } = await import(pathToFileURL(path.join(LOADER_DIR, '_kit.mjs')).href)
   const { morphKeys, EFFECTS } = await import(pathToFileURL(path.join(ROOT, 'packages', 'loaders', 'src', 'effects.js')).href)
+  for (const m of list) for (const n of m.icons || []) if (typeof n !== 'string' || /^(loader|icon):|^</i.test(n))
+    throw new Error(`morph preset ${m.name}: item ${JSON.stringify(n)} must be a plain library icon name (presets chain icons; "loader:<name>" is runtime only)`)
   return list.filter(m => !names || names.includes(m.name)).map(m => normalize({
     name: m.name, title: m.title, group: 'morph', intent: m.intent, aliases: m.aliases, tags: ['loading', 'morph', ...m.icons],
     synonyms: m.synonyms || [], effect: m.effect,
@@ -120,6 +122,8 @@ function drawPart(style, name, skel) {
   RENDERS.set(key, nodes)
   return nodes
 }
+/** Forget every cached part drawing and chrome probe, so the next compile() really draws again (determinism checks). */
+export function resetCaches() { RENDERS.clear(); CHROME.clear() }
 // a node's markup with every id and url reference blanked: what the node LOOKS like, wherever its gradients live
 const sig = n => nodesToMarkup([n]).replace(/(\sid="|url\(#|href="#)[^")]+/g, '$1#')
 // Style chrome: nodes a style draws whatever the glyph is (a tile, its rim, a corner sparkle). Found by drawing two

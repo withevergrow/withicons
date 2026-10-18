@@ -1,0 +1,65 @@
+{
+  "name": "cloud-hail",
+  "category": "weather",
+  "description": "A cloud dropping round hailstones, for hail, hailstorms and severe weather warnings.",
+  "aliases": [
+    "hailstorm",
+    "hailstones",
+    "hail-cloud",
+    "hail-storm",
+    "ice-pellets",
+    "graupel",
+    "hail-shower"
+  ],
+  "tags": [
+    "weather",
+    "hail",
+    "storm",
+    "forecast",
+    "ice"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 19 A1 1 0 1 1 5.5 19 A1 1 0 1 1 7.5 19 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M13 19 A1 1 0 1 1 11 19 A1 1 0 1 1 13 19 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M18.5 19 A1 1 0 1 1 16.5 19 A1 1 0 1 1 18.5 19 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z",
+    "M7.5 19 A1 1 0 1 1 5.5 19 A1 1 0 1 1 7.5 19 Z",
+    "M13 19 A1 1 0 1 1 11 19 A1 1 0 1 1 13 19 Z",
+    "M18.5 19 A1 1 0 1 1 16.5 19 A1 1 0 1 1 18.5 19 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "hail warning",
+    "severe weather",
+    "ice",
+    "ice balls",
+    "frozen rain",
+    "sleet",
+    "storm",
+    "thunderstorm hail",
+    "car damage",
+    "crop damage",
+    "cold",
+    "freezing rain",
+    "weather alert",
+    "insurance claim",
+    "hailing",
+    "hailstone",
+    "pellets"
+  ]
+}

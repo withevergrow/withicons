@@ -1,6 +1,6 @@
 {
   "name": "hard-drive",
-  "intent": "the read arm sweeps across the platter while data moves",
+  "intent": "the activity light flickers while data moves",
   "loop": {
     "preset": "pulse",
     "amount": 0.25,
@@ -10,20 +10,16 @@
     "preset": "jelly",
     "origin": [
       12,
-      22
+      19
     ],
     "amount": 0.5,
     "duration": 0.6
   },
   "parts": {
     "A": {
-      "preset": "rock",
-      "origin": [
-        12,
-        13.5
-      ],
+      "preset": "flicker",
       "amount": 0.8,
-      "duration": 2.8,
+      "duration": 1.6,
       "delay": 0.06
     }
   },

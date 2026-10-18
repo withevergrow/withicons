@@ -69,9 +69,14 @@ export const FRONT_WORDS = new Set(words(`
   git code braces terminal command api variable webhook workflow
 `))
 
+// Live icons (forge/DYNAMIC.md) carry a value that must face the viewer: they are FRONT symbols, except the few that
+// are solid objects whose value sits on their front face
+export const LIVE_OBJECTS = new Set(words(`calendar-date calendar-weekday calendar-month calendar-tear calendar-event calendar-range dice`))
+
 export function modeOf(icon) {
   const name = String(icon.name || ''), cat = String(icon.category || '')
   if (name.startsWith('avatar-')) return 'avatar'
+  if (icon.params) return LIVE_OBJECTS.has(name) ? 'object' : 'front'
   if (FRONT_NAMES.has(name)) return 'front'
   if (OBJECT_NAMES.has(name)) return 'object'
   const ws = name.split('-')
@@ -164,6 +169,7 @@ const NATURAL = [
   ['bath toilet refrigerator washing-machine', C.white, [C.silver, C.sky]],
   ['door door-open door-closed', C.wood, [C.gold, C.brown]],
   ['clock alarm-clock timer hourglass gauge compass', C.red, [C.cream, C.dark]],
+  ['watch-time', C.red, [C.cream, C.dark]],
   ['calendar calendar-check calendar-days calendar-plus calendar-clock calendar-x', C.white, [C.red, C.dark]],
   ['book notebook notebook-pen library address-book', C.blue, [C.cream, C.gold]],
   ['folder folder-open folder-plus folder-minus folder-search archive', C.amber, [C.cream, C.brown]],

@@ -12,10 +12,11 @@
 // outline follows, so a moving part's tint moves with it.
 import { snowmanFor } from './_line-snowman.mjs'
 import { build, plain } from './_duo-core.mjs'
+import { withSolidBadge } from './_live-badge.mjs'
 
 const safely = fn => icon => {
   icon = snowmanFor('duo', icon)
-  try { return fn(icon) } catch {
+  try { return withSolidBadge(fn, { paint: 'var(--with-duo-accent, currentColor)' })(icon) } catch {
     try { return plain(icon) } catch { return [] }
   }
 }

@@ -1,0 +1,51 @@
+{
+  "name": "folder-up",
+  "intent": "the arrow lifts out of the folder, heading up",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.4,
+      "duration": 2.6,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rise",
+      "amount": 0.4,
+      "duration": 2.4
+    },
+    {
+      "preset": "pass",
+      "dir": 270,
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder-check",
+      "effect": "slide-up"
+    },
+    {
+      "to": "folder-down",
+      "effect": "flip"
+    },
+    {
+      "to": "upload",
+      "effect": "fade"
+    }
+  ]
+}

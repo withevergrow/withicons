@@ -1,11 +1,11 @@
 ---
 name: with-icons
-description: Icons for any web, app or UI project from the "with icons" library (withicons.com, npm @withicons/*), 750 MIT-licensed icons in 34 styles: line, solid, duo, office suite, 3D (clay, glass, liquid glass, chrome, soft 3D, luxe, skeuomorphic), brand (bento, app-dock tiles, neo-brutalism, bauhaus), playful (kawaii, plush, sticker, pastel, pixel, retro), artistic (sketch, engrave, blueprint, anime, gothic, coquette) and holiday styles (Diwali, Holi, Halloween, Christmas, Lunar New Year, Valentine's). React, Vue, Svelte, Angular, SolidJS, web component, CSS classes, sprites, CDN, download-all zips. Festival icons, inclusive avatars, animated and 3D icons (@withicons/motion), live date or count icons (@withicons/dynamic), files for slides, print, email and social (SVG, PNG, PDF, PowerPoint, GIF, Lottie). Use it whenever a task needs an icon, icon set or avatar, the right icon name or style for a job, icon search over MCP, or to replace emoji, inline SVG or another set (Lucide, Heroicons, Font Awesome).
+description: Icons for any web, app or UI project from the "with icons" library (withicons.com, npm @withicons/*), 1000 MIT-licensed icons in 34 styles: line, solid, duo, office suite, 3D (clay, glass, liquid glass, chrome, soft 3D, luxe, skeuomorphic), brand (bento, app-dock tiles, neo-brutalism, bauhaus), playful (kawaii, plush, sticker, pastel, pixel, retro), artistic (sketch, engrave, blueprint, anime, gothic, coquette) and holiday styles (Diwali, Holi, Halloween, Christmas, Lunar New Year, Valentine's). React, Vue, Svelte, Angular, SolidJS, web component, CSS classes, sprites, CDN, download-all zips. Festival icons, inclusive avatars, animated and 3D icons (@withicons/motion), live date or count icons (@withicons/dynamic), files for slides, print, email and social (SVG, PNG, PDF, PowerPoint, GIF, Lottie). Use it whenever a task needs an icon, icon set or avatar, the right icon name or style for a job, icon search over MCP, or to replace emoji, inline SVG or another set (Lucide, Heroicons, Font Awesome).
 ---
 
 # with icons
 
-750 icons, each drawn once and rendered in 34 styles. The ink is `currentColor`, the grid 24x24, the default size 24.
+1000 icons, each drawn once and rendered in 34 styles. The ink is `currentColor`, the grid 24x24, the default size 24.
 Site https://withicons.com · repo https://github.com/withevergrow/withicons · MIT. Detail lives in `reference/`; read
 the file a rule links to before going beyond the rule.
 
@@ -86,7 +86,7 @@ Looks, minimum sizes, every variable, holiday palettes and Duo presets: [referen
 - Canonical names are kebab-case (`arrow-right`); components are PascalCase, exported as `ArrowRight` and `ArrowRightIcon`.
 - **Aliases** (`bin`, `house`, `gear`) resolve in name-based APIs (`<with-icon name>`, `<Icon name>`, `resolve()`,
   search, MCP) but **are not exports**: `import { Bin }` fails, use `Trash`.
-- Look every name up before writing it (section 5) or read [reference/icons.md](reference/icons.md) (all 750 names,
+- Look every name up before writing it (section 5) or read [reference/icons.md](reference/icons.md) (all 1000 names,
   categories, aliases). Common: delete/bin -> `trash`, gear -> `settings`, x/dismiss -> `close`, hamburger -> `menu`,
   house -> `home`, magnifier -> `search`, profile picture -> `user-circle` or an `avatar-*` icon.
 
@@ -206,6 +206,9 @@ Colour, speed, custom sequences, a finished state: the tag (or `Loader` / `Morph
 <with-loader name="orbit" variant="glass" color="#7c5cff" speed="1.2"></with-loader>
 <with-loader morph="file,cloud-upload,check-circle" effect="slide-up"></with-loader>  <!-- then el.done() -->
 ```
+
+Morph items are icon names (even `rocket`, `download`, `gift`, which are loaders too); write `loader:<name>` to put a
+loader in the chain (since 0.6.0).
 
 Pick by what is loading (MCP `get_loader(query)` answers with the URL and code). Every name and what it says:
 [reference/loaders.md](reference/loaders.md).

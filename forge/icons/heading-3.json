@@ -1,0 +1,57 @@
+{
+  "name": "heading-3",
+  "category": "text",
+  "description": "A capital H with a small 3, for the level-three heading or subsection title in a text editor.",
+  "aliases": [
+    "heading-three",
+    "heading3",
+    "h3",
+    "h3-tag",
+    "heading-level-3",
+    "third-heading",
+    "minor-heading",
+    "subsection-heading"
+  ],
+  "tags": [
+    "heading",
+    "subsection",
+    "text",
+    "editor",
+    "format",
+    "h3"
+  ],
+  "paths": [
+    {
+      "d": "M3 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H12",
+      "plate": "A"
+    },
+    {
+      "d": "M16 10 H21 L18 14 A3 3 0 1 1 16 19.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "heading 3",
+    "level 3",
+    "subsection",
+    "small heading",
+    "sub subheading",
+    "minor title",
+    "rich text",
+    "text editor",
+    "markdown heading",
+    "formatting",
+    "font size",
+    "subhead"
+  ]
+}

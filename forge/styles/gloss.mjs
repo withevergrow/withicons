@@ -59,9 +59,14 @@ export default {
       S = new Float32Array(NN)
       // a specular streak never runs through lettering: it would read as a stroke of the letter
       // (nor puts a glint in a counter): no highlight within 0.9u of a glyph stroke or inside a glyph's box
-      const T = B.textD, clear = TW / 2 + 0.9, TB = B.textBoxes || []
-      const inBox = k => { const x = gx(k % N), y = gx((k - k % N) / N); return TB.some(b => x > b[0] && x < b[2] && y > b[1] && y < b[3]) }
-      for (let k = 0; k < NN; k++) S[k] = T && (T[k] < clear || (T[k] < 2.2 && inBox(k))) ? B.depth[k] : Math.min(B.depth[k], hl[k])
+      // (a badge's digits sit in a small disc: the glint keeps 1.25u clear of the digits' box too)
+      const T = B.textD, clear = TW / 2 + 0.9, TB = B.textBoxes || [], M = 1.25
+      const inBox = k => { const x = gx(k % N), y = gx((k - k % N) / N); return TB.some(b => x > b[0] - M && x < b[2] + M && y > b[1] - M && y < b[3] + M) }
+      // a live count badge carries no glint at all: on a 9u disc any streak runs through its digits
+      const badges = (icon.paths || []).filter(p => /^badge:/u.test(p.id || '')).map(p => p.subs[0].pts)
+      const bb = badges.map(r => r.reduce((o, [x, y]) => [Math.min(o[0], x), Math.min(o[1], y), Math.max(o[2], x), Math.max(o[3], y)], [Infinity, Infinity, -Infinity, -Infinity]))
+      const inBadge = k => { if (!badges.length) return false; const x = gx(k % N), y = gx((k - k % N) / N); return badges.some((r, i) => x > bb[i][0] - 1.5 && x < bb[i][2] + 1.5 && y > bb[i][1] - 1.5 && y < bb[i][3] + 1.5) }
+      for (let k = 0; k < NN; k++) S[k] = T && (T[k] < clear || (T[k] < 2.2 && inBox(k))) || inBadge(k) ? B.depth[k] : Math.min(B.depth[k], hl[k])
     } catch { /* never throw: fall back to the unlit body */ }
     const rings = contours(S, 0)
     let parts = null

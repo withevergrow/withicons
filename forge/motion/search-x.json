@@ -1,0 +1,50 @@
+{
+  "name": "search-x",
+  "intent": "the lens looks around, finds nothing and shakes no",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      20.5,
+      20.5
+    ],
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        10.5,
+        10.5
+      ],
+      "amount": 0.6,
+      "duration": 3.2,
+      "delay": 0.15
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "orbit",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "search",
+      "effect": "morph"
+    },
+    {
+      "to": "zoom-out",
+      "effect": "fade"
+    }
+  ]
+}

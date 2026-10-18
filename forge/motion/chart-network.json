@@ -1,0 +1,46 @@
+{
+  "name": "chart-network",
+  "intent": "the nodes pulse as links draw between them",
+  "loop": {
+    "preset": "draw",
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        3.5,
+        20.5
+      ],
+      "amount": 0.25
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.4
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-scatter",
+      "effect": "fade"
+    },
+    {
+      "to": "network",
+      "effect": "morph"
+    },
+    {
+      "to": "chart-line",
+      "effect": "fade"
+    }
+  ]
+}

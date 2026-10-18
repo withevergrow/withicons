@@ -1,0 +1,49 @@
+{
+  "name": "arrow-down-to-line",
+  "intent": "the arrow drops onto the line and settles",
+  "loop": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.25,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.7,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "drop",
+      "amount": 0.6
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "arrow-up-from-line",
+      "effect": "rotate"
+    },
+    {
+      "to": "download",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

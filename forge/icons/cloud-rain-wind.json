@@ -1,0 +1,64 @@
+{
+  "name": "cloud-rain-wind",
+  "category": "weather",
+  "description": "A cloud with rain swept sideways by the wind, for wind-driven rain, squalls and stormy weather.",
+  "aliases": [
+    "windy-rain",
+    "rain-wind",
+    "driving-rain",
+    "rainstorm",
+    "squall",
+    "blowing-rain",
+    "sideways-rain"
+  ],
+  "tags": [
+    "weather",
+    "rain",
+    "wind",
+    "storm",
+    "forecast"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 17.5 C9 19.25 7.75 20.5 5.5 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 17.5 C14 19.25 12.75 20.5 10.5 21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M19.5 17.5 C19 19.25 17.75 20.5 15.5 21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 14 A4.05 4.05 0 0 1 6.78 5.99 A5.58 5.58 0 0 1 17.49 6.44 A3.83 3.83 0 0 1 16.73 14 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "wind and rain",
+    "wind-driven rain",
+    "heavy rain",
+    "gale",
+    "gusty showers",
+    "storm",
+    "stormy",
+    "bad weather",
+    "monsoon",
+    "typhoon",
+    "tropical storm",
+    "blustery",
+    "horizontal rain",
+    "weather warning",
+    "umbrella weather",
+    "wet and windy",
+    "downpour",
+    "rain squall",
+    "windy"
+  ]
+}

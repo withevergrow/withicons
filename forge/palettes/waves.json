@@ -1,0 +1,427 @@
+{
+  "name": "waves",
+  "palettes": [
+    {
+      "id": "ocean-blue",
+      "name": "Ocean blue",
+      "tags": [
+        "true-to-life",
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#0077B6",
+        "c2": "#48CAE4",
+        "c3": "#023E8A",
+        "c4": "#CAF0F8",
+        "tint": "#CCE4F0",
+        "accent": "#FFB703",
+        "shadow": "#004164",
+        "shine": "#A6CFE5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "tropical-lagoon",
+      "name": "Tropical lagoon",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#05303A",
+        "c1": "#00A6A6",
+        "c2": "#7FE0E0",
+        "c3": "#046B6B",
+        "c4": "#E0FAFA",
+        "tint": "#CCEDED",
+        "accent": "#FF7F50",
+        "shadow": "#005B5B",
+        "shine": "#A6E0E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pool-day",
+      "name": "Pool day",
+      "tags": [
+        "true-to-life",
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0B1E33",
+        "c1": "#1EA7FD",
+        "c2": "#8FD8FF",
+        "c3": "#0A6CB2",
+        "c4": "#E3F6FF",
+        "tint": "#D2EDFF",
+        "accent": "#FFD23F",
+        "shadow": "#115C8B",
+        "shine": "#B0E0FE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "stormy-sea",
+      "name": "Stormy sea",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0E1526",
+        "c1": "#3D5A73",
+        "c2": "#8BA6BF",
+        "c3": "#1E3245",
+        "c4": "#D3DFEA",
+        "tint": "#D8DEE3",
+        "accent": "#FFFFFF",
+        "shadow": "#22323F",
+        "shine": "#BBC5CE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lake-green",
+      "name": "Lake green",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#0E1A12",
+        "c1": "#2E7D6B",
+        "c2": "#8CC7B6",
+        "c3": "#1A4D41",
+        "c4": "#DDF1EB",
+        "tint": "#D5E5E1",
+        "accent": "#F2CC5B",
+        "shadow": "#19453B",
+        "shine": "#B6D2CB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "river-teal",
+      "name": "River teal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#052E2B",
+        "c1": "#14B8A6",
+        "c2": "#5EEAD4",
+        "c3": "#0F766E",
+        "c4": "#CCFBF1",
+        "tint": "#D0F1ED",
+        "accent": "#FDE68A",
+        "shadow": "#0B655B",
+        "shine": "#ADE6E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "seafoam",
+      "name": "Seafoam",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#21413A",
+        "c1": "#A8E6CF",
+        "c2": "#DCF5EC",
+        "c3": "#6CC3A6",
+        "c4": "#F2FBF8",
+        "tint": "#EEFAF5",
+        "accent": "#FFB7A5",
+        "shadow": "#5C7F72",
+        "shine": "#E1F6EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "baby-blue",
+      "name": "Baby blue",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#23384D",
+        "c1": "#A8D8FF",
+        "c2": "#DDEFFF",
+        "c3": "#6FB5EE",
+        "c4": "#F5FAFF",
+        "tint": "#EEF7FF",
+        "accent": "#FFB3C1",
+        "shadow": "#5C778C",
+        "shine": "#E1F1FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-surf",
+      "name": "Candy surf",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D1233",
+        "c1": "#7AD3FF",
+        "c2": "#FF9AC8",
+        "c3": "#C2408A",
+        "c4": "#E5F7FF",
+        "tint": "#E4F6FF",
+        "accent": "#FFE36E",
+        "shadow": "#43748C",
+        "shine": "#D0F0FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-surf",
+      "name": "Neon surf",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#05030A",
+        "c1": "#00F0FF",
+        "c2": "#FF2E88",
+        "c3": "#7B2CFF",
+        "c4": "#CCFBFF",
+        "tint": "#CCFBFF",
+        "accent": "#B6FF3B",
+        "shadow": "#005A61",
+        "shine": "#FFFFFF",
+        "edge": "#15121F"
+      }
+    },
+    {
+      "id": "surf-retro",
+      "name": "Surf retro",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#2E6F8E",
+        "c2": "#F7B32B",
+        "c3": "#E8632B",
+        "c4": "#F4E3C3",
+        "tint": "#D5E2E8",
+        "accent": "#E8632B",
+        "shadow": "#193D4E",
+        "shine": "#B6CDD7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "hokusai",
+      "name": "Woodblock wave",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#14213D",
+        "c1": "#2F4A73",
+        "c2": "#E9E2CF",
+        "c3": "#9DB4C0",
+        "c4": "#1B2A47",
+        "tint": "#E5E7EC",
+        "accent": "#C64B2B",
+        "shadow": "#172840",
+        "shine": "#8FA3BF",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "earth-river",
+      "name": "Earth river",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1F1A14",
+        "c1": "#5E7F7A",
+        "c2": "#C9B28A",
+        "c3": "#3A5552",
+        "c4": "#E7DFD0",
+        "tint": "#DFE5E4",
+        "accent": "#C2553E",
+        "shadow": "#344643",
+        "shine": "#C7D2D0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-ramp",
+      "name": "Blue ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0A1F44",
+        "c1": "#3D7BE0",
+        "c2": "#9EC1F7",
+        "c3": "#1E4C9A",
+        "c4": "#E3EEFF",
+        "tint": "#D8E5F9",
+        "accent": "#9EC1F7",
+        "shadow": "#22447B",
+        "shine": "#BBD1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#6E6E6E",
+        "c2": "#B5B5B5",
+        "c3": "#3A3A3A",
+        "c4": "#EFEFEF",
+        "tint": "#E2E2E2",
+        "accent": "#B5B5B5",
+        "shadow": "#3D3D3D",
+        "shine": "#CCCCCC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#0050D8",
+        "c2": "#000000",
+        "c3": "#FFD400",
+        "c4": "#FFFFFF",
+        "tint": "#D6E4FF",
+        "accent": "#FFD400",
+        "shadow": "#002A70",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "deep-navy",
+      "name": "Deep navy",
+      "tags": [
+        "dark"
+      ],
+      "colors": {
+        "ink": "#020B18",
+        "c1": "#1A3755",
+        "c2": "#2F6FB0",
+        "c3": "#06192E",
+        "c4": "#8FB3D9",
+        "tint": "#D0D7E0",
+        "accent": "#4FC3F7",
+        "shadow": "#05121F",
+        "shine": "#5C7090",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-sea",
+      "name": "Sunset sea",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#36132A",
+        "c1": "#F25C78",
+        "c2": "#FF9E5E",
+        "c3": "#8A4FA8",
+        "c4": "#FFE4D2",
+        "tint": "#FCDEE4",
+        "accent": "#FFD08A",
+        "shadow": "#853342",
+        "shine": "#FAC6D0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-tide",
+      "name": "Gold tide",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#120D02",
+        "c1": "#373737",
+        "c2": "#D4AF37",
+        "c3": "#8A6A1C",
+        "c4": "#F4E3A1",
+        "tint": "#E5E1D6",
+        "accent": "#D4AF37",
+        "shadow": "#0C0C0C",
+        "shine": "#5E5A52",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-wave",
+      "name": "Y2K wave",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2340",
+        "c1": "#A8F0FF",
+        "c2": "#C9B5FF",
+        "c3": "#FF9CEB",
+        "c4": "#E8FFFF",
+        "tint": "#EEFCFF",
+        "accent": "#FF9CEB",
+        "shadow": "#5C848C",
+        "shine": "#E1FAFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "summer-swim",
+      "name": "Summer swim",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#0B1530",
+        "c1": "#00B4D8",
+        "c2": "#FFD23F",
+        "c3": "#FF6B35",
+        "c4": "#E0F7FA",
+        "tint": "#CCF0F7",
+        "accent": "#FF6B35",
+        "shadow": "#006377",
+        "shine": "#A6E5F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24113A",
+        "c1": "#00D4C8",
+        "c2": "#7B4DFF",
+        "c3": "#FF3E9D",
+        "c4": "#FFD23F",
+        "tint": "#CCF6F4",
+        "accent": "#FFD23F",
+        "shadow": "#00756E",
+        "shine": "#A6F0EC",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

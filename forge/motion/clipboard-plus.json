@@ -1,0 +1,57 @@
+{
+  "name": "clipboard-plus",
+  "intent": "the plus beats softly on the chart like a pulse",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      14
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "beat",
+      "origin": [
+        12,
+        14
+      ],
+      "amount": 0.6,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "nod",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "clipboard-check",
+      "effect": "flip"
+    },
+    {
+      "to": "clipboard",
+      "effect": "fade"
+    },
+    {
+      "to": "heart-pulse",
+      "effect": "morph"
+    }
+  ]
+}

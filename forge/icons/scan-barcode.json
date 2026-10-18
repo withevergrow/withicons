@@ -1,0 +1,77 @@
+{
+  "name": "scan-barcode",
+  "category": "commerce",
+  "description": "A barcode inside four scan corners, for barcode scanning, price checks, self-checkout and stock taking.",
+  "aliases": [
+    "barcode-scan",
+    "barcode-scanner",
+    "scan-product",
+    "product-scan",
+    "scan-upc",
+    "scan-sku",
+    "price-check",
+    "scan-item"
+  ],
+  "tags": [
+    "scan",
+    "barcode",
+    "product",
+    "retail",
+    "inventory",
+    "checkout"
+  ],
+  "paths": [
+    {
+      "d": "M3 7.5 V5 A2 2 0 0 1 5 3 H7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 3 H19 A2 2 0 0 1 21 5 V7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M21 16.5 V19 A2 2 0 0 1 19 21 H16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 21 H5 A2 2 0 0 1 3 19 V16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 8 V16 M16.5 8 V16",
+      "plate": "A"
+    },
+    {
+      "d": "M11 8 H13 V16 H11 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M11 8 H13 V16 H11 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "scan barcode",
+    "scan item",
+    "scan product",
+    "self checkout",
+    "checkout",
+    "point of sale",
+    "pos",
+    "till",
+    "retail",
+    "price lookup",
+    "stock take",
+    "inventory",
+    "warehouse",
+    "upc",
+    "ean",
+    "camera scan",
+    "code reader",
+    "bar code",
+    "laser scanner",
+    "product lookup",
+    "scanner",
+    "barcod"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "cloud-hail",
+  "intent": "cloud hangs heavy while hailstones keep dropping",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.45,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "drop",
+      "amount": 0.5,
+      "duration": 1.2,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "bounce"
+    },
+    {
+      "preset": "shake"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-snow",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud-rain",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud-lightning",
+      "effect": "blur"
+    }
+  ]
+}

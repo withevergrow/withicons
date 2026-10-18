@@ -1,0 +1,39 @@
+{
+  "name": "case-upper",
+  "intent": "the capitals grow a little louder, like text switching to caps",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "amount": 0.6,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "case-lower",
+      "effect": "flip"
+    },
+    {
+      "to": "case-sensitive",
+      "effect": "fade"
+    }
+  ]
+}

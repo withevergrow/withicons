@@ -1,0 +1,41 @@
+{
+  "name": "map-pin-off",
+  "intent": "rests switched off; shakes no when you try to drop it",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.5
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "pop",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "map-pin",
+      "effect": "flip"
+    },
+    {
+      "to": "map-pin-check",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "name": "bell-dot",
+  "category": "communication",
+  "description": "A bell with a dot for unread notifications and new alerts.",
+  "aliases": [
+    "notification-dot",
+    "unread-notification",
+    "bell-badge",
+    "notification-badge",
+    "unread-alerts",
+    "bell-unread",
+    "new-alerts",
+    "has-notifications",
+    "notification-indicator",
+    "bell-new"
+  ],
+  "synonyms": [
+    "unread",
+    "new",
+    "notification",
+    "notifications",
+    "alert",
+    "alerts",
+    "badge",
+    "inbox",
+    "activity",
+    "updates",
+    "mention",
+    "ping",
+    "reminder",
+    "red dot",
+    "new message",
+    "something new",
+    "attention",
+    "notify",
+    "bell dot"
+  ],
+  "tags": [
+    "bell",
+    "notification",
+    "unread",
+    "dot",
+    "alert"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 16.5 V12 A5.5 5.5 0 0 1 16.5 12 V16.5 L18 18.5 H4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 18.5 A2.5 2.5 0 0 0 13.5 18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M22 4.5 A2.5 2.5 0 1 1 17 4.5 A2.5 2.5 0 1 1 22 4.5 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M5.5 16.5 V12 A5.5 5.5 0 0 1 16.5 12 V16.5 L18 18.5 H4 Z",
+    "M22 4.5 A2.5 2.5 0 1 1 17 4.5 A2.5 2.5 0 1 1 22 4.5 Z"
+  ],
+  "cutouts": []
+}

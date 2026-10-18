@@ -8,6 +8,7 @@
 // every colour is a role variable --with-chrome-<role> with a literal fallback.
 // Geometry and paint: _chrome-core.mjs (on _chrome-field.mjs / _chrome-path.mjs);
 // per-icon tuning: _chrome-tune.mjs.
+import { dropSlabs } from './_live-badge.mjs'
 import { snowman } from './_chrome-snowman.mjs'
 import { dragon } from './_rich-dragon.mjs'
 import { build, col } from './_chrome-core.mjs'
@@ -20,6 +21,7 @@ export default {
   strokeWidth: false,
   root: { fill: 'none' },
   render(icon) {
+    icon = dropSlabs(icon) // a battery's charge is its island, never a grille of rows
     if (icon && icon.name === 'snowman') { try { return snowman() } catch { /* generic below */ } }
     if (icon && icon.name === 'dragon-head') { try { return dragon('chrome') } catch { /* generic below */ } }
     try {

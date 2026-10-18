@@ -1,0 +1,49 @@
+{
+  "name": "shield-half",
+  "category": "security",
+  "description": "A shield split down the middle with one half filled, for partial protection and security levels.",
+  "aliases": [
+    "half-shield",
+    "partial-protection",
+    "shield-split",
+    "partially-secure",
+    "security-level",
+    "half-protected",
+    "protection-level"
+  ],
+  "tags": [
+    "security",
+    "protection",
+    "partial",
+    "level",
+    "shield"
+  ],
+  "paths": [
+    {
+      "d": "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2.5 V21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "partial security",
+    "moderate security",
+    "half secure",
+    "limited protection",
+    "security score",
+    "halfway",
+    "split shield",
+    "heraldry",
+    "coat of arms",
+    "balanced",
+    "defense",
+    "medium risk"
+  ]
+}

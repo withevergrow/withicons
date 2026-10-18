@@ -14,19 +14,28 @@ const f = n => String(snap(n))
 const clamp01 = v => Math.max(0, Math.min(1, Number(v) || 0))
 
 // ── batteries ──────────────────────────────────────────────────────────────────────────────────────────
-// Horizontal: the static battery (PARTS.md) made 1u taller on each side (6..18) so a cap-5 number fits inside.
+// One battery language for the family (redrawn 2026-10): a 17.5 x 11 body (a phone battery's 1.6 : 1, never a
+// square chip), r 2.5 corners, a 4u terminal nub 2.5u off the wall, and the charge as ONE solid rounded bar inset
+// 2.75u from the wall centreline (1u of white at line weight), drawn as a closed "solid:" mark so every style shows
+// a solid bar (outline styles fill it; filled styles keep it as an island in the hollowed body).
 export const H = {
-  body: rr(2, 6, 19, 18, 2),
-  terminal: 'M22 10.5 V13.5',
-  inner: rr(3, 7, 18, 17, 1),            // inside edge of the wall ink (cutout base)
-  slab: { x0: 6, x1: 15, y0: 10, y1: 14 }, // slab centrelines: ink 5..16 x 9..15 (2u of white to the wall)
+  body: rr(2, 6.5, 19.5, 17.5, 2.5),
+  terminal: 'M22 10 V14',
+  inner: rr(3, 7.5, 18.5, 16.5, 1.5),         // inside edge of the wall ink (cutout base)
+  bar: { x0: 4.75, x1: 16.75, y0: 9.25, y1: 14.75 }, // the full charge bar
 }
-// Vertical (portrait keyline): 12u wide like the horizontal one is tall, terminal on top.
+// Upright: the same body turned a quarter, terminal on top
 export const V = {
-  body: rr(6, 5.5, 18, 21.5, 2),
-  terminal: 'M10.5 2.5 H13.5',
-  inner: rr(7, 6.5, 17, 20.5, 1),
-  slab: { x0: 10, x1: 14, y0: 9.5, y1: 17.5 }, // fills from the bottom (y1) up to y0
+  body: rr(6.5, 4.5, 17.5, 22, 2.5),
+  terminal: 'M10 2 H14',
+  inner: rr(7.5, 5.5, 16.5, 21, 1.5),
+  bar: { x0: 9.25, x1: 14.75, y0: 7.25, y1: 19.25 }, // fills from the bottom (y1) up to y0
+}
+// the charge bar: { d, region } = slab() over the bar's centreline box (the ink reaches 0.875u further at line
+// weight): a perimeter + serpentine rows, which every style draws as solid ink (outline styles as a filled bar,
+// filled styles as an island left standing in the hollowed body via `region`)
+export function chargeBar(x0, y0, x1, y1) {
+  return slab(x0 + 0.875, y0 + 0.875, x1 - 0.875, y1 - 0.875)
 }
 
 // A solid bar of ink made of strokes: perimeter + serpentine rows (pitch <= 1.5u so a 1.75 line leaves no slits).
@@ -81,6 +90,45 @@ export function dotsOnArc(cx, cy, r, a0, a1, pitch = 3.5) {
   const len = (Math.abs(a1 - a0) * Math.PI * r) / 180
   const n = Math.max(2, Math.floor(len / pitch + 1e-9) + 1)
   return Array.from({ length: n }, (_, i) => { const [x, y] = polar(cx, cy, r, a0 + ((a1 - a0) * i) / (n - 1)); return dot(x, y) })
+}
+
+// GHOST DASHES: the inactive trace of an arc / a bar as short dashes (centreline `dash` long), ends included and
+// evenly spread, so "2 of 3" reads as two lit arcs and one dashed one, never as a cloud of beads
+export function dashesOnArc(cx, cy, r, a0, a1, { dash = 2.5, gap = 3.5 } = {}) {
+  const len = (Math.abs(a1 - a0) * Math.PI * r) / 180
+  const n = Math.max(2, Math.round((len + gap) / (dash + gap)))
+  const span = a1 - a0
+  const dA = (dash / len) * span
+  return Array.from({ length: n }, (_, i) => {
+    const m = a0 + dA / 2 + ((span - dA) * i) / (n - 1)
+    return arcD(cx, cy, r, m - dA / 2, m + dA / 2)
+  })
+}
+// the remaining track of a ring from clock angle a0 to a1 (clockwise), as ghost dashes that keep `clear` u of
+// centreline arc clear of the lit arc's round caps at both ends; a full ring (a0 === a1 mod 360) is dashed evenly
+export function trackDashes(cx, cy, r, a0, a1, { clear = 3.5, dash = 2.5, gap = 3.5 } = {}) {
+  const deg = u => (u / (Math.PI * r)) * 180
+  if (Math.abs(((a1 - a0) % 360 + 360) % 360) < 1e-6) {
+    const n = Math.max(3, Math.round((2 * Math.PI * r) / (dash + gap))), dA = deg(dash)
+    return Array.from({ length: n }, (_, i) => arcD(cx, cy, r, a0 + (360 * i) / n - dA / 2, a0 + (360 * i) / n + dA / 2))
+  }
+  const s = a0 + deg(clear), e = (a1 <= a0 ? a1 + 360 : a1) - deg(clear)
+  if (e - s < deg(dash)) return []
+  return dashesOnArc(cx, cy, r, s, e, { dash, gap })
+}
+export function dashesOnLine(x0, y0, x1, y1, { dash = 1.5, gap = 3.25 } = {}) {
+  const len = Math.hypot(x1 - x0, y1 - y0)
+  const n = Math.max(1, Math.round((len + gap) / (dash + gap)))
+  if (n === 1 || len <= dash) return [`M${f(x0)} ${f(y0)} L${f(x1)} ${f(y1)}`]
+  const ux = (x1 - x0) / len, uy = (y1 - y0) / len
+  return Array.from({ length: n }, (_, i) => {
+    const t = ((len - dash) * i) / (n - 1)
+    return `M${f(x0 + ux * t)} ${f(y0 + uy * t)} L${f(x0 + ux * (t + dash))} ${f(y0 + uy * (t + dash))}`
+  })
+}
+function arcD(cx, cy, r, a0, a1) {
+  const [ax, ay] = polar(cx, cy, r, a0), [bx, by] = polar(cx, cy, r, a1)
+  return `M${ax} ${ay} A${f(r)} ${f(r)} 0 0 1 ${bx} ${by}`
 }
 
 // closed annular sector (clock degrees) for cutouts

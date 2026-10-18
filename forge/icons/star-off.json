@@ -1,0 +1,59 @@
+{
+  "name": "star-off",
+  "category": "status",
+  "description": "A star struck through by a slash for removing a rating, unstarring or hiding favourites.",
+  "aliases": [
+    "unstar",
+    "star-slash",
+    "remove-star",
+    "unstarred",
+    "rating-off",
+    "unfeature",
+    "no-rating",
+    "star-remove",
+    "unrate"
+  ],
+  "synonyms": [
+    "remove rating",
+    "clear rating",
+    "no stars",
+    "not rated",
+    "unfavorite",
+    "unfavourite",
+    "remove from starred",
+    "not featured",
+    "hide rating",
+    "reviews off",
+    "disable ratings",
+    "unhighlight",
+    "star off",
+    "strike star",
+    "unstar repo"
+  ],
+  "tags": [
+    "star",
+    "slash",
+    "rating",
+    "unstar",
+    "off"
+  ],
+  "paths": [
+    {
+      "d": "M10.34 6.04 L11.38 3.75 L14.11 9.79 L20.7 10.52 L17.63 13.33",
+      "plate": "K"
+    },
+    {
+      "d": "M17.14 21.48 L11.38 18.21 L5.62 21.48 L6.95 14.99 L2.06 10.52 L5.8 10.1",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M11.38 3.75 L14.11 9.79 L20.7 10.52 L17 13.9 L9.97 6.87 Z",
+    "M16.82 19.92 L17.14 21.48 L11.38 18.21 L5.62 21.48 L6.95 14.99 L2.06 10.52 L6.88 9.98 Z"
+  ],
+  "cutouts": []
+}

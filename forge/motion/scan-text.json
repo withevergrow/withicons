@@ -1,0 +1,45 @@
+{
+  "name": "scan-text",
+  "intent": "the frame focuses while the text lines are read, like OCR at work",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.35,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "type"
+    }
+  ],
+  "swap": [
+    {
+      "to": "scan",
+      "effect": "fade"
+    },
+    {
+      "to": "file-text",
+      "effect": "morph"
+    },
+    {
+      "to": "check",
+      "effect": "scale"
+    }
+  ]
+}

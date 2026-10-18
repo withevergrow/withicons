@@ -461,12 +461,24 @@ function pageCounts(ctx) {
   const attrEsc = v => String(v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
   const say = (html) => `Every icon is drawn once and comes in ${html ? `<span data-count="styles">${S}</span>` : S} looks, in ${numWord(groups.length)} groups. ` +
     groups.map(g => `${html ? `<b>${attrEsc(g.title)}</b>` : g.title}, ${GROUP_FOR[g.id] || 'for ' + (g.blurb || '').toLowerCase()}: ${and(g.styles.map(s => `${T[s]} (${SHORT[s] || ''})`.replace(' ()', '')))}.`).join(' ')
+  // the Loaders page counts loaders too: from the catalogue emit-loaders just wrote (it runs before site data)
+  const LD = (() => {
+    try {
+      const c = JSON.parse(fs.readFileSync(path.join(ROOT, 'packages', 'loaders', 'dist', 'catalog.json'), 'utf8'))
+      return { main: c.filter(l => l.group !== 'morph').length, all: c.length }
+    } catch { return null }
+  })()
   const done = []
-  for (const f of ['index.html', 'icons.html', '404.html']) {
+  for (const f of ['index.html', 'icons.html', '404.html', 'loaders.html']) {
     const file = path.join(ROOT, 'site', f)
     if (!fs.existsSync(file)) continue
     let h = fs.readFileSync(file, 'utf8')
     const before = h
+    if (f === 'loaders.html' && LD) {
+      // visible copy: <span data-count="loaders"> / "loaders-all"; title, meta, OG, JSON-LD: "<n> free animated loaders"
+      h = h.replace(/(data-count="loaders">)[^<]*(<)/g, `$1${LD.main}$2`).replace(/(data-count="loaders-all">)[^<]*(<)/g, `$1${LD.all}$2`)
+        .replace(/(?<![\d,])\b\d+(?= free animated loaders\b)/g, String(LD.main))
+    }
     const oldN = (/data-count="icons">([\d,]+)</.exec(h) || [])[1], oldS = (/data-count="styles">(\d+)</.exec(h) || [])[1]
     const oldSV = (/data-count="svgs">([\d,]+)</.exec(h) || [])[1]
     const oldW = oldS ? numWord(+oldS) : null

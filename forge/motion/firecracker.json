@@ -1,11 +1,11 @@
 {
   "name": "firecracker",
-  "intent": "the anar fountains sparks from its tip",
+  "intent": "the cracker fizzes while sparks burst from its lit fuse",
   "loop": {
     "preset": "flicker",
     "origin": [
-      12,
-      21.5
+      10.5,
+      22
     ],
     "amount": 0.5,
     "duration": 1.8
@@ -17,8 +17,8 @@
     "A": {
       "preset": "rise",
       "origin": [
-        12,
-        11
+        10.5,
+        9.5
       ],
       "amount": 0.5,
       "duration": 1.2
@@ -32,8 +32,8 @@
     {
       "preset": "pulse",
       "origin": [
-        12,
-        21.5
+        10.5,
+        22
       ]
     }
   ],

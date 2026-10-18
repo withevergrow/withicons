@@ -1,0 +1,79 @@
+{
+  "name": "potted-plant",
+  "category": "home",
+  "description": "A leafy plant growing in a flower pot, for houseplants, gardening, interiors, care and growth.",
+  "aliases": [
+    "houseplant",
+    "house-plant",
+    "pot-plant",
+    "plant-pot",
+    "flowerpot",
+    "indoor-plant",
+    "planter"
+  ],
+  "tags": [
+    "plant",
+    "nature",
+    "home",
+    "garden",
+    "growth",
+    "interior"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 14.5 H18.5 L17.2 20.2 A1.5 1.5 0 0 1 15.75 21.5 H8.25 A1.5 1.5 0 0 1 6.8 20.2 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 12 C8.5 12.5 4.5 10.5 4 6 C8 5.5 11.5 8 12 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 9.5 C12.5 5.5 15 3 20 3 C20 7 16.5 9.5 12 9.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 14.5 V9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 14.5 H18.5 L17.2 20.2 A1.5 1.5 0 0 1 15.75 21.5 H8.25 A1.5 1.5 0 0 1 6.8 20.2 Z",
+    "M12 12 C8.5 12.5 4.5 10.5 4 6 C8 5.5 11.5 8 12 12 Z",
+    "M12 9.5 C12.5 5.5 15 3 20 3 C20 7 16.5 9.5 12 9.5 Z"
+  ],
+  "cutouts": [
+    "M10 10.75 L6.75 8",
+    "M14 8.25 L17 5.75"
+  ],
+  "synonyms": [
+    "plants",
+    "pot",
+    "flower pot",
+    "garden",
+    "gardening",
+    "grow",
+    "growth",
+    "nurture",
+    "care",
+    "water the plant",
+    "green",
+    "greenery",
+    "leaves",
+    "foliage",
+    "indoor",
+    "interior",
+    "decor",
+    "office plant",
+    "nature",
+    "eco",
+    "sustainability",
+    "calm",
+    "wellbeing",
+    "nursery",
+    "botanical",
+    "succulent",
+    "monstera",
+    "potted plnt"
+  ]
+}

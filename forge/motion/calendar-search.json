@@ -1,0 +1,10 @@
+{
+  "name": "calendar-search",
+  "intent": "the lens scans across the page looking for a free date",
+  "loop": { "preset": "pulse", "origin": [12, 13], "amount": 0.25, "duration": 3 },
+  "hover": { "preset": "tilt", "origin": [16.5, 16.5], "amount": 0.8 },
+  "parts": { "S": { "preset": "orbit", "origin": [16.5, 16.5], "amount": 0.5, "duration": 2.4, "delay": 0.1 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "zoom", "amount": 0.6 }, { "preset": "pop" }],
+  "swap": [{ "to": "calendar", "effect": "fade" }, { "to": "search", "effect": "morph" }, { "to": "calendar-check", "effect": "scale" }]
+}

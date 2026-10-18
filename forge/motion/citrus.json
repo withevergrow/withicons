@@ -1,0 +1,43 @@
+{
+  "name": "citrus",
+  "intent": "the half slice rocks on its rind like a garnish on a glass rim",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      17
+    ],
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      17
+    ],
+    "amount": 0.6
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "citrus@solid",
+      "effect": "flip"
+    },
+    {
+      "to": "mandarin-orange",
+      "effect": "fade"
+    }
+  ]
+}

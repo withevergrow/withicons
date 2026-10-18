@@ -1,0 +1,70 @@
+{
+  "name": "citrus",
+  "category": "food",
+  "description": "A half slice of citrus with its rind and segments, for lemons, limes, oranges and fresh flavour.",
+  "aliases": [
+    "lemon",
+    "lime",
+    "orange-slice",
+    "citrus-slice",
+    "lemon-slice",
+    "lime-wedge",
+    "grapefruit"
+  ],
+  "tags": [
+    "food",
+    "fruit",
+    "fresh",
+    "flavour",
+    "summer"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 7.5 A9.5 9.5 0 0 0 21.5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 7.5 A6 6 0 0 0 18 7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 7.5 L16.24 11.74 M12 7.5 L12 13.5 M12 7.5 L7.76 11.74",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 7.5 A9.5 9.5 0 0 0 21.5 7.5 Z"
+  ],
+  "cutouts": [
+    "M14.39 8.9 L18.35 8.9 A6.5 6.5 0 0 1 17.06 11.57 Z",
+    "M12.7 9.19 L16.07 12.56 A6.5 6.5 0 0 1 12.7 13.96 Z",
+    "M11.3 9.19 L11.3 13.96 A6.5 6.5 0 0 1 7.93 12.56 Z",
+    "M9.61 8.9 L6.94 11.57 A6.5 6.5 0 0 1 5.65 8.9 Z"
+  ],
+  "synonyms": [
+    "orange",
+    "fruit slice",
+    "slice of lemon",
+    "slice of orange",
+    "zest",
+    "juicy",
+    "lemonade",
+    "vitamin c",
+    "sour",
+    "tangy",
+    "fresh",
+    "refreshing",
+    "summer",
+    "tropical",
+    "cocktail garnish",
+    "garnish",
+    "flavor",
+    "flavour",
+    "tangerine",
+    "clementine",
+    "yuzu",
+    "citric",
+    "citris",
+    "lemmon"
+  ]
+}

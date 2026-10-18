@@ -14,6 +14,7 @@
 //                            render: { [style]: { nodes: [[tag, attrs, children?]], svg: '<svg ...>...</svg>', inner: '<path/>...' } } }
 //                          (children: the ['defs', {}, [gradients]] node of rich styles; see forge/CONTRACT.md "Rich styles")
 //   ctx.aliasIndex         { alias -> [canonical names] }  (ambiguous aliases map to >1 name)
+//   ctx.noSite             true with --no-site: write package files only, no site/ files
 //   ctx.write(rel, text)   write a file relative to repo root (mkdir -p)
 import fs from 'fs'
 import path from 'path'
@@ -59,6 +60,8 @@ const ctx = {
     return { name: s.name, title: s.title, kind: s.kind, description: s.description, strokeWidth: s.strokeWidth || false, root: s.root, palette: isPalette(s, vars), vars }
   }),
   icons, aliasIndex,
+  // --no-site: emitters that also write site files (emit-loaders: site/vendor/loaders, site/loaders/svg, site/data) skip them
+  noSite: process.argv.includes('--no-site'),
   write(rel, text) { const f = path.join(ROOT, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, text) },
 }
 console.log(`rendered ${icons.length} icons x ${styles.length} styles in ${Date.now() - t0} ms (${pool.rendered} drawn, ${pool.cached} from cache)${failures.length ? ` — ${failures.length} FAILURES` : ''}`)

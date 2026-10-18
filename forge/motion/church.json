@@ -1,0 +1,51 @@
+{
+  "name": "church",
+  "intent": "stands calm while the cross on the steeple glints",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.3,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      21.5
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        12,
+        4
+      ],
+      "amount": 0.8,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "ring",
+      "origin": [
+        12,
+        6.5
+      ],
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "mosque",
+      "effect": "fade"
+    },
+    {
+      "to": "building",
+      "effect": "slide-up"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 // ENGRAVE — creative. Intaglio: crisp contour + shade-side swell + swelling burin hatch.
 import { snowmanFor } from './_line-snowman.mjs'
+import { withSolidBadge } from './_live-badge.mjs'
 import { pointInRing, simplify, resample } from '../kernel/geom.mjs'
 import { merge, subtract, ringsT, capsulesT, segsOf, ringD } from './_engrave-core.mjs'
 import { shadeCrescents } from './_engrave-shade.mjs'
@@ -349,15 +350,16 @@ function markText(R, icon) {
 
 export function makeEngrave(over = {}) {
   const P = { ...DEFAULTS, ...over }
-  return {
+  const S = {
     name: 'engrave',
     title: 'Engrave',
     kind: 'creative',
     description: 'Banknote intaglio: a crisp contour that swells on its shadow side, swelling burin hatching that models light and shade, and a hatched cast shadow.',
     strokeWidth: false,
     root: { fill: 'none', stroke: 'currentColor', 'stroke-width': P.SW, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
-    render(icon) {
-      icon = snowmanFor('engrave', icon)
+    // a live count badge is solid with its number knocked out (_live-badge.mjs), like every notification badge
+    render(icon) { return withSolidBadge(i => S.renderBody(i), { grow: P.SW / 2 })(snowmanFor('engrave', icon)) },
+    renderBody(icon) {
       const R = prepareRegions(icon)
       // Motion parts (forge/MOTION.md "Parts choreography"): with more than one skeleton plate, the ink of each
       // plate (contour, dots, swell, body hatch) is its own node tagged wm-k / wm-a / wm-s; the cast shade is wm-shadow.
@@ -402,6 +404,7 @@ export function makeEngrave(over = {}) {
       return out
     },
   }
+  return S
 }
 
 export default makeEngrave()

@@ -1,0 +1,64 @@
+{
+  "name": "video-plus",
+  "category": "media",
+  "description": "A video camera with a plus on its body, for adding a video, starting a recording or creating a new meeting.",
+  "aliases": [
+    "add-video",
+    "new-video",
+    "video-add",
+    "create-video",
+    "upload-video",
+    "new-recording",
+    "add-camera",
+    "video-new"
+  ],
+  "tags": [
+    "video",
+    "add",
+    "camera",
+    "media",
+    "create"
+  ],
+  "paths": [
+    {
+      "d": "M4 6 H14 A2 2 0 0 1 16 8 V16 A2 2 0 0 1 14 18 H4 A2 2 0 0 1 2 16 V8 A2 2 0 0 1 4 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 10.5 L22 7 V17 L16 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 9.5 V14.5 M6.5 12 H11.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4 6 H14 A2 2 0 0 1 16 8 V16 A2 2 0 0 1 14 18 H4 A2 2 0 0 1 2 16 V8 A2 2 0 0 1 4 6 Z",
+    "M16 10.5 L22 7 V17 L16 13.5 Z"
+  ],
+  "cutouts": [
+    "M9 9.5 V14.5",
+    "M6.5 12 H11.5"
+  ],
+  "synonyms": [
+    "add video",
+    "new video",
+    "upload video",
+    "create video",
+    "record",
+    "recording",
+    "new meeting",
+    "start meeting",
+    "video call",
+    "add clip",
+    "new clip",
+    "vlog",
+    "video content",
+    "add stream",
+    "go live",
+    "new recording",
+    "insert video",
+    "attach video"
+  ]
+}

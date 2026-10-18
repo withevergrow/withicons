@@ -1,0 +1,40 @@
+{
+  "name": "pill-bottle",
+  "intent": "rattles like a shaken bottle of pills",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "pill",
+      "effect": "fade"
+    },
+    {
+      "to": "syringe",
+      "effect": "slide-left"
+    }
+  ]
+}

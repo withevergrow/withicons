@@ -1,0 +1,42 @@
+{
+  "name": "bee",
+  "intent": "hovers and bobs in the air like a bee about to land on a flower",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "amount": 0.9
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "orbit"
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "flower",
+      "effect": "fade"
+    },
+    {
+      "to": "butterfly",
+      "effect": "morph"
+    },
+    {
+      "to": "bee@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "file-clock",
+  "category": "files",
+  "description": "A page with a small clock for recent, scheduled or time-stamped files and document history.",
+  "aliases": [
+    "recent-file",
+    "file-history",
+    "file-time",
+    "document-history",
+    "file-pending",
+    "recent-documents",
+    "scheduled-file",
+    "file-recent",
+    "document-clock"
+  ],
+  "tags": [
+    "file",
+    "clock",
+    "recent",
+    "history",
+    "time",
+    "pending"
+  ],
+  "paths": [
+    {
+      "d": "M19 11.5 V7.5 L14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H12.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 17.5 A4 4 0 1 1 13.5 17.5 A4 4 0 1 1 21.5 17.5 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.5 15.5 V17.5 L19 18.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H12.5 A6.5 6.5 0 0 1 19 11.5 V7.5 Z",
+    "M21.5 17.5 A4 4 0 1 1 13.5 17.5 A4 4 0 1 1 21.5 17.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M17.5 15.5 V17.5 L19 18.5"
+  ],
+  "synonyms": [
+    "recent",
+    "recently opened",
+    "last modified",
+    "modified date",
+    "timestamp",
+    "version history",
+    "history",
+    "pending review",
+    "awaiting",
+    "scheduled",
+    "due",
+    "deadline",
+    "timesheet",
+    "time log",
+    "expiring document",
+    "saved at",
+    "backup time",
+    "temporary file"
+  ]
+}

@@ -5,7 +5,7 @@
     "preset": "sway",
     "origin": [
       12,
-      3.5
+      4
     ],
     "amount": 0.5,
     "duration": 3.2
@@ -14,7 +14,7 @@
     "preset": "ring",
     "origin": [
       12,
-      3.5
+      4
     ],
     "amount": 0.5
   },
@@ -23,7 +23,7 @@
       "preset": "sway",
       "origin": [
         12,
-        3.5
+        4
       ],
       "amount": 0.9,
       "delay": 0.15
@@ -34,7 +34,7 @@
       "preset": "rock",
       "origin": [
         12,
-        3.5
+        4
       ],
       "amount": 0.5
     },

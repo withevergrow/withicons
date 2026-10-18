@@ -6,6 +6,7 @@
 // shadow grounds it all. Geometry: _glass-core.mjs (signed distance fields); paint: _glass-soft.mjs;
 // per-icon tuning: _glass-tune.mjs; Live-icon marks: _glass-live.mjs.
 import { G } from './_glass-core.mjs'
+import { slabBars, barD } from './_live-badge.mjs'
 import { softLayers, softPaint, V } from './_glass-soft.mjs'
 import { splitText, shiftD } from './_live-text.mjs'
 import { stripGlyphs, beads, hands } from './_glass-live.mjs'
@@ -21,6 +22,8 @@ export default {
   strokeWidth: false,
   root: { fill: 'none' },
   render(full) {
+    // a battery's charge is one accent glass bar laid on the pane (never etched rows): taken out, painted on top
+    const SB = slabBars(full); full = SB.icon
     // Live icons (_glass-live.mjs): the value is set ON the glass, never built into it.
     //   text inside a pane   deep etch-ink lettering at Line's weight
     //   free text            a currentColor numeral over a translucent colour echo
@@ -37,7 +40,7 @@ export default {
       const Hd = hands(icon), B = beads(Hd.icon)
       icon = B.icon; M = { hands: Hd.hands, columns: Hd.columns, beads: [...B.beads, ...Hd.hubs] }
     } catch { /* keep the glass build of the icon as it is */ }
-    const marks = () => [...handNodes(M.hands, M.columns), ...beadNodes(M.beads)]
+    const marks = () => [...barNodes(SB.bars), ...handNodes(M.hands, M.columns), ...beadNodes(M.beads)]
     let L = null
     try { L = softLayers(icon) } catch { L = null }
     if (!L) return [...fallback(icon), ...marks(), ...liveText(free, inside)]
@@ -70,6 +73,15 @@ function handNodes(hs, cs = []) {
   if (cs.length) out.push(['path', { d: D(cs), stroke: V.etch, 'stroke-width': 2.1, ...round }], ['path', { d: D(cs), stroke: V.accent, 'stroke-width': 1.1, ...round }])
   if (hs.length) out.push(['path', { d: D(hs), stroke: V.etch, 'stroke-width': 1.5, ...round }])
   return out
+}
+
+// a battery's charge in glass's frame: accent glass with a deep etch edge and a frosted top band (wm-a)
+function barNodes(bars) {
+  if (!bars.length) return []
+  const S = G.SCALE, T = p => [12 + (p[0] - 12) * S - 0.5, 12 + (p[1] - 12) * S - 0.5]
+  const d = bars.map(b => barD(b, T)).join('')
+  const top = bars.map(b => barD({ ...b, x0: b.x0 + 0.6, x1: b.x1 - 0.6, y0: b.y0 + 0.55, y1: b.y0 + Math.min(1.6, (b.y1 - b.y0) * 0.35) }, T, 0.5)).join('')
+  return [['path', { d, fill: V.accent, stroke: V.etch, 'stroke-width': 0.5, class: 'wm-a' }], ['path', { d: top, fill: V.frost || '#fff', 'fill-opacity': 0.45, class: 'wm-a' }]]
 }
 
 // luminous beads in glass's frame: accent glass, a soft deep edge and a specular dot (wm-a: they move with the value)

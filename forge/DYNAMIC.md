@@ -50,6 +50,19 @@ Every param has a plain-language `label`. Defaults must make a great-looking ico
   Text that would be illegible at 24px is not allowed — the generator must fall back (e.g. "99+" for counts over 99).
 - Put text on plate **A** (or **S** for badges) and, inside filled frames, also add it to `cutouts` (open subpaths) so solid/duo/
   gloss/etc. show it knocked out of the mass.
+- **Frames stay closed.** A label never opens its walls for a long word: the word is set inside, first in the regular
+  cut, then in the **condensed cut** (`text(…, { condense: 0.7–1 })`, glyphs drawn narrower from their own widths;
+  `_parts-labels.mjs fitLabel` and `_parts-misc.mjs fitInside` try 1 → 0.88 → 0.8 → 0.74 at each cap, condensed only
+  below cap 5.6), and only then shortened. Frames span the full live width (2..22) so 4 letters fit at cap 4–5.
+- **Optical size.** Below cap 5.6 knockout styles cut text with the fine pen (`_live-text.mjs textWeight`, 1.4u) so the
+  counters of 0 6 8 9 A B D survive; Line keeps 1.75 (the gate's reference).
+- **Path ids with a meaning** (besides the font's `text:` ids):
+  - `badge:<kind>` on a count badge outline (`_parts-counts.mjs`): outline styles draw the badge SOLID with its digits
+    knocked out (`forge/styles/_live-badge.mjs withSolidBadge`), like every notification badge.
+  - `solid:<name>` on a closed mark that must read as a silhouette in every style (an earned rating star, a half star,
+    a die's pip, a stopwatch's swept pie): outline styles fill it instead of stroking it.
+- **Inactive steps are ghost dashes** (`_parts-power.mjs dashesOnArc / dashesOnLine / trackDashes`): the unlit arcs of
+  wifi and volume, unlit signal bars, a progress ring's remaining track, a timer's spent time. Never bead dots.
 - Deterministic and pure. No `Math.random`, no dates (a "today" calendar is the runtime's job, not the generator's).
 - Fast: `build()` < 5 ms.
 

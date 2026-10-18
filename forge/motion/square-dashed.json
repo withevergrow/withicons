@@ -1,0 +1,43 @@
+{
+  "name": "square-dashed",
+  "intent": "the dashed box breathes like a live selection",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.9,
+    "duration": 0.5
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "spin",
+      "duration": 6,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "square",
+      "effect": "fade"
+    },
+    {
+      "to": "check-square",
+      "effect": "scale"
+    },
+    {
+      "to": "square-plus",
+      "effect": "fade"
+    }
+  ]
+}

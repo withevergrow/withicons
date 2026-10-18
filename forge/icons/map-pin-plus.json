@@ -1,0 +1,63 @@
+{
+  "name": "map-pin-plus",
+  "category": "maps",
+  "description": "A map pin with a plus in its head, for adding a new place, address or stop to a map.",
+  "aliases": [
+    "add-location",
+    "location-plus",
+    "new-location",
+    "add-place",
+    "map-marker-plus",
+    "add-pin",
+    "add-marker"
+  ],
+  "tags": [
+    "location",
+    "map",
+    "add",
+    "create",
+    "pin"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 10 C19.5 14.5 15.5 18.5 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 19.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V13",
+      "plate": "S"
+    },
+    {
+      "d": "M9 10 H15",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M19.5 10 C19.5 14.5 15.5 18.5 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 19.5 10 Z"
+  ],
+  "cutouts": [
+    "M12 7 V13",
+    "M9 10 H15"
+  ],
+  "synonyms": [
+    "add address",
+    "new address",
+    "add a place",
+    "add stop",
+    "add waypoint",
+    "save place",
+    "mark location",
+    "create marker",
+    "add destination",
+    "new pin",
+    "pin location",
+    "add to map",
+    "suggest a place",
+    "new place",
+    "drop a pin",
+    "add venue",
+    "add store",
+    "new marker",
+    "add point of interest"
+  ]
+}

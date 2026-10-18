@@ -1,0 +1,48 @@
+{
+  "name": "drumstick",
+  "intent": "waves about on its bone like a drumstick held up to eat",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      6,
+      18
+    ],
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      6,
+      18
+    ],
+    "amount": 0.9
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "tada",
+      "origin": [
+        6,
+        18
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "drumstick@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "beef",
+      "effect": "slide-right"
+    }
+  ]
+}

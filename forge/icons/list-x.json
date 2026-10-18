@@ -1,0 +1,64 @@
+{
+  "name": "list-x",
+  "category": "layout",
+  "description": "Lines of a list with an x, for clearing a list, deleting it or cancelling a queue.",
+  "aliases": [
+    "list-clear",
+    "clear-list",
+    "remove-list",
+    "delete-list",
+    "list-close",
+    "cancel-list",
+    "clear-queue",
+    "list-delete",
+    "clear-all-items"
+  ],
+  "tags": [
+    "list",
+    "clear",
+    "delete",
+    "cancel",
+    "queue",
+    "close"
+  ],
+  "paths": [
+    {
+      "d": "M3 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M3 18 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M16 16 L20 20",
+      "plate": "S"
+    },
+    {
+      "d": "M20 16 L16 20",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "clear",
+    "clear all",
+    "remove all",
+    "empty list",
+    "close list",
+    "cancel",
+    "discard",
+    "dismiss",
+    "clear playlist",
+    "reset list",
+    "wipe",
+    "cross",
+    "no results",
+    "invalid list"
+  ]
+}

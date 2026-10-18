@@ -1,7 +1,7 @@
 {
   "name": "@withicons/classes-plus",
-  "version": "0.5.0",
-  "description": "CSS icon classes for the 7 newer with icons styles (clay, bento, suite, dock, liquid, chrome, brutal). Companion of @withicons/classes, whose loader finds them by itself.",
+  "version": "0.6.0",
+  "description": "CSS icon classes for 10 with icons styles (glass, skeuo, gothic, clay, bento, suite, dock, liquid, chrome, brutal): the newest, and the heaviest older ones. Companion of @withicons/classes, whose loader finds them by itself.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -26,6 +26,9 @@
     "css-icons",
     "icon-classes",
     "cdn",
+    "glass",
+    "skeuo",
+    "gothic",
     "clay",
     "bento",
     "suite",

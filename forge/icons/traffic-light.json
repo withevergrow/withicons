@@ -1,0 +1,73 @@
+{
+  "name": "traffic-light",
+  "category": "maps",
+  "description": "A traffic light with three lamps, for traffic, road signals, stop and go, and red-amber-green status.",
+  "aliases": [
+    "traffic-signal",
+    "stoplight",
+    "stop-light",
+    "signal-light",
+    "traffic-lights",
+    "semaphore",
+    "red-light",
+    "intersection"
+  ],
+  "tags": [
+    "traffic",
+    "road",
+    "signal",
+    "driving",
+    "city"
+  ],
+  "paths": [
+    {
+      "d": "M9.5 2 H14.5 A2.5 2.5 0 0 1 17 4.5 V19.5 A2.5 2.5 0 0 1 14.5 22 H9.5 A2.5 2.5 0 0 1 7 19.5 V4.5 A2.5 2.5 0 0 1 9.5 2 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.75 6.5 A0.75 0.75 0 1 1 11.25 6.5 A0.75 0.75 0 1 1 12.75 6.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12.75 12 A0.75 0.75 0 1 1 11.25 12 A0.75 0.75 0 1 1 12.75 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12.75 17.5 A0.75 0.75 0 1 1 11.25 17.5 A0.75 0.75 0 1 1 12.75 17.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.5 2 H14.5 A2.5 2.5 0 0 1 17 4.5 V19.5 A2.5 2.5 0 0 1 14.5 22 H9.5 A2.5 2.5 0 0 1 7 19.5 V4.5 A2.5 2.5 0 0 1 9.5 2 Z"
+  ],
+  "cutouts": [
+    "M13.75 6.5 A1.75 1.75 0 1 1 10.25 6.5 A1.75 1.75 0 1 1 13.75 6.5 Z",
+    "M13.75 12 A1.75 1.75 0 1 1 10.25 12 A1.75 1.75 0 1 1 13.75 12 Z",
+    "M13.75 17.5 A1.75 1.75 0 1 1 10.25 17.5 A1.75 1.75 0 1 1 13.75 17.5 Z"
+  ],
+  "synonyms": [
+    "stop",
+    "go",
+    "wait",
+    "red amber green",
+    "red yellow green",
+    "rag status",
+    "status",
+    "traffic control",
+    "crossroads",
+    "junction",
+    "road signal",
+    "driving",
+    "street",
+    "rules of the road",
+    "status lights",
+    "pedestrian crossing",
+    "drive",
+    "commute",
+    "traffic jam",
+    "driving test",
+    "road safety",
+    "green light",
+    "ready steady go"
+  ]
+}

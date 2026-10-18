@@ -1,0 +1,71 @@
+{
+  "name": "unplug",
+  "category": "devices",
+  "description": "A plug pulled apart from its socket with a gap between them, for unplugging, disconnecting and removed integrations.",
+  "aliases": [
+    "unplugged",
+    "plug-out",
+    "power-disconnect",
+    "pull-plug",
+    "disconnect-power",
+    "unplug-cable",
+    "plug-off"
+  ],
+  "tags": [
+    "plug",
+    "disconnect",
+    "power",
+    "electricity",
+    "integration"
+  ],
+  "paths": [
+    {
+      "d": "M20.84 3.16 L18.72 5.28",
+      "plate": "A"
+    },
+    {
+      "d": "M12 6.34 L17.66 12 L19.07 10.59 A3.5 3.5 0 0 0 19.07 5.64 L18.36 4.93 A3.5 3.5 0 0 0 13.41 4.93 L12 6.34 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.41 7.76 L12 9.17 M16.24 10.59 L14.83 12",
+      "plate": "A"
+    },
+    {
+      "d": "M7.76 10.59 L13.41 16.24 L12 17.66 A3.5 3.5 0 0 1 7.05 17.66 L6.34 16.95 A3.5 3.5 0 0 1 6.34 12 L7.76 10.59 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.7 17.3 L3.16 20.84",
+      "plate": "A"
+    },
+    {
+      "d": "M6.34 6.34 L7.4 7.4 M16.6 16.6 L17.66 17.66",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 6.34 L17.66 12 L19.07 10.59 A3.5 3.5 0 0 0 19.07 5.64 L18.36 4.93 A3.5 3.5 0 0 0 13.41 4.93 L12 6.34 Z",
+    "M7.76 10.59 L13.41 16.24 L12 17.66 A3.5 3.5 0 0 1 7.05 17.66 L6.34 16.95 A3.5 3.5 0 0 1 6.34 12 L7.76 10.59 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "disconnect",
+    "disconnected",
+    "power off",
+    "unplug device",
+    "remove cable",
+    "offline",
+    "cut power",
+    "detach",
+    "unhook",
+    "integration removed",
+    "disable plugin",
+    "remove plugin",
+    "disable integration",
+    "connection lost",
+    "no power",
+    "not connected",
+    "unplg"
+  ]
+}

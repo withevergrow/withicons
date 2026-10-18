@@ -44,7 +44,8 @@ export default live({
     const off = deg ? OFF - 0.25 : OFF
     const pips = (FACES[value] || FACES[5]).map(([i, j]) => rotPt([C + i * off, C + j * off], deg))
     return {
-      paths: [{ d, plate: 'K' }, ...pips.map(([x, y]) => ({ d: dot(x, y, PIP), plate: 'A' }))],
+      // pips are SOLID discs in every style (outline styles fill a "solid:" mark): a stroked 0.75u ring leaves a pinhole
+      paths: [{ d, plate: 'K' }, ...pips.map(([x, y], i) => ({ d: dot(x, y, PIP), plate: 'A', id: `solid:pip-${i}` }))],
       fills: [d],
       cutouts: pips.map(([x, y]) => dot(x, y, HOLE)),
     }

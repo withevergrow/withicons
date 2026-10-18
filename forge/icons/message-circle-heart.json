@@ -1,0 +1,62 @@
+{
+  "name": "message-circle-heart",
+  "category": "communication",
+  "description": "A round speech bubble with a heart, for kind messages, love notes, favourite chats and positive feedback.",
+  "aliases": [
+    "heart-chat",
+    "heart-message",
+    "chat-heart",
+    "kind-message",
+    "sweet-message",
+    "bubble-heart",
+    "romantic-chat",
+    "message-love",
+    "flirt"
+  ],
+  "tags": [
+    "message",
+    "heart",
+    "love",
+    "chat",
+    "feedback",
+    "social"
+  ],
+  "paths": [
+    {
+      "d": "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M 12.5 15.63 C 12.5 15.63 8 12.98 8 9.82 C 8 8.48 9.05 7.38 10.4 7.38 C 11.3 7.38 12.05 7.88 12.5 8.63 C 12.95 7.88 13.7 7.38 14.6 7.38 C 15.95 7.38 17 8.48 17 9.82 C 17 12.98 12.5 15.63 12.5 15.63 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z"
+  ],
+  "cutouts": [
+    "M 12.5 15.63 C 12.5 15.63 8 12.98 8 9.82 C 8 8.48 9.05 7.38 10.4 7.38 C 11.3 7.38 12.05 7.88 12.5 8.63 C 12.95 7.88 13.7 7.38 14.6 7.38 C 15.95 7.38 17 8.48 17 9.82 C 17 12.98 12.5 15.63 12.5 15.63 Z"
+  ],
+  "synonyms": [
+    "love",
+    "like",
+    "favourite",
+    "favorite",
+    "kind words",
+    "compliment",
+    "appreciation",
+    "thanks",
+    "thank you",
+    "positive feedback",
+    "dating",
+    "romance",
+    "valentine",
+    "crush",
+    "care",
+    "support",
+    "sweet talk",
+    "reaction",
+    "heart reply",
+    "wholesome"
+  ]
+}

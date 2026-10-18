@@ -1,0 +1,65 @@
+{
+  "name": "drumstick",
+  "category": "food",
+  "description": "A chicken drumstick with a plump meaty end and a two-knob bone, for chicken, poultry, fried food and roasts.",
+  "aliases": [
+    "chicken-leg",
+    "chicken",
+    "poultry",
+    "fried-chicken",
+    "turkey-leg",
+    "leg-piece",
+    "chicken-drumstick",
+    "meat-leg"
+  ],
+  "tags": [
+    "food",
+    "meat",
+    "chicken",
+    "protein"
+  ],
+  "paths": [
+    {
+      "d": "M9.17 12.71 C9.17 10.59 9.53 7.4 12 4.93 A5 5 45 0 1 19.07 12 C16.6 14.47 13.41 14.83 11.29 14.83 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.23 13.77 L6.87 17.13",
+      "plate": "A"
+    },
+    {
+      "d": "M6.85 17.15 A2 2 45 1 0 5.48 18.52 A2 2 45 1 0 6.85 17.15 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.17 12.71 C9.17 10.59 9.53 7.4 12 4.93 A5 5 45 0 1 19.07 12 C16.6 14.47 13.41 14.83 11.29 14.83 Z",
+    "M6.85 17.15 A2 2 45 1 0 5.48 18.52 A2 2 45 1 0 6.85 17.15 Z"
+  ],
+  "cutouts": [
+    "M13.24 6.87 A2.75 2.75 45 0 1 17.13 6.17",
+    "M9.17 12.71 L11.29 14.83"
+  ],
+  "synonyms": [
+    "chicken wing",
+    "wings",
+    "roast chicken",
+    "fried chicken",
+    "crispy chicken",
+    "thanksgiving",
+    "turkey",
+    "bbq",
+    "barbecue",
+    "grill",
+    "tandoori",
+    "fast food",
+    "takeaway",
+    "dinner",
+    "meat",
+    "protein",
+    "non vegetarian",
+    "non veg",
+    "drum stick",
+    "drumstik"
+  ]
+}

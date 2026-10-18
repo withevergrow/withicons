@@ -1,0 +1,41 @@
+{
+  "name": "mushroom",
+  "intent": "the cap puffs up and settles like a mushroom popping from the ground",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.9
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "rise",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "mushroom@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "sprout",
+      "effect": "slide-up"
+    }
+  ]
+}

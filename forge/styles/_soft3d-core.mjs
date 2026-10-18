@@ -180,7 +180,8 @@ export function build(icon, lite = 0) {
   let ri = 0
   const byRole = {}, seams = []
   for (const pt of M.parts) {
-    if (pt.text) { solids.push({ set: pt.set, z0: -0.7, z1: 0.05, role: M.textInside ? 'ink' : 'c2', cls: 'wm-a', raised: true, order: 4, text: true, lines: pt.lines }); continue }
+    // text is always printed in ink: a free reading (under a gauge, a wind gust) in c2 was near-white on white
+    if (pt.text) { solids.push({ set: pt.set, z0: -0.7, z1: 0.05, role: 'ink', cls: 'wm-a', raised: true, order: 4, text: true, lines: pt.lines }); continue }
     const b = bboxOf([pt.set])
     // a long horizontal line across an object's face is a seam (a lid line, a window sill), not a raised bar
     if (mode === 'object' && b && b[3] - b[1] < 2.6 && b[2] - b[0] > mw * 0.55) { seams.push(pt.set); continue }

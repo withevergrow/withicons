@@ -1,0 +1,10 @@
+{
+  "name": "package-check",
+  "intent": "the box lands softly and the check ticks in: delivered",
+  "loop": { "preset": "bounce", "origin": [12, 21.5], "amount": 0.3, "duration": 2.6 },
+  "hover": { "preset": "nod", "amount": 0.6 },
+  "parts": { "S": { "preset": "pop", "origin": [18, 18], "amount": 0.7, "delay": 0.12 } },
+  "deco": "twinkle",
+  "alt": [{ "preset": "draw", "duration": 0.9 }, { "preset": "tada", "amount": 0.6 }],
+  "swap": [{ "to": "package", "effect": "fade" }, { "to": "package-open", "effect": "scale" }, { "to": "package-check@solid", "effect": "scale" }]
+}

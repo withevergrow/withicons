@@ -1,0 +1,50 @@
+{
+  "name": "paint-bucket",
+  "intent": "tips a little further and lets a drop of paint fall",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      11,
+      11
+    ],
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      11,
+      11
+    ],
+    "amount": 1
+  },
+  "parts": {
+    "S": {
+      "preset": "drop",
+      "amount": 0.8,
+      "duration": 1.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "palette",
+      "effect": "fade"
+    },
+    {
+      "to": "paint-roller",
+      "effect": "slide-left"
+    },
+    {
+      "to": "pipette",
+      "effect": "fade"
+    }
+  ]
+}

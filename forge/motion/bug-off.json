@@ -1,0 +1,46 @@
+{
+  "name": "bug-off",
+  "intent": "the bug stays still while the slash taps down: squashed",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "amount": 0.6,
+      "duration": 3.4,
+      "delay": 0.12
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        14
+      ],
+      "amount": 0.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bug",
+      "effect": "fade"
+    },
+    {
+      "to": "check-circle",
+      "effect": "morph"
+    }
+  ]
+}

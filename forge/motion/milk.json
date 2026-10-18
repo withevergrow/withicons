@@ -1,0 +1,48 @@
+{
+  "name": "milk",
+  "intent": "the carton rocks on its base as if the milk inside sloshes",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.35,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "milk@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "cup-soda",
+      "effect": "fade"
+    }
+  ]
+}

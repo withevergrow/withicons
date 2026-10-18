@@ -1,9 +1,9 @@
 {
   "name": "paste",
-  "intent": "the page hovers over the board, lands with a bounce on hover",
-  "loop": { "preset": "float", "amount": 0.5, "duration": 3 },
+  "intent": "the board floats while its clip clamps the pasted page down",
+  "loop": { "preset": "float", "amount": 0.4, "duration": 3 },
   "hover": { "preset": "bounce", "amount": 0.7, "duration": 0.7 },
-  "parts": { "A": { "preset": "float", "amount": 0.25, "duration": 3, "delay": 0.25 } },
+  "parts": { "A": { "preset": "nod", "origin": [10, 4.5], "amount": 0.5, "duration": 3, "delay": 0.15 } },
   "deco": "float",
   "alt": [ { "preset": "drop", "amount": 0.6 }, { "preset": "pop" } ],
   "swap": [ { "to": "check", "effect": "scale" }, { "to": "clipboard", "effect": "fade" } ]

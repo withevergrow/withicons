@@ -1,0 +1,72 @@
+{
+  "name": "ticket-percent",
+  "category": "commerce",
+  "description": "A notched ticket with a percent sign, for discount coupons, promo codes and voucher deals.",
+  "aliases": [
+    "discount-ticket",
+    "discount-coupon",
+    "coupon-percent",
+    "discount-voucher",
+    "promo-ticket",
+    "percent-coupon",
+    "deal-ticket",
+    "offer-ticket",
+    "sale-coupon",
+    "discount-code"
+  ],
+  "tags": [
+    "discount",
+    "coupon",
+    "sale",
+    "offer",
+    "promo",
+    "ticket"
+  ],
+  "paths": [
+    {
+      "d": "M4 5 H20 A2 2 0 0 1 22 7 V9.5 A2.5 2.5 0 0 0 22 14.5 V17 A2 2 0 0 1 20 19 H4 A2 2 0 0 1 2 17 V14.5 A2.5 2.5 0 0 0 2 9.5 V7 A2 2 0 0 1 4 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 8.5 L8.5 15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 8.75 V9.25 M15 14.75 V15.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 5 H20 A2 2 0 0 1 22 7 V9.5 A2.5 2.5 0 0 0 22 14.5 V17 A2 2 0 0 1 20 19 H4 A2 2 0 0 1 2 17 V14.5 A2.5 2.5 0 0 0 2 9.5 V7 A2 2 0 0 1 4 5 Z"
+  ],
+  "cutouts": [
+    "M15.5 8.5 L8.5 15.5",
+    "M10.25 9 A1.25 1.25 0 1 1 7.75 9 A1.25 1.25 0 1 1 10.25 9 Z",
+    "M16.25 15 A1.25 1.25 0 1 1 13.75 15 A1.25 1.25 0 1 1 16.25 15 Z"
+  ],
+  "synonyms": [
+    "coupon",
+    "voucher",
+    "promo code",
+    "promotion",
+    "discount",
+    "percent off",
+    "sale",
+    "deal",
+    "offer",
+    "savings",
+    "rebate",
+    "cashback",
+    "special offer",
+    "gift voucher",
+    "redeem",
+    "redeem code",
+    "loyalty",
+    "reward",
+    "markdown",
+    "black friday",
+    "clearance",
+    "%",
+    "cupon"
+  ]
+}

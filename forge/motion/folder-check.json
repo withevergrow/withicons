@@ -1,0 +1,53 @@
+{
+  "name": "folder-check",
+  "intent": "the check pops inside the folder like a finished sync",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.7,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "nod",
+      "origin": [
+        12,
+        20
+      ]
+    },
+    {
+      "preset": "tada",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder",
+      "effect": "fade"
+    },
+    {
+      "to": "folder-x",
+      "effect": "rotate"
+    },
+    {
+      "to": "folder-check@solid",
+      "effect": "scale"
+    }
+  ]
+}

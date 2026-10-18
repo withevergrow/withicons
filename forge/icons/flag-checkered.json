@@ -1,0 +1,65 @@
+{
+  "name": "flag-checkered",
+  "category": "sports",
+  "description": "A waving chequered flag on a pole, for races, finish lines, motorsport and completed goals.",
+  "aliases": [
+    "checkered-flag",
+    "racing-flag",
+    "finish-line",
+    "finish-flag",
+    "race-flag",
+    "motorsport",
+    "grand-prix"
+  ],
+  "tags": [
+    "sports",
+    "racing",
+    "flag",
+    "finish",
+    "goal"
+  ],
+  "paths": [
+    {
+      "d": "M5 3.5 C7.5 2.25 10 2.25 12.5 3.5 C15 4.75 17.5 4.75 20 3.5 V13.5 C17.5 14.75 15 14.75 12.5 13.5 C10 12.25 7.5 12.25 5 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5 8.5 C7.5 7.25 10 7.25 12.5 8.5 C15 9.75 17.5 9.75 20 8.5 M10 2.67 V12.67 M15 4.33 V14.33",
+      "plate": "K"
+    },
+    {
+      "d": "M5 21.5 V3.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3.5 C6.67 2.67 8.33 2.39 10 2.67 L10 7.67 C8.33 7.39 6.67 7.67 5 8.5 Z",
+    "M10 7.67 C10.83 7.81 11.67 8.08 12.5 8.5 C13.33 8.92 14.17 9.19 15 9.33 L15 14.33 C14.17 14.19 13.33 13.92 12.5 13.5 C11.67 13.08 10.83 12.81 10 12.67 Z",
+    "M15 4.33 C16.67 4.61 18.33 4.33 20 3.5 L20 8.5 C18.33 9.33 16.67 9.61 15 9.33 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "finish",
+    "finished",
+    "race",
+    "racing",
+    "car race",
+    "formula 1",
+    "f1",
+    "nascar",
+    "rally",
+    "karting",
+    "go kart",
+    "winner",
+    "victory",
+    "end",
+    "complete",
+    "completed",
+    "done",
+    "goal",
+    "destination",
+    "last lap",
+    "checkpoint",
+    "checkerd flag"
+  ]
+}

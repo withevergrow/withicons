@@ -1,0 +1,47 @@
+{
+  "name": "circle-chevron-left",
+  "intent": "chevron leans back inside its ring, pointing to the previous one",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.6,
+    "duration": 0.55
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.45,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "circle-chevron-right",
+      "effect": "flip"
+    },
+    {
+      "to": "circle-chevron-left@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "chevron-left",
+      "effect": "fade"
+    }
+  ]
+}

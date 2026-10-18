@@ -1,6 +1,6 @@
 {
   "name": "lunar-drum",
-  "intent": "drumsticks beat the festival drum",
+  "intent": "the drumstick beats the festival drum",
   "loop": {
     "preset": "beat",
     "duration": 1
@@ -9,15 +9,15 @@
     "preset": "jelly",
     "origin": [
       12,
-      21
+      22
     ]
   },
   "parts": {
-    "S": {
+    "A": {
       "preset": "nod",
       "origin": [
-        12,
-        4.5
+        19.5,
+        2
       ],
       "amount": 1.3
     }

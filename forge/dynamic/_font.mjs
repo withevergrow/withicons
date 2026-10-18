@@ -13,6 +13,7 @@
 //     x, y     anchor. align 'left' | 'center' | 'right' sets what x is; valign 'middle' (y = middle of the
 //              caps, default) | 'top' (y = cap top) | 'baseline' (y = baseline).
 //     tracking extra space in u added between letters (negative tightens; spacing is already optically kerned).
+//     condense 0.7..1 (default 1): the condensed cut, glyphs drawn narrower from their own widths (labels).
 //     paths    one d string per visible glyph (open subpaths only: ring glyphs like 0 O 8 are emitted as two
 //              open arcs, so no renderer ever mistakes a counter for an area). Put them on plate A (S in badges).
 //     width    centreline width; height = cap height; box = centreline bbox (ink reaches strokeWidth/2 further).
@@ -87,6 +88,15 @@ class Pen {
     return p
   }
   d(ox = 0, oy = 0) {
+    // pens are never changed once drawn (map() makes a new one), so one serialisation per offset is remembered
+    const key = ox + ',' + oy
+    const hit = this.dc && this.dc.get(key)
+    if (hit !== undefined) return hit
+    const out = this.d0(ox, oy)
+    ;(this.dc ||= new Map()).set(key, out)
+    return out
+  }
+  d0(ox, oy) {
     let s = ''
     for (const c of this.c) {
       if (c[0] === 'A') s += `A${f(c[1])} ${f(c[2])} 0 ${c[3]} ${c[4]} ${f(c[5] + ox)} ${f(c[6] + oy)}`
@@ -323,11 +333,11 @@ const G = {
 // ── glyph cache: drawing + ink profile at a given cap ────────────────────────────────────────────────────
 const BIN = 0.25
 const cache = new Map()
-function glyph(ch, cap) {
-  const key = ch + '@' + cap
+function glyph(ch, cap, cond = 1) {
+  const key = ch + '@' + cap + '@' + cond
   if (cache.has(key)) return cache.get(key)
   const small = cap < 6, M = small ? SMALL : LARGE, k = cap / M.cap
-  const w = WIDTH[ch][small ? 1 : 0] * k
+  const w = WIDTH[ch][small ? 1 : 0] * k * cond
   const pens = G[ch](cap, w, small)
   const d = pens.map(p => p.d()).filter(Boolean).join(' ')
   // ink profile (left/right extent per y bin) at the reference stroke, from the snapped drawing
@@ -358,8 +368,18 @@ function glyph(ch, cap) {
   return g
 }
 
-// horizontal offset of b's origin relative to a's origin (optical kerning)
+// horizontal offset of b's origin relative to a's origin (optical kerning). Glyphs are cached per character, cap
+// and cut, and M and k follow from the cap, so the offset of a pair is remembered (fitting tries many layouts).
+const PAIRS = new WeakMap()
 function pairOffset(a, b, M, k) {
+  let row = PAIRS.get(a)
+  if (!row) PAIRS.set(a, row = new Map())
+  if (row.has(b)) return row.get(b)
+  const X = pairOffset0(a, b, M, k)
+  row.set(b, X)
+  return X
+}
+function pairOffset0(a, b, M, k) {
   if (a.empty || b.empty) return null
   let dmin = Infinity
   const ds = []
@@ -395,12 +415,27 @@ export function coverage(str) {
 }
 export const clean = (str, maxLength = 4) => [...fold(str)].filter(supports).slice(0, maxLength).join('')
 
+// layouts are remembered per (text, size, cut, tracking): fitting tries the same strings at many caps, again and again.
+// A layout is read-only for every caller (place/result/fitText only read it).
+const LAYOUTS = new Map()
 function layout(str, opts = {}) {
+  const key = str + '' + (opts.size ?? 'large') + '' + (opts.condense ?? '') + '' + (opts.tracking ?? '')
+  let lay = LAYOUTS.get(key)
+  if (lay === undefined) {
+    if (LAYOUTS.size > 4000) LAYOUTS.clear()
+    LAYOUTS.set(key, lay = layout0(str, opts))
+  }
+  return lay
+}
+function layout0(str, opts = {}) {
   const cap = Math.max(2, Math.min(12, snap(capOf(opts.size ?? 'large'))))
   const small = cap < 6, M = small ? SMALL : LARGE, k = cap / M.cap
   const chars = [...fold(str)]
   const missing = [...new Set(chars.filter(c => !supports(c)))]
-  const glyphs = chars.filter(supports).map(c => glyph(c, cap))
+  // condense: the CONDENSED cut (0.7..1 of the design widths) for labels: every glyph is drawn from its width, so
+  // rounds become stadiums and diagonals steepen instead of being squeezed; spacing follows the narrower ink
+  const cond = Math.max(0.7, Math.min(1, snap(Number(opts.condense) || 1, 0.02)))
+  const glyphs = chars.filter(supports).map(c => glyph(c, cap, cond))
   const track = Number(opts.tracking) || 0
   const placed = []
   let pen = 0, prev = null, pendingSpace = 0
@@ -470,7 +505,7 @@ export function fitText(str, box, opts = {}) {
   const minCap = opts.minCap ?? 4, maxCap = opts.maxCap ?? Infinity
   const bw = box.x1 - box.x0, bh = box.y1 - box.y0
   for (const cap of caps(prefer, minCap, maxCap)) {
-    const lay = layout(s, { size: cap, tracking: opts.tracking })
+    const lay = layout(s, { size: cap, tracking: opts.tracking, condense: opts.condense })
     // a round letter overshooting the cap by a hair (S, O: < 0.125u, under the 0.25 grid measure() reports) must
     // not make fitText refuse what measure() and fitLabel() say fits; widths are compared exactly
     const w = lay.x1 - lay.x0, h = lay.y1 - lay.y0 - Math.min(0.125, Math.max(0, lay.y1 - lay.y0 - lay.cap))

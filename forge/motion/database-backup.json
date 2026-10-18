@@ -1,0 +1,44 @@
+{
+  "name": "database-backup",
+  "intent": "the restore arrow turns back time on the database",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "spin-once",
+      "origin": [
+        17.5,
+        17.5
+      ],
+      "amount": 1,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "database",
+      "effect": "fade"
+    },
+    {
+      "to": "history",
+      "effect": "morph"
+    }
+  ]
+}

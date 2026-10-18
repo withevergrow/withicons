@@ -1,0 +1,68 @@
+{
+  "name": "timer-off",
+  "category": "time",
+  "description": "A stopwatch crossed out by a slash, for a stopped or disabled timer and play with no time limit.",
+  "aliases": [
+    "stopwatch-off",
+    "timer-disabled",
+    "no-timer",
+    "disable-timer",
+    "no-time-limit",
+    "timer-slash",
+    "untimed",
+    "countdown-off"
+  ],
+  "tags": [
+    "timer",
+    "off",
+    "stopwatch",
+    "disabled",
+    "time",
+    "stop"
+  ],
+  "paths": [
+    {
+      "d": "M10.28 5.69 A8 8 0 0 1 19.81 15.22",
+      "plate": "K"
+    },
+    {
+      "d": "M15.89 20.49 A8 8 0 0 1 5.01 9.61",
+      "plate": "K"
+    },
+    {
+      "d": "M10 2 H14 M12 2 V5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M18 7.5 L20 5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9.35 5.95 A8 8 0 0 1 19.55 16.15 Z",
+    "M16.63 20.02 A8 8 0 0 1 5.48 8.87 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "stop timer",
+    "cancel timer",
+    "timer stopped",
+    "turn off timer",
+    "no countdown",
+    "no deadline",
+    "unlimited time",
+    "no limit",
+    "untimed mode",
+    "pause",
+    "disabled",
+    "inactive",
+    "free play",
+    "practice mode",
+    "relaxed mode",
+    "stopwatch stopped"
+  ]
+}

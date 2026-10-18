@@ -1,0 +1,33 @@
+{
+  "name": "parentheses",
+  "intent": "the brackets open and close around nothing yet",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "braces",
+      "effect": "morph"
+    },
+    {
+      "to": "code",
+      "effect": "fade"
+    }
+  ]
+}

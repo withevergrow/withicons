@@ -1,0 +1,70 @@
+{
+  "name": "video-plus",
+  "intent": "the plus pulses on the camera, inviting you to add a video",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      9,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      9,
+      12
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        9,
+        12
+      ],
+      "amount": 0.7,
+      "duration": 1.6,
+      "delay": 0.1
+    },
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        16,
+        12
+      ],
+      "amount": 0.5,
+      "delay": 0.15
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        9,
+        18
+      ]
+    },
+    {
+      "preset": "rise",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "video-camera",
+      "effect": "scale"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    },
+    {
+      "to": "film",
+      "effect": "fade"
+    }
+  ]
+}

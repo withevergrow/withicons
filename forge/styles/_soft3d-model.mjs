@@ -1,7 +1,7 @@
 // SOFT 3D model: the skeleton read as parts (adapted from the retired iso style's model).
 //   mass (fills + K strokes, or the strokes of a pure-line glyph), wells (small cutouts), screens (big closed cutouts),
 //   raised parts (A inside the mass), ground parts (A outside it), S (badges, slashes), text, covers (hijab / hood frames).
-import { ribbon, parsePath, distToPolyline, pointInRing, area, simplify, circle, resample } from '../kernel/geom.mjs'
+import { ribbon, parsePath, distToPolyline, pointInRing, area, simplify, circle, resample, rect as rectPts } from '../kernel/geom.mjs'
 import { hasText, textInfo, glyphLines, openText, textWeight } from './_live-text.mjs'
 import { dilate, erode, setOf, unionSets, differenceSets, intersectSets, normalize, roundStrokeSet, strokeSet } from '../kernel/bool.mjs'
 
@@ -159,7 +159,14 @@ export function model(icon0, opts = {}) {
     const fset = (icon.fillSet && icon.fillSet.length ? icon.fillSet : U(icon.fills.map(f => f.set))).map(r => simplify(r, 0.022, true))
     mass = opts.onlyFill ? U([fset]) : U([fset, ...byPlate('K').map(p => pathSet(p.subs, K.WK, false, fset)), dotSet('K', K.WK + 0.3)])
     for (const p of byPlate('A')) {
-      const set = pathSet(p.subs, K.WA, true)
+      let set = pathSet(p.subs, K.WA, true)
+      // live icons: a part drawn as a dense serpentine of axis-aligned rows (a battery's charge bar) is one solid
+      // rounded block, never a grille: its box, corners rounded 0.75u
+      const sp = p.subs.length === 1 && !p.subs[0].closed ? p.subs[0].pts : null
+      if (icon.params && sp && sp.length >= 6) {
+        const b = bboxOf([set])
+        if (b) set = dilate(N_(rectPts(b[0] + 0.75, b[1] + 0.75, b[2] - 0.75, b[3] - 0.75)), 0.75)
+      }
       if (!set.length) continue
       const f = insideFrac(samplePts(p.subs), mass)
       if (f > 0.55) raised.push({ set, subs: p.subs })

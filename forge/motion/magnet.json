@@ -1,0 +1,44 @@
+{
+  "name": "magnet",
+  "intent": "leans toward something it attracts and snaps back",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.9,
+    "duration": 0.7
+  },
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "magnet@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "zap",
+      "effect": "fade"
+    }
+  ]
+}

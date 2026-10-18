@@ -1,0 +1,46 @@
+{
+  "name": "microwave",
+  "intent": "hums warmly while it heats, then dings when done",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      19.5
+    ],
+    "amount": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.6,
+      "duration": 1.4
+    }
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.3
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "refrigerator",
+      "effect": "fade"
+    },
+    {
+      "to": "cooking-pot",
+      "effect": "fade"
+    },
+    {
+      "to": "microwave@solid",
+      "effect": "fade"
+    }
+  ]
+}

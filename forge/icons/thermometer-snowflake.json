@@ -1,0 +1,65 @@
+{
+  "name": "thermometer-snowflake",
+  "category": "weather",
+  "description": "A thermometer with a low reading beside a snowflake, for cold weather, frost and freezing temperatures.",
+  "aliases": [
+    "cold-weather",
+    "temperature-low",
+    "freezing",
+    "cold-temperature",
+    "below-zero",
+    "temperature-cold",
+    "frost-warning"
+  ],
+  "tags": [
+    "weather",
+    "temperature",
+    "cold",
+    "winter",
+    "freezing"
+  ],
+  "paths": [
+    {
+      "d": "M14 13.88 V5.5 A2.5 2.5 0 0 1 19 5.5 V13.88 A4 4 0 1 1 14 13.88 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 5 V15 M11.33 7.5 L2.67 12.5 M11.33 12.5 L2.67 7.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 4.25 L7 5.5 L8.5 4.25 M8.5 15.75 L7 14.5 L5.5 15.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 13.88 V5.5 A2.5 2.5 0 0 1 19 5.5 V13.88 A4 4 0 1 1 14 13.88 Z"
+  ],
+  "cutouts": [
+    "M15.25 12.5 V5.75 A1.25 1.25 0 0 1 17.75 5.75 V12.5 A1.25 1.25 0 0 1 15.25 12.5 Z"
+  ],
+  "synonyms": [
+    "cold",
+    "chilly",
+    "icy",
+    "frost",
+    "frosty",
+    "freeze warning",
+    "sub zero",
+    "below freezing",
+    "winter",
+    "wind chill",
+    "snow",
+    "refrigeration",
+    "freezer",
+    "cold storage",
+    "cold chain",
+    "air conditioning",
+    "cooling",
+    "low temperature",
+    "overnight low",
+    "feels like",
+    "frostbite",
+    "polar"
+  ]
+}

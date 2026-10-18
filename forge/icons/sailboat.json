@@ -1,0 +1,76 @@
+{
+  "name": "sailboat",
+  "category": "travel",
+  "description": "A sailboat with a mainsail and a jib riding on a wave, for sailing, yachting, marinas and holidays at sea.",
+  "aliases": [
+    "sailing",
+    "yacht",
+    "sail",
+    "sailing-boat",
+    "dinghy",
+    "regatta",
+    "sloop",
+    "sailing-ship"
+  ],
+  "tags": [
+    "boat",
+    "sea",
+    "travel",
+    "sailing",
+    "water"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 C15.75 5.5 18.25 9 19 13 H12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 5.5 C9.25 7.75 7 10.25 5.5 13 H12",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 13 H21.5 L19 17 H5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 20.5 Q4.25 19 6 20.5 T9.5 20.5 T13 20.5 T16.5 20.5 T20 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 2.5 C15.75 5.5 18.25 9 19 13 H12 Z",
+    "M12 5.5 C9.25 7.75 7 10.25 5.5 13 H12 Z",
+    "M2.5 13 H21.5 L19 17 H5 Z"
+  ],
+  "cutouts": [
+    "M12 3.5 V13",
+    "M3.5 13 H20.5"
+  ],
+  "synonyms": [
+    "boat",
+    "yachting",
+    "yacht club",
+    "marina",
+    "harbour",
+    "harbor",
+    "ocean",
+    "sea",
+    "lake",
+    "holiday",
+    "vacation",
+    "cruise",
+    "nautical",
+    "maritime",
+    "wind",
+    "sailor",
+    "voyage",
+    "water sports",
+    "boating",
+    "catamaran",
+    "boat trip",
+    "boat rental",
+    "seaside",
+    "sailboat race",
+    "sale boat"
+  ]
+}

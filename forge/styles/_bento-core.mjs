@@ -223,7 +223,8 @@ function build0(icon) {
   for (const p of text) {
     const t = textInfo(p), pts = (p.subs || []).flatMap(sb => sb.pts)
     const box = pts.length ? { x0: Math.min(...pts.map(q => q[0])), x1: Math.max(...pts.map(q => q[0])), y0: Math.min(...pts.map(q => q[1])), y1: Math.max(...pts.map(q => q[1])) } : null
-    const w = +(glyphWeight({ ch: t.ch, cap: t.cap, box }) * S * 0.85).toFixed(2)
+    // (no fine tier: the tile shrinks the drawing, a finer pen would go faint)
+    const w = +(glyphWeight({ ch: t.ch, cap: t.cap, box }, { tiny: 0 }) * S * 0.85).toFixed(2)
     const pl = CLS[p.plate] ? p.plate : 'K'
     const stroke = pl === 'S' ? (textOnS && byPlate.S.length ? col('shine') : col('accent')) : col('shadow')
     const k = pl + stroke + w

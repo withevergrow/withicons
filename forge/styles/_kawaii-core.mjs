@@ -5,13 +5,13 @@ import { parseSegs, fillet, snapEnds, writeSubs, nums } from './_kawaii-path.mjs
 import { N, NN, H, gx, gi, segsOf, distField, maskOf, sample, contours } from './_kawaii-field.mjs'
 import { placeFace, drawFace, cheeksD, ellipseD, heartD, sparkleD, discD, faceMetrics } from './_kawaii-face.mjs'
 import { PALETTE, BLUSH, BLUSH_OPACITY, SHINE, ACCENT, SPARKLE, colorFor, NO_FACE, TUNE, avatarTune } from './_kawaii-tune.mjs'
-import { textInfo } from './_live-text.mjs'
+import { textInfo, textWeight } from './_live-text.mjs'
 import { isPerson, tones, adapt, fillParts } from './_people.mjs'
 
 export const INK = 2.2          // outline weight
 const R_INK = 1.75              // fillet radius of sharp corners (centreline)
 const HALF = INK / 2
-const textW = () => 1.75   // Live-icon text: the line weight of the font (it is spaced for it) (forge/styles/_live-text.mjs)
+const textW = cap => textWeight(cap || 6) // Live-icon text: the font's weight, lighter below the tiny cap (badge digits) (forge/styles/_live-text.mjs)
 const BAND = 3.6           // fields only need to see this far (largest probe ~2.1u)
 
 const v = ([role, hex], fb) => `var(--with-kawaii-${role}, ${fb || hex})`

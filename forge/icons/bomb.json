@@ -1,0 +1,77 @@
+{
+  "name": "bomb",
+  "category": "objects",
+  "description": "A round bomb with a capped neck and a lit, sparking fuse, for danger, explosive content, deadlines and destroy actions.",
+  "aliases": [
+    "explosive",
+    "grenade",
+    "dynamite",
+    "cartoon-bomb",
+    "bomb-fuse",
+    "lit-fuse",
+    "kaboom",
+    "detonate"
+  ],
+  "tags": [
+    "danger",
+    "explosion",
+    "fuse",
+    "game",
+    "warning",
+    "destroy"
+  ],
+  "paths": [
+    {
+      "d": "M16.5 14.5 A7 7 0 1 1 2.5 14.5 A7 7 0 1 1 16.5 14.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.89 8.5 L14.86 6.54 L17.46 9.14 L15.5 11.11",
+      "plate": "A"
+    },
+    {
+      "d": "M16.16 7.84 C16.5 6.5 17 5.75 17.75 5.25",
+      "plate": "A"
+    },
+    {
+      "d": "M20 2 Q20.25 3.75 22 4 Q20.25 4.25 20 6 Q19.75 4.25 18 4 Q19.75 3.75 20 2 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M16.5 14.5 A7 7 0 1 1 2.5 14.5 A7 7 0 1 1 16.5 14.5 Z",
+    "M12.89 8.5 L14.86 6.54 L17.46 9.14 L15.5 11.11 Z",
+    "M20 2 Q20.25 3.75 22 4 Q20.25 4.25 20 6 Q19.75 4.25 18 4 Q19.75 3.75 20 2 Z"
+  ],
+  "cutouts": [
+    "M5.75 13.5 A4 4 0 0 1 8.25 10.75"
+  ],
+  "synonyms": [
+    "explosion",
+    "explode",
+    "blast",
+    "boom",
+    "blow up",
+    "self destruct",
+    "destroy",
+    "nuke",
+    "danger",
+    "hazard",
+    "threat",
+    "deadline",
+    "time bomb",
+    "ticking",
+    "minesweeper",
+    "mine",
+    "cannonball",
+    "bombshell",
+    "surprise",
+    "hit",
+    "bomb emoji",
+    "fuse",
+    "spark",
+    "game over",
+    "bom",
+    "bombe"
+  ]
+}

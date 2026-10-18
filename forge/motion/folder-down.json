@@ -1,0 +1,54 @@
+{
+  "name": "folder-down",
+  "intent": "the arrow dips into the folder, saving something inside",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.4,
+      "duration": 2.6,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "drop",
+      "amount": 0.4,
+      "duration": 2.4
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        20
+      ],
+      "amount": 0.45
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder-check",
+      "effect": "slide-down"
+    },
+    {
+      "to": "folder-up",
+      "effect": "flip"
+    },
+    {
+      "to": "download",
+      "effect": "fade"
+    }
+  ]
+}

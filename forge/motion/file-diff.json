@@ -1,0 +1,49 @@
+{
+  "name": "file-diff",
+  "intent": "the plus and minus pulse like changes being compared",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        14.5
+      ],
+      "amount": 0.6,
+      "duration": 1.5,
+      "delay": 0.1
+    }
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "type",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-plus",
+      "effect": "fade"
+    },
+    {
+      "to": "file-minus",
+      "effect": "fade"
+    },
+    {
+      "to": "git-compare",
+      "effect": "morph"
+    }
+  ]
+}

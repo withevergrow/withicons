@@ -1,0 +1,50 @@
+{
+  "name": "bell-minus",
+  "intent": "the bell gives a softer ring as an alert is removed",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      11,
+      6.5
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      11,
+      6.5
+    ],
+    "amount": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell-plus",
+      "effect": "morph"
+    },
+    {
+      "to": "bell-off",
+      "effect": "flip"
+    }
+  ]
+}

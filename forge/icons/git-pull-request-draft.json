@@ -1,0 +1,60 @@
+{
+  "name": "git-pull-request-draft",
+  "category": "development",
+  "description": "A pull request with a dotted line to its target, for draft and work-in-progress pull requests.",
+  "aliases": [
+    "draft-pr",
+    "pr-draft",
+    "pull-request-draft",
+    "wip-pr",
+    "draft-merge-request",
+    "mr-draft",
+    "work-in-progress-pr"
+  ],
+  "tags": [
+    "git",
+    "pull-request",
+    "draft",
+    "vcs"
+  ],
+  "paths": [
+    {
+      "d": "M8 6 A3 3 0 1 1 2 6 A3 3 0 1 1 8 6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 18 A3 3 0 1 1 2 18 A3 3 0 1 1 8 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 18 A3 3 0 1 1 16 18 A3 3 0 1 1 22 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 9 V15",
+      "plate": "K"
+    },
+    {
+      "d": "M19 5.5 V5.51 M19 10.5 V10.51",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 6 A3 3 0 1 1 2 6 A3 3 0 1 1 8 6 Z",
+    "M8 18 A3 3 0 1 1 2 18 A3 3 0 1 1 8 18 Z",
+    "M22 18 A3 3 0 1 1 16 18 A3 3 0 1 1 22 18 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "draft pull request",
+    "work in progress",
+    "wip",
+    "not ready for review",
+    "early feedback",
+    "in progress",
+    "pending changes",
+    "github draft",
+    "gitlab draft",
+    "unfinished changes"
+  ]
+}

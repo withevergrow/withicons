@@ -1,0 +1,74 @@
+{
+  "name": "circle-dollar-sign",
+  "category": "commerce",
+  "description": "A dollar sign inside a circle, like a coin, for prices, payments, earnings and paid features.",
+  "aliases": [
+    "dollar-circle",
+    "circle-dollar",
+    "dollar-coin",
+    "money-circle",
+    "usd-circle",
+    "coin-dollar",
+    "price-circle",
+    "currency-circle"
+  ],
+  "tags": [
+    "money",
+    "currency",
+    "dollar",
+    "finance",
+    "payment",
+    "price"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 9.5 C14.1 8.6 13.2 8 12 8 C10.6 8 9.5 8.75 9.5 9.9 C9.5 11.2 10.7 11.6 12 12 C13.3 12.4 14.5 12.8 14.5 14.1 C14.5 15.25 13.4 16 12 16 C10.8 16 9.9 15.4 9.5 14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 6.5 V8 M12 16 V17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M14.5 9.5 C14.1 8.6 13.2 8 12 8 C10.6 8 9.5 8.75 9.5 9.9 C9.5 11.2 10.7 11.6 12 12 C13.3 12.4 14.5 12.8 14.5 14.1 C14.5 15.25 13.4 16 12 16 C10.8 16 9.9 15.4 9.5 14.5",
+    "M12 6.5 V8",
+    "M12 16 V17.5"
+  ],
+  "synonyms": [
+    "usd",
+    "money",
+    "cash",
+    "coin",
+    "price",
+    "pricing",
+    "cost",
+    "payment",
+    "pay",
+    "paid",
+    "billing",
+    "earnings",
+    "revenue",
+    "income",
+    "profit",
+    "sales",
+    "fee",
+    "finance",
+    "fintech",
+    "budget",
+    "monetize",
+    "paid plan",
+    "premium",
+    "subscription",
+    "$",
+    "tip",
+    "donation"
+  ]
+}

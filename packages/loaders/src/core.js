@@ -5,7 +5,9 @@
 //   svgAsync(name, options)                     same, loading the style first when needed
 //   url(name, style)                            the standalone .svg on the CDN (works as <img src>, zero JS)
 //   morph(items, { style, effect, hold, size, … })   one looping svg that turns each item into the next
-//   morphAsync(names, options)                  same, fetching library icons by name (CDN, or setIconSource())
+//   morphAsync(items, options)                  same, fetching library icons by name (CDN, or setIconSource())
+//   Morph items (0.6.0): a plain name is a library ICON; a loader only when asked for: 'loader:<name>' or
+//   { loader: '<name>' } ({ icon }, { svg } and '<svg …>' markup work too). morphItem(item) says how one is read.
 //   list() catalog() get(name) search(query) effects() styles() load(style) loaded(style) register(style, data)
 import { EFFECTS, morphKeys, keyframes } from './effects.js'
 
@@ -168,32 +170,61 @@ function splitSvg(markup) {
 let MID = 0
 function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) } return (h >>> 0).toString(36) }
 /**
+ * How a morph item is read: { kind: 'icon', name } | { kind: 'loader', name } | { kind: 'svg', markup } | null.
+ * A plain name is a library icon (since 0.6.0: many loaders share a name with an icon, e.g. rocket, download, gift);
+ * a loader only when asked for explicitly: 'loader:rocket' or { loader: 'rocket' }. 'icon:rocket', { icon: 'rocket' },
+ * { svg: '<svg …>' } and '<svg …>' markup work too.
+ */
+export function morphItem(it) {
+  if (it && typeof it === 'object') {
+    if (it.svg != null) return { kind: 'svg', markup: String(it.svg) }
+    if (it.loader != null) return String(it.loader).trim() ? { kind: 'loader', name: String(it.loader).trim() } : null
+    if (it.icon != null) return String(it.icon).trim() ? { kind: 'icon', name: String(it.icon).trim() } : null
+    return null
+  }
+  const s = it == null ? '' : String(it).trim()
+  if (!s) return null
+  if (s[0] === '<') return { kind: 'svg', markup: s }
+  const m = /^(loader|icon):\s*(.+)$/i.exec(s)
+  if (m) return { kind: m[1].toLowerCase(), name: m[2].trim() }
+  return { kind: 'icon', name: s }
+}
+const itemKey = p => p.kind === 'svg' ? p.markup : p.kind + ':' + p.name
+const loaderHint = name => get(name) ? ` (for the "${get(name).name}" loader write "loader:${name}")` : ''
+/**
  * Turn items into one another in a loop: each holds the stage for `hold` seconds and hands over with `effect`.
- * items: loader names (drawn in options.style) and/or complete icon <svg> strings of any with icons style.
- *   morph(['spinner', checkSvg], { style: 'line', effect: 'bloom', hold: 1.2 })
+ * items: icon <svg> strings of any with icons style, and/or loaders asked for as 'loader:<name>' / { loader } (drawn in
+ * options.style). A plain name is an icon: morph() cannot fetch it (use morphAsync(), or pass its <svg>).
+ *   morph([fileSvg, 'loader:spinner', checkSvg], { style: 'line', effect: 'bloom', hold: 1.2 })
  * options: style, effect (bloom spin flip slide-up slide-left drop zoom fade), hold (s per item, 1.1), size, color,
  *          speed, paused, label, vars, class, flat
  */
 export function morph(items, options) {
   const o = options || {}
   const st = o.style || o.variant || 'line'
-  const list0 = (items || []).filter(Boolean)
-  if (!list0.length) throw fail('WITH_LOADER_MORPH', 'morph() needs at least one item')
+  const raw = (Array.isArray(items) ? items : items == null ? [] : [items]).filter(it => it != null && it !== '')
+  if (!raw.length) throw fail('WITH_LOADER_MORPH', 'morph() needs at least one item')
+  const list0 = raw.map((it, i) => {
+    const p = morphItem(it)
+    if (!p) throw fail('WITH_LOADER_MORPH', `morph item ${i}: ${JSON.stringify(it)} is not an icon <svg>, 'loader:<name>' or { loader | icon | svg }`)
+    return p
+  })
   const fx = EFFECTS[o.effect] ? o.effect : 'bloom'
   const hold = Math.max(0.3, Number(o.hold) || 1.1)
   const n = list0.length, dur = hold * n
-  const id = o.id || 'wl-m' + hash(st + fx + hold + list0.join('\u0001')).slice(0, 6)
+  const id = o.id || 'wl-m' + hash(st + fx + hold + list0.map(itemKey).join('\u0001')).slice(0, 6)
   const css = [`.${id}{--wl-k:1;overflow:visible}`, `@media (prefers-reduced-motion:reduce){.${id}{--wl-k:2.4}}`]
   const D = s => `calc(${Math.round(s * 1000) / 1000}s*var(--wl-k,1)/var(--wl-speed,1))`
   const groups = list0.map((it, i) => {
-    let root, inner
-    const l = typeof it === 'string' && !/^\s*</.test(it) ? get(it) : null
-    if (l) {
+    let root, inner, l = null
+    if (it.kind === 'loader') {
+      l = get(it.name)
+      if (!l) { const s = suggest(it.name); throw fail('WITH_LOADER_UNKNOWN', `morph item ${i}: no loader "${it.name}"${s.length ? ` (did you mean ${s.join(', ')}?)` : ''}`, { suggestions: s }) }
       const d = DATA[st]
       if (!d || d.loaders[l.name] == null) throw fail('WITH_LOADER_STYLE', `loader "${l.name}" in "${st}" is not loaded yet: use morphAsync()`)
       root = d.root; inner = d.loaders[l.name]
-    } else if (typeof it === 'string' && /^\s*</.test(it)) ({ root, inner } = splitSvg(it))
-    else throw fail('WITH_LOADER_MORPH', `morph item ${i}: "${it}" is not a loader name or an <svg> string (morphAsync fetches icons by name)`)
+    } else if (it.kind === 'svg') ({ root, inner } = splitSvg(it.markup))
+    else throw fail('WITH_LOADER_MORPH', `morph item ${i}: "${it.name}" is an icon name: pass its <svg> markup, or use morphAsync(), which fetches icons by name${loaderHint(it.name)}`)
     const cls = `${id}-${i}`
     if (n > 1) {
       css.push(keyframes(cls, morphKeys(i, n, fx)))
@@ -227,10 +258,23 @@ export function iconSvg(name, style) {
   return p
 }
 export const iconUrl = (name, style) => `https://cdn.jsdelivr.net/npm/@withicons/${(META.cdn || {})[style || 'line'] || 'core'}@${META.version}/dist/svg/${style || 'line'}/${name}.svg`
-/** morph() for names: loader names stay loaders, every other name is a library icon fetched in the same style. */
-export function morphAsync(names, options) {
+/**
+ * morph() for names: every plain name is a library icon, fetched in the same style; 'loader:<name>' (or { loader })
+ * is a loader. A string is a comma / space separated list ("file, cloud-upload, loader:spinner").
+ */
+export function morphAsync(items, options) {
   const st = (options && (options.style || options.variant)) || 'line'
-  const items = (Array.isArray(names) ? names : String(names).split(/[\s,]+/)).filter(Boolean)
-  return Promise.all(items.map(n => get(n) ? ensure(n, st).then(() => n) : iconSvg(n, st))).then(list => morph(list, options))
+  const list0 = (Array.isArray(items) ? items : String(items == null ? '' : items).split(/[\s,]+/)).filter(it => it != null && it !== '')
+  return Promise.all(list0.map((it, i) => {
+    const p = morphItem(it)
+    if (!p) return Promise.reject(fail('WITH_LOADER_MORPH', `morph item ${i}: ${JSON.stringify(it)} is not an icon name, 'loader:<name>' or <svg>`))
+    if (p.kind === 'svg') return p.markup
+    if (p.kind === 'loader') {
+      const l = get(p.name)
+      if (!l) { const s = suggest(p.name); return Promise.reject(fail('WITH_LOADER_UNKNOWN', `no loader "${p.name}"${s.length ? ` (did you mean ${s.join(', ')}?)` : ''}`, { suggestions: s })) }
+      return ensure(l.name, st).then(() => ({ loader: l.name }))
+    }
+    return iconSvg(p.name, st).catch(e => { const h = loaderHint(p.name); if (h && e && e.message && !e.message.includes(h)) e.message += h; throw e })
+  })).then(list => morph(list, options))
 }
 export const nextId = () => 'l' + (++MID).toString(36)

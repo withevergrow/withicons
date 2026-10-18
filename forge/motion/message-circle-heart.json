@@ -1,0 +1,57 @@
+{
+  "name": "message-circle-heart",
+  "intent": "the heart beats inside the bubble, a kind message sent with love",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12.5,
+      11.5
+    ],
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "beat",
+    "origin": [
+      12.5,
+      11.5
+    ],
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "beat",
+      "origin": [
+        12.5,
+        11.5
+      ],
+      "amount": 1.2,
+      "duration": 1.2,
+      "delay": 0.08
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "float",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "heart",
+      "effect": "scale"
+    },
+    {
+      "to": "message-circle",
+      "effect": "fade"
+    },
+    {
+      "to": "message-circle-heart@solid",
+      "effect": "scale"
+    }
+  ]
+}

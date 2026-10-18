@@ -1,0 +1,62 @@
+{
+  "name": "person-standing",
+  "category": "users",
+  "description": "A simple standing person figure, for people, guests, occupancy and human scale.",
+  "aliases": [
+    "standing-person",
+    "upright-person",
+    "stick-figure",
+    "figure",
+    "person-figure",
+    "standing",
+    "human-figure",
+    "body"
+  ],
+  "tags": [
+    "person",
+    "human",
+    "standing",
+    "figure",
+    "people",
+    "body"
+  ],
+  "paths": [
+    {
+      "d": "M14 4 A2 2 0 1 1 10 4 A2 2 0 1 1 14 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 9.5 V15 M12 15 L8.5 21.5 M12 15 L15.5 21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 9.5 H15.5 M8.5 9.5 L5.5 12.5 M15.5 9.5 L18.5 12.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 4 A2 2 0 1 1 10 4 A2 2 0 1 1 14 4 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "human",
+    "people",
+    "individual",
+    "stick man",
+    "stand",
+    "posture",
+    "adult",
+    "guest",
+    "visitor",
+    "attendee",
+    "mannequin",
+    "presence",
+    "occupant",
+    "population",
+    "man",
+    "woman",
+    "character",
+    "pedestrian",
+    "headcount"
+  ]
+}

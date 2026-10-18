@@ -1,0 +1,62 @@
+{
+  "name": "heart-off",
+  "category": "status",
+  "description": "A heart struck through by a slash for unliking, unfavouriting or turning likes off.",
+  "aliases": [
+    "heart-unlike",
+    "heart-slash",
+    "remove-favorite",
+    "remove-favourite",
+    "favorite-off",
+    "likes-off",
+    "love-off",
+    "no-love",
+    "heart-remove"
+  ],
+  "synonyms": [
+    "unlike",
+    "unfavorite",
+    "unfavourite",
+    "unlove",
+    "remove from favourites",
+    "remove from wishlist",
+    "not interested",
+    "hide likes",
+    "likes hidden",
+    "no likes",
+    "disable likes",
+    "unfollow",
+    "removed like",
+    "heartless",
+    "cold",
+    "breakup",
+    "dislike",
+    "heart off"
+  ],
+  "tags": [
+    "heart",
+    "slash",
+    "unlike",
+    "off",
+    "favorite"
+  ],
+  "paths": [
+    {
+      "d": "M14.31 18.91 C12.99 19.92 12 20.5 12 20.5 C12 20.5 3 15.2 3 8.9 C3 8.5 3.05 8.11 3.13 7.73",
+      "plate": "K"
+    },
+    {
+      "d": "M8.68 4.08 C10.09 4.35 11.25 5.25 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 10.85 20.14 12.71 18.94 14.34",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M14.98 18.38 C13.34 19.71 12 20.5 12 20.5 C12 20.5 3 15.2 3 8.9 C3 8.16 3.16 7.47 3.44 6.84 Z",
+    "M7.42 4.02 C7.54 4.01 7.67 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 11.13 19.87 13.23 18.42 15.02 Z"
+  ],
+  "cutouts": []
+}

@@ -1,0 +1,10 @@
+{
+  "name": "timer-off",
+  "intent": "the stopwatch rests stopped while the slash holds",
+  "loop": { "preset": "pulse", "origin": [12, 13.5], "amount": 0.3, "duration": 3.6 },
+  "hover": { "preset": "shake", "amount": 0.5, "duration": 0.5 },
+  "parts": { "S": { "preset": "pop", "amount": 0.5, "duration": 3.6, "delay": 0.12 } },
+  "deco": "still",
+  "alt": [{ "preset": "breathe" }, { "preset": "pop" }],
+  "swap": [{ "to": "timer", "effect": "flip" }, { "to": "timer-reset", "effect": "fade" }]
+}

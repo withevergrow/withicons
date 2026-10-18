@@ -1,0 +1,50 @@
+{
+  "name": "panel-right-close",
+  "intent": "the arrow pushes right to fold the side pane away",
+  "loop": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.4,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 1.1,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0,
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "panel-right",
+      "effect": "flip"
+    },
+    {
+      "to": "panel-left-close",
+      "effect": "flip"
+    },
+    {
+      "to": "chevron-right",
+      "effect": "morph"
+    }
+  ]
+}

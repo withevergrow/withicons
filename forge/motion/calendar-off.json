@@ -1,0 +1,10 @@
+{
+  "name": "calendar-off",
+  "intent": "rests with nothing planned while the slash holds; shakes no on hover",
+  "loop": { "preset": "pulse", "amount": 0.3, "duration": 3.6 },
+  "hover": { "preset": "shake", "amount": 0.5, "duration": 0.5 },
+  "parts": { "S": { "preset": "pop", "amount": 0.5, "duration": 3.6, "delay": 0.12 } },
+  "deco": "still",
+  "alt": [{ "preset": "breathe" }, { "preset": "pop" }],
+  "swap": [{ "to": "calendar", "effect": "flip" }, { "to": "calendar-x", "effect": "fade" }]
+}

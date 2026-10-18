@@ -1,0 +1,10 @@
+{
+  "name": "chart-bar-horizontal",
+  "intent": "bars stretch out from the axis like live rankings updating",
+  "loop": { "preset": "jelly", "origin": [3.5, 12], "amount": 0.45, "duration": 3 },
+  "hover": { "preset": "pop", "origin": [3.5, 12], "amount": 0.9 },
+  "parts": { "A": { "preset": "pulse", "origin": [3.5, 12], "amount": 0.25 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "fill" }, { "preset": "nudge", "dir": 0, "amount": 0.5 }],
+  "swap": [{ "to": "chart-bar", "effect": "rotate" }, { "to": "chart-bar-increasing", "effect": "fade" }, { "to": "chart-donut", "effect": "morph" }]
+}

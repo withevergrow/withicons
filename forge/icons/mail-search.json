@@ -1,0 +1,66 @@
+{
+  "name": "mail-search",
+  "category": "communication",
+  "description": "An envelope with a magnifying glass, for searching email, finding messages and looking up an address.",
+  "aliases": [
+    "search-mail",
+    "search-email",
+    "find-email",
+    "email-search",
+    "find-mail",
+    "mail-lookup",
+    "inbox-search",
+    "envelope-search",
+    "email-lookup"
+  ],
+  "tags": [
+    "email",
+    "search",
+    "find",
+    "envelope",
+    "inbox",
+    "lookup"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 11.5 V6.5 A2 2 0 0 0 19.5 4.5 H4.5 A2 2 0 0 0 2.5 6.5 V17.5 A2 2 0 0 0 4.5 19.5 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 7 L12 13.5 L21.5 7",
+      "plate": "A"
+    },
+    {
+      "d": "M20 17.25 A2.75 2.75 0 1 1 14.5 17.25 A2.75 2.75 0 1 1 20 17.25 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M19.25 19.25 L21.5 21.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V12.67 A6.25 6.25 0 0 0 11.42 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z",
+    "M20 17.25 A2.75 2.75 0 1 1 14.5 17.25 A2.75 2.75 0 1 1 20 17.25 Z"
+  ],
+  "cutouts": [
+    "M5 8.71 L12 13.5 L19 8.71"
+  ],
+  "synonyms": [
+    "search inbox",
+    "find message",
+    "filter email",
+    "look up",
+    "find address",
+    "mail search",
+    "query",
+    "magnifier",
+    "magnifying glass",
+    "investigate",
+    "find sender",
+    "gmail search",
+    "scan email",
+    "discover",
+    "browse mail"
+  ]
+}

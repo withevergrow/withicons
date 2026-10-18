@@ -1,0 +1,54 @@
+{
+  "name": "message-square-warning",
+  "intent": "the exclamation blinks in the bubble: this message needs attention",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      10.5
+    ],
+    "amount": 0.25,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        12,
+        10.5
+      ],
+      "amount": 0.8,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "amount": 0.7
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "alert-triangle",
+      "effect": "morph"
+    },
+    {
+      "to": "message-square",
+      "effect": "fade"
+    },
+    {
+      "to": "message-square-x",
+      "effect": "flip"
+    }
+  ]
+}

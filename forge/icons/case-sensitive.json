@@ -1,0 +1,60 @@
+{
+  "name": "case-sensitive",
+  "category": "text",
+  "description": "A capital A beside a small a, for match-case options, letter case and case-sensitive search.",
+  "aliases": [
+    "match-case",
+    "aa",
+    "letter-case",
+    "text-case",
+    "mixed-case",
+    "toggle-case",
+    "change-case",
+    "upper-lower",
+    "case-match"
+  ],
+  "tags": [
+    "text",
+    "case",
+    "letters",
+    "typography",
+    "search",
+    "format"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 19 L7 5.5 L11.5 19",
+      "plate": "K"
+    },
+    {
+      "d": "M4 14.5 H10",
+      "plate": "K"
+    },
+    {
+      "d": "M20.5 15.75 A3.25 3.25 0 1 1 14 15.75 A3.25 3.25 0 1 1 20.5 15.75 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 12.5 V19",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "match case",
+    "case sensitive search",
+    "uppercase and lowercase",
+    "capital letters",
+    "small letters",
+    "sentence case",
+    "title case",
+    "capitalization",
+    "capitalisation",
+    "find options",
+    "search flag",
+    "case insensitive",
+    "letter a",
+    "font case"
+  ]
+}

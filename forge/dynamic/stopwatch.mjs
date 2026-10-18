@@ -26,7 +26,9 @@ export default live({
       { d: STOPWATCH.face, plate: 'K' },
       { d: STOPWATCH.crown, plate: 'A' },
       ...STOPWATCH.pushers.map(d => ({ d, plate: 'A' })),
-      { d: sweep, plate: 'A' },
+      // the swept seconds are a SOLID pie in every style (outline styles fill the "solid:" mark): an outlined
+      // sector reads as a C or a target, a filled one as elapsed time
+      deg > 0 ? { d: sweep, plate: 'A', id: 'solid:sweep' } : { d: sweep, plate: 'A' },
     ]
     return {
       paths,

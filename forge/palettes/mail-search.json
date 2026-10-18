@@ -1,0 +1,427 @@
+{
+  "name": "mail-search",
+  "palettes": [
+    {
+      "id": "inbox-blue",
+      "name": "Inbox blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#142238",
+        "c1": "#4C9BFF",
+        "c2": "#FFC83D",
+        "c3": "#BFD9FF",
+        "c4": "#FFFFFF",
+        "tint": "#DFEDFF",
+        "accent": "#FFC83D",
+        "shadow": "#224673",
+        "shine": "#EAF3FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "white-envelope",
+      "name": "White envelope",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E2430",
+        "c1": "#F3F5F8",
+        "c2": "#2563EB",
+        "c3": "#C9D1DC",
+        "c4": "#7E828A",
+        "tint": "#FDFDFE",
+        "accent": "#2563EB",
+        "shadow": "#6D6E70",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kraft-envelope",
+      "name": "Kraft envelope",
+      "tags": [
+        "true-to-life",
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2E2213",
+        "c1": "#D2A86E",
+        "c2": "#2A4D8F",
+        "c3": "#F0DFC2",
+        "c4": "#785E3C",
+        "tint": "#F7EFE5",
+        "accent": "#2A4D8F",
+        "shadow": "#5E4C31",
+        "shine": "#FAF5EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lookup-teal",
+      "name": "Lookup teal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#062B2A",
+        "c1": "#14B8A6",
+        "c2": "#F59E0B",
+        "c3": "#CCFBF1",
+        "c4": "#0F766E",
+        "tint": "#D5F2EF",
+        "accent": "#F59E0B",
+        "shadow": "#09534B",
+        "shine": "#E3F6F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "detective",
+      "name": "Detective",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1E10",
+        "c1": "#E8D5B0",
+        "c2": "#6B4F2A",
+        "c3": "#A3392B",
+        "c4": "#FFF8EA",
+        "tint": "#FBF7F1",
+        "accent": "#A3392B",
+        "shadow": "#68604F",
+        "shine": "#FFFDF6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-post",
+      "name": "Pastel post",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#363049",
+        "c1": "#D7CCFF",
+        "c2": "#FFB3C7",
+        "c3": "#BDEBD9",
+        "c4": "#FFE8A8",
+        "tint": "#F8F6FF",
+        "accent": "#FF8FAB",
+        "shadow": "#615C73",
+        "shine": "#FAF9FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-mail",
+      "name": "Candy mail",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3B1240",
+        "c1": "#FF9ACB",
+        "c2": "#6FD6FF",
+        "c3": "#FFD84D",
+        "c4": "#B388FF",
+        "tint": "#FFEDF6",
+        "accent": "#6FD6FF",
+        "shadow": "#73455B",
+        "shine": "#FFF3F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-inbox",
+      "name": "Neon inbox",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#2BF0FF",
+        "c1": "#8A5CFF",
+        "c2": "#FF2BD6",
+        "c3": "#39FF88",
+        "c4": "#FFE600",
+        "tint": "#EAE2FF",
+        "accent": "#FF2BD6",
+        "shadow": "#3E2973",
+        "shine": "#F1EBFF",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "y2k-mail",
+      "name": "Y2K mail",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#1A1340",
+        "c1": "#9FB2FF",
+        "c2": "#FF8ADF",
+        "c3": "#C2F970",
+        "c4": "#E6EBFF",
+        "tint": "#EEF1FF",
+        "accent": "#C2F970",
+        "shadow": "#485073",
+        "shine": "#F3F6FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "kraft-boho",
+      "name": "Kraft & sage",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2E2213",
+        "c1": "#D2A86E",
+        "c2": "#7D8F69",
+        "c3": "#B5452F",
+        "c4": "#F0DFC2",
+        "tint": "#F7EFE5",
+        "accent": "#7D8F69",
+        "shadow": "#5E4C31",
+        "shine": "#FAF5EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "retro-post",
+      "name": "Retro post",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#22140C",
+        "c1": "#E8B04B",
+        "c2": "#D9532B",
+        "c3": "#2E7D6E",
+        "c4": "#F3DFC1",
+        "tint": "#FBF1DF",
+        "accent": "#D9532B",
+        "shadow": "#684F22",
+        "shine": "#FCF6E9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "airmail",
+      "name": "Airmail",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#1F2433",
+        "c1": "#F4EFE3",
+        "c2": "#C8352E",
+        "c3": "#2A4D8F",
+        "c4": "#E3D7BC",
+        "tint": "#FDFCFA",
+        "accent": "#C8352E",
+        "shadow": "#6E6C66",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#141414",
+        "c1": "#A6A6A6",
+        "c2": "#4A4A4A",
+        "c3": "#D9D9D9",
+        "c4": "#6E6E6E",
+        "tint": "#EFEFEF",
+        "accent": "#4A4A4A",
+        "shadow": "#4B4B4B",
+        "shine": "#F4F4F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "ocean-mail",
+      "name": "Ocean mail",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#062A33",
+        "c1": "#1A9BB5",
+        "c2": "#FFD166",
+        "c3": "#FF7E67",
+        "c4": "#B7E5EE",
+        "tint": "#D6EDF2",
+        "accent": "#FFD166",
+        "shadow": "#0C4651",
+        "shine": "#E4F3F6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "leaf-mail",
+      "name": "Leaf letter",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#12230E",
+        "c1": "#4C8C3A",
+        "c2": "#F2B134",
+        "c3": "#A5D86B",
+        "c4": "#CDE6C2",
+        "tint": "#DFEADC",
+        "accent": "#F2B134",
+        "shadow": "#223F1A",
+        "shine": "#EAF1E7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-mail",
+      "name": "Sunset mail",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#2E0F1A",
+        "c1": "#F2785C",
+        "c2": "#FFC857",
+        "c3": "#8E4B9C",
+        "c4": "#FCDCCF",
+        "tint": "#FDE7E2",
+        "accent": "#FFC857",
+        "shadow": "#6D3629",
+        "shine": "#FDEFEB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "berry-mail",
+      "name": "Berry mail",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2A0B1E",
+        "c1": "#D6336C",
+        "c2": "#FFD43B",
+        "c3": "#5FD3A0",
+        "c4": "#FBD0DF",
+        "tint": "#F8DAE5",
+        "accent": "#5FD3A0",
+        "shadow": "#601731",
+        "shine": "#FAE7ED",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "wax-seal",
+      "name": "Wax seal",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#1D1506",
+        "c1": "#F3E6C4",
+        "c2": "#8E1B2B",
+        "c3": "#D4AF37",
+        "c4": "#5A4318",
+        "tint": "#FDFBF4",
+        "accent": "#D4AF37",
+        "shadow": "#6D6758",
+        "shine": "#FFFBF0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "holiday-card",
+      "name": "Holiday card",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#2A0E0E",
+        "c1": "#D62828",
+        "c2": "#2A9D8F",
+        "c3": "#F6C343",
+        "c4": "#FFF1C9",
+        "tint": "#F8D8D8",
+        "accent": "#F6C343",
+        "shadow": "#601212",
+        "shine": "#FAE5E5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFFFFF",
+        "c2": "#D10000",
+        "c3": "#0057B8",
+        "c4": "#FFD400",
+        "tint": "#FFFFFF",
+        "accent": "#D10000",
+        "shadow": "#5A5A5A",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dark-mode",
+      "name": "Dark mode",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#E6E8F0",
+        "c1": "#2F3447",
+        "c2": "#60A5FA",
+        "c3": "#F472B6",
+        "c4": "#1C1F2B",
+        "tint": "#DADADE",
+        "accent": "#60A5FA",
+        "shadow": "#151720",
+        "shine": "#5D6377",
+        "edge": "#14141F"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine brights",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1A1033",
+        "c1": "#FFD60A",
+        "c2": "#FF3D9A",
+        "c3": "#00C2A8",
+        "c4": "#8B5CF6",
+        "tint": "#FFF8D3",
+        "accent": "#FF3D9A",
+        "shadow": "#736005",
+        "shine": "#FFFAE2",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

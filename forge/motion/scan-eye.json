@@ -1,0 +1,52 @@
+{
+  "name": "scan-eye",
+  "intent": "the eye blinks inside the frame while it is scanned",
+  "loop": {
+    "preset": "blink",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 3.5
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.7,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "blink",
+      "origin": [
+        12,
+        12
+      ],
+      "duration": 3.5,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.6
+    },
+    {
+      "preset": "zoom"
+    }
+  ],
+  "swap": [
+    {
+      "to": "eye",
+      "effect": "scale"
+    },
+    {
+      "to": "scan-face",
+      "effect": "fade"
+    },
+    {
+      "to": "scan",
+      "effect": "fade"
+    }
+  ]
+}

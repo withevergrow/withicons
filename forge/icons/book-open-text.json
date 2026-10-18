@@ -1,0 +1,77 @@
+{
+  "name": "book-open-text",
+  "category": "files",
+  "description": "An open book with lines of text on both pages for reading, articles and documentation.",
+  "aliases": [
+    "open-book-text",
+    "reading-book",
+    "book-text",
+    "book-pages",
+    "read-article",
+    "documentation-book",
+    "book-reading",
+    "open-book-lines"
+  ],
+  "tags": [
+    "book",
+    "reading",
+    "text",
+    "pages",
+    "documentation",
+    "learning"
+  ],
+  "paths": [
+    {
+      "d": "M12 7 C10.5 5.5 8 4.5 4.5 4.5 A1.5 1.5 0 0 0 3 6 V16.5 A1.5 1.5 0 0 0 4.5 18 C8 18 10.5 19 12 20.5 C13.5 19 16 18 19.5 18 A1.5 1.5 0 0 0 21 16.5 V6 A1.5 1.5 0 0 0 19.5 4.5 C16 4.5 13.5 5.5 12 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6 10 H9 M6 14 H9",
+      "plate": "A"
+    },
+    {
+      "d": "M15 10 H18 M15 14 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 7 C10.5 5.5 8 4.5 4.5 4.5 A1.5 1.5 0 0 0 3 6 V16.5 A1.5 1.5 0 0 0 4.5 18 C8 18 10.5 19 12 20.5 C13.5 19 16 18 19.5 18 A1.5 1.5 0 0 0 21 16.5 V6 A1.5 1.5 0 0 0 19.5 4.5 C16 4.5 13.5 5.5 12 7 Z"
+  ],
+  "cutouts": [
+    "M12 7.5 V20",
+    "M6 10 H9",
+    "M6 14 H9",
+    "M15 10 H18",
+    "M15 14 H18"
+  ],
+  "synonyms": [
+    "read",
+    "reading",
+    "reader mode",
+    "article",
+    "documentation",
+    "docs",
+    "manual",
+    "guide",
+    "story",
+    "novel",
+    "chapter",
+    "lesson",
+    "study",
+    "literature",
+    "ebook",
+    "e-reader",
+    "kindle",
+    "bible",
+    "scripture",
+    "dictionary",
+    "learn",
+    "education",
+    "course material",
+    "textbook"
+  ]
+}

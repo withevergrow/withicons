@@ -1,0 +1,63 @@
+{
+  "name": "mails",
+  "category": "communication",
+  "description": "Two stacked envelopes, for inboxes, bulk email, newsletters and mail campaigns.",
+  "aliases": [
+    "emails",
+    "mail-stack",
+    "bulk-email",
+    "mass-email",
+    "email-campaign",
+    "multiple-emails",
+    "all-mail",
+    "mail-multiple"
+  ],
+  "tags": [
+    "email",
+    "inbox",
+    "bulk",
+    "newsletter",
+    "campaign",
+    "mail"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 8 H15.5 A2 2 0 0 1 17.5 10 V19 A2 2 0 0 1 15.5 21 H4.5 A2 2 0 0 1 2.5 19 V10 A2 2 0 0 1 4.5 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 10.5 L10 15.5 L17.5 10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 4 H19.5 A2 2 0 0 1 21.5 6 V17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 8 H15.5 A2 2 0 0 1 17.5 10 V19 A2 2 0 0 1 15.5 21 H4.5 A2 2 0 0 1 2.5 19 V10 A2 2 0 0 1 4.5 8 Z"
+  ],
+  "cutouts": [
+    "M5 12.17 L10 15.5 L15 12.17"
+  ],
+  "synonyms": [
+    "inbox",
+    "newsletters",
+    "newsletter",
+    "campaign",
+    "mailing list",
+    "mass mail",
+    "bulk mail",
+    "broadcast",
+    "correspondence",
+    "letters",
+    "post",
+    "mail merge",
+    "email marketing",
+    "drip campaign",
+    "outbox",
+    "threads",
+    "many emails",
+    "stack of mail"
+  ]
+}

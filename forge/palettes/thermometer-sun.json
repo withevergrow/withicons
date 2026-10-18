@@ -1,0 +1,425 @@
+{
+  "name": "thermometer-sun",
+  "palettes": [
+    {
+      "id": "heatwave",
+      "name": "Heatwave",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1003",
+        "c1": "#FFFFFF",
+        "c2": "#E53935",
+        "c3": "#FFB300",
+        "c4": "#FF7043",
+        "tint": "#FFF5F2",
+        "accent": "#FFB300",
+        "shadow": "#A5A5A5",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "summer-noon",
+      "name": "Summer noon",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1F00",
+        "c1": "#FFF6E0",
+        "c2": "#FF6B35",
+        "c3": "#FFC72C",
+        "c4": "#E53935",
+        "tint": "#FFFBF2",
+        "accent": "#FFC72C",
+        "shadow": "#A8A291",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "glass-and-mercury",
+      "name": "Glass & mercury",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E2329",
+        "c1": "#E8EEF3",
+        "c2": "#D32F2F",
+        "c3": "#F5B700",
+        "c4": "#9AA7B4",
+        "tint": "#F7FAFC",
+        "accent": "#F5B700",
+        "shadow": "#8C949C",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "desert-heat",
+      "name": "Desert heat",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2F1A0C",
+        "c1": "#F6E3CE",
+        "c2": "#C8471E",
+        "c3": "#E8A23B",
+        "c4": "#8C5A3C",
+        "tint": "#FDF9F5",
+        "accent": "#E8A23B",
+        "shadow": "#877D71",
+        "shine": "#FCF5EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "uv-warning",
+      "name": "UV warning",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1F0A00",
+        "c1": "#FFE0B2",
+        "c2": "#FF3D00",
+        "c3": "#FFD600",
+        "c4": "#8E24AA",
+        "tint": "#FFF9F0",
+        "accent": "#8E24AA",
+        "shadow": "#8C7B62",
+        "shine": "#FFF4E4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "weather-app",
+      "name": "Weather app",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0F1A2A",
+        "c1": "#F1F5F9",
+        "c2": "#EF4444",
+        "c3": "#F59E0B",
+        "c4": "#64748B",
+        "tint": "#FFFFFF",
+        "accent": "#F59E0B",
+        "shadow": "#8A8F96",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "peach-sun",
+      "name": "Peach sun",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A2C1E",
+        "c1": "#FFEFE6",
+        "c2": "#FF9E80",
+        "c3": "#FFD98A",
+        "c4": "#F2946B",
+        "tint": "#FFFCFA",
+        "accent": "#FFD98A",
+        "shadow": "#8C837F",
+        "shine": "#FFF9F6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sherbet",
+      "name": "Sherbet",
+      "tags": [
+        "pastel",
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D1233",
+        "c1": "#FFF0F6",
+        "c2": "#FF7AB5",
+        "c3": "#FFE36E",
+        "c4": "#FFB5D8",
+        "tint": "#FFFCFD",
+        "accent": "#FFE36E",
+        "shadow": "#8C8487",
+        "shine": "#FFFAFC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-heat",
+      "name": "Candy heat",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D1233",
+        "c1": "#FFE6F2",
+        "c2": "#FF4F9A",
+        "c3": "#FFC93C",
+        "c4": "#9FE5FF",
+        "tint": "#FFFAFC",
+        "accent": "#FFC93C",
+        "shadow": "#8C7F85",
+        "shine": "#FFF6FA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-heat",
+      "name": "Neon heat",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#05030A",
+        "c1": "#372C58",
+        "c2": "#FF2E63",
+        "c3": "#FFF200",
+        "c4": "#FF6A00",
+        "tint": "#D5CCF0",
+        "accent": "#FFF200",
+        "shadow": "#120C24",
+        "shine": "#6B5CA6",
+        "edge": "#15121F"
+      }
+    },
+    {
+      "id": "seventies-summer",
+      "name": "70s summer",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#FDEAC4",
+        "c2": "#C6322B",
+        "c3": "#F7B32B",
+        "c4": "#E8632B",
+        "tint": "#FFFBF3",
+        "accent": "#F7B32B",
+        "shadow": "#8B816C",
+        "shine": "#FEF8EA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-gauge",
+      "name": "Vintage gauge",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2C2218",
+        "c1": "#F2E2BC",
+        "c2": "#A23B2A",
+        "c3": "#E3B65C",
+        "c4": "#6E8A86",
+        "tint": "#FCF9F2",
+        "accent": "#E3B65C",
+        "shadow": "#857C67",
+        "shine": "#FAF5E8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "red-ramp",
+      "name": "Red ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2A0707",
+        "c1": "#FFE1E1",
+        "c2": "#D32F2F",
+        "c3": "#FF8A80",
+        "c4": "#8E1212",
+        "tint": "#FFF9F9",
+        "accent": "#FF8A80",
+        "shadow": "#8C7C7C",
+        "shine": "#FFF5F5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#F0F0F0",
+        "c2": "#4D4D4D",
+        "c3": "#BDBDBD",
+        "c4": "#8A8A8A",
+        "tint": "#FFFFFF",
+        "accent": "#4D4D4D",
+        "shadow": "#8F8F8F",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFFFFF",
+        "c2": "#D50000",
+        "c3": "#FFD400",
+        "c4": "#000000",
+        "tint": "#FFFFFF",
+        "accent": "#FFD400",
+        "shadow": "#6B6B6B",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "brass-thermometer",
+      "name": "Brass gauge",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#120D02",
+        "c1": "#F4E3A1",
+        "c2": "#8A1C1C",
+        "c3": "#D4AF37",
+        "c4": "#1C1C1C",
+        "tint": "#FDF9EC",
+        "accent": "#D4AF37",
+        "shadow": "#867D59",
+        "shine": "#FBF5DE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "beach-day",
+      "name": "Beach day",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#E0F7FA",
+        "c2": "#FF6F59",
+        "c3": "#FFCB3D",
+        "c4": "#2EC4B6",
+        "tint": "#F9FDFE",
+        "accent": "#2EC4B6",
+        "shadow": "#7B888A",
+        "shine": "#F4FCFD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-heat",
+      "name": "Sunset heat",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#36132A",
+        "c1": "#FFE4D2",
+        "c2": "#F25C78",
+        "c3": "#FF9E5E",
+        "c4": "#8A4FA8",
+        "tint": "#FFFAF6",
+        "accent": "#FF9E5E",
+        "shadow": "#8C7D74",
+        "shine": "#FFF6EF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "greenhouse",
+      "name": "Greenhouse",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#132A13",
+        "c1": "#EEF4E4",
+        "c2": "#E76F51",
+        "c3": "#F2CC5B",
+        "c4": "#6A994E",
+        "tint": "#FCFDFA",
+        "accent": "#F2CC5B",
+        "shadow": "#83867D",
+        "shine": "#F9FBF6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-heat",
+      "name": "Y2K heat",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2340",
+        "c1": "#FFF9D6",
+        "c2": "#FF9CEB",
+        "c3": "#FFE86B",
+        "c4": "#A8F0FF",
+        "tint": "#FFFEF7",
+        "accent": "#FF9CEB",
+        "shadow": "#8C8976",
+        "shine": "#FFFDF1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dark-heat",
+      "name": "Dark heat",
+      "tags": [
+        "dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#443838",
+        "c2": "#FF5A36",
+        "c3": "#FFC233",
+        "c4": "#6B3A2E",
+        "tint": "#DDD6D6",
+        "accent": "#FFC233",
+        "shadow": "#120C0C",
+        "shine": "#6E5E5E",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24113A",
+        "c1": "#FFF0F8",
+        "c2": "#FF3E9D",
+        "c3": "#FFB000",
+        "c4": "#7B4DFF",
+        "tint": "#FFFCFE",
+        "accent": "#FFB000",
+        "shadow": "#8C8488",
+        "shine": "#FFFAFD",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

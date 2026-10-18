@@ -1,0 +1,56 @@
+{
+  "name": "circle-chevron-up",
+  "category": "arrows",
+  "description": "An up chevron inside a circle for collapse, show less and back-to-top buttons.",
+  "aliases": [
+    "chevron-up-circle",
+    "circled-chevron-up",
+    "collapse-circle",
+    "expand-less",
+    "show-less-circle",
+    "caret-up-circle",
+    "circle-caret-up",
+    "top-chevron-circle"
+  ],
+  "tags": [
+    "chevron",
+    "up",
+    "collapse",
+    "top",
+    "circle",
+    "button"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 14 L12 9.5 L16.5 14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M7.5 14 L12 9.5 L16.5 14"
+  ],
+  "synonyms": [
+    "collapse",
+    "show less",
+    "see less",
+    "hide",
+    "fold",
+    "close section",
+    "accordion",
+    "back to top",
+    "scroll to top",
+    "top",
+    "raise",
+    "round button",
+    "circle button",
+    "chevron in circle",
+    "upgrade"
+  ]
+}

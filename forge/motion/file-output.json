@@ -1,0 +1,49 @@
+{
+  "name": "file-output",
+  "intent": "the arrow keeps sliding out of the page, sending data away",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.7,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pass",
+      "dir": 0,
+      "amount": 0.4,
+      "duration": 1.8,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-check",
+      "effect": "slide-right"
+    },
+    {
+      "to": "file-input",
+      "effect": "flip"
+    },
+    {
+      "to": "file-up",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "name": "battery-medium",
+  "category": "devices",
+  "description": "A battery filled about halfway, for a medium charge level and half-full power states.",
+  "aliases": [
+    "battery-half-full",
+    "battery-50",
+    "half-battery",
+    "battery-mid",
+    "medium-battery",
+    "half-charged",
+    "battery-middle"
+  ],
+  "tags": [
+    "battery",
+    "power",
+    "charge",
+    "level",
+    "status"
+  ],
+  "paths": [
+    {
+      "d": "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M22 10.5 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6 10.5 H10 V13.5 H6 Z M6.5 12 H9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 7 H17 A2 2 0 0 1 19 9 V15 A2 2 0 0 1 17 17 H4 A2 2 0 0 1 2 15 V9 A2 2 0 0 1 4 7 Z"
+  ],
+  "cutouts": [
+    "M4 8 H17 A1 1 0 0 1 18 9 V15 A1 1 0 0 1 17 16 H4 A1 1 0 0 1 3 15 V9 A1 1 0 0 1 4 8 Z M5 9.5 H11 V14.5 H5 Z"
+  ],
+  "synonyms": [
+    "half charged",
+    "50 percent",
+    "half power",
+    "battery level",
+    "partly charged",
+    "mid charge",
+    "battery status",
+    "charge level",
+    "energy level",
+    "phone battery",
+    "laptop battery",
+    "battery remaining",
+    "okay battery",
+    "moderate",
+    "some charge left",
+    "batteries"
+  ]
+}

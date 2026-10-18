@@ -1,0 +1,52 @@
+{
+  "name": "text-sparkles",
+  "intent": "the sparkle twinkles over the lines: text written with AI",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "twinkle",
+    "origin": [
+      17,
+      8
+    ],
+    "duration": 0.9
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        16,
+        15
+      ],
+      "amount": 1,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sparkles",
+      "effect": "morph"
+    },
+    {
+      "to": "text-search",
+      "effect": "fade"
+    },
+    {
+      "to": "wand-sparkles",
+      "effect": "scale"
+    }
+  ]
+}

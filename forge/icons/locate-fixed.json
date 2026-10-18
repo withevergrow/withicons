@@ -1,0 +1,63 @@
+{
+  "name": "locate-fixed",
+  "category": "maps",
+  "description": "A locate ring with a filled centre, showing that your position is fixed and the map is centred on you.",
+  "aliases": [
+    "gps-fixed",
+    "location-locked",
+    "locate-on",
+    "position-fixed",
+    "gps-lock",
+    "location-found",
+    "gps-on"
+  ],
+  "tags": [
+    "location",
+    "gps",
+    "position",
+    "map",
+    "center"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 12 A7.5 7.5 0 1 1 4.5 12 A7.5 7.5 0 1 1 19.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 2 V4.5 M12 19.5 V22 M2 12 H4.5 M19.5 12 H22",
+      "plate": "K"
+    },
+    {
+      "d": "M15 12 A3 3 0 1 1 9 12 A3 3 0 1 1 15 12 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.5 12 A7.5 7.5 0 1 1 4.5 12 A7.5 7.5 0 1 1 19.5 12 Z"
+  ],
+  "cutouts": [
+    "M18.5 12 A6.5 6.5 0 1 1 5.5 12 A6.5 6.5 0 1 1 18.5 12 Z M16 12 A4 4 0 1 1 8 12 A4 4 0 1 1 16 12 Z"
+  ],
+  "synonyms": [
+    "current location found",
+    "you are here",
+    "gps signal",
+    "gps locked",
+    "location acquired",
+    "recenter map",
+    "recentre map",
+    "center on me",
+    "centre on me",
+    "find my position",
+    "tracking on",
+    "live location",
+    "pinpoint",
+    "accurate location",
+    "satellite fix",
+    "location services on",
+    "follow me",
+    "my position",
+    "locate me",
+    "gps fix"
+  ]
+}

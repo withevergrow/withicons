@@ -1,0 +1,425 @@
+{
+  "name": "virus",
+  "palettes": [
+    {
+      "id": "covid-red",
+      "name": "Coronavirus red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2B0606",
+        "c1": "#E53935",
+        "c2": "#FF8A80",
+        "c3": "#8E1212",
+        "c4": "#FFCDD2",
+        "tint": "#FAD7D7",
+        "accent": "#FFC107",
+        "shadow": "#7E1F1D",
+        "shine": "#F6BAB8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "microscope-green",
+      "name": "Microscope green",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0B2E17",
+        "c1": "#43A047",
+        "c2": "#A5D6A7",
+        "c3": "#1B5E20",
+        "c4": "#E8F5E9",
+        "tint": "#D9ECDA",
+        "accent": "#FFD23F",
+        "shadow": "#255827",
+        "shine": "#BDDEBF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lab-purple",
+      "name": "Lab purple",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1C0B3A",
+        "c1": "#7E57C2",
+        "c2": "#CE93D8",
+        "c3": "#4527A0",
+        "c4": "#EDE7F6",
+        "tint": "#E5DDF3",
+        "accent": "#FFB300",
+        "shadow": "#45306B",
+        "shine": "#D2C4EA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "germ-teal",
+      "name": "Germ teal",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#052E2B",
+        "c1": "#14B8A6",
+        "c2": "#FB7185",
+        "c3": "#0F766E",
+        "c4": "#CCFBF1",
+        "tint": "#D0F1ED",
+        "accent": "#FB7185",
+        "shadow": "#0B655B",
+        "shine": "#ADE6E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "biohazard",
+      "name": "Biohazard",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#1F1A00",
+        "c1": "#F2D600",
+        "c2": "#1C1C1C",
+        "c3": "#E65100",
+        "c4": "#FFF9C4",
+        "tint": "#FCF7CC",
+        "accent": "#1C1C1C",
+        "shadow": "#857600",
+        "shine": "#FAF1A6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "health-alert",
+      "name": "Health alert",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0F1A2A",
+        "c1": "#EF4444",
+        "c2": "#F59E0B",
+        "c3": "#334155",
+        "c4": "#FEE2E2",
+        "tint": "#FCDADA",
+        "accent": "#F59E0B",
+        "shadow": "#832525",
+        "shine": "#F9BEBE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "cute-germ",
+      "name": "Cute germ",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#21413A",
+        "c1": "#A8E6CF",
+        "c2": "#FFB3C1",
+        "c3": "#6CC3A6",
+        "c4": "#F2FBF8",
+        "tint": "#EEFAF5",
+        "accent": "#FFB3C1",
+        "shadow": "#5C7F72",
+        "shine": "#E1F6EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "lilac-germ",
+      "name": "Lilac germ",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3E3550",
+        "c1": "#C8B6FF",
+        "c2": "#FFE38F",
+        "c3": "#9C86E8",
+        "c4": "#F7F3FF",
+        "tint": "#F4F0FF",
+        "accent": "#FFE38F",
+        "shadow": "#6E648C",
+        "shine": "#ECE5FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-bug",
+      "name": "Candy bug",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D1233",
+        "c1": "#FF6FB5",
+        "c2": "#7AD3FF",
+        "c3": "#FFE36E",
+        "c4": "#FFE6F2",
+        "tint": "#FFE2F0",
+        "accent": "#FFE36E",
+        "shadow": "#8C3D64",
+        "shine": "#FFCDE5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-virus",
+      "name": "Neon virus",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#05030A",
+        "c1": "#39FF14",
+        "c2": "#FF2E88",
+        "c3": "#00F0FF",
+        "c4": "#DFFFD3",
+        "tint": "#DFFFD3",
+        "accent": "#FF2E88",
+        "shadow": "#145C06",
+        "shine": "#FFFFFF",
+        "edge": "#15121F"
+      }
+    },
+    {
+      "id": "malware-dark",
+      "name": "Malware",
+      "tags": [
+        "dark",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#353535",
+        "c2": "#FF3B30",
+        "c3": "#34C759",
+        "c4": "#DADADA",
+        "tint": "#E0E0E0",
+        "accent": "#FF3B30",
+        "shadow": "#0A0A0A",
+        "shine": "#5C5C5C",
+        "edge": "#15121F"
+      }
+    },
+    {
+      "id": "retro-germ",
+      "name": "Retro germ",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#C6322B",
+        "c2": "#F7B32B",
+        "c3": "#7D2E68",
+        "c4": "#FDEAC4",
+        "tint": "#F4D6D5",
+        "accent": "#F7B32B",
+        "shadow": "#6D1C18",
+        "shine": "#EBB7B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "textbook",
+      "name": "Textbook",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2C2218",
+        "c1": "#A23B2A",
+        "c2": "#E3B65C",
+        "c3": "#6E8A86",
+        "c4": "#F2E2BC",
+        "tint": "#ECD8D4",
+        "accent": "#6E8A86",
+        "shadow": "#592017",
+        "shine": "#DEBAB4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "swamp",
+      "name": "Swamp",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1F2A20",
+        "c1": "#6B8E23",
+        "c2": "#C2553E",
+        "c3": "#4C5C49",
+        "c4": "#E4E9DF",
+        "tint": "#E1E8D3",
+        "accent": "#C2553E",
+        "shadow": "#3B4E13",
+        "shine": "#CBD7B2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "green-ramp",
+      "name": "Green ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0B2E17",
+        "c1": "#22C55E",
+        "c2": "#86EFAC",
+        "c3": "#15803D",
+        "c4": "#F0FDF4",
+        "tint": "#D3F3DF",
+        "accent": "#86EFAC",
+        "shadow": "#136C34",
+        "shine": "#B2EBC7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#7A7A7A",
+        "c2": "#C4C4C4",
+        "c3": "#3D3D3D",
+        "c4": "#F0F0F0",
+        "tint": "#E4E4E4",
+        "accent": "#C4C4C4",
+        "shadow": "#434343",
+        "shine": "#D0D0D0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#D50000",
+        "c2": "#FFD400",
+        "c3": "#000000",
+        "c4": "#FFFFFF",
+        "tint": "#FFD9D9",
+        "accent": "#FFD400",
+        "shadow": "#6B0000",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gold-spikes",
+      "name": "Gold spikes",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#120D02",
+        "c1": "#373737",
+        "c2": "#D4AF37",
+        "c3": "#8A6A1C",
+        "c4": "#F4E3A1",
+        "tint": "#E5E1D6",
+        "accent": "#D4AF37",
+        "shadow": "#0C0C0C",
+        "shine": "#5E5A52",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "plankton",
+      "name": "Plankton",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#00A6A6",
+        "c2": "#FF7F50",
+        "c3": "#046B6B",
+        "c4": "#E0FAFA",
+        "tint": "#CCEDED",
+        "accent": "#FF7F50",
+        "shadow": "#005B5B",
+        "shine": "#A6E0E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-spore",
+      "name": "Sunset spore",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#36132A",
+        "c1": "#F25C78",
+        "c2": "#FF9E5E",
+        "c3": "#8A4FA8",
+        "c4": "#FFE4D2",
+        "tint": "#FCDEE4",
+        "accent": "#FFD08A",
+        "shadow": "#853342",
+        "shine": "#FAC6D0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-germ",
+      "name": "Y2K germ",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2340",
+        "c1": "#C9B5FF",
+        "c2": "#A8F0FF",
+        "c3": "#FF9CEB",
+        "c4": "#F7F3FF",
+        "tint": "#F4F0FF",
+        "accent": "#FF9CEB",
+        "shadow": "#6F648C",
+        "shine": "#ECE5FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24113A",
+        "c1": "#7B4DFF",
+        "c2": "#FFD23F",
+        "c3": "#FF3E9D",
+        "c4": "#EFE9FF",
+        "tint": "#E5DBFF",
+        "accent": "#00D4C8",
+        "shadow": "#442A8C",
+        "shine": "#D1C1FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

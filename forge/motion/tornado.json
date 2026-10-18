@@ -1,0 +1,51 @@
+{
+  "name": "tornado",
+  "intent": "twists and sways as the funnel winds down",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      4
+    ],
+    "amount": 1.2,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      4
+    ],
+    "amount": 1.4
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        4
+      ],
+      "amount": 1.6,
+      "duration": 1.2,
+      "delay": 0.15
+    }
+  },
+  "alt": [
+    {
+      "preset": "shake"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "wind",
+      "effect": "morph"
+    },
+    {
+      "to": "cloud-lightning",
+      "effect": "fade"
+    }
+  ]
+}

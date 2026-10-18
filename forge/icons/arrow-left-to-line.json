@@ -1,0 +1,60 @@
+{
+  "name": "arrow-left-to-line",
+  "category": "arrows",
+  "description": "An arrow pointing left into a vertical line, for jump to start, move to the left edge and Shift+Tab.",
+  "aliases": [
+    "arrow-to-start",
+    "arrow-to-left-edge",
+    "move-to-start",
+    "arrow-left-bar",
+    "to-left-edge",
+    "home-key",
+    "back-to-start",
+    "arrow-left-line",
+    "dock-left-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "left",
+    "start",
+    "first",
+    "edge",
+    "beginning"
+  ],
+  "paths": [
+    {
+      "d": "M20.5 12 H8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15 5.5 L8.5 12 L15 18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3.5 5 V19",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "start",
+    "beginning",
+    "first",
+    "home",
+    "skip to start",
+    "line start",
+    "left edge",
+    "outdent",
+    "shift tab",
+    "back tab",
+    "wall",
+    "rewind",
+    "reset",
+    "move left",
+    "push left",
+    "collapse left",
+    "dock left",
+    "snap left"
+  ]
+}

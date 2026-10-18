@@ -1,0 +1,82 @@
+{
+  "name": "church",
+  "category": "maps",
+  "description": "A church with a steeple, a cross and an arched door, for churches, chapels, Christian places of worship and weddings.",
+  "aliases": [
+    "chapel",
+    "cathedral",
+    "parish",
+    "christian",
+    "kirk",
+    "steeple",
+    "basilica",
+    "church-building"
+  ],
+  "tags": [
+    "building",
+    "religion",
+    "worship",
+    "architecture",
+    "christian"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 21.5 V16 L9 13.5 V10.5 L12 6.5 L15 10.5 V13.5 L20.5 16 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21.5 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M10 21.5 V18 A2 2 0 0 1 14 18 V21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 6.5 V2",
+      "plate": "S"
+    },
+    {
+      "d": "M10.5 3.5 H13.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3.5 21.5 V16 L9 13.5 V10.5 L12 6.5 L15 10.5 V13.5 L20.5 16 V21.5 Z"
+  ],
+  "cutouts": [
+    "M10 21.5 V18 A2 2 0 0 1 14 18 V21.5 Z"
+  ],
+  "synonyms": [
+    "churches",
+    "christianity",
+    "worship",
+    "prayer",
+    "mass",
+    "sunday service",
+    "service",
+    "wedding",
+    "wedding venue",
+    "funeral",
+    "baptism",
+    "christmas mass",
+    "easter",
+    "faith",
+    "religion",
+    "religious building",
+    "cross",
+    "bell tower",
+    "spire",
+    "parish church",
+    "pastor",
+    "priest",
+    "congregation",
+    "place of worship",
+    "house of worship",
+    "chruch",
+    "curch",
+    "minister",
+    "chapel of rest",
+    "abbey"
+  ]
+}

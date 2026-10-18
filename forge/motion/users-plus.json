@@ -1,0 +1,63 @@
+{
+  "name": "users-plus",
+  "intent": "the pair floats together while the plus pops: someone joins the team",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 1,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        19,
+        17.5
+      ],
+      "amount": 1.2,
+      "duration": 1.6,
+      "delay": 0.1
+    },
+    "A": {
+      "preset": "nod",
+      "origin": [
+        15,
+        6.5
+      ],
+      "amount": 0.6,
+      "duration": 3.4,
+      "delay": 0.14
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "tada"
+    }
+  ],
+  "swap": [
+    {
+      "to": "users",
+      "effect": "scale"
+    },
+    {
+      "to": "user-plus",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "folder-lock",
+  "category": "files",
+  "description": "A folder with a padlock on its front for private, encrypted or permission-protected directories.",
+  "aliases": [
+    "locked-folder",
+    "secure-folder",
+    "private-folder",
+    "protected-folder",
+    "folder-secure",
+    "encrypted-folder",
+    "folder-private",
+    "folder-password",
+    "vault-folder"
+  ],
+  "tags": [
+    "folder",
+    "lock",
+    "secure",
+    "private",
+    "protected",
+    "encrypted"
+  ],
+  "paths": [
+    {
+      "d": "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 13 V12.25 A2 2 0 0 1 14 12.25 V13",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 13 H14.5 A1 1 0 0 1 15.5 14 V16 A1 1 0 0 1 14.5 17 H9.5 A1 1 0 0 1 8.5 16 V14 A1 1 0 0 1 9.5 13 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z"
+  ],
+  "cutouts": [
+    "M9.5 13 H14.5 A1 1 0 0 1 15.5 14 V16 A1 1 0 0 1 14.5 17 H9.5 A1 1 0 0 1 8.5 16 V14 A1 1 0 0 1 9.5 13 Z",
+    "M10 13 V12.25 A2 2 0 0 1 14 12.25 V13"
+  ],
+  "synonyms": [
+    "locked",
+    "private",
+    "secure",
+    "protected",
+    "encrypted",
+    "password protected",
+    "restricted",
+    "permissions",
+    "access control",
+    "confidential",
+    "secret",
+    "safe",
+    "padlock",
+    "hidden folder",
+    "secure vault",
+    "admin only",
+    "read only",
+    "privacy",
+    "personal"
+  ]
+}

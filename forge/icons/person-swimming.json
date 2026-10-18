@@ -1,0 +1,71 @@
+{
+  "name": "person-swimming",
+  "category": "sports",
+  "description": "A person swimming front crawl, one arm reaching high over the head above a wave, for swimming pools, beaches, lessons and water sports.",
+  "aliases": [
+    "swimming",
+    "swimmer",
+    "swim",
+    "pool",
+    "swimming-pool",
+    "freestyle",
+    "lap-swim",
+    "water-sport"
+  ],
+  "tags": [
+    "sports",
+    "person",
+    "water",
+    "fitness",
+    "summer"
+  ],
+  "paths": [
+    {
+      "d": "M19.5 12.5 A2 2 0 1 1 15.5 12.5 A2 2 0 1 1 19.5 12.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 14.5 L7.5 12 H12.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 12 L13.5 5.5 L20.5 8",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 19 C4 17.75 5.5 17.75 7 19 C8.5 20.25 10 20.25 11.5 19 C13 17.75 14.5 17.75 16 19 C17.5 20.25 19 20.25 20.5 19",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19.5 12.5 A2 2 0 1 1 15.5 12.5 A2 2 0 1 1 19.5 12.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "swim person",
+    "man swimming",
+    "woman swimming",
+    "swim lessons",
+    "swimming lessons",
+    "lifeguard",
+    "beach",
+    "sea",
+    "ocean",
+    "lake",
+    "leisure centre",
+    "aquatics",
+    "triathlon",
+    "crawl",
+    "front crawl",
+    "backstroke",
+    "breaststroke",
+    "laps",
+    "cardio",
+    "exercise",
+    "workout",
+    "summer",
+    "holiday",
+    "swiming",
+    "swimmimg"
+  ]
+}

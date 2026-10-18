@@ -1,0 +1,68 @@
+{
+  "name": "mail-warning",
+  "category": "communication",
+  "description": "An envelope with an exclamation mark at its corner, for email errors, phishing alerts and important mail.",
+  "aliases": [
+    "mail-alert",
+    "email-alert",
+    "email-warning",
+    "mail-error",
+    "email-error",
+    "phishing-alert",
+    "suspicious-email",
+    "important-email",
+    "envelope-alert",
+    "urgent-mail"
+  ],
+  "tags": [
+    "email",
+    "warning",
+    "alert",
+    "error",
+    "phishing",
+    "envelope"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 11.5 V6.5 A2 2 0 0 0 19.5 4.5 H4.5 A2 2 0 0 0 2.5 6.5 V17.5 A2 2 0 0 0 4.5 19.5 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 7 L12 13.5 L21.5 7",
+      "plate": "A"
+    },
+    {
+      "d": "M18 14 V17",
+      "plate": "S"
+    },
+    {
+      "d": "M18 20.25 V20.75",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V12.5 A7 7 0 0 0 12 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z"
+  ],
+  "cutouts": [
+    "M5 8.71 L12 13.5 L19 8.71"
+  ],
+  "synonyms": [
+    "alert",
+    "phishing",
+    "scam",
+    "spam",
+    "suspicious",
+    "fraud",
+    "important",
+    "urgent",
+    "attention",
+    "unverified sender",
+    "security alert",
+    "delivery problem",
+    "exclamation",
+    "caution",
+    "notice",
+    "high priority",
+    "flagged"
+  ]
+}

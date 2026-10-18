@@ -1,0 +1,64 @@
+{
+  "name": "message-square-x",
+  "category": "communication",
+  "description": "A square speech bubble with an x inside, for deleting a comment, closing a chat or a message that failed to send.",
+  "aliases": [
+    "delete-comment",
+    "remove-comment",
+    "close-chat",
+    "delete-message",
+    "message-delete",
+    "comment-x",
+    "chat-x",
+    "message-failed",
+    "clear-chat"
+  ],
+  "tags": [
+    "message",
+    "comment",
+    "delete",
+    "close",
+    "remove",
+    "error"
+  ],
+  "paths": [
+    {
+      "d": "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 7.5 L15 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15 7.5 L9 13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z"
+  ],
+  "cutouts": [
+    "M9 7.5 L15 13.5",
+    "M15 7.5 L9 13.5"
+  ],
+  "synonyms": [
+    "delete message",
+    "remove message",
+    "close conversation",
+    "end chat",
+    "discard reply",
+    "failed to send",
+    "not sent",
+    "message error",
+    "dismiss",
+    "hide comment",
+    "mute thread",
+    "cancel",
+    "clear",
+    "unsend",
+    "report comment",
+    "remove",
+    "block"
+  ]
+}

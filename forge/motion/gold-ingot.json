@@ -8,15 +8,6 @@
   "hover": {
     "preset": "tada"
   },
-  "parts": {
-    "S": {
-      "preset": "twinkle",
-      "origin": [
-        19,
-        4.5
-      ]
-    }
-  },
   "alt": [
     {
       "preset": "bounce"

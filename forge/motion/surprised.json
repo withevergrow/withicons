@@ -1,0 +1,59 @@
+{
+  "name": "surprised",
+  "intent": "gasps with a jolt, wide-eyed, then jumps back in shock on hover",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "zoom",
+      "origin": [
+        12,
+        15.5
+      ],
+      "amount": 0.6,
+      "duration": 2.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.4
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "smile",
+      "effect": "scale"
+    },
+    {
+      "to": "laugh",
+      "effect": "fade"
+    },
+    {
+      "to": "surprised@solid",
+      "effect": "scale"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "mail-search",
+  "intent": "the little lens circles the envelope, hunting through the inbox",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      19.5
+    ],
+    "amount": 0.7,
+    "duration": 0.9
+  },
+  "parts": {
+    "S": {
+      "preset": "orbit",
+      "origin": [
+        17.25,
+        17.25
+      ],
+      "amount": 0.8,
+      "duration": 2.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "zoom",
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "fade"
+    },
+    {
+      "to": "search",
+      "effect": "morph"
+    },
+    {
+      "to": "mail-open",
+      "effect": "flip"
+    }
+  ]
+}

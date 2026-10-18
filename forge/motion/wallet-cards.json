@@ -1,0 +1,10 @@
+{
+  "name": "wallet-cards",
+  "intent": "the cards peek up out of the wallet and tuck back in",
+  "loop": { "preset": "pulse", "origin": [12, 21], "amount": 0.25, "duration": 3.2 },
+  "hover": { "preset": "pop", "amount": 0.9 },
+  "parts": { "A": { "preset": "nudge", "dir": 270, "amount": 0.4, "duration": 3.2, "delay": 0.12 } },
+  "deco": "float",
+  "alt": [{ "preset": "bounce", "origin": [12, 21], "amount": 0.6 }, { "preset": "jelly", "origin": [12, 21] }],
+  "swap": [{ "to": "wallet", "effect": "fade" }, { "to": "credit-card", "effect": "slide-up" }, { "to": "wallet-cards@solid", "effect": "scale" }]
+}

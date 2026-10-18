@@ -1,0 +1,53 @@
+{
+  "name": "message-square-x",
+  "intent": "the bubble shakes its head: comment removed, message not sent",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      10.5
+    ],
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "spin-once",
+      "origin": [
+        12,
+        10.5
+      ],
+      "amount": 0.5,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "message-square",
+      "effect": "fade"
+    },
+    {
+      "to": "message-square-plus",
+      "effect": "rotate"
+    },
+    {
+      "to": "message-square-warning",
+      "effect": "flip"
+    }
+  ]
+}

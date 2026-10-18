@@ -15,7 +15,7 @@
 // on a signed-distance field (see _solid-field.mjs) and traced to ONE even-odd path.
 import { polyD, pointInRing, distToPolyline, arclen, simplify, bbox, parsePath, V } from '../kernel/geom.mjs'
 import * as F from './_lunar-sfield.mjs'
-import { hasText, splitText, openText, glyphLines, glyphWeight, TEXT_REF } from './_live-text.mjs'
+import { hasText, splitText, openText, glyphLines, glyphWeight, TEXT_REF, textWeight } from './_live-text.mjs'
 
 export const K = {
   W: 2.0,          // stroke weight of every centreline
@@ -140,6 +140,7 @@ function build(icon) {
   const live = !!icon.params
   const glyphIds = live ? new Set(glyphLines(icon).map(l => l.pathId)) : null
   const isGlyph = l => !!glyphIds && glyphIds.has(l.pathId)
+  const capOf = live ? new Map(glyphLines(icon).map(l => [l.pathId, l.cap])) : new Map()
   const lines = [...(icon.lines || []).filter(l => l.pts && l.pts.length), ...dots(icon)]
   const base = lines.filter(l => l.plate !== 'S')
   const sig = lines.filter(l => l.plate === 'S')
@@ -309,7 +310,8 @@ function build(icon) {
   }
   const cuts = F.region(cutArea)
   if (cutLine.length) F.union(cuts, F.strokes(cutLine, K.CUT))
-  if (cutText.length) F.union(cuts, F.strokes(cutText, K.TEXT_CUT))
+  // knocked-out text: Line's weight, and lighter below textWeight's tiny cap (badge digits, a month) so 8 9 6 B stay open
+  for (const s of cutText) F.union(cuts, F.strokes([s], Math.min(K.TEXT_CUT, textWeight(s.glyph?.cap ?? 6))))
   for (const b of cutArea.flatMap(r => wallBreaches(r, mass))) F.union(cuts, F.region([b]))
   if (inlay.length) F.union(cuts, F.strokes(inlay, K.W + 2 * K.INLAY))
   if (cutArea.length || cutLine.length || cutText.length || inlay.length) { F.subtract(mass, cuts); cut = true }
@@ -321,11 +323,13 @@ function build(icon) {
     F.subtract(mass, F.union(F.region([b.pts]), F.strokes([b], K.W + 2 * K.GAP_S)))
     const disc = F.union(F.region([b.pts]), F.strokes([b], K.W))
     const gl = glyphs.filter(g => badgeOf(g) === b)
-    const knock = F.region(gl.filter(g => g.closed && g.pts.length > 2).map(g => g.pts))
-    const gLines = gl.filter(g => !(g.closed && g.pts.length > 2))
+    // a glyph's ring (the loops of 8 0 B) is a stroke, never an area: knocked out as an area it prints a blob
+    const knock = F.region(gl.filter(g => g.closed && g.pts.length > 2 && !isGlyph(g)).map(g => g.pts))
+    const gLines = gl.filter(g => isGlyph(g) || !(g.closed && g.pts.length > 2))
     const gText = gLines.filter(isGlyph), gOther = gLines.filter(g => !isGlyph(g))
     if (gOther.length) F.union(knock, F.strokes(gOther, K.CUT))
-    if (gText.length) F.union(knock, F.strokes(gText, K.TEXT_CUT))
+    // a badge's small digits knock out lighter (textWeight's fine tier), so 8 9 6 keep their counters
+    if (gText.length) F.union(knock, F.strokes(gText, Math.min(K.TEXT_CUT, ...gText.map(g => textWeight(capOf.get(g.pathId) ?? 6)))))
     F.subtract(disc, knock)
     F.subtract(disc, cuts)
     F.union(mass, disc)

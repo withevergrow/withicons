@@ -1,0 +1,71 @@
+{
+  "name": "file-pen",
+  "category": "files",
+  "description": "A page with a pencil over its corner for editing, writing or renaming a document.",
+  "aliases": [
+    "edit-file",
+    "file-edit",
+    "document-edit",
+    "file-pencil",
+    "write-document",
+    "rename-file",
+    "file-write",
+    "document-pen"
+  ],
+  "tags": [
+    "file",
+    "edit",
+    "pencil",
+    "write",
+    "document",
+    "draft"
+  ],
+  "paths": [
+    {
+      "d": "M19 10 V7.5 L14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H11",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 21.5 L15.56 17.61 L19.09 14.09 A2 2 0 0 1 21.91 16.91 L18.39 20.44 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M18.39 20.44 L15.56 17.61",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H9.5 L19 12 V7.5 Z",
+    "M14.5 21.5 L15.56 17.61 L19.09 14.09 A2 2 0 0 1 21.91 16.91 L18.39 20.44 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M18.39 20.44 L15.56 17.61"
+  ],
+  "synonyms": [
+    "edit",
+    "write",
+    "modify",
+    "change document",
+    "update file",
+    "rewrite",
+    "draft",
+    "compose",
+    "author",
+    "annotate",
+    "sign",
+    "fill in form",
+    "editable",
+    "rename",
+    "notes",
+    "pencil",
+    "revise",
+    "proofread",
+    "edit page",
+    "text editor"
+  ]
+}

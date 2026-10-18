@@ -576,7 +576,7 @@ ${(() => {
   const h = splitPackages(styles, 'classes'), parts = Object.entries(h).filter(([p]) => p !== 'classes')
   if (!parts.length) return ''
   return `
-The newest styles' CSS files live in companion packages (jsDelivr serves at most 150 MB per package): ${parts.map(([p, l]) =>
+The CSS files of the newest and the heaviest styles live in companion packages (jsDelivr serves at most 150 MB per package): ${parts.map(([p, l]) =>
     `${l.map(x => '`' + x + '`').join(', ')} in [\`@withicons/${p}\`](https://www.npmjs.com/package/@withicons/${p})${isOwnPackage(p) ? ' (`dist/classes/`)' : ''}`).join('; ')}.
 \`with-loader.js\` and \`with-icons.js\` load them by themselves, from the same CDN or \`node_modules\` folder, so
 \`<i class="with with-home with-${parts[0][1][0]}">\` just works. A self-hosted copy: put their files next to this package's, or
@@ -868,7 +868,7 @@ function pkgJson(ctx, styleNames) {
 // @withicons/classes-plus: the newest styles' class files, same layout as @withicons/classes (no scripts of its own)
 function plusPkgJson(ctx, name, list) {
   return {
-    ...basePkg(ctx, '@withicons/' + name, `CSS icon classes for the ${list.length} newer with icons styles (${list.join(', ')}). Companion of @withicons/classes, whose loader finds them by itself.`,
+    ...basePkg(ctx, '@withicons/' + name, `CSS icon classes for ${list.length} with icons styles (${list.join(', ')}): the newest, and the heaviest older ones. Companion of @withicons/classes, whose loader finds them by itself.`,
       ['css', 'css-icons', 'icon-classes', 'cdn', ...list, 'multicolor-icons']),
     type: 'module',
     sideEffects: ['*.css'],
@@ -881,7 +881,7 @@ function plusReadme(ctx, name, list) {
   const ex = list[0], t = '`', fence = '```'
   return `# @withicons/${name}
 
-CSS icon classes for the ${list.length} newer with icons styles (${list.map(x => t + x + t).join(', ')}), for all ${ctx.icons.length} icons.
+CSS icon classes for ${list.length} with icons styles (${list.map(x => t + x + t).join(', ')}: the newest, and the heaviest older ones), for all ${ctx.icons.length} icons.
 A companion of [${t}@withicons/classes${t}](https://www.npmjs.com/package/@withicons/classes): its loader (${t}with-loader.js${t}) and
 runtime (${t}with-icons.js${t}) find these styles by themselves, so a page needs nothing extra:
 

@@ -1,0 +1,50 @@
+{
+  "name": "battery-medium",
+  "intent": "the charge level swells and settles at half full",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      17
+    ],
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 2.2,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "glow",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "battery-full",
+      "effect": "fade"
+    },
+    {
+      "to": "battery-low",
+      "effect": "fade"
+    },
+    {
+      "to": "battery-charging",
+      "effect": "scale"
+    }
+  ]
+}

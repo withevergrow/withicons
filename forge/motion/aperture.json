@@ -1,0 +1,44 @@
+{
+  "name": "aperture",
+  "intent": "the iris blades turn slowly like a lens stopping down",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "amount": 1,
+      "duration": 3,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "zoom",
+      "amount": 0.5
+    },
+    {
+      "preset": "turn-once"
+    }
+  ],
+  "swap": [
+    {
+      "to": "camera",
+      "effect": "rotate"
+    },
+    {
+      "to": "crosshair",
+      "effect": "fade"
+    },
+    {
+      "to": "circle-dot",
+      "effect": "morph"
+    }
+  ]
+}

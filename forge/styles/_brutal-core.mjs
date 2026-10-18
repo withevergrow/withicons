@@ -15,7 +15,7 @@
 //           c1 core when they have room, else the ink line with a c1 offset echo
 import { parsePath, simplify, area, pointInRing, distToPolyline, resample } from '../kernel/geom.mjs'
 import * as F from './_brutal-field.mjs'
-import { textInfo } from './_live-text.mjs'
+import { textInfo, textWeight } from './_live-text.mjs'
 import { tune } from './_brutal-tune.mjs'
 
 export const K = {
@@ -143,7 +143,11 @@ export function build(icon) {
   const inkK = F.strokes(kLines, W, 1.2)
   const inkA = F.strokes(aLines, W, 1.2)
   const ink = F.union(F.copy(inkK), inkA)
-  if (tFree.length) F.strokes(tFree, K.TEXT_W, 1.2, ink)
+  // free text (a reading under a sun, beside a gauge) is printed: no hard shadow, no echo, the fine pen at small
+  // caps, so "21°" never inflates into a blob; it joins the ink after the shadow is cut (finish)
+  const tInk = tFree.length ? F.field(1.2) : null
+  for (const l of tFree) F.strokes([l], textWeight(caps.get(l.pathId) ?? 6, { base: K.TEXT_W }), 1.2, tInk)
+  if (tInk) F.subtract(inkK, F.offset(F.copy(tInk), 0.9)), F.subtract(inkA, F.offset(F.copy(tInk), 0.9)), F.subtract(ink, F.offset(F.copy(tInk), 0.9))
 
   // --- FILL and the detail regions (closed cutouts, closed A rings)
   const fill = F.field(1.2)
@@ -294,7 +298,8 @@ export function build(icon) {
   if (disc) {
     const bInk = F.strokes(badges, W, 1.2)
     if (bGlyph.length) F.strokes(bGlyph, W * K.BADGE_GLYPH, 1.2, bInk)
-    if (tBadge.length) F.strokes(tBadge, K.TEXT_W, 1.2, bInk)
+    // a badge's digits at the fine pen: at 24px the 1.75 pen closes the counters of 8 and 6 on a 9u disc
+    for (const l of tBadge) F.strokes([l], textWeight(caps.get(l.pathId) ?? 6, { base: K.TEXT_W }), 1.2, bInk)
     const bsil = F.union(F.copy(disc), bInk)
     out.bshadow = bsil
     out.badge = F.subtract(F.copy(disc), F.offset(F.copy(bInk), K.TUCK))
@@ -305,6 +310,7 @@ export function build(icon) {
     out.inkS = out.inkS ? F.union(out.inkS, sInk) : sInk
   }
   if (tBadge.length && !disc) out.ink = F.strokes(tBadge, K.TEXT_W, 1.2, out.ink)
+  if (tInk) out.text = tInk
   return out
   }
 }

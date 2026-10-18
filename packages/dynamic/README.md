@@ -8,7 +8,7 @@ Each live icon is a small generator. You give it params, it draws the icon, and 
 readable down to 16px. When a value can't be drawn legibly, the icon switches to something that can: "99+" for big
 counts, or a level bar in place of a percentage that doesn't fit.
 
-50 live icons, version 0.5.0. Browse and edit them at https://withicons.com.
+50 live icons, version 0.6.0. Browse and edit them at https://withicons.com.
 
 ```bash
 npm i @withicons/dynamic
@@ -148,15 +148,15 @@ await renderAsync('battery-level', { level: 0.2 }, 'luxe')
 
 | file | what | size | gzip |
 |---|---|---|---|
-| `index.js` | full runtime, all 34 styles, sync render() | 2058 KB | 745 KB |
-| `lite.js` | core + line; other styles load on first use | 172 KB | 62.9 KB |
-| `element.js` | `<with-live-icon>` on lite | 179 KB | 65.8 KB |
-| `react.js` | `<LiveIcon>` on lite (react not included) | 174 KB | 63.9 KB |
-| `vue.js` | `<LiveIcon>` on lite (vue not included) | 173 KB | 63.7 KB |
-| `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (225 KB / 74.3 KB gzip) | 3.9 KB | 2.0 KB |
-| `cdn/lite.js` | classic script: `window.WithLive` + element, line inline; each live icon loads its own `cdn/gens/<name>.js` on first draw | 125 KB | 43.6 KB |
-| `cdn/gens/<name>.js` | one live icon's drawing code (typical `price-tag`; largest `cart-count` 9.9 KB / 4.5 KB gzip) | 3.9 KB | 2.0 KB |
-| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line and every live icon inline (sync `render()` of any icon) | 180 KB | 65.1 KB |
+| `index.js` | full runtime, all 34 styles, sync render() | 2061 KB | 750 KB |
+| `lite.js` | core + line; other styles load on first use | 178 KB | 66.2 KB |
+| `element.js` | `<with-live-icon>` on lite | 186 KB | 69.2 KB |
+| `react.js` | `<LiveIcon>` on lite (react not included) | 180 KB | 67.3 KB |
+| `vue.js` | `<LiveIcon>` on lite (vue not included) | 180 KB | 67.1 KB |
+| `styles/<style>.js` | one style chunk: smallest `duo`, largest `gothic` (225 KB / 74.3 KB gzip) | 4.0 KB | 2.0 KB |
+| `cdn/lite.js` | classic script: `window.WithLive` + element, line inline; each live icon loads its own `cdn/gens/<name>.js` on first draw | 131 KB | 46.3 KB |
+| `cdn/gens/<name>.js` | one live icon's drawing code (typical `cellular-tech`; largest `cart-count` 12.0 KB / 5.4 KB gzip) | 3.8 KB | 2.0 KB |
+| `cdn/dynamic.js` | classic script: `window.WithLive` + element, line and every live icon inline (sync `render()` of any icon) | 184 KB | 67.2 KB |
 
 ## Performance
 
@@ -260,7 +260,7 @@ Each table row gives a param's name, type, range or options, default, and what i
 |---|---|---|
 | `battery-charging-level`<br>Charging battery level | `level` level 0–1, default `0.55` — Charge | `<with-live-icon name="battery-charging-level" level="1">` |
 | `battery-level`<br>Battery level | `level` level 0–1, default `0.7` — Charge<br>`warnAt` int 0–50, default `15` — Show a warning at or below (%) — 0 turns it off | `<with-live-icon name="battery-level" level="1">` |
-| `battery-percent`<br>Battery percentage | `level` level 0–1, default `0.8` — Charge (0-1, or "80%"), written as a percentage<br>`percent` bool, default `true` — Add the % sign when it fits | `<with-live-icon name="battery-percent" level="1">` |
+| `battery-percent`<br>Battery percentage | `level` level 0–1, default `0.8` — Charge (0-1, or "80%"), written as a percentage<br>`percent` bool, default `false` — Add the % sign where it fits | `<with-live-icon name="battery-percent" level="1">` |
 | `battery-vertical`<br>Battery level (upright) | `level` level 0–1, default `0.6` — Charge<br>`warnAt` int 0–50, default `15` — Show a warning at or below (%) — 0 turns it off | `<with-live-icon name="battery-vertical" level="1">` |
 | `cellular-tech`<br>Network type | `tech` text (up to 4), default `5G` — Network (up to 4 characters)<br>`chip` bool, default `true` — Set it in a chip | `<with-live-icon name="cellular-tech" tech="5G">` |
 | `keycap`<br>Keycap | `label` text (up to 4), default `A` — Key label<br>`symbol` enum: none, command, shift, option, enter, backspace, tab, up, down, left, right, space, default `none` — Symbol (replaces the label) | `<with-live-icon name="keycap" param-label="A">` |

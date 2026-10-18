@@ -1,0 +1,71 @@
+{
+  "name": "user-clock",
+  "category": "users",
+  "description": "A person with a clock, for last seen, user activity history, shifts and pending accounts.",
+  "aliases": [
+    "last-seen",
+    "user-history",
+    "user-pending",
+    "user-time",
+    "user-schedule",
+    "person-clock",
+    "user-shift",
+    "last-active",
+    "attendance"
+  ],
+  "tags": [
+    "person",
+    "clock",
+    "time",
+    "history",
+    "pending",
+    "activity"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M21.5 16.5 A4 4 0 1 1 13.5 16.5 A4 4 0 1 1 21.5 16.5 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.5 14.5 V16.5 L19 17.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5 V21 Z",
+    "M21.5 16.5 A4 4 0 1 1 13.5 16.5 A4 4 0 1 1 21.5 16.5 Z"
+  ],
+  "cutouts": [
+    "M17.5 14.5 V16.5 L19 17.5"
+  ],
+  "synonyms": [
+    "last seen",
+    "last active",
+    "activity",
+    "history",
+    "pending",
+    "waiting",
+    "timesheet",
+    "clock in",
+    "clock out",
+    "shift",
+    "working hours",
+    "availability",
+    "schedule",
+    "appointment",
+    "response time",
+    "time tracking",
+    "overtime",
+    "away",
+    "idle"
+  ]
+}

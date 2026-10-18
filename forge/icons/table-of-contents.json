@@ -1,0 +1,62 @@
+{
+  "name": "table-of-contents",
+  "category": "layout",
+  "description": "Entry lines with an indented sub-entry and page-number dots aligned on the right, for a table of contents or document outline.",
+  "aliases": [
+    "toc",
+    "contents",
+    "table-contents",
+    "document-outline",
+    "doc-outline",
+    "contents-list",
+    "chapter-list",
+    "section-list",
+    "index-list"
+  ],
+  "tags": [
+    "contents",
+    "outline",
+    "chapters",
+    "document",
+    "navigation",
+    "headings"
+  ],
+  "paths": [
+    {
+      "d": "M3 6 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M7 12 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M3 18 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M20.75 6 A0.75 0.75 0 1 1 19.25 6 A0.75 0.75 0 1 1 20.75 6 Z M19.75 6 H20.25 M20.75 12 A0.75 0.75 0 1 1 19.25 12 A0.75 0.75 0 1 1 20.75 12 Z M19.75 12 H20.25 M20.75 18 A0.75 0.75 0 1 1 19.25 18 A0.75 0.75 0 1 1 20.75 18 Z M19.75 18 H20.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "chapters",
+    "sections",
+    "headings",
+    "index",
+    "navigation",
+    "document structure",
+    "book contents",
+    "jump to section",
+    "outline",
+    "summary",
+    "overview",
+    "agenda",
+    "syllabus",
+    "on this page",
+    "page contents",
+    "contents page"
+  ]
+}

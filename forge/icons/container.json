@@ -1,0 +1,64 @@
+{
+  "name": "container",
+  "category": "development",
+  "description": "A shipping container in three-quarter view with corrugated ribs along its side, for Docker containers, images, deployments and freight.",
+  "aliases": [
+    "docker",
+    "shipping-container",
+    "cargo-container",
+    "docker-container",
+    "freight-container",
+    "intermodal",
+    "container-image",
+    "oci"
+  ],
+  "tags": [
+    "docker",
+    "devops",
+    "shipping",
+    "cargo",
+    "deploy",
+    "infrastructure"
+  ],
+  "paths": [
+    {
+      "d": "M2 8.5 L6 4.5 H22 V15.5 L18 19.5 H2 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 8.5 H18 L22 4.5 M18 8.5 V19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6 11.5 V16.5 M10 11.5 V16.5 M14 11.5 V16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 8.5 L6 4.5 H22 V15.5 L18 19.5 H2 Z"
+  ],
+  "cutouts": [
+    "M2 8.5 H18 L22 4.5 M18 8.5 V19.5",
+    "M6 11.5 V16.5",
+    "M10 11.5 V16.5",
+    "M14 11.5 V16.5"
+  ],
+  "synonyms": [
+    "shipping",
+    "cargo",
+    "freight",
+    "containerization",
+    "docker image",
+    "pod",
+    "kubernetes",
+    "k8s",
+    "deployment",
+    "microservice",
+    "logistics",
+    "port",
+    "harbor",
+    "sandbox",
+    "virtualization",
+    "podman"
+  ]
+}

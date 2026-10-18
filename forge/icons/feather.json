@@ -1,0 +1,68 @@
+{
+  "name": "feather",
+  "category": "objects",
+  "description": "A single quill feather with a split in its vane and a long shaft, for lightness, writing with a quill, birds and soft or gentle settings.",
+  "aliases": [
+    "quill",
+    "plume",
+    "quill-pen",
+    "feather-pen",
+    "bird-feather",
+    "lightweight",
+    "featherweight"
+  ],
+  "tags": [
+    "nature",
+    "bird",
+    "light",
+    "writing",
+    "soft",
+    "quill"
+  ],
+  "paths": [
+    {
+      "d": "M9.4 14.6 C7.92 11.63 9.22 8.47 11.63 6.43 C14.04 4.39 16.83 4.2 19.8 4.2 C19.8 7.17 19.61 9.96 17.94 12 L14.78 11.44 L15.71 14.23 C13.67 15.9 11.63 16.08 9.4 14.6 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3.83 20.17 L16.45 7.55",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.4 14.6 C7.92 11.63 9.22 8.47 11.63 6.43 C14.04 4.39 16.83 4.2 19.8 4.2 C19.8 7.17 19.61 9.96 17.94 12 L14.78 11.44 L15.71 14.23 C13.67 15.9 11.63 16.08 9.4 14.6 Z"
+  ],
+  "cutouts": [
+    "M9.77 14.23 L16.45 7.55"
+  ],
+  "synonyms": [
+    "light",
+    "lightness",
+    "weightless",
+    "soft",
+    "gentle",
+    "tickle",
+    "bird",
+    "wing",
+    "plumage",
+    "down",
+    "pillow",
+    "write",
+    "writing",
+    "calligraphy",
+    "ink pen",
+    "author",
+    "poet",
+    "poetry",
+    "literature",
+    "old pen",
+    "signature",
+    "freedom",
+    "float",
+    "easy",
+    "lite mode",
+    "boho",
+    "dream catcher",
+    "fether"
+  ]
+}

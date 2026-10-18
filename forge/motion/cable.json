@@ -1,0 +1,60 @@
+{
+  "name": "cable",
+  "intent": "the looping cord sways while both plugs pulse as they connect",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.7,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.3,
+      "duration": 2.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.5
+    },
+    {
+      "preset": "glow",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "plug",
+      "effect": "fade"
+    },
+    {
+      "to": "usb",
+      "effect": "scale"
+    },
+    {
+      "to": "unplug",
+      "effect": "slide-right"
+    }
+  ]
+}

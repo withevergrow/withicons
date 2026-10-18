@@ -1,0 +1,72 @@
+{
+  "name": "footprints",
+  "category": "maps",
+  "description": "Two staggered shoe prints, for walking, step counts, trails and following a path.",
+  "aliases": [
+    "footsteps",
+    "footprint",
+    "foot-prints",
+    "shoe-prints",
+    "walking",
+    "tracks",
+    "step-count"
+  ],
+  "tags": [
+    "walk",
+    "steps",
+    "trail",
+    "fitness",
+    "tracking"
+  ],
+  "paths": [
+    {
+      "d": "M6.5 7.5 C8.6 7.5 9.75 9.25 9.75 11.5 C9.75 13.5 8.75 14.5 8.75 16.5 V19.25 A2.25 2.25 0 0 1 4.25 19.25 V16.5 C4.25 14.5 3.25 13.5 3.25 11.5 C3.25 9.25 4.4 7.5 6.5 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M17.5 2.5 C19.6 2.5 20.75 4.25 20.75 6.5 C20.75 8.5 19.75 9.5 19.75 11.5 V14.25 A2.25 2.25 0 0 1 15.25 14.25 V11.5 C15.25 9.5 14.25 8.5 14.25 6.5 C14.25 4.25 15.4 2.5 17.5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.25 16.5 H8.75",
+      "plate": "A"
+    },
+    {
+      "d": "M15.25 11.5 H19.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.5 7.5 C8.6 7.5 9.75 9.25 9.75 11.5 C9.75 13.5 8.75 14.5 8.75 16.5 V19.25 A2.25 2.25 0 0 1 4.25 19.25 V16.5 C4.25 14.5 3.25 13.5 3.25 11.5 C3.25 9.25 4.4 7.5 6.5 7.5 Z",
+    "M17.5 2.5 C19.6 2.5 20.75 4.25 20.75 6.5 C20.75 8.5 19.75 9.5 19.75 11.5 V14.25 A2.25 2.25 0 0 1 15.25 14.25 V11.5 C15.25 9.5 14.25 8.5 14.25 6.5 C14.25 4.25 15.4 2.5 17.5 2.5 Z"
+  ],
+  "cutouts": [
+    "M4.25 16.5 H8.75",
+    "M15.25 11.5 H19.75"
+  ],
+  "synonyms": [
+    "walk",
+    "steps",
+    "pedometer",
+    "track",
+    "trail",
+    "hike",
+    "hiking",
+    "path",
+    "journey",
+    "follow me",
+    "trace",
+    "history",
+    "footstep",
+    "shoeprint",
+    "distance walked",
+    "route",
+    "been here",
+    "step by step",
+    "walking route",
+    "crime scene",
+    "evidence",
+    "on foot",
+    "pedestrian"
+  ]
+}

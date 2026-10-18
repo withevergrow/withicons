@@ -28,30 +28,38 @@ export { snap }
 export const CLEAR = 3.25 // 1.75 line stroke: 0.875 wall ink + 1.5 white + 0.875 text ink
 const SIZES = new Map() // measure() memo: "text|cap|tracking" -> [width, height] (pure, so caching is safe)
 
-// Largest legible fit. Tries every cap from maxCap down to minCap (0.25 steps) at natural spacing first, then
-// slightly tighter tracking at the same cap before giving up a size: a bigger cap reads better than airier spacing.
-export function fitLabel(str, box, { minCap = 4.5, maxCap = 7, tracking = [0, -0.25], valign = 'middle', align = 'center' } = {}) {
+// Largest legible fit. Tries every cap from maxCap down to minCap (0.25 steps); at each cap the regular cut at
+// natural spacing first, then slightly tighter tracking, then the CONDENSED cuts (_font.mjs `condense`), before
+// giving up a size: a bigger, narrower word reads better at 24px than a smaller wide one, and it keeps the frame
+// closed around it.
+export const CONDENSE = [1, 0.88, 0.8, 0.74]
+export function fitLabel(str, box, { minCap = 4.5, maxCap = 7, tracking = [0, -0.25, -0.5], condense = CONDENSE, valign = 'middle', align = 'center' } = {}) {
   const s = clean(str, 8)
   if (!s.trim()) return null
   const bw = box.x1 - box.x0 + 1e-9, bh = box.y1 - box.y0 + 1e-9
-  const size = (c, tr) => {
-    const k = `${s}|${c}|${tr}`
-    let m = SIZES.get(k)
-    if (!m) { if (SIZES.size > 4000) SIZES.clear(); const r = measure(s, { size: c, tracking: tr }); m = [r.width, r.box.y1 - r.box.y0]; SIZES.set(k, m) }
+  const size = (c, tr, k) => {
+    const key = `${s}|${c}|${tr}|${k}`
+    let m = SIZES.get(key)
+    if (!m) { if (SIZES.size > 8000) SIZES.clear(); const r = measure(s, { size: c, tracking: tr, condense: k }); m = [r.width, r.box.y1 - r.box.y0]; SIZES.set(key, m) }
     return m
   }
-  const fits = (c, tr) => { const [w, h] = size(c, tr); return w <= bw && h <= bh }
-  // fail fast: nothing fits if the smallest, tightest setting does not (keeps build() well under 5 ms)
-  if (!fits(minCap, -0.5)) return null
+  const kMin = Math.min(...condense)
+  const fits = (c, tr, k) => { const [w, h] = size(c, tr, k); return w <= bw && h <= bh }
+  // fail fast: nothing fits if the smallest, tightest, narrowest setting does not (keeps build() well under 5 ms)
+  if (!fits(minCap, -0.5, kMin)) return null
   // widths grow ~linearly with the cap: start near the largest cap that can fit instead of walking down to it
   let start = maxCap
-  { const [w] = size(maxCap, tracking[0]); if (w > bw) start = Math.max(minCap, Math.min(maxCap, Math.ceil(maxCap * bw / w * 4) / 4 + 0.25)) }
+  { const [w] = size(maxCap, tracking.at(-1), kMin); if (w > bw) start = Math.max(minCap, Math.min(maxCap, Math.ceil(maxCap * bw / w * 4) / 4 + 0.25)) }
   for (let c = start; c >= minCap - 1e-9; c = snap(c - 0.25)) {
-    // last resort at the smallest size: half a unit tighter (ink gaps stay >= ~0.25u at a 1.75 stroke)
-    for (const tr of c <= minCap + 1e-9 ? [...tracking, -0.5] : tracking) {
-      if (!fits(c, tr)) continue
-      const t = fitText(s, box, { prefer: c > 5 ? 'large' : 'small', minCap: c, maxCap: c, tracking: tr, valign, align })
-      if (t && t.cap === c) return t
+    // the condensed cuts only below cap 5.6, where knockout styles cut text with the fine pen (_live-text.mjs
+    // textWeight): at a heavier pen their counters close
+    for (const k of condense.filter(k => c < 5.6 || k === 1)) {
+      // last resort at the smallest size: half a unit tighter (ink gaps stay >= ~0.25u at a 1.75 stroke)
+      for (const tr of c <= minCap + 1e-9 && k === kMin ? [...tracking, -0.5] : tracking) {
+        if (!fits(c, tr, k)) continue
+        const t = fitText(s, box, { prefer: c > 5 ? 'large' : 'small', minCap: c, maxCap: c, tracking: tr, condense: k, valign, align })
+        if (t && t.cap === c) return t
+      }
     }
   }
   return null

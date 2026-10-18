@@ -1,0 +1,67 @@
+{
+  "name": "fence",
+  "category": "home",
+  "description": "A wooden picket fence with three pointed boards and two rails, for gardens, property lines, boundaries and enclosures.",
+  "aliases": [
+    "picket-fence",
+    "wooden-fence",
+    "garden-fence",
+    "boundary",
+    "palisade",
+    "fence-panel",
+    "barrier",
+    "pickets"
+  ],
+  "tags": [
+    "garden",
+    "home",
+    "boundary",
+    "wood",
+    "property",
+    "farm"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 21 V6.5 L4.25 3.5 L6 6.5 V21 Z M10.25 21 V6.5 L12 3.5 L13.75 6.5 V21 Z M18 21 V6.5 L19.75 3.5 L21.5 6.5 V21 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 10 H10.25 M13.75 10 H18 M6 16 H10.25 M13.75 16 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 21 V6.5 L4.25 3.5 L6 6.5 V21 Z",
+    "M10.25 21 V6.5 L12 3.5 L13.75 6.5 V21 Z",
+    "M18 21 V6.5 L19.75 3.5 L21.5 6.5 V21 Z",
+    "M6 9 H10.25 V11 H6 Z",
+    "M13.75 9 H18 V11 H13.75 Z",
+    "M6 15 H10.25 V17 H6 Z",
+    "M13.75 15 H18 V17 H13.75 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "border",
+    "perimeter",
+    "property line",
+    "yard",
+    "backyard",
+    "farm",
+    "ranch",
+    "paddock",
+    "enclosure",
+    "block",
+    "protect",
+    "privacy",
+    "wall",
+    "gate",
+    "boards",
+    "white picket fence",
+    "real estate",
+    "suburb",
+    "geofence",
+    "sandbox",
+    "walled garden",
+    "fense"
+  ]
+}

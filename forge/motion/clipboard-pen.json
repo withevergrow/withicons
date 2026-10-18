@@ -1,0 +1,56 @@
+{
+  "name": "clipboard-pen",
+  "intent": "the pencil scribbles across the form, filling it in",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      13,
+      21
+    ],
+    "amount": 0.9,
+    "duration": 0.7
+  },
+  "parts": {
+    "S": {
+      "preset": "wiggle",
+      "origin": [
+        13,
+        21
+      ],
+      "amount": 1.1,
+      "duration": 2.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "clipboard-check",
+      "effect": "fade"
+    },
+    {
+      "to": "clipboard-list",
+      "effect": "fade"
+    }
+  ]
+}

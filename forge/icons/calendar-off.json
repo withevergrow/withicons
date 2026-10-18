@@ -1,0 +1,70 @@
+{
+  "name": "calendar-off",
+  "category": "time",
+  "description": "A calendar crossed out by a slash, for no events, disabled scheduling and days away.",
+  "aliases": [
+    "calendar-disabled",
+    "calendar-slash",
+    "no-events",
+    "no-schedule",
+    "schedule-off",
+    "events-off",
+    "scheduling-off",
+    "no-calendar"
+  ],
+  "tags": [
+    "calendar",
+    "off",
+    "disabled",
+    "schedule",
+    "unavailable",
+    "empty"
+  ],
+  "paths": [
+    {
+      "d": "M9.6 5 H19 A2 2 0 0 1 21 7 V16.4",
+      "plate": "K"
+    },
+    {
+      "d": "M16.4 21 H5 A2 2 0 0 1 3 19 V7.6",
+      "plate": "K"
+    },
+    {
+      "d": "M14.6 10 H21 M3 10 H5.4",
+      "plate": "K"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M8.4 5 H19 A2 2 0 0 1 21 7 V17.6 Z",
+    "M3 6.4 L17.6 21 H5 A2 2 0 0 1 3 19 Z"
+  ],
+  "cutouts": [
+    "M15.5 10 H19"
+  ],
+  "synonyms": [
+    "empty calendar",
+    "nothing scheduled",
+    "free day",
+    "day off",
+    "time off",
+    "holiday",
+    "vacation",
+    "out of office",
+    "away",
+    "disabled",
+    "blocked",
+    "unavailable",
+    "booking closed",
+    "no bookings",
+    "calendar sync off",
+    "pause schedule"
+  ]
+}

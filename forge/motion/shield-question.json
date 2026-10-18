@@ -1,0 +1,47 @@
+{
+  "name": "shield-question",
+  "intent": "the question mark tilts, unsure whether this is safe",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "tilt",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        13
+      ],
+      "amount": 0.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "tilt"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield-check",
+      "effect": "flip"
+    },
+    {
+      "to": "shield-alert",
+      "effect": "fade"
+    }
+  ]
+}

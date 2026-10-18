@@ -1,0 +1,48 @@
+{
+  "name": "unplug",
+  "intent": "the two halves hold apart while a little spark flickers between",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "amount": 0.9,
+      "duration": 1.3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "amount": 0.5
+    },
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "plug",
+      "effect": "fade"
+    },
+    {
+      "to": "cable",
+      "effect": "scale"
+    },
+    {
+      "to": "unlink",
+      "effect": "morph"
+    }
+  ]
+}

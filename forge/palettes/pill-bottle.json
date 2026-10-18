@@ -1,0 +1,425 @@
+{
+  "name": "pill-bottle",
+  "palettes": [
+    {
+      "id": "pharmacy-amber",
+      "name": "Pharmacy amber",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2A1600",
+        "c1": "#E08E1B",
+        "c2": "#FFFFFF",
+        "c3": "#F4F4F4",
+        "c4": "#2B6CB0",
+        "tint": "#F9E8D1",
+        "accent": "#E53935",
+        "shadow": "#7B4E0F",
+        "shine": "#F4D7AF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "white-bottle",
+      "name": "White bottle",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1E2329",
+        "c1": "#F4F6F8",
+        "c2": "#2B6CB0",
+        "c3": "#E53935",
+        "c4": "#C9D1DA",
+        "tint": "#FFFFFF",
+        "accent": "#E53935",
+        "shadow": "#9EA3A8",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vitamin-orange",
+      "name": "Vitamin orange",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2E1003",
+        "c1": "#FF8A1E",
+        "c2": "#FFFFFF",
+        "c3": "#2E7D32",
+        "c4": "#FFE0B2",
+        "tint": "#FFE8D2",
+        "accent": "#2E7D32",
+        "shadow": "#8C4C11",
+        "shine": "#FFD6B0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "blue-rx",
+      "name": "Blue Rx",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#0A1F44",
+        "c1": "#2F80ED",
+        "c2": "#FFFFFF",
+        "c3": "#F4F4F4",
+        "c4": "#1C4FA0",
+        "tint": "#D5E6FB",
+        "accent": "#FFC145",
+        "shadow": "#1A4682",
+        "shine": "#B6D3F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "supplement-green",
+      "name": "Supplement green",
+      "tags": [
+        "true-to-life",
+        "nature"
+      ],
+      "colors": {
+        "ink": "#0B2E17",
+        "c1": "#4CAF50",
+        "c2": "#FFFFFF",
+        "c3": "#F2E8CF",
+        "c4": "#2E7D32",
+        "tint": "#DBEFDC",
+        "accent": "#F2CC5B",
+        "shadow": "#2A602C",
+        "shine": "#C0E3C2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "clinic-teal",
+      "name": "Clinic teal",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#052E2B",
+        "c1": "#0FA3A3",
+        "c2": "#FFFFFF",
+        "c3": "#E6FAF7",
+        "c4": "#0B6E6E",
+        "tint": "#CFEDED",
+        "accent": "#FF6B6B",
+        "shadow": "#085A5A",
+        "shine": "#ABDFDF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "pastel-pills",
+      "name": "Pastel pills",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#3E3550",
+        "c1": "#FFD6E0",
+        "c2": "#FFFFFF",
+        "c3": "#C8B6FF",
+        "c4": "#A8E6CF",
+        "tint": "#FFF7F9",
+        "accent": "#C8B6FF",
+        "shadow": "#8C767B",
+        "shine": "#FFF1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "gummy-vitamins",
+      "name": "Gummy vitamins",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D1233",
+        "c1": "#FF6FB5",
+        "c2": "#FFE36E",
+        "c3": "#7AD3FF",
+        "c4": "#8BE68B",
+        "tint": "#FFE2F0",
+        "accent": "#FFE36E",
+        "shadow": "#8C3D64",
+        "shine": "#FFCDE5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-rx",
+      "name": "Neon Rx",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#05030A",
+        "c1": "#B6FF3B",
+        "c2": "#0B0B12",
+        "c3": "#00F0FF",
+        "c4": "#FF2E88",
+        "tint": "#F0FFD6",
+        "accent": "#FF2E88",
+        "shadow": "#3D5C06",
+        "shine": "#FFFFFF",
+        "edge": "#15121F"
+      }
+    },
+    {
+      "id": "apothecary",
+      "name": "Apothecary",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2C2218",
+        "c1": "#6E4A2C",
+        "c2": "#F2E2BC",
+        "c3": "#2F4858",
+        "c4": "#A23B2A",
+        "tint": "#E9E2DA",
+        "accent": "#A23B2A",
+        "shadow": "#3C2818",
+        "shine": "#9C8370",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "retro-pharmacy",
+      "name": "Retro pharmacy",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#E8632B",
+        "c2": "#F4E3C3",
+        "c3": "#2E6F8E",
+        "c4": "#F7B32B",
+        "tint": "#FAE0D5",
+        "accent": "#F7B32B",
+        "shadow": "#803618",
+        "shine": "#F7C8B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "herbal",
+      "name": "Herbal",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1F2A20",
+        "c1": "#7E8C5C",
+        "c2": "#F6EEDB",
+        "c3": "#C8673E",
+        "c4": "#4C5C49",
+        "tint": "#E5E8DE",
+        "accent": "#C8673E",
+        "shadow": "#454D33",
+        "shine": "#D2D7C6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "amber-ramp",
+      "name": "Amber ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2A1600",
+        "c1": "#D98200",
+        "c2": "#FFF4DE",
+        "c3": "#8A5300",
+        "c4": "#FFE2A6",
+        "tint": "#F7E6CC",
+        "accent": "#FFE2A6",
+        "shadow": "#774800",
+        "shine": "#F2D3A6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#9E9E9E",
+        "c2": "#FFFFFF",
+        "c3": "#E0E0E0",
+        "c4": "#4D4D4D",
+        "tint": "#ECECEC",
+        "accent": "#4D4D4D",
+        "shadow": "#575757",
+        "shine": "#DDDDDD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#FFFFFF",
+        "c3": "#000000",
+        "c4": "#0050D8",
+        "tint": "#FFF4B8",
+        "accent": "#0050D8",
+        "shadow": "#806A00",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "black-label",
+      "name": "Black label",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0B0A08",
+        "c1": "#373737",
+        "c2": "#F4E3A1",
+        "c3": "#D4AF37",
+        "c4": "#6B6B6B",
+        "tint": "#E5E1D6",
+        "accent": "#D4AF37",
+        "shadow": "#0C0C0C",
+        "shine": "#5E5A52",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sea-minerals",
+      "name": "Sea minerals",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#1F8A9E",
+        "c2": "#FFFFFF",
+        "c3": "#BDE8EF",
+        "c4": "#0B4F5C",
+        "tint": "#D2E8EC",
+        "accent": "#FF7F50",
+        "shadow": "#114C57",
+        "shine": "#B1D6DD",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-dose",
+      "name": "Sunset dose",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#36132A",
+        "c1": "#FF9E5E",
+        "c2": "#FFF1E6",
+        "c3": "#F25C78",
+        "c4": "#8A4FA8",
+        "tint": "#FFECDF",
+        "accent": "#F25C78",
+        "shadow": "#8C5734",
+        "shine": "#FFDDC7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-pills",
+      "name": "Y2K pills",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2340",
+        "c1": "#C9B5FF",
+        "c2": "#FFFFFF",
+        "c3": "#FF9CEB",
+        "c4": "#A8F0FF",
+        "tint": "#F4F0FF",
+        "accent": "#FF9CEB",
+        "shadow": "#6F648C",
+        "shine": "#ECE5FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-meds",
+      "name": "Night meds",
+      "tags": [
+        "dark"
+      ],
+      "colors": {
+        "ink": "#04101E",
+        "c1": "#364357",
+        "c2": "#E3ECF7",
+        "c3": "#4FC3F7",
+        "c4": "#0A1626",
+        "tint": "#D7E4F2",
+        "accent": "#4FC3F7",
+        "shadow": "#070D16",
+        "shine": "#5C6E89",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "flu-season",
+      "name": "Flu season",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#16263A",
+        "c1": "#8FB3D9",
+        "c2": "#FFFFFF",
+        "c3": "#D7263D",
+        "c4": "#3E5F86",
+        "tint": "#E9F0F7",
+        "accent": "#D7263D",
+        "shadow": "#4F6277",
+        "shine": "#D8E4F2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24113A",
+        "c1": "#7B4DFF",
+        "c2": "#FFFFFF",
+        "c3": "#FFD23F",
+        "c4": "#FF3E9D",
+        "tint": "#E5DBFF",
+        "accent": "#FF3E9D",
+        "shadow": "#442A8C",
+        "shine": "#D1C1FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

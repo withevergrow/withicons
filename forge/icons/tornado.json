@@ -1,0 +1,63 @@
+{
+  "name": "tornado",
+  "category": "weather",
+  "description": "A tornado funnel of curved bands that narrows and twists down to the ground, for tornadoes, twisters and severe wind warnings.",
+  "aliases": [
+    "twister",
+    "cyclone",
+    "whirlwind",
+    "funnel-cloud",
+    "vortex",
+    "waterspout",
+    "dust-devil"
+  ],
+  "tags": [
+    "weather",
+    "storm",
+    "wind",
+    "disaster",
+    "warning"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 3.5 Q12 6 21.5 3.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 9 Q13 11.5 20 9",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 14.5 Q14.25 16.5 19 14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 20 Q11 21.5 13.5 20",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "storm",
+    "severe weather",
+    "tornado warning",
+    "tornado watch",
+    "hurricane",
+    "wind storm",
+    "windstorm",
+    "natural disaster",
+    "spin",
+    "swirl",
+    "spiral",
+    "chaos",
+    "destruction",
+    "emergency",
+    "tornedo",
+    "tornadoe",
+    "extreme weather",
+    "funnel",
+    "storm chaser",
+    "whirl"
+  ]
+}

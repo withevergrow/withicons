@@ -3,7 +3,10 @@
 //
 //   cache: .tmp/render-cache/<style>-<hash>.json  { [icon]: [skeletonHash, nodes] }
 //          <hash> covers the style's own module and everything it imports (transitively, relative imports), so editing
-//          a renderer, its helpers or the kernel re-renders that style only. Stale files of a style are deleted.
+//          a renderer, its helpers or the kernel re-renders that style only (forge/lib/load.mjs, which applies the
+//          hand-drawn overrides, is part of every style's hash). Stale files of a style are deleted.
+//          An entry is keyed on the skeleton hash, plus the hash of the hand-drawn override (forge/hand/<style>/<icon>.mjs
+//          and everything it imports) when there is one, so editing, adding or removing an override redraws that icon.
 //   --no-cache   render everything (the cache is still rewritten)
 //   WITH_RENDER_THREADS=<n>   worker count (default: cores - 1, at most 12; 0 = this thread only)
 import fs from 'fs'
@@ -33,6 +36,14 @@ function depsHash(entry) {
   return sha([...seen].sort((a, b) => a[0] < b[0] ? -1 : 1).map(([f, s]) => path.relative(ROOT, f).split(path.sep).join('/') + '\0' + s.replace(/\r\n/g, '\n')).join('\0\0'))
 }
 
+const LOAD_SRC = sha(fs.readFileSync(path.join(ROOT, 'forge', 'lib', 'load.mjs'), 'utf8').replace(/\r\n/g, '\n'))
+// the cache key of one icon in one style: its skeleton, plus its hand-drawn override when it has one
+const HAND_DIR = path.join(ROOT, 'forge', 'hand')
+export function handHash(style, icon) {
+  const f = path.join(HAND_DIR, style, icon + '.mjs')
+  return fs.existsSync(f) ? depsHash(f) : ''
+}
+
 async function renderSome(jobs, styleNames) {
   const { loadIcon, loadStyles, renderIcon } = await import(pathToFileURL(path.join(ROOT, 'forge', 'lib', 'load.mjs')).href)
   const styles = await loadStyles(styleNames)
@@ -58,13 +69,16 @@ if (!isMainThread && workerData && workerData.withRenderPool) {
 export async function renderAll(names, styles, { cache = true, threads } = {}) {
   const ICON_DIR = path.join(ROOT, 'forge', 'icons')
   const skel = {}
-  for (const n of names) skel[n] = sha(fs.readFileSync(path.join(ICON_DIR, n + '.json'), 'utf8').replace(/\r\n/g, '\n'))
+  const skelOf = {}
+  for (const n of names) skelOf[n] = sha(fs.readFileSync(path.join(ICON_DIR, n + '.json'), 'utf8').replace(/\r\n/g, '\n'))
+  // per style: skeleton hash, or skeleton + override hash for the icons that style draws by hand
+  for (const n of names) skel[n] = Object.fromEntries(styles.map(s => { const h = handHash(s.name, n); return [s.name, h ? skelOf[n] + ':' + h : skelOf[n]] }))
   const renders = Object.fromEntries(names.map(n => [n, {}]))
   const failures = []
   const files = {}, stores = {}
   fs.mkdirSync(CACHE, { recursive: true })
   for (const s of styles) {
-    const h = depsHash(path.join(ROOT, 'forge', 'styles', s.name + '.mjs'))
+    const h = sha(depsHash(path.join(ROOT, 'forge', 'styles', s.name + '.mjs')) + LOAD_SRC)
     files[s.name] = path.join(CACHE, `${s.name}-${h}.json`)
     let store = {}
     if (cache && fs.existsSync(files[s.name])) { try { store = JSON.parse(fs.readFileSync(files[s.name], 'utf8')) } catch { store = {} } }
@@ -75,7 +89,7 @@ export async function renderAll(names, styles, { cache = true, threads } = {}) {
   let cached = 0
   for (const n of names) for (const s of styles) {
     const hit = stores[s.name][n]
-    if (hit && hit[0] === skel[n]) { renders[n][s.name] = hit[1]; cached++ }
+    if (hit && hit[0] === skel[n][s.name]) { renders[n][s.name] = hit[1]; cached++ }
     else { if (!todo.has(n)) todo.set(n, []); todo.get(n).push(s.name) }
   }
   const jobs = [...todo]
@@ -100,14 +114,14 @@ export async function renderAll(names, styles, { cache = true, threads } = {}) {
       if (json == null) { failures.push(`${s}/${name}: ${err}`); continue }
       const nodes = JSON.parse(json)
       renders[name][s] = nodes
-      stores[s][name] = [skel[name], nodes]
+      stores[s][name] = [skel[name][s], nodes]
       rendered++
     }
   }
   // write back (only icons that still exist), drop stale files of each style
   for (const s of styles) {
     const keep = {}
-    for (const n of names) if (stores[s.name][n] && stores[s.name][n][0] === skel[n]) keep[n] = stores[s.name][n]
+    for (const n of names) if (stores[s.name][n] && stores[s.name][n][0] === skel[n][s.name]) keep[n] = stores[s.name][n]
     const text = JSON.stringify(keep)
     const old = fs.existsSync(files[s.name]) ? fs.readFileSync(files[s.name], 'utf8') : null
     if (old !== text) fs.writeFileSync(files[s.name], text)

@@ -215,7 +215,9 @@ export function withoutText(sk) {
   return { ...sk, paths: sk.paths.filter(p => !isText(p)), cutouts: sk.cutouts.filter(c => !isGlyph(c)) }
 }
 export const textOnly = sk => ({ ...sk, paths: sk.paths.filter(isText), fills: [], cutouts: [] })
-export const nonTextOnly = sk => ({ ...withoutText(sk), fills: [], cutouts: [] })
+// (a count badge, path id "badge:*", is its digits' own frame: outline styles draw it solid with the digits knocked
+// out, and the generator sets the digit clearance; text-crowded measures the text against the rest of the drawing)
+export const nonTextOnly = sk => { const w = withoutText(sk); return { ...w, paths: w.paths.filter(p => !/^badge:/.test(p.id || '')), fills: [], cutouts: [] } }
 // the elements of `sk` that are not in `other` (non-text): the parts a value change moves / adds
 export function dynamicParts(sk, other) {
   const od = new Set(other.paths.filter(p => !isText(p)).map(p => p.d)), of = new Set(other.fills), oc = new Set(other.cutouts)

@@ -1,0 +1,71 @@
+{
+  "name": "trees",
+  "category": "nature",
+  "description": "A pine and a round leafy tree side by side, for forests, parks, campsites and nature reserves.",
+  "aliases": [
+    "woods",
+    "woodland",
+    "grove",
+    "park",
+    "nature-reserve",
+    "two-trees",
+    "tree-group"
+  ],
+  "tags": [
+    "nature",
+    "forest",
+    "park",
+    "outdoors",
+    "environment"
+  ],
+  "paths": [
+    {
+      "d": "M6.75 2.5 L3.25 8.5 H5.25 L2.5 14 H11 L8.25 8.5 H10.25 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M21 11 A4.25 4.25 0 1 1 12.5 11 A4.25 4.25 0 1 1 21 11 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.75 14 V21.5 M16.75 15.25 V21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 21.5 H21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6.75 2.5 L3.25 8.5 H5.25 L2.5 14 H11 L8.25 8.5 H10.25 Z",
+    "M21 11 A4.25 4.25 0 1 1 12.5 11 A4.25 4.25 0 1 1 21 11 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "group of trees",
+    "forest",
+    "forests",
+    "national park",
+    "public park",
+    "camping",
+    "campsite",
+    "hiking",
+    "trail",
+    "outdoors",
+    "countryside",
+    "landscape",
+    "wilderness",
+    "nature",
+    "environment",
+    "eco",
+    "green",
+    "reforestation",
+    "conservation",
+    "sustainability",
+    "orchard",
+    "timber",
+    "woodlands",
+    "forrest",
+    "treees"
+  ]
+}

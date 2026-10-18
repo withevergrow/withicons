@@ -1,0 +1,426 @@
+{
+  "name": "bone",
+  "palettes": [
+    {
+      "id": "ivory-bone",
+      "name": "Ivory bone",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#3A2E1E",
+        "c1": "#F2E8D5",
+        "c2": "#D9C7A5",
+        "c3": "#B8A27A",
+        "c4": "#FFFFFF",
+        "tint": "#FBF7EF",
+        "accent": "#C8673E",
+        "shadow": "#9C917E",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dog-treat",
+      "name": "Dog treat",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2F1A0C",
+        "c1": "#C9874A",
+        "c2": "#F2D3A4",
+        "c3": "#8C5A3C",
+        "c4": "#FFFFFF",
+        "tint": "#F4E7DB",
+        "accent": "#E53935",
+        "shadow": "#6F4A29",
+        "shine": "#ECD5C0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "rawhide",
+      "name": "Rawhide",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2A1A0E",
+        "c1": "#E3C79A",
+        "c2": "#B08155",
+        "c3": "#F5EAD7",
+        "c4": "#6E4A2C",
+        "tint": "#F9F4EB",
+        "accent": "#6B8E23",
+        "shadow": "#7D6D55",
+        "shine": "#F5EBDC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "x-ray",
+      "name": "X-ray",
+      "tags": [
+        "true-to-life",
+        "dark"
+      ],
+      "colors": {
+        "ink": "#03070D",
+        "c1": "#E8F4FF",
+        "c2": "#4FC3F7",
+        "c3": "#0B1A2B",
+        "c4": "#9AD8FF",
+        "tint": "#F5FAFF",
+        "accent": "#4FC3F7",
+        "shadow": "#8A939C",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "fossil",
+      "name": "Fossil",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2C2218",
+        "c1": "#C9B28A",
+        "c2": "#8C7A60",
+        "c3": "#F2E2BC",
+        "c4": "#5B4A33",
+        "tint": "#F4F0E8",
+        "accent": "#A23B2A",
+        "shadow": "#6F624C",
+        "shine": "#ECE4D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chew-toy-red",
+      "name": "Chew toy red",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#2B0606",
+        "c1": "#E53935",
+        "c2": "#FFCDD2",
+        "c3": "#8E1212",
+        "c4": "#FFFFFF",
+        "tint": "#FAD7D7",
+        "accent": "#FFD23F",
+        "shadow": "#7E1F1D",
+        "shine": "#F6BAB8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "chew-toy-blue",
+      "name": "Chew toy blue",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#0A1F44",
+        "c1": "#2F80ED",
+        "c2": "#CFE3FF",
+        "c3": "#1C4FA0",
+        "c4": "#FFFFFF",
+        "tint": "#D5E6FB",
+        "accent": "#FFD23F",
+        "shadow": "#1A4682",
+        "shine": "#B6D3F9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "puppy-pastel",
+      "name": "Puppy pastel",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#4A2A38",
+        "c1": "#FFD6E0",
+        "c2": "#A8DFF5",
+        "c3": "#F2A7BC",
+        "c4": "#FFFFFF",
+        "tint": "#FFF7F9",
+        "accent": "#A8DFF5",
+        "shadow": "#8C767B",
+        "shine": "#FFF1F4",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mint-treat",
+      "name": "Mint treat",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#21413A",
+        "c1": "#A8E6CF",
+        "c2": "#FFD3B6",
+        "c3": "#6CC3A6",
+        "c4": "#FFFFFF",
+        "tint": "#EEFAF5",
+        "accent": "#FFAAA5",
+        "shadow": "#5C7F72",
+        "shine": "#E1F6EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "candy-bone",
+      "name": "Candy bone",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D1233",
+        "c1": "#FF9AC8",
+        "c2": "#FFE36E",
+        "c3": "#7AD3FF",
+        "c4": "#FFFFFF",
+        "tint": "#FFEBF4",
+        "accent": "#7AD3FF",
+        "shadow": "#8C556E",
+        "shine": "#FFDCEC",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-bone",
+      "name": "Neon bone",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#05030A",
+        "c1": "#B6FF3B",
+        "c2": "#00F0FF",
+        "c3": "#FF2E88",
+        "c4": "#F0FFD6",
+        "tint": "#F0FFD6",
+        "accent": "#FF2E88",
+        "shadow": "#3D5C06",
+        "shine": "#FFFFFF",
+        "edge": "#15121F"
+      }
+    },
+    {
+      "id": "spooky-bone",
+      "name": "Spooky bone",
+      "tags": [
+        "seasonal"
+      ],
+      "colors": {
+        "ink": "#14081C",
+        "c1": "#F2EEE3",
+        "c2": "#FF7A1A",
+        "c3": "#6D4C8D",
+        "c4": "#2B2B2B",
+        "tint": "#FBF9F4",
+        "accent": "#FF7A1A",
+        "shadow": "#9B988F",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "retro-pet-shop",
+      "name": "Retro pet shop",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#F7B32B",
+        "c2": "#E8632B",
+        "c3": "#2E6F8E",
+        "c4": "#F4E3C3",
+        "tint": "#FDF0D5",
+        "accent": "#E8632B",
+        "shadow": "#886218",
+        "shine": "#FCE4B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "museum-sepia",
+      "name": "Museum sepia",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2C2218",
+        "c1": "#E6D5B5",
+        "c2": "#A88B5E",
+        "c3": "#6E8A86",
+        "c4": "#F7EEDC",
+        "tint": "#F7F0E1",
+        "accent": "#A23B2A",
+        "shadow": "#918471",
+        "shine": "#FFF8EC",
+        "edge": "#FFF8EC"
+      }
+    },
+    {
+      "id": "tan-ramp",
+      "name": "Tan ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#2F1F0E",
+        "c1": "#D9B77E",
+        "c2": "#F2E2C2",
+        "c3": "#A7834D",
+        "c4": "#FBF4E6",
+        "tint": "#F7F1E5",
+        "accent": "#A7834D",
+        "shadow": "#776545",
+        "shine": "#F2E6D2",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#D6D6D6",
+        "c2": "#9E9E9E",
+        "c3": "#6E6E6E",
+        "c4": "#F5F5F5",
+        "tint": "#F7F7F7",
+        "accent": "#6E6E6E",
+        "shadow": "#767676",
+        "shine": "#F1F1F1",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFFFFF",
+        "c2": "#FFD400",
+        "c3": "#0050D8",
+        "c4": "#FFFFFF",
+        "tint": "#FFFFFF",
+        "accent": "#FFD400",
+        "shadow": "#6B6B6B",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "golden-bone",
+      "name": "Golden bone",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#120D02",
+        "c1": "#D4AF37",
+        "c2": "#F4E3A1",
+        "c3": "#8A6A1C",
+        "c4": "#1C1C1C",
+        "tint": "#F6EFD7",
+        "accent": "#1C1C1C",
+        "shadow": "#75601E",
+        "shine": "#F0E3B9",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "beach-bone",
+      "name": "Beach bone",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#F4F1DE",
+        "c2": "#2A9D8F",
+        "c3": "#E9C46A",
+        "c4": "#FFFFFF",
+        "tint": "#FDFCF6",
+        "accent": "#2A9D8F",
+        "shadow": "#9B998C",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "park-walk",
+      "name": "Park walk",
+      "tags": [
+        "nature"
+      ],
+      "colors": {
+        "ink": "#132A13",
+        "c1": "#E9DFC4",
+        "c2": "#6A994E",
+        "c3": "#A3B18A",
+        "c4": "#FFFFFF",
+        "tint": "#FAF7EF",
+        "accent": "#BC4749",
+        "shadow": "#969079",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-bone",
+      "name": "Y2K bone",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2340",
+        "c1": "#E8FFFF",
+        "c2": "#C9B5FF",
+        "c3": "#FF9CEB",
+        "c4": "#FFFFFF",
+        "tint": "#FFFFFF",
+        "accent": "#FF9CEB",
+        "shadow": "#8C9A9A",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24113A",
+        "c1": "#FFD23F",
+        "c2": "#FF3E9D",
+        "c3": "#7B4DFF",
+        "c4": "#FFFFFF",
+        "tint": "#FFF6D9",
+        "accent": "#00D4C8",
+        "shadow": "#8C7423",
+        "shine": "#FFEFBC",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "cactus",
+  "category": "nature",
+  "description": "A saguaro cactus with two raised arms, for deserts, succulents, dry climates and the Wild West.",
+  "aliases": [
+    "saguaro",
+    "succulent",
+    "desert-plant",
+    "cacti",
+    "desert",
+    "prickly",
+    "house-plant-cactus"
+  ],
+  "tags": [
+    "nature",
+    "plant",
+    "desert",
+    "succulent"
+  ],
+  "paths": [
+    {
+      "d": "M9.5 21.5 V16.5 H5.5 A2.5 2.5 0 0 1 3 14 V9.5 A1.75 1.75 0 0 1 6.5 9.5 V13 H9.5 V5 A2.5 2.5 0 0 1 14.5 5 V14 H17.5 V7.5 A1.75 1.75 0 0 1 21 7.5 V14.5 A2.5 2.5 0 0 1 18.5 17 H14.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6 21.5 H18",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9.5 21.5 V16.5 H5.5 A2.5 2.5 0 0 1 3 14 V9.5 A1.75 1.75 0 0 1 6.5 9.5 V13 H9.5 V5 A2.5 2.5 0 0 1 14.5 5 V14 H17.5 V7.5 A1.75 1.75 0 0 1 21 7.5 V14.5 A2.5 2.5 0 0 1 18.5 17 H14.5 V21.5 Z"
+  ],
+  "cutouts": [
+    "M12 6 V19"
+  ],
+  "synonyms": [
+    "cactuses",
+    "arid",
+    "dry",
+    "drought",
+    "hot",
+    "heat",
+    "mexico",
+    "arizona",
+    "wild west",
+    "western",
+    "cowboy",
+    "southwest",
+    "houseplant",
+    "plant",
+    "low maintenance",
+    "spiky",
+    "thorn",
+    "boho",
+    "kaktus",
+    "catcus"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "message-circle-question",
+  "category": "communication",
+  "description": "A round speech bubble with a question mark, for help chat, FAQs and asking a question.",
+  "aliases": [
+    "ask-question",
+    "help-chat",
+    "question-bubble",
+    "chat-help",
+    "chat-question",
+    "faq-chat",
+    "support-question",
+    "message-help",
+    "ask-a-question"
+  ],
+  "tags": [
+    "message",
+    "question",
+    "help",
+    "support",
+    "faq",
+    "chat"
+  ],
+  "paths": [
+    {
+      "d": "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 9 A2.5 2.5 0 1 1 14 11 C13.1 11.6 12.5 12.1 12.5 13 V13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 16.5 H12.51",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 19.29 A9 9 0 1 0 4.71 16 L2.5 21.5 Z"
+  ],
+  "cutouts": [
+    "M10 9 A2.5 2.5 0 1 1 14 11 C13.1 11.6 12.5 12.1 12.5 13 V13.5",
+    "M13.5 16.5 A1 1 0 1 1 11.5 16.5 A1 1 0 1 1 13.5 16.5 Z"
+  ],
+  "synonyms": [
+    "help",
+    "support",
+    "faq",
+    "ask",
+    "query",
+    "enquiry",
+    "inquiry",
+    "customer support",
+    "help desk",
+    "live help",
+    "how to",
+    "unsure",
+    "confused",
+    "need help",
+    "ask us",
+    "ask ai",
+    "q and a",
+    "doubt",
+    "question mark"
+  ]
+}

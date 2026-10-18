@@ -1,0 +1,66 @@
+{
+  "name": "message-square-code",
+  "category": "ai",
+  "description": "A square speech bubble with code brackets, for AI coding chat, code review comments and developer support.",
+  "aliases": [
+    "code-chat",
+    "chat-code",
+    "code-comment",
+    "dev-chat",
+    "coding-assistant",
+    "message-code",
+    "comment-code",
+    "code-message",
+    "ai-coding"
+  ],
+  "tags": [
+    "message",
+    "code",
+    "ai",
+    "developer",
+    "chat",
+    "review"
+  ],
+  "paths": [
+    {
+      "d": "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 7.5 L7 10.5 L10 13.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 7.5 L17 10.5 L14 13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 21 V5.5 A2 2 0 0 1 5 3.5 H19 A2 2 0 0 1 21 5.5 V15.5 A2 2 0 0 1 19 17.5 H6.5 Z"
+  ],
+  "cutouts": [
+    "M10 7.5 L7 10.5 L10 13.5",
+    "M14 7.5 L17 10.5 L14 13.5"
+  ],
+  "synonyms": [
+    "ai coding",
+    "copilot",
+    "code assistant",
+    "pair programming",
+    "developer chat",
+    "code snippet",
+    "review comment",
+    "pull request comment",
+    "programming",
+    "html",
+    "embed",
+    "markup",
+    "ask code",
+    "explain code",
+    "debug chat",
+    "developer support",
+    "snippet",
+    "brackets",
+    "code review"
+  ]
+}

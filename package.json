@@ -2,7 +2,7 @@
   "name": "egopenicons-monorepo",
   "private": true,
   "type": "module",
-  "withiconsVersion": "0.5.0",
+  "withiconsVersion": "0.6.0",
   "workspaces": [
     "packages/*"
   ],

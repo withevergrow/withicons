@@ -62,7 +62,7 @@ Every icon in every style, all generated from hand-authored JSON skeletons (coun
 | `glass` | creative | `forge/styles/glass.mjs` — multi-layer frosted glass (glassmorphism) |
 | `kawaii` | creative | `forge/styles/kawaii.mjs` — chubby, soft, with a tiny face and blush |
 | `sticker` | creative | `forge/styles/sticker.mjs` — Y2K die-cut sticker with puffy border and sparkles |
-| `pixel` | creative | `forge/styles/pixel.mjs` — crisp pixel art on a 16×16 grid |
+| `pixel` | creative | `forge/styles/pixel.mjs` — crisp pixel art on the 24×24 grid (1u per pixel; live icons keep 16×16 sprites) |
 | `retro` | creative | `forge/styles/retro.mjs` — 70s sunset stripes and chunky outline |
 
 | `luxe` | creative | `forge/styles/luxe.mjs` — premium, luxurious, multi-layered 3D |

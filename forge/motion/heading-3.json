@@ -1,0 +1,50 @@
+{
+  "name": "heading-3",
+  "intent": "the subsection title stands up while its level number pops",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      20
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.9
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        18.5,
+        15
+      ],
+      "amount": 1,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.6
+    },
+    {
+      "preset": "zoom",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "heading-2",
+      "effect": "slide-down"
+    },
+    {
+      "to": "heading",
+      "effect": "fade"
+    }
+  ]
+}

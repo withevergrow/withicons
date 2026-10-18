@@ -1,0 +1,64 @@
+{
+  "name": "brain-cog",
+  "intent": "the brain thinks while its cog turns slowly: a model in training",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "spin",
+      "origin": [
+        17.5,
+        16.5
+      ],
+      "duration": 6
+    },
+    "A": {
+      "preset": "flicker",
+      "origin": [
+        7,
+        12
+      ],
+      "amount": 0.5,
+      "duration": 3,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "tick",
+      "origin": [
+        17.5,
+        16.5
+      ],
+      "steps": 8,
+      "amount": 0.5,
+      "duration": 2
+    }
+  ],
+  "swap": [
+    {
+      "to": "brain",
+      "effect": "morph"
+    },
+    {
+      "to": "brain-circuit",
+      "effect": "fade"
+    },
+    {
+      "to": "settings",
+      "effect": "spin"
+    }
+  ]
+}

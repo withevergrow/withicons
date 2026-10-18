@@ -1,0 +1,47 @@
+{
+  "name": "sd-card",
+  "intent": "slides into the card slot and pops back out",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.35,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 2.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "save",
+      "effect": "fade"
+    },
+    {
+      "to": "hard-drive",
+      "effect": "slide-up"
+    },
+    {
+      "to": "camera",
+      "effect": "scale"
+    }
+  ]
+}

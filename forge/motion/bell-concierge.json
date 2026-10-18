@@ -1,0 +1,57 @@
+{
+  "name": "bell-concierge",
+  "intent": "the button is tapped and the bell answers with a ding",
+  "loop": {
+    "preset": "nod",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "amount": 1.2,
+      "delay": 0.05
+    }
+  },
+  "alt": [
+    {
+      "preset": "ring",
+      "origin": [
+        12,
+        6
+      ]
+    },
+    {
+      "preset": "press"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "bell",
+      "effect": "fade"
+    },
+    {
+      "to": "hotel",
+      "effect": "fade"
+    },
+    {
+      "to": "bell-ring",
+      "effect": "scale"
+    }
+  ]
+}

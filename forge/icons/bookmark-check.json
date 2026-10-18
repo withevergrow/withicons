@@ -1,0 +1,58 @@
+{
+  "name": "bookmark-check",
+  "category": "actions",
+  "description": "A bookmark ribbon with a check for items already saved to a reading list.",
+  "aliases": [
+    "bookmark-done",
+    "bookmark-saved",
+    "saved-check",
+    "bookmark-tick",
+    "bookmark-added",
+    "saved-item",
+    "marked-read",
+    "read-done",
+    "bookmarked-check"
+  ],
+  "synonyms": [
+    "saved",
+    "already saved",
+    "in your list",
+    "added to list",
+    "read",
+    "finished reading",
+    "done reading",
+    "completed",
+    "wishlist added",
+    "collection added",
+    "kept",
+    "confirmed save",
+    "saved for later",
+    "bookmark confirmed",
+    "watched",
+    "seen",
+    "bookmrk check"
+  ],
+  "tags": [
+    "bookmark",
+    "check",
+    "saved",
+    "done",
+    "ribbon"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 3 H16.5 A2 2 0 0 1 18.5 5 V20.5 L12 16.5 L5.5 20.5 V5 A2 2 0 0 1 7.5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9.5 L11 11.5 L15 7.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 3 H16.5 A2 2 0 0 1 18.5 5 V20.5 L12 16.5 L5.5 20.5 V5 A2 2 0 0 1 7.5 3 Z"
+  ],
+  "cutouts": [
+    "M9 9.5 L11 11.5 L15 7.5"
+  ]
+}

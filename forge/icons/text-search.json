@@ -1,0 +1,64 @@
+{
+  "name": "text-search",
+  "category": "text",
+  "description": "Lines of text with a magnifier, for find in page, searching documents and full-text search.",
+  "aliases": [
+    "find-text",
+    "search-text",
+    "find-in-page",
+    "find-in-document",
+    "full-text-search",
+    "text-find",
+    "find-word",
+    "search-content"
+  ],
+  "tags": [
+    "text",
+    "search",
+    "find",
+    "document",
+    "magnifier"
+  ],
+  "paths": [
+    {
+      "d": "M3 5.5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 11.5 H9",
+      "plate": "K"
+    },
+    {
+      "d": "M3 17.5 H8.5",
+      "plate": "K"
+    },
+    {
+      "d": "M19 15 A3.5 3.5 0 1 1 12 15 A3.5 3.5 0 1 1 19 15 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M18 17.5 L21 20.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M19 15 A3.5 3.5 0 1 1 12 15 A3.5 3.5 0 1 1 19 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "find in text",
+    "search within",
+    "ctrl f",
+    "command f",
+    "find and replace",
+    "word search",
+    "keyword search",
+    "grep",
+    "text lookup",
+    "search notes",
+    "find phrase",
+    "search transcript",
+    "search article",
+    "look up text"
+  ]
+}

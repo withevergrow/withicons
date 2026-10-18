@@ -1,0 +1,83 @@
+{
+  "name": "clipboard-pen",
+  "category": "actions",
+  "description": "A clipboard with a pencil for editing a form, filling in a survey or taking notes.",
+  "aliases": [
+    "clipboard-edit",
+    "edit-form",
+    "fill-form",
+    "clipboard-pencil",
+    "form-edit",
+    "edit-clipboard",
+    "clipboard-write",
+    "fill-in-form"
+  ],
+  "synonyms": [
+    "edit",
+    "fill in",
+    "fill out",
+    "survey",
+    "questionnaire",
+    "sign form",
+    "write notes",
+    "note taking",
+    "application form",
+    "registration",
+    "assessment",
+    "inspection notes",
+    "checklist edit",
+    "update task",
+    "compose",
+    "draft",
+    "paperwork",
+    "signup form",
+    "input"
+  ],
+  "tags": [
+    "clipboard",
+    "pencil",
+    "edit",
+    "form",
+    "write"
+  ],
+  "paths": [
+    {
+      "d": "M8.5 4.5 H6.5 A2 2 0 0 0 4.5 6.5 V19.5 A2 2 0 0 0 6.5 21.5 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 4.5 H17.5 A2 2 0 0 1 19.5 6.5 V9",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 2.5 H14.5 A1 1 0 0 1 15.5 3.5 V5.5 A1 1 0 0 1 14.5 6.5 H9.5 A1 1 0 0 1 8.5 5.5 V3.5 A1 1 0 0 1 9.5 2.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 11 H14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 15 H11",
+      "plate": "A"
+    },
+    {
+      "d": "M13 21 L14 17 L18 13 A2.12 2.12 0 0 1 21 16 L17 20 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M14 17 L17 20",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M6.5 4.5 H8.5 V3.5 A1 1 0 0 1 9.5 2.5 H14.5 A1 1 0 0 1 15.5 3.5 V4.5 H17.5 A2 2 0 0 1 19.5 6.5 V8.5 L12 16 L10.5 21.5 H6.5 A2 2 0 0 1 4.5 19.5 V6.5 A2 2 0 0 1 6.5 4.5 Z",
+    "M13 21 L14 17 L18 13 A2.12 2.12 0 0 1 21 16 L17 20 Z"
+  ],
+  "cutouts": [
+    "M6.75 4 V6.5 A1.75 1.75 0 0 0 8.5 8.25 H15.5 A1.75 1.75 0 0 0 17.25 6.5 V4",
+    "M8.5 11 H14.5",
+    "M8.5 15 H11",
+    "M14 17 L17 20"
+  ]
+}

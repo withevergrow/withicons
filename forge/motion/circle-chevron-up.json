@@ -1,0 +1,46 @@
+{
+  "name": "circle-chevron-up",
+  "intent": "chevron lifts inside its ring to fold the section up",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 0.6,
+    "duration": 0.55
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.45,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "circle-chevron-down",
+      "effect": "rotate"
+    },
+    {
+      "to": "circle-chevron-up@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "chevron-up",
+      "effect": "fade"
+    }
+  ]
+}

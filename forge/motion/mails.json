@@ -1,0 +1,50 @@
+{
+  "name": "mails",
+  "intent": "the envelopes float as a stack, a whole inbox of mail",
+  "loop": {
+    "preset": "float",
+    "amount": 0.35,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.6,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "float",
+      "amount": 0.6,
+      "duration": 3.2,
+      "delay": 0.25
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "mail",
+      "effect": "slide-left"
+    },
+    {
+      "to": "mail-open",
+      "effect": "flip"
+    },
+    {
+      "to": "inbox",
+      "effect": "fade"
+    }
+  ]
+}

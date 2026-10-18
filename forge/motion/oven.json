@@ -2,9 +2,9 @@
   "name": "oven",
   "intent": "the oven glows warm while its window flickers with baking heat",
   "loop": { "preset": "glow", "origin": [12, 12], "amount": 0.6, "duration": 2.6 },
-  "hover": { "preset": "bounce", "origin": [12, 21], "amount": 0.35, "duration": 0.8 },
-  "parts": { "A": { "preset": "flicker", "origin": [12, 15.75], "amount": 0.5, "duration": 1.8, "delay": 0.1 } },
+  "hover": { "preset": "bounce", "origin": [12, 22], "amount": 0.35, "duration": 0.8 },
+  "parts": { "A": { "preset": "flicker", "origin": [12, 12], "amount": 0.5, "duration": 1.8, "delay": 0.1 } },
   "deco": "float",
-  "alt": [ { "preset": "pulse", "origin": [12, 21], "amount": 0.25 }, { "preset": "jelly", "origin": [12, 21], "amount": 0.6 }, { "preset": "type", "amount": 0.5 } ],
+  "alt": [ { "preset": "pulse", "origin": [12, 22], "amount": 0.25 }, { "preset": "jelly", "origin": [12, 22], "amount": 0.6 }, { "preset": "type", "amount": 0.5 } ],
   "swap": [ { "to": "oven@solid", "effect": "scale" }, { "to": "bread", "effect": "slide-up" }, { "to": "cooking-pot", "effect": "fade" } ]
 }

@@ -19,7 +19,7 @@
 //   countLabel(count, limit)                                   -> '' | '7' | '42' | '99+' | '9+'
 //   COUNT_PARAMS(defaults)                                     -> the shared params block
 //   countExamples(extra)                                       -> the shared examples
-import { setD, parsePath } from '../kernel/geom.mjs'
+import { setD, parsePath, pointInSet } from '../kernel/geom.mjs'
 import { setOf, differenceSets } from '../kernel/bool.mjs'
 import { text, measure, asCutouts, snap } from './_font.mjs'
 
@@ -166,15 +166,15 @@ export function countLabel(count, limit = '99+') {
 // anchored in the corner opposite the badge (the Material / SF Symbols pattern), and loses only the corner the
 // badge sits in: check-dynamic fails a count icon whose base keeps less than 55% of its centreline length.
 const EDGE = 21.5, TOP = 2.5
-const CLEAR = 3.25 // centreline clearance base <-> badge: 1u badge ink + 1.25u white + 1u base ink
-const PAD = 2.25   // badge centreline -> text centreline: 0.875u ring ink + 0.5u white + 0.875u text ink
+const CLEAR = 3 // centreline clearance base <-> badge: 0.875u badge ink + 1.25u white + 0.875u base ink
+const PAD = 2      // badge centreline -> text centreline: 0.875u ring ink + 0.375u white + 0.75u text ink
 // badge sizes, overridable per icon through countIcon's `badge` option
 export const BADGE = {
   dotR: 2,            // dot ring centreline radius: ink 6u across, a ring in line, a disc in filled styles
-  r1: 4.75, cap1: 4.25, // one digit: a circle (centreline 9.5u); cap 4.25 keeps >= 0.5u white to the ring at the glyph corners
-  h: 9, cap2: 4,      // two or more characters: a rounded rectangle 9u tall
+  r1: 4.5, cap1: 4.25, // one digit: a circle (centreline 9u); outline styles draw it solid with the digit knocked out
+  h: 8.5, cap2: 4,    // two or more characters: a rounded tag 8.5u tall hugging its digits
   rc: 3.5,            // its corner radius
-  plusCap: 2.75,      // the "+" of "99+" / "9+"
+  plusCap: 3.25,      // the "+" of "99+" / "9+"
 }
 
 // the label as text: digits at `cap`, a trailing "+" a size smaller, centred on the digits' cap middle
@@ -182,7 +182,7 @@ function labelText(label, cap, plusCap, x, y) {
   const plus = label.endsWith('+') && label.length > 1
   if (!plus) return text(label, { x, y, size: cap, tracking: label.length > 1 ? -0.25 : 0 })
   const digits = label.slice(0, -1)
-  const wd = measure(digits, { size: cap, tracking: -0.5 }).width, wp = measure('+', { size: plusCap }).width, gap = 0.5
+  const wd = measure(digits, { size: cap, tracking: -0.5 }).width, wp = measure('+', { size: plusCap }).width, gap = 1
   const x0 = snap(x - (wd + gap + wp) / 2)
   const d = text(digits, { x: x0, y, size: cap, align: 'left', tracking: -0.5 })
   const p = text('+', { x: snap(d.box.x1 + gap), y, size: plusCap, align: 'left' })
@@ -240,12 +240,76 @@ function badgeD(B) {
   return `M${f(x0 + r)} ${f(y0)} H${f(x1 - r)} A${f(r)} ${f(r)} 0 0 1 ${f(x1)} ${f(y0 + r)} V${f(y1 - r)} A${f(r)} ${f(r)} 0 0 1 ${f(x1 - r)} ${f(y1)} H${f(x0 + r)} A${f(r)} ${f(r)} 0 0 1 ${f(x0)} ${f(y1 - r)} V${f(y0 + r)} A${f(r)} ${f(r)} 0 0 1 ${f(x0 + r)} ${f(y0)} Z`
 }
 
+// the badge outline grown by g, as an exact sub (arcs stay arcs): the line the base's bite follows
+function outlineSub(B, g) {
+  if (B.kind === 'circle') {
+    const r = B.r + g
+    return { closed: true, segs: [{ t: 'A', c: [B.cx, B.cy], r, a0: 0, a1: Math.PI }, { t: 'A', c: [B.cx, B.cy], r, a0: Math.PI, a1: TAU }] }
+  }
+  const r = B.rc + g, x0 = B.x0 + B.rc, x1 = B.x1 - B.rc, y0 = B.y0 + B.rc, y1 = B.y1 - B.rc
+  const A = (cx, cy, a) => ({ t: 'A', c: [cx, cy], r, a0: a, a1: a + Math.PI / 2 })
+  return { closed: true, segs: [
+    { t: 'L', a: [x0, y0 - r], b: [x1, y0 - r] }, A(x1, y0, -Math.PI / 2),
+    { t: 'L', a: [x1 + r, y0], b: [x1 + r, y1] }, A(x1, y1, 0),
+    { t: 'L', a: [x1, y1 + r], b: [x0, y1 + r] }, A(x0, y1, Math.PI / 2),
+    { t: 'L', a: [x0 - r, y1], b: [x0 - r, y0] }, A(x0, y0, Math.PI),
+  ] }
+}
+// join open subs whose ends meet (either direction) into longer runs; a run that returns to its start is closed
+const rev = s => s.t === 'L' ? { t: 'L', a: s.b, b: s.a } : { ...s, a0: s.a1, a1: s.a0 }
+const revSub = sb => ({ closed: sb.closed, segs: sb.segs.slice().reverse().map(rev) })
+const near = (p, q, e = 0.35) => Math.hypot(p[0] - q[0], p[1] - q[1]) <= e
+function chain(subs) {
+  const done = subs.filter(s => s.closed), open = subs.filter(s => !s.closed).map(s => ({ ...s, segs: s.segs.slice() }))
+  while (open.length) {
+    let cur = open.shift(), grew = true
+    while (grew) {
+      grew = false
+      const end = at(cur.segs.at(-1), 1), start = at(cur.segs[0], 0)
+      for (let i = 0; i < open.length; i++) {
+        const o = open[i], os = at(o.segs[0], 0), oe = at(o.segs.at(-1), 1)
+        let add = null, front = false
+        if (near(end, os)) add = o
+        else if (near(end, oe)) add = revSub(o)
+        else if (near(start, oe)) { add = o; front = true }
+        else if (near(start, os)) { add = revSub(o); front = true }
+        if (!add) continue
+        cur.segs = front ? [...add.segs, ...cur.segs] : [...cur.segs, ...add.segs]
+        open.splice(i, 1); grew = true; break
+      }
+    }
+    if (cur.segs.length > 1 && near(at(cur.segs[0], 0), at(cur.segs.at(-1), 1))) cur.closed = true
+    done.push(cur)
+  }
+  return done
+}
+
 // how much the base shrinks toward the far corner, per badge kind (overridable per icon)
-export const DEFAULT_SCALES = { dot: 1, one: 0.85, two: 0.8, three: 0.8 }
+export const DEFAULT_SCALES = { dot: 1, one: 'auto', two: 'auto', three: 'auto' }
+// 'auto' fitting per badge kind: scale range and the share of the base's outline the badge may leave
+const AUTO = { one: { max: 0.86, min: 0.72, keep: 0.86 }, two: { max: 0.84, min: 0.6, keep: 0.86 }, three: { max: 0.84, min: 0.58, keep: 0.86 } }
 const MIN_KEEP = 0.55 // share of the base's (scaled) centreline a "99+" tag must leave, else it shows "9+"
 
 // total centreline length of path data (check-dynamic: the base must keep >= 55% of it next to a badge)
 export const pathLength = ds => [].concat(ds).reduce((a, d) => a + parse(d).reduce((b, sb) => b + sb.segs.reduce((c, sg) => c + len(sg), 0), 0), 0)
+
+// The base's filled regions after scaling depend on the base, the scale and the anchor only, never on the count or the
+// badge: the polygon unions (the slowest step of a build) are remembered per (fills, k, anchor) and shared by every
+// count. The cached region sets are only ever read (pointInSet, differenceSets), never changed.
+const REGIONS = new Map()
+function baseRegions(base, k, o, parsed, T) {
+  const key = k + '|' + o + '|' + (base.fills || []).join('|')
+  let r = REGIONS.get(key)
+  if (!r) {
+    if (REGIONS.size > 400) REGIONS.clear()
+    r = {
+      mass: setOf(parsed.fills.flatMap(fl => T(fl).map(sb => toPoly(sb, 0.25)))),
+      sets: parsed.fills.map(fl => setOf(T(fl).map(sb => toPoly(sb)))),
+    }
+    REGIONS.set(key, r)
+  }
+  return r
+}
 
 export function countIcon(base, { count = 0, dotOnly = false, limit = '99+', corner = 'top-right', scales = {}, anchor, badge = {}, minKeep = MIN_KEEP } = {}) {
   // tolerate unset / unknown enum values (a runtime may pass false or undefined)
@@ -269,13 +333,37 @@ export function countIcon(base, { count = 0, dotOnly = false, limit = '99+', cor
   }
   const B = layoutBadge(label, dotOnly, corner, { ...BADGE, ...badge })
   const kind = B.dot ? 'dot' : label.length === 1 ? 'one' : label.length === 2 ? 'two' : 'three'
-  const k = sc[kind]
   const o = anchor ? (top ? [anchor[0], 24 - anchor[1]] : anchor) : (top ? [2.5, 21.5] : [2.5, 2.5])
   const keep = p => badgeDist(p, B) >= CLEAR
+  // the base's scale: a number, or 'auto' = the largest scale (from `max` down in 0.02 steps, never below `min`) at
+  // which the badge's clearance leaves >= `keep` of the base's outline: a tall base (bell, bubble, tile) shrinks
+  // under a wide "42" tag instead of losing its dome, a flat one (envelope, tray, cart) keeps its size
+  const fitK = ({ max, min, keep: want }) => {
+    const whole = pathLength(base.paths.map(x => x.d))
+    let best = min
+    for (let kk = max; kk >= min - 1e-9; kk -= 0.02) {
+      // a small closed part (a wheel, a dot) counts only when it survives whole: half a wheel is no wheel
+      const got = parsed.paths.reduce((a, p) => a + p.subs.reduce((a2, sub) => {
+        const sc2 = scaleSubs([sub], kk, o), cut = clipSubs(sc2, keep)
+        const L = cut.reduce((b, sb) => b + sb.segs.reduce((c, sg) => c + len(sg), 0), 0), full = sc2[0].segs.reduce((c, sg) => c + len(sg), 0)
+        return a2 + (sub.closed && full < 12 && L < full - 1e-6 ? -full : L)
+      }, 0), 0)
+      if (got >= want * whole * kk) { best = kk; break }
+    }
+    return Math.round(best * 100) / 100
+  }
+  const k = typeof sc[kind] === 'number' ? sc[kind] : fitK({ ...AUTO[kind], ...(typeof sc[kind] === 'object' ? sc[kind] : {}) })
   const T = subs => k === 1 ? subs : scaleSubs(subs, k, o)
+  // the base's mass after scaling: where the badge's clearance runs through it, the cut outline is closed again
+  // along that clearance (a concentric "bite"), so the base stays one clean silhouette instead of loose stubs
+  const shared = baseRegions(base, k, o, parsed, T)
+  const mass = shared.mass
+  const bite = mass.length ? clipSubs([outlineSub(B, CLEAR)], q => pointInSet(q, mass), 0.5) : []
   const paths = []
+  let bitten = false
   for (const p of parsed.paths) {
-    const subs = clipSubs(T(p.subs), keep)
+    let subs = clipSubs(T(p.subs), keep)
+    if (p.plate === 'K' && bite.length && !bitten) { subs = chain([...subs, ...bite]); bitten = true }
     if (subs.length) paths.push({ d: toD(subs), plate: p.plate })
   }
   // a "99+" tag that would eat the base (the bell's dome, ...) gives way to the compact "9+" (still true: more
@@ -287,10 +375,11 @@ export function countIcon(base, { count = 0, dotOnly = false, limit = '99+', cor
   const cutouts = []
   for (const c of parsed.cutouts) { const subs = clipSubs(T(c), keep); if (subs.length) cutouts.push(toD(subs)) }
   // fills: subtract the badge grown by its ink + white gap so solid shows a clean moat
-  const moat = setOf([badgeRing(B, CLEAR - 1)])
+  const moat = setOf([badgeRing(B, CLEAR)])
   const fills = []
+  let fi = 0
   for (const fl of parsed.fills) {
-    const set = setOf(T(fl).map(sb => toPoly(sb)))
+    const set = shared.sets[fi++]
     const cut = differenceSets(set, moat)
     const d = setD(cut, 0.04)
     if (d) fills.push(d)
@@ -300,17 +389,17 @@ export function countIcon(base, { count = 0, dotOnly = false, limit = '99+', cor
   if (B.dot) {
     // a ring: filled styles fill it (fills), line styles show the family badge ring. An inner ring or stub would
     // be carved off as a separate detail by solid (a donut), so the dot stays a single closed path.
-    paths.push({ d: ring, plate: 'S' })
+    paths.push({ d: ring, plate: 'S', id: 'badge:dot' })
     fills.push(ring)
-    return { paths, fills, cutouts }
+    return { paths, fills, cutouts, scale: k }
   }
   const cx = B.kind === 'circle' ? B.cx : (B.x0 + B.x1) / 2, cy = B.kind === 'circle' ? B.cy : (B.y0 + B.y1) / 2
   const t = labelText(label, B.cap, B.plusCap, snap(cx), snap(cy))
-  paths.push({ d: ring, plate: 'S' })
+  paths.push({ d: ring, plate: 'S', id: `badge:${kind}` })
   for (const d of t.paths) paths.push({ d, plate: 'S' })
   fills.push(ring)
   cutouts.push(...asCutouts(t.paths))
-  return { paths, fills, cutouts, shown: label }
+  return { paths, fills, cutouts, shown: label, scale: k }
 }
 
 // ── check hooks (forge/tools/check-dynamic.mjs) ────────────────────────────────────────────────────────────
@@ -322,9 +411,7 @@ export function keptRatio(base, p, opts = {}) {
   const sk = countIcon(base, { ...p, ...opts })
   const label = p.dotOnly === true ? countLabel(p.count) : sk.shown
   if (!label) return 1
-  const kind = p.dotOnly === true ? 'dot' : label.length === 1 ? 'one' : label.length === 2 ? 'two' : 'three'
-  const k = { ...DEFAULT_SCALES, ...(opts.scales || {}) }[kind]
-  const total = pathLength(base.paths.map(x => x.d)) * k
+  const total = pathLength(base.paths.map(x => x.d)) * (sk.scale ?? 1)
   return pathLength(sk.paths.filter(x => x.plate !== 'S').map(x => x.d)) / total
 }
 

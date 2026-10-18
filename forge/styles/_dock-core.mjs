@@ -148,6 +148,8 @@ export function build(icon) {
   // the glyph: one soft shadow on the tile, then each plate as a raised piece
   const drop = all.map(l => l.map(p => T([p[0], p[1] + D.DROP / S])))
   out.push(['path', { d: loopsD(drop, 1, 0.06), fill: v('shadow'), 'fill-opacity': 0.4, 'fill-rule': 'evenodd', stroke: v('shadow'), 'stroke-opacity': 0.3, 'stroke-width': 0.7, 'stroke-linejoin': 'round', class: 'wm-shadow' }])
+  // a crisp deep keyline hugging the glyph: the light glyph never melts into a light tile (amber, gold, a pale palette)
+  out.push(['path', { d: loopsD(tl(all)), fill: 'none', stroke: v('shadow'), 'stroke-opacity': 0.6, 'stroke-width': 0.8, 'stroke-linejoin': 'round' }])  // unclassed like the K plate: it moves with the glyph, not with the lagging shadow
 
   let sheen = false
   // a part as big as the object is the object (a microphone whose cradle is the K plate): keep it in the light material

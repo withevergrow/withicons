@@ -1,0 +1,55 @@
+{
+  "name": "phone-forwarded",
+  "category": "communication",
+  "description": "A phone handset with a forward arrow, for call forwarding and redirected calls.",
+  "aliases": [
+    "call-forward",
+    "call-forwarding",
+    "forward-call",
+    "forwarded-call",
+    "redirect-call",
+    "phone-forward",
+    "divert-call",
+    "transfer-call"
+  ],
+  "tags": [
+    "phone",
+    "call",
+    "forward",
+    "redirect",
+    "transfer",
+    "telephone"
+  ],
+  "paths": [
+    {
+      "d": "M3 5 A2 2 0 0 1 5 3 H8 A1.5 1.5 0 0 1 9.5 4.5 V6 C9.5 7.25 8.5 7.25 8.5 8.5 A7 7 0 0 0 15.5 15.5 C16.75 15.5 16.75 14.5 18 14.5 H19.5 A1.5 1.5 0 0 1 21 16 V19 A2 2 0 0 1 19 21 A16 16 0 0 1 3 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 6 H21 M17.5 2.5 L21 6 L17.5 9.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3 5 A2 2 0 0 1 5 3 H8 A1.5 1.5 0 0 1 9.5 4.5 V6 C9.5 7.25 8.5 7.25 8.5 8.5 A7 7 0 0 0 15.5 15.5 C16.75 15.5 16.75 14.5 18 14.5 H19.5 A1.5 1.5 0 0 1 21 16 V19 A2 2 0 0 1 19 21 A16 16 0 0 1 3 5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "forward",
+    "redirect",
+    "divert",
+    "transfer",
+    "route call",
+    "reroute",
+    "forward to voicemail",
+    "follow me",
+    "call routing",
+    "telephone",
+    "handset",
+    "call settings",
+    "pass on",
+    "hand over",
+    "switchboard",
+    "reception"
+  ]
+}

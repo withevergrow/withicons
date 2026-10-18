@@ -1,0 +1,40 @@
+{
+  "name": "binary",
+  "intent": "the digits flick like bits switching on and off",
+  "loop": {
+    "preset": "type",
+    "amount": 0.5,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "flip",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "amount": 0.6,
+      "duration": 1.4,
+      "delay": 0.2
+    }
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "flicker"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "code",
+      "effect": "morph"
+    },
+    {
+      "to": "terminal",
+      "effect": "fade"
+    }
+  ]
+}

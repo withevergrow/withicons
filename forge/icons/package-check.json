@@ -1,0 +1,73 @@
+{
+  "name": "package-check",
+  "category": "commerce",
+  "description": "A shipping box with a check mark in its corner, for delivered orders, packed items and verified stock.",
+  "aliases": [
+    "package-delivered",
+    "order-delivered",
+    "box-check",
+    "parcel-delivered",
+    "delivery-complete",
+    "shipment-received",
+    "parcel-check",
+    "box-delivered"
+  ],
+  "tags": [
+    "box",
+    "package",
+    "delivered",
+    "check",
+    "shipping",
+    "order"
+  ],
+  "paths": [
+    {
+      "d": "M21 12 V7 L12 2.5 L3 7 V17 L12 21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 7 L12 11.5 L21 7 M12 11.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 4.75 L16.5 9.25 V11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 18 L17.5 20 L20.5 16",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L21 7 V12.8 A6 6 0 0 0 12.85 21.08 L12 21.5 L3 17 V7 Z"
+  ],
+  "cutouts": [
+    "M3 7 L12 11.5 L21 7 M12 11.5 V21.5",
+    "M7.5 4.75 L16.5 9.25 V11"
+  ],
+  "synonyms": [
+    "delivered",
+    "delivery confirmed",
+    "order received",
+    "received",
+    "arrived",
+    "parcel arrived",
+    "shipped",
+    "fulfilled",
+    "fulfillment",
+    "packed",
+    "ready to ship",
+    "in stock",
+    "available",
+    "verified",
+    "approved",
+    "done",
+    "complete",
+    "order complete",
+    "tracking",
+    "courier",
+    "logistics",
+    "proof of delivery",
+    "delivery status"
+  ]
+}

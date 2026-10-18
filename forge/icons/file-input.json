@@ -1,0 +1,65 @@
+{
+  "name": "file-input",
+  "category": "files",
+  "description": "A page with an arrow entering through its left edge for importing data or opening a file.",
+  "aliases": [
+    "file-in",
+    "import-data",
+    "document-in",
+    "load-file",
+    "open-file",
+    "file-enter",
+    "read-file",
+    "input-file"
+  ],
+  "tags": [
+    "file",
+    "import",
+    "input",
+    "arrow",
+    "load",
+    "data"
+  ],
+  "paths": [
+    {
+      "d": "M8 12.5 V4.5 A2 2 0 0 1 10 2.5 H16.5 L21.5 7.5 V19.5 A2 2 0 0 1 19.5 21.5 H10 A2 2 0 0 1 8 19.5 V17.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 2.5 V6 A1.5 1.5 0 0 0 18 7.5 H21.5",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 15 H15",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 12.5 L15 15 L12.5 17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M16.5 2.5 H10 A2 2 0 0 0 8 4.5 V19.5 A2 2 0 0 0 10 21.5 H19.5 A2 2 0 0 0 21.5 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M16.5 2.5 V6 A1.5 1.5 0 0 0 18 7.5 H21.5",
+    "M8.5 15 H15",
+    "M12.5 12.5 L15 15 L12.5 17.5"
+  ],
+  "synonyms": [
+    "import",
+    "load",
+    "open",
+    "read",
+    "ingest",
+    "bring in",
+    "upload data",
+    "import csv",
+    "import file",
+    "insert",
+    "attach",
+    "add from file",
+    "data import",
+    "incoming"
+  ]
+}

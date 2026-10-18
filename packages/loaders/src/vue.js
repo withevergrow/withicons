@@ -1,4 +1,5 @@
 // Vue 3: <Loader name="spinner" variant="glass" :size="32" :speed="1.2" />  ·  <Morph :items="['file','cloud-upload','check-circle']" />
+// Morph items are library icon names; 'loader:<name>' (or { loader: '<name>' }) puts a loader in the chain.
 import { defineComponent, h, ref, watchEffect } from 'vue'
 import * as L from './core.js'
 

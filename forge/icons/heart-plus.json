@@ -1,0 +1,65 @@
+{
+  "name": "heart-plus",
+  "category": "status",
+  "description": "A heart with a plus for adding an item to favourites or a wishlist.",
+  "aliases": [
+    "add-favorite",
+    "add-favourite",
+    "favorite-plus",
+    "add-to-favorites",
+    "add-to-wishlist",
+    "like-plus",
+    "add-like",
+    "wishlist-add",
+    "love-plus",
+    "heart-add"
+  ],
+  "synonyms": [
+    "favourite",
+    "favorite",
+    "like",
+    "love",
+    "wishlist",
+    "save",
+    "add to favourites",
+    "add to favorites",
+    "follow",
+    "new favourite",
+    "add to collection",
+    "save to wishlist",
+    "add love",
+    "health add",
+    "care",
+    "donate",
+    "charity",
+    "heart plus"
+  ],
+  "tags": [
+    "heart",
+    "add",
+    "favorite",
+    "wishlist",
+    "like"
+  ],
+  "paths": [
+    {
+      "d": "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 10 V15",
+      "plate": "S"
+    },
+    {
+      "d": "M9.5 12.5 H14.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 20.5 C12 20.5 3 15.2 3 8.9 C3 6.2 5.1 4 7.8 4 C9.6 4 11.1 5 12 6.5 C12.9 5 14.4 4 16.2 4 C18.9 4 21 6.2 21 8.9 C21 15.2 12 20.5 12 20.5 Z"
+  ],
+  "cutouts": [
+    "M12 10 V15",
+    "M9.5 12.5 H14.5"
+  ]
+}

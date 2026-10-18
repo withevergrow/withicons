@@ -1,0 +1,69 @@
+{
+  "name": "surprised",
+  "category": "users",
+  "description": "A surprised face with wide eyes and a round open mouth, for shock, wow and astonished reactions.",
+  "aliases": [
+    "shocked",
+    "wow",
+    "astonished",
+    "amazed",
+    "surprised-face",
+    "face-surprised",
+    "open-mouth",
+    "omg",
+    "stunned"
+  ],
+  "tags": [
+    "face",
+    "emoji",
+    "surprise",
+    "reaction",
+    "mood",
+    "wow"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 8.5 V9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15 8.5 V9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14.25 15.5 A2.25 2.25 0 1 1 9.75 15.5 A2.25 2.25 0 1 1 14.25 15.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 9 A1 1.25 0 1 1 8 9 A1 1.25 0 1 1 10 9 Z",
+    "M16 9 A1 1.25 0 1 1 14 9 A1 1.25 0 1 1 16 9 Z",
+    "M14.25 15.5 A2.25 2.25 0 1 1 9.75 15.5 A2.25 2.25 0 1 1 14.25 15.5 Z"
+  ],
+  "synonyms": [
+    "shock",
+    "gasp",
+    "oh",
+    "whoa",
+    "unexpected",
+    "disbelief",
+    "awe",
+    "emoji",
+    "reaction",
+    "feeling",
+    "startled",
+    "speechless",
+    "jaw drop",
+    "no way",
+    "emoticon",
+    "impressed",
+    "mind blown"
+  ]
+}

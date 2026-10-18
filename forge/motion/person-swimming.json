@@ -1,0 +1,43 @@
+{
+  "name": "person-swimming",
+  "intent": "bobs on the water with each stroke, surges forward on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 1,
+    "duration": 0.8
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "rock",
+      "amount": 0.4
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "person-swimming@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "person-running",
+      "effect": "slide-left"
+    },
+    {
+      "to": "waves",
+      "effect": "fade"
+    }
+  ]
+}

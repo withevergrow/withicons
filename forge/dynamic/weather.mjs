@@ -2,7 +2,8 @@
 // With the temperature on, the glyph is a compact drawing in the top band (y 2..12.25) and the number sits in the
 // bottom band (cap 5, y 16.25..21.25). With it off, the glyph is drawn full size like its static siblings.
 import { snap, polar } from './_layout.mjs'
-import { cloud, sun, crescent, sparkle, firstFit } from './_parts-weather.mjs'
+import { cloud, sun, crescent, sparkle } from './_parts-weather.mjs'
+import { fitFirst } from './_parts-labels.mjs'
 import { live } from './_font.mjs'
 
 const CONDITIONS = ['sunny', 'partly', 'cloudy', 'rain', 'storm', 'snow', 'fog', 'night']
@@ -157,7 +158,7 @@ export default live({
     const u = UNITS[unit] ?? '°'
     // longest first; the unit letter goes, then the degree sign, before the text shrinks below cap 4.5
     const t = showTemperature
-      ? firstFit([n + u, u.length > 1 ? n + '°' : null, n], { x0: 3, y0: 16.25, x1: 21, y1: 21.25 }, { prefer: 'small', minCap: 4.5 })
+      ? fitFirst([n + u, u.length > 1 ? n + '°' : null, n].filter(Boolean), { x0: 3, y0: 16.25, x1: 21, y1: 21.25 }, { minCap: 4.5, maxCap: 5 })?.t
       : null
     const g = (t ? COMPACT : FULL)[cond]()
     return {

@@ -1,0 +1,42 @@
+{
+  "name": "git-pull-request-draft",
+  "intent": "the dotted line pulses on, a pull request still being drafted",
+  "loop": {
+    "preset": "fill",
+    "amount": 0.8,
+    "duration": 2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.8,
+      "duration": 2,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-pull-request",
+      "effect": "draw"
+    },
+    {
+      "to": "git-pull-request-closed",
+      "effect": "fade"
+    }
+  ]
+}

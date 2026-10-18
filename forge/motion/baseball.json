@@ -1,0 +1,40 @@
+{
+  "name": "baseball",
+  "intent": "spins on its seams like a pitch on its way to the plate",
+  "loop": {
+    "preset": "spin",
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "spin-once",
+    "duration": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "baseball@solid",
+      "effect": "spin"
+    },
+    {
+      "to": "trophy",
+      "effect": "slide-up"
+    }
+  ]
+}

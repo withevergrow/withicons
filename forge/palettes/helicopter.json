@@ -1,0 +1,425 @@
+{
+  "name": "helicopter",
+  "palettes": [
+    {
+      "id": "rescue-red",
+      "name": "Rescue red",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#2B0606",
+        "c1": "#E53935",
+        "c2": "#FFFFFF",
+        "c3": "#37474F",
+        "c4": "#90CAF9",
+        "tint": "#FAD7D7",
+        "accent": "#FFC107",
+        "shadow": "#7E1F1D",
+        "shine": "#F6BAB8",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "air-ambulance",
+      "name": "Air ambulance",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1A1F00",
+        "c1": "#F2D600",
+        "c2": "#2E7D32",
+        "c3": "#2B2B2B",
+        "c4": "#CFEFFF",
+        "tint": "#FCF7CC",
+        "accent": "#2E7D32",
+        "shadow": "#857600",
+        "shine": "#FAF1A6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "coast-guard",
+      "name": "Coast guard",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#1F0F00",
+        "c1": "#FF6D00",
+        "c2": "#FFFFFF",
+        "c3": "#1B2F5B",
+        "c4": "#B3E5FC",
+        "tint": "#FFE2CC",
+        "accent": "#1B2F5B",
+        "shadow": "#8C3C00",
+        "shine": "#FFCCA6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "police-blue",
+      "name": "Police blue",
+      "tags": [
+        "true-to-life"
+      ],
+      "colors": {
+        "ink": "#06132B",
+        "c1": "#1B3A8C",
+        "c2": "#FFFFFF",
+        "c3": "#F2C14E",
+        "c4": "#9EC1F7",
+        "tint": "#D1D8E8",
+        "accent": "#F2C14E",
+        "shadow": "#0F204D",
+        "shine": "#AFBAD7",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "army-olive",
+      "name": "Army olive",
+      "tags": [
+        "true-to-life",
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#1A1F10",
+        "c1": "#5B6B3A",
+        "c2": "#C2B280",
+        "c3": "#2E3520",
+        "c4": "#A3B18A",
+        "tint": "#DEE1D8",
+        "accent": "#C2B280",
+        "shadow": "#323B20",
+        "shine": "#C6CBBA",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "news-chopper",
+      "name": "News chopper",
+      "tags": [
+        "corporate"
+      ],
+      "colors": {
+        "ink": "#0F1A2A",
+        "c1": "#F1F5F9",
+        "c2": "#2563EB",
+        "c3": "#EF4444",
+        "c4": "#94A3B8",
+        "tint": "#FFFFFF",
+        "accent": "#EF4444",
+        "shadow": "#8A8F96",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "mint-pastel",
+      "name": "Mint pastel",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#21413A",
+        "c1": "#A8E6CF",
+        "c2": "#FFFFFF",
+        "c3": "#FFD3B6",
+        "c4": "#6CC3A6",
+        "tint": "#EEFAF5",
+        "accent": "#FFAAA5",
+        "shadow": "#5C7F72",
+        "shine": "#E1F6EE",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "baby-blue",
+      "name": "Baby blue",
+      "tags": [
+        "pastel"
+      ],
+      "colors": {
+        "ink": "#23384D",
+        "c1": "#A8D8FF",
+        "c2": "#FFFFFF",
+        "c3": "#FFE38F",
+        "c4": "#6FB5EE",
+        "tint": "#EEF7FF",
+        "accent": "#FFB3C1",
+        "shadow": "#5C778C",
+        "shine": "#E1F1FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "toy-copter",
+      "name": "Toy copter",
+      "tags": [
+        "candy"
+      ],
+      "colors": {
+        "ink": "#3D1233",
+        "c1": "#FF6FB5",
+        "c2": "#FFE36E",
+        "c3": "#7AD3FF",
+        "c4": "#8BE68B",
+        "tint": "#FFE2F0",
+        "accent": "#7AD3FF",
+        "shadow": "#8C3D64",
+        "shine": "#FFCDE5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "neon-flight",
+      "name": "Neon flight",
+      "tags": [
+        "neon",
+        "on-dark"
+      ],
+      "colors": {
+        "ink": "#05030A",
+        "c1": "#00F0FF",
+        "c2": "#B6FF3B",
+        "c3": "#FF2E88",
+        "c4": "#7B2CFF",
+        "tint": "#CCFBFF",
+        "accent": "#FF2E88",
+        "shadow": "#005A61",
+        "shine": "#FFFFFF",
+        "edge": "#15121F"
+      }
+    },
+    {
+      "id": "retro-airshow",
+      "name": "Retro airshow",
+      "tags": [
+        "retro"
+      ],
+      "colors": {
+        "ink": "#2E140A",
+        "c1": "#E8632B",
+        "c2": "#F7B32B",
+        "c3": "#2E6F8E",
+        "c4": "#F4E3C3",
+        "tint": "#FAE0D5",
+        "accent": "#F7B32B",
+        "shadow": "#803618",
+        "shine": "#F7C8B5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "vintage-aviation",
+      "name": "Vintage aviation",
+      "tags": [
+        "vintage"
+      ],
+      "colors": {
+        "ink": "#2C2218",
+        "c1": "#6E8A86",
+        "c2": "#F2E2BC",
+        "c3": "#A23B2A",
+        "c4": "#C9A86A",
+        "tint": "#E2E8E7",
+        "accent": "#A23B2A",
+        "shadow": "#3D4C4A",
+        "shine": "#CCD6D5",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "desert-ops",
+      "name": "Desert ops",
+      "tags": [
+        "earthy"
+      ],
+      "colors": {
+        "ink": "#2F1A0C",
+        "c1": "#C9A26B",
+        "c2": "#6B4F3A",
+        "c3": "#F2E2BC",
+        "c4": "#7E8C5C",
+        "tint": "#F4ECE1",
+        "accent": "#A0522D",
+        "shadow": "#6F593B",
+        "shine": "#ECDECB",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "steel-ramp",
+      "name": "Steel ramp",
+      "tags": [
+        "mono"
+      ],
+      "colors": {
+        "ink": "#0F1A2A",
+        "c1": "#607D8B",
+        "c2": "#CFD8DC",
+        "c3": "#37474F",
+        "c4": "#ECEFF1",
+        "tint": "#DFE5E8",
+        "accent": "#CFD8DC",
+        "shadow": "#35454C",
+        "shine": "#C7D2D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "grayscale",
+      "name": "Grayscale",
+      "tags": [
+        "grayscale"
+      ],
+      "colors": {
+        "ink": "#121212",
+        "c1": "#8A8A8A",
+        "c2": "#FFFFFF",
+        "c3": "#3D3D3D",
+        "c4": "#CFCFCF",
+        "tint": "#E8E8E8",
+        "accent": "#3D3D3D",
+        "shadow": "#4C4C4C",
+        "shine": "#D6D6D6",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "high-contrast",
+      "name": "High contrast",
+      "tags": [
+        "accessible"
+      ],
+      "colors": {
+        "ink": "#000000",
+        "c1": "#FFD400",
+        "c2": "#000000",
+        "c3": "#FFFFFF",
+        "c4": "#0050D8",
+        "tint": "#FFF4B8",
+        "accent": "#0050D8",
+        "shadow": "#806A00",
+        "shine": "#FFFFFF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "executive-jet-black",
+      "name": "Executive black",
+      "tags": [
+        "luxe"
+      ],
+      "colors": {
+        "ink": "#0B0A08",
+        "c1": "#373737",
+        "c2": "#D4AF37",
+        "c3": "#F4E3A1",
+        "c4": "#6B6B6B",
+        "tint": "#E5E1D6",
+        "accent": "#D4AF37",
+        "shadow": "#0C0C0C",
+        "shine": "#5E5A52",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "night-patrol",
+      "name": "Night patrol",
+      "tags": [
+        "dark"
+      ],
+      "colors": {
+        "ink": "#04101E",
+        "c1": "#364357",
+        "c2": "#4FC3F7",
+        "c3": "#FFCC00",
+        "c4": "#E3ECF7",
+        "tint": "#D7E4F2",
+        "accent": "#FFCC00",
+        "shadow": "#070D16",
+        "shine": "#5C6E89",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "island-tour",
+      "name": "Island tour",
+      "tags": [
+        "ocean"
+      ],
+      "colors": {
+        "ink": "#06283D",
+        "c1": "#00A6A6",
+        "c2": "#FFFFFF",
+        "c3": "#FFB703",
+        "c4": "#7FE0E0",
+        "tint": "#CCEDED",
+        "accent": "#FF7F50",
+        "shadow": "#005B5B",
+        "shine": "#A6E0E0",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "sunset-flight",
+      "name": "Sunset flight",
+      "tags": [
+        "sunset"
+      ],
+      "colors": {
+        "ink": "#36132A",
+        "c1": "#FF7B54",
+        "c2": "#FFE4D2",
+        "c3": "#8A4FA8",
+        "c4": "#FFB26B",
+        "tint": "#FFE5DD",
+        "accent": "#8A4FA8",
+        "shadow": "#8C442E",
+        "shine": "#FFD1C3",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "y2k-copter",
+      "name": "Y2K copter",
+      "tags": [
+        "y2k"
+      ],
+      "colors": {
+        "ink": "#2A2340",
+        "c1": "#C9B5FF",
+        "c2": "#A8F0FF",
+        "c3": "#FF9CEB",
+        "c4": "#FFFFFF",
+        "tint": "#F4F0FF",
+        "accent": "#FF9CEB",
+        "shadow": "#6F648C",
+        "shine": "#ECE5FF",
+        "edge": "#FFFFFF"
+      }
+    },
+    {
+      "id": "dopamine",
+      "name": "Dopamine",
+      "tags": [
+        "vivid"
+      ],
+      "colors": {
+        "ink": "#24113A",
+        "c1": "#7B4DFF",
+        "c2": "#FFD23F",
+        "c3": "#FF3E9D",
+        "c4": "#00D4C8",
+        "tint": "#E5DBFF",
+        "accent": "#00D4C8",
+        "shadow": "#442A8C",
+        "shine": "#D1C1FF",
+        "edge": "#FFFFFF"
+      }
+    }
+  ]
+}

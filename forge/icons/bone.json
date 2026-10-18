@@ -1,0 +1,55 @@
+{
+  "name": "bone",
+  "category": "health",
+  "description": "A classic double-knobbed bone, for dogs and pet treats, anatomy, orthopaedics and fractures.",
+  "aliases": [
+    "dog-bone",
+    "dog-treat",
+    "chew-toy",
+    "femur",
+    "skeleton-bone",
+    "pet-treat"
+  ],
+  "tags": [
+    "dog",
+    "pet",
+    "anatomy",
+    "skeleton",
+    "health"
+  ],
+  "paths": [
+    {
+      "d": "M8.08 13.45 L13.45 8.08 A2.75 2.75 0 1 1 17.71 6.29 A2.75 2.75 0 1 1 15.92 10.55 L10.55 15.92 A2.75 2.75 0 1 1 6.29 17.71 A2.75 2.75 0 1 1 8.08 13.45 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M8.08 13.45 L13.45 8.08 A2.75 2.75 0 1 1 17.71 6.29 A2.75 2.75 0 1 1 15.92 10.55 L10.55 15.92 A2.75 2.75 0 1 1 6.29 17.71 A2.75 2.75 0 1 1 8.08 13.45 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "bones",
+    "dog",
+    "puppy",
+    "pet",
+    "pet food",
+    "pet shop",
+    "treat",
+    "chew",
+    "fetch",
+    "orthopedic",
+    "orthopaedic",
+    "fracture",
+    "broken bone",
+    "x-ray",
+    "skeleton",
+    "anatomy",
+    "calcium",
+    "joint",
+    "halloween",
+    "archaeology",
+    "fossil",
+    "dog walking",
+    "good boy"
+  ]
+}

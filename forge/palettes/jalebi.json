@@ -9,14 +9,14 @@
       ],
       "colors": {
         "ink": "#3B1B00",
-        "c1": "#FF9800",
-        "c2": "#FFCC80",
-        "c3": "#E65100",
-        "c4": "#FFF3E0",
-        "tint": "#FFECD1",
-        "accent": "#FFCC80",
-        "shadow": "#804C00",
-        "shine": "#FFD699",
+        "c1": "#FF9F1C",
+        "c2": "#FFC93C",
+        "c3": "#E8590C",
+        "c4": "#FFF4D6",
+        "tint": "#FFEFD0",
+        "accent": "#E8590C",
+        "shadow": "#8A3B00",
+        "shine": "#FFF1B8",
         "edge": "#FFFFFF"
       }
     },

@@ -1,0 +1,36 @@
+{
+  "name": "utensils-crossed",
+  "intent": "the crossed cutlery nods like a table ready to be served",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "tada",
+    "amount": 0.6
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "utensils",
+      "effect": "morph"
+    },
+    {
+      "to": "utensils-crossed@solid",
+      "effect": "scale"
+    }
+  ]
+}

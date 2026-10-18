@@ -1,0 +1,36 @@
+{
+  "name": "flip-horizontal",
+  "intent": "turns over on its axis like a layer being mirrored",
+  "loop": {
+    "preset": "flip",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "flip",
+    "origin": [
+      12,
+      12
+    ],
+    "duration": 0.9
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "swap",
+      "effect": "flip"
+    }
+  ]
+}

@@ -29,12 +29,14 @@ export const PALETTE_STYLES = ['glass', 'kawaii', 'sticker', 'pixel', 'retro', '
 // (wg-<style>-<icon>-<n>) are referenced as url(#id). Every inline output makes those ids unique per rendered instance
 // (withUniq below); standalone files keep the deterministic ids. Detection is by data (hasDefs); this list is for docs.
 export const RICH_STYLES = ['glass', 'clay', 'bento', 'suite', 'dock', 'liquid', 'chrome', 'soft3d', 'brutal', 'utsav', 'rangoli', 'halloween', 'christmas', 'lunar', 'valentine']
-// Split packages (jsDelivr serves at most 150 MB per package). @withicons/core and @withicons/classes keep the 20
-// older styles (glass included), so no import path or CDN URL of an older style changes. The run 12 styles live in
-// companions with the SAME layout (dist/svg/<style>/<name>.svg, dist/nodes/<style>.js, dist/<style>/<name>.css):
+// Split packages (jsDelivr serves at most 150 MB per package). @withicons/core keeps the 20 older styles (glass
+// included), so no import path or CDN URL of an older style changes; @withicons/classes keeps them too, except the class
+// files of the three heaviest ones (CLASSES_PLUS_STYLES: glass, skeuo, gothic), which live in @withicons/classes-plus.
+// The run 12 styles live in companions with the SAME layout (dist/svg/<style>/<name>.svg, dist/nodes/<style>.js, dist/<style>/<name>.css):
 //   STYLE_PACKAGE  the ONE style -> package map for styles with a package of their own (one or several styles each):
 //                  core files in dist/, class files in dist/classes/
 //   PLUS_STYLES    every other style after 'plush' in STYLE_ORDER: @withicons/core-plus and @withicons/classes-plus
+//   CLASSES_PLUS_STYLES  older styles whose CLASS files alone moved to @withicons/classes-plus (their core files stay in core)
 // Every other package (react, vue, svelte, angular, solid, web, static, dynamic, mcp) holds every style.
 export const STYLE_PACKAGE = {
   soft3d: 'soft3d',
@@ -43,6 +45,8 @@ export const STYLE_PACKAGE = {
 export const OWN_STYLES = Object.keys(STYLE_PACKAGE)
 // the run 12 styles: everything after 'plush' in STYLE_ORDER (so the list follows STYLE_ORDER), own-package styles excepted
 export const PLUS_STYLES = STYLE_ORDER.slice(STYLE_ORDER.indexOf('plush') + 1).filter(s => !OWN_STYLES.includes(s))
+// older styles whose class files (base 'classes' only) live in @withicons/classes-plus to keep @withicons/classes under budget
+export const CLASSES_PLUS_STYLES = ['glass', 'skeuo', 'gothic']
 export const isPlusStyle = style => PLUS_STYLES.includes(style)
 export const isOwnStyle = style => Object.prototype.hasOwnProperty.call(STYLE_PACKAGE, style)
 /** true for a package name from STYLE_PACKAGE ('soft3d', 'holiday'): core files in dist/, class files in dist/classes/ */
@@ -51,6 +55,7 @@ export const isOwnPackage = pkg => Object.values(STYLE_PACKAGE).includes(pkg)
  *  cdnPkg('clay') -> 'core-plus', cdnPkg('soft3d', 'classes') -> 'soft3d', cdnPkg('line', 'classes') -> 'classes'. */
 export const cdnPkg = (style, base = 'core') => !SPLIT_BASES.includes(base) ? base
   : (base === 'core' || base === 'classes') && isOwnStyle(style) ? STYLE_PACKAGE[style]
+  : base === 'classes' && CLASSES_PLUS_STYLES.includes(style) ? 'classes-plus'
   : isPlusStyle(style) || isOwnStyle(style) ? base + '-plus' : base
 // the packages that are split: core and classes (companions: -plus and the STYLE_PACKAGE packages), web and static
 // (every newer style, own-package ones included, in web-plus / static-plus: one package each keeps them under the limit)

@@ -1,7 +1,7 @@
 {
   "name": "radar",
   "category": "ai",
-  "description": "A radar sweep with a blip, for monitoring, discovery and scanning.",
+  "description": "A radar scope with a centre dot, a range ring, a sweep line trailing a lit wedge and a blip, for monitoring, discovery and scanning.",
   "aliases": [
     "radar-scan",
     "sonar",
@@ -25,25 +25,33 @@
       "plate": "K"
     },
     {
-      "d": "M12 17 A5 5 0 0 1 12 7",
+      "d": "M16 8 A5.75 5.75 0 1 1 10.5 6.5",
       "plate": "A"
     },
     {
       "d": "M12 12 L18.5 5.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 12 L9.5 3",
       "plate": "A"
     },
     {
-      "d": "M16.5 15.5 A0.5 0.5 0 1 1 15.5 15.5 A0.5 0.5 0 1 1 16.5 15.5 Z",
-      "plate": "S"
+      "d": "M12.875 12 A0.875 0.875 0 1 1 11.125 12 A0.875 0.875 0 1 1 12.875 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.875 6 A0.375 0.375 0 1 1 13.125 6 A0.375 0.375 0 1 1 13.875 6 Z",
+      "plate": "A"
     }
   ],
   "fills": [
     "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
   ],
   "cutouts": [
-    "M12 17 A5 5 0 0 1 12 7",
-    "M12 12 L18.5 5.5",
-    "M17.25 15.5 A1.25 1.25 0 1 1 14.75 15.5 A1.25 1.25 0 1 1 17.25 15.5 Z"
+    "M12 12 L17.75 6.25 A8.125 8.125 0 0 0 9.75 4 Z M14.75 6 A1.25 1.25 0 1 1 12.25 6 A1.25 1.25 0 1 1 14.75 6 Z",
+    "M16 8 A5.75 5.75 0 1 1 10.5 6.5",
+    "M13.5 12 A1.5 1.5 0 1 1 10.5 12 A1.5 1.5 0 1 1 13.5 12 Z"
   ],
   "synonyms": [
     "discover",

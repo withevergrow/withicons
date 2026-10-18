@@ -10,7 +10,7 @@ Design your own in the **Loader Studio**: https://withicons.com/loaders.html
 ## The one-liner (no install, no JS)
 
 ```html
-<img src="https://cdn.jsdelivr.net/npm/@withicons/loaders@0.5.0/dist/svg/line/spinner.svg" width="32" height="32" alt="Loading">
+<img src="https://cdn.jsdelivr.net/npm/@withicons/loaders@0.6.0/dist/svg/line/spinner.svg" width="32" height="32" alt="Loading">
 ```
 
 Swap `line` for any style (line, solid, duo, gloss, engrave, blueprint, sketch, glass, kawaii, sticker, pixel, retro, luxe, bauhaus, skeuo, anime, gothic, pastel, coquette, plush, clay, bento, suite, dock, liquid, chrome, soft3d, brutal, utsav, rangoli, halloween, christmas, lunar, valentine) and `spinner` for any loader name below.
@@ -18,12 +18,19 @@ Swap `line` for any style (line, solid, duo, gloss, engrave, blueprint, sketch, 
 ## Web component (themeable, any framework)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@withicons/loaders@0.5.0/dist/cdn/loaders.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@withicons/loaders@0.6.0/dist/cdn/loaders.js"></script>
 <with-loader name="orbit" variant="glass" size="48" speed="1.2" color="#7c5cff"></with-loader>
 <with-loader morph="file,cloud-upload,check-circle" effect="slide-up"></with-loader>
 ```
 
-`el.done('check-circle')` turns a running loader into a finished icon; `el.reset()` starts it again; `paused` pauses.
+`el.done('check-circle')` turns a running loader into a finished icon (always the library icon, even when a loader
+has the same name); `el.reset()` starts it again; `paused` pauses. The finish is announced through a polite
+`role="status"` live region.
+
+**Morph items are library icon names.** Since 0.6.0 a plain name in `morph="…"`, `<Morph items>`, `morph()` and
+`morphAsync()` is always an icon, even when a loader has the same name (`rocket`, `download`, `gift` …). To put a
+loader in the chain, ask for it: `loader:<name>` (or `{ loader: '<name>' }`), e.g.
+`morph="file,loader:upload,check-circle"`. Earlier versions turned a name that was also a loader into the loader.
 
 ## npm
 
@@ -36,6 +43,8 @@ import { svg, svgAsync, url, morphAsync, search } from '@withicons/loaders'
 el.innerHTML = svg('spinner', { size: 32, color: '#16a34a', label: 'Saving' })   // line is built in (sync)
 el.innerHTML = await svgAsync('fireworks', { style: 'utsav', size: 64 })          // other styles load on demand
 search('ai thinking')     // -> [{ name: 'ai-sparkle', … }, { name: 'morph-ai', … }]
+el.innerHTML = await morphAsync(['wrench', 'settings', 'rocket'], { effect: 'spin' })   // three icons
+el.innerHTML = await morphAsync(['file', 'loader:upload', 'check-circle'])              // an icon, the upload loader, an icon
 ```
 
 React / Vue:

@@ -2,7 +2,7 @@
 // orange cuff and a green pompom, a blue scarf with a hanging end, chunky stick arms, a carrot nose, coal eyes and
 // two coal buttons. Flat on purpose: no defs, no gradients. Roles: body c1 (snow), beanie c2, scarf c3, pompom c4,
 // cuff + carrot accent, outline + shadow ink (currentColor). Motion: shadow wm-shadow, body wm-k, beanie/scarf/arms wm-a.
-const v = (r, h) => r === 'ink' ? 'var(--with-brutal-ink, currentColor)' : `var(--with-brutal-${r}, ${h})`
+const v = (r, h) => r === 'ink' ? 'var(--with-brutal-ink, #16130F)' : `var(--with-brutal-${r}, ${h})`
 const C = { ink: v('ink'), c1: v('c1', '#FFFFFF'), c2: v('c2', '#FF6BA8'), c3: v('c3', '#4D7CFE'), c4: v('c4', '#3DDC97'), accent: v('accent', '#FF8A3D') }
 const f = n => +n.toFixed(2)
 const circ = (x, y, r) => `M${f(x - r)} ${f(y)}a${f(r)} ${f(r)} 0 1 0 ${f(2 * r)} 0a${f(r)} ${f(r)} 0 1 0 ${f(-2 * r)} 0Z`

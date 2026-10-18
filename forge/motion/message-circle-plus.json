@@ -1,0 +1,59 @@
+{
+  "name": "message-circle-plus",
+  "intent": "the plus pops inside the bubble, inviting a new chat",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12.5,
+      11.5
+    ],
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12.5,
+        11.5
+      ],
+      "amount": 1,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12.5,
+        20.5
+      ]
+    },
+    {
+      "preset": "spin-once",
+      "origin": [
+        12.5,
+        11.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "message-circle",
+      "effect": "scale"
+    },
+    {
+      "to": "message-square-plus",
+      "effect": "morph"
+    },
+    {
+      "to": "message-circle-more",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "door-open",
   "category": "home",
-  "description": "A door swung open in its frame for entrances, check-in, exits, and rooms.",
+  "description": "A door frame with the door leaf hinged on the left jamb and swung open toward you, handle showing, the doorway and its right jamb visible beyond, over a floor line, for entrances, exits and rooms.",
   "aliases": [
     "door",
     "entrance",
@@ -23,27 +23,31 @@
   ],
   "paths": [
     {
-      "d": "M14 3 H7 A2 2 0 0 0 5 5 V21",
+      "d": "M3 21 V5 A2 2 0 0 1 5 3 H19 A2 2 0 0 1 21 5 V21",
       "plate": "K"
     },
     {
-      "d": "M2.5 21 H21.5",
+      "d": "M17.5 21 V6.5 H15.5",
       "plate": "K"
     },
     {
-      "d": "M14 3 L19.5 4.5 V19.5 L14 21 Z",
+      "d": "M1.5 21 H3 M13 21 H22.5",
       "plate": "K"
     },
     {
-      "d": "M16.5 11.5 V13",
+      "d": "M6.5 6.5 L13 4.5 V22.5 L6.5 20 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 12 V14.5 M10.5 13.25 H9",
       "plate": "A"
     }
   ],
   "fills": [
-    "M14 3 L19.5 4.5 V19.5 L14 21 Z"
+    "M6.5 6.5 L13 4.5 V22.5 L6.5 20 Z"
   ],
   "cutouts": [
-    "M16.5 11.5 V13"
+    "M10.5 12 V14.5 M10.5 13.25 H9"
   ],
   "synonyms": [
     "doors",

@@ -1,0 +1,49 @@
+{
+  "name": "screwdriver",
+  "intent": "twists back and forth as if driving in a screw",
+  "loop": {
+    "preset": "wiggle",
+    "origin": [
+      20,
+      4
+    ],
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      20,
+      4
+    ],
+    "amount": 1.1
+  },
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        3.5,
+        20.5
+      ]
+    },
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "drill",
+      "effect": "rotate"
+    },
+    {
+      "to": "wrench",
+      "effect": "rotate"
+    },
+    {
+      "to": "toolbox",
+      "effect": "fade"
+    }
+  ]
+}

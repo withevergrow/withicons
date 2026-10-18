@@ -1,0 +1,71 @@
+{
+  "name": "cloud-sun-rain",
+  "category": "weather",
+  "description": "A sun peeking out from behind a rain cloud, for sunny spells with showers and changeable weather.",
+  "aliases": [
+    "sun-showers",
+    "sunshower",
+    "sunny-rain",
+    "scattered-showers",
+    "rain-and-sun",
+    "showers-sun",
+    "partly-rainy"
+  ],
+  "tags": [
+    "weather",
+    "rain",
+    "sun",
+    "forecast",
+    "showers"
+  ],
+  "paths": [
+    {
+      "d": "M11.85 14.5 A3.15 3.15 0 0 1 11.29 8.27 A4.34 4.34 0 0 1 19.62 8.62 A2.97 2.97 0 0 1 19.02 14.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.1 9.79 A3 3 0 0 1 9.66 5.23",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 3.25 L8.5 1.5 M5.14 4.64 L3.9 3.4 M3.75 8 L2 8 M5.14 11.36 L3.9 12.6",
+      "plate": "A"
+    },
+    {
+      "d": "M12 18 L10.5 21",
+      "plate": "S"
+    },
+    {
+      "d": "M16 18 L14.5 21",
+      "plate": "S"
+    },
+    {
+      "d": "M20 18 L18.5 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M11.85 14.5 A3.15 3.15 0 0 1 11.29 8.27 A4.34 4.34 0 0 1 19.62 8.62 A2.97 2.97 0 0 1 19.02 14.5 Z",
+    "M9.55 6.34L8.93 7.14L9.38 6.2L8.76 6.57L8.46 6.78L8.18 7.01L7.66 7.51L7.21 8.08L6.84 8.7L6.55 9.37L6.34 10.08L6.01 9.67L5.73 9.15L5.56 8.59L5.5 8L5.56 7.41L5.66 7.04L5.9 6.5L6.24 6.02L6.67 5.62L7 5.4L7.35 5.23L7.91 5.06L8.3 5.01L8.7 5.01L9.28 5.1L9.65 5.23L9.94 5.37L9.38 6.2L10.05 5.92L10.4 5.81Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "sun and rain",
+    "sunny spells and showers",
+    "light showers",
+    "passing showers",
+    "april showers",
+    "changeable weather",
+    "mixed weather",
+    "rainbow weather",
+    "intermittent rain",
+    "chance of rain",
+    "scattered rain",
+    "showers later",
+    "partly sunny with rain",
+    "unsettled",
+    "spring weather",
+    "monsoon break",
+    "weather app"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "wink",
+  "category": "users",
+  "description": "A winking face with one eye closed and a smile, for playful, joking and flirty reactions.",
+  "aliases": [
+    "winking",
+    "winky",
+    "face-wink",
+    "wink-emoji",
+    "cheeky",
+    "playful",
+    "just-kidding",
+    "winking-face"
+  ],
+  "tags": [
+    "face",
+    "emoji",
+    "wink",
+    "playful",
+    "reaction",
+    "mood"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9 9 V10",
+      "plate": "A"
+    },
+    {
+      "d": "M13.5 10 A1.5 1.5 0 0 1 16.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M8 14 A5 5 0 0 0 16 14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M10 9.5 A1 1.25 0 1 1 8 9.5 A1 1.25 0 1 1 10 9.5 Z",
+    "M13.5 10 A1.5 1.5 0 0 1 16.5 10",
+    "M8 14 A5 5 0 0 0 16 14"
+  ],
+  "synonyms": [
+    "joke",
+    "kidding",
+    "jk",
+    "tease",
+    "sly",
+    "flirt",
+    "flirty",
+    "hint",
+    "secret",
+    "in on it",
+    "emoji",
+    "emoticon",
+    "reaction",
+    "feeling",
+    "smirk",
+    "humor",
+    "humour",
+    "fun",
+    "cheeky grin"
+  ]
+}

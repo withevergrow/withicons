@@ -25,13 +25,24 @@ export interface LoaderOptions {
   /** resolve var() paints (for <img>, canvas, data URIs) */
   flat?: boolean
 }
+/**
+ * One step of a morph sequence. A plain string is a library ICON name ('rocket', 'cloud-upload'); a loader only when
+ * asked for: 'loader:rocket' or { loader: 'rocket' } (0.6.0; before, a name that was also a loader became the loader).
+ * '<svg …>' markup and { svg } are used as they are; 'icon:<name>' / { icon } say "icon" explicitly.
+ */
+export type MorphItem = string | { icon: string } | { loader: string } | { svg: string }
+export type MorphItemInfo = { kind: 'icon' | 'loader'; name: string } | { kind: 'svg'; markup: string }
 export interface MorphOptions extends LoaderOptions { effect?: MorphEffect; hold?: number | string; id?: string; enter?: boolean }
 export function svg(name: string, options?: LoaderOptions): string
 export function svgAsync(name: string, options?: LoaderOptions): Promise<string>
 export function url(name: string, style?: string, version?: string): string
 export function dataUri(name: string, options?: LoaderOptions): string
-export function morph(items: string[], options?: MorphOptions): string
-export function morphAsync(names: string[] | string, options?: MorphOptions): Promise<string>
+/** sync: items are icon <svg> strings and/or loaders ('loader:<name>'); a plain icon name needs morphAsync() */
+export function morph(items: MorphItem[], options?: MorphOptions): string
+/** plain names are library icons fetched in the same style; a string is a comma list ("file,cloud-upload,loader:spinner") */
+export function morphAsync(items: MorphItem[] | string, options?: MorphOptions): Promise<string>
+/** how one morph item is read (null when it is none of the forms) */
+export function morphItem(item: MorphItem): MorphItemInfo | null
 export function iconSvg(name: string, style?: string): Promise<string>
 export function iconUrl(name: string, style?: string): string
 export function setIconSource(fn: ((name: string, style: string) => string | Promise<string>) | null): void

@@ -1,0 +1,10 @@
+{
+  "name": "clock-alert",
+  "intent": "the hands tick on while the warning mark blinks: running late",
+  "loop": { "preset": "pulse", "amount": 0.25, "duration": 3 },
+  "hover": { "preset": "shake", "amount": 0.6, "duration": 0.5 },
+  "parts": { "A": { "preset": "tick", "origin": [12, 12], "steps": 12, "duration": 6 }, "S": { "preset": "flicker", "amount": 0.8, "duration": 1.5 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "ring", "origin": [12, 3] }, { "preset": "pop" }],
+  "swap": [{ "to": "clock-check", "effect": "morph" }, { "to": "clock", "effect": "fade" }]
+}

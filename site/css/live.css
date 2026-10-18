@@ -262,8 +262,11 @@ html:not(.js) .lv-sb-o[aria-checked="true"] { background: color-mix(in srgb, var
 .lv-bg[aria-checked="true"] { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--ink); }
 .lv-bg:hover { transform: scale(1.12); }
 .lv-bg:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 3px; }
-.lv-stage-art { position: absolute; inset: 58px 20px 104px; display: grid; place-items: center; }
-.lv-art { position: relative; width: min(60%, 360px); max-height: 100%; aspect-ratio: 1; border-radius: 26px; display: grid; place-items: center; -webkit-tap-highlight-color: transparent;
+.lv-stage-art { position: absolute; inset: 58px 20px 132px; display: grid; place-items: center; min-height: 0; }
+.lv-stage-art > .lv-art { min-height: 0; }
+/* the art is a square that fits its band both ways (height first: a short stage never lets it spill onto the hint and
+   the size strip below), at most 60% of the stage's width and 360px */
+.lv-art { position: relative; height: min(100%, 360px); width: auto; max-width: min(60%, 100%); aspect-ratio: 1; border-radius: 26px; display: grid; place-items: center; -webkit-tap-highlight-color: transparent;
   transition: transform .35s var(--e-spring); outline: none; }
 .lv-art .lv-svg { width: 100%; height: 100%; filter: drop-shadow(0 18px 26px color-mix(in srgb, var(--style) 26%, transparent)); transition: opacity .2s; }
 .lv-stage[data-bg="grid"] .lv-art .lv-svg, .lv-stage[data-bg="white"] .lv-art .lv-svg { filter: none; }
@@ -277,7 +280,7 @@ html:not(.js) .lv-sb-o[aria-checked="true"] { background: color-mix(in srgb, var
 .lv-art[data-g="scrub"].is-drag, .lv-art[data-g="pos-x"].is-drag { cursor: ew-resize; }
 .lv-art:focus-visible { box-shadow: 0 0 0 3px var(--card), 0 0 0 5.5px var(--focus-ring), 0 0 0 10px var(--focus-halo); }
 .lv-art[data-g="roll"]:active, .lv-art[data-g="cycle"]:active { transform: scale(.96); }
-.lv-stage-hint { position: absolute; z-index: 2; left: 50%; bottom: 68px; display: inline-flex; align-items: center; gap: 8px; max-width: calc(100% - 32px); margin: 0; padding: 6px 14px 6px 10px;
+.lv-stage-hint { position: absolute; z-index: 2; left: 50%; bottom: 86px; display: inline-flex; align-items: center; gap: 8px; max-width: calc(100% - 32px); margin: 0; padding: 6px 14px 6px 10px;
   border-radius: var(--pill); background: color-mix(in srgb, var(--card) 90%, transparent); border: 1px solid color-mix(in srgb, var(--style) 30%, var(--rule)); color: var(--style-text);
   font: 700 19px/1.1 var(--font-hand); white-space: nowrap; transform: translateX(-50%); pointer-events: none; transition: opacity .4s, transform .5s var(--e-out); }
 .lv-stage-hint span { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; padding-right: 6px; }
@@ -431,7 +434,12 @@ html:not(.js) .lv-js-inline { display: none; }
 .lv-tiles-f.is-many .lv-tiles { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); }
 .lv-tiles-f:not(.is-many) .lv-tiles { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); max-width: calc(var(--n) * 112px); }
 .lv-set { container: lvset / inline-size; }
-@container lvset (max-width: 440px) { .lv-tiles-f:not(.is-many):not(.is-few) .lv-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* narrow: 4 options sit 4 or 2 x 2, 5 as 3 + 2 is avoided (5 and 6 go 3 across: 3 + 3, or 3 + 2 centred) */
+@container lvset (max-width: 440px) {
+  .lv-tiles-f:not(.is-many):not(.is-few) .lv-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lv-tiles-f:not(.is-many) .lv-tiles[style*="--n:4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@container lvset (max-width: 330px) { .lv-tiles-f:not(.is-many) .lv-tiles[style*="--n:4"] { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .lv-to { display: grid; justify-items: center; align-content: start; gap: 7px; min-width: 0; padding: 10px 6px 9px; border-radius: 16px; border: 1.5px solid var(--rule); background: var(--card); color: var(--ink);
   cursor: pointer; transition: border-color .2s, background .2s, transform .25s var(--e-spring); }
 .lv-to:hover { transform: translateY(-2px); border-color: var(--rule-strong); background: var(--paper-2); }
@@ -462,14 +470,28 @@ html:not(.js) .lv-js-inline { display: none; }
 .lv-chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .lv-chip:focus-visible, .lv-mini:focus-visible { outline: 2.5px solid var(--focus-ring); outline-offset: 2px; }
 
-/* text: the label maker (one cell per character, monospaced so letters sit in their cells) */
-.lv-type { position: relative; width: calc(var(--n) * 1.9ch + .2ch); max-width: 100%; height: 66px; font: 750 30px/1 var(--font-mono); }
-.lv-type-cells { position: absolute; inset: 0; display: flex; pointer-events: none; }
-.lv-type-cells i { flex: none; width: 1.9ch; margin: 0 .1ch 0 0; border-radius: 13px; background: var(--paper-2); box-shadow: inset 0 0 0 1.5px var(--rule-strong); transition: box-shadow .2s, background .2s; }
-.lv-type-in { position: relative; display: block; width: 100%; height: 100%; padding: 0 0 0 .45ch; border: 0; background: none; color: var(--ink); font: inherit; letter-spacing: 1ch; text-transform: uppercase; outline: none; caret-color: var(--style); }
-.lv-type:focus-within .lv-type-cells i { background: var(--card); box-shadow: inset 0 0 0 2px var(--ink); }
+/* text: the label maker. Each character is drawn in its own cell (real boxes with real gaps, so nothing overlaps
+   whatever font loads); a transparent input on top takes the typing, taps and paste on every device. The cell the
+   next letter goes into carries the caret. */
+.lv-type { position: relative; display: grid; grid-template-columns: repeat(var(--n), var(--cell)); gap: var(--gap); width: max-content; max-width: 100%;
+  --cell: clamp(46px, 13vw, 58px); --gap: clamp(6px, 1.8vw, 10px); }
+.lv-type-cells { display: contents; }
+.lv-type-cells i { position: relative; display: grid; place-items: center; height: calc(var(--cell) * 1.16); border-radius: 14px; font: 750 clamp(24px, 7vw, 30px)/1 var(--font-mono); font-style: normal;
+  color: var(--ink); background: var(--paper-2); box-shadow: inset 0 0 0 1.5px var(--rule-strong); transition: box-shadow .2s, background .2s, transform .25s var(--e-spring); }
+.lv-type-cells i.is-full { background: var(--card); }
+.lv-type-cells i.is-new { animation: lv-pop .32s var(--e-spring); }
+@keyframes lv-pop { 0% { transform: scale(.86); } 100% { transform: none; } }
+.lv-type:focus-within .lv-type-cells i { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--ink) 40%, var(--rule-strong)); }
+.lv-type:focus-within .lv-type-cells i.is-caret { background: var(--card); box-shadow: inset 0 0 0 2.5px var(--style); }
+.lv-type:focus-within .lv-type-cells i.is-caret:empty::after { content: ''; width: 2.5px; height: 46%; border-radius: 2px; background: var(--style); animation: lv-blink 1.05s steps(2, start) infinite; }
+@keyframes lv-blink { to { visibility: hidden; } }
 .lv-type.is-bad .lv-type-cells i { box-shadow: inset 0 0 0 2px var(--c-solid); }
-.lv-type:focus-within { border-radius: 14px; box-shadow: 0 0 0 5px var(--focus-halo); }
+/* the real input: covers the cells, invisible, 16px+ so phones never zoom; its text and caret never show */
+.lv-type-in { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; border-radius: 14px; background: none; color: transparent; caret-color: transparent;
+  font: 16px/1 var(--font-mono); letter-spacing: 0; text-transform: uppercase; outline: none; cursor: text; -webkit-text-fill-color: transparent; -webkit-tap-highlight-color: transparent; }
+.lv-type-in::selection { background: transparent; }
+.lv-type:focus-within { border-radius: 16px; box-shadow: 0 0 0 5px var(--focus-halo); }
+@media (prefers-reduced-motion: reduce) { .lv-type-cells i.is-new { animation: none; } .lv-type:focus-within .lv-type-cells i.is-caret:empty::after { animation: none; } }
 
 /* switches */
 .lv-opts-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px 18px; }
@@ -498,6 +520,8 @@ html:not(.js) .lv-js-inline { display: none; }
 .lv-pick-say { font: 500 13.5px/1.3 var(--font-sans); color: var(--muted); }
 .lv-qc-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; }
 .lv-qc { display: flex; flex-wrap: wrap; gap: 8px; }
+/* phones: one swatch row that scrolls sideways (never a lone swatch wrapped onto its own line) */
+@media (max-width: 640px) { .lv-qc-row { flex-direction: column; align-items: flex-start; gap: 10px; } .lv-qc { flex-wrap: nowrap; max-width: 100%; overflow-x: auto; padding: 6px 4px; margin: -6px -4px; scrollbar-width: none; overscroll-behavior-x: contain; } .lv-qc::-webkit-scrollbar { display: none; } .lv-qb { flex: none; } }
 .lv-qb, .lv-swb { position: relative; display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 0; border-radius: 50%; background: none; cursor: pointer; transition: transform .25s var(--e-spring); }
 .lv-qb span, .lv-swb span { width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1px color-mix(in srgb, #000 16%, transparent); }
 .lv-qb.is-pal span { box-shadow: inset 0 0 0 2.5px var(--ring, #111318), inset 0 0 0 3.5px rgba(255, 255, 255, .5); }
@@ -768,7 +792,6 @@ html.lv-sheet-open { overflow: hidden; }
   .lv-ghost { flex: 1 1 auto; min-height: 56px; }
   .lv-cta .lv-split { flex-basis: 100%; }
   .lv-dial { width: 132px; height: 132px; }
-  .lv-type { font-size: 26px; height: 58px; }
   .lv-all { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .lv-as-art { height: 108px; }
   .lv-as-art .lv-svg { width: 60px; height: 60px; }

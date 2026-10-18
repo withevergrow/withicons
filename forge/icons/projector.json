@@ -1,0 +1,71 @@
+{
+  "name": "projector",
+  "category": "devices",
+  "description": "A video projector with its round lens on top and two little feet, for presentations, home cinema and screenings.",
+  "aliases": [
+    "video-projector",
+    "beamer",
+    "movie-projector",
+    "home-cinema",
+    "home-theater",
+    "projection",
+    "presentation-projector"
+  ],
+  "tags": [
+    "devices",
+    "presentation",
+    "video",
+    "cinema",
+    "display"
+  ],
+  "paths": [
+    {
+      "d": "M11.1 9.5 H4.5 A2 2 0 0 0 2.5 11.5 V16 A2 2 0 0 0 4.5 18 H19.5 A2 2 0 0 0 21.5 16 V11.5 A2 2 0 0 0 19.5 9.5 H18.9",
+      "plate": "K"
+    },
+    {
+      "d": "M19 10.5 A4 4 0 1 1 11 10.5 A4 4 0 1 1 19 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15 10.5 V10.51",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 13.5 H8",
+      "plate": "A"
+    },
+    {
+      "d": "M6 18 L5 20.5 M18 18 L19 20.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M11.1 9.5 H4.5 A2 2 0 0 0 2.5 11.5 V16 A2 2 0 0 0 4.5 18 H19.5 A2 2 0 0 0 21.5 16 V11.5 A2 2 0 0 0 19.5 9.5 H18.9 A4 4 0 0 1 11.1 9.5 Z",
+    "M19 10.5 A4 4 0 1 1 11 10.5 A4 4 0 1 1 19 10.5 Z"
+  ],
+  "cutouts": [
+    "M18.25 10.5 A3.25 3.25 0 1 1 11.75 10.5 A3.25 3.25 0 1 1 18.25 10.5 Z M16.25 10.5 A1.25 1.25 0 1 1 13.75 10.5 A1.25 1.25 0 1 1 16.25 10.5 Z",
+    "M5.5 13.5 H8"
+  ],
+  "synonyms": [
+    "presentation",
+    "cinema",
+    "movie night",
+    "home theatre",
+    "slideshow",
+    "screen",
+    "display",
+    "conference room",
+    "meeting room",
+    "beam",
+    "film",
+    "classroom",
+    "lecture",
+    "big screen",
+    "multimedia",
+    "overhead projector",
+    "screening",
+    "projecter"
+  ]
+}

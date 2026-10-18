@@ -1,0 +1,33 @@
+{
+  "name": "helicopter",
+  "intent": "hovers in place, bobbing on its rotor",
+  "loop": {
+    "preset": "float",
+    "amount": 0.8,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "rise",
+    "amount": 0.6,
+    "duration": 1.2
+  },
+  "alt": [
+    {
+      "preset": "wiggle"
+    },
+    {
+      "preset": "nudge",
+      "dir": 180
+    }
+  ],
+  "swap": [
+    {
+      "to": "plane",
+      "effect": "fade"
+    },
+    {
+      "to": "plane-takeoff",
+      "effect": "blur"
+    }
+  ]
+}

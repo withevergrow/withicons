@@ -1,0 +1,52 @@
+{
+  "name": "feather",
+  "intent": "drifts down lightly, then writes a quick flourish",
+  "loop": {
+    "preset": "float",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.7,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      4,
+      20
+    ],
+    "amount": 0.9
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        4,
+        20
+      ],
+      "amount": 0.8
+    },
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "pen-tool",
+      "effect": "fade"
+    },
+    {
+      "to": "feather@solid",
+      "effect": "fade"
+    },
+    {
+      "to": "leaf",
+      "effect": "morph"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "case-upper",
+  "category": "text",
+  "description": "Capital letters A and B, for turning text into uppercase or all caps.",
+  "aliases": [
+    "uppercase",
+    "all-caps",
+    "caps",
+    "capitals",
+    "upper-case",
+    "capital-letters",
+    "text-uppercase",
+    "to-upper",
+    "make-uppercase"
+  ],
+  "tags": [
+    "text",
+    "case",
+    "uppercase",
+    "letters",
+    "typography",
+    "format"
+  ],
+  "paths": [
+    {
+      "d": "M2 19 L6.5 5.5 L11 19",
+      "plate": "K"
+    },
+    {
+      "d": "M3.5 14.5 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 5.5 H17.75 A3 3 0 0 1 17.75 11.5 H18 A3.75 3.75 0 0 1 18 19 H14.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 11.5 H17.75",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "all capitals",
+    "capitalize",
+    "capitalise",
+    "shouting",
+    "majuscule",
+    "big letters",
+    "text transform",
+    "touppercase",
+    "block letters",
+    "caps lock",
+    "capital ab"
+  ]
+}

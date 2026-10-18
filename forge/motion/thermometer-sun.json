@@ -1,0 +1,54 @@
+{
+  "name": "thermometer-sun",
+  "intent": "heat rises while the sun beats down",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      16.5,
+      17
+    ],
+    "amount": 0.3,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      16.5,
+      17
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        8.5,
+        9.5
+      ],
+      "amount": 1.2,
+      "duration": 2.4,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "thermometer-snowflake",
+      "effect": "fade"
+    },
+    {
+      "to": "thermometer",
+      "effect": "slide-up"
+    },
+    {
+      "to": "sun",
+      "effect": "blur"
+    }
+  ]
+}

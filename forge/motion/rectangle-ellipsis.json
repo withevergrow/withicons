@@ -1,0 +1,42 @@
+{
+  "name": "rectangle-ellipsis",
+  "intent": "the dots tick in one by one like a password being typed",
+  "loop": {
+    "preset": "type",
+    "amount": 0.5,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.4,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "amount": 0.7,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "text-cursor-input",
+      "effect": "fade"
+    },
+    {
+      "to": "eye",
+      "effect": "morph"
+    }
+  ]
+}

@@ -7,9 +7,14 @@
 //                                         search, preview, copy and download that work straight from file://
 //     with-icons-<style>/LICENSE.txt      the repo's MIT licence
 //     with-icons-<style>/README.txt       what is inside and how to use it
+//   site/downloads/with-icons-<style>-png-<px>.zip       one per PNG_SIZES entry: the whole style as PNG at that size
+//     with-icons-<style>-png-<px>/<name>.png               resvg render of the standalone SVG, transparent background,
+//                                                          "currentColor" painted PNG_INK; PNGs are stored, not deflated
+//     with-icons-<style>-png-<px>/LICENSE.txt, README.txt
+//                                         skipped (the zips already on disk stay listed) without @resvg/resvg-js or with --no-png
 //   site/downloads/with-icons-all.zip     every style as svg/<style>/<name>.svg (no viewers: get those from the style zips),
 //                                         skipped when it would be bigger than ALL_LIMIT
-//   site/data/downloads.json              { version, styles: { <style>: { file, bytes, icons, sha } }, all }
+//   site/data/downloads.json              { version, pngSizes, styles: { <style>: { file, bytes, icons, sha, png: [{ px, file, bytes, size }] } }, all }
 //   site/data/downloads.js                the same as window.WITH_DOWNLOADS (the site also works from file://)
 //
 // The zips are deterministic (fixed timestamps, sorted entries, fixed deflate level): the same icons give the same
@@ -24,6 +29,7 @@ import path from 'path'
 import zlib from 'zlib'
 import crypto from 'crypto'
 import { pathToFileURL } from 'url'
+import { createRequire } from 'module'
 import { ROOT, listIcons, loadIcon, loadStyles, toSvg, nodesToMarkup, readManifest } from '../lib/load.mjs'
 import { sortStyles, styleVars, isPalette, flattenVars } from '../lib/emit-core.mjs'
 
@@ -31,6 +37,13 @@ const OUT = path.join(ROOT, 'site', 'downloads')
 const DATA = path.join(ROOT, 'site', 'data')
 const ALL_LIMIT = 48 * 1048576   // the all-styles zip is skipped above this (bytes)
 const SITE = 'https://withicons.com'
+// whole-style PNG zips, one per size and style (the style hubs' quick downloads, forge/tools/site-seo.mjs)
+export const PNG_SIZES = [16, 24, 32, 48, 64, 128, 256]   // 512 px would add about 1.2 GB over all the styles
+const PNG_DIR = OUT   // flat, next to the SVG zips (scripts/deploy.mjs caches downloads/*.zip as one class)
+const PNG_INK = '#111318'   // "currentColor" in a PNG: the site's light-theme ink (a PNG cannot follow the CSS colour)
+const PNG_REV = 1
+// resvg is a root devDependency; without it the PNG zips are skipped and the ones on disk kept
+const RESVG = (() => { try { const req = createRequire(import.meta.url); const mod = req('@resvg/resvg-js'); let ver = '?'; try { ver = req('@resvg/resvg-js/package.json').version } catch {} return { Resvg: mod.Resvg, ver } } catch { return null } })()
 
 // ------------------------------------------------------------------ deterministic zip writer (no dependencies)
 const CRC_TABLE = new Int32Array(256).map((_, n) => { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; return c })
@@ -39,7 +52,7 @@ const crc32 = typeof zlib.crc32 === 'function' ? b => zlib.crc32(b) >>> 0
 // every entry is dated 2026-01-01 00:00 (local, as ZIP has no zone): fixed, so the same input -> the same zip
 const DOS_TIME = 0, DOS_DATE = ((2026 - 1980) << 9) | (1 << 5) | 1
 /** entries: [[name, Buffer|string]] (a name ending in "/" is a folder). Sorted here; returns a Buffer. */
-export function zipFiles(entries, comment = '') {
+export function zipFiles(entries, comment = '', { store } = {}) {
   const list = entries.map(([n, d]) => [n, n.endsWith('/') ? Buffer.alloc(0) : Buffer.isBuffer(d) ? d : Buffer.from(String(d), 'utf8')])
   // add the folders of every file (Explorer and Finder show empty-looking trees without them), then sort
   const names = new Set(list.map(e => e[0]))
@@ -49,7 +62,7 @@ export function zipFiles(entries, comment = '') {
   let offset = 0
   for (const [name, data] of list) {
     const n = Buffer.from(name, 'utf8'), dir = name.endsWith('/')
-    const method = dir || data.length < 64 ? 0 : 8
+    const method = dir || data.length < 64 || (store && store.test(name)) ? 0 : 8
     const comp = method ? zlib.deflateRawSync(data, { level: 9, memLevel: 9 }) : data
     const crc = dir ? 0 : crc32(data)
     const h = Buffer.alloc(30)
@@ -122,9 +135,11 @@ function skeletonMeta(name) {
 }
 
 // ------------------------------------------------------------------ build
-export function build(ctx, { allZip = true } = {}) {
+export function build(ctx, { allZip = true, png = true } = {}) {
   const t0 = Date.now()
   fs.mkdirSync(OUT, { recursive: true }); fs.mkdirSync(DATA, { recursive: true })
+  const pngOn = png && !!RESVG
+  const pngKept = list => (list || []).filter(p => fs.existsSync(path.join(OUT, '..', p.file)))
   const manifest = readManifest()
   // the published set: the manifest's icons that have a skeleton (a stray skeleton or a render left over from a removed
   // icon never reaches a zip, so every zip, its README and downloads.json agree with the site's own count)
@@ -149,9 +164,9 @@ export function build(ctx, { allZip = true } = {}) {
   void lineStyle
 
   const prevJson = (() => { try { return JSON.parse(fs.readFileSync(path.join(DATA, 'downloads.json'), 'utf8')) } catch { return null } })()
-  const doc = { version, site: SITE, styles: {}, all: null }
+  const doc = { version, site: SITE, pngSizes: PNG_SIZES, styles: {}, all: null }
   // a partial standalone run keeps the other styles' entries (their zips are still on disk; a removed style's go)
-  if (prevJson && prevJson.styles) for (const [k, v] of Object.entries(prevJson.styles)) if (fs.existsSync(path.join(OUT, `with-icons-${k}.zip`)) && fs.existsSync(path.join(ROOT, 'forge', 'styles', `${k}.mjs`))) doc.styles[k] = { ...v, size: v.size || mb(v.bytes || fs.statSync(path.join(OUT, `with-icons-${k}.zip`)).size) }
+  if (prevJson && prevJson.styles) for (const [k, v] of Object.entries(prevJson.styles)) if (fs.existsSync(path.join(OUT, `with-icons-${k}.zip`)) && fs.existsSync(path.join(ROOT, 'forge', 'styles', `${k}.mjs`))) doc.styles[k] = { ...v, size: v.size || mb(v.bytes || fs.statSync(path.join(OUT, `with-icons-${k}.zip`)).size), png: pngKept(v.png) }
   const report = []
   const allEntries = []
   let wrote = 0
@@ -171,8 +186,12 @@ export function build(ctx, { allZip = true } = {}) {
     files.push([`${dir}/index.html`, html], [`${dir}/LICENSE.txt`, license], [`${dir}/README.txt`, readme])
     const { buf, wrote: w } = writeZip(path.join(OUT, `${dir}.zip`), files, `with icons ${st.name} ${version} https://withicons.com`)
     if (w) wrote++
-    doc.styles[st.name] = { title: st.title || st.name, file: `downloads/${dir}.zip`, bytes: buf.length, size: mb(buf.length), icons: svgs.length, sha: sha(buf).slice(0, 12) }
-    report.push(`${st.name}: ${svgs.length} icons, ${mb(buf.length)} (viewer ${mb(Buffer.byteLength(html))} raw)`)
+    // the whole style as PNG, one zip per size (skipped without resvg / with --no-png: the earlier zips stay listed)
+    const pngs = pngOn ? pngZips({ st, version, svgs, license }) : pngKept(prevJson && prevJson.styles && prevJson.styles[st.name] && prevJson.styles[st.name].png)
+    for (const p of pngs) if (p.wrote) wrote++
+    doc.styles[st.name] = { title: st.title || st.name, file: `downloads/${dir}.zip`, bytes: buf.length, size: mb(buf.length), icons: svgs.length, sha: sha(buf).slice(0, 12),
+      png: pngs.map(({ px, file, bytes, size }) => ({ px, file, bytes, size })) }
+    report.push(`${st.name}: ${svgs.length} icons, ${mb(buf.length)} (viewer ${mb(Buffer.byteLength(html))} raw)${pngs.length ? ', PNG ' + pngs.map(p => p.px + ' px ' + p.size).join(' / ') : ''}`)
     if (allZip) {
       for (const [n, svg] of svgs) allEntries.push([`with-icons-all/svg/${st.name}/${n}.svg`, svg + '\n'])
     }
@@ -196,14 +215,58 @@ export function build(ctx, { allZip = true } = {}) {
   } else if (prevJson && prevJson.all && fs.existsSync(path.join(OUT, 'with-icons-all.zip'))) doc.all = prevJson.all
 
   // stale zips of styles that no longer exist
-  const keep = new Set([...Object.values(doc.styles).map(s => path.basename(s.file)), 'with-icons-all.zip'])
+  const keep = new Set([...Object.values(doc.styles).flatMap(s => [s.file, ...(s.png || []).map(p => p.file)]).map(f => path.basename(f)), 'with-icons-all.zip'])
   for (const f of fs.readdirSync(OUT)) if (f.endsWith('.zip') && !keep.has(f)) fs.unlinkSync(path.join(OUT, f))
 
   const json = JSON.stringify(doc, null, 1) + '\n'
   const js = `window.WITH_DOWNLOADS=${JSON.stringify(doc)};\n`
   for (const [f, t] of [[path.join(DATA, 'downloads.json'), json], [path.join(DATA, 'downloads.js'), js]]) if (!fs.existsSync(f) || fs.readFileSync(f, 'utf8') !== t) fs.writeFileSync(f, t)
-  const total = Object.values(doc.styles).reduce((a, s) => a + s.bytes, 0) + (doc.all ? doc.all.bytes : 0)
-  return `site downloads: ${Object.keys(doc.styles).length} style zips${doc.all ? ' + all' : ''}, ${mb(total)} total, ${wrote} rewritten (${Date.now() - t0} ms)\n  ` + report.join('\n  ')
+  const pngTotal = Object.values(doc.styles).reduce((a, s) => a + (s.png || []).reduce((b, p) => b + p.bytes, 0), 0)
+  const total = Object.values(doc.styles).reduce((a, s) => a + s.bytes, 0) + (doc.all ? doc.all.bytes : 0) + pngTotal
+  return `site downloads: ${Object.keys(doc.styles).length} style zips${doc.all ? ' + all' : ''}${pngTotal ? ` + PNG zips (${PNG_SIZES.join('/')} px, ${mb(pngTotal)})` : ''}${pngOn ? '' : ' (PNG zips not rebuilt: no @resvg/resvg-js or --no-png)'}, ${mb(total)} total, ${wrote} rewritten (${Date.now() - t0} ms)\n  ` + report.join('\n  ')
+}
+
+// ------------------------------------------------------------------ PNG zips
+/** The style's PNG zips, one per PNG_SIZES entry; returns [{ px, file, bytes, size, wrote }]. Their content key (every SVG,
+ *  the resvg version, PNG_INK, PNG_REV) is part of the zip comment, so an unchanged style is not rasterized again. */
+function pngZips({ st, version, svgs, license }) {
+  const h = crypto.createHash('sha256').update(`png${PNG_REV} ${RESVG.ver} ${PNG_INK}`)
+  for (const [n, svg] of svgs) h.update(n).update('\0').update(svg).update('\0')
+  const key = h.digest('hex').slice(0, 24)
+  const out = []
+  for (const px of PNG_SIZES) {
+    const dir = `with-icons-${st.name}-png-${px}`, file = path.join(PNG_DIR, `${dir}.zip`)
+    const comment = `with icons ${st.name} png ${px} ${version} ${SITE} ${key}`
+    let buf = null, wrote = false
+    if (fs.existsSync(file)) { const old = fs.readFileSync(file); if (old.length > 22 && old.subarray(old.length - Buffer.byteLength(comment)).toString('utf8') === comment) buf = old }
+    if (!buf) {
+      const entries = svgs.map(([n, svg]) => [`${dir}/${n}.png`,
+        Buffer.from(new RESVG.Resvg(svg.replace(/currentColor/g, PNG_INK), { fitTo: { mode: 'width', value: px }, font: { loadSystemFonts: false } }).render().asPng())])
+      entries.push([`${dir}/LICENSE.txt`, license], [`${dir}/README.txt`, readmePng({ st, version, count: svgs.length, px })])
+      buf = zipFiles(entries, comment, { store: /\.png$/ })
+      fs.writeFileSync(file, buf); wrote = true
+    }
+    out.push({ px, file: `downloads/${dir}.zip`, bytes: buf.length, size: mb(buf.length), wrote })
+  }
+  return out
+}
+function readmePng({ st, version, count, px }) {
+  return `with icons: ${st.title || st.name} as PNG, ${px} x ${px} px (${count} icons, version ${version})
+${'='.repeat(48)}
+
+${st.description || ''}
+
+What is inside
+--------------
+  <name>.png    one PNG per icon, ${px} x ${px} pixels, transparent background
+  LICENSE.txt   MIT licence: free for personal and commercial use
+
+Parts drawn in a single colour are painted ${PNG_INK} (near-black). Need another
+colour or size? Pick it on any icon page, or take the SVG zip, which scales to
+any size and takes any colour: ${SITE}/styles/${st.name}.html
+
+with icons, powered by Evergrow.
+`
 }
 
 // ------------------------------------------------------------------ README.txt
@@ -559,6 +622,6 @@ async function standalone() {
     if (line) { const lp = await renderAll(['search', 'download', 'copy', 'check', 'close', 'sun', 'moon', 'image', 'folder-open'].filter(n => names.includes(n)), [line], {}); for (const i of icons) { const nodes = lp.renders[i.name] && lp.renders[i.name].line; if (nodes) i.render.line = { nodes, inner: nodesToMarkup(nodes), svg: toSvg(line, nodes) } } }
     // (the line renders added for UI glyphs are not a style of this run: ctx.styles decides what gets zipped)
   }
-  console.log(build(ctx, { allZip: !only.length && !process.argv.includes('--no-all') }))
+  console.log(build(ctx, { allZip: !only.length && !process.argv.includes('--no-all'), png: !process.argv.includes('--no-png') }))
 }
 if (import.meta.url === pathToFileURL(process.argv[1] || '').href) await standalone()

@@ -1,0 +1,66 @@
+{
+  "name": "logs",
+  "category": "development",
+  "description": "A console window with timestamped log lines, for log files, event logs and console output.",
+  "aliases": [
+    "log-file",
+    "logging",
+    "log-lines",
+    "event-log",
+    "console-output",
+    "syslog",
+    "log-viewer",
+    "log-stream"
+  ],
+  "tags": [
+    "logs",
+    "developer",
+    "monitoring",
+    "events",
+    "text",
+    "devops"
+  ],
+  "paths": [
+    {
+      "d": "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 8 H7 M5.5 12 H7 M5.5 16 H7",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 8 H18.5 M10.5 12 H15.5 M10.5 16 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z"
+  ],
+  "cutouts": [
+    "M5.5 8 H7",
+    "M5.5 12 H7",
+    "M5.5 16 H7",
+    "M10.5 8 H18.5",
+    "M10.5 12 H15.5",
+    "M10.5 16 H17"
+  ],
+  "synonyms": [
+    "log",
+    "server logs",
+    "application logs",
+    "timestamps",
+    "events",
+    "journal",
+    "trace",
+    "tail",
+    "stdout",
+    "debug output",
+    "monitoring",
+    "observability",
+    "records",
+    "output",
+    "audit trail",
+    "error log"
+  ]
+}

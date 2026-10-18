@@ -5,6 +5,7 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
+import { BUDGET } from '../../../scripts/package-budget.mjs'
 
 const dist = path.resolve(import.meta.dirname, '..', 'dist')
 const skip = !fs.existsSync(path.join(dist, 'index.js')) && 'build first: node forge/build.mjs core palettes --no-site'
@@ -82,7 +83,7 @@ test('every style lives in exactly one package; companions export their styles a
   assert.ok(meta.slice(0, 20).every(st => st.package === '@withicons/core'), 'the 20 older styles stay in core')
 })
 
-test('every package a CDN serves stays under jsDelivr limits with a margin (150 MB per package, 20 MB per file)', { skip }, () => {
+test('every package a CDN serves stays under the size budget (145 MB per package, 5 MB under the jsDelivr limit of 150 MB; 20 MB per file)', { skip }, () => {
   const pk = path.resolve(dist, '..', '..')
   const walk = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)])
   const names = ['core', 'core-plus', 'classes', 'classes-plus', 'web', 'web-plus', 'static', 'static-plus', 'soft3d', 'holiday']
@@ -90,8 +91,8 @@ test('every package a CDN serves stays under jsDelivr limits with a margin (150 
     const d = path.join(pk, n, 'dist')
     if (!fs.existsSync(d)) continue
     const files = walk(d)
-    assert.deepEqual(files.filter(f => fs.statSync(f).size > 20 * 1024 * 1024), [], n)
+    assert.deepEqual(files.filter(f => fs.statSync(f).size > BUDGET.file), [], n)
     const mb = files.reduce((a, f) => a + fs.statSync(f).size, 0) / 1048576
-    assert.ok(mb < 120, `${n}/dist is ${mb.toFixed(1)} MB (keep 30 MB of headroom under 150)`)
+    assert.ok(mb * 1048576 < BUDGET.total, `${n}/dist is ${mb.toFixed(1)} MB (budget ${BUDGET.total / 1048576} MB, jsDelivr limit 150)`)
   }
 })

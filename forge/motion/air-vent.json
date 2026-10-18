@@ -1,0 +1,50 @@
+{
+  "name": "air-vent",
+  "intent": "cool air streams down from the unit in soft waves",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      7.5
+    ],
+    "amount": 0.3,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      3.5
+    ],
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "drop",
+      "amount": 0.6,
+      "duration": 1.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "pulse"
+    }
+  ],
+  "swap": [
+    {
+      "to": "snowflake",
+      "effect": "fade"
+    },
+    {
+      "to": "fan",
+      "effect": "slide-down"
+    },
+    {
+      "to": "heater",
+      "effect": "fade"
+    }
+  ]
+}

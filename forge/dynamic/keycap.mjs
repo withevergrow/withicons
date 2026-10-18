@@ -1,16 +1,14 @@
 // Live icon: a keyboard key with one character, a short key name, or a modifier symbol.
 // One character sits large on a square key. Names like ESC, TAB or ALT switch to a wide key with smaller type.
 // Symbols (command, shift, option, enter, arrows...) are drawn, not typed, so they stay crisp at 16px.
-import { fitFirst, fitLadder, textInk, wallCut, openCutouts } from './_parts-labels.mjs'
+import { fitFirst, fitLadder, textInk, openCutouts } from './_parts-labels.mjs'
 import { rr } from './_layout.mjs'
 import { live } from './_font.mjs'
 
 // square key: the face above a front lip line
 const SQ = { body: rr(3, 3, 21, 21, 3), lip: 'M3 17 H21', box: { x0: 6.25, y0: 6.25, x1: 17.75, y1: 13.75 } }
 // wide key for names: same lip height, full width
-const WIDE = { body: rr(2, 4.5, 22, 19.5, 2.5), lip: 'M2 16 H22', box: { x0: 5.25, y0: 7.75, x1: 18.75, y1: 12.75 } }
-// four-letter names (CTRL, HOME, PGUP): the wide key opens its upper side walls and the name runs edge to edge
-const OPEN = { top: 'M4.5 4.5 H19.5', tray: 'M2 16 V17 A2.5 2.5 0 0 0 4.5 19.5 H19.5 A2.5 2.5 0 0 0 22 17 V16', box: { x0: 3.5, y0: 7.75, x1: 20.5, y1: 12.75 } }
+const WIDE = { body: rr(2, 4.5, 22, 19.5, 2.5), lip: 'M2 16 H22', box: { x0: 4.9, y0: 7.4, x1: 19.1, y1: 13.1 } }
 
 // symbols drawn in the square key's face (centre 12, 10); every path open or closed as noted
 const SYMBOLS = {
@@ -48,18 +46,14 @@ export default live({
       }
     }
     const s = label || 'A'
-    // one or two characters on the square key, large; names on the wide key; four letters open it up
-    const sq = s.length <= 2 && fitFirst([s], SQ.box, { minCap: 5, maxCap: 7 })
-    const wide = !sq && fitFirst([s], WIDE.box, { minCap: 4.5, maxCap: 5 })
-    const open = !sq && !wide && fitLadder(s, OPEN.box, { minCap: 4, maxCap: 5 })
-    const fit = sq || wide || open
+    // one or two characters on the square key, large; names on the wide key, condensed when long (never opened)
+    const sq = s.length <= 2 && fitFirst([s], SQ.box, { minCap: 5, maxCap: 6.5 })
+    const wide = !sq && (fitFirst([s], WIDE.box, { minCap: 4, maxCap: 5 }) || fitLadder(s, WIDE.box, { minCap: 3.75, maxCap: 5 }))
+    const fit = sq || wide
     const ink = textInk(fit && fit.t, 'A')
     const K = sq ? SQ : WIDE
-    const frame = open && (wallCut(2, open.t.box) || wallCut(22, open.t.box))
-      ? [{ d: OPEN.top, plate: 'K' }, { d: OPEN.tray, plate: 'K' }, { d: WIDE.lip, plate: 'K' }]
-      : [{ d: K.body, plate: 'K' }, { d: K.lip, plate: 'K' }]
     return {
-      paths: [...frame, ...ink.paths],
+      paths: [{ d: K.body, plate: 'K' }, { d: K.lip, plate: 'K' }, ...ink.paths],
       fills: [K.body],
       cutouts: [K.lip, ...ink.cutouts],
     }

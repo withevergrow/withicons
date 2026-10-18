@@ -60,7 +60,7 @@ hand and everything after that is published by GitHub Actions without tokens.
    - Workflow filename: **`release.yml`** · Environment: **`npm`**
    - Then, in the same settings page under **Publishing access**, choose *"Require two-factor authentication and disallow tokens"*.
    Repeat for each package (`@withicons/core`, `core-plus`, `soft3d`, `holiday`, `react`, `vue`, `svelte`, `angular`, `solid`, `web`, `web-plus`, `classes`,
-   `classes-plus`, `static`, `static-plus`, `search`, `mcp`, `motion`, `dynamic`, and `withicons`).
+   `classes-plus`, `static`, `static-plus`, `search`, `mcp`, `motion`, `dynamic`, `loaders`, and `withicons`).
 
    **New companion packages (0.4): `@withicons/core-plus`, `@withicons/classes-plus`, `@withicons/web-plus`, `@withicons/static-plus`, `@withicons/soft3d`, `@withicons/holiday`.** They hold the newest
    styles' files because jsDelivr serves at most 150 MB per package. Trusted Publishing can only be added to a package that
@@ -81,11 +81,24 @@ hand and everything after that is published by GitHub Actions without tokens.
    4. Check: `npm view @withicons/core-plus version`, `npm view @withicons/soft3d version`, `npm view @withicons/holiday version`, `npm view @withicons/web-plus version`, `npm view @withicons/static-plus version`
       and `npm view @withicons/classes-plus version`
       show the release; the next tag publishes all of them from CI (`scripts/publish.mjs` fails if one is missing).
+   **New package (0.6): `@withicons/loaders`.** Same rule: Trusted Publishing can only be added once it exists, and the
+   CI release stops at the first package npm refuses (earlier packages are then already out and the CLI is not). Before
+   the first tag that contains it:
+   1. Build and check: `node forge/build.mjs && node scripts/publish.mjs --dry-run`.
+   2. Publish it by hand once, as `withicons` with 2FA:
+      ```bash
+      npm login && npm whoami                                   # -> withicons
+      node scripts/publish.mjs --only @withicons/loaders
+      ```
+   3. npmjs.com, `@withicons/loaders`, Settings, **Trusted Publisher**: GitHub Actions, user **`withevergrow`**, repository
+      **`withicons`**, workflow **`release.yml`**, environment **`npm`**; then **Publishing access**: *"Require two-factor
+      authentication and disallow tokens"*.
+   4. Check: `npm view @withicons/loaders version` shows the release; then push the tag.
 7. **[you] Remove tokens.** If you created an `NPM_TOKEN` (granular, publish-only, 7-day expiry) as a stop-gap,
    delete the GitHub secret and revoke the token at npmjs.com, then Access Tokens. `release.yml` works without it.
 8. **Co-maintainers** (later): they create their own npm accounts with 2FA, then
    ```bash
-   for p in core core-plus soft3d holiday react vue svelte angular solid web web-plus classes classes-plus static static-plus search mcp motion dynamic; do npm owner add <user> @withicons/$p; done
+   for p in core core-plus soft3d holiday react vue svelte angular solid web web-plus classes classes-plus static static-plus search mcp motion dynamic loaders; do npm owner add <user> @withicons/$p; done
    npm owner add <user> withicons
    ```
 9. **Verify** after the first CI release: `npm audit signatures` in a project that installs a package, and the

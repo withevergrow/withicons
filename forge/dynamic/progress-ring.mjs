@@ -1,8 +1,9 @@
 // Live icon: a progress ring. The arc grows clockwise from 12 o'clock; the rest of the track is dotted;
 // the percentage sits in the middle (a check mark at 100).
 import { asCutouts, live } from './_font.mjs'
-import { arc, circle, polar } from './_layout.mjs'
-import { fitInCircle, checkMark, dot } from './_parts-progress.mjs'
+import { arc, circle } from './_layout.mjs'
+import { fitInCircle, checkMark } from './_parts-progress.mjs'
+import { trackDashes } from './_parts-power.mjs'
 
 const CX = 12, CY = 12, R = 9.5   // circle keyline, like check-circle / circle
 const DISC = 7                    // inner mass for the filled styles: 1.5u clear of the ring's ink
@@ -35,14 +36,8 @@ export default live({
     // the progress arc: a full closed ring at 100, a short tick at very small values so 1–2% still shows
     if (v >= 100) paths.push({ d: circle(CX, CY, R), plate: 'K' })
     else if (v > 0) paths.push({ d: arc(CX, CY, R, 0, Math.max(end, 6)), plate: 'K' })
-    // the remaining track: dots every 30°, starting a clear step past the arc's round cap
-    if (track && v < 100) {
-      const first = v > 0 ? Math.max(end, 6) + 22 : 0
-      for (let a = Math.ceil(first / 30) * 30; a < 360 - (v > 0 ? 14 : 0); a += 30) {
-        const [x, y] = polar(CX, CY, R, a)
-        paths.push({ d: dot(x, y), plate: 'A' })
-      }
-    }
+    // the remaining track: ghost dashes along the rest of the ring, clear of the arc's round caps
+    if (track && v < 100) for (const d of trackDashes(CX, CY, R, v > 0 ? Math.max(end, 6) : 0, 0)) paths.push({ d, plate: 'A' })
     // centre: the number (shrinks to fit a 5.25u circle), or a check mark when complete
     let inner = []
     if (number) {
@@ -52,7 +47,7 @@ export default live({
     paths.push(...inner.map(d => ({ d, plate: 'A' })))
     cutouts.push(...asCutouts(inner))
     // 0% with no track and no number: fall back to the dotted track so the icon is never empty
-    if (!paths.length) for (let a = 0; a < 360; a += 30) { const [x, y] = polar(CX, CY, R, a); paths.push({ d: dot(x, y), plate: 'A' }) }
+    if (!paths.length) for (const d of trackDashes(CX, CY, R, 0, 0)) paths.push({ d, plate: 'A' })
     // the inner disc carries the number in the filled styles; without a number the ring stands alone
     return { paths, fills: inner.length ? [circle(CX, CY, DISC)] : [], cutouts }
   },

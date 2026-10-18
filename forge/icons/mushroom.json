@@ -1,0 +1,71 @@
+{
+  "name": "mushroom",
+  "category": "nature",
+  "description": "A spotted toadstool mushroom with a domed cap and a sturdy stem, for fungi, foraging, cooking and fairy tales.",
+  "aliases": [
+    "fungus",
+    "toadstool",
+    "fungi",
+    "shroom",
+    "mushrooms",
+    "fly-agaric",
+    "champignon",
+    "porcini"
+  ],
+  "tags": [
+    "nature",
+    "food",
+    "forest",
+    "plant"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 12 A9.5 8.5 0 0 1 21.5 12 C21.5 13 20.75 13.5 19.5 13.5 H4.5 C3.25 13.5 2.5 13 2.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 13.5 V19.5 A2 2 0 0 0 10.5 21.5 H13.5 A2 2 0 0 0 15.5 19.5 V13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 7.25 A1.5 1.5 0 1 1 10.5 7.25 A1.5 1.5 0 1 1 13.5 7.25 Z M8.5 9.75 A1 1 0 1 1 6.5 9.75 A1 1 0 1 1 8.5 9.75 Z M17.5 9.75 A1 1 0 1 1 15.5 9.75 A1 1 0 1 1 17.5 9.75 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.5 12 A9.5 8.5 0 0 1 21.5 12 C21.5 13 20.75 13.5 19.5 13.5 H4.5 C3.25 13.5 2.5 13 2.5 12 Z",
+    "M8.5 13.5 V19.5 A2 2 0 0 0 10.5 21.5 H13.5 A2 2 0 0 0 15.5 19.5 V13.5 Z"
+  ],
+  "cutouts": [
+    "M13.5 7.25 A1.5 1.5 0 1 1 10.5 7.25 A1.5 1.5 0 1 1 13.5 7.25 Z",
+    "M8.5 9.75 A1 1 0 1 1 6.5 9.75 A1 1 0 1 1 8.5 9.75 Z",
+    "M17.5 9.75 A1 1 0 1 1 15.5 9.75 A1 1 0 1 1 17.5 9.75 Z",
+    "M7.5 13.5 H16.5"
+  ],
+  "synonyms": [
+    "shrooms",
+    "forage",
+    "foraging",
+    "forest floor",
+    "woodland",
+    "autumn",
+    "fall",
+    "fairy",
+    "fairy tale",
+    "magic",
+    "gnome",
+    "cottagecore",
+    "video game",
+    "power up",
+    "vegetable",
+    "cooking",
+    "ingredient",
+    "risotto",
+    "truffle",
+    "mycology",
+    "spore",
+    "button mushroom",
+    "mushrom",
+    "mashroom"
+  ]
+}

@@ -5,8 +5,11 @@
 import { fitText, live } from './_font.mjs'
 import { star, halfStar, dot } from './_parts-progress.mjs'
 
-const R = 2.6, RATIO = 0.42
-const SLOTS = [[4.75, 8.25], [12, 8.25], [19.25, 8.25], [8.25, 15.5], [15.75, 15.5]]
+// stars as big as two rows allow, drawn as INSET centrelines (R 2.25): every style grows a mark by about its stroke
+// (outline styles fill the "solid:" mark grown by half the line; filled styles inflate it), so each star prints at
+// ~3.1u and the 7u pitch keeps ~1u of white between neighbours in every style; chubby (ratio 0.5) so they stay stars
+const R = 2.25, RATIO = 0.5
+const SLOTS = [[5, 7.75], [12, 7.75], [19, 7.75], [8.5, 16.5], [15.5, 16.5]]
 
 export default live({
   name: 'rating-stars', title: 'Star rating', category: 'status',
@@ -43,8 +46,12 @@ export default live({
     }
     const paths = [], fills = []
     SLOTS.forEach(([x, y], i) => {
-      if (r >= i + 1) { const d = star(x, y, R, RATIO); paths.push({ d, plate: 'K' }); fills.push(d) }
-      else if (r >= i + 0.5) { const d = halfStar(x, y, R, RATIO); paths.push({ d, plate: 'K' }); fills.push(d) }
+      const d = star(x, y, R, RATIO)
+      // at R 2.6 any star outline fills in with ink, so stars are SILHOUETTES in every style (outline styles fill
+      // a "solid:" mark): an earned star whole, a half star its left half with a straight cut, a star not earned
+      // a round dot or a small star
+      if (r >= i + 1) { paths.push({ d, plate: 'K', id: `solid:star-${i}` }); fills.push(d) }
+      else if (r >= i + 0.5) { const h = halfStar(x, y, R, RATIO); paths.push({ d: h, plate: 'K', id: `solid:half-${i}` }); fills.push(h) }
       else if (empty === 'small stars') paths.push({ d: star(x, y + 0.25, 1.25, 0.45), plate: 'A' })
       else if (empty === 'dots' || r === 0) paths.push({ d: dot(x, y + 0.25), plate: 'A' })
     })

@@ -1,0 +1,59 @@
+{
+  "name": "arrow-down-to-line",
+  "category": "arrows",
+  "description": "An arrow pointing down onto a flat line, for download, save to device and jump to the bottom.",
+  "aliases": [
+    "download-arrow",
+    "arrow-to-bottom",
+    "to-bottom",
+    "jump-to-bottom",
+    "arrow-down-bar",
+    "move-to-bottom",
+    "save-down",
+    "arrow-down-line"
+  ],
+  "tags": [
+    "arrow",
+    "down",
+    "download",
+    "bottom",
+    "save",
+    "end"
+  ],
+  "paths": [
+    {
+      "d": "M12 3.5 V15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 9 L12 15.5 L18.5 9",
+      "plate": "A"
+    },
+    {
+      "d": "M5 20.5 H19",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "download",
+    "save",
+    "save to device",
+    "install",
+    "get",
+    "fetch",
+    "import",
+    "bottom",
+    "go to bottom",
+    "scroll to end",
+    "end of page",
+    "last",
+    "pull down",
+    "land",
+    "drop",
+    "descend",
+    "sink",
+    "down to floor"
+  ]
+}

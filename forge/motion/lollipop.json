@@ -1,0 +1,48 @@
+{
+  "name": "lollipop",
+  "intent": "twirls back and forth on its stick like a treat in a hand",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      3,
+      21
+    ],
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      3,
+      21
+    ],
+    "amount": 0.7
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "twinkle",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        3,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "lollipop@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "candy",
+      "effect": "fade"
+    }
+  ]
+}

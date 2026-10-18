@@ -1,0 +1,80 @@
+{
+  "name": "scan-text",
+  "category": "ai",
+  "description": "Lines of text inside scan corners, for OCR, text recognition and scanning documents.",
+  "aliases": [
+    "ocr",
+    "text-recognition",
+    "scan-document",
+    "read-text",
+    "text-scan",
+    "extract-text",
+    "recognize-text",
+    "document-scan",
+    "scan-to-text"
+  ],
+  "tags": [
+    "scan",
+    "text",
+    "ocr",
+    "document",
+    "recognition",
+    "ai"
+  ],
+  "paths": [
+    {
+      "d": "M3 7.5 V5 A2 2 0 0 1 5 3 H7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 3 H19 A2 2 0 0 1 21 5 V7.5",
+      "plate": "K"
+    },
+    {
+      "d": "M21 16.5 V19 A2 2 0 0 1 19 21 H16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 21 H5 A2 2 0 0 1 3 19 V16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M8 8 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 12 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 16 H12.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 5.5 H17 A1.5 1.5 0 0 1 18.5 7 V17 A1.5 1.5 0 0 1 17 18.5 H7 A1.5 1.5 0 0 1 5.5 17 V7 A1.5 1.5 0 0 1 7 5.5 Z"
+  ],
+  "cutouts": [
+    "M8 8 H16",
+    "M8 12 H16",
+    "M8 16 H12.5"
+  ],
+  "synonyms": [
+    "optical character recognition",
+    "scan text",
+    "copy text from image",
+    "text detection",
+    "capture text",
+    "read",
+    "document",
+    "receipt scan",
+    "live text",
+    "camera text",
+    "digitize",
+    "transcribe",
+    "extract",
+    "translate image",
+    "select text",
+    "paper to digital"
+  ]
+}

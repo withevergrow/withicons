@@ -1,0 +1,39 @@
+{
+  "name": "swords",
+  "intent": "the crossed blades rock on guard, then clash in triumph",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      18
+    ],
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tada",
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "shake",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "twinkle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield",
+      "effect": "flip"
+    },
+    {
+      "to": "trophy",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "cricket",
+  "category": "sports",
+  "description": "A full-length cricket bat with a broad blade, sloped shoulders and a taped grip beside a cricket ball, for cricket matches, scores, teams and bat-and-ball sports.",
+  "aliases": [
+    "cricket-bat",
+    "cricket-ball",
+    "bat-and-ball",
+    "ipl",
+    "wicket",
+    "test-match",
+    "cricket-match",
+    "innings"
+  ],
+  "tags": [
+    "sports",
+    "cricket",
+    "bat",
+    "ball",
+    "game"
+  ],
+  "paths": [
+    {
+      "d": "M15.03 6.83 L12.92 6.65 L3.35 14.77 A1.25 1.25 0 0 0 3.21 16.53 L4.82 18.44 A1.25 1.25 0 0 0 6.58 18.58 L16.15 10.47 L16.33 8.35 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.68 7.59 L17.78 5.81 M17.29 5.24 L19.43 3.43 A0.75 0.75 0 0 1 20.4 4.57 L18.26 6.38 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M20 17.25 A2.25 2.25 0 1 1 15.5 17.25 A2.25 2.25 0 1 1 20 17.25 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M15.03 6.83 L12.92 6.65 L3.35 14.77 A1.25 1.25 0 0 0 3.21 16.53 L4.82 18.44 A1.25 1.25 0 0 0 6.58 18.58 L16.15 10.47 L16.33 8.35 Z",
+    "M17.29 5.24 L19.43 3.43 A0.75 0.75 0 0 1 20.4 4.57 L18.26 6.38 Z",
+    "M20 17.25 A2.25 2.25 0 1 1 15.5 17.25 A2.25 2.25 0 1 1 20 17.25 Z"
+  ],
+  "cutouts": [
+    "M13.78 9.21 L5.16 16.52",
+    "M16.75 15.75 A2.25 2.25 0 0 0 19.25 18.25"
+  ],
+  "synonyms": [
+    "cricket match",
+    "cricket game",
+    "test cricket",
+    "one day",
+    "odi",
+    "t20",
+    "world cup",
+    "batsman",
+    "batter",
+    "bowler",
+    "bowling",
+    "six",
+    "boundary",
+    "century",
+    "run",
+    "runs",
+    "score",
+    "live score",
+    "pitch",
+    "stumps",
+    "india",
+    "england",
+    "australia",
+    "willow",
+    "cricket bat",
+    "crikcet",
+    "criket"
+  ]
+}

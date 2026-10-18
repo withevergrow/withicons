@@ -1,0 +1,65 @@
+{
+  "name": "sort-alpha",
+  "category": "layout",
+  "description": "The letters A and Z beside a down arrow, for sorting a list alphabetically.",
+  "aliases": [
+    "sort-alphabetical",
+    "sort-a-z",
+    "a-to-z",
+    "sort-az",
+    "az-sort",
+    "sort-by-name",
+    "alphabetize",
+    "abc-sort",
+    "sort-alphabetically"
+  ],
+  "tags": [
+    "sort",
+    "alphabetical",
+    "letters",
+    "order",
+    "name",
+    "ascending"
+  ],
+  "paths": [
+    {
+      "d": "M13 10 L17 3 L21 10",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 7.5 H19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 14 H20.5 L13.5 21 H20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M6 4 V20",
+      "plate": "A"
+    },
+    {
+      "d": "M2 16 L6 20 L10 16",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "alphabetical order",
+    "a z",
+    "a-z",
+    "abc",
+    "sort by name",
+    "order by name",
+    "name order",
+    "ascending",
+    "arrange",
+    "letters",
+    "dictionary order",
+    "alphabetic",
+    "lexicographic",
+    "sort names",
+    "a to z order"
+  ]
+}

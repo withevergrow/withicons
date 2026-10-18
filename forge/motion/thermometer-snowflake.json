@@ -1,0 +1,50 @@
+{
+  "name": "thermometer-snowflake",
+  "intent": "the snowflake slowly turns while the reading stays low",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      16.5,
+      17
+    ],
+    "amount": 0.3,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.35,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "origin": [
+        7,
+        10
+      ],
+      "duration": 6
+    }
+  },
+  "alt": [
+    {
+      "preset": "shake"
+    },
+    {
+      "preset": "fill"
+    }
+  ],
+  "swap": [
+    {
+      "to": "thermometer-sun",
+      "effect": "fade"
+    },
+    {
+      "to": "thermometer",
+      "effect": "slide-down"
+    },
+    {
+      "to": "snowflake",
+      "effect": "blur"
+    }
+  ]
+}

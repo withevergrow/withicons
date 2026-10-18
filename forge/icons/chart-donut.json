@@ -1,0 +1,59 @@
+{
+  "name": "chart-donut",
+  "category": "charts",
+  "description": "A ring-shaped chart with a hole in the middle and one slice pulled out, for share of total, completion and budget breakdowns.",
+  "aliases": [
+    "donut-graph",
+    "doughnut-graph",
+    "ring-chart",
+    "chart-doughnut",
+    "chart-ring",
+    "donut-diagram",
+    "ring-graph"
+  ],
+  "tags": [
+    "chart",
+    "donut",
+    "share",
+    "composition",
+    "report",
+    "ring"
+  ],
+  "paths": [
+    {
+      "d": "M18.94 16.05 A8.5 8.5 0 1 1 7.95 5.06 L9.39 8.8 A4.5 4.5 0 1 0 15.2 14.61 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.01 2.78 A8.5 8.5 0 0 1 21.22 11.99 L17.23 11.64 A4.5 4.5 0 0 0 12.36 6.77 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M18.94 16.05 A8.5 8.5 0 1 1 7.95 5.06 L9.39 8.8 A4.5 4.5 0 1 0 15.2 14.61 Z",
+    "M12.01 2.78 A8.5 8.5 0 0 1 21.22 11.99 L17.23 11.64 A4.5 4.5 0 0 0 12.36 6.77 Z"
+  ],
+  "cutouts": [
+    "M14.5 13 A3.5 3.5 0 1 1 7.5 13 A3.5 3.5 0 1 1 14.5 13 Z"
+  ],
+  "synonyms": [
+    "donut chart",
+    "doughnut chart",
+    "ring",
+    "share of total",
+    "percentage",
+    "proportion",
+    "segments",
+    "breakdown",
+    "distribution",
+    "allocation",
+    "budget",
+    "spending",
+    "portfolio",
+    "market share",
+    "completion",
+    "progress ring",
+    "statistics",
+    "report"
+  ]
+}

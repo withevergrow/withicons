@@ -1,10 +1,50 @@
 {
   "name": "turtle",
-  "intent": "plods slowly side to side, bobbing its head as it goes",
-  "loop": {"preset": "rock", "origin": [10,19], "amount": 0.3, "duration": 4.2},
-  "hover": {"preset": "nudge", "dir": 0, "amount": 0.7, "duration": 1},
-  "parts": {"A": {"preset": "sway", "origin": [10,12.5], "amount": 0.7, "delay": 0.15}},
+  "intent": "plods slowly side to side on its stubby legs",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      10,
+      18
+    ],
+    "amount": 0.3,
+    "duration": 4.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.7,
+    "duration": 1
+  },
   "deco": "float",
-  "alt": [ {"preset": "float", "amount": 0.6, "duration": 4}, {"preset": "pass", "dir": 0, "duration": 4}, {"preset": "nod", "origin": [10,19], "amount": 0.6} ],
-  "swap": [ {"to": "rabbit", "effect": "morph"}, {"to": "turtle@solid", "effect": "scale"} ]
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.6,
+      "duration": 4
+    },
+    {
+      "preset": "pass",
+      "dir": 0,
+      "duration": 4
+    },
+    {
+      "preset": "nod",
+      "origin": [
+        10,
+        18
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "rabbit",
+      "effect": "morph"
+    },
+    {
+      "to": "turtle@solid",
+      "effect": "scale"
+    }
+  ]
 }

@@ -1,11 +1,11 @@
 {
   "name": "spider-web",
-  "intent": "trembles softly in the corner breeze",
+  "intent": "trembles softly in the breeze, hanging from its top thread",
   "loop": {
     "preset": "sway",
     "origin": [
-      3,
-      3
+      12,
+      2
     ],
     "amount": 0.5,
     "duration": 3.2
@@ -13,8 +13,8 @@
   "hover": {
     "preset": "jelly",
     "origin": [
-      3,
-      3
+      12,
+      12
     ],
     "amount": 0.8
   },
@@ -25,15 +25,15 @@
     {
       "preset": "breathe",
       "origin": [
-        3,
-        3
+        12,
+        12
       ]
     },
     {
       "preset": "wiggle",
       "origin": [
-        3,
-        3
+        12,
+        2
       ],
       "amount": 0.5
     }

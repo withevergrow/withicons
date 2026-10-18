@@ -1,0 +1,48 @@
+{
+  "name": "chart-spline",
+  "intent": "draws its smooth curve like new data flowing in",
+  "loop": {
+    "preset": "draw",
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.6,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        3.5,
+        20.5
+      ],
+      "amount": 0.25
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "draw",
+      "duration": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "chart-line",
+      "effect": "fade"
+    },
+    {
+      "to": "chart-area",
+      "effect": "fade"
+    },
+    {
+      "to": "trending-up",
+      "effect": "morph"
+    }
+  ]
+}

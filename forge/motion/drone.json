@@ -1,0 +1,46 @@
+{
+  "name": "drone",
+  "intent": "hovers in the air with its rotors buzzing",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "lift",
+    "amount": 0.8,
+    "duration": 1.2
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.25,
+      "duration": 0.6,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "drift"
+    },
+    {
+      "preset": "rock",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "plane",
+      "effect": "slide-up"
+    },
+    {
+      "to": "camera",
+      "effect": "fade"
+    },
+    {
+      "to": "helicopter",
+      "effect": "morph"
+    }
+  ]
+}

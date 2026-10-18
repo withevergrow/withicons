@@ -36,7 +36,7 @@ const DOCK_TILE = (dy = 0) => `M14.64 ${f(2 + dy)}c2.58 0 3.86 0 4.85.5a4.6 4.6 
 const BENTO_TILE = 'M9.4 2H14.6C20.08 2 22 3.92 22 9.4V14.6C22 20.08 20.08 22 14.6 22H9.4C3.92 22 2 20.08 2 14.6V9.4C2 3.92 3.92 2 9.4 2Z'
 
 export function dragon(style) {
-  const v = r => r === 'ink' && style === 'brutal' ? 'var(--with-brutal-ink, currentColor)' : `var(--with-${style}-${r}, ${DEF[r]})`
+  const v = r => r === 'ink' && style === 'brutal' ? 'var(--with-brutal-ink, #16130F)' : `var(--with-${style}-${r}, ${DEF[r]})`
   const C = Object.fromEntries(Object.keys(DEF).map(k => [k, v(k)]))
   const id = n => `wg-${style}-${N}-${n}`, url = n => `url(#${id(n)})`
   const stop = (o, c, a = 1) => ['stop', { offset: o, 'stop-color': c, 'stop-opacity': a }]

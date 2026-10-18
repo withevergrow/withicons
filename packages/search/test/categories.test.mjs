@@ -15,7 +15,7 @@ const CASES = [
   ['pizza slice', 'pizza', 1], ['cheeseburger', 'burger', 1], ['restaurant', 'utensils', 1], ['fork and knife', 'utensils', 1],
   ['birthday cake', 'cake', 1], ['cookies', 'cookie', 1], ['doughnut', 'donut', 1], ['soft drink', 'cup-soda', 1],
   ['ice cream', 'ice-cream', 1], ['icecream', 'ice-cream', 1], ['wine glass', 'wine', 1], ['ramen', 'soup', 1],
-  ['piza', 'pizza', 1], ['burgr', 'burger', 1], ['aple', 'apple', 1], ['dinner', 'utensils', 3], ['candy', 'cake', 5],
+  ['piza', 'pizza', 1], ['burgr', 'burger', 1], ['aple', 'apple', 1], ['dinner', 'utensils', 3], ['candy', 'candy', 1], // 2026-10: a dedicated candy icon replaced the cake stand-in
   // health
   ['doctor', 'stethoscope', 1], ['first aid kit', 'briefcase-medical', 1], ['vaccine', 'syringe', 1], ['dentist', 'tooth', 1],
   ['band aid', 'bandage', 1], ['wheelchair', 'accessibility', 1], ['ambulence', 'ambulance', 1], ['stethoscpe', 'stethoscope', 1],
@@ -80,7 +80,9 @@ describe('style words', () => {
   test('"glass of water" is about water, not the glass style', () => {
     assert.equal(engine.parse('glass of water').style, null)
     // many festival icons are glasses of something (thandai glass, wine glass): water still answers, never the style
-    assert.ok(engine.search('glass of water', { limit: 10 }).some(r => r.name === 'droplet' || r.name === 'droplets'))
+    // (2026-10: the glass-water icon is now the literal answer and leads; before it, droplet / droplets stood in)
+    assert.equal(engine.search('glass of water', { limit: 1 })[0].name, 'glass-water')
+    assert.ok(engine.search('glass of water', { limit: 10 }).some(r => ['glass-water', 'droplet', 'droplets'].includes(r.name)))
   })
   test('a style word plus a UI word keeps the UI word as content ("glossy button")', () => {
     const p = engine.parse('glossy button')

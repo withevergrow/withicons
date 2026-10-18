@@ -1,0 +1,45 @@
+{
+  "name": "spy",
+  "intent": "tips its hat and peers about, quietly incognito",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      18
+    ],
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "tilt",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.3,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "swivel"
+    }
+  ],
+  "swap": [
+    {
+      "to": "eye-off",
+      "effect": "morph"
+    },
+    {
+      "to": "user",
+      "effect": "fade"
+    }
+  ]
+}

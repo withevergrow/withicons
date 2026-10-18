@@ -1,15 +1,20 @@
-// PIXEL core — the 16x16 grid, a pixel-perfect line rasteriser, area coverage
-// and a path writer that traces merged cell regions into compact h/v outlines.
+// PIXEL core — the pixel grid (24x24 for static icons, 16x16 for live icons), a pixel-perfect line rasteriser,
+// area coverage and a path writer that traces merged cell regions into compact h/v outlines.
 //
-// Grid: 16 cells of 1.5u (cell i spans x in [1.5i, 1.5i + 1.5]), so the pixels land
-// on whole device pixels whenever the icon is a multiple of 16 device px (16, 32, 48 px
-// at 1x; 24 px at 2x). Other sizes snap cells to uneven 1/2 px under crispEdges.
-// The drawing is shifted by -0.75u (half a cell) before it is rasterised: the
-// skeleton's 0.5u-snapped coordinates then never sit on a cell edge (no ties), its centre (12,12) lands on the centre of cell 7, and
-// mirror-symmetric icons stay pixel-symmetric about that cell.
+// 24 grid: cell i spans x in [i + 0.5, i + 1.5] (SHIFT 0.5u), drawn at [i, i + 1]; the icon centre (12,12) lands
+// on the centre of cell 11, so mirror-symmetric icons stay pixel-symmetric about that cell. 16 grid: cells of 1.5u,
+// SHIFT 0.75u (half a cell), centre cell 7; the skeleton's 0.5u-snapped coordinates never sit on a cell edge there.
 import { fmt } from '../kernel/geom.mjs'
 
-export const N = 16, P = 1.5, SHIFT = 0.75
+// The grid is switchable: static icons are drawn on 24x24 (1u per pixel, SHIFT 0.5 puts the icon centre (12,12)
+// on the centre of cell 11), live icons (forge/DYNAMIC.md, whose sprites, bitmap font and composers are drawn
+// for it) keep the 16x16 grid. build() picks the grid per icon; everything reads N / P / SHIFT live.
+export let N = 16, P = 1.5, SHIFT = 0.75, CENTRE = 7
+export function useGrid(n) {
+  if (n === 24) { N = 24; P = 1; SHIFT = 0.5; CENTRE = 11 }
+  else { N = 16; P = 1.5; SHIFT = 0.75; CENTRE = 7 }
+  return N
+}
 export const grid = () => new Uint8Array(N * N)
 export const ix = (i, j) => j * N + i
 export const inb = (i, j) => i >= 0 && j >= 0 && i < N && j < N
@@ -21,7 +26,15 @@ export const and = (a, b) => { const o = grid(); for (let k = 0; k < o.length; k
 export const copy = g => Uint8Array.from(g)
 
 // user units -> cell space (shift = per-axis extra offset in user units, from tuning)
-export const toCell = (p, sh = [0, 0]) => [(p[0] - SHIFT + sh[0]) / P, (p[1] - SHIFT + sh[1]) / P]
+// On the 24 grid the skeleton's 0.5u snap lands on cell edges; every point is pushed a hair away from the centre
+// cell so a tie always falls outward (an outline sits just outside the body it holds, like the stroke it stands
+// for, and mirror-symmetric icons stay pixel-symmetric about cell 11).
+export const toCell = (p, sh = [0, 0]) => {
+  const u = (p[0] - SHIFT + sh[0]) / P, v = (p[1] - SHIFT + sh[1]) / P
+  if (N !== 24) return [u, v]
+  const c = CENTRE + 0.5, e = -2e-5
+  return [u + (c - u) * e, v + (c - v) * e]
+}
 
 // the cell containing a cell-space coordinate; on an exact edge, follow the stroke
 export const cellOf = (c, bias = 0) => {
@@ -213,7 +226,8 @@ export function thin(c, closed) {
         c[pk][2] |= c[kk][2]; c.splice(kk, 1); k = Math.max(-1, k - 2); changed = true; continue
       }
       // a pinned corner that juts out of a straight step (its neighbours touch side by side) is a spur
-      if (Math.abs(p[0] - q[0]) + Math.abs(p[1] - q[1]) === 1) { c.splice(k, 1); k--; changed = true; continue }
+      // (on the 24 grid a designed sharp corner keeps its two-cell tip: a peak or a spike would erode pass by pass)
+      if (Math.abs(p[0] - q[0]) + Math.abs(p[1] - q[1]) === 1 && !(m[2] && N === 24)) { c.splice(k, 1); k--; changed = true; continue }
       if (m[2]) continue
       if (Math.abs(p[0] - q[0]) === 1 && Math.abs(p[1] - q[1]) === 1) { c.splice(k, 1); k--; changed = true }
     }
@@ -362,6 +376,18 @@ export function fitCircle(pts) {
 export function ringCells(cx, cy, D) {
   if (D <= 1) return [[Math.floor(cx), Math.floor(cy)]]
   if (D === 3 && arguments[3]) return [[0, -1], [-1, 0], [0, 0], [1, 0], [0, 1]].map(([a, b]) => [Math.floor(cx + a), Math.floor(cy + b)])
+  if (N === 24 && D >= 4) {
+    // 24 grid: the edge of a pixel disc (cell centres within D/2 of the centre, a hair inside), so step lengths
+    // vary round the ring (3 / 2 / 1 ...) the way a hand-drawn pixel circle does, never a 45deg octagon
+    const r2 = (D / 2) ** 2 - 0.5, h = Math.ceil(D / 2) + 1, m = new Map()
+    const inD = (i, j) => (i + 0.5 - cx) ** 2 + (j + 0.5 - cy) ** 2 <= r2
+    for (let j = Math.floor(cy) - h; j <= Math.floor(cy) + h; j++) for (let i = Math.floor(cx) - h; i <= Math.floor(cx) + h; i++) {
+      if (!inD(i, j)) continue
+      if (inD(i + 1, j) && inD(i - 1, j) && inD(i, j + 1) && inD(i, j - 1)) continue
+      m.set(i * 64 + j, [i, j, Math.atan2(j + 0.5 - cy, i + 0.5 - cx)])
+    }
+    return [...m.values()].sort((p, q) => p[2] - q[2]).map(([i, j]) => [i, j])
+  }
   const half = D % 2 ? 0 : 0.5
   if (D === 2) return [[-.5, -.5], [.5, -.5], [.5, .5], [-.5, .5]].map(([a, b]) => [Math.floor(cx + a), Math.floor(cy + b)])
   const R = D / 2 - 0.5
@@ -407,7 +433,9 @@ export function snapCircle(c, sh = [0, 0], maxD = 99, minD = 1) {
 // it widens toward the centre from both ends, so an X keeps both mirrors.
 export function boldDiag(c, closed = false, ref = null, segs = null) {
   const L = c.length
-  if (L < 3) return c
+  // on the 24 grid a one-pixel staircase is dense enough to read as a line: diagonals stay one pixel, the classic
+  // pixel-art line, the same weight as the outlines
+  if (L < 3 || N === 24) return c
   // only runs that follow a straight 45deg stretch of the drawing: curves and
   // rounded corners keep their canonical one-pixel steps
   const onSeg = (x, y) => !segs || segs.some(([a, b]) => {
@@ -418,7 +446,7 @@ export function boldDiag(c, closed = false, ref = null, segs = null) {
   const dir = k => { const a = c[k], b = c[(k + 1) % L], dx = b[0] - a[0], dy = b[1] - a[1]; return Math.abs(dx) === 1 && Math.abs(dy) === 1 ? [dx, dy] : null }
   let mx = 0, my = 0
   for (const p of c) { mx += p[0]; my += p[1] }
-  const refs = [ref || [mx / L, my / L], [7, 7]]
+  const refs = [ref || [mx / L, my / L], [CENTRE, CENTRE]]
   const d2 = (x, y, r) => (x - r[0]) ** 2 + (y - r[1]) ** 2
   const steps = closed ? L : L - 1
   const ds = []

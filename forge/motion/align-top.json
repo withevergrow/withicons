@@ -1,0 +1,43 @@
+{
+  "name": "align-top",
+  "intent": "its bars snap up to the top line",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.6,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.6,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "align-bottom",
+      "effect": "flip"
+    },
+    {
+      "to": "align-left",
+      "effect": "rotate"
+    }
+  ]
+}

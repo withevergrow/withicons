@@ -1,22 +1,35 @@
 {
   "name": "jalebi",
-  "intent": "the syrupy coil spins round and round",
+  "intent": "the syrupy coil spins fresh and glossy",
   "loop": {
-    "preset": "spin",
-    "duration": 4
+    "preset": "breathe",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.5,
+    "duration": 2.6
   },
   "hover": {
-    "preset": "spin-once"
+    "preset": "jelly",
+    "origin": [
+      12,
+      12
+    ]
   },
   "alt": [
     {
-      "preset": "breathe"
-    },
-    {
-      "preset": "jelly"
-    },
-    {
       "preset": "draw"
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        18
+      ]
+    },
+    {
+      "preset": "pop"
     }
   ]
 }

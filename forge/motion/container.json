@@ -1,0 +1,44 @@
+{
+  "name": "container",
+  "intent": "sways gently like a container hanging from a crane",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      3
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "bounce",
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.4,
+      "duration": 3.2,
+      "delay": 0.2
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "package",
+      "effect": "morph"
+    },
+    {
+      "to": "boxes",
+      "effect": "fade"
+    }
+  ]
+}

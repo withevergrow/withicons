@@ -1,0 +1,62 @@
+{
+  "name": "projector",
+  "intent": "the lens glows and the projector hums like a film is playing",
+  "loop": {
+    "preset": "glow",
+    "origin": [
+      15,
+      10.5
+    ],
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "zoom",
+    "origin": [
+      15,
+      10.5
+    ],
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        15,
+        10.5
+      ],
+      "amount": 0.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "origin": [
+        15,
+        10.5
+      ],
+      "amount": 0.3
+    },
+    {
+      "preset": "flicker",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "presentation",
+      "effect": "fade"
+    },
+    {
+      "to": "film",
+      "effect": "scale"
+    },
+    {
+      "to": "monitor",
+      "effect": "slide-up"
+    }
+  ]
+}

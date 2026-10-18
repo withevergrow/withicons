@@ -1,0 +1,69 @@
+{
+  "name": "chart-bar-decreasing",
+  "category": "charts",
+  "description": "A horizontal bar chart on an L-shaped axis whose bars step shorter from top to bottom, for decline, descending sorts and top-N rankings.",
+  "aliases": [
+    "bar-chart-decreasing",
+    "chart-decreasing",
+    "descending-chart",
+    "bars-decreasing",
+    "sort-descending-chart",
+    "decline-bars",
+    "decreasing-bars",
+    "top-n-chart"
+  ],
+  "tags": [
+    "chart",
+    "bars",
+    "decrease",
+    "descending",
+    "ranking",
+    "sort"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3 V19 A2 2 0 0 0 5.5 21 H21",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 4 H20 A0.75 0.75 0 0 1 20 5.5 H8.5 A0.75 0.75 0 0 1 8.5 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 9.5 H15.5 A0.75 0.75 0 0 1 15.5 11 H8.5 A0.75 0.75 0 0 1 8.5 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 15 H11 A0.75 0.75 0 0 1 11 16.5 H8.5 A0.75 0.75 0 0 1 8.5 15 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M8.5 4 H20 A0.75 0.75 0 0 1 20 5.5 H8.5 A0.75 0.75 0 0 1 8.5 4 Z",
+    "M8.5 9.5 H15.5 A0.75 0.75 0 0 1 15.5 11 H8.5 A0.75 0.75 0 0 1 8.5 9.5 Z",
+    "M8.5 15 H11 A0.75 0.75 0 0 1 11 16.5 H8.5 A0.75 0.75 0 0 1 8.5 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "decrease",
+    "decline",
+    "falling",
+    "fall",
+    "down",
+    "drop",
+    "descending",
+    "sort descending",
+    "high to low",
+    "largest first",
+    "top 10",
+    "top n",
+    "leaderboard",
+    "ranking",
+    "less",
+    "reduce",
+    "loss",
+    "trend",
+    "bar chart",
+    "stats"
+  ]
+}

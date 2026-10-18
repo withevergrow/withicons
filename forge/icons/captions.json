@@ -1,7 +1,7 @@
 {
   "name": "captions",
   "category": "media",
-  "description": "A box with lines of text for closed captions and subtitles.",
+  "description": "A screen box with a CC mark for closed captions and subtitles.",
   "aliases": [
     "subtitles",
     "closed-captions",
@@ -28,19 +28,11 @@
       "plate": "K"
     },
     {
-      "d": "M6 12 H8",
+      "d": "M10 8.5 H8.5 A2.5 2.5 0 0 0 6 11 V13 A2.5 2.5 0 0 0 8.5 15.5 H10",
       "plate": "A"
     },
     {
-      "d": "M12 12 H18",
-      "plate": "A"
-    },
-    {
-      "d": "M6 16 H13",
-      "plate": "A"
-    },
-    {
-      "d": "M17 16 H18",
+      "d": "M18 8.5 H16.5 A2.5 2.5 0 0 0 14 11 V13 A2.5 2.5 0 0 0 16.5 15.5 H18",
       "plate": "A"
     }
   ],
@@ -48,10 +40,8 @@
     "M4 4 H20 A2 2 0 0 1 22 6 V18 A2 2 0 0 1 20 20 H4 A2 2 0 0 1 2 18 V6 A2 2 0 0 1 4 4 Z"
   ],
   "cutouts": [
-    "M6 11 H8 A1 1 0 0 1 9 12 V12 A1 1 0 0 1 8 13 H6 A1 1 0 0 1 5 12 V12 A1 1 0 0 1 6 11 Z",
-    "M12 11 H18 A1 1 0 0 1 19 12 V12 A1 1 0 0 1 18 13 H12 A1 1 0 0 1 11 12 V12 A1 1 0 0 1 12 11 Z",
-    "M6 15 H13 A1 1 0 0 1 14 16 V16 A1 1 0 0 1 13 17 H6 A1 1 0 0 1 5 16 V16 A1 1 0 0 1 6 15 Z",
-    "M17 15 H18 A1 1 0 0 1 19 16 V16 A1 1 0 0 1 18 17 H17 A1 1 0 0 1 16 16 V16 A1 1 0 0 1 17 15 Z"
+    "M10 8.5 H8.5 A2.5 2.5 0 0 0 6 11 V13 A2.5 2.5 0 0 0 8.5 15.5 H10",
+    "M18 8.5 H16.5 A2.5 2.5 0 0 0 14 11 V13 A2.5 2.5 0 0 0 16.5 15.5 H18"
   ],
   "synonyms": [
     "closed captioning",

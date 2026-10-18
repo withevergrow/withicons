@@ -1,0 +1,65 @@
+{
+  "name": "thermometer-sun",
+  "category": "weather",
+  "description": "A thermometer beside a blazing sun, for hot weather, high temperatures and heat warnings.",
+  "aliases": [
+    "hot-weather",
+    "temperature-high",
+    "heatwave",
+    "heat-index",
+    "warm-weather",
+    "hot-temperature",
+    "temperature-hot"
+  ],
+  "tags": [
+    "weather",
+    "temperature",
+    "hot",
+    "summer",
+    "heat"
+  ],
+  "paths": [
+    {
+      "d": "M14 13.88 V5.5 A2.5 2.5 0 0 1 19 5.5 V13.88 A4 4 0 1 1 14 13.88 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10.99 11.17 A3 3 0 1 1 10.99 7.83",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 4.5 L8.5 2.75 M4.96 5.96 L3.73 4.73 M3.5 9.5 L1.75 9.5 M4.96 13.04 L3.73 14.27 M8.5 14.5 L8.5 16.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 13.88 V5.5 A2.5 2.5 0 0 1 19 5.5 V13.88 A4 4 0 1 1 14 13.88 Z",
+    "M11.4 10.28L11.19 10.83L10.88 11.33L10.48 11.76L10 12.1L9.46 12.34L8.89 12.47L8.3 12.49L7.72 12.4L7.17 12.19L6.67 11.88L6.24 11.48L5.9 11L5.66 10.46L5.53 9.89L5.51 9.3L5.6 8.72L5.81 8.17L6.12 7.67L6.52 7.24L7 6.9L7.54 6.66L8.11 6.53L8.7 6.51L9.28 6.6L9.83 6.81L10.33 7.12L10.76 7.52L11.1 8L11.27 8.35L11.4 8.73Z"
+  ],
+  "cutouts": [
+    "M15.25 7 V5.75 A1.25 1.25 0 0 1 17.75 5.75 V7 A1.25 1.25 0 0 1 15.25 7 Z"
+  ],
+  "synonyms": [
+    "hot",
+    "heat",
+    "scorching",
+    "sweltering",
+    "warm",
+    "summer",
+    "sunny",
+    "heat warning",
+    "heat advisory",
+    "high temperature",
+    "temperature rising",
+    "sunstroke",
+    "heatstroke",
+    "dehydration",
+    "uv",
+    "climate",
+    "global warming",
+    "heat wave",
+    "daytime high",
+    "feels like",
+    "tropical"
+  ]
+}

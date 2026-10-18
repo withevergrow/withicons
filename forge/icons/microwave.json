@@ -1,0 +1,69 @@
+{
+  "name": "microwave",
+  "category": "home",
+  "description": "A microwave oven with a door window and control buttons, for heating food, kitchens, reheating and cooking time.",
+  "aliases": [
+    "microwave-oven",
+    "micro",
+    "reheat",
+    "heat-up",
+    "nuke-it",
+    "heat-food"
+  ],
+  "tags": [
+    "kitchen",
+    "appliance",
+    "cooking",
+    "food",
+    "home",
+    "heat"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V17.5 A2 2 0 0 1 19.5 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7 7.5 H12.5 A1.5 1.5 0 0 1 14 9 V15 A1.5 1.5 0 0 1 12.5 16.5 H7 A1.5 1.5 0 0 1 5.5 15 V9 A1.5 1.5 0 0 1 7 7.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M17 8.5 H18.5 M17 12 H18.5 M17 15.5 H18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 4.5 H19.5 A2 2 0 0 1 21.5 6.5 V17.5 A2 2 0 0 1 19.5 19.5 H4.5 A2 2 0 0 1 2.5 17.5 V6.5 A2 2 0 0 1 4.5 4.5 Z"
+  ],
+  "cutouts": [
+    "M7 7.5 H12.5 A1.5 1.5 0 0 1 14 9 V15 A1.5 1.5 0 0 1 12.5 16.5 H7 A1.5 1.5 0 0 1 5.5 15 V9 A1.5 1.5 0 0 1 7 7.5 Z",
+    "M17 8.5 H18.5",
+    "M17 12 H18.5",
+    "M17 15.5 H18.5"
+  ],
+  "synonyms": [
+    "heat up",
+    "warm up",
+    "defrost",
+    "leftovers",
+    "ready meal",
+    "instant",
+    "popcorn",
+    "cook",
+    "cooking",
+    "kitchen",
+    "appliance",
+    "oven",
+    "toaster oven",
+    "convection",
+    "timer",
+    "pantry",
+    "office kitchen",
+    "break room",
+    "food",
+    "lunch",
+    "microwave oven",
+    "micowave",
+    "mircowave"
+  ]
+}

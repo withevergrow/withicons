@@ -1,0 +1,66 @@
+{
+  "name": "sandwich",
+  "category": "food",
+  "description": "A triangle sandwich half with a wavy lettuce filling along its cut side, for lunch, delis, cafes and snacks.",
+  "aliases": [
+    "sandwiches",
+    "hoagie",
+    "panini",
+    "club-sandwich",
+    "deli",
+    "toastie",
+    "sarnie",
+    "butty"
+  ],
+  "tags": [
+    "food",
+    "lunch",
+    "bread",
+    "cafe",
+    "snack"
+  ],
+  "paths": [
+    {
+      "d": "M3 12 L14.75 4 A1.75 1.75 0 0 1 17.4 4.6 L21 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 V18 A2 2 0 0 0 5 20 H19 A2 2 0 0 0 21 18 V12",
+      "plate": "K"
+    },
+    {
+      "d": "M3 16 C4.5 14.75 6 14.75 7.5 16 C9 17.25 10.5 17.25 12 16 C13.5 14.75 15 14.75 16.5 16 C18 17.25 19.5 17.25 21 16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 12 L14.75 4 A1.75 1.75 0 0 1 17.4 4.6 L21 12 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z"
+  ],
+  "cutouts": [
+    "M2 12 H22",
+    "M3 16 C4.5 14.75 6 14.75 7.5 16 C9 17.25 10.5 17.25 12 16 C13.5 14.75 15 14.75 16.5 16 C18 17.25 19.5 17.25 21 16"
+  ],
+  "synonyms": [
+    "sub",
+    "sub sandwich",
+    "submarine",
+    "blt",
+    "grilled cheese",
+    "toasted sandwich",
+    "deli counter",
+    "lunchbox",
+    "packed lunch",
+    "lunch break",
+    "picnic",
+    "cafe",
+    "snack",
+    "bread",
+    "lettuce",
+    "ham and cheese",
+    "quick bite",
+    "takeaway",
+    "sandwhich",
+    "sandwitch",
+    "sanwich"
+  ]
+}

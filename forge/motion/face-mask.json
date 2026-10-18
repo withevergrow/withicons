@@ -1,0 +1,30 @@
+{
+  "name": "face-mask",
+  "intent": "breathes in and out softly through the mask",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "alt": [
+    {
+      "preset": "jelly"
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "virus",
+      "effect": "fade"
+    },
+    {
+      "to": "shield-check",
+      "effect": "morph"
+    }
+  ]
+}

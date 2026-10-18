@@ -1,0 +1,79 @@
+{
+  "name": "brain-cog",
+  "category": "ai",
+  "description": "A brain with a cog at its corner, for machine learning, model training, AI settings and tuning.",
+  "aliases": [
+    "ml-settings",
+    "model-training",
+    "ai-settings",
+    "brain-gear",
+    "train-model",
+    "ai-config",
+    "brain-settings",
+    "neural-settings",
+    "mind-gear"
+  ],
+  "tags": [
+    "ai",
+    "brain",
+    "cog",
+    "learning",
+    "settings",
+    "training"
+  ],
+  "paths": [
+    {
+      "d": "M21.61 9.51 A3.5 3.5 0 0 0 17.5 6 A3 3 0 0 0 12 5.5 A3 3 0 0 0 6.5 6 A3.5 3.5 0 0 0 3.5 12 A3.5 3.5 0 0 0 6 18 A3.25 3.25 0 0 0 10.41 20.38",
+      "plate": "K"
+    },
+    {
+      "d": "M12 5.5 V10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 6 C7.5 6.75 8 7.75 8 9 M3.5 12 C5.5 12 7 12.75 7.5 14.5 M17.5 6 C16.5 6.75 16 7.5 16 8.5",
+      "plate": "A"
+    },
+    {
+      "d": "M18.8 19.48 L18.4 21.01 L16.6 21.01 L16.2 19.48 A3.25 3.25 0 0 1 15.57 19.12 L14.04 19.53 L13.14 17.98 L14.27 16.86 A3.25 3.25 0 0 1 14.27 16.14 L13.14 15.02 L14.04 13.47 L15.57 13.88 A3.25 3.25 0 0 1 16.2 13.52 L16.6 11.99 L18.4 11.99 L18.8 13.52 A3.25 3.25 0 0 1 19.43 13.88 L20.96 13.47 L21.86 15.02 L20.73 16.14 A3.25 3.25 0 0 1 20.73 16.86 L21.86 17.98 L20.96 19.53 L19.43 19.12 A3.25 3.25 0 0 1 18.8 19.48 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M17.5 16.25 V16.75",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M21.49 10.33 A3.5 3.5 0 0 0 17.5 6 A3 3 0 0 0 12 5.5 A3 3 0 0 0 6.5 6 A3.5 3.5 0 0 0 3.5 12 A3.5 3.5 0 0 0 6 18 A3.25 3.25 0 0 0 11.07 20.02 A7.35 7.35 0 0 1 21.49 10.33 Z",
+    "M18.8 19.48 L18.4 21.01 L16.6 21.01 L16.2 19.48 A3.25 3.25 0 0 1 15.57 19.12 L14.04 19.53 L13.14 17.98 L14.27 16.86 A3.25 3.25 0 0 1 14.27 16.14 L13.14 15.02 L14.04 13.47 L15.57 13.88 A3.25 3.25 0 0 1 16.2 13.52 L16.6 11.99 L18.4 11.99 L18.8 13.52 A3.25 3.25 0 0 1 19.43 13.88 L20.96 13.47 L21.86 15.02 L20.73 16.14 A3.25 3.25 0 0 1 20.73 16.86 L21.86 17.98 L20.96 19.53 L19.43 19.12 A3.25 3.25 0 0 1 18.8 19.48 Z"
+  ],
+  "cutouts": [
+    "M12 4 V10.5",
+    "M6.5 6 C7.5 6.75 8 7.75 8 9",
+    "M3.5 12 C5.5 12 7 12.75 7.5 14.5",
+    "M17.5 6 C16.5 6.75 16 7.5 16 8.5",
+    "M19.25 16.5 A1.75 1.75 0 1 1 15.75 16.5 A1.75 1.75 0 1 1 19.25 16.5 Z"
+  ],
+  "synonyms": [
+    "machine learning",
+    "artificial intelligence",
+    "training",
+    "fine tune",
+    "fine-tuning",
+    "model settings",
+    "reasoning",
+    "cognition",
+    "automation",
+    "processing",
+    "intelligence",
+    "deep learning",
+    "neural network",
+    "algorithm",
+    "smart settings",
+    "configure ai",
+    "think",
+    "mind",
+    "logic",
+    "computing"
+  ]
+}

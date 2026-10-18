@@ -1,0 +1,65 @@
+{
+  "name": "save-all",
+  "category": "files",
+  "description": "Two stacked floppy disks for saving every open file or all pending changes at once.",
+  "aliases": [
+    "save-everything",
+    "save-multiple",
+    "floppy-disks",
+    "save-all-files",
+    "multi-save",
+    "disks",
+    "save-changes-all"
+  ],
+  "tags": [
+    "save",
+    "floppy",
+    "all",
+    "multiple",
+    "disk",
+    "storage"
+  ],
+  "paths": [
+    {
+      "d": "M9 7 H17 L21 11 V19 A2 2 0 0 1 19 21 H9 A2 2 0 0 1 7 19 V9 A2 2 0 0 1 9 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 7 V9.5 A1 1 0 0 0 11 10.5 H15 A1 1 0 0 0 16 9.5 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 21 V17 A1 1 0 0 1 11.5 16 H16.5 A1 1 0 0 1 17.5 17 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M3 16.5 V5 A2 2 0 0 1 5 3 H14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M9 7 H17 L21 11 V19 A2 2 0 0 1 19 21 H9 A2 2 0 0 1 7 19 V9 A2 2 0 0 1 9 7 Z",
+    "M3 16.5 V5 A2 2 0 0 1 5 3 H14 V5 H5 V16.5 Z"
+  ],
+  "cutouts": [
+    "M11 8.25 H15 V9 A0.75 0.75 0 0 1 14.25 9.75 H11.75 A0.75 0.75 0 0 1 11 9 Z",
+    "M12.25 17.25 H15.75 A0.75 0.75 0 0 1 16.5 18 V19.75 H11.5 V18 A0.75 0.75 0 0 1 12.25 17.25 Z"
+  ],
+  "synonyms": [
+    "save all",
+    "save everything",
+    "save all changes",
+    "save all files",
+    "save all tabs",
+    "ctrl shift s",
+    "cmd option s",
+    "floppy disks",
+    "diskettes",
+    "commit all",
+    "persist all",
+    "batch save",
+    "backup all",
+    "keep all",
+    "storage"
+  ]
+}

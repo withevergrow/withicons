@@ -1,0 +1,49 @@
+{
+  "name": "file-input",
+  "intent": "the arrow keeps sliding into the page, bringing data in",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.7,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5,
+      "duration": 1.6,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0,
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-check",
+      "effect": "slide-right"
+    },
+    {
+      "to": "file-output",
+      "effect": "flip"
+    },
+    {
+      "to": "file-down",
+      "effect": "fade"
+    }
+  ]
+}

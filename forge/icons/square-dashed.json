@@ -1,0 +1,56 @@
+{
+  "name": "square-dashed",
+  "category": "layout",
+  "description": "A rounded square drawn with a dashed outline, for selection boxes, placeholders and drop zones.",
+  "aliases": [
+    "dashed-square",
+    "selection-box",
+    "box-select",
+    "rectangle-select",
+    "select-area",
+    "marquee-select",
+    "dotted-square",
+    "selection-rectangle",
+    "dashed-box"
+  ],
+  "tags": [
+    "selection",
+    "dashed",
+    "square",
+    "placeholder",
+    "marquee",
+    "area"
+  ],
+  "paths": [
+    {
+      "d": "M3 7 V5 A2 2 0 0 1 5 3 H7 M17 3 H19 A2 2 0 0 1 21 5 V7 M21 17 V19 A2 2 0 0 1 19 21 H17 M7 21 H5 A2 2 0 0 1 3 19 V17",
+      "plate": "K"
+    },
+    {
+      "d": "M11 3 H13 M21 11 V13 M13 21 H11 M3 13 V11",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "selection",
+    "select",
+    "marquee tool",
+    "crop area",
+    "placeholder",
+    "empty slot",
+    "drop zone",
+    "frame",
+    "bounding box",
+    "rectangle selection",
+    "dashed border",
+    "dotted border",
+    "draft",
+    "outline",
+    "region",
+    "area",
+    "hidden",
+    "ghost"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "name": "house-wifi",
+  "category": "home",
+  "description": "A house with wifi waves inside, for smart homes, home networks, connected devices and home automation.",
+  "aliases": [
+    "smart-home",
+    "home-wifi",
+    "home-network",
+    "connected-home",
+    "home-automation",
+    "house-signal",
+    "home-internet",
+    "iot-home"
+  ],
+  "tags": [
+    "home",
+    "wifi",
+    "network",
+    "smart-home",
+    "iot",
+    "connectivity"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 11 L12 3.5 L21.5 11",
+      "plate": "K"
+    },
+    {
+      "d": "M5 9.5 V19 A2 2 0 0 0 7 21 H17 A2 2 0 0 0 19 19 V9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12.875 18.25 A0.875 0.875 0 1 1 11.125 18.25 A0.875 0.875 0 1 1 12.875 18.25 Z M9.51 16.16 A3.25 3.25 0 0 1 14.49 16.16 M7.02 14.07 A6.5 6.5 0 0 1 16.98 14.07",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 9.6 L12 4.1 L19 9.6 V19 A2 2 0 0 1 17 21 H7 A2 2 0 0 1 5 19 Z"
+  ],
+  "cutouts": [
+    "M12.875 18.25 A0.875 0.875 0 1 1 11.125 18.25 A0.875 0.875 0 1 1 12.875 18.25 Z",
+    "M9.51 16.16 A3.25 3.25 0 0 1 14.49 16.16",
+    "M7.02 14.07 A6.5 6.5 0 0 1 16.98 14.07"
+  ],
+  "synonyms": [
+    "smart house",
+    "home internet",
+    "broadband",
+    "home wifi",
+    "wireless",
+    "network",
+    "router",
+    "internet at home",
+    "internet included",
+    "wifi included",
+    "free wifi",
+    "connected devices",
+    "iot",
+    "internet of things",
+    "automation",
+    "home assistant",
+    "alexa",
+    "google home",
+    "homekit",
+    "remote home",
+    "work from home",
+    "wfh",
+    "airbnb",
+    "rental amenity",
+    "housewifi",
+    "home wi-fi"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "armchair",
+  "category": "home",
+  "description": "An upholstered armchair with a tall back, rounded arms and legs, for seating, living rooms, lounges and furniture.",
+  "aliases": [
+    "easy-chair",
+    "lounge-chair",
+    "recliner",
+    "club-chair",
+    "accent-chair",
+    "seat",
+    "arm-chair",
+    "wingback"
+  ],
+  "tags": [
+    "furniture",
+    "home",
+    "seat",
+    "interior",
+    "living-room",
+    "comfort"
+  ],
+  "paths": [
+    {
+      "d": "M7 12 V6 A2.5 2.5 0 0 1 9.5 3.5 H14.5 A2.5 2.5 0 0 1 17 6 V12",
+      "plate": "K"
+    },
+    {
+      "d": "M7 14 V12 A2 2 0 0 0 3 12 V16.5 A2 2 0 0 0 5 18.5 H19 A2 2 0 0 0 21 16.5 V12 A2 2 0 0 0 17 12 V14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 18.5 V20.5 M18.5 18.5 V20.5",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M7 14 V6 A2.5 2.5 0 0 1 9.5 3.5 H14.5 A2.5 2.5 0 0 1 17 6 V14 Z",
+    "M7 14 V12 A2 2 0 0 0 3 12 V16.5 A2 2 0 0 0 5 18.5 H19 A2 2 0 0 0 21 16.5 V12 A2 2 0 0 0 17 12 V14 Z"
+  ],
+  "cutouts": [
+    "M7 11 V14 H17 V11"
+  ],
+  "synonyms": [
+    "chair",
+    "seating",
+    "sit",
+    "sit down",
+    "lounge",
+    "living room",
+    "lobby",
+    "waiting room",
+    "reception",
+    "furniture",
+    "interior",
+    "interior design",
+    "decor",
+    "home",
+    "cozy",
+    "cosy",
+    "relax",
+    "comfort",
+    "reading nook",
+    "upholstery",
+    "furniture store",
+    "armchiar",
+    "arm chair"
+  ]
+}

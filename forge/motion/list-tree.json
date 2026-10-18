@@ -1,0 +1,46 @@
+{
+  "name": "list-tree",
+  "intent": "the branches reach out to their child rows",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.4,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5,
+      "delay": 0.06
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "list",
+      "effect": "fade"
+    },
+    {
+      "to": "git-branch",
+      "effect": "morph"
+    },
+    {
+      "to": "table-of-contents",
+      "effect": "fade"
+    }
+  ]
+}

@@ -19,6 +19,21 @@ export function findLoaders(query, limit = 5) {
     return [l, s]
   }).filter(([, s]) => s > 0).sort((a, b) => b[1] - a[1]).slice(0, limit).map(([l]) => l)
 }
+// a morph item is a library ICON name; "loader:<name>" puts a loader in the chain (0.6.0 semantics, as the runtime)
+const LOADER_ITEM = /^loader:\s*(.+)$/i
+function morphItems(items) {
+  return items.map(raw => {
+    const s = String(raw).trim(), m = LOADER_ITEM.exec(s)
+    if (!m) return s.replace(/^icon:\s*/i, '')
+    const l = byName(m[1])
+    if (!l) throw new Error(`no loader "${m[1].trim()}" (morph items are icon names; "loader:<name>" takes a loader name or alias)`)
+    return 'loader:' + l.name
+  })
+}
+// JSX string props: a plain "…" literal when nothing needs escaping, else a JS string expression
+const jsxStr = (k, v) => /^[^"{}<>&\\\n]*$/.test(String(v)) ? `${k}="${v}"` : `${k}={${JSON.stringify(String(v))}}`
+// a JS array literal with single-quoted strings (for a Vue template binding)
+const jsList = a => '[' + a.map(n => "'" + String(n).replace(/[\\']/g, c => '\\' + c) + "'").join(', ') + ']'
 const byName = n => { const k = String(n || '').toLowerCase().trim(); return LD.loaders.find(l => l.name === k) || LD.loaders.find(l => l.aliases.includes(k)) || null }
 
 export function getLoader(a) {
@@ -33,11 +48,15 @@ export function getLoader(a) {
     if (!l) { hits = findLoaders(a.query || a.name || 'spinner'); l = hits[0] || byName('spinner') || LD.loaders[0] }
   }
   const attrs = o => Object.entries(o).filter(([, v]) => v != null && v !== '').map(([k, v]) => ` ${k}="${esc(v)}"`).join('')
-  const tagAttrs = custom ? { morph: a.morph.join(','), effect: a.effect, variant: style !== 'line' ? style : null } : { name: l.name, variant: style !== 'line' ? style : null }
+  const items = custom ? morphItems(a.morph) : null
+  const tagAttrs = custom ? { morph: items.join(','), effect: a.effect, variant: style !== 'line' ? style : null } : { name: l.name, variant: style !== 'line' ? style : null }
   Object.assign(tagAttrs, { size: size !== 24 ? size : null, color: a.color, speed: a.speed && a.speed !== 1 ? a.speed : null, label: label !== 'Loading' ? label : null })
   const url = custom ? null : `${CDN}svg/${style}/${l.name}.svg`
-  const prop = (k, v) => typeof v === 'number' ? `${k}={${v}}` : `${k}="${v}"`
-  const comp = custom ? `<Morph items={${JSON.stringify(a.morph)}}${a.effect ? ` effect="${a.effect}"` : ''}` : `<Loader name="${l.name}"`
+  // React: JSX (numbers in braces, strings escaped); Vue: a template (bound numbers, HTML-escaped strings)
+  const vue = fmt === 'vue'
+  const prop = (k, v) => typeof v === 'number' ? (vue ? `:${k}="${v}"` : `${k}={${v}}`) : vue ? `${k}="${esc(v)}"` : jsxStr(k, v)
+  const itemsProp = custom && (vue ? `:items="${esc(jsList(items))}"` : `items={${JSON.stringify(items)}}`)
+  const comp = custom ? `<Morph ${itemsProp}${a.effect ? ` effect="${a.effect}"` : ''}` : `<Loader name="${l.name}"`
   const props = [style !== 'line' && prop('variant', style), size !== 24 && prop('size', size), a.color && prop('color', a.color), a.speed && a.speed !== 1 && prop('speed', a.speed), label !== 'Loading' && prop('label', label)].filter(Boolean).join(' ')
   let code
   if (fmt === 'url') code = url || `${CDN}cdn/loaders.js`
@@ -45,7 +64,7 @@ export function getLoader(a) {
   else if (fmt === 'react' || fmt === 'vue') code = `import { ${custom ? 'Morph' : 'Loader'} } from '@withicons/loaders/${fmt}'\n${comp}${props ? ' ' + props : ''} />`
   else code = `<script src="${CDN}cdn/loaders.js"></script>\n<with-loader${attrs(tagAttrs)}></with-loader>`
   return {
-    ...(l ? { name: l.name, title: l.title, group: l.group, says: l.intent || l.description, duration: l.duration, ...(l.morph ? { morph: l.morph } : {}) } : { morph: a.morph, effect: a.effect || 'bloom' }),
+    ...(l ? { name: l.name, title: l.title, group: l.group, says: l.intent || l.description, duration: l.duration, ...(l.morph ? { morph: l.morph } : {}) } : { morph: items, effect: a.effect || 'bloom', note: 'Morph items are library icon names; write "loader:<name>" to put a loader in the chain.' }),
     style, url, format: fmt === 'img' && !url ? 'html' : fmt, code,
     ...(a.color && fmt === 'img' ? { note: 'An <img> keeps the default colours: for a colour use format html (the tag) or react/vue.' } : {}),
     ...(hits.length > 1 ? { alternatives: hits.slice(1).map(h => h.name) } : {}),
@@ -60,12 +79,12 @@ export function registerLoaderTool(server, { json, safe, ro }) {
     title: 'Get loader',
     description: `Animated loading indicators from @withicons/loaders: ${names.length} loaders (everyday spinners and dots, creative ones like ai-sparkle, rocket, coffee, festival ones like diya, fireworks, ghost, plus icon morph sequences), each in all ${LD.styles.length} styles. ` +
       'One self-contained animated SVG per loader (CSS transform/opacity, no JavaScript, slows for reduced motion). Pass query (what is loading: "ai thinking", "upload", "payment", "diwali") or name; ' +
-      'morph: library icon names to chain into a custom sequence (["package", "truck", "home"]). Returns url and one line of code (img by default; html = the themeable <with-loader> tag; react; vue). ' +
+      'morph: library icon names to chain into a custom sequence (["package", "truck", "home"]); a plain name is always an icon, "loader:<name>" puts a loader in the chain. Returns url and one line of code (img by default; html = the themeable <with-loader> tag; react; vue). ' +
       `Names: ${names.join(', ')}.`,
     inputSchema: {
       query: z.string().max(120).optional().describe('What is loading, in words'),
       name: z.string().max(60).optional().describe('Loader name or alias'),
-      morph: z.array(z.string().min(1).max(60)).min(2).max(8).optional().describe('Icon names to turn into one another (custom sequence)'),
+      morph: z.array(z.string().min(1).max(60)).min(2).max(8).optional().describe('Icon names to turn into one another (custom sequence); "loader:<name>" for a loader'),
       effect: z.enum(EFFECTS).optional().describe('Morph hand-over (default bloom)'),
       style: z.enum(LD.styles).optional().describe('Style (default line)'),
       format: z.enum(FORMATS).optional().describe('img (default), html, react, vue or url'),

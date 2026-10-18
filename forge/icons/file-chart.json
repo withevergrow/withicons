@@ -1,0 +1,72 @@
+{
+  "name": "file-chart",
+  "category": "files",
+  "description": "A page with a small bar chart for reports, analytics exports and data documents.",
+  "aliases": [
+    "file-report",
+    "chart-file",
+    "document-chart",
+    "data-report",
+    "file-stats",
+    "report-document"
+  ],
+  "tags": [
+    "file",
+    "report",
+    "chart",
+    "data",
+    "statistics",
+    "document"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 17.5 V15",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17.5 V11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 17.5 V13.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M8.5 17.5 V15",
+    "M12 17.5 V11.5",
+    "M15.5 17.5 V13.5"
+  ],
+  "synonyms": [
+    "report",
+    "statistics",
+    "stats",
+    "dashboard export",
+    "bar chart",
+    "graph",
+    "results",
+    "sales report",
+    "quarterly report",
+    "annual report",
+    "performance",
+    "insights",
+    "summary",
+    "spreadsheet",
+    "business report",
+    "presentation",
+    "data sheet",
+    "analytics report"
+  ]
+}

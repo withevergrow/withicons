@@ -1,0 +1,58 @@
+{
+  "name": "list-minus",
+  "category": "layout",
+  "description": "Three list lines with a minus in the corner, for removing an item from a list, queue or playlist.",
+  "aliases": [
+    "remove-from-list",
+    "list-remove",
+    "playlist-remove",
+    "remove-from-playlist",
+    "delete-list-item",
+    "queue-remove",
+    "remove-from-queue",
+    "list-subtract"
+  ],
+  "tags": [
+    "list",
+    "remove",
+    "minus",
+    "playlist",
+    "queue",
+    "delete"
+  ],
+  "paths": [
+    {
+      "d": "M3 6 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H15",
+      "plate": "K"
+    },
+    {
+      "d": "M3 18 H9",
+      "plate": "K"
+    },
+    {
+      "d": "M15 18 H21",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "remove item",
+    "delete item",
+    "take off list",
+    "subtract",
+    "dequeue",
+    "unqueue",
+    "remove song",
+    "remove track",
+    "shorten list",
+    "fewer",
+    "less",
+    "drop item",
+    "cross off"
+  ]
+}

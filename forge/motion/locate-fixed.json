@@ -1,0 +1,39 @@
+{
+  "name": "locate-fixed",
+  "intent": "pulses from the centre once your position is locked",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.6,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "zoom",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 1.4,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "crosshair",
+      "effect": "fade"
+    },
+    {
+      "to": "map-pin",
+      "effect": "scale"
+    }
+  ]
+}

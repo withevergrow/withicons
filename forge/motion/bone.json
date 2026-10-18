@@ -1,0 +1,31 @@
+{
+  "name": "bone",
+  "intent": "wiggles like a treat being waved for a dog",
+  "loop": {
+    "preset": "rock",
+    "amount": 0.7,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "wiggle",
+    "amount": 1.2
+  },
+  "alt": [
+    {
+      "preset": "bounce"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "paw-print",
+      "effect": "fade"
+    },
+    {
+      "to": "dog",
+      "effect": "scale"
+    }
+  ]
+}

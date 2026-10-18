@@ -1,0 +1,57 @@
+{
+  "name": "flip-horizontal",
+  "category": "actions",
+  "description": "Two mirrored triangles across a dashed axis for flipping an image or layer horizontally.",
+  "aliases": [
+    "flip-x",
+    "mirror-horizontal",
+    "mirror",
+    "flip-h",
+    "reflect-horizontal",
+    "horizontal-flip",
+    "mirror-image",
+    "flip-left-right"
+  ],
+  "synonyms": [
+    "reflect",
+    "reflection",
+    "symmetry",
+    "symmetric",
+    "reverse",
+    "invert",
+    "transform",
+    "image edit",
+    "photo edit",
+    "horizontal mirror",
+    "mirrored",
+    "swap sides",
+    "left right",
+    "layer flip",
+    "flip image"
+  ],
+  "tags": [
+    "flip",
+    "mirror",
+    "transform",
+    "symmetry",
+    "design"
+  ],
+  "paths": [
+    {
+      "d": "M8 5 L8 19 L2.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16 5 L16 19 L21.5 12 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 3 V4.5 M12 8.5 V10 M12 14 V15.5 M12 19.5 V21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M8 5 L8 19 L2.5 12 Z"
+  ],
+  "cutouts": []
+}

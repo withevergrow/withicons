@@ -1,0 +1,72 @@
+{
+  "name": "calendar-heart",
+  "category": "time",
+  "description": "A calendar with a heart on its page, for special dates, anniversaries, date nights and favourite events.",
+  "aliases": [
+    "special-date",
+    "date-night",
+    "favorite-date",
+    "favourite-date",
+    "wedding-date",
+    "save-the-date",
+    "love-calendar",
+    "favorite-event"
+  ],
+  "tags": [
+    "calendar",
+    "love",
+    "date",
+    "event",
+    "anniversary",
+    "special"
+  ],
+  "paths": [
+    {
+      "d": "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M12 18.5 C10.3 17.6 7.75 16 7.75 14.25 C7.75 13.2 8.6 12.5 9.7 12.5 C10.7 12.5 11.5 13 12 13.85 C12.5 13 13.3 12.5 14.3 12.5 C15.4 12.5 16.25 13.2 16.25 14.25 C16.25 16 13.7 17.6 12 18.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M5 10 H19",
+    "M12 18.5 C10.3 17.6 7.75 16 7.75 14.25 C7.75 13.2 8.6 12.5 9.7 12.5 C10.7 12.5 11.5 13 12 13.85 C12.5 13 13.3 12.5 14.3 12.5 C15.4 12.5 16.25 13.2 16.25 14.25 C16.25 16 13.7 17.6 12 18.5 Z"
+  ],
+  "synonyms": [
+    "anniversary",
+    "valentine's day",
+    "valentines",
+    "romantic",
+    "wedding",
+    "honeymoon",
+    "birthday",
+    "special day",
+    "liked event",
+    "date",
+    "dating",
+    "love",
+    "relationship",
+    "couple",
+    "engagement",
+    "celebration",
+    "memorable",
+    "wishlist"
+  ]
+}

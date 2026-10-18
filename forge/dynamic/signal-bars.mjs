@@ -1,5 +1,5 @@
 // Live icon: cellular signal strength, 0-4 bars. Unlit bars stay as dotted ghosts so "2 of 4" reads without colour.
-import { BARS, BASE, dotsOnLine, cross } from './_parts-power.mjs'
+import { BARS, BASE, dashesOnLine, cross } from './_parts-power.mjs'
 import { rr } from './_layout.mjs'
 import { live } from './_font.mjs'
 
@@ -23,7 +23,7 @@ export default live({
         paths.push({ d: `M${b.x} ${BASE} V${b.top}`, plate: 'K' })
         fills.push(rr(b.x - 1, b.top - 1, b.x + 1, BASE + 1, 1))
       } else if (ghost) {
-        for (const d of dotsOnLine(b.x, BASE, b.x, b.top, 5)) paths.push({ d, plate: 'A' })
+        for (const d of dashesOnLine(b.x, BASE, b.x, b.top, { dash: 1.75, gap: 3 })) paths.push({ d, plate: 'A' })
       }
     })
     if (bars === 0 && noSignal) for (const d of cross(6, 7, 2.5)) paths.push({ d, plate: 'S' })

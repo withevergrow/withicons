@@ -1,6 +1,6 @@
 {
   "name": "dumpling",
-  "intent": "a fresh dumpling steams and wobbles",
+  "intent": "a fresh, plump dumpling breathes and wobbles",
   "loop": {
     "preset": "breathe",
     "amount": 0.5
@@ -11,13 +11,6 @@
       12,
       19.75
     ]
-  },
-  "parts": {
-    "S": {
-      "preset": "rise",
-      "amount": 0.6,
-      "duration": 1.8
-    }
   },
   "alt": [
     {

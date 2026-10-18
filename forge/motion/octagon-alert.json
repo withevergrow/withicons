@@ -1,0 +1,56 @@
+{
+  "name": "octagon-alert",
+  "intent": "the stop sign throbs urgently: something critical needs you",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.4,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.9,
+      "duration": 2.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flicker"
+    },
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "octagon-x",
+      "effect": "flip"
+    },
+    {
+      "to": "alert-triangle",
+      "effect": "rotate"
+    },
+    {
+      "to": "alert-circle",
+      "effect": "fade"
+    }
+  ]
+}

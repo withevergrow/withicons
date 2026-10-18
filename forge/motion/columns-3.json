@@ -1,0 +1,46 @@
+{
+  "name": "columns-3",
+  "intent": "the dividers slide like columns being resized",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.3,
+      "duration": 3.2,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "columns",
+      "effect": "fade"
+    },
+    {
+      "to": "rows",
+      "effect": "rotate"
+    },
+    {
+      "to": "grid-2x2",
+      "effect": "morph"
+    }
+  ]
+}

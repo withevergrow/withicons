@@ -1,5 +1,6 @@
 // Live icon: a countdown timer — a ring that empties toward 12 o'clock, the time left written inside, and a
 // stopwatch crown on top so it never reads as a plain progress ring (forge/DYNAMIC.md).
+import { trackDashes } from './_parts-power.mjs'
 import { measure, text, asCutouts, live } from './_font.mjs'
 import { STOPWATCH, circle, arc, hand, spentDots } from './_parts-time.mjs'
 
@@ -47,7 +48,8 @@ export default live({
     if (l >= t) paths.push({ d: circle(CX, CY, R), plate: 'K' })
     else if (l > 0) paths.push({ d: arc(CX, CY, R, Math.min(start, 354), 360), plate: 'K' })
     // the spent part as dots, clear of the arc's start cap and the crown
-    if (l < t) for (const d of spentDots(CX, CY, R, 0, l > 0 ? Math.min(start, 354) : 360, { step: 30, clear: 22 })) paths.push({ d, plate: 'A' })
+    // the spent part as ghost dashes, clear of the arc's start cap and of the crown at 12 o'clock
+    if (l < t) for (const d of trackDashes(CX, CY, R, 0, l > 0 ? Math.min(start, 354) : 360, { clear: 4 })) paths.push({ d, plate: 'A' })
     let inner = []
     if (number) { const g = fitRound(String(l)); if (g) inner = g.paths }
     paths.push(...inner.map(d => ({ d, plate: 'A' })))

@@ -1,0 +1,80 @@
+{
+  "name": "vault",
+  "category": "commerce",
+  "description": "A heavy safe with a spoked wheel handle on its door, hinges on the left and feet, for secure storage, savings and protected data.",
+  "aliases": [
+    "strongbox",
+    "bank-vault",
+    "safe-box",
+    "lockbox",
+    "deposit-box",
+    "safe-deposit",
+    "secure-storage",
+    "money-safe",
+    "strong-room"
+  ],
+  "tags": [
+    "security",
+    "safe",
+    "bank",
+    "money",
+    "storage",
+    "protection"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V17 A2 2 0 0 1 19 19 H5 A2 2 0 0 1 3 17 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6.5 19 V21 M17.5 19 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M3 7 H5 M3 15 H5",
+      "plate": "K"
+    },
+    {
+      "d": "M15 11 A2 2 0 1 1 11 11 A2 2 0 1 1 15 11 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M11.5 9.5 L9.5 7.5 M14.5 9.5 L16.5 7.5 M11.5 12.5 L9.5 14.5 M14.5 12.5 L16.5 14.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V17 A2 2 0 0 1 19 19 H5 A2 2 0 0 1 3 17 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M16 11 A3 3 0 1 1 10 11 A3 3 0 1 1 16 11 Z",
+    "M11.5 9.5 L9.5 7.5 M14.5 9.5 L16.5 7.5 M11.5 12.5 L9.5 14.5 M14.5 12.5 L16.5 14.5"
+  ],
+  "synonyms": [
+    "safe",
+    "safety deposit box",
+    "bank",
+    "banking",
+    "savings",
+    "treasury",
+    "secure",
+    "security",
+    "protected",
+    "locked",
+    "combination lock",
+    "dial",
+    "valuables",
+    "money",
+    "cash",
+    "gold",
+    "reserve",
+    "encryption",
+    "password vault",
+    "secrets",
+    "cold storage",
+    "store securely",
+    "deposit",
+    "heist",
+    "valt"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "folder-check",
+  "category": "files",
+  "description": "A folder with a check mark for a synced, approved or completed directory.",
+  "aliases": [
+    "folder-done",
+    "folder-ok",
+    "folder-approved",
+    "folder-synced",
+    "folder-verified",
+    "folder-tick",
+    "folder-complete",
+    "checked-folder",
+    "saved-folder"
+  ],
+  "tags": [
+    "folder",
+    "check",
+    "done",
+    "synced",
+    "approved",
+    "complete"
+  ],
+  "paths": [
+    {
+      "d": "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 13.5 L11 16 L15.5 11",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 7 A2 2 0 0 1 5 5 H9 L11 7 H19 A2 2 0 0 1 21 9 V18 A2 2 0 0 1 19 20 H5 A2 2 0 0 1 3 18 Z"
+  ],
+  "cutouts": [
+    "M8.5 13.5 L11 16 L15.5 11"
+  ],
+  "synonyms": [
+    "done",
+    "completed",
+    "approved",
+    "synced",
+    "up to date",
+    "saved",
+    "verified",
+    "success",
+    "tick",
+    "checked",
+    "backed up",
+    "ready",
+    "selected folder",
+    "published",
+    "organised",
+    "organized"
+  ]
+}

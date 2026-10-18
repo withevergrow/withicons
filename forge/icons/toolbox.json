@@ -1,0 +1,77 @@
+{
+  "name": "toolbox",
+  "category": "objects",
+  "description": "A toolbox with a carry handle, lid seam and latch, for tools, utilities, kits, maintenance and services.",
+  "aliases": [
+    "tool-box",
+    "tool-kit",
+    "toolkit",
+    "tool-chest",
+    "tool-case",
+    "utilities",
+    "kit",
+    "repair-kit"
+  ],
+  "tags": [
+    "tools",
+    "repair",
+    "maintenance",
+    "kit",
+    "utilities",
+    "hardware"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 8 H19.5 A2 2 0 0 1 21.5 10 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V10 A2 2 0 0 1 4.5 8 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 8 V5.5 A1.5 1.5 0 0 1 10 4 H14 A1.5 1.5 0 0 1 15.5 5.5 V8",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 12.5 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M10.5 12.5 V14 A1 1 0 0 0 11.5 15 H12.5 A1 1 0 0 0 13.5 14 V12.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 8 H19.5 A2 2 0 0 1 21.5 10 V18.5 A2 2 0 0 1 19.5 20.5 H4.5 A2 2 0 0 1 2.5 18.5 V10 A2 2 0 0 1 4.5 8 Z"
+  ],
+  "cutouts": [
+    "M2.5 12.5 H21.5",
+    "M10.5 12.5 V14 A1 1 0 0 0 11.5 15 H12.5 A1 1 0 0 0 13.5 14 V12.5"
+  ],
+  "synonyms": [
+    "tools",
+    "tool kit",
+    "repair",
+    "fix",
+    "maintenance",
+    "service",
+    "services",
+    "handyman",
+    "mechanic",
+    "diy",
+    "workshop",
+    "garage",
+    "equipment",
+    "supplies",
+    "utility",
+    "extensions",
+    "plugins",
+    "add-ons",
+    "resources",
+    "starter kit",
+    "dev tools",
+    "developer tools",
+    "toolset",
+    "case",
+    "box",
+    "toolbx",
+    "tool box icon"
+  ]
+}

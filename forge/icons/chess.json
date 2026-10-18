@@ -1,0 +1,70 @@
+{
+  "name": "chess",
+  "category": "sports",
+  "description": "A chess knight piece on its base, for chess, strategy, board games and planning.",
+  "aliases": [
+    "chess-knight",
+    "knight",
+    "chess-piece",
+    "horse-piece",
+    "strategy",
+    "board-game",
+    "checkmate",
+    "chessboard"
+  ],
+  "tags": [
+    "game",
+    "chess",
+    "strategy",
+    "board",
+    "sports"
+  ],
+  "paths": [
+    {
+      "d": "M7.5 18 C7.5 15 10 13.5 10.5 11.5 L6.5 12.75 C5 13.25 3.75 11.75 4.75 10.5 L9.5 4.5 L10.5 2.5 L12.5 3.75 C16.5 4 19 7.5 18.5 12.5 L17.5 18 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5 21.5 V20 A2 2 0 0 1 7 18 H17 A2 2 0 0 1 19 20 V21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M11.75 7.5 H12.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7.5 18 C7.5 15 10 13.5 10.5 11.5 L6.5 12.75 C5 13.25 3.75 11.75 4.75 10.5 L9.5 4.5 L10.5 2.5 L12.5 3.75 C16.5 4 19 7.5 18.5 12.5 L17.5 18 Z",
+    "M5 21.5 V20 A2 2 0 0 1 7 18 H17 A2 2 0 0 1 19 20 V21.5 Z"
+  ],
+  "cutouts": [
+    "M12.9 7.5 A0.9 0.9 0 1 1 11.1 7.5 A0.9 0.9 0 1 1 12.9 7.5 Z",
+    "M4 18 H20"
+  ],
+  "synonyms": [
+    "chess game",
+    "chess club",
+    "chess match",
+    "play chess",
+    "board games",
+    "tabletop",
+    "strategy game",
+    "tactics",
+    "gambit",
+    "grandmaster",
+    "opening",
+    "move",
+    "next move",
+    "smart move",
+    "planning",
+    "thinking",
+    "intelligence",
+    "mind game",
+    "pawn",
+    "rook",
+    "horse",
+    "tournament",
+    "chees",
+    "chesss"
+  ]
+}

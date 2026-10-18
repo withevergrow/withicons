@@ -1,0 +1,60 @@
+{
+  "name": "cricket",
+  "intent": "the bat swings from the handle like a batter playing a drive",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      19.75,
+      4
+    ],
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "rock",
+    "origin": [
+      19.75,
+      4
+    ],
+    "amount": 1.2,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "bounce",
+      "amount": 0.5,
+      "delay": 0.15
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "tada",
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        19.75,
+        4
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cricket@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "baseball",
+      "effect": "fade"
+    },
+    {
+      "to": "trophy",
+      "effect": "slide-up"
+    }
+  ]
+}

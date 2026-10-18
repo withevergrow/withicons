@@ -1,0 +1,10 @@
+{
+  "name": "package-plus",
+  "intent": "the plus pops onto the box like a new item being added",
+  "loop": { "preset": "pulse", "origin": [12, 12], "amount": 0.25, "duration": 2.6 },
+  "hover": { "preset": "pop", "amount": 0.9 },
+  "parts": { "S": { "preset": "pop", "origin": [18, 18], "amount": 0.7, "delay": 0.1 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "bounce", "origin": [12, 21.5], "amount": 0.6 }, { "preset": "jelly", "origin": [12, 21.5] }],
+  "swap": [{ "to": "package-check", "effect": "morph" }, { "to": "package", "effect": "fade" }]
+}

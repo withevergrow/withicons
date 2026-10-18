@@ -1,0 +1,75 @@
+{
+  "name": "package-plus",
+  "category": "commerce",
+  "description": "A shipping box with a plus in its corner, for adding a product, creating a shipment or restocking inventory.",
+  "aliases": [
+    "add-package",
+    "add-product",
+    "new-package",
+    "package-add",
+    "new-shipment",
+    "add-to-inventory",
+    "parcel-plus",
+    "parcel-add",
+    "create-shipment"
+  ],
+  "tags": [
+    "box",
+    "package",
+    "add",
+    "product",
+    "inventory",
+    "create"
+  ],
+  "paths": [
+    {
+      "d": "M21 12 V7 L12 2.5 L3 7 V17 L12 21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 7 L12 11.5 L21 7 M12 11.5 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 4.75 L16.5 9.25 V11.5",
+      "plate": "A"
+    },
+    {
+      "d": "M18 15.5 V20.5",
+      "plate": "S"
+    },
+    {
+      "d": "M15.5 18 H20.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L21 7 V12.8 A6 6 0 0 0 12.85 21.08 L12 21.5 L3 17 V7 Z"
+  ],
+  "cutouts": [
+    "M3 7 L12 11.5 L21 7 M12 11.5 V21.5",
+    "M7.5 4.75 L16.5 9.25 V11"
+  ],
+  "synonyms": [
+    "add product",
+    "new product",
+    "add stock",
+    "restock",
+    "inventory",
+    "warehouse",
+    "new order",
+    "add parcel",
+    "add to order",
+    "product listing",
+    "list item",
+    "catalog",
+    "catalogue",
+    "goods",
+    "sku",
+    "packing",
+    "pack",
+    "shipping",
+    "delivery",
+    "stock up"
+  ]
+}

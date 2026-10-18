@@ -1,0 +1,58 @@
+{
+  "name": "save-all",
+  "intent": "both disks press down to commit, the back one a beat later",
+  "loop": {
+    "preset": "nod",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.4,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nod",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 1,
+    "duration": 0.55
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.4,
+      "duration": 2.8,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "save",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "morph"
+    },
+    {
+      "to": "save-all@solid",
+      "effect": "scale"
+    }
+  ]
+}

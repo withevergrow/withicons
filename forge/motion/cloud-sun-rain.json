@@ -1,0 +1,54 @@
+{
+  "name": "cloud-sun-rain",
+  "intent": "sun glows behind a drifting cloud while showers fall",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.35,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        8.5,
+        8
+      ],
+      "amount": 0.8,
+      "duration": 3.2,
+      "delay": 0.1
+    },
+    "S": {
+      "preset": "drop",
+      "amount": 0.45,
+      "duration": 1.6,
+      "delay": 0.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-sun",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud-rain",
+      "effect": "fade"
+    },
+    {
+      "to": "rainbow",
+      "effect": "blur"
+    }
+  ]
+}

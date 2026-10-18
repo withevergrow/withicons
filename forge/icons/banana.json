@@ -1,0 +1,62 @@
+{
+  "name": "banana",
+  "category": "food",
+  "description": "A plump banana curving up at both ends, with a short stem at the top and a dark tip at the other end, for fruit, snacks, potassium and tropical themes.",
+  "aliases": [
+    "bananas",
+    "plantain",
+    "yellow-fruit",
+    "banana-fruit",
+    "tropical-fruit"
+  ],
+  "tags": [
+    "food",
+    "fruit",
+    "tropical",
+    "snack"
+  ],
+  "paths": [
+    {
+      "d": "M2.69 14.23 C6.62 19.18 10.59 19.87 13.88 18.67 C17.17 17.47 19.77 14.39 19.6 8.07 A1.45 1.45 -20 0 0 16.76 8.31 C16.38 11.64 14.69 13.58 12.34 14.44 C9.99 15.29 7.45 14.89 4.87 12.9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.87 12.9 L2.69 14.23 C2.35 13.29 2.32 12.5 2.62 11.86 C3.41 11.84 4.37 12.28 4.87 12.9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M18.06 6.77 L17.91 4.16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2.69 14.23 C6.62 19.18 10.59 19.87 13.88 18.67 C17.17 17.47 19.77 14.39 19.6 8.07 A1.45 1.45 -20 0 0 16.76 8.31 C16.38 11.64 14.69 13.58 12.34 14.44 C9.99 15.29 7.45 14.89 4.87 12.9 Z",
+    "M4.87 12.9 L2.69 14.23 C2.35 13.29 2.32 12.5 2.62 11.86 C3.41 11.84 4.37 12.28 4.87 12.9 Z"
+  ],
+  "cutouts": [
+    "M7.56 15.91 C9.8 16.96 11.7 17.07 13.11 16.55 C14.52 16.04 15.91 14.74 16.95 12.49",
+    "M5.08 12.77 L2.47 14.36"
+  ],
+  "synonyms": [
+    "fruit",
+    "fresh fruit",
+    "healthy snack",
+    "snack",
+    "potassium",
+    "smoothie",
+    "banana bread",
+    "banana split",
+    "breakfast",
+    "monkey",
+    "tropical",
+    "grocery",
+    "produce",
+    "peel",
+    "slip",
+    "energy",
+    "vegan",
+    "bananna",
+    "banan",
+    "banaana"
+  ]
+}

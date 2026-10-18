@@ -1,0 +1,47 @@
+{
+  "name": "cctv",
+  "intent": "the camera pans slowly on its bracket, watching",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      10.5
+    ],
+    "amount": 0.6,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      10.5
+    ],
+    "amount": 0.8,
+    "duration": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.3
+    },
+    {
+      "preset": "swivel",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "eye",
+      "effect": "fade"
+    },
+    {
+      "to": "video-camera",
+      "effect": "scale"
+    },
+    {
+      "to": "shield-check",
+      "effect": "morph"
+    }
+  ]
+}

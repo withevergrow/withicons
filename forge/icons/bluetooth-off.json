@@ -1,0 +1,60 @@
+{
+  "name": "bluetooth-off",
+  "category": "devices",
+  "description": "The Bluetooth rune struck through by a slash, for Bluetooth turned off or a device that is not paired.",
+  "aliases": [
+    "no-bluetooth",
+    "bluetooth-disabled",
+    "bt-off",
+    "bluetooth-disconnected",
+    "unpair",
+    "bluetooth-slash",
+    "ble-off"
+  ],
+  "tags": [
+    "bluetooth",
+    "wireless",
+    "off",
+    "disabled",
+    "device"
+  ],
+  "paths": [
+    {
+      "d": "M12 7.75 V3 L17.5 7.5 L14.33 10.09",
+      "plate": "K"
+    },
+    {
+      "d": "M9.67 13.91 L6.5 16.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.25 V21 L14.62 18.86",
+      "plate": "K"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12 8.46 V3 L17.5 7.5 L13.94 10.41 Z",
+    "M12 15.54 L15.01 18.54 L12 21 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "bluetooth disabled",
+    "turn off bluetooth",
+    "disconnect device",
+    "unpaired",
+    "not paired",
+    "no pairing",
+    "wireless off",
+    "airplane mode",
+    "headphones disconnected",
+    "earbuds disconnected",
+    "not connected",
+    "device unavailable",
+    "connection lost",
+    "forget device"
+  ]
+}

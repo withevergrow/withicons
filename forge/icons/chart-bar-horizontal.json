@@ -1,0 +1,62 @@
+{
+  "name": "chart-bar-horizontal",
+  "category": "charts",
+  "description": "Horizontal bars of different lengths on an L-shaped axis, for rankings, comparisons and survey results.",
+  "aliases": [
+    "horizontal-bar-chart",
+    "bar-chart-horizontal",
+    "horizontal-bars",
+    "chart-horizontal",
+    "bar-graph-horizontal",
+    "row-chart",
+    "ranking-chart"
+  ],
+  "tags": [
+    "chart",
+    "bars",
+    "horizontal",
+    "comparison"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3 V19 A2 2 0 0 0 5.5 21 H21",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 4 H15.5 A0.75 0.75 0 0 1 15.5 5.5 H8.5 A0.75 0.75 0 0 1 8.5 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 9.5 H20 A0.75 0.75 0 0 1 20 11 H8.5 A0.75 0.75 0 0 1 8.5 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 15 H11.5 A0.75 0.75 0 0 1 11.5 16.5 H8.5 A0.75 0.75 0 0 1 8.5 15 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M8.5 4 H15.5 A0.75 0.75 0 0 1 15.5 5.5 H8.5 A0.75 0.75 0 0 1 8.5 4 Z",
+    "M8.5 9.5 H20 A0.75 0.75 0 0 1 20 11 H8.5 A0.75 0.75 0 0 1 8.5 9.5 Z",
+    "M8.5 15 H11.5 A0.75 0.75 0 0 1 11.5 16.5 H8.5 A0.75 0.75 0 0 1 8.5 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "bar chart",
+    "horizontal bar graph",
+    "leaderboard",
+    "top list",
+    "survey results",
+    "poll results",
+    "comparison",
+    "compare",
+    "statistics",
+    "data",
+    "report",
+    "progress bars",
+    "distribution",
+    "categories",
+    "votes",
+    "graph"
+  ]
+}

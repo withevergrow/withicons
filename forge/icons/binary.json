@@ -1,0 +1,53 @@
+{
+  "name": "binary",
+  "category": "development",
+  "description": "The digits 0 and 1, for binary code, bits, raw data and low-level computing.",
+  "aliases": [
+    "binary-code",
+    "bits",
+    "zero-one",
+    "ones-and-zeros",
+    "machine-code",
+    "base-2",
+    "bitstring",
+    "digits-01"
+  ],
+  "tags": [
+    "code",
+    "data",
+    "digital",
+    "developer",
+    "number"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 8.25 A3.75 3.75 0 0 1 10 8.25 V15.75 A3.75 3.75 0 0 1 2.5 15.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 7.5 L17.5 4.5 V19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M14 19.5 H21",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "binary digits",
+    "bit",
+    "byte",
+    "digital",
+    "computer code",
+    "bits and bytes",
+    "0 and 1",
+    "zeros and ones",
+    "encoding",
+    "low level",
+    "raw data",
+    "bitwise",
+    "01"
+  ]
+}

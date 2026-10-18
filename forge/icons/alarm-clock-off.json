@@ -1,0 +1,71 @@
+{
+  "name": "alarm-clock-off",
+  "category": "time",
+  "description": "An alarm clock crossed out by a slash, for a switched-off alarm, quiet hours and no wake-up call.",
+  "aliases": [
+    "alarm-off",
+    "no-alarm",
+    "disable-alarm",
+    "alarm-disabled",
+    "mute-alarm",
+    "alarm-slash",
+    "snooze-off",
+    "alarm-cancelled"
+  ],
+  "tags": [
+    "alarm",
+    "off",
+    "disabled",
+    "time",
+    "mute",
+    "sleep"
+  ],
+  "paths": [
+    {
+      "d": "M10.3 5.71 A7 7 0 0 1 18.79 14.2",
+      "plate": "K"
+    },
+    {
+      "d": "M14.46 19.05 A7 7 0 0 1 5.45 10.04",
+      "plate": "K"
+    },
+    {
+      "d": "M17 3 A2.83 2.83 0 0 1 21 7 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7 17.5 L4.5 20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9.4 6 A7 7 0 0 1 18.5 15.1 Z",
+    "M15.29 18.68 A7 7 0 0 1 5.82 9.21 Z",
+    "M17 3 A2.83 2.83 0 0 1 21 7 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "turn off alarm",
+    "stop alarm",
+    "dismiss alarm",
+    "cancel alarm",
+    "alarm stopped",
+    "no wake up",
+    "sleep in",
+    "lie in",
+    "silent",
+    "quiet hours",
+    "do not disturb",
+    "weekend",
+    "day off",
+    "holiday",
+    "mute",
+    "disabled",
+    "reminder off",
+    "no reminder"
+  ]
+}

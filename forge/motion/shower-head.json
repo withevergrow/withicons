@@ -1,0 +1,46 @@
+{
+  "name": "shower-head",
+  "intent": "water drops fall steadily from the shower head",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      2.5,
+      3.5
+    ],
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      11.5,
+      7.5
+    ],
+    "amount": 0.6
+  },
+  "parts": {
+    "S": {
+      "preset": "drop",
+      "amount": 0.8,
+      "duration": 1.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "drop"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "droplets",
+      "effect": "fade"
+    },
+    {
+      "to": "bath",
+      "effect": "fade"
+    }
+  ]
+}

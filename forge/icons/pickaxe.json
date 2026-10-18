@@ -1,0 +1,62 @@
+{
+  "name": "pickaxe",
+  "category": "objects",
+  "description": "A pickaxe with a thick, two-pointed curved head on a sturdy handle, for mining, digging, crafting games and hard work.",
+  "aliases": [
+    "pick",
+    "pick-axe",
+    "mining",
+    "mine",
+    "mattock",
+    "mining-pick",
+    "dig-tool"
+  ],
+  "tags": [
+    "tool",
+    "mining",
+    "dig",
+    "game",
+    "construction",
+    "work"
+  ],
+  "paths": [
+    {
+      "d": "M5.89 4.1 Q23.84 0.66 20.4 18.61 Q18.11 6.39 5.89 4.1 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14.1 7.35 L4.36 17.08 A2.16 2.16 45 0 0 7.42 20.14 L17.15 10.4",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.89 4.1 Q23.84 0.66 20.4 18.61 Q18.11 6.39 5.89 4.1 Z",
+    "M14.1 7.35 L4.36 17.08 A2.16 2.16 45 0 0 7.42 20.14 L17.15 10.4 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "miner",
+    "dig",
+    "digging",
+    "excavate",
+    "quarry",
+    "rock",
+    "stone",
+    "ore",
+    "gold rush",
+    "crypto mining",
+    "bitcoin mining",
+    "craft",
+    "crafting",
+    "minecraft",
+    "survival game",
+    "hard work",
+    "grind",
+    "labor",
+    "labour",
+    "construction",
+    "tools",
+    "pick ax",
+    "pikaxe"
+  ]
+}

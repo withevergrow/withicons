@@ -1,0 +1,32 @@
+{
+  "name": "shield-half",
+  "intent": "turns like a coin to show both halves of its protection",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "flip",
+    "amount": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield",
+      "effect": "fade"
+    },
+    {
+      "to": "shield-check",
+      "effect": "flip"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "file-pen",
+  "intent": "the pencil scribbles on its tip over a calm page",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      14.5,
+      21.5
+    ],
+    "duration": 0.7
+  },
+  "parts": {
+    "S": {
+      "preset": "sway",
+      "origin": [
+        14.5,
+        21.5
+      ],
+      "amount": 0.6,
+      "duration": 1.5,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw",
+      "duration": 1.2
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-check",
+      "effect": "rotate"
+    },
+    {
+      "to": "file-text",
+      "effect": "fade"
+    },
+    {
+      "to": "pencil",
+      "effect": "morph"
+    }
+  ]
+}

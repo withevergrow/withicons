@@ -1,0 +1,51 @@
+{
+  "name": "folders",
+  "intent": "the stack floats like loose folders, fans out on hover",
+  "loop": {
+    "preset": "float",
+    "amount": 0.35,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 315,
+    "amount": 0.45,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "float",
+      "amount": 0.4,
+      "duration": 3.2,
+      "delay": 0.25
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder",
+      "effect": "slide-left"
+    },
+    {
+      "to": "files",
+      "effect": "fade"
+    },
+    {
+      "to": "folder-open",
+      "effect": "scale"
+    }
+  ]
+}

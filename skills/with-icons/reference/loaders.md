@@ -9,10 +9,10 @@ turning into one another). Studio with live preview and copy-ready code: https:/
 |---|---|
 | no code at all | `<img src="https://cdn.jsdelivr.net/npm/@withicons/loaders@latest/dist/svg/<style>/<name>.svg" width="32" height="32" alt="Loading">` |
 | colour, speed, morph, done state | `<script src="https://cdn.jsdelivr.net/npm/@withicons/loaders@latest/dist/cdn/loaders.js"></script>` then `<with-loader name="<name>" variant="<style>" color="#hex" speed="1.5" label="Saving"></with-loader>` |
-| a custom sequence | `<with-loader morph="package,truck,home" effect="slide-left" hold="1"></with-loader>` (any icon names, loaders too) |
+| a custom sequence | `<with-loader morph="package,truck,home" effect="slide-left" hold="1"></with-loader>` (icon names; `loader:<name>` adds a loader) |
 | React / Vue | `import { Loader, Morph } from '@withicons/loaders/react'` (or `/vue`): `<Loader name="orbit" variant="glass" size={40} />`, `<Morph items={['file', 'cloud-upload', 'check-circle']} />` |
 | JS string | `import { svg, svgAsync, url, morphAsync, search } from '@withicons/loaders'`: `svg('spinner', { size: 32, color: '#16a34a' })` (line built in; other styles: `await svgAsync(name, { style })`) |
-| finished | `el.done('check-circle')` blooms a running `<with-loader>` into an icon and stops; `el.reset()` starts again |
+| finished | `el.done('check-circle')` blooms a running `<with-loader>` into that icon (always the icon) and stops, announced to screen readers; `el.reset()` starts again |
 
 - An `<img>` cannot take a colour or speed (it uses the style's colours, black ink): use the tag or a component for those.
 - Inline SVG reads CSS from any parent: `--wl-speed: 2` (twice as fast), `--wl-state: paused`, the ink from `color`, style
@@ -20,6 +20,10 @@ turning into one another). Studio with live preview and copy-ready code: https:/
 - Accessibility: the tag and components are `role="progressbar"` with `aria-label` (default "Loading"); `label=""` hides
   a decorative one. Reduced motion slows every loader (it never freezes: a frozen loader reads as a hang).
 - Morph effects: bloom (default), spin, flip, slide-up, slide-left, drop, zoom, fade.
+- Morph items are library **icon** names, even when a loader has the same name (rocket, download, upload, gift, diya …):
+  `morph="wrench,settings,rocket"` ends on the rocket icon. Ask for a loader explicitly: `loader:<name>` (or
+  `{ loader: '<name>' }` in JS), e.g. `morph="file,loader:upload,check-circle"`. This is the behaviour since 0.6.0;
+  before, a name that was also a loader became the loader.
 - Pick by what is loading: an upload → `morph-upload`, an AI answer → `ai-sparkle` or `morph-ai`, a payment → `morph-payment`,
   a festival page → its festival loader in its holiday style (diya in utsav, ghost in halloween …).
 
@@ -100,7 +104,7 @@ turning into one another). Studio with live preview and copy-ready code: https:/
 | `morph-upload` | file → cloud-upload → check-circle: a file travels to the cloud and lands safely | uploading, upload-sequence, file-to-cloud |
 | `morph-download` | cloud → cloud-download → file-check: something comes down from the cloud to you | downloading, download-sequence, cloud-to-file |
 | `morph-payment` | credit-card → wallet → badge-check: the card is charged and the payment confirmed | paying, checkout-loader, payment-processing |
-| `morph-ai` | sparkles → brain → bot → message-circle-more: an assistant thinks, then answers | ai-loader, generating, assistant-thinking |
+| `morph-ai` | sparkles → brain → bot → message-circle-more: an assistant thinks, then answers | ai-sequence, generating, assistant-thinking |
 | `morph-send` | pencil → mail → send → mail-check: a message is written, sealed, sent and delivered | sending, send-sequence, mail-sending |
 | `morph-secure` | key → lock → shield-check: keys turn and the connection is secured | securing, encrypting, secure-sequence |
 | `morph-search` | search → scan-search → file-search → check: looking everywhere until it is found | searching-sequence, finding, lookup-loader |
@@ -108,8 +112,8 @@ turning into one another). Studio with live preview and copy-ready code: https:/
 | `morph-delivery` | package → truck → home: the parcel is packed, on the road and home | shipping-loader, order-tracking, delivery-sequence |
 | `morph-music` | music-note → headphones → audio-waveform → disc: the track is loading, the beat is coming | audio-loader, music-sequence, buffering-music |
 | `morph-photo` | camera → image → sparkles: a photo is taken, developed and enhanced | image-processing, photo-sequence, enhancing |
-| `morph-build` | wrench → settings → rocket: it is built, tuned and launched | building, deploying, build-sequence |
-| `morph-diwali` | diya → sparkler → firecracker → rangoli-pattern: lamps, sparklers and colour: Diwali is loading | diwali-sequence, festival-of-lights, deepavali-loader |
-| `morph-winter` | snowflake → christmas-tree → gift → star: snow, the tree, presents and the star on top | christmas-sequence, holiday-season, winter-loader |
-| `morph-celebrate` | party-popper → gift → cake → heart: a little party while you wait | celebration-loader, birthday-sequence, party-sequence |
+| `morph-build` | wrench → settings → rocket: it is built, tuned and launched | build-and-launch, deploying, build-sequence |
+| `morph-diwali` | diya → sparkler → firecracker → rangoli-pattern: lamps, sparklers and colour: Diwali is loading | diwali-sequence, festival-of-lights, deepavali-sequence |
+| `morph-winter` | snowflake → christmas-tree → gift → star: snow, the tree, presents and the star on top | christmas-sequence, holiday-season, winter-sequence |
+| `morph-celebrate` | party-popper → gift → cake → heart: a little party while you wait | celebration-sequence, birthday-sequence, party-sequence |
 <!-- loaders:end -->

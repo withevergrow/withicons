@@ -1,0 +1,47 @@
+{
+  "name": "folder-tree",
+  "intent": "the branches draw in like a tree view unfolding",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 0.6,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw",
+      "duration": 1.4
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder",
+      "effect": "fade"
+    },
+    {
+      "to": "folder-open",
+      "effect": "scale"
+    },
+    {
+      "to": "network",
+      "effect": "morph"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "aperture",
+  "category": "media",
+  "description": "Six camera iris blades turning inside a ring around a hexagonal opening, for aperture, lens and photo settings.",
+  "aliases": [
+    "camera-aperture",
+    "shutter",
+    "iris",
+    "f-stop",
+    "lens-aperture",
+    "camera-shutter",
+    "diaphragm",
+    "camera-iris"
+  ],
+  "tags": [
+    "camera",
+    "photography",
+    "lens",
+    "media",
+    "settings"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 8 L21.39 13.42 M15.46 10 L15.46 20.85 M15.46 14 L6.07 19.42 M12 16 L2.61 10.58 M8.54 14 L8.54 3.15 M8.54 10 L17.93 4.58",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M12 8 L21.39 13.42 M15.46 10 L15.46 20.85 M15.46 14 L6.07 19.42 M12 16 L2.61 10.58 M8.54 14 L8.54 3.15 M8.54 10 L17.93 4.58",
+    "M12 8 L15.46 10 L15.46 14 L12 16 L8.54 14 L8.54 10 Z"
+  ],
+  "synonyms": [
+    "photography",
+    "camera",
+    "lens",
+    "focus",
+    "exposure",
+    "depth of field",
+    "bokeh",
+    "photo",
+    "photo settings",
+    "camera settings",
+    "photo mode",
+    "blades",
+    "f number",
+    "shutter speed",
+    "dslr",
+    "mirrorless",
+    "portrait mode",
+    "apperture",
+    "aperature"
+  ]
+}

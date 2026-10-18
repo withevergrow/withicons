@@ -1,0 +1,45 @@
+{
+  "name": "cactus",
+  "intent": "stands in the desert heat, swelling slightly as if baking in the sun",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.3
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cactus@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "palm-tree",
+      "effect": "fade"
+    }
+  ]
+}

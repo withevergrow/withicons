@@ -1,0 +1,50 @@
+{
+  "name": "smartphone-message",
+  "intent": "the phone buzzes as a new text bubble pops up",
+  "loop": {
+    "preset": "wiggle",
+    "origin": [
+      8,
+      12.25
+    ],
+    "amount": 0.3,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        18,
+        5.5
+      ],
+      "amount": 1.1,
+      "duration": 1.6,
+      "delay": 0.12
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "float",
+      "amount": 0.6
+    },
+    {
+      "preset": "type"
+    }
+  ],
+  "swap": [
+    {
+      "to": "smartphone",
+      "effect": "fade"
+    },
+    {
+      "to": "message-circle",
+      "effect": "scale"
+    }
+  ]
+}

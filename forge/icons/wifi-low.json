@@ -1,0 +1,57 @@
+{
+  "name": "wifi-low",
+  "category": "devices",
+  "description": "A Wi-Fi dot with only its first arc, for a weak wireless signal or a poor connection.",
+  "aliases": [
+    "wifi-weak",
+    "weak-wifi",
+    "wifi-1",
+    "wifi-poor",
+    "poor-wifi",
+    "wifi-one-bar",
+    "wifi-signal-low",
+    "weak-wireless"
+  ],
+  "tags": [
+    "wireless",
+    "network",
+    "signal",
+    "weak",
+    "status"
+  ],
+  "paths": [
+    {
+      "d": "M12.875 18.5 A0.875 0.875 0 1 1 11.125 18.5 A0.875 0.875 0 1 1 12.875 18.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.361 15.447 A4.75 4.75 0 0 1 15.639 15.447",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 18.5 L8.361 15.447 A4.75 4.75 0 0 1 15.639 15.447 Z"
+  ],
+  "cutouts": [
+    "M8.689 16.739 A3.75 3.75 0 0 1 9.127 16.09 L9.127 16.09 L9.382 15.868 L9.69 15.716 L10.019 15.621 L10.346 15.561 L10.656 15.511 L10.942 15.438 A3.24 3.24 0 0 1 13.058 15.438 L13.344 15.511 L13.654 15.561 L13.981 15.621 L14.31 15.716 L14.618 15.868 L14.873 16.09 A3.75 3.75 0 0 1 15.311 16.739 L13.656 17.62 A1.875 1.875 0 0 0 10.344 17.62 Z"
+  ],
+  "synonyms": [
+    "weak connection",
+    "weak signal",
+    "bad wifi",
+    "slow internet",
+    "poor signal",
+    "poor connection",
+    "one bar",
+    "low reception",
+    "unstable connection",
+    "signal strength",
+    "network quality",
+    "far from router",
+    "spotty wifi",
+    "lag",
+    "buffering",
+    "wifi strength",
+    "low signal"
+  ]
+}

@@ -73,7 +73,7 @@ const styleNames = new Set(styles.map(s => s.name))
 const groupsBody = '| group | styles |\n|---|---|\n' + STYLE_GROUPS
   .map(g => [g, g.styles.filter(s => styleNames.has(s))]).filter(([, l]) => l.length)
   .map(([g, l]) => `| ${g.title} | ${l.map(s => '`' + s + '`').join(', ')} |`).join('\n') + '\n'
-// where each style's files live: @withicons/core and @withicons/classes keep the older styles, the newest ones are in
+// where each style's files live: @withicons/core and @withicons/classes keep the older styles (except the class files of glass, skeuo and gothic: classes-plus), the newest ones are in
 // companion packages (jsDelivr serves at most 150 MB per package; forge/lib/emit-core.mjs cdnPkg / cdnDir)
 const companion = styles.map(s => s.name).filter(n => cdnPkg(n) !== 'core' || cdnPkg(n, 'classes') !== 'classes')
 const tick = '`'
@@ -92,12 +92,12 @@ const packagesBody = companion.length
     ' with the package from this table (' + code('static') + ' / ' + code('core') + ' for the styles not listed).\n\n' +
     'In short, by package (every other style is in ' + code('@withicons/core') + ', ' + code('@withicons/static') + ' and ' + code('@withicons/classes') + '):\n\n' +
     (() => {
-      const by = (base) => { const m = new Map(); for (const n of companion) { const k = '@withicons/' + cdnPkg(n, base); m.set(k, [...(m.get(k) || []), n]) } return m }
+      const by = (base) => { const m = new Map(); for (const n of companion) { if (cdnPkg(n, base) === base) continue; const k = '@withicons/' + cdnPkg(n, base); m.set(k, [...(m.get(k) || []), n]) } return m }
       const lines = []
       for (const [k, l] of by('core')) lines.push(`- ${code(k)}: SVG files and node data of ${l.map(code).join(', ')}`)
       for (const [k, l] of by('static')) lines.push(`- ${code(k)}: prebuilt SVGs and sprites (${code('dist/sprite-<style>.svg')}) of ${l.map(code).join(', ')}`)
       for (const [k, l] of by('classes')) if (!lines.some(x => x.startsWith('- ' + code(k)))) lines.push(`- ${code(k)}: CSS class files of ${l.map(code).join(', ')}`)
-        else lines.push(`- ${code(k)} also: CSS class files of ${l.map(code).join(', ')} (${code('dist/classes/')})`)
+        else lines.push(`- ${code(k)} also: CSS class files of ${l.map(code).join(', ')}${k.endsWith('/classes-plus') ? '' : ` (${code('dist/classes/')})`}`)
       return lines.join('\n') + '\n'
     })() + '\n' +
     'Sprite URL: ' + code('https://cdn.jsdelivr.net/npm/@withicons/<static or static-plus>@latest/dist/sprite-<style>.svg') +

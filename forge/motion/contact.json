@@ -1,0 +1,52 @@
+{
+  "name": "contact",
+  "intent": "the card floats like it is held up, then flips to show the contact",
+  "loop": {
+    "preset": "float",
+    "amount": 0.35,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        12,
+        21
+      ],
+      "amount": 0.5,
+      "duration": 3.4,
+      "delay": 0.15
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "user",
+      "effect": "fade"
+    },
+    {
+      "to": "id-card",
+      "effect": "flip"
+    },
+    {
+      "to": "address-book",
+      "effect": "scale"
+    }
+  ]
+}

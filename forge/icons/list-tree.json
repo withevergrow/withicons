@@ -1,0 +1,67 @@
+{
+  "name": "list-tree",
+  "category": "layout",
+  "description": "A parent line with a trunk branching to two indented child lines, for tree views, outlines and nested items.",
+  "aliases": [
+    "tree-list",
+    "tree-view",
+    "outline-view",
+    "nested-list",
+    "hierarchy-list",
+    "indented-list",
+    "treeview",
+    "outliner",
+    "list-nested"
+  ],
+  "tags": [
+    "list",
+    "tree",
+    "hierarchy",
+    "nested",
+    "outline",
+    "structure"
+  ],
+  "paths": [
+    {
+      "d": "M9 5 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 12 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M13 19 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 5 V16.5 A2.5 2.5 0 0 0 7 19 H9",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 9.5 A2.5 2.5 0 0 0 7 12 H9",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "hierarchy",
+    "nested",
+    "children",
+    "parent child",
+    "outline",
+    "structure",
+    "directory",
+    "explorer",
+    "navigator",
+    "sitemap",
+    "levels",
+    "indent",
+    "branches",
+    "org chart",
+    "sub items",
+    "subtasks",
+    "layers"
+  ]
+}

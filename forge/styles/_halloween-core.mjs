@@ -395,7 +395,9 @@ export function halloweenNodes(icon) {
     const cls = p.plate === 'A' ? 'wm-a' : p.plate === 'S' ? 'wm-s' : 'wm-k'
     if (live) {
       out.push(['path', { d: loopsD(p.loops), fill: p.plate === 'K' ? C.c2 : p.plate === 'A' ? C.c3 : C.c4, 'fill-rule': 'evenodd', class: cls }])
-      const o = outerOf(p.loops)
+      // only the true outline: a letter's counter is an island of body inside a knocked-out glyph, and a 0.72u
+      // ink ring round a 1u island fills it (a "D" or "0" printed as a blot)
+      const o = outerOf(p.loops).filter(l => !p.loops.some(m => m !== l && Math.abs(area(m)) > Math.abs(area(l)) && pointInRing(l[0], m)))
       if (o.length) out.push(['path', { d: loopsD(o), fill: 'none', stroke: C.ink, 'stroke-width': U.INK, 'stroke-linejoin': 'round', class: cls }])
       continue
     }

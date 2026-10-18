@@ -1,0 +1,52 @@
+{
+  "name": "map-pin-plus",
+  "intent": "drops onto the map and pops its plus to add a place",
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      21.5
+    ]
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        12,
+        10
+      ],
+      "delay": 0.15
+    }
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "bounce",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "map-pin-check",
+      "effect": "fade"
+    },
+    {
+      "to": "map-pin",
+      "effect": "scale"
+    }
+  ]
+}

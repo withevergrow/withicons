@@ -1,0 +1,56 @@
+{
+  "name": "shield-question",
+  "category": "security",
+  "description": "A shield with a question mark, for unknown security status, unverified items and security help.",
+  "aliases": [
+    "security-question",
+    "shield-help",
+    "security-help",
+    "unverified",
+    "security-unknown",
+    "shield-unknown",
+    "trust-question"
+  ],
+  "tags": [
+    "security",
+    "question",
+    "help",
+    "unknown",
+    "trust"
+  ],
+  "paths": [
+    {
+      "d": "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 8.5 A2.5 2.5 0 1 1 13.5 10.5 C12.6 11.1 12 11.6 12 12.5 V13",
+      "plate": "A"
+    },
+    {
+      "d": "M12 16 V16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 21.5 C7.5 19.8 4.5 16.5 4.5 12 V5.5 L12 2.5 L19.5 5.5 V12 C19.5 16.5 16.5 19.8 12 21.5 Z"
+  ],
+  "cutouts": [
+    "M9.5 8.5 A2.5 2.5 0 1 1 13.5 10.5 C12.6 11.1 12 11.6 12 12.5 V13",
+    "M12 16 V16.5"
+  ],
+  "synonyms": [
+    "security faq",
+    "is it safe",
+    "unverified site",
+    "unknown threat",
+    "privacy help",
+    "security support",
+    "security questions",
+    "suspicious",
+    "not sure if safe",
+    "status unknown",
+    "verify",
+    "security quiz"
+  ]
+}

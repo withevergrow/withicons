@@ -1,0 +1,29 @@
+{
+  "name": "virus",
+  "intent": "turns slowly, spikes out, like a particle under the microscope",
+  "loop": {
+    "preset": "spin",
+    "duration": 6
+  },
+  "hover": {
+    "preset": "jelly"
+  },
+  "alt": [
+    {
+      "preset": "pulse"
+    },
+    {
+      "preset": "wiggle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "shield-check",
+      "effect": "morph"
+    },
+    {
+      "to": "face-mask",
+      "effect": "fade"
+    }
+  ]
+}

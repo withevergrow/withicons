@@ -1,13 +1,12 @@
 // Live icon: a hanging ribbon banner with a swallowtail end and a short word ("BEST", "TOP", "#1", "NEW").
 // Short text sits inside the closed banner. Longer words run the full width: the banner keeps its top edge and
 // its notched tail and opens its side walls where the letters pass.
-import { fitFirst, fitLadder, textInk, cutPolygon, polyD } from './_parts-labels.mjs'
+import { fitFirst, fitLadder, textInk, polyD } from './_parts-labels.mjs'
 import { live } from './_font.mjs'
 
-// landscape 20 x 17.5 banner; the V tail rises to y 16 so a cap-6.5 word fits above it
-const BAND = [[2, 3], [22, 3], [22, 20.5], [12, 16], [2, 20.5]]
-const INSIDE = { x0: 5.25, y0: 6.25, x1: 18.75, y1: 12.75 }
-const ACROSS = { x0: 3.5, y0: 6.25, x1: 20.5, y1: 12.75 }
+// landscape 20 x 17.5 banner with a notched V tail; the word sits closed on the band above the notch
+const BAND = [[2, 3], [22, 3], [22, 20.5], [12, 16.5], [2, 20.5]]
+const INSIDE = { x0: 4.9, y0: 5.9, x1: 19.1, y1: 13.1 }
 
 export default live({
   name: 'ribbon-label', title: 'Ribbon banner', category: 'commerce',
@@ -21,15 +20,9 @@ export default live({
   examples: [{ text: 'BEST' }, { text: 'TOP' }, { text: '#1' }, { text: 'NEW' }, { text: 'WWWW' }, { text: 'A' }],
   build({ text }) {
     const s = text || 'BEST'
-    const inside = fitFirst([s], INSIDE, { minCap: 5, maxCap: 6.5 })
-    const fit = inside || fitLadder(s, ACROSS, { minCap: 4, maxCap: 6 })
-    const t = fit && fit.t, ink = textInk(t, 'A')
-    const runs = t ? cutPolygon(BAND, t.box, 3.25) : null
-    const band = runs ? runs.map(r => ({ d: polyD(r, false), plate: 'K' })) : [{ d: polyD(BAND, true), plate: 'K' }]
-    return {
-      paths: [...band, ...ink.paths],
-      fills: [polyD(BAND, true)],
-      cutouts: ink.cutouts,
-    }
+    const fit = fitFirst([s], INSIDE, { minCap: 4, maxCap: 5.75 }) || fitLadder(s, INSIDE, { minCap: 3.75, maxCap: 5.75 })
+    const ink = textInk(fit && fit.t, 'A')
+    const band = polyD(BAND, true)
+    return { paths: [{ d: band, plate: 'K' }, ...ink.paths], fills: [band], cutouts: ink.cutouts }
   },
 })

@@ -1,0 +1,67 @@
+{
+  "name": "chart-bar-increasing",
+  "category": "charts",
+  "description": "A horizontal bar chart on an L-shaped axis whose bars step longer from top to bottom, for growth, ascending sorts and rising values.",
+  "aliases": [
+    "bar-chart-increasing",
+    "chart-increasing",
+    "ascending-chart",
+    "bars-increasing",
+    "sort-ascending-chart",
+    "growth-bars",
+    "increasing-bars"
+  ],
+  "tags": [
+    "chart",
+    "bars",
+    "increase",
+    "growth",
+    "ascending",
+    "sort"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 3 V19 A2 2 0 0 0 5.5 21 H21",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 4 H11 A0.75 0.75 0 0 1 11 5.5 H8.5 A0.75 0.75 0 0 1 8.5 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 9.5 H15.5 A0.75 0.75 0 0 1 15.5 11 H8.5 A0.75 0.75 0 0 1 8.5 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 15 H20 A0.75 0.75 0 0 1 20 16.5 H8.5 A0.75 0.75 0 0 1 8.5 15 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M8.5 4 H11 A0.75 0.75 0 0 1 11 5.5 H8.5 A0.75 0.75 0 0 1 8.5 4 Z",
+    "M8.5 9.5 H15.5 A0.75 0.75 0 0 1 15.5 11 H8.5 A0.75 0.75 0 0 1 8.5 9.5 Z",
+    "M8.5 15 H20 A0.75 0.75 0 0 1 20 16.5 H8.5 A0.75 0.75 0 0 1 8.5 15 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "increase",
+    "growth",
+    "grow",
+    "rising",
+    "rise",
+    "up",
+    "ascending",
+    "sort ascending",
+    "low to high",
+    "smallest first",
+    "improvement",
+    "progress",
+    "gain",
+    "more",
+    "scale up",
+    "stats",
+    "report",
+    "trend",
+    "bar chart"
+  ]
+}

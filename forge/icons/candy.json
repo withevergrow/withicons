@@ -1,0 +1,65 @@
+{
+  "name": "candy",
+  "category": "food",
+  "description": "A wrapped sweet tilted on the diagonal with twisted, pleated wrapper ends, for candy, sweets, treats and Halloween.",
+  "aliases": [
+    "sweet",
+    "wrapped-candy",
+    "bonbon",
+    "toffee",
+    "hard-candy",
+    "caramel",
+    "mint-candy",
+    "confectionery",
+    "wrapped-sweet"
+  ],
+  "tags": [
+    "food",
+    "sweet",
+    "treat",
+    "halloween"
+  ],
+  "paths": [
+    {
+      "d": "M15.18 8.82 A4.5 4.5 -45 1 1 8.82 15.18 A4.5 4.5 -45 1 1 15.18 8.82 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.93 13.94 L2.81 15.18 C4.05 17.83 6.17 19.95 8.82 21.19 L10.06 16.07 M13.94 7.93 L15.18 2.81 C17.83 4.05 19.95 6.17 21.19 8.82 L16.07 10.06",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M15.18 8.82 A4.5 4.5 -45 1 1 8.82 15.18 A4.5 4.5 -45 1 1 15.18 8.82 Z",
+    "M7.93 13.94 L2.81 15.18 C4.05 17.83 6.17 19.95 8.82 21.19 L10.06 16.07 Z",
+    "M13.94 7.93 L15.18 2.81 C17.83 4.05 19.95 6.17 21.19 8.82 L16.07 10.06 Z"
+  ],
+  "cutouts": [
+    "M8.11 15.89 L5.99 18.01",
+    "M15.89 8.11 L18.01 5.99"
+  ],
+  "synonyms": [
+    "candies",
+    "sweets",
+    "sweetie",
+    "treat",
+    "trick or treat",
+    "halloween",
+    "candy shop",
+    "sweet shop",
+    "sugar",
+    "dessert",
+    "snack",
+    "reward",
+    "peppermint",
+    "butterscotch",
+    "chocolate",
+    "goody",
+    "goodies",
+    "kids",
+    "party",
+    "pick n mix",
+    "candee",
+    "candie"
+  ]
+}

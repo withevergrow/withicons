@@ -1,6 +1,6 @@
 # @withicons/classes
 
-Font Awesome-style icon classes for 750 icons x 34 styles: plain `<i>`/`<span>` tags, no build step,
+Font Awesome-style icon classes for 1000 icons x 34 styles: plain `<i>`/`<span>` tags, no build step,
 no framework, zero dependencies. One line in your page:
 
 ```html
@@ -14,11 +14,11 @@ Every file sits at the top of `dist/`, so the URLs are short: `dist/with-loader.
 `dist/line/home.css` (one icon). Prefer a custom element or components? `<with-icon>` is
 [`@withicons/web`](https://www.npmjs.com/package/@withicons/web); React, Vue, Svelte, Angular and Solid have their own packages.
 
-The newest styles' CSS files live in companion packages (jsDelivr serves at most 150 MB per package): `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal` in [`@withicons/classes-plus`](https://www.npmjs.com/package/@withicons/classes-plus); `soft3d` in [`@withicons/soft3d`](https://www.npmjs.com/package/@withicons/soft3d) (`dist/classes/`); `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine` in [`@withicons/holiday`](https://www.npmjs.com/package/@withicons/holiday) (`dist/classes/`).
+The CSS files of the newest and the heaviest styles live in companion packages (jsDelivr serves at most 150 MB per package): `glass`, `skeuo`, `gothic`, `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal` in [`@withicons/classes-plus`](https://www.npmjs.com/package/@withicons/classes-plus); `soft3d` in [`@withicons/soft3d`](https://www.npmjs.com/package/@withicons/soft3d) (`dist/classes/`); `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine` in [`@withicons/holiday`](https://www.npmjs.com/package/@withicons/holiday) (`dist/classes/`).
 `with-loader.js` and `with-icons.js` load them by themselves, from the same CDN or `node_modules` folder, so
-`<i class="with with-home with-clay">` just works. A self-hosted copy: put their files next to this package's, or
+`<i class="with with-home with-glass">` just works. A self-hosted copy: put their files next to this package's, or
 point the loader at them with `data-with-css-<package>="…/"`. With a bundler, install the companion
-(`npm i @withicons/classes-plus`) and import its files, e.g. `@withicons/classes-plus/with-clay.css`.
+(`npm i @withicons/classes-plus`) and import its files, e.g. `@withicons/classes-plus/with-glass.css`.
 
 With a bundler or a self-hosted copy:
 
@@ -47,9 +47,9 @@ Plain `<i>`/`<span>` elements with classes. Three interchangeable ways to render
 <i class="with with-search with-2x with-spin"></i>
 ```
 
-`with-loader.js` (19 KB, 8 KB gzip) adds the base rules, finds every `with with-<name>` on the
+`with-loader.js` (22 KB, 9 KB gzip) adds the base rules, finds every `with with-<name>` on the
 page and links just that icon's rule: `dist/<style>/<name>.css` (a `line` icon is typically 464 bytes,
-289 gzip; a `liquid` icon about 15.6 KB, 3.1 KB gzip). Any style mix costs only the icons shown, and icons
+292 gzip; a `liquid` icon about 15.2 KB, 3.0 KB gzip). Any style mix costs only the icons shown, and icons
 added later (or re-classed) load theirs. The rendering is the CSS-only one below (masks, no inline SVG); aliases get their
 canonical class added with a console hint. Without JavaScript, link the same files yourself:
 
@@ -68,9 +68,9 @@ canonical class added with a console hint. Without JavaScript, link the same fil
 <i class="with with-search with-2x with-spin"></i>
 ```
 
-One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`, `with-anime.css`, `with-gothic.css`, `with-pastel.css`, `with-coquette.css`, `with-plush.css`, `with-clay.css`, `with-bento.css`, `with-suite.css`, `with-dock.css`, `with-liquid.css`, `with-chrome.css`, `with-soft3d.css`, `with-brutal.css`, `with-utsav.css`, `with-rangoli.css`, `with-halloween.css`, `with-christmas.css`, `with-lunar.css`, `with-valentine.css`), each holding all 750 icons
-(see the sizes below: the default `with-line.css` is 50 KB gzipped, the richest styles several hundred KB).
-`with-all.css` imports every style file: 110.5 MB (20.7 MB gzipped) in 34 requests,
+One file per style (`with-line.css`, `with-solid.css`, `with-duo.css`, `with-gloss.css`, `with-engrave.css`, `with-blueprint.css`, `with-sketch.css`, `with-glass.css`, `with-kawaii.css`, `with-sticker.css`, `with-pixel.css`, `with-retro.css`, `with-luxe.css`, `with-bauhaus.css`, `with-skeuo.css`, `with-anime.css`, `with-gothic.css`, `with-pastel.css`, `with-coquette.css`, `with-plush.css`, `with-clay.css`, `with-bento.css`, `with-suite.css`, `with-dock.css`, `with-liquid.css`, `with-chrome.css`, `with-soft3d.css`, `with-brutal.css`, `with-utsav.css`, `with-rangoli.css`, `with-halloween.css`, `with-christmas.css`, `with-lunar.css`, `with-valentine.css`), each holding all 1000 icons
+(see the sizes below: the default `with-line.css` is 65 KB gzipped, the richest styles several hundred KB).
+`with-all.css` imports every style file: 146.7 MB (27.1 MB gzipped) in 34 requests,
 so keep it for prototypes and offline tools, never for a production page:
 
 ```html
@@ -94,45 +94,45 @@ Use the JS runtime for live CSS variables and stroke width.
 
 | file | size | gzip |
 |---|---|---|
-| `<style>/<name>.css` (one icon, typical) | 464 B (`line`) to 15.6 KB (`liquid`) | 289 B to 3.1 KB |
-| `with-line.css` | 369 KB | 50 KB |
-| `with-solid.css` | 1.1 MB | 329 KB |
-| `with-duo.css` | 604 KB | 63 KB |
-| `with-gloss.css` | 1.2 MB | 298 KB |
-| `with-engrave.css` | 1.8 MB | 468 KB |
-| `with-blueprint.css` | 1.0 MB | 164 KB |
-| `with-sketch.css` | 1.0 MB | 239 KB |
-| `with-glass.css` | 5.6 MB | 821 KB |
-| `with-kawaii.css` | 1.5 MB | 228 KB |
-| `with-sticker.css` | 3.5 MB | 374 KB |
-| `with-pixel.css` | 896 KB | 65 KB |
-| `with-retro.css` | 1.8 MB | 443 KB |
-| `with-luxe.css` | 4.8 MB | 1.4 MB |
-| `with-bauhaus.css` | 1.2 MB | 239 KB |
-| `with-skeuo.css` | 8.2 MB | 1022 KB |
-| `with-anime.css` | 2.4 MB | 592 KB |
-| `with-gothic.css` | 5.7 MB | 1.7 MB |
-| `with-pastel.css` | 2.8 MB | 620 KB |
-| `with-coquette.css` | 4.7 MB | 1.2 MB |
-| `with-plush.css` | 3.9 MB | 981 KB |
-| `with-clay.css` | 5.6 MB | 1004 KB |
-| `with-bento.css` | 2.9 MB | 225 KB |
-| `with-suite.css` | 2.1 MB | 349 KB |
-| `with-dock.css` | 3.9 MB | 579 KB |
-| `with-liquid.css` | 11.0 MB | 1.6 MB |
-| `with-chrome.css` | 5.1 MB | 1.3 MB |
-| `with-soft3d.css` | 6.6 MB | 1.1 MB |
-| `with-brutal.css` | 2.4 MB | 420 KB |
-| `with-utsav.css` | 2.6 MB | 555 KB |
-| `with-rangoli.css` | 2.0 MB | 463 KB |
-| `with-halloween.css` | 3.8 MB | 539 KB |
-| `with-christmas.css` | 3.6 MB | 594 KB |
-| `with-lunar.css` | 1.8 MB | 387 KB |
-| `with-valentine.css` | 3.1 MB | 534 KB |
-| `with-all.css` (imports every style file) | 110.5 MB | 20.7 MB |
+| `<style>/<name>.css` (one icon, typical) | 464 B (`line`) to 15.2 KB (`liquid`) | 292 B to 3.0 KB |
+| `with-line.css` | 487 KB | 65 KB |
+| `with-solid.css` | 1.5 MB | 431 KB |
+| `with-duo.css` | 796 KB | 82 KB |
+| `with-gloss.css` | 1.6 MB | 398 KB |
+| `with-engrave.css` | 2.4 MB | 605 KB |
+| `with-blueprint.css` | 1.3 MB | 198 KB |
+| `with-sketch.css` | 1.3 MB | 331 KB |
+| `with-glass.css` | 8.4 MB | 1.2 MB |
+| `with-kawaii.css` | 1.9 MB | 295 KB |
+| `with-sticker.css` | 4.6 MB | 494 KB |
+| `with-pixel.css` | 1.3 MB | 147 KB |
+| `with-retro.css` | 2.4 MB | 574 KB |
+| `with-luxe.css` | 6.3 MB | 1.8 MB |
+| `with-bauhaus.css` | 1.6 MB | 328 KB |
+| `with-skeuo.css` | 10.6 MB | 1.3 MB |
+| `with-anime.css` | 3.2 MB | 761 KB |
+| `with-gothic.css` | 7.5 MB | 2.2 MB |
+| `with-pastel.css` | 3.7 MB | 828 KB |
+| `with-coquette.css` | 6.4 MB | 1.7 MB |
+| `with-plush.css` | 5.2 MB | 1.3 MB |
+| `with-clay.css` | 7.4 MB | 1.3 MB |
+| `with-bento.css` | 3.9 MB | 298 KB |
+| `with-suite.css` | 2.8 MB | 452 KB |
+| `with-dock.css` | 6.2 MB | 775 KB |
+| `with-liquid.css` | 14.5 MB | 2.0 MB |
+| `with-chrome.css` | 6.7 MB | 1.7 MB |
+| `with-soft3d.css` | 8.1 MB | 1.4 MB |
+| `with-brutal.css` | 2.9 MB | 652 KB |
+| `with-utsav.css` | 3.4 MB | 716 KB |
+| `with-rangoli.css` | 2.6 MB | 585 KB |
+| `with-halloween.css` | 4.7 MB | 689 KB |
+| `with-christmas.css` | 4.5 MB | 749 KB |
+| `with-lunar.css` | 2.3 MB | 497 KB |
+| `with-valentine.css` | 4.1 MB | 702 KB |
+| `with-all.css` (imports every style file) | 146.7 MB | 27.1 MB |
 | `with-base.css` | 2 KB | 1 KB |
-| `with-icons.js` | 28 KB | 10 KB |
-| `with-loader.js` | 19 KB | 8 KB |
+| `with-icons.js` | 31 KB | 11 KB |
+| `with-loader.js` | 22 KB | 9 KB |
 
 ### 3. JS runtime (inline SVG)
 

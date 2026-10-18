@@ -1,0 +1,10 @@
+{
+  "name": "calendar-minus",
+  "intent": "the minus slides off the page like an event being removed",
+  "loop": { "preset": "pulse", "origin": [12, 13], "amount": 0.25, "duration": 3 },
+  "hover": { "preset": "pop", "origin": [12, 15.5], "amount": 0.8 },
+  "parts": { "A": { "preset": "nudge", "dir": 0, "amount": 0.4, "duration": 3, "delay": 0.1 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "shake", "amount": 0.5 }, { "preset": "jelly" }],
+  "swap": [{ "to": "calendar-plus", "effect": "rotate" }, { "to": "calendar", "effect": "fade" }, { "to": "calendar-x", "effect": "morph" }]
+}

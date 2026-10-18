@@ -5,6 +5,7 @@
 // node, so A (moving part) and S (badge/modifier) plates are tagged wm-a / wm-s.
 // K paths stay untagged (motion treats untagged geometry as wm-k) to keep files small.
 import { snowmanFor } from './_line-snowman.mjs'
+import { withSolidBadge } from './_live-badge.mjs'
 export const PLATE_CLASS = { A: 'wm-a', S: 'wm-s' }
 
 export default {
@@ -16,6 +17,7 @@ export default {
   root: { fill: 'none', stroke: 'currentColor', 'stroke-width': 1.75, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' },
   render(icon) {
     icon = snowmanFor('line', icon)
-    return icon.paths.map(p => ['path', { d: p.d, ...(p.solid ? { fill: 'currentColor', stroke: 'none' } : {}), ...(PLATE_CLASS[p.plate] ? { class: PLATE_CLASS[p.plate] } : {}) }])
+    // a live count badge is drawn solid with its number knocked out (_live-badge.mjs); static icons: unchanged
+    return withSolidBadge(i => i.paths.map(p => ['path', { d: p.d, ...(p.solid ? { fill: 'currentColor', stroke: 'none' } : {}), ...(PLATE_CLASS[p.plate] ? { class: PLATE_CLASS[p.plate] } : {}) }]))(icon)
   },
 }

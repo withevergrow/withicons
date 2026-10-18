@@ -1,0 +1,49 @@
+{
+  "name": "sailboat",
+  "intent": "rocks gently on the swell",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      17
+    ],
+    "amount": 0.7,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "rock",
+    "origin": [
+      12,
+      17
+    ],
+    "amount": 1.2,
+    "duration": 1.2
+  },
+  "parts": {
+    "A": {
+      "preset": "float",
+      "amount": 0.4,
+      "duration": 3,
+      "delay": 0.3
+    }
+  },
+  "alt": [
+    {
+      "preset": "float"
+    },
+    {
+      "preset": "nudge",
+      "dir": 0
+    }
+  ],
+  "swap": [
+    {
+      "to": "ship",
+      "effect": "fade"
+    },
+    {
+      "to": "anchor",
+      "effect": "slide-down"
+    }
+  ]
+}

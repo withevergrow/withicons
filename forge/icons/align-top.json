@@ -1,0 +1,57 @@
+{
+  "name": "align-top",
+  "category": "layout",
+  "description": "A long and a short bar hanging from a top line, for aligning objects to their top edge.",
+  "aliases": [
+    "align-items-top",
+    "vertical-align-top",
+    "align-start-vertical",
+    "top-align",
+    "flush-top",
+    "valign-top",
+    "align-vertical-top",
+    "snap-to-top"
+  ],
+  "tags": [
+    "align",
+    "top",
+    "layout",
+    "objects",
+    "design",
+    "arrange"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 3 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 7 H8.5 A1.5 1.5 0 0 1 10 8.5 V19.5 A1.5 1.5 0 0 1 8.5 21 H5.5 A1.5 1.5 0 0 1 4 19.5 V8.5 A1.5 1.5 0 0 1 5.5 7 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 7 H18.5 A1.5 1.5 0 0 1 20 8.5 V13 A1.5 1.5 0 0 1 18.5 14.5 H15.5 A1.5 1.5 0 0 1 14 13 V8.5 A1.5 1.5 0 0 1 15.5 7 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 7 H8.5 A1.5 1.5 0 0 1 10 8.5 V19.5 A1.5 1.5 0 0 1 8.5 21 H5.5 A1.5 1.5 0 0 1 4 19.5 V8.5 A1.5 1.5 0 0 1 5.5 7 Z",
+    "M15.5 7 H18.5 A1.5 1.5 0 0 1 20 8.5 V13 A1.5 1.5 0 0 1 18.5 14.5 H15.5 A1.5 1.5 0 0 1 14 13 V8.5 A1.5 1.5 0 0 1 15.5 7 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "align top",
+    "top edge",
+    "vertical alignment",
+    "align objects",
+    "align layers",
+    "arrange",
+    "distribute",
+    "layout",
+    "hang",
+    "top aligned",
+    "justify top",
+    "flex start",
+    "align start"
+  ]
+}

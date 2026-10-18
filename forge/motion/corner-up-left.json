@@ -1,0 +1,46 @@
+{
+  "name": "corner-up-left",
+  "intent": "swings back to the left, the head leading",
+  "loop": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 180,
+    "amount": 0.75,
+    "duration": 0.55
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.68
+    }
+  },
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "spin-once",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "corner-up-right",
+      "effect": "flip"
+    },
+    {
+      "to": "undo",
+      "effect": "fade"
+    },
+    {
+      "to": "corner-down-left",
+      "effect": "rotate"
+    }
+  ]
+}

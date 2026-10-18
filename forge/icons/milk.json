@@ -1,0 +1,76 @@
+{
+  "name": "milk",
+  "category": "food",
+  "description": "A gable-top milk carton in three-quarter view with a drop on its front panel, for dairy, groceries, breakfast and baking.",
+  "aliases": [
+    "milk-carton",
+    "carton",
+    "dairy",
+    "milk-box",
+    "carton-of-milk",
+    "whole-milk",
+    "oat-milk",
+    "skim-milk"
+  ],
+  "tags": [
+    "food",
+    "drink",
+    "dairy",
+    "grocery",
+    "breakfast"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 10 L7.5 4 H16.5 L19.5 10 V19.5 A2 2 0 0 1 17.5 21.5 H6.5 A2 2 0 0 1 4.5 19.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 10 H13.5 L16.5 4 M13.5 10 V21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 4 V2.5 H16.5 V4",
+      "plate": "A"
+    },
+    {
+      "d": "M9 13 C10.25 14.5 11 15.5 11 16.5 A2 2 0 0 1 7 16.5 C7 15.5 7.75 14.5 9 13 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 10 L7.5 4 V2.5 H16.5 V4 L19.5 10 V19.5 A2 2 0 0 1 17.5 21.5 H6.5 A2 2 0 0 1 4.5 19.5 Z"
+  ],
+  "cutouts": [
+    "M4.5 10 H13.5 L16.5 4",
+    "M13.5 10 V22",
+    "M7.5 4 H16.5",
+    "M9 13 C10.25 14.5 11 15.5 11 16.5 A2 2 0 0 1 7 16.5 C7 15.5 7.75 14.5 9 13 Z"
+  ],
+  "synonyms": [
+    "dairy products",
+    "plant milk",
+    "almond milk",
+    "soy milk",
+    "lactose",
+    "lactose free",
+    "calcium",
+    "cereal",
+    "breakfast",
+    "coffee creamer",
+    "grocery",
+    "groceries",
+    "fridge",
+    "refrigerator",
+    "pint",
+    "litre",
+    "gallon",
+    "drink",
+    "beverage",
+    "baking ingredient",
+    "farm",
+    "milkman",
+    "school milk",
+    "mlik",
+    "milc"
+  ]
+}

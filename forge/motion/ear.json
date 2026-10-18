@@ -1,0 +1,35 @@
+{
+  "name": "ear",
+  "intent": "leans in, listening closely",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "wiggle"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "headphones",
+      "effect": "fade"
+    },
+    {
+      "to": "volume",
+      "effect": "slide-left"
+    }
+  ]
+}

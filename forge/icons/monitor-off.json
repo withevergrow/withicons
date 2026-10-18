@@ -1,0 +1,71 @@
+{
+  "name": "monitor-off",
+  "category": "devices",
+  "description": "A desktop monitor struck through by a slash, for a screen that is off, asleep or has no signal.",
+  "aliases": [
+    "screen-off",
+    "display-off",
+    "monitor-disabled",
+    "no-display",
+    "desktop-off",
+    "screen-disabled",
+    "blank-screen",
+    "display-disabled"
+  ],
+  "tags": [
+    "devices",
+    "display",
+    "screen",
+    "off",
+    "disabled"
+  ],
+  "paths": [
+    {
+      "d": "M7.74 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20.64 16.4",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.5 H4 A2 2 0 0 1 2 14.5 V6.24",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.5 V21",
+      "plate": "A"
+    },
+    {
+      "d": "M8 21 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M7.04 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20.04 16.5 Z",
+    "M12.96 16.5 H4 A2 2 0 0 1 2 14.5 V5.54 Z"
+  ],
+  "cutouts": [
+    "M5 5.5 H19 A1 1 0 0 1 20 6.5 V12.5 A1 1 0 0 1 19 13.5 H5 A1 1 0 0 1 4 12.5 V6.5 A1 1 0 0 1 5 5.5 Z"
+  ],
+  "synonyms": [
+    "screen off",
+    "display off",
+    "turn off screen",
+    "sleep mode",
+    "standby",
+    "monitor sleep",
+    "no signal",
+    "disconnected display",
+    "black screen",
+    "blank display",
+    "power off monitor",
+    "hide screen",
+    "stop sharing",
+    "stop presenting",
+    "monitor offline",
+    "no screen",
+    "display unavailable",
+    "monior off"
+  ]
+}

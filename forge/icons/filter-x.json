@@ -1,0 +1,57 @@
+{
+  "name": "filter-x",
+  "category": "actions",
+  "description": "A funnel with an x for clearing filters and resetting a filtered list.",
+  "aliases": [
+    "clear-filter",
+    "clear-filters",
+    "remove-filter",
+    "filter-remove",
+    "reset-filter",
+    "filter-off",
+    "no-filter",
+    "funnel-x",
+    "filter-clear",
+    "unfilter"
+  ],
+  "synonyms": [
+    "reset filters",
+    "remove filters",
+    "show all",
+    "clear all",
+    "clear selection",
+    "remove criteria",
+    "cancel filter",
+    "reset search",
+    "undo filter",
+    "filter cancel",
+    "all results",
+    "delete filter",
+    "funnel off"
+  ],
+  "tags": [
+    "filter",
+    "funnel",
+    "clear",
+    "x",
+    "reset"
+  ],
+  "paths": [
+    {
+      "d": "M3.64 3.5 L18.36 3.5 A1 1 0 0 1 19.13 5.14 L13.35 12.08 A1.5 1.5 0 0 0 13 13.04 L13 18.69 A0.5 0.5 0 0 1 12.72 19.14 L9.72 20.64 A0.5 0.5 0 0 1 9 20.19 L9 13.04 A1.5 1.5 0 0 0 8.65 12.08 L2.87 5.14 A1 1 0 0 1 3.64 3.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 15.5 L20.5 19.5",
+      "plate": "S"
+    },
+    {
+      "d": "M20.5 15.5 L16.5 19.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3.64 3.5 L18.36 3.5 A1 1 0 0 1 19.13 5.14 L13.35 12.08 A1.5 1.5 0 0 0 13 13.04 L13 18.69 A0.5 0.5 0 0 1 12.72 19.14 L9.72 20.64 A0.5 0.5 0 0 1 9 20.19 L9 13.04 A1.5 1.5 0 0 0 8.65 12.08 L2.87 5.14 A1 1 0 0 1 3.64 3.5 Z"
+  ],
+  "cutouts": []
+}

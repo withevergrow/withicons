@@ -1,0 +1,52 @@
+{
+  "name": "text-cursor",
+  "category": "text",
+  "description": "An I-beam text cursor, for typing, text selection and insertion points.",
+  "aliases": [
+    "i-beam",
+    "ibeam",
+    "caret",
+    "text-caret",
+    "typing-cursor",
+    "insertion-point",
+    "text-select",
+    "edit-cursor",
+    "beam-cursor"
+  ],
+  "tags": [
+    "text",
+    "cursor",
+    "typing",
+    "editor",
+    "input"
+  ],
+  "paths": [
+    {
+      "d": "M12 6 V18",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3.5 H9.5 A2.5 2.5 0 0 1 12 6 A2.5 2.5 0 0 1 14.5 3.5 H16",
+      "plate": "A"
+    },
+    {
+      "d": "M8 20.5 H9.5 A2.5 2.5 0 0 0 12 18 A2.5 2.5 0 0 0 14.5 20.5 H16",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "text insertion",
+    "type here",
+    "mouse text",
+    "blinking cursor",
+    "edit text",
+    "text pointer",
+    "selection cursor",
+    "typing",
+    "insert text",
+    "text tool",
+    "caret position"
+  ]
+}

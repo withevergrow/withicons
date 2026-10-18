@@ -1,0 +1,70 @@
+{
+  "name": "clock-alert",
+  "category": "time",
+  "description": "A clock with an exclamation mark beside it, for overdue tasks, late payments and time warnings.",
+  "aliases": [
+    "clock-warning",
+    "overdue",
+    "time-alert",
+    "time-warning",
+    "deadline-alert",
+    "clock-exclamation",
+    "past-due",
+    "running-late"
+  ],
+  "tags": [
+    "time",
+    "clock",
+    "alert",
+    "warning",
+    "overdue",
+    "deadline"
+  ],
+  "paths": [
+    {
+      "d": "M16.5 20.37 A9.5 9.5 0 1 1 21.17 9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6.5 V12 L16 14",
+      "plate": "A"
+    },
+    {
+      "d": "M20 13 V16.5",
+      "plate": "S"
+    },
+    {
+      "d": "M20 20 V20.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M16.5 20.37 A9.5 9.5 0 1 1 21.17 9.5 A15 15 0 0 0 16.5 20.37 Z"
+  ],
+  "cutouts": [
+    "M12 6.5 V12 L16 14"
+  ],
+  "synonyms": [
+    "late",
+    "past due date",
+    "deadline",
+    "deadline missed",
+    "missed deadline",
+    "urgent",
+    "expiring",
+    "expires soon",
+    "expired",
+    "timeout",
+    "time out",
+    "sla breach",
+    "delay",
+    "delayed",
+    "behind schedule",
+    "reminder",
+    "attention",
+    "time sensitive",
+    "late payment",
+    "overdue invoice",
+    "hurry"
+  ]
+}

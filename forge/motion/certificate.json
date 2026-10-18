@@ -1,0 +1,48 @@
+{
+  "name": "certificate",
+  "intent": "the seal shines while its ribbon tails flutter",
+  "loop": {
+    "preset": "glow",
+    "amount": 0.6,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "tada",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        16.5,
+        11.75
+      ],
+      "amount": 0.5,
+      "duration": 2.8,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "twinkle"
+    }
+  ],
+  "swap": [
+    {
+      "to": "award",
+      "effect": "morph"
+    },
+    {
+      "to": "graduation-cap",
+      "effect": "flip"
+    },
+    {
+      "to": "certificate@solid",
+      "effect": "scale"
+    }
+  ]
+}

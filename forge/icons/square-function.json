@@ -1,0 +1,59 @@
+{
+  "name": "square-function",
+  "category": "development",
+  "description": "An italic function f in a rounded square, for formulas, functions and insert-function buttons.",
+  "aliases": [
+    "function-square",
+    "fx",
+    "formula-box",
+    "function-box",
+    "math-function",
+    "f-of-x",
+    "function-tile",
+    "insert-function"
+  ],
+  "tags": [
+    "code",
+    "math",
+    "function",
+    "formula",
+    "spreadsheet",
+    "developer"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.5 6.5 H15 A2.5 2.5 0 0 0 12.5 9 V15 A2.5 2.5 0 0 1 10 17.5 H9",
+      "plate": "A"
+    },
+    {
+      "d": "M9.5 11 H15",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z"
+  ],
+  "cutouts": [
+    "M15.5 6.5 H15 A2.5 2.5 0 0 0 12.5 9 V15 A2.5 2.5 0 0 1 10 17.5 H9",
+    "M9.5 11 H15"
+  ],
+  "synonyms": [
+    "formula",
+    "excel function",
+    "spreadsheet formula",
+    "fx button",
+    "calculate",
+    "math",
+    "equation",
+    "compute",
+    "method",
+    "serverless function",
+    "cloud function",
+    "lambda",
+    "f(x)"
+  ]
+}

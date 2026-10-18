@@ -1,0 +1,54 @@
+{
+  "name": "toolbox",
+  "intent": "hops up as if lifted by its handle, latch clicking",
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      20.5
+    ],
+    "amount": 0.4,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "amount": 0.6,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        20.5
+      ]
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        4
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "wrench",
+      "effect": "fade"
+    },
+    {
+      "to": "hammer",
+      "effect": "fade"
+    },
+    {
+      "to": "screwdriver",
+      "effect": "slide-up"
+    }
+  ]
+}

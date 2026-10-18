@@ -1,5 +1,5 @@
 // Size budget (scripts/package-budget.mjs): jsDelivr serves at most 150 MB per package version and ~20 MB per file,
-// so the publishable files stay under 120 MB unpacked (headroom for new icons) and no file goes over 20 MB.
+// so the publishable files stay under 145 MB unpacked (headroom for new icons) and no file goes over 20 MB.
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'

@@ -1,0 +1,57 @@
+{
+  "name": "panel-top",
+  "category": "layout",
+  "description": "A window frame with a bar across the top, for headers, toolbars and top panels.",
+  "aliases": [
+    "top-panel",
+    "header-panel",
+    "header-bar",
+    "toolbar-panel",
+    "app-bar",
+    "panel-top-open",
+    "dock-top",
+    "title-bar",
+    "top-sheet",
+    "navbar-layout"
+  ],
+  "tags": [
+    "layout",
+    "panel",
+    "window",
+    "header",
+    "toolbar",
+    "top"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 A2 2 0 0 1 21 5 V19 A2 2 0 0 1 19 21 H5 A2 2 0 0 1 3 19 V5 A2 2 0 0 1 5 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M3 9 H21",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M3 9 V5 A2 2 0 0 1 5 3 H19 A2 2 0 0 1 21 5 V9 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "header",
+    "navbar",
+    "navigation bar",
+    "toolbar",
+    "top bar",
+    "menu bar",
+    "banner",
+    "ribbon",
+    "window layout",
+    "layout",
+    "pane",
+    "top drawer",
+    "notification shade",
+    "browser window",
+    "frame",
+    "masthead"
+  ]
+}

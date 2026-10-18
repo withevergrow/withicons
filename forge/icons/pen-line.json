@@ -1,0 +1,64 @@
+{
+  "name": "pen-line",
+  "category": "actions",
+  "description": "A pen writing over a baseline for signing, writing text or editing a field.",
+  "aliases": [
+    "pen-write",
+    "write-line",
+    "write-on-line",
+    "edit-text",
+    "pen-underline",
+    "signature-line",
+    "pen-baseline",
+    "pencil-line",
+    "edit-line"
+  ],
+  "synonyms": [
+    "write",
+    "sign",
+    "signature",
+    "edit",
+    "rename",
+    "type",
+    "input",
+    "compose",
+    "author",
+    "text field",
+    "fill in",
+    "annotate",
+    "handwriting",
+    "scribble",
+    "note",
+    "draft",
+    "ink",
+    "fountain pen",
+    "ballpoint"
+  ],
+  "tags": [
+    "pen",
+    "write",
+    "edit",
+    "line",
+    "sign"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 20.5 L4.5 16 L15 5.5 A2.47 2.47 0 0 1 18.5 9 L8 19.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M4.5 16 L8 19.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 20.5 H21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3.5 20.5 L4.5 16 L15 5.5 A2.47 2.47 0 0 1 18.5 9 L8 19.5 Z"
+  ],
+  "cutouts": [
+    "M4.5 16 L8 19.5"
+  ]
+}

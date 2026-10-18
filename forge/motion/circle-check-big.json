@@ -1,0 +1,56 @@
+{
+  "name": "circle-check-big",
+  "intent": "the big check sweeps out of the ring: done",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.35,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        11.5,
+        14.5
+      ],
+      "amount": 0.6,
+      "duration": 3,
+      "delay": 0.15
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.6
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "circle-check-big@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "circle-dashed",
+      "effect": "morph"
+    },
+    {
+      "to": "check-circle",
+      "effect": "fade"
+    }
+  ]
+}

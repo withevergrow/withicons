@@ -1,0 +1,40 @@
+{
+  "name": "a-large-small",
+  "intent": "the letters swell and settle like text being resized",
+  "loop": {
+    "preset": "zoom",
+    "amount": 0.4,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "amount": 0.8,
+      "duration": 2.6,
+      "delay": 0.3
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "type",
+      "effect": "fade"
+    },
+    {
+      "to": "case-sensitive",
+      "effect": "flip"
+    }
+  ]
+}

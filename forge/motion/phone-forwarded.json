@@ -1,0 +1,57 @@
+{
+  "name": "phone-forwarded",
+  "intent": "the handset buzzes softly while the arrow passes the call along",
+  "loop": {
+    "preset": "ring",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.3,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.7,
+    "duration": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.9,
+      "duration": 1.2,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.8
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "phone",
+      "effect": "fade"
+    },
+    {
+      "to": "phone-outgoing",
+      "effect": "rotate"
+    },
+    {
+      "to": "phone-incoming",
+      "effect": "flip"
+    }
+  ]
+}

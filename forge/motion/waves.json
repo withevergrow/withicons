@@ -1,0 +1,42 @@
+{
+  "name": "waves",
+  "intent": "water rolls gently from side to side",
+  "loop": {
+    "preset": "float",
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.5,
+      "duration": 3,
+      "delay": 0.2
+    }
+  },
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 0
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "droplets",
+      "effect": "fade"
+    },
+    {
+      "to": "sailboat",
+      "effect": "slide-up"
+    }
+  ]
+}

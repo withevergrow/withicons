@@ -1,0 +1,58 @@
+{
+  "name": "book-marked",
+  "intent": "rests on the shelf while its ribbon sways gently",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3.6
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8,
+    "duration": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        13,
+        2.5
+      ],
+      "amount": 0.6,
+      "duration": 2.4,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "float",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "book",
+      "effect": "fade"
+    },
+    {
+      "to": "book-open",
+      "effect": "flip"
+    },
+    {
+      "to": "bookmark",
+      "effect": "slide-down"
+    }
+  ]
+}

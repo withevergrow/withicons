@@ -1,0 +1,56 @@
+{
+  "name": "bell-minus",
+  "category": "communication",
+  "description": "A bell with a minus for removing an alert or turning notifications down.",
+  "aliases": [
+    "remove-notification",
+    "remove-alert",
+    "delete-alert",
+    "fewer-notifications",
+    "notifications-minus",
+    "unsubscribe-alerts",
+    "alert-minus",
+    "bell-remove",
+    "remove-reminder"
+  ],
+  "synonyms": [
+    "less notifications",
+    "reduce alerts",
+    "delete reminder",
+    "cancel alert",
+    "stop alert",
+    "notification settings",
+    "quieter",
+    "mute some",
+    "fewer alerts",
+    "opt out",
+    "unfollow",
+    "turn down",
+    "bell minus"
+  ],
+  "tags": [
+    "bell",
+    "minus",
+    "remove",
+    "notification",
+    "alert"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 16.5 V12 A5.5 5.5 0 0 1 16.5 12 V16.5 L18 18.5 H4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 18.5 A2.5 2.5 0 0 0 13.5 18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M17.5 6 H21.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M5.5 16.5 V12 A5.5 5.5 0 0 1 16.5 12 V16.5 L18 18.5 H4 Z"
+  ],
+  "cutouts": []
+}

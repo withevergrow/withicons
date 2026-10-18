@@ -1,0 +1,50 @@
+{
+  "name": "axe",
+  "intent": "rocks on its handle, then chops down with a rebound",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      8.2,
+      21.8
+    ],
+    "amount": 0.45,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "ring",
+    "origin": [
+      8.2,
+      21.8
+    ],
+    "amount": 0.9,
+    "duration": 0.8
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "tilt",
+      "origin": [
+        8.2,
+        21.8
+      ]
+    },
+    {
+      "preset": "nod",
+      "amount": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "pickaxe",
+      "effect": "rotate"
+    },
+    {
+      "to": "hammer",
+      "effect": "rotate"
+    },
+    {
+      "to": "tree-pine",
+      "effect": "fade"
+    }
+  ]
+}

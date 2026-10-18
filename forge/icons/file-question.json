@@ -1,0 +1,69 @@
+{
+  "name": "file-question",
+  "category": "files",
+  "description": "A page with a question mark for unknown file types, help documents and FAQs.",
+  "aliases": [
+    "unknown-file",
+    "file-help",
+    "help-document",
+    "file-unknown",
+    "document-question",
+    "faq-document",
+    "missing-file",
+    "file-query"
+  ],
+  "tags": [
+    "file",
+    "question",
+    "help",
+    "unknown",
+    "faq",
+    "support"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M9.75 12 A2.25 2.25 0 1 1 13.4 13.75 C12.6 14.3 12 14.75 12 15.5 V15.75",
+      "plate": "A"
+    },
+    {
+      "d": "M12 18.25 V18.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M9.75 12 A2.25 2.25 0 1 1 13.4 13.75 C12.6 14.3 12 14.75 12 15.5 V15.75",
+    "M13 18.4 A1 1 0 1 1 11 18.4 A1 1 0 1 1 13 18.4 Z"
+  ],
+  "synonyms": [
+    "help",
+    "question mark",
+    "unknown",
+    "unsupported",
+    "unrecognised",
+    "unrecognized",
+    "faq",
+    "documentation",
+    "guide",
+    "support article",
+    "what is this",
+    "not found",
+    "missing",
+    "unclear",
+    "query",
+    "ask",
+    "knowledge base",
+    "how to"
+  ]
+}

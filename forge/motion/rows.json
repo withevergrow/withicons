@@ -1,0 +1,46 @@
+{
+  "name": "rows",
+  "intent": "the divider slides like a split being resized",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.35,
+      "duration": 3.2,
+      "delay": 0.08
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "flip"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "columns",
+      "effect": "rotate"
+    },
+    {
+      "to": "panel-bottom",
+      "effect": "fade"
+    },
+    {
+      "to": "grid-2x2",
+      "effect": "morph"
+    }
+  ]
+}

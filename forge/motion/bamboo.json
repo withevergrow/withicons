@@ -1,6 +1,6 @@
 {
   "name": "bamboo",
-  "intent": "bamboo stalks bend in the wind",
+  "intent": "bamboo stalks and their leaves bend in the wind",
   "loop": {
     "preset": "sway",
     "origin": [
@@ -18,13 +18,6 @@
     ],
     "amount": 1.4,
     "duration": 1.4
-  },
-  "parts": {
-    "A": {
-      "preset": "wiggle",
-      "amount": 0.6,
-      "delay": 0.1
-    }
   },
   "alt": [
     {

@@ -1,0 +1,45 @@
+{
+  "name": "mountain-snow",
+  "intent": "sits still while the snow cap catches the light",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.4,
+    "duration": 4
+  },
+  "hover": {
+    "preset": "pop",
+    "origin": [
+      12,
+      20
+    ]
+  },
+  "parts": {
+    "A": {
+      "preset": "twinkle",
+      "origin": [
+        9.5,
+        11.5
+      ],
+      "amount": 0.6,
+      "delay": 0.15
+    }
+  },
+  "alt": [
+    {
+      "preset": "glow"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "mountain",
+      "effect": "fade"
+    },
+    {
+      "to": "snowflake",
+      "effect": "blur"
+    }
+  ]
+}

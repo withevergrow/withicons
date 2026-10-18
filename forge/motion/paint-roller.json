@@ -1,0 +1,47 @@
+{
+  "name": "paint-roller",
+  "intent": "rolls up and down the wall laying on a fresh coat",
+  "loop": {
+    "preset": "nudge",
+    "dir": 90,
+    "amount": 0.7,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 1.1,
+    "duration": 0.8
+  },
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "paintbrush",
+      "effect": "fade"
+    },
+    {
+      "to": "paint-bucket",
+      "effect": "slide-right"
+    },
+    {
+      "to": "palette",
+      "effect": "fade"
+    }
+  ]
+}

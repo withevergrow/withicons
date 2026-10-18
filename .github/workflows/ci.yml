@@ -34,6 +34,9 @@ jobs:
       - name: Lint skeletons and render through every style
         run: node forge/tools/check.mjs
 
+      - name: Hand-drawn overrides (forge/hand/**, forge/HAND.md)
+        run: node forge/tools/hand.mjs check --all --quiet
+
       - name: Lint animation specs (forge/motion/*.json)
         if: hashFiles('forge/tools/check-motion.mjs') != ''
         run: node forge/tools/check-motion.mjs

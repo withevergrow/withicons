@@ -12,6 +12,9 @@
 //   packages/loaders/{package.json,README.md}, site/vendor/loaders/** (the cdn build), site/data/loaders.js
 // Hand-written runtime: packages/loaders/src/{core,effects,element,react,vue}.js + index.d.ts.
 // Runs inside forge/build.mjs, or standalone:  node forge/lib/emit-loaders.mjs [--no-site] [--styles line,glass] [--quiet]
+// --styles (ctx.onlyStyles) is a quick partial run: it redraws only those styles (and line, the built-in one), keeps
+// every other style's files in dist and site/loaders/svg, rebuilds the runtime entries over all the styles present,
+// and leaves package.json, README.md and the MCP data (packages/mcp/src/loaders-data.mjs) alone: a full run writes those.
 import fs from 'fs'
 import os from 'os'
 import path from 'path'
@@ -70,7 +73,9 @@ export default async function emit(ctx = {}) {
   const core = await import(pathToFileURL(path.join(ROOT, 'forge', 'lib', 'emit-core.mjs')).href)
   const C = await import(pathToFileURL(path.join(ROOT, 'forge', 'lib', 'loader-compile.mjs')).href)
   const allStyles = core.STYLE_ORDER.filter(s => fs.existsSync(path.join(ROOT, 'forge', 'styles', s + '.mjs')))
-  const styleNames = ctx.onlyStyles ? allStyles.filter(s => ctx.onlyStyles.includes(s)) : allStyles
+  const partial = !!(ctx.onlyStyles && ctx.onlyStyles.length)
+  // a partial run still draws line: the runtime and the CDN script carry it built in
+  const styleNames = partial ? allStyles.filter(s => s === 'line' || ctx.onlyStyles.includes(s)) : allStyles
   const specs = []
   for (const n of C.listLoaders()) { try { specs.push(await C.loadLoader(n)) } catch (e) { log(`  ! skipped ${n}: ${e.message}`) } }
   specs.push(...await C.loadMorphs())
@@ -82,8 +87,9 @@ export default async function emit(ctx = {}) {
   const res = await compileAll(styleNames, log)
   const cdnMap = Object.fromEntries(allStyles.map(s => [s, core.cdnPkg(s, 'core')]))
 
-  // ---- clean + write
-  fs.rmSync(DIST, { recursive: true, force: true })
+  // ---- clean + write (a partial run cleans only the styles it redraws)
+  if (!partial) fs.rmSync(DIST, { recursive: true, force: true })
+  else for (const s of styleNames) if (res[s] && res[s].bodies) for (const rel of [`svg/${s}`, `styles/${s}.js`, `cdn/styles/${s}.js`]) fs.rmSync(path.join(DIST, rel), { recursive: true, force: true })
   const W = (rel, text) => { const f = path.join(DIST, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, text) }
   let files = 0, bytes = 0
   for (const s of styleNames) {
@@ -98,7 +104,9 @@ export default async function emit(ctx = {}) {
   for (const f of ['core.js', 'effects.js', 'element.js', 'react.js', 'vue.js']) W(`lib/${f}`, `${BANNER(version)}\n` + fs.readFileSync(path.join(SRC, f), 'utf8'))
   W('catalog.json', JSON.stringify(catalog, null, 1) + '\n')
   W('catalog.js', `${BANNER(version)}\nexport default ${J(catalog)}\n`)
-  const metaObj = { version, styles: styleNames, cdn: cdnMap }
+  // every style whose files are in dist (all of them after a full run; a partial run keeps the others' files)
+  const shipped = allStyles.filter(s => (res[s] && res[s].bodies) || (partial && fs.existsSync(path.join(DIST, 'styles', s + '.js'))))
+  const metaObj = { version, styles: shipped, cdn: cdnMap }
   const configure = `L.configure({ catalog, meta: ${J(metaObj)}, loader: s => import('./styles/' + s + '.js') })`
   W('index.js', `${BANNER(version)}\nimport * as L from './lib/core.js'\nimport catalog from './catalog.js'\nimport './styles/line.js'\n${configure}\nexport * from './lib/core.js'\nexport { EFFECTS, EASE, morphKeys } from './lib/effects.js'\n`)
   W('element.js', `${BANNER(version)}\nimport './index.js'\nimport { defineLoader } from './lib/element.js'\nexport * from './index.js'\nexport { WithLoaderElement, defineLoader } from './lib/element.js'\ndefineLoader()\n`)
@@ -124,7 +132,43 @@ export default async function emit(ctx = {}) {
     banner: { js: BANNER(version) }, outfile: path.join(DIST, 'cdn', 'loaders.js'), logLevel: 'silent',
   })
 
-  // ---- package.json + README
+  // ---- package.json + README + MCP data: full runs only (a partial run would describe only its own styles)
+  if (!partial) writePackage(version, catalog, shipped)
+
+  // ---- site
+  if (!ctx.noSite) {
+    const vend = path.join(ROOT, 'site', 'vendor', 'loaders')
+    fs.rmSync(vend, { recursive: true, force: true })
+    fs.cpSync(path.join(DIST, 'cdn'), vend, { recursive: true })
+    // one file per loader and style (colour variables kept, so palettes recolour them): the gallery fetches only what
+    // is on screen; also public URLs (withicons.com/loaders/svg/<style>/<name>.svg)
+    const sdir = path.join(ROOT, 'site', 'loaders', 'svg')
+    if (!partial) fs.rmSync(sdir, { recursive: true, force: true })
+    for (const s of styleNames) {
+      if (!res[s] || !res[s].svgs) continue
+      if (partial) fs.rmSync(path.join(sdir, s), { recursive: true, force: true })
+      for (const [name, svg] of Object.entries(res[s].svgs)) {
+        const f = path.join(sdir, s, name + '.svg'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, svg)
+      }
+    }
+    const { EFFECTS } = await import(pathToFileURL(path.join(SRC, 'effects.js')).href)
+    // sizes of the standalone files; styles a partial run did not redraw are measured from their files in dist
+    // (in catalogue order either way, so a partial run writes the same bytes a full run does)
+    const sizeOf = s => Object.fromEntries(catalog.map(l => {
+      if (res[s] && res[s].svgs) return res[s].svgs[l.name] == null ? null : [l.name, flatStyle(res[s].svgs[l.name]).length]
+      const f = path.join(DIST, 'svg', s, l.name + '.svg')
+      return fs.existsSync(f) ? [l.name, fs.readFileSync(f, 'utf8').length] : null
+    }).filter(Boolean))
+    const site = { version, styles: shipped, loaders: catalog, effects: Object.entries(EFFECTS).map(([name, e]) => ({ name, title: e.title, say: e.say })),
+      sizes: Object.fromEntries(shipped.map(s => [s, sizeOf(s)])) }
+    const f = path.join(ROOT, 'site', 'data', 'loaders.js')
+    fs.writeFileSync(f, `/* generated by forge/lib/emit-loaders.mjs, do not edit */\nwindow.WITH_LOADERS=${J(site)};\n`)
+  }
+  const n50 = catalog.filter(l => l.group !== 'morph').length
+  return `${n50} loaders + ${catalog.length - n50} morphs x ${styleNames.length} styles${partial ? ` (partial: ${styleNames.join(', ')}; package.json, README and MCP data left as they were)` : ''} = ${files} svgs, ${(bytes / 1048576).toFixed(1)} MB (${((Date.now() - t0) / 1000).toFixed(1)}s)`
+}
+
+function writePackage(version, catalog, styleNames) {
   const pkg = {
     name: '@withicons/loaders', version,
     description: `${catalog.filter(l => l.group !== 'morph').length} animated loaders (common, creative, festival) + icon morph sequences in all ${styleNames.length} with icons styles. One self-contained SVG each: works as <img>, inline, <with-loader>, React or Vue. Pure CSS animation, zero dependencies.`,
@@ -154,27 +198,6 @@ export default async function emit(ctx = {}) {
   fs.writeFileSync(path.join(PKG, 'README.md'), readme(version, catalog, styleNames))
   // the MCP server's get_loader tool reads this (bundled into @withicons/mcp; no dependency on this package)
   fs.writeFileSync(path.join(ROOT, 'packages', 'mcp', 'src', 'loaders-data.mjs'), `// Generated by forge/lib/emit-loaders.mjs, do not edit.\nexport default ${J({ version, styles: styleNames, loaders: catalog })}\n`)
-
-  // ---- site
-  if (!ctx.noSite) {
-    const vend = path.join(ROOT, 'site', 'vendor', 'loaders')
-    fs.rmSync(vend, { recursive: true, force: true })
-    fs.cpSync(path.join(DIST, 'cdn'), vend, { recursive: true })
-    // one file per loader and style (colour variables kept, so palettes recolour them): the gallery fetches only what
-    // is on screen; also public URLs (withicons.com/loaders/svg/<style>/<name>.svg)
-    const sdir = path.join(ROOT, 'site', 'loaders', 'svg')
-    fs.rmSync(sdir, { recursive: true, force: true })
-    for (const s of styleNames) for (const [name, svg] of Object.entries((res[s] && res[s].svgs) || {})) {
-      const f = path.join(sdir, s, name + '.svg'); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, svg)
-    }
-    const { EFFECTS } = await import(pathToFileURL(path.join(SRC, 'effects.js')).href)
-    const site = { version, styles: styleNames, loaders: catalog, effects: Object.entries(EFFECTS).map(([name, e]) => ({ name, title: e.title, say: e.say })),
-      sizes: Object.fromEntries(styleNames.filter(s => res[s]).map(s => [s, Object.fromEntries(Object.entries(res[s].svgs).map(([n, v]) => [n, flatStyle(v).length]))])) }
-    const f = path.join(ROOT, 'site', 'data', 'loaders.js')
-    fs.writeFileSync(f, `/* generated by forge/lib/emit-loaders.mjs, do not edit */\nwindow.WITH_LOADERS=${J(site)};\n`)
-  }
-  const n50 = catalog.filter(l => l.group !== 'morph').length
-  return `${n50} loaders + ${catalog.length - n50} morphs x ${styleNames.length} styles = ${files} svgs, ${(bytes / 1048576).toFixed(1)} MB (${((Date.now() - t0) / 1000).toFixed(1)}s)`
 }
 
 function readme(version, catalog, styles) {
@@ -207,7 +230,14 @@ Swap \`line\` for any style (${styles.join(', ')}) and \`spinner\` for any loade
 <with-loader morph="file,cloud-upload,check-circle" effect="slide-up"></with-loader>
 \`\`\`
 
-\`el.done('check-circle')\` turns a running loader into a finished icon; \`el.reset()\` starts it again; \`paused\` pauses.
+\`el.done('check-circle')\` turns a running loader into a finished icon (always the library icon, even when a loader
+has the same name); \`el.reset()\` starts it again; \`paused\` pauses. The finish is announced through a polite
+\`role="status"\` live region.
+
+**Morph items are library icon names.** Since 0.6.0 a plain name in \`morph="…"\`, \`<Morph items>\`, \`morph()\` and
+\`morphAsync()\` is always an icon, even when a loader has the same name (\`rocket\`, \`download\`, \`gift\` …). To put a
+loader in the chain, ask for it: \`loader:<name>\` (or \`{ loader: '<name>' }\`), e.g.
+\`morph="file,loader:upload,check-circle"\`. Earlier versions turned a name that was also a loader into the loader.
 
 ## npm
 
@@ -220,6 +250,8 @@ import { svg, svgAsync, url, morphAsync, search } from '@withicons/loaders'
 el.innerHTML = svg('spinner', { size: 32, color: '#16a34a', label: 'Saving' })   // line is built in (sync)
 el.innerHTML = await svgAsync('fireworks', { style: 'utsav', size: 64 })          // other styles load on demand
 search('ai thinking')     // -> [{ name: 'ai-sparkle', … }, { name: 'morph-ai', … }]
+el.innerHTML = await morphAsync(['wrench', 'settings', 'rocket'], { effect: 'spin' })   // three icons
+el.innerHTML = await morphAsync(['file', 'loader:upload', 'check-circle'])              // an icon, the upload loader, an icon
 \`\`\`
 
 React / Vue:

@@ -1,0 +1,75 @@
+{
+  "name": "calendar-search",
+  "category": "time",
+  "description": "A calendar with a magnifying glass in its corner, for finding events, searching dates and checking availability.",
+  "aliases": [
+    "find-event",
+    "search-events",
+    "find-date",
+    "search-date",
+    "date-search",
+    "event-search",
+    "check-availability",
+    "find-slot",
+    "calendar-find"
+  ],
+  "tags": [
+    "calendar",
+    "search",
+    "find",
+    "event",
+    "date",
+    "availability"
+  ],
+  "paths": [
+    {
+      "d": "M21 11.5 V7 A2 2 0 0 0 19 5 H5 A2 2 0 0 0 3 7 V19 A2 2 0 0 0 5 21 H11.5",
+      "plate": "K"
+    },
+    {
+      "d": "M3 10 H21",
+      "plate": "K"
+    },
+    {
+      "d": "M8 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M16 3 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M19.5 16.5 A3 3 0 1 1 13.5 16.5 A3 3 0 1 1 19.5 16.5 Z",
+      "plate": "S"
+    },
+    {
+      "d": "M18.6 18.6 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M5 5 H19 A2 2 0 0 1 21 7 V11.5 A7 7 0 0 0 11.5 21 H5 A2 2 0 0 1 3 19 V7 A2 2 0 0 1 5 5 Z"
+  ],
+  "cutouts": [
+    "M5 10 H14"
+  ],
+  "synonyms": [
+    "search calendar",
+    "find appointment",
+    "find a time",
+    "find meeting",
+    "availability",
+    "available slots",
+    "free slot",
+    "free time",
+    "browse events",
+    "explore events",
+    "event finder",
+    "date finder",
+    "lookup",
+    "filter dates",
+    "schedule search",
+    "booking search",
+    "magnifier"
+  ]
+}

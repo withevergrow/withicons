@@ -5,7 +5,8 @@ This file is for coding agents (Claude Code, Cursor, Codex, Copilot) that change
 
 ## What this repo is
 
-600 icons x 31 styles = 18,600 icons (current numbers; generators read them from data), all generated from 600 hand-authored skeletons, plus one optional animation spec and 20-30 colour palettes per icon,
+1,000 icons x 34 styles = 34,000 icons (current numbers; generators read them from data), all generated from 1,000 hand-authored skeletons
+(plus hand-drawn per-style overrides in forge/hand/), plus one optional animation spec and 20-30 colour palettes per icon,
 and a separate set of up to 50 **live icons** (content you set: dates, times, counts, labels) whose generators every style renders.
 
 ```
@@ -23,6 +24,8 @@ forge/styles/<style>.mjs    one deterministic renderer per style, in this order 
                             glass is rich too (soft frosted glass with gradients); duo has an accent detail + opt-in gradient.
                             Site groups (site/js/site.js GROUPS): Essentials, Product & brand, 3D & glass, Playful, Artistic, Holidays
                             (palette colours are var(--with-<style>-<role>, #hex), ink stays currentColor)
+forge/hand/<style>/<icon>.mjs hand-drawn override of one icon in one style (replaces the generated drawing);
+                            contract: forge/HAND.md; validate with node forge/tools/hand.mjs check <style> <icon>
 forge/dynamic/<name>.mjs    live icon generators: params -> skeleton, rendered by every style (forge/DYNAMIC.md);
                             ships as @withicons/dynamic (emit-dynamic) and site/vendor/dynamic/dynamic.js (live.html)
 forge/loaders/<name>.mjs    animated loaders (50: common / creative / festival): parts = skeletons + CSS keyframe motion, drawn by
@@ -35,10 +38,10 @@ forge/lib/emit-*.mjs        one emitter per package -> packages/*/dist (generate
 forge/tools/site-data.mjs   site data (site/data/meta.js, style-<name>.js); build.mjs calls its build(ctx)
 forge/tools/site-seo.mjs    generated pages: site/icons/*.html, categories/, styles/, sitemap, robots, llms*.txt, icons.json, og/
 forge/build.mjs             renders everything once, runs every emitter, then site-data + site-seo
-packages/*                  npm packages @withicons/{core,core-plus,soft3d,holiday,react,vue,svelte,angular,solid,web,web-plus,classes,classes-plus,static,static-plus,search,mcp,motion,dynamic} + CLI `withicons`
+packages/*                  npm packages @withicons/{core,core-plus,soft3d,holiday,react,vue,svelte,angular,solid,web,web-plus,classes,classes-plus,static,static-plus,search,mcp,motion,dynamic,loaders} + CLI `withicons`
                             companions (jsDelivr: 150 MB per package): the newest styles' core files (svg, nodes) and class files
                             live in core-plus / classes-plus / web-plus / static-plus, the styles in STYLE_PACKAGE in their own packages (@withicons/soft3d,
-                            @withicons/holiday: dist/ + dist/classes/); core and classes keep the older styles. Build every CDN URL with cdnPkg/cdnDir/cdnSvgUrl
+                            @withicons/holiday: dist/ + dist/classes/); core and classes keep the older styles, except the class files of CLASSES_PLUS_STYLES (glass, skeuo, gothic: classes-plus). Every package stays under 145 MB (scripts/package-budget.mjs). Build every CDN URL with cdnPkg/cdnDir/cdnSvgUrl
                             (forge/lib/emit-core.mjs), never with a hard-coded core@ or classes@ path per style
 site/                       zero-build static website (vanilla HTML/CSS/JS), deployed to withicons.com
 skills/with-icons/          the agent skill for USERS of the library (reference/icons.md is generated)
@@ -62,7 +65,7 @@ node forge/tools/serve.mjs               # http://localhost:4321 (site/)
 npm test --workspaces --if-present       # package tests (incl. packages/search)
 node forge/tools/check-loaders.mjs [names] [--styles a,b]   # validate loader specs, compile every style, size, determinism
 node forge/tools/preview-loaders.mjs --loaders spinner,orbit --styles line,glass --frames 8   # frame strips (motion on a PNG)
-node forge/lib/emit-loaders.mjs [--styles line,glass]        # @withicons/loaders + site loader files only (~2 min)
+node forge/lib/emit-loaders.mjs [--styles line,glass]        # @withicons/loaders + site loader files only (~2 min); --styles redraws just those (+ line) and leaves package.json, README and MCP data alone
 node scripts/skill-sync.mjs [--check]    # regenerate the skill's icons.md, palette + motion tables, counts, site/skill/SKILL.md
 node scripts/deploy.mjs --dry-run        # deploy plan; never run without --dry-run unless asked
 node scripts/publish.mjs --dry-run       # npm pack check (warns if v<version> is already tagged elsewhere); never publish unless asked

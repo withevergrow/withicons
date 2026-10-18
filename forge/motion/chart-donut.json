@@ -1,0 +1,10 @@
+{
+  "name": "chart-donut",
+  "intent": "the pulled-out slice eases away from the ring, then settles back",
+  "loop": { "preset": "pulse", "origin": [11, 13], "amount": 0.25, "duration": 3.2 },
+  "hover": { "preset": "spin-once", "origin": [11, 13], "duration": 0.9 },
+  "parts": { "A": { "preset": "nudge", "dir": 315, "amount": 0.6, "delay": 0.15 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "spin", "origin": [11, 13], "duration": 6 }, { "preset": "pop", "origin": [11, 13] }],
+  "swap": [{ "to": "chart-pie", "effect": "morph" }, { "to": "chart-bar", "effect": "rotate" }, { "to": "chart-donut@solid", "effect": "scale" }]
+}

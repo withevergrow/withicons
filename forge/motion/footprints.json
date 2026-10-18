@@ -1,0 +1,36 @@
+{
+  "name": "footprints",
+  "intent": "steps forward one print at a time",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.5,
+    "duration": 1.4
+  },
+  "hover": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.7
+  },
+  "alt": [
+    {
+      "preset": "wiggle"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "person-running",
+      "effect": "slide-up"
+    },
+    {
+      "to": "route",
+      "effect": "fade"
+    }
+  ]
+}

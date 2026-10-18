@@ -1,0 +1,41 @@
+{
+  "name": "git-pull-request-closed",
+  "intent": "the cross taps down on the pull request: closed without merging",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "amount": 0.7,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-pull-request",
+      "effect": "fade"
+    },
+    {
+      "to": "git-pull-request-draft",
+      "effect": "fade"
+    }
+  ]
+}

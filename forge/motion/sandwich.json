@@ -1,0 +1,43 @@
+{
+  "name": "sandwich",
+  "intent": "the stack squishes softly as if pressed for a first bite",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "amount": 0.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "press"
+    }
+  ],
+  "swap": [
+    {
+      "to": "sandwich@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "burger",
+      "effect": "fade"
+    }
+  ]
+}

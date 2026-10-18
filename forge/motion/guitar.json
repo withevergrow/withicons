@@ -1,0 +1,65 @@
+{
+  "name": "guitar",
+  "intent": "sways to the music like it is being strummed",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      8,
+      17
+    ],
+    "amount": 0.8,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      8,
+      17
+    ],
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        7.6,
+        16.4
+      ],
+      "amount": 0.4,
+      "delay": 0.08
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        8,
+        17
+      ]
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        8,
+        17
+      ],
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "music-note",
+      "effect": "morph"
+    },
+    {
+      "to": "music-2",
+      "effect": "fade"
+    },
+    {
+      "to": "piano",
+      "effect": "scale"
+    }
+  ]
+}

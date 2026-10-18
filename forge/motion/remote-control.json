@@ -1,0 +1,57 @@
+{
+  "name": "remote-control",
+  "intent": "the remote tilts toward the screen and its signal waves pulse out",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      22
+    ],
+    "amount": 0.5,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "press",
+    "amount": 0.8,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.5,
+      "delay": 0.1
+    },
+    "S": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.6,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 270,
+      "amount": 0.4
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.4
+    }
+  ],
+  "swap": [
+    {
+      "to": "tv",
+      "effect": "fade"
+    },
+    {
+      "to": "gamepad",
+      "effect": "scale"
+    }
+  ]
+}

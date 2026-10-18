@@ -1,0 +1,53 @@
+{
+  "name": "radio-tower",
+  "intent": "radio waves pulse out from the top of the mast",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.25,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "glow",
+    "amount": 0.9,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "amount": 1,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "breathe",
+      "origin": [
+        12,
+        7.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "wifi",
+      "effect": "morph"
+    },
+    {
+      "to": "podcast",
+      "effect": "fade"
+    },
+    {
+      "to": "satellite-dish",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,15 +1,16 @@
 // Live icon: a starburst sale sticker with a short deal ("-50%", "SALE", "%").
-// Short text sits inside the burst. Longer text runs across a band: the burst keeps its points above and below
-// and opens where the letters pass, and filled styles knock the text out of a band laid across the burst.
-import { fitFirst, fitLadder, textInk, cutPolygon, polyD, bandAround, snap } from './_parts-labels.mjs'
+// The text always sits inside the closed burst (no band, no opened outline): regular cut, then condensed, then a
+// little closer to the teeth, before "-50%" gives way to "50%".
+import { textInk, polyD, snap } from './_parts-labels.mjs'
+import { fitChain } from './_parts-misc.mjs'
 import { polar } from './_layout.mjs'
 import { live } from './_font.mjs'
 
-const INSIDE = { x0: 7.5, y0: 9.5, x1: 16.5, y1: 14.5 }
-const ACROSS = { x0: 3.5, y0: 8.5, x1: 20.5, y1: 15.5 }
-
+// A closed starburst with the word or discount set inside it (the regular cut, then condensed; "-50%" gives way to
+// "50%" before it would shrink below cap 4). Teeth are shallow enough (rIn 8.5-9.25) to leave a 6u-radius middle.
 function burst(n, rIn) {
   const pts = []
+  // a tooth tip points straight left and right, where the word runs (an inner notch there would pinch it)
   for (let i = 0; i < n * 2; i++) pts.push(polar(12, 12, i % 2 ? rIn : 10, i * 180 / n))
   return pts
 }
@@ -28,46 +29,20 @@ export default live({
   build({ text, points }) {
     const n = Math.max(8, Math.min(20, points | 0))
     // deeper teeth with few points, shallower with many, so the outline weight stays even
-    const rIn = snap(n <= 10 ? 7.5 : n <= 14 ? 8 : 8.5)
-    const B = burst(n, rIn)
+    const rIn = snap(n <= 10 ? 8.75 : n <= 14 ? 9 : 9.25)
+    const B = burst(n, rIn), d = polyD(B, true)
     const s = text || '%'
-    let fit = fitFirst([s], INSIDE, { minCap: 4.5, maxCap: 7 })
-    let runs = fit ? cutPolygon(B, fit.t.box, 3.25) : null
-    if (!fit || runs) {
-      // too long for the middle: run it across, the burst opens where the letters pass
-      const pct = s.replace(/^-/, '')
-      fit = fitLadder(s, ACROSS, { minCap: 4, maxCap: 6 }, [pct, pct.replace(/%$/, '')])
-      runs = fit ? cutPolygon(B, fit.t.box, 3.25) : null
-    }
-    const t = fit && fit.t
-    const ink = textInk(t, 'A')
-    const fills = [polyD(B, true)]
-    const paths = runs ? runs.map(r => ({ d: polyD(r, false), plate: 'K' })) : [{ d: polyD(B, true), plate: 'K' }]
-    if (runs && t) {
-      // band across the burst for the filled styles: union drawn as one outline would be off-grid, so the burst
-      // fill becomes burst-above + band + burst-below in one polygon: walk the burst and clamp it to the band
-      const band = bandAround(t.box, { dx: 1.25, dy: 1.75 })
-      const out = []
-      for (const [x, y] of B) {
-        if (y > band.y0 && y < band.y1) out.push([x < 12 ? Math.min(x, band.x0) : Math.max(x, band.x1), y])
-        else out.push([x, y])
-      }
-      // square the band ends: insert its corners where the outline enters and leaves the band rows
-      const ring = []
-      for (let i = 0; i < out.length; i++) {
-        const a = out[i], c = out[(i + 1) % out.length], A = B[i], C = B[(i + 1) % B.length]
-        ring.push(a)
-        for (const yb of [band.y0, band.y1]) {
-          if ((A[1] - yb) * (C[1] - yb) < 0) {
-            const side = (A[0] + C[0]) / 2 < 12 ? band.x0 : band.x1
-            const tt = (yb - A[1]) / (C[1] - A[1]), xb = A[0] + (C[0] - A[0]) * tt
-            const inA = A[1] > band.y0 && A[1] < band.y1
-            ring.push(inA ? [side, yb] : [snap(xb), yb], inA ? [snap(xb), yb] : [side, yb])
-          }
-        }
-      }
-      fills[0] = polyD(ring, true)
-    }
-    return { paths: [...paths, ...ink.paths], fills, cutouts: ink.cutouts }
+    const pct = s.replace(/^-/, '')
+    const opts = { outline: d, cx: 12, ys: [12, 12.25, 11.75], clearance: 2.75, maxCap: 6, condense: [1, 0.88, 0.8, 0.74] }
+    // the whole text first, then the same at 2.5u from the teeth (the default "-50%" and "100%" fit there at cap 4),
+    // then "50%" for "-50%"; truncating is the last resort. A sign or "%" below cap 4 closes its counters, so only
+    // plain words and numbers go down to cap 3.5, a word in the tightest setting.
+    const word = /^[A-Z]+$/.test(s), plain = /^[0-9A-Z]+$/.test(s)
+    const hit = fitChain([s], { ...opts, minCap: 4 }) || fitChain([s], { ...opts, minCap: 4, clearance: 2.5 }) ||
+      (plain && fitChain([s], { ...opts, minCap: 3.5, clearance: 2.5 })) || fitChain([pct], { ...opts, minCap: 4 }) ||
+      (word && (fitChain([s], { ...opts, minCap: 3.5, tracking: -0.5 }) || fitChain([s], { ...opts, minCap: 3.5, maxCap: 3.75, tracking: -0.75 }))) ||
+      fitChain([pct.replace(/%$/, ''), [...s].slice(0, 3).join(''), [...s].slice(0, 2).join('')], { ...opts, minCap: 3.5 })
+    const ink = textInk(hit && hit.t, 'A')
+    return { paths: [{ d, plate: 'K' }, ...ink.paths], fills: [d], cutouts: ink.cutouts }
   },
 })

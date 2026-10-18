@@ -7,6 +7,7 @@
 //   node scripts/publish.mjs --expect 0.2.0         fail unless every package is at 0.2.0 (CI passes the tag)
 //   node scripts/publish.mjs --only @withicons/core,withicons
 //   node scripts/publish.mjs --order                print the publish order and exit
+//   node scripts/publish.mjs --wait 40              minutes to wait, in all, for dependencies to become installable
 //
 // Packages (lockstep, one version): core core-plus soft3d holiday react vue svelte angular solid web web-plus classes classes-plus static
 // static-plus search mcp
@@ -122,34 +123,94 @@ if (tagSha && headSha && tagSha !== headSha) {
 if (problems.length && !(DRY && flag('lenient'))) die('\n  ' + problems.join('\n  '))
 else if (problems.length) console.warn('  (dry run, --lenient) ' + problems.join('\n  '))
 
-// a dependency must be installable (visible on the registry) before a dependent goes out
+// --- publish. npm accepts a publish before the version is installable: it processes the tarball first ("Your package is
+// being processed"), which takes 10-20+ min for the ~100 MB packages (core, react, static-plus), and the registry CDN
+// then caches the packument for another 5 min. 0.5.0 failed twice on a fixed 10-min wait that blocked the whole run, so:
+//   - visibility is read from the registry directly (abbreviated packument, what `npm install` reads) with a
+//     cache-busting query, so neither npm's local cache nor the CDN hides a version that just went out
+//   - only real npm dependencies wait for visibility (core before core-plus/soft3d/holiday, web-plus before web, mcp
+//     before the CLI); runtime links (AFTER) only need the companion published first, not installable
+//   - a waiting package does not block the others: every package whose dependencies are ready goes out meanwhile
+//   - the wait budget (--wait <min>, default 40) covers the whole run, not one package
 const sleep = ms => new Promise(r => setTimeout(r, ms))
-const onNpm = (id, version, dir) => { const r = npm(['view', id, 'version'], dir, true); return r.status === 0 && r.stdout.trim() === version }
-async function waitFor(id, version, dir, minutes = 10) {
-  const until = Date.now() + minutes * 60e3
-  for (let n = 0; ; n++) {
-    if (onNpm(id, version, dir)) return
-    if (Date.now() > until) die(`${id} is still not visible on the registry after ${minutes} min; not publishing its dependents (re-run later)`)
-    if (n === 0) console.log(`  waiting for ${id} to appear on the registry …`)
-    await sleep(10e3)
-  }
+const REGISTRY = 'https://registry.npmjs.org'
+const versionOf = name => pkgs.find(x => x.json.name === name).json.version
+// true / false, or null when the registry could not be asked
+async function onRegistry(name, version) {
+  try {
+    const r = await fetch(`${REGISTRY}/${name.replace('/', '%2f')}?t=${Date.now()}`, { headers: { accept: 'application/vnd.npm.install-v1+json' } })
+    if (r.status === 404) return false
+    if (!r.ok) return null
+    return Object.hasOwn((await r.json()).versions || {}, version)
+  } catch { return null }
 }
+// already published? npm is the fallback when the registry cannot be asked
+async function published(name, version, dir) {
+  const v = await onRegistry(name, version)
+  if (v !== null) return v
+  const r = npm(['view', `${name}@${version}`, 'version', '--prefer-online'], dir, true)
+  return r.status === 0 && r.stdout.trim() === version
+}
+const npmDeps = p => Object.keys({ ...p.json.dependencies, ...p.json.peerDependencies, ...p.json.optionalDependencies })
+  .concat(p.json.bundleDependencies || p.json.bundledDependencies || []).filter(n => names.has(n))
 
 const inCI = !!process.env.GITHUB_ACTIONS
-let published = 0, skipped = 0
-for (const p of order) {
-  const { dir, json } = p
-  if (only && !only.includes(json.name)) continue
-  const id = `${json.name}@${json.version}`
-  if (onNpm(id, json.version, dir)) { console.log(`= ${id} already on npm`); skipped++; continue }
-  // internal dependencies first, at the exact version this package pins
-  if (!DRY) for (const d of deps(p)) await waitFor(`${d}@${pkgs.find(x => x.json.name === d).json.version}`, pkgs.find(x => x.json.name === d).json.version, dir)
-  const args = ['publish', '--access', 'public', '--tag', json.version.includes('-') ? 'next' : 'latest']
-  if (inCI) args.push('--provenance')
-  if (DRY) args.push('--dry-run')
-  console.log(`> npm ${args.join(' ')}   (${id})`)
-  const r = npm(args, dir)
-  if (r.status !== 0) die(`${id} failed (earlier packages in this run are already published; fix and re-run - published versions are skipped)`)
-  published++
+const waitMin = opt('wait') === undefined || opt('wait') === true ? 40 : Number(opt('wait'))
+if (!Number.isFinite(waitMin) || waitMin < 0) die(`--wait takes minutes (a number), not "${opt('wait')}"`)
+const deadline = Date.now() + waitMin * 60e3
+// packages outside --only are not this run's to publish or wait for
+const done = new Set(pkgs.filter(p => only && !only.includes(p.json.name)).map(p => p.json.name))
+const visible = new Set()
+let pending = order.filter(p => !done.has(p.json.name))
+let nPublished = 0, nSkipped = 0
+for (const p of pending) {
+  if (!(await published(p.json.name, p.json.version, p.dir))) continue
+  console.log(`= ${p.json.name}@${p.json.version} already on npm`)
+  done.add(p.json.name); visible.add(p.json.name); nSkipped++
 }
-console.log(`${DRY ? 'dry run: ' : ''}${published} published, ${skipped} already on npm`)
+pending = pending.filter(p => !done.has(p.json.name))
+
+const isVisible = async name => visible.has(name) || ((await onRegistry(name, versionOf(name))) === true && !!visible.add(name))
+// what a package still waits for: [] when it can go out now
+async function waitingOn(p) {
+  const w = deps(p).filter(d => !done.has(d))   // dependencies and companions are published first (the order guarantees it)
+  if (p.json.name === CLI) w.push(...pending.filter(x => x !== p).map(x => x.json.name))   // the CLI strictly last
+  if (w.length || DRY) return w
+  for (const d of npmDeps(p)) if (!(await isVisible(d))) w.push(`${d} (published, not installable yet)`)
+  return w
+}
+const announced = new Set()
+while (pending.length) {
+  let progressed = false
+  for (const p of [...pending]) {
+    const w = await waitingOn(p)
+    if (w.length) {
+      if (!announced.has(p.json.name) && w.some(x => x.includes('not installable'))) { console.log(`  ${p.json.name} waits for ${w.join(', ')}`); announced.add(p.json.name) }
+      continue
+    }
+    const id = `${p.json.name}@${p.json.version}`
+    const args = ['publish', '--access', 'public', '--tag', p.json.version.includes('-') ? 'next' : 'latest']
+    if (inCI) args.push('--provenance')
+    if (DRY) args.push('--dry-run')
+    console.log(`> npm ${args.join(' ')}   (${id})`)
+    // in CI (no OTP prompt) the output is captured, then shown, so a re-run that meets a version npm accepted earlier
+    // but still hides while it processes it ("cannot publish over the previously published versions") counts it as out
+    const r = npm(args, p.dir, inCI)
+    if (inCI) { process.stdout.write(r.stdout || ''); process.stderr.write(r.stderr || '') }
+    if (r.status !== 0 && inCI && /cannot publish over|previously published|EPUBLISHCONFLICT/i.test(`${r.stdout}
+${r.stderr}`)) {
+      console.log(`= ${id} was already accepted by npm (still processing): skipped`)
+      done.add(p.json.name); pending = pending.filter(x => x !== p); nSkipped++; progressed = true
+      continue
+    }
+    if (r.status !== 0) die(`${id} failed (earlier packages in this run are already published; fix and re-run - published versions are skipped)`)
+    done.add(p.json.name); pending = pending.filter(x => x !== p); nPublished++; progressed = true
+  }
+  if (!pending.length || progressed) continue
+  if (Date.now() > deadline) {
+    const left = await Promise.all(pending.map(async p => `${p.json.name} (waits for ${(await waitingOn(p)).join(', ')})`))
+    die(`not published, their dependencies are still being processed by the registry:\n  ${left.join('\n  ')}\nre-run the release later: published versions are skipped`)
+  }
+  await sleep(15e3)
+}
+console.log(`${DRY ? 'dry run: ' : ''}${nPublished} published, ${nSkipped} already on npm`)

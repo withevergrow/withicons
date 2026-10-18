@@ -7,6 +7,8 @@
 //   noCutouts noCrease pits pitMax inlay
 //   eyes [[cx, cy, rx, ry?]]  dark glossy eye pits drawn on top of the A piece (skeleton coordinates)
 const TUNE = {
+  // Live: five rating stars set 7u apart: a thin tube keeps each star its own piece
+  'rating-stars': { wk: 1.0, wa: 1.0 },
   brain: { aCrease: true },
   'brain-circuit': { aCrease: true },
   coffee: { colors: { c2: '#FFF1E2' } },

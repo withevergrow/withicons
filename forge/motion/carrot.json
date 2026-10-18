@@ -1,0 +1,56 @@
+{
+  "name": "carrot",
+  "intent": "hangs by its leafy top and sways, the greens rustling a beat behind",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      16.5,
+      7.5
+    ],
+    "amount": 0.4,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      16.5,
+      7.5
+    ],
+    "amount": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        16.5,
+        7.5
+      ],
+      "amount": 0.7,
+      "delay": 0.12
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rise",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "carrot@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "salad",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "weight",
+  "intent": "gives a little bounce as someone steps on",
+  "loop": {
+    "preset": "bounce",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.35,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ]
+  },
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "dumbbell",
+      "effect": "fade"
+    },
+    {
+      "to": "scale",
+      "effect": "flip"
+    }
+  ]
+}

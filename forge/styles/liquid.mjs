@@ -9,6 +9,7 @@
 // gradients, ids wg-liquid-<icon>-<n>, every colour a role variable
 // --with-liquid-<role> with a hex fallback; the ink hairline is currentColor.
 // Geometry: _liquid-core.mjs (on _liquid-field.mjs, _liquid-path.mjs).
+import { slabBars, barD } from './_live-badge.mjs'
 import { snowman } from './_liquid-snowman.mjs'
 import { dragon } from './_rich-dragon.mjs'
 import { build, col, L } from './_liquid-core.mjs'
@@ -22,12 +23,14 @@ export default {
   strokeWidth: false,
   root: { fill: 'none' },
   render(icon) {
+    // a battery's charge is one coloured glass bar (never a grille of rows): taken out, painted on top
+    const SB = slabBars(icon); icon = SB.icon
     if (icon && icon.name === 'snowman') { try { return snowman() } catch { /* generic below */ } }
     if (icon && icon.name === 'dragon-head') { try { return dragon('liquid') } catch { /* generic below */ } }
     try {
       const { glass, text } = liveSplit(icon)
       const nodes = build(glass)
-      if (nodes && nodes.length > 1) return [...nodes, ...text]
+      if (nodes && nodes.length > 1) return [...nodes, ...liquidBars(SB.bars), ...text]
     } catch { /* degrade below: never throw */ }
     // last resort: the line drawing in tinted glass, so nothing ever renders empty
     try {
@@ -37,6 +40,15 @@ export default {
       }])
     } catch { return [] }
   },
+}
+
+// a battery's charge in liquid's frame: c2 glass with an ink hairline and a white lens highlight (wm-a)
+function liquidBars(bars) {
+  if (!bars.length) return []
+  const S = L.SCALE, T = p => [12 + (p[0] - 12) * S + L.TX, 12 + (p[1] - 12) * S + L.TY]
+  const hi = bars.map(b => barD({ ...b, x0: b.x0 + 0.6, x1: b.x1 - 0.6, y0: b.y0 + 0.5, y1: b.y0 + Math.min(1.5, (b.y1 - b.y0) * 0.33) }, T, 0.45)).join('')
+  return [['path', { d: bars.map(b => barD(b, T)).join(''), fill: col('c2'), stroke: 'currentColor', 'stroke-opacity': 0.55, 'stroke-width': 0.45, class: 'wm-a' }],
+    ['path', { d: hi, fill: col('shine'), 'fill-opacity': 0.6, class: 'wm-a' }]]
 }
 
 // Live icons (forge/DYNAMIC.md): lettering is never built as glass (2u tubes with rims close every counter).

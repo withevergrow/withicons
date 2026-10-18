@@ -1,13 +1,12 @@
 // Live icon: a speech bubble with a short word inside (HI, OK, LOL, ?, !, ...), tail on the left or the right.
-import { asCutouts, live } from './_font.mjs'
-import { fitChain, fitInside, dot } from './_parts-misc.mjs'
-import { fitLabel, fitLadder, boxDist, CLEAR } from './_parts-labels.mjs'
-import { clipD } from './_parts-counts.mjs'
+import { live } from './_font.mjs'
+import { dot } from './_parts-misc.mjs'
+import { fitLabel, fitLadder, textInk } from './_parts-labels.mjs'
 
 // landscape bubble (2..22 x 3..17, r 2.5) with a straight-backed tail dropping to y 21, on the left or the right
 const LEFT = 'M4.5 3 H19.5 A2.5 2.5 0 0 1 22 5.5 V14.5 A2.5 2.5 0 0 1 19.5 17 H10.5 L6 21 V17 H4.5 A2.5 2.5 0 0 1 2 14.5 V5.5 A2.5 2.5 0 0 1 4.5 3 Z'
-// a long word runs across the bubble between its top and bottom walls (3.25u clear of both)
-const ACROSS = { x0: 3.5, y0: 6.5, x1: 20.5, y1: 13.5 }
+// the word's centreline box: 2.9u inside the walls
+const INSIDE = { x0: 4.9, y0: 5.9, x1: 19.1, y1: 14.1 }
 const RIGHT = 'M4.5 3 H19.5 A2.5 2.5 0 0 1 22 5.5 V14.5 A2.5 2.5 0 0 1 19.5 17 H18 V21 L13.5 17 H4.5 A2.5 2.5 0 0 1 2 14.5 V5.5 A2.5 2.5 0 0 1 4.5 3 Z'
 
 export default live({
@@ -41,18 +40,13 @@ export default live({
         cutouts: xs.map(x => dot(x, 10, 1.75)),
       }
     }
-    // inside the closed bubble, shrinking to cap 4 (and slightly tighter tracking) ...
-    const inside = fitInside(s, { outline: body, cx: 12, ys: [10, 9.75, 10.25], minCap: 4 })
-    // ... else the word runs the full width and the bubble opens its side walls where the letters pass, like the
-    // label family ("NEW", "WOW", "888" stay whole instead of turning into another word); shortening is the last resort
-    const across = !inside && s ? (fitLabel(s, ACROSS, { minCap: 4, maxCap: 5.5 }) || fitLadder(s, ACROSS, { minCap: 4, maxCap: 5.5 })?.t) : null
-    const t = inside || across
-    const txt = t ? t.paths : []
-    const frame = across ? clipD(body, p => boxDist(p, across.box) >= CLEAR) : body
+    // always inside the closed bubble: regular cut, then condensed (_parts-labels fitLabel), shortening last
+    const t = s ? (fitLabel(s, INSIDE, { minCap: 4, maxCap: 5.5 }) || fitLadder(s, INSIDE, { minCap: 3.75, maxCap: 5.5 })?.t) : null
+    const ink = textInk(t, 'A')
     return {
-      paths: [{ d: frame, plate: 'K' }, ...txt.map(d => ({ d, plate: 'A' }))],
+      paths: [{ d: body, plate: 'K' }, ...ink.paths],
       fills: [body],
-      cutouts: asCutouts(txt),
+      cutouts: ink.cutouts,
     }
   },
 })

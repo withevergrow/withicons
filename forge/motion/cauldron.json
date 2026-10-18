@@ -21,8 +21,8 @@
     "S": {
       "preset": "rise",
       "origin": [
-        12,
-        5
+        12.5,
+        4
       ],
       "amount": 0.8,
       "duration": 1.6

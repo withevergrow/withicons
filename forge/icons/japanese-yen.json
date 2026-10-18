@@ -1,0 +1,62 @@
+{
+  "name": "japanese-yen",
+  "category": "commerce",
+  "description": "The yen sign, a Y with two crossbars, for prices and money in Japanese yen (and the Chinese yuan, which shares the sign).",
+  "aliases": [
+    "yen",
+    "jpy",
+    "yen-sign",
+    "yen-symbol",
+    "currency-yen",
+    "money-yen",
+    "japanese-currency"
+  ],
+  "tags": [
+    "currency",
+    "money",
+    "price",
+    "payment",
+    "japan",
+    "finance"
+  ],
+  "paths": [
+    {
+      "d": "M5.5 3 L12 10.5 M18.5 3 L12 10.5 M12 10.5 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 13 H16.5 M7.5 17 H16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "¥",
+    "円",
+    "japan",
+    "tokyo",
+    "money",
+    "price",
+    "pricing",
+    "cost",
+    "cash",
+    "currency",
+    "payment",
+    "pay",
+    "finance",
+    "exchange rate",
+    "salary",
+    "invoice",
+    "bill",
+    "budget",
+    "yuan",
+    "cny",
+    "rmb",
+    "renminbi",
+    "chinese yuan",
+    "yen sign",
+    "jen",
+    "yenn"
+  ]
+}

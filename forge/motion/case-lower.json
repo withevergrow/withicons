@@ -1,0 +1,43 @@
+{
+  "name": "case-lower",
+  "intent": "the small letters settle softly, like text turning quiet",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.6,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "squish",
+    "origin": [
+      12,
+      19
+    ],
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "bounce",
+      "amount": 0.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "jelly"
+    }
+  ],
+  "swap": [
+    {
+      "to": "case-upper",
+      "effect": "flip"
+    },
+    {
+      "to": "case-sensitive",
+      "effect": "fade"
+    }
+  ]
+}

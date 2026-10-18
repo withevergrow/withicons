@@ -1,0 +1,68 @@
+{
+  "name": "map-pin-off",
+  "category": "maps",
+  "description": "A map pin struck through by a slash, for location services turned off, a hidden location and no GPS.",
+  "aliases": [
+    "location-off",
+    "map-marker-off",
+    "location-disabled",
+    "gps-off",
+    "no-location",
+    "location-hidden",
+    "marker-off"
+  ],
+  "tags": [
+    "location",
+    "map",
+    "disabled",
+    "privacy",
+    "pin"
+  ],
+  "paths": [
+    {
+      "d": "M8.16 3.56 A7.5 7.5 0 0 1 19.5 10 C19.5 11.36 19.13 12.67 18.53 13.93",
+      "plate": "K"
+    },
+    {
+      "d": "M14.56 19.16 C13.72 19.99 12.85 20.78 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 4.55 9.15",
+      "plate": "K"
+    },
+    {
+      "d": "M11.62 7.02 A3 3 0 0 1 14.98 10.38",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M7.94 3.7 A7.5 7.5 0 0 1 19.5 10 C19.5 11.45 19.09 12.84 18.41 14.17 Z",
+    "M14.74 18.98 C13.84 19.88 12.91 20.72 12 21.5 C8.5 18.5 4.5 14.5 4.5 10 A7.5 7.5 0 0 1 4.59 8.83 Z"
+  ],
+  "cutouts": [
+    "M11.62 7.02 A3 3 0 0 1 14.98 10.38 Z"
+  ],
+  "synonyms": [
+    "location services off",
+    "hide location",
+    "hide my location",
+    "stop sharing location",
+    "location turned off",
+    "no gps",
+    "gps disabled",
+    "location unavailable",
+    "unknown location",
+    "location permission denied",
+    "do not track",
+    "private location",
+    "incognito",
+    "offline map",
+    "no signal",
+    "remove pin",
+    "unpin location",
+    "location blocked",
+    "geolocation off",
+    "tracking off"
+  ]
+}

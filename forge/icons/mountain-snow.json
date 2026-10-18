@@ -1,0 +1,71 @@
+{
+  "name": "mountain-snow",
+  "category": "maps",
+  "description": "A mountain with a snow-capped peak beside a smaller one, for alpine terrain, winter sports and high altitude.",
+  "aliases": [
+    "snowy-mountain",
+    "snow-peak",
+    "snowcap",
+    "snow-capped",
+    "alpine",
+    "mountain-top",
+    "ski-mountain"
+  ],
+  "tags": [
+    "nature",
+    "mountains",
+    "snow",
+    "winter",
+    "outdoors",
+    "altitude"
+  ],
+  "paths": [
+    {
+      "d": "M2 20 L9.5 5 L14 14 L16.5 10 L22 20 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 14 L17 20",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 11 L8 12.5 L9.5 11 L11 12.5 L12.5 11",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M2 20 L9.5 5 L14 14 L16.5 10 L22 20 Z"
+  ],
+  "cutouts": [
+    "M13.75 13.5 L17.75 21.5",
+    "M5.5 11 L6.5 11 L8 12.5 L9.5 11 L11 12.5 L12.5 11 L13.5 11"
+  ],
+  "synonyms": [
+    "alps",
+    "himalaya",
+    "himalayas",
+    "everest",
+    "mountaineering",
+    "skiing",
+    "ski",
+    "ski resort",
+    "snowboarding",
+    "winter sports",
+    "hiking",
+    "trekking",
+    "glacier",
+    "high altitude",
+    "cold",
+    "landscape",
+    "national park",
+    "climbing",
+    "expedition",
+    "rockies",
+    "fuji",
+    "snowy peak",
+    "summit",
+    "peak",
+    "mountain range",
+    "base camp"
+  ]
+}

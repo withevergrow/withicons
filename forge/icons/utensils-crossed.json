@@ -1,0 +1,68 @@
+{
+  "name": "utensils-crossed",
+  "category": "food",
+  "description": "A fork and a knife crossed in an X, for restaurants, menus, dining and food places.",
+  "aliases": [
+    "fork-and-knife-crossed",
+    "crossed-cutlery",
+    "cross-utensils",
+    "food-place",
+    "eatery",
+    "dining-room",
+    "cutlery-crossed",
+    "food-court"
+  ],
+  "tags": [
+    "food",
+    "restaurant",
+    "dining",
+    "cutlery",
+    "meal"
+  ],
+  "paths": [
+    {
+      "d": "M16.95 2.6 L14.47 5.08 A3.5 3.5 45 0 0 19.42 10.03 L21.9 7.55",
+      "plate": "K"
+    },
+    {
+      "d": "M19.42 5.08 L5.99 18.51",
+      "plate": "K"
+    },
+    {
+      "d": "M12.18 9.49 L6.17 3.48 C4.93 5.78 5.28 8.96 7.58 11.26 A2 2 -45 0 0 10.41 11.26 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10.59 11.09 L18.01 18.51",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12.18 9.49 L6.17 3.48 C4.93 5.78 5.28 8.96 7.58 11.26 A2 2 -45 0 0 10.41 11.26 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "fork and knife",
+    "knife and fork",
+    "dining",
+    "eat",
+    "eat out",
+    "dinner",
+    "lunch",
+    "breakfast",
+    "meal",
+    "menu",
+    "food menu",
+    "diner",
+    "cafe",
+    "canteen",
+    "kitchen",
+    "cutlery",
+    "silverware",
+    "food and drink",
+    "places to eat",
+    "food delivery",
+    "catering",
+    "bistro"
+  ]
+}

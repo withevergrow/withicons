@@ -1,13 +1,13 @@
 {
   "name": "firecracker-string",
-  "intent": "the firecrackers jump and crackle on their string",
+  "intent": "the firecrackers swing on their string while the last one crackles",
   "loop": {
     "preset": "sway",
     "origin": [
       12,
       2
     ],
-    "amount": 1.2,
+    "amount": 0.8,
     "duration": 2
   },
   "hover": {
@@ -15,7 +15,7 @@
     "amount": 1.2
   },
   "parts": {
-    "A": {
+    "S": {
       "preset": "flicker"
     }
   },

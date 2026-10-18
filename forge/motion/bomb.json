@@ -1,0 +1,48 @@
+{
+  "name": "bomb",
+  "intent": "the fuse sparks while the bomb swells with tension, then rattles",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      9.5,
+      14.5
+    ],
+    "amount": 0.5,
+    "duration": 1.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "twinkle",
+      "origin": [
+        20,
+        4
+      ],
+      "amount": 1.2,
+      "duration": 0.8
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "flicker"
+    },
+    {
+      "preset": "tada",
+      "amount": 0.8
+    }
+  ],
+  "swap": [
+    {
+      "to": "flame",
+      "effect": "fade"
+    },
+    {
+      "to": "zap",
+      "effect": "scale"
+    }
+  ]
+}

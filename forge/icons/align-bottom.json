@@ -1,0 +1,58 @@
+{
+  "name": "align-bottom",
+  "category": "layout",
+  "description": "A long and a short bar standing on a bottom line, for aligning objects to their bottom edge.",
+  "aliases": [
+    "align-items-bottom",
+    "vertical-align-bottom",
+    "align-end-vertical",
+    "bottom-align",
+    "flush-bottom",
+    "valign-bottom",
+    "align-vertical-bottom",
+    "snap-to-bottom"
+  ],
+  "tags": [
+    "align",
+    "bottom",
+    "layout",
+    "objects",
+    "design",
+    "arrange"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 21 H21.5",
+      "plate": "K"
+    },
+    {
+      "d": "M5.5 3 H8.5 A1.5 1.5 0 0 1 10 4.5 V15.5 A1.5 1.5 0 0 1 8.5 17 H5.5 A1.5 1.5 0 0 1 4 15.5 V4.5 A1.5 1.5 0 0 1 5.5 3 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 9.5 H18.5 A1.5 1.5 0 0 1 20 11 V15.5 A1.5 1.5 0 0 1 18.5 17 H15.5 A1.5 1.5 0 0 1 14 15.5 V11 A1.5 1.5 0 0 1 15.5 9.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5.5 3 H8.5 A1.5 1.5 0 0 1 10 4.5 V15.5 A1.5 1.5 0 0 1 8.5 17 H5.5 A1.5 1.5 0 0 1 4 15.5 V4.5 A1.5 1.5 0 0 1 5.5 3 Z",
+    "M15.5 9.5 H18.5 A1.5 1.5 0 0 1 20 11 V15.5 A1.5 1.5 0 0 1 18.5 17 H15.5 A1.5 1.5 0 0 1 14 15.5 V11 A1.5 1.5 0 0 1 15.5 9.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "align bottom",
+    "bottom edge",
+    "baseline",
+    "vertical alignment",
+    "align objects",
+    "align layers",
+    "arrange",
+    "distribute",
+    "layout",
+    "stand",
+    "bottom aligned",
+    "justify bottom",
+    "flex end",
+    "align end"
+  ]
+}

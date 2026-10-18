@@ -1,0 +1,66 @@
+{
+  "name": "baseball",
+  "category": "sports",
+  "description": "A baseball with curved stitched seams, for baseball, softball, innings and ball games.",
+  "aliases": [
+    "baseball-ball",
+    "softball",
+    "mlb",
+    "home-run",
+    "hardball"
+  ],
+  "tags": [
+    "sports",
+    "ball",
+    "baseball",
+    "game"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 4.6 C9 8 9 16 6 19.4 M18 4.6 C15 8 15 16 18 19.4",
+      "plate": "A"
+    },
+    {
+      "d": "M6.5 8.5 L8.5 8 M7.25 12 H9.25 M6.5 15.5 L8.5 16 M17.5 8.5 L15.5 8 M16.75 12 H14.75 M17.5 15.5 L15.5 16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"
+  ],
+  "cutouts": [
+    "M6 4.6 C9 8 9 16 6 19.4",
+    "M18 4.6 C15 8 15 16 18 19.4",
+    "M6.5 8.5 L8.5 8 M7.25 12 H9.25 M6.5 15.5 L8.5 16",
+    "M17.5 8.5 L15.5 8 M16.75 12 H14.75 M17.5 15.5 L15.5 16"
+  ],
+  "synonyms": [
+    "ball",
+    "sport",
+    "sports",
+    "baseball game",
+    "ballgame",
+    "ball park",
+    "ballpark",
+    "diamond",
+    "pitcher",
+    "batter",
+    "catcher",
+    "inning",
+    "innings",
+    "strike",
+    "home run",
+    "world series",
+    "little league",
+    "stitches",
+    "seams",
+    "team sport",
+    "base ball",
+    "basebal",
+    "beisbol"
+  ]
+}

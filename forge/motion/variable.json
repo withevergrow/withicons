@@ -1,24 +1,29 @@
 {
   "name": "variable",
-  "intent": "the x spins in its brackets like a value being filled in",
+  "intent": "the equals sign slides in as a value is assigned to x",
   "loop": {
     "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
     "amount": 0.25,
     "duration": 2.6
   },
   "hover": {
     "preset": "jelly",
-    "amount": 0.7,
+    "amount": 0.6,
     "duration": 0.7
   },
   "parts": {
     "A": {
-      "preset": "spin-once",
+      "preset": "nudge",
+      "dir": 180,
       "origin": [
-        12,
+        18.75,
         12
       ],
-      "amount": 1,
+      "amount": 0.6,
       "delay": 0.08
     }
   },

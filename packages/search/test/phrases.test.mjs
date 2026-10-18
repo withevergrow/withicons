@@ -52,7 +52,9 @@ describe('the head sense wins over a stray word', () => {
   })
   test('"shop counter" -> store; counter-clockwise and step counters are other senses', () => {
     const got = top('shop counter')
-    assert.equal(got[0], 'store')
+    // 2026-10: cash-register (a till: "checkout counter", "shop") is the literal shop-counter object and may lead
+    assert.ok(['store', 'cash-register'].includes(got[0]), show('shop counter'))
+    assert.ok(got.includes('store'), show('shop counter'))
     assert.ok(noneIn(got, ['rotate-ccw', 'activity', 'person-running', 'watch']), show('shop counter'))
     assert.ok(noneIn(exact('shop counter'), ['rotate-ccw', 'activity', 'watch']), exact('shop counter').join(', '))
   })
@@ -103,7 +105,8 @@ describe('calibration: a partial match is exact only when it covers the head', (
   })
   test('the head covered, a modifier missed -> may be exact', () => {
     assert.ok(exact('nature-based day care').includes('baby'), exact('nature-based day care').join(', '))
-    assert.ok(exact('shop counter').includes('store') || engine.query('shop counter').results[0].name === 'store')
+    // 2026-10: cash-register ("checkout counter", "shop") now covers both words and answers exactly
+    assert.ok(exact('shop counter').some(n => n === 'store' || n === 'cash-register') || ['store', 'cash-register'].includes(engine.query('shop counter').results[0].name))
   })
   test('"anxious worried patient" is answered by the worried face (it had no honest icon before `worried` existed)', () => {
     assert.equal(engine.query('anxious worried patient').results[0].name, 'worried')

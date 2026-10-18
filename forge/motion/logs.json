@@ -1,0 +1,43 @@
+{
+  "name": "logs",
+  "intent": "new log lines tick in as events stream past",
+  "loop": {
+    "preset": "type",
+    "amount": 0.4,
+    "duration": 1.6
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "flicker",
+      "amount": 0.6,
+      "duration": 1.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "pass",
+      "dir": 270
+    }
+  ],
+  "swap": [
+    {
+      "to": "terminal",
+      "effect": "fade"
+    },
+    {
+      "to": "list",
+      "effect": "morph"
+    }
+  ]
+}

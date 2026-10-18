@@ -1,17 +1,14 @@
 // Live icon: a pill badge carrying a short word ("NEW", "PRO", "BETA", "99+").
-// Short text sits inside a closed pill. Longer words run the full width and the pill opens at its ends
-// (top and bottom arcs stay, like brackets), because a 24px frame cannot fit 3-4 letters between two walls.
-import { fitFirst, fitLadder, textInk, boxDist } from './_parts-labels.mjs'
+// The badge is always closed: the word is set inside it, in the condensed cut when it is long (_parts-labels.mjs
+// fitLabel), never through an opened wall. The badge spans the whole live width so a 4-letter word fits at cap 4-5.
+import { fitFirst, fitLadder, textInk } from './_parts-labels.mjs'
 import { rr } from './_layout.mjs'
 import { live } from './_font.mjs'
 
-const SHAPES = {
-  // r 5 pill: hook ends (4,6.5) sit on the corner arc (3-4-5 triangle) so they stay on the grid
-  pill: { r: 5, top: ['M4 6.5 A5 5 0 0 1 7 5.5', 'H17 A5 5 0 0 1 20 6.5'], bot: ['M20 17.5 A5 5 0 0 1 17 18.5', 'H7 A5 5 0 0 1 4 17.5'], ends: [[4, 6.5], [20, 6.5], [20, 17.5], [4, 17.5]], flat: [7, 17] },
-  rounded: { r: 2.5, top: ['M2.5 6.5 A2.5 2.5 0 0 1 4.5 5.5', 'H19.5 A2.5 2.5 0 0 1 21.5 6.5'], bot: ['M21.5 17.5 A2.5 2.5 0 0 1 19.5 18.5', 'H4.5 A2.5 2.5 0 0 1 2.5 17.5'], ends: [[2.5, 6.5], [21.5, 6.5], [21.5, 17.5], [2.5, 17.5]], flat: [4.5, 19.5] },
-}
-const INSIDE = { x0: 5.25, y0: 8.75, x1: 18.75, y1: 15.25 }
-const ACROSS = { x0: 3.5, y0: 8.75, x1: 20.5, y1: 15.25 }
+const SHAPES = { pill: 4.5, rounded: 2.5 } // corner radius of the 20 x 12 badge
+// the word's centreline box: 2.9u inside the walls (0.875 wall ink + 1.25 white + 0.75 text ink); at the pill's
+// corners the box keeps that clearance for a cap-5 word (checked against the corner arcs)
+const INSIDE = { pill: { x0: 5.25, y0: 8.9, x1: 18.75, y1: 15.1 }, rounded: { x0: 4.9, y0: 8.9, x1: 19.1, y1: 15.1 } }
 
 export default live({
   name: 'badge-text', title: 'Text badge', category: 'status',
@@ -25,22 +22,13 @@ export default live({
   },
   examples: [{ text: 'NEW', shape: 'pill' }, { text: 'PRO', shape: 'rounded' }, { text: 'BETA', shape: 'pill' }, { text: 'OK', shape: 'pill' }, { text: '99+', shape: 'rounded' }, { text: '1', shape: 'pill' }],
   build({ text, shape }) {
-    const S = SHAPES[shape] || SHAPES.pill
-    const body = rr(2, 5.5, 22, 18.5, S.r)
+    const r = SHAPES[shape] ?? SHAPES.pill, box = INSIDE[shape] || INSIDE.pill
+    const body = rr(2, 6, 22, 18, r)
     const s = text || 'NEW'
-    const closed = fitFirst([s], INSIDE, { minCap: 5, maxCap: 7 })
-    const fit = closed || fitLadder(s, ACROSS, { minCap: 4, maxCap: 6.5 })
-    const t = fit && fit.t
-    const ink = textInk(t, 'A')
-    const paths = []
-    if (!t || closed) paths.push({ d: body, plate: 'K' })
-    else {
-      // keep each end hook only if it clears the letters; otherwise stop at the flat edge
-      const ok = S.ends.map(p => boxDist(p, t.box) >= 3)
-      const [fx0, fx1] = S.flat
-      paths.push({ d: (ok[0] ? S.top[0] + ' ' : `M${fx0} 5.5 `) + (ok[1] ? S.top[1] : `H${fx1}`), plate: 'K' })
-      paths.push({ d: (ok[2] ? S.bot[0] + ' ' : `M${fx1} 18.5 `) + (ok[3] ? S.bot[1] : `H${fx0}`), plate: 'K' })
-    }
-    return { paths: [...paths, ...ink.paths], fills: [body], cutouts: ink.cutouts }
+    // the whole word down to cap 4, then cap 3.5 ("DOCX" in the pill) before the ladder shortens it
+    const fit = fitFirst([s], box, { minCap: 4, maxCap: 5.5 }) || fitFirst([s], box, { minCap: 3.5, maxCap: 3.75 }) ||
+      fitLadder(s, box, { minCap: 3.75, maxCap: 5.5 })
+    const ink = textInk(fit && fit.t, 'A')
+    return { paths: [{ d: body, plate: 'K' }, ...ink.paths], fills: [body], cutouts: ink.cutouts }
   },
 })

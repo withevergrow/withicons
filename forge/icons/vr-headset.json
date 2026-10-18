@@ -1,0 +1,61 @@
+{
+  "name": "vr-headset",
+  "category": "devices",
+  "description": "A virtual reality headset with two lenses and a nose cut-out, for VR, AR, the metaverse and immersive experiences.",
+  "aliases": [
+    "vr",
+    "virtual-reality",
+    "vr-goggles",
+    "vr-glasses",
+    "xr-headset",
+    "ar-headset",
+    "mixed-reality",
+    "immersive"
+  ],
+  "tags": [
+    "devices",
+    "vr",
+    "gaming",
+    "immersive",
+    "wearable"
+  ],
+  "paths": [
+    {
+      "d": "M4 6.5 H20 A2 2 0 0 1 22 8.5 V15.5 A2 2 0 0 1 20 17.5 H15.5 L14 15 H10 L8.5 17.5 H4 A2 2 0 0 1 2 15.5 V8.5 A2 2 0 0 1 4 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8.5 11.5 A1.5 1.5 0 1 1 5.5 11.5 A1.5 1.5 0 1 1 8.5 11.5 Z M18.5 11.5 A1.5 1.5 0 1 1 15.5 11.5 A1.5 1.5 0 1 1 18.5 11.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 6.5 H20 A2 2 0 0 1 22 8.5 V15.5 A2 2 0 0 1 20 17.5 H15.5 L14 15 H10 L8.5 17.5 H4 A2 2 0 0 1 2 15.5 V8.5 A2 2 0 0 1 4 6.5 Z"
+  ],
+  "cutouts": [
+    "M9.25 11.5 A2.25 2.25 0 1 1 4.75 11.5 A2.25 2.25 0 1 1 9.25 11.5 Z",
+    "M19.25 11.5 A2.25 2.25 0 1 1 14.75 11.5 A2.25 2.25 0 1 1 19.25 11.5 Z"
+  ],
+  "synonyms": [
+    "virtual reality",
+    "augmented reality",
+    "mixed reality",
+    "xr",
+    "ar",
+    "metaverse",
+    "immersive experience",
+    "3d",
+    "gaming",
+    "game",
+    "simulation",
+    "oculus",
+    "quest",
+    "vision pro",
+    "360 video",
+    "spatial computing",
+    "headgear",
+    "goggles",
+    "vr headset",
+    "virtual world"
+  ]
+}

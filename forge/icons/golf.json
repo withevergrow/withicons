@@ -1,0 +1,69 @@
+{
+  "name": "golf",
+  "category": "sports",
+  "description": "A golf flag on a pin beside the hole and a golf ball, for golf, courses, tee times and clubs.",
+  "aliases": [
+    "golf-flag",
+    "golf-ball",
+    "putting-green",
+    "hole-in-one",
+    "golfing",
+    "tee-time"
+  ],
+  "tags": [
+    "sports",
+    "golf",
+    "flag",
+    "ball",
+    "leisure"
+  ],
+  "paths": [
+    {
+      "d": "M8 2.5 L17.5 6.25 L8 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 2.5 V19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12.5 19.5 A4.5 2 0 1 1 3.5 19.5 A4.5 2 0 1 1 12.5 19.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M20 18.5 A2.5 2.5 0 1 1 15 18.5 A2.5 2.5 0 1 1 20 18.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 2.5 L17.5 6.25 L8 10 Z",
+    "M12.5 19.5 A4.5 2 0 1 1 3.5 19.5 A4.5 2 0 1 1 12.5 19.5 Z",
+    "M20 18.5 A2.5 2.5 0 1 1 15 18.5 A2.5 2.5 0 1 1 20 18.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "golf course",
+    "golf club",
+    "country club",
+    "putt",
+    "putting",
+    "green",
+    "fairway",
+    "birdie",
+    "par",
+    "eagle",
+    "hole",
+    "pin",
+    "flagstick",
+    "tee",
+    "tee off",
+    "caddie",
+    "mini golf",
+    "crazy golf",
+    "clubhouse",
+    "driving range",
+    "golfer",
+    "golff",
+    "gulf"
+  ]
+}

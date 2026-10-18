@@ -1,0 +1,10 @@
+{
+  "name": "ticket-percent",
+  "intent": "floats like a coupon in hand while the percent pulses",
+  "loop": { "preset": "float", "amount": 0.3, "duration": 3.2 },
+  "hover": { "preset": "tada", "amount": 0.7 },
+  "parts": { "A": { "preset": "pulse", "amount": 0.6, "duration": 1.6, "delay": 0.1 } },
+  "deco": "twinkle",
+  "alt": [{ "preset": "flip" }, { "preset": "wiggle", "amount": 0.7 }],
+  "swap": [{ "to": "ticket", "effect": "fade" }, { "to": "badge-percent", "effect": "flip" }, { "to": "check-circle", "effect": "scale" }]
+}

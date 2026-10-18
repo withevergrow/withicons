@@ -1,0 +1,70 @@
+{
+  "name": "pill-bottle",
+  "category": "health",
+  "description": "A medicine bottle with a cap and a label, for prescriptions, pharmacy refills and medication reminders.",
+  "aliases": [
+    "medicine-bottle",
+    "pill-jar",
+    "rx-bottle",
+    "pharmacy-bottle",
+    "prescription-bottle",
+    "pills",
+    "meds",
+    "vitamins"
+  ],
+  "tags": [
+    "medicine",
+    "health",
+    "pharmacy",
+    "prescription",
+    "medication"
+  ],
+  "paths": [
+    {
+      "d": "M7 6.5 V19.5 A2 2 0 0 0 9 21.5 H15 A2 2 0 0 0 17 19.5 V6.5",
+      "plate": "K"
+    },
+    {
+      "d": "M7 2.5 H17 A1 1 0 0 1 18 3.5 V5.5 A1 1 0 0 1 17 6.5 H7 A1 1 0 0 1 6 5.5 V3.5 A1 1 0 0 1 7 2.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M7 11 H17 M7 17 H17",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 6.5 V19.5 A2 2 0 0 0 9 21.5 H15 A2 2 0 0 0 17 19.5 V6.5 Z",
+    "M7 2.5 H17 A1 1 0 0 1 18 3.5 V5.5 A1 1 0 0 1 17 6.5 H7 A1 1 0 0 1 6 5.5 V3.5 A1 1 0 0 1 7 2.5 Z"
+  ],
+  "cutouts": [
+    "M6 6.5 H18",
+    "M8.75 12.75 H15.25 V15.25 H8.75 Z"
+  ],
+  "synonyms": [
+    "medicine",
+    "medication",
+    "prescription",
+    "pharmacy",
+    "prescription refill",
+    "refill",
+    "rx",
+    "drugstore",
+    "chemist",
+    "tablets",
+    "capsules",
+    "supplements",
+    "painkillers",
+    "dosage",
+    "dose",
+    "medication reminder",
+    "pill reminder",
+    "take medicine",
+    "pharmacist",
+    "otc",
+    "over the counter",
+    "treatment",
+    "pill container",
+    "pill bottel"
+  ]
+}

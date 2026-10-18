@@ -1,0 +1,75 @@
+{
+  "name": "weight",
+  "category": "health",
+  "description": "A bathroom scale seen from above, with a dial and needle at the top and two foot pads, for body weight, weigh-ins, diet and fitness tracking.",
+  "aliases": [
+    "bathroom-scale",
+    "body-weight",
+    "weighing-scale",
+    "weigh-in",
+    "body-scale",
+    "weight-scale",
+    "weight-tracker"
+  ],
+  "tags": [
+    "health",
+    "fitness",
+    "weight",
+    "body",
+    "diet"
+  ],
+  "paths": [
+    {
+      "d": "M6 3 H18 A3 3 0 0 1 21 6 V18 A3 3 0 0 1 18 21 H6 A3 3 0 0 1 3 18 V6 A3 3 0 0 1 6 3 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 11 A4.5 4.5 0 0 1 16.5 11 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M12 11 L13.25 9.25",
+      "plate": "A"
+    },
+    {
+      "d": "M7.5 16.5 H10 M14 16.5 H16.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M6 3 H18 A3 3 0 0 1 21 6 V18 A3 3 0 0 1 18 21 H6 A3 3 0 0 1 3 18 V6 A3 3 0 0 1 6 3 Z"
+  ],
+  "cutouts": [
+    "M13.23 11L14.08 9.81L14.21 9.54L14.25 9.25L14.21 8.96L13.98 8.57L13.62 8.32L13.32 8.25L12.88 8.32L12.52 8.57L11.17 10.44L11.04 10.71L11 11L7.5 11L7.57 10.21L7.78 9.44L8.12 8.72L8.71 7.93L9.47 7.28L10.16 6.89L11.11 6.59L11.9 6.5L12.5 6.53L13.28 6.68L14.02 6.98L14.69 7.39L15.29 7.93L15.78 8.55L16.15 9.26L16.34 9.82L16.46 10.4L16.5 11Z",
+    "M7.5 16.5 H10",
+    "M14 16.5 H16.5"
+  ],
+  "synonyms": [
+    "scale",
+    "scales",
+    "weigh",
+    "weight loss",
+    "lose weight",
+    "weight gain",
+    "diet",
+    "dieting",
+    "bmi",
+    "body mass index",
+    "kg",
+    "kilograms",
+    "lbs",
+    "pounds",
+    "weigh yourself",
+    "fitness tracking",
+    "healthy",
+    "obesity",
+    "smart scale",
+    "body fat",
+    "nutrition",
+    "gym",
+    "wellness",
+    "bathroom",
+    "heavy",
+    "mass"
+  ]
+}

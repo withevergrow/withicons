@@ -1,0 +1,51 @@
+{
+  "name": "navigation-2",
+  "category": "maps",
+  "description": "A navigation arrowhead pointing straight up, for heading-up navigation, direction of travel and sat-nav modes.",
+  "aliases": [
+    "navigation-arrow",
+    "nav-arrow",
+    "heading-arrow",
+    "north-arrow",
+    "direction-up",
+    "gps-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "navigation",
+    "gps",
+    "direction",
+    "maps"
+  ],
+  "paths": [
+    {
+      "d": "M12 2.5 L19.5 20.5 L12 16.5 L4.5 20.5 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12 2.5 L19.5 20.5 L12 16.5 L4.5 20.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "north",
+    "go straight",
+    "head north",
+    "straight ahead",
+    "forward",
+    "sat nav",
+    "satnav",
+    "turn by turn",
+    "directions",
+    "driving mode",
+    "compass",
+    "bearing",
+    "pointer",
+    "arrowhead",
+    "travel direction",
+    "heading up",
+    "navigate",
+    "location arrow",
+    "wayfinding"
+  ]
+}

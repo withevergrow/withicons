@@ -1,4 +1,5 @@
 // React: <Loader name="spinner" variant="glass" size={32} speed={1.2} />  ·  <Morph items={['file', 'cloud-upload', 'check-circle']} />
+// Morph items are library icon names; 'loader:<name>' (or { loader: '<name>' }) puts a loader in the chain.
 // Inline SVG (currentColor, CSS variables, crisp at any size). Styles other than line load on first use; an empty box
 // of the same size holds the space meanwhile. Extra props (className, style, onClick, data-*, aria-*) go on the wrapper.
 import { createElement, useEffect, useState } from 'react'
@@ -31,7 +32,7 @@ export function Loader({ name = 'spinner', variant = 'line', size = 24, color, s
 export function Morph({ items, variant = 'line', effect = 'bloom', hold, size = 24, color, speed, paused, label, vars, ...rest }) {
   const uid = useUid()
   const [html, setHtml] = useState('')
-  const key = (Array.isArray(items) ? items : [items]).join('\u0001')
+  const key = (Array.isArray(items) ? items : [items]).map(it => it && typeof it === 'object' ? JSON.stringify(it) : String(it)).join('\u0001')
   useEffect(() => {
     let live = true
     L.morphAsync(items, { style: variant, effect, hold, size, color, speed, paused, vars, label: '', id: 'wl-m' + uid })

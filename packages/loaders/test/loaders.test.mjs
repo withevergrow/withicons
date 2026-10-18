@@ -70,13 +70,16 @@ test('url() and flat output', () => {
 
 test('morph(): items hand over in a loop; one item arrives once', () => {
   const icon = n => `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M${n} 4 L12 20"/></svg>`
-  const s = L.morph([icon(4), icon(8), L.list()[0]], { effect: 'spin', hold: 1 })
+  const s = L.morph([icon(4), icon(8), 'loader:' + L.list()[0]], { effect: 'spin', hold: 1 })
   assert.equal((s.match(/@keyframes wl-m/g) || []).length, 3)
   assert.match(s, /stroke-width="2"/)          // the icon's root attributes survive on its group
   assert.match(s, /calc\(3s\*/)                 // 3 items x 1 s
   const one = L.morph([icon(4)], {})
   assert.match(one, /animation:[^;]*\.6s both/)
   assert.throws(() => L.morph(['not-a-loader-or-svg']), e => e.code === 'WITH_LOADER_MORPH')
+  // a plain name is an icon (sync morph cannot fetch it), even when a loader has that name
+  assert.throws(() => L.morph(['spinner']), e => e.code === 'WITH_LOADER_MORPH' && /loader:spinner/.test(e.message))
+  assert.throws(() => L.morph(['loader:no-such-loader']), e => e.code === 'WITH_LOADER_UNKNOWN')
   for (const e of L.effects()) assert.ok(L.morph([icon(1), icon(2)], { effect: e.name }).includes('@keyframes'), e.name)
 })
 
@@ -88,4 +91,60 @@ test('standalone files: self-contained, no external refs, under the size cap', (
     assert.ok(!/var\(--with-/.test(t), `${s}/${l.name} unflattened colour`)
     assert.ok(/prefers-reduced-motion/.test(t))
   }
+})
+
+test('morphItem(): a plain name is an icon, a loader only when asked for (0.6.0)', () => {
+  assert.deepEqual(L.morphItem('rocket'), { kind: 'icon', name: 'rocket' })
+  assert.deepEqual(L.morphItem('loader:rocket'), { kind: 'loader', name: 'rocket' })
+  assert.deepEqual(L.morphItem('icon:rocket'), { kind: 'icon', name: 'rocket' })
+  assert.deepEqual(L.morphItem({ loader: 'rocket' }), { kind: 'loader', name: 'rocket' })
+  assert.deepEqual(L.morphItem({ icon: 'gift' }), { kind: 'icon', name: 'gift' })
+  assert.equal(L.morphItem('<svg></svg>').kind, 'svg')
+  assert.equal(L.morphItem(''), null)
+})
+
+test('morphAsync(): names that are also loaders stay icons; loader:<name> embeds the loader', async () => {
+  const icon = n => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-icon="${n}"><path d="M4 4h16v16H4z"/></svg>`
+  const asked = []
+  L.setIconSource((name, style) => { asked.push(name + '/' + style); return icon(name) })
+  try {
+    assert.ok(L.get('rocket') && L.get('download'), 'rocket and download are loaders too')
+    const s = await L.morphAsync(['wrench', 'settings', 'rocket'])
+    assert.deepEqual(asked, ['wrench/line', 'settings/line', 'rocket/line'])
+    assert.match(s, /data-icon="rocket"/)
+    assert.ok(!s.includes('wl-rocket-line'), 'the rocket LOADER must not be embedded')
+    const l = await L.morphAsync('wrench, settings, loader:rocket')
+    assert.ok(l.includes('wl-rocket-line'), 'loader:rocket embeds the loader')
+    assert.ok(!/data-icon="rocket"/.test(l))
+    const o = await L.morphAsync(['file', { loader: 'spinner' }])
+    assert.ok(o.includes('wl-spinner-line'))
+    await assert.rejects(L.morphAsync(['loader:no-such-loader']), e => e.code === 'WITH_LOADER_UNKNOWN')
+  } finally { L.setIconSource(null) }
+})
+
+test('<with-loader>.done(name) always ends on the icon, never a loader of that name', async () => {
+  const { WithLoaderElement } = await import(new URL('../dist/element.js', import.meta.url))
+  // a tiny stand-in for the DOM bits the element touches (node has no HTMLElement)
+  class Host extends WithLoaderElement {
+    constructor() { super(); this.attrs = { name: 'download' }; this.style = {}; this.isConnected = true; this.innerHTML = '' }
+    getAttribute(k) { return k in this.attrs ? this.attrs[k] : null }
+    setAttribute(k, v) { this.attrs[k] = String(v) }
+    removeAttribute(k) { delete this.attrs[k] }
+    hasAttribute(k) { return k in this.attrs }
+  }
+  L.setIconSource(name => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-icon="${name}"><path d="M4 4h16v16H4z"/></svg>`)
+  try {
+    const el = new Host()
+    el.connectedCallback()
+    await new Promise(r => setTimeout(r, 20))
+    assert.ok(el.innerHTML.includes('wl-download-line'), 'busy: the download loader')
+    assert.equal(el.attrs.role, 'progressbar')
+    el.done('download')
+    await new Promise(r => setTimeout(r, 20))
+    assert.match(el.innerHTML, /data-icon="download"/)
+    assert.ok(!el.innerHTML.includes('wl-download-line'), 'done: the download ICON, not the loader')
+    assert.equal(el.attrs.role, 'img')
+    assert.equal(el.attrs['aria-label'], 'Done')
+    assert.equal(el.attrs['aria-busy'], 'false')
+  } finally { L.setIconSource(null) }
 })

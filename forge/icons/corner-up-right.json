@@ -1,0 +1,52 @@
+{
+  "name": "corner-up-right",
+  "category": "arrows",
+  "description": "An elbow arrow that rises and turns to the right, for redo, forward and share.",
+  "aliases": [
+    "turn-up-right",
+    "elbow-up-right",
+    "bend-up-right",
+    "forward-up",
+    "up-right-turn",
+    "curve-up-right",
+    "corner-arrow-up-right",
+    "pass-on-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "corner",
+    "turn",
+    "forward",
+    "redo",
+    "right"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 20 V13 A4 4 0 0 1 8.5 9 H19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 14 L19.5 9 L14.5 4",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "redo",
+    "forward",
+    "share",
+    "send on",
+    "pass on",
+    "next",
+    "turn right",
+    "route",
+    "direction",
+    "redirect",
+    "detour",
+    "navigate",
+    "bend",
+    "step forward",
+    "continue"
+  ]
+}

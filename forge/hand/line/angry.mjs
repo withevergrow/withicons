@@ -1,0 +1,2 @@
+// old (pre-rework) drawing restored on request
+export default function render() { return [["path",{"d":"M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z"}],["path",{"d":"M7 7.5 L10.5 9.25","class":"wm-a"}],["path",{"d":"M17 7.5 L13.5 9.25","class":"wm-a"}],["path",{"d":"M9 12 V12.5","class":"wm-a"}],["path",{"d":"M15 12 V12.5","class":"wm-a"}],["path",{"d":"M9 17.5 A3.5 3.5 0 0 1 15 17.5","class":"wm-a"}]] }

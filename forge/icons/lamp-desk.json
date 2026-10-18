@@ -1,0 +1,72 @@
+{
+  "name": "lamp-desk",
+  "category": "home",
+  "description": "An articulated desk lamp: a weighted base, two arm segments meeting at an elbow joint and a conical shade angled down at the desk, for study, work, reading and focus modes.",
+  "aliases": [
+    "task-lamp",
+    "study-lamp",
+    "office-lamp",
+    "work-lamp",
+    "anglepoise",
+    "swing-arm-lamp",
+    "architect-lamp",
+    "lamp-arm"
+  ],
+  "tags": [
+    "light",
+    "lamp",
+    "desk",
+    "study",
+    "office",
+    "furniture"
+  ],
+  "paths": [
+    {
+      "d": "M12.69 6.31 L14.81 4.19 L21.53 7.02 L15.52 13.03 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 18.25 L7.91 11 M9.21 8.61 L13.75 5.25",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 9.5 A1.5 1.5 0 1 1 6.5 9.5 A1.5 1.5 0 1 1 9.5 9.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21 A5 2.75 0 0 1 12.5 21 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M12.69 6.31 L14.81 4.19 L21.53 7.02 L15.52 13.03 Z",
+    "M2.5 21 A5 2.75 0 0 1 12.5 21 Z",
+    "M9.5 9.5 A1.5 1.5 0 1 1 6.5 9.5 A1.5 1.5 0 1 1 9.5 9.5 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "desk lamp",
+    "table lamp",
+    "reading lamp",
+    "reading",
+    "study",
+    "studying",
+    "homework",
+    "focus",
+    "focus mode",
+    "work",
+    "workspace",
+    "office",
+    "night",
+    "late night",
+    "light",
+    "lighting",
+    "illumination",
+    "lamp on",
+    "pixar lamp",
+    "adjustable lamp",
+    "led lamp",
+    "desklamp",
+    "lamp desk"
+  ]
+}

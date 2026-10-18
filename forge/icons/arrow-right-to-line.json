@@ -1,0 +1,58 @@
+{
+  "name": "arrow-right-to-line",
+  "category": "arrows",
+  "description": "An arrow pointing right into a vertical line, for jump to end, move to the right edge and the Tab key.",
+  "aliases": [
+    "arrow-to-end",
+    "arrow-to-right-edge",
+    "move-to-end",
+    "arrow-right-bar",
+    "to-right-edge",
+    "tab-key",
+    "end-key",
+    "dock-right-arrow"
+  ],
+  "tags": [
+    "arrow",
+    "right",
+    "end",
+    "last",
+    "edge",
+    "tab"
+  ],
+  "paths": [
+    {
+      "d": "M3.5 12 H15.5",
+      "plate": "A"
+    },
+    {
+      "d": "M9 5.5 L15.5 12 L9 18.5",
+      "plate": "A"
+    },
+    {
+      "d": "M20.5 5 V19",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "end",
+    "last",
+    "skip to end",
+    "end of line",
+    "finish",
+    "right edge",
+    "tab",
+    "indent",
+    "wall",
+    "limit",
+    "stop",
+    "move right",
+    "push right",
+    "collapse right",
+    "dock right",
+    "snap right",
+    "exit"
+  ]
+}

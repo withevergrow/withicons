@@ -145,7 +145,7 @@ Plain `?q=<words>` (no `limit`) is the form most likely to be cached already.
 | https://withicons.com/icons.json | every icon: name, category, description, aliases, tags, styles |
 | https://withicons.com/llms.txt | short index for LLMs; `llms-full.txt` is the full reference (usage, styles, motion, Ask AI briefs, every icon) |
 | https://withicons.com/skill/SKILL.md | this skill |
-| [icons.md](icons.md) | all 750 canonical names with categories and aliases (offline) |
+| [icons.md](icons.md) | all 1000 canonical names with categories and aliases (offline) |
 | https://withicons.com/downloads/with-icons-<style>.zip | one style, every SVG (colours baked in) + an offline searchable viewer; `with-icons-all.zip` has every style |
 
 ## In code

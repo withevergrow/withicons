@@ -1,6 +1,6 @@
 {
   "name": "@withicons/loaders",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "50 animated loaders (common, creative, festival) + icon morph sequences in all 34 with icons styles. One self-contained SVG each: works as <img>, inline, <with-loader>, React or Vue. Pure CSS animation, zero dependencies.",
   "license": "MIT",
   "author": {

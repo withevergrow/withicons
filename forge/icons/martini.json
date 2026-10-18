@@ -1,0 +1,67 @@
+{
+  "name": "martini",
+  "category": "food",
+  "description": "A martini glass with an olive on a pick, for cocktails, bars, happy hour and nightlife.",
+  "aliases": [
+    "cocktail",
+    "cocktail-glass",
+    "cosmopolitan",
+    "mixed-drink",
+    "cocktail-bar",
+    "nightlife",
+    "aperitif"
+  ],
+  "tags": [
+    "drink",
+    "alcohol",
+    "cocktail",
+    "bar",
+    "nightlife"
+  ],
+  "paths": [
+    {
+      "d": "M3 3.5 H21 L12 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 13 V21.5 M8 21.5 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M12.25 7.5 A1.5 1.5 0 1 1 9.25 7.5 A1.5 1.5 0 1 1 12.25 7.5 Z M11.75 6.5 L16 2",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M3 3.5 H21 L12 13 Z"
+  ],
+  "cutouts": [
+    "M12.5 7.5 A1.75 1.75 0 1 1 9 7.5 A1.75 1.75 0 1 1 12.5 7.5",
+    "M12 6.25 L15 3.25"
+  ],
+  "synonyms": [
+    "cocktails",
+    "drinks",
+    "happy hour",
+    "bar",
+    "bartender",
+    "mixology",
+    "gin",
+    "vodka",
+    "olive",
+    "shaken not stirred",
+    "margarita",
+    "party",
+    "night out",
+    "celebration",
+    "drinks menu",
+    "alcohol",
+    "booze",
+    "club",
+    "pub",
+    "lounge",
+    "martinis",
+    "coctail",
+    "marteeni"
+  ]
+}

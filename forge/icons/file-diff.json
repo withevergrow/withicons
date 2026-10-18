@@ -1,0 +1,67 @@
+{
+  "name": "file-diff",
+  "category": "files",
+  "description": "A page with a plus above a minus for file differences, changes and version comparison.",
+  "aliases": [
+    "file-changes",
+    "document-diff",
+    "file-compare",
+    "file-delta",
+    "version-diff"
+  ],
+  "tags": [
+    "file",
+    "diff",
+    "changes",
+    "compare",
+    "version",
+    "code"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M12 9.5 V13.5 M10 11.5 H14",
+      "plate": "A"
+    },
+    {
+      "d": "M10 17.5 H14",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M12 9.5 V13.5",
+    "M10 11.5 H14",
+    "M10 17.5 H14"
+  ],
+  "synonyms": [
+    "difference",
+    "differences",
+    "compare",
+    "comparison",
+    "changes",
+    "changelog",
+    "additions",
+    "deletions",
+    "added and removed",
+    "track changes",
+    "revision",
+    "version control",
+    "git diff",
+    "pull request",
+    "merge",
+    "review changes",
+    "redline",
+    "plus minus"
+  ]
+}

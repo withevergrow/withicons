@@ -1,0 +1,49 @@
+{
+  "name": "filter-x",
+  "intent": "the funnel shakes its filters loose and the x clears them",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      11,
+      12
+    ],
+    "amount": 0.35,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7,
+    "duration": 0.5
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        18.5,
+        17.5
+      ],
+      "amount": 0.8,
+      "duration": 3.2,
+      "delay": 0.2
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "spin-once",
+      "origin": [
+        18.5,
+        17.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "filter",
+      "effect": "morph"
+    }
+  ]
+}

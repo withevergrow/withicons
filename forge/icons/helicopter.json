@@ -1,0 +1,74 @@
+{
+  "name": "helicopter",
+  "category": "travel",
+  "description": "A helicopter seen from the side, with its main rotor, windscreen, tail boom and landing skids, for helicopter flights, rescue and air transport.",
+  "aliases": [
+    "chopper",
+    "heli",
+    "copter",
+    "rotorcraft",
+    "air-ambulance",
+    "heliport",
+    "whirlybird",
+    "helicopter-ride"
+  ],
+  "tags": [
+    "aircraft",
+    "flight",
+    "transport",
+    "rescue",
+    "travel"
+  ],
+  "paths": [
+    {
+      "d": "M8 6.5 H11 C14.5 6.5 16.5 9 16.5 12 C16.5 15.25 14.5 17.5 11.5 17.5 H8 A5.5 5.5 0 0 1 8 6.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 11 H21 M21 7 V12.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 12 H8 A2 2 0 0 0 10 10 V6.5",
+      "plate": "A"
+    },
+    {
+      "d": "M4.5 2.5 H21.5 M13 2.5 V7",
+      "plate": "A"
+    },
+    {
+      "d": "M2.5 19.5 A1.5 1.5 0 0 0 4 21 H16 M7 17.5 V21 M12.5 17.5 V21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M8 6.5 H11 C14.5 6.5 16.5 9 16.5 12 C16.5 15.25 14.5 17.5 11.5 17.5 H8 A5.5 5.5 0 0 1 8 6.5 Z"
+  ],
+  "cutouts": [
+    "M4.25 10.75 A3.75 3.75 0 0 1 8.75 8.3 V9.5 A1.25 1.25 0 0 1 7.5 10.75 Z"
+  ],
+  "synonyms": [
+    "helicopter tour",
+    "air taxi",
+    "rescue",
+    "medevac",
+    "emergency",
+    "airlift",
+    "aviation",
+    "flying",
+    "flight",
+    "rotor",
+    "pilot",
+    "sightseeing",
+    "transport",
+    "helipad",
+    "military",
+    "news chopper",
+    "coast guard",
+    "search and rescue",
+    "aerial",
+    "helicoptor",
+    "helecopter",
+    "toy helicopter"
+  ]
+}

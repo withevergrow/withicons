@@ -1,0 +1,42 @@
+{
+  "name": "git-branch-plus",
+  "intent": "the plus pops at the tip where the new branch begins",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "pop",
+    "amount": 1
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "amount": 0.8,
+      "duration": 2.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "draw"
+    },
+    {
+      "preset": "nudge",
+      "dir": 315,
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "git-branch",
+      "effect": "morph"
+    },
+    {
+      "to": "git-pull-request",
+      "effect": "fade"
+    }
+  ]
+}

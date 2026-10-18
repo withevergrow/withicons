@@ -1,0 +1,46 @@
+{
+  "name": "lamp-desk",
+  "intent": "the lamp glows warmly and nods its head as if reading",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      7.5,
+      21
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "nod",
+      "origin": [
+        7.5,
+        21
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "flicker"
+    },
+    {
+      "preset": "hop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "lamp",
+      "effect": "fade"
+    },
+    {
+      "to": "lightbulb",
+      "effect": "fade"
+    },
+    {
+      "to": "lightbulb-off",
+      "effect": "fade"
+    }
+  ]
+}

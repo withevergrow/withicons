@@ -1,0 +1,63 @@
+{
+  "name": "circle-check-big",
+  "category": "status",
+  "description": "A large check sweeping out of an open circle for done, success and completed tasks.",
+  "aliases": [
+    "check-circle-big",
+    "big-check",
+    "circle-check-large",
+    "checkmark-circle-big",
+    "done-circle",
+    "success-big",
+    "complete-circle",
+    "big-tick",
+    "check-big"
+  ],
+  "synonyms": [
+    "done",
+    "success",
+    "complete",
+    "completed",
+    "finished",
+    "approved",
+    "verified",
+    "ok",
+    "okay",
+    "yes",
+    "correct",
+    "passed",
+    "accepted",
+    "confirmed",
+    "all good",
+    "tick",
+    "checkmark",
+    "check mark",
+    "achievement",
+    "goal met",
+    "success state"
+  ],
+  "tags": [
+    "check",
+    "circle",
+    "success",
+    "done",
+    "complete"
+  ],
+  "paths": [
+    {
+      "d": "M21.15 9.45 A9.5 9.5 0 1 1 17.29 4.11",
+      "plate": "K"
+    },
+    {
+      "d": "M8 11 L11.5 14.5 L21.5 4.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 12 A9.5 9.5 0 1 1 2.5 12 A9.5 9.5 0 1 1 21.5 12 Z",
+    "M19.21 8.21 L22.21 5.21 A1 1 0 0 0 20.79 3.79 L17.79 6.79 Z"
+  ],
+  "cutouts": [
+    "M8 11 L11.5 14.5 L19.5 6.5"
+  ]
+}

@@ -20,6 +20,7 @@ import { Worker, isMainThread, parentPort, workerData } from 'worker_threads'
 import { ROOT, ICON_DIR, STYLE_DIR, listIcons, loadIcon, loadStyles, renderIcon, nodesToMarkup, readManifest, attrs, resolveVars } from '../lib/load.mjs'
 import { STYLE_GROUPS } from './style-groups.mjs'
 import { cdnPkg, cdnDir } from '../lib/emit-core.mjs'
+import { handHash } from '../lib/render-pool.mjs'
 import { DUO_PRESETS } from '../styles/_duo-presets.mjs'
 
 const SELF = fileURLToPath(import.meta.url)
@@ -268,18 +269,20 @@ async function main() {
     return seen
   }
   const STYLE_HASH = Object.fromEntries(STYLES.map(st => [st.name, sha(SHARED_SRC + [...styleSources(path.join(STYLE_DIR, `${st.name}.mjs`))].sort().map(fl => fs.readFileSync(fl, 'utf8')).join('\u0000'))]))
+  // an icon a style draws by hand (forge/hand/<style>/<icon>.mjs) also keys on that override and what it imports
+  const iconStyleHash = (sn, n) => { const h = handHash(sn, n); return h ? STYLE_HASH[sn] + ':' + h : STYLE_HASH[sn] }
   const RC_FILE = path.join(CACHE_DIR, 'render-cache-v2.json')
   let rc = (!FORCE && readJSON(RC_FILE)) || { icons: {} }
   const jobs = []
   for (const n of names) {
     const h = sha(rawText[n]), e = rc.icons[n] && rc.icons[n].h === h ? rc.icons[n] : (rc.icons[n] = { h, svg: {}, sh: {} })
-    const want = STYLES.map(st => st.name).filter(sn => e.sh[sn] !== STYLE_HASH[sn])
+    const want = STYLES.map(st => st.name).filter(sn => e.sh[sn] !== iconStyleHash(sn, n))
     if (want.length) jobs.push([n, want])
   }
   if (jobs.length) {
     const tr = Date.now()
     const rendered = await renderMany(jobs)
-    for (const [n, want] of jobs) for (const sn of want) { rc.icons[n].svg[sn] = rendered[n] ? rendered[n][sn] : null; rc.icons[n].sh[sn] = STYLE_HASH[sn] }
+    for (const [n, want] of jobs) for (const sn of want) { rc.icons[n].svg[sn] = rendered[n] ? rendered[n][sn] : null; rc.icons[n].sh[sn] = iconStyleHash(sn, n) }
     console.log(`  site-seo: rendered ${jobs.reduce((a, j) => a + j[1].length, 0)} icon-styles (${jobs.length} icons) in ${Date.now() - tr} ms`)
   }
   for (const k of Object.keys(rc.icons)) if (!BY[k]) delete rc.icons[k]
@@ -393,6 +396,18 @@ async function main() {
   const dlButton = s => { const d = dlOf(s); if (!d) return ''
     const n = d.icons.toLocaleString('en-US')
     return `<a class="btn btn-ghost btn-lg dl-all" data-download-all="${s}" data-variant="hub" href="../${d.file}" download="${d.file.split('/').pop()}" aria-label="${esc(dlMain(s, d))} (ZIP, ${esc(d.size)})"><span class="dl-all-ic" aria-hidden="true">${DL_GLYPH}</span><span class="dl-all-t"><span class="dl-all-main">Download all</span><span class="dl-all-note">${n} SVGs · ZIP · ${esc(d.size)}</span></span></a>` }
+  // the style hub's quick downloads: the whole style in one zip per format, SVG first, then one PNG zip per size
+  // (site-downloads.mjs PNG_SIZES -> downloads.json styles[s].png). Plain <a download> links, no JS; the visible text is
+  // the format and the zip's size, the hidden prefix names the style and count for screen readers.
+  const pngOf = s => { const d = dlOf(s); return d && Array.isArray(d.png) ? d.png.filter(p => p && p.file && exists(p.file)) : [] }
+  const dlQuick = s => { const d = dlOf(s); if (!d) return ''
+    const png = pngOf(s), n = d.icons.toLocaleString('en-US'), T = STYLE[s].title
+    const item = (file, main, note) => `<li><a class="btn btn-ghost dl-all dl-q" href="../${file}" download="${file.split('/').pop()}"><span class="dl-all-ic" aria-hidden="true">${DL_GLYPH}</span><span class="visually-hidden">Download all ${n} ${esc(T)} icons as </span><span class="dl-all-t"><span class="dl-all-main">${esc(main)}</span><span class="dl-all-note">${esc(note)}</span></span></a></li>`
+    const sizes = png.length ? `; PNG comes in ${numw(png.length)} sizes from ${png[0].px} to ${png[png.length - 1].px} px, on a transparent background${STYLE[s].palette ? '' : ', drawn in near-black'}` : ''
+    return `<section class="ip-section hub-dl" id="download" aria-labelledby="dl-h"><div class="wrap">
+  <div class="ip-head"><h2 class="ip-h2" id="dl-h">Download the <span class="ip-hand">whole set</span></h2><p>All ${n} ${esc(T)} icons in one ZIP, one click each. SVG scales to any size${sizes}.</p></div>
+  <ul class="dl-quick">${item(d.file, 'SVG', `ZIP · ${d.size}`)}${png.map(p => item(p.file, `PNG ${p.px} px`, `ZIP · ${p.size}`)).join('')}</ul>
+</div></section>` }
   const guide = slug => exists(`guides/${slug}.html`) ? `guides/${slug}.html` : 'guides/index.html'
 
   // inline svg for a page; decorative by default
@@ -1180,11 +1195,12 @@ ${crumbs(crumbItems)}
   <div class="hub-strip is-mono" aria-hidden="true">${SHOWCASE.slice(0, 9).map((n, k) => `<span style="--i:${k}">${svgEl(n, s)}</span>`).join('')}</div>
 </div>
 </div></section>
+${dlQuick(s)}
 <section class="ip-section" aria-labelledby="when-h"><div class="wrap">
   <div class="ip-head"><h2 class="ip-h2" id="when-h">When to use <span class="ip-hand">${esc(S.title)}</span></h2></div>
   <div class="hub-when">
     <article><h3>Good for</h3><p>${esc(cap(S.good))}.</p></article>
-    <article><h3>Sizes</h3><p>${s === 'pixel' ? 'Drawn on a 16×16 pixel grid, so it is sharpest at 16, 32 and 48px: tiny UI, games and big retro posters.' : FAM(s) === 'studio' ? 'Built from layers of light, shade and material, so it is at its best from 48px up: app tiles, hero sections, pricing cards and posters.' : FAM(s) === 'modern' ? ('Built with smooth gradients and layered light, so it reads from 32px and is at its best from 48px up: hero sections, feature cards, app tiles and launches.') : FAM(s) === 'storybook' ? 'Drawn like a small illustration, with layered colour, shading and fine detail, so it is at its best from 48px up: hero sections, app tiles, stickers, posters and social posts.' : S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
+    <article><h3>Sizes</h3><p>${s === 'pixel' ? 'Drawn one pixel per unit of the 24 grid, so it is pixel-perfect at 24, 48 and 72px: UI, games and big retro posters.' : FAM(s) === 'studio' ? 'Built from layers of light, shade and material, so it is at its best from 48px up: app tiles, hero sections, pricing cards and posters.' : FAM(s) === 'modern' ? ('Built with smooth gradients and layered light, so it reads from 32px and is at its best from 48px up: hero sections, feature cards, app tiles and launches.') : FAM(s) === 'storybook' ? 'Drawn like a small illustration, with layered colour, shading and fine detail, so it is at its best from 48px up: hero sections, app tiles, stickers, posters and social posts.' : S.kind === 'universal' ? 'Reads well from 16px up, so it works in menus, buttons and small UI as well as on slides.' : 'Shines at 32px and larger: hero sections, slides, posters and illustrations.'}</p></article>
     <article><h3>Colour</h3><p>${FAM(s) === 'modern' ? 'Arrives in its own colours, painted with smooth gradients; pick a palette and every gradient follows. Developers can retint each colour role with CSS variables (--with-' + s + '-c1 …), right inside the gradients.' : FAM(s) === 'storybook' ? 'Arrives in its own hand-picked colours; pick a palette and every layer follows. Developers can retint every part with role-named CSS variables (--with-' + s + '-c1 …).' : FAM(s) === 'studio' ? (s === 'bauhaus' ? 'Arrives in the Bauhaus primaries: red, yellow and blue with black and paper. Pick a palette to swap them; developers can retint every part with role-named CSS variables.' : 'Arrives with its own rich default colours; pick a palette and the whole layered stack follows. Developers can retint every part with role-named CSS variables.') : S.palette ? 'Arrives with its own cheerful palette; the outline follows any colour you pick. Developers can retint every part with CSS variables.' : s === 'duo' ? 'One colour plus a soft tint of it. Pick any colour when you download.' : s === 'blueprint' ? 'One ink colour; developers can add an accent colour for the construction lines.' : 'A single colour you choose when you download. Every shape follows it.'}</p></article>
     <article><h3>For developers</h3><ul class="hub-dev"><li><code>${SCOPE}/react${subpath}</code></li><li><code>&lt;with-icon variant="${s}"&gt;</code></li><li><code>with with-home${s === 'line' ? '' : ` with-${s}`}</code></li></ul><p class="hub-dev-more"><a href="../developers.html">Developer docs</a> · on npm</p></article>
   </div>

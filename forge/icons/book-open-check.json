@@ -1,0 +1,62 @@
+{
+  "name": "book-open-check",
+  "category": "education",
+  "description": "An open book with a check mark on its right page for finished reading, completed lessons and learned material.",
+  "aliases": [
+    "book-check",
+    "read-complete",
+    "lesson-complete",
+    "book-done",
+    "finished-reading",
+    "chapter-done",
+    "studied"
+  ],
+  "tags": [
+    "book",
+    "check",
+    "complete",
+    "reading",
+    "learning",
+    "education"
+  ],
+  "paths": [
+    {
+      "d": "M12 7 C10.5 5.5 8 4.5 4.5 4.5 A1.5 1.5 0 0 0 3 6 V16.5 A1.5 1.5 0 0 0 4.5 18 C8 18 10.5 19 12 20.5 C13.5 19 16 18 19.5 18 A1.5 1.5 0 0 0 21 16.5 V6 A1.5 1.5 0 0 0 19.5 4.5 C16 4.5 13.5 5.5 12 7 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 7 V20.5",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 12 L16 13.5 L18.5 10.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M12 7 C10.5 5.5 8 4.5 4.5 4.5 A1.5 1.5 0 0 0 3 6 V16.5 A1.5 1.5 0 0 0 4.5 18 C8 18 10.5 19 12 20.5 C13.5 19 16 18 19.5 18 A1.5 1.5 0 0 0 21 16.5 V6 A1.5 1.5 0 0 0 19.5 4.5 C16 4.5 13.5 5.5 12 7 Z"
+  ],
+  "cutouts": [
+    "M12 7.5 V20",
+    "M14.5 12 L16 13.5 L18.5 10.5"
+  ],
+  "synonyms": [
+    "read",
+    "finished",
+    "completed",
+    "done reading",
+    "lesson done",
+    "course completed",
+    "learned",
+    "mastered",
+    "homework done",
+    "study complete",
+    "passed",
+    "verified source",
+    "approved reading",
+    "mark as read",
+    "progress",
+    "achievement",
+    "tick"
+  ]
+}

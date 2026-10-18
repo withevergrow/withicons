@@ -1,0 +1,50 @@
+{
+  "name": "glass-water",
+  "intent": "water sloshes gently in the glass",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8
+  },
+  "alt": [
+    {
+      "preset": "fill"
+    },
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "tilt",
+      "origin": [
+        12,
+        21.5
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "droplet",
+      "effect": "fade"
+    },
+    {
+      "to": "cup-soda",
+      "effect": "slide-left"
+    },
+    {
+      "to": "coffee",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "name": "heading-1",
+  "category": "text",
+  "description": "A capital H with a small 1, for the level-one heading or main title in a text editor.",
+  "aliases": [
+    "h1",
+    "heading-one",
+    "heading1",
+    "h1-tag",
+    "heading-level-1",
+    "title-heading",
+    "main-heading",
+    "top-heading",
+    "h1-heading"
+  ],
+  "tags": [
+    "heading",
+    "title",
+    "text",
+    "editor",
+    "format",
+    "h1"
+  ],
+  "paths": [
+    {
+      "d": "M3 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M12 4 V20",
+      "plate": "K"
+    },
+    {
+      "d": "M3 12 H12",
+      "plate": "A"
+    },
+    {
+      "d": "M16 12.5 L19 10 V20",
+      "plate": "S"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "heading 1",
+    "level 1",
+    "title",
+    "page title",
+    "main title",
+    "big text",
+    "largest heading",
+    "rich text",
+    "text editor",
+    "markdown heading",
+    "formatting",
+    "font size",
+    "headline"
+  ]
+}

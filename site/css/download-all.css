@@ -18,3 +18,14 @@
 .dl-all-compact .dl-all-t { flex-direction: row; align-items: baseline; gap: 8px; }
 .dl-all[hidden] { display: none; }
 @media (prefers-reduced-motion: reduce) { .dl-all .dl-all-ic svg { transition: none; } }
+/* style hub quick downloads (forge/tools/site-seo.mjs dlQuick): SVG + one PNG zip per size, a grid of pills.
+   Two columns up to tablet width (fits 16px gutters at 320px+), four on desktop (SVG + seven PNG sizes = two even rows). */
+.dl-quick { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (min-width: 900px) { .dl-quick { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; } }
+.dl-quick li { display: flex; min-width: 0; }
+.dl-quick .dl-q { flex: 1; min-width: 0; min-height: 56px; justify-content: flex-start; gap: 10px; padding: 0 14px 0 8px; }
+.dl-quick .dl-q .dl-all-main { font-size: 15.5px; }
+.dl-quick .dl-q .dl-all-note { font-size: 12px; overflow: hidden; text-overflow: ellipsis; }
+.dl-quick li:first-child .dl-q { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--dl-c) 70%, var(--rule-strong)); }
+.dl-quick li:first-child .dl-q:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+@media (max-width: 380px) { .dl-quick { gap: 8px; } .dl-quick .dl-q { gap: 8px; padding: 0 8px 0 6px; } .dl-quick .dl-q .dl-all-ic { width: 30px; height: 30px; } .dl-quick .dl-q .dl-all-main { font-size: 14px; } }

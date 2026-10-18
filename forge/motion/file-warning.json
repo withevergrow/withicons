@@ -1,0 +1,54 @@
+{
+  "name": "file-warning",
+  "intent": "the exclamation pops now and then to call your attention",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.3,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12,
+        14.5
+      ],
+      "amount": 0.7,
+      "duration": 2.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "still",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "flicker",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "file-check",
+      "effect": "rotate"
+    },
+    {
+      "to": "alert-triangle",
+      "effect": "morph"
+    },
+    {
+      "to": "file-x",
+      "effect": "fade"
+    }
+  ]
+}

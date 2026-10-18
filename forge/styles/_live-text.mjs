@@ -123,7 +123,12 @@ export function shiftD(d, dx, dy, s = 1) {
 
 // ── quality-gate helpers (opt-in) ────────────────────────────────────────────────────────────────────────
 export const TEXT_REF = 1.75
-export const textWeight = (cap, { base = 2, ref = TEXT_REF, small = 6 } = {}) => +(cap >= small ? base : Math.min(base, ref)).toFixed(2)
+// below cap `tiny` (a count badge's digits, a month, a label word) even Line's weight closes the counters of 8 9 6 B
+// (and a knocked-out counter thinner than 0.8u is erased as a sliver): such text is drawn at `fine` (1.4u). Labels
+// only use the narrowest condensed cuts at these caps (_parts-labels.mjs fitLabel), so condensed text is always fine.
+export const TINY_CAP = 5.6
+export const textWeight = (cap, { base = 2, ref = TEXT_REF, small = 6, tiny = TINY_CAP, fine = 1.4 } = {}) =>
+  +(cap >= small ? base : cap < tiny ? Math.min(base, ref, fine) : Math.min(base, ref)).toFixed(2)
 
 const reopen = s => s.closed && s.pts.length > 2 ? { ...s, pts: [...s.pts, s.pts[0]], closed: false } : s
 export function glyphLines(icon) {

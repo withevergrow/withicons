@@ -1,0 +1,66 @@
+{
+  "name": "bug-off",
+  "category": "development",
+  "description": "A beetle struck through by a slash, for fixed bugs, resolved issues and turning debugging off.",
+  "aliases": [
+    "bug-fixed",
+    "no-bugs",
+    "fixed-bug",
+    "debug-off",
+    "bug-free",
+    "bug-slash",
+    "resolved-bug",
+    "squashed-bug"
+  ],
+  "tags": [
+    "bug",
+    "fixed",
+    "debug",
+    "resolved",
+    "development",
+    "qa"
+  ],
+  "paths": [
+    {
+      "d": "M11.61 7.02 A5 5 0 0 1 17 12 V12.4",
+      "plate": "K"
+    },
+    {
+      "d": "M7 12 V15 A5 5 0 0 0 14.64 19.24",
+      "plate": "K"
+    },
+    {
+      "d": "M7 12 L3.5 10.5 M7 15.5 H3 M9 19 L5.5 21 M17 12 L20.5 10.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 16.75 V20 M14 7.5 L16 4.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M10.71 7.17 A5 5 0 0 1 17 12 V13.46 Z",
+    "M7.17 10.71 A5 5 0 0 0 7 12 V15 A5 5 0 0 0 15.25 18.8 Z"
+  ],
+  "cutouts": [
+    "M12 16.75 V20.5"
+  ],
+  "synonyms": [
+    "fixed",
+    "bug fix",
+    "resolved",
+    "issue closed",
+    "no issues",
+    "pest control",
+    "stop debugging",
+    "disable debugger",
+    "exterminate",
+    "bug squashed",
+    "no errors",
+    "insect off"
+  ]
+}

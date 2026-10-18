@@ -1,7 +1,7 @@
 # with icons — Loaders
 
 **50 animated loaders** (20 common, 20 creative, 10 festival) that ship in **every style**, plus **morph sequences**:
-any chain of library icons (or loaders) that keep turning into one another while something loads.
+any chain of library icons (and, asked for by `loader:<name>`, loaders) that keep turning into one another while something loads.
 
 A loader is a few **parts**. Each part is a normal skeleton (`paths` with plates K/A/S, `fills`, `cutouts`, exactly the
 format in `forge/CONTRACT.md`) plus a **motion**. Every style renderer draws each part exactly as it draws an icon, the
@@ -23,7 +23,8 @@ export default {
   name: 'spinner-dots', title: 'Dot spinner', group: 'common',          // common | creative | festival
   description: 'Eight dots on a ring: a bright head runs clockwise while the tail fades.',   // <= 160 chars
   intent: 'the everyday activity indicator, softer and rounder',             // <= 80 chars: what the motion SAYS
-  aliases: ['activity-indicator', 'dots-spinner', 'ios-spinner'],            // >= 3, what people type
+  aliases: ['activity-indicator', 'dots-spinner', 'ios-spinner'],            // >= 3, what people type; never an icon name
+                                                                             // or another loader's name / alias
   tags: ['loading', 'spinner'], synonyms: ['please wait', 'busy'],
   duration: 1,                       // seconds per cycle (0.6..8)
   morph: ['sparkles', 'zap'],        // optional: the library icons the loader turns into (shown on the site)
@@ -91,16 +92,41 @@ out (the shape-shift and icon-morph loaders). Group helpers may live in `forge/l
 ## Morph sequences (runtime + Loader Studio)
 
 `@withicons/loaders` composes any list of library icons (in any style) into one looping SVG at runtime:
-`morph(['file', 'cloud-upload', 'check-circle'], { style: 'line', effect: 'bloom', hold: 0.9 })`. Effects: `bloom`
-(fold into a dot, bloom out), `spin`, `flip`, `slide-up`, `slide-left`, `blur`, `drop`, `zoom`. Presets live in
-`forge/loaders/_morphs.mjs` (name, title, icons, effect) and are pre-rendered like loaders.
+`morphAsync(['file', 'cloud-upload', 'check-circle'], { style: 'line', effect: 'bloom', hold: 0.9 })`. Effects: `bloom`
+(fold into a dot, bloom out), `spin`, `flip`, `slide-up`, `slide-left`, `drop`, `zoom`, `fade` (cross-fade).
+
+**Items are icons unless a loader is asked for (the behaviour since 0.6.0).** 16 loader names are also icon
+names (`clock download upload refresh hourglass atom book coffee dna infinity radar rocket christmas-tree diya ghost
+gift`), so a bare name can only mean one thing: a plain item is always a library **icon**. A loader goes in the chain
+only when written `loader:<name>` (or `{ loader: '<name>' }`; aliases work): `morph="file,loader:upload,check-circle"`.
+`icon:<name>` / `{ icon }`, `{ svg }` and `<svg …>` markup are accepted too; `morphItem(item)` reports how an item is
+read. The same rule holds for `<with-loader morph>`, React / Vue `<Morph items>`, `morph()` (sync: icons as markup),
+`morphAsync()`, MCP `get_loader({ morph })` and the Loader Studio. `el.done(name)` always shows the icon. Before 0.6.0
+a name that was also a loader became the running loader (`morphAsync(['wrench', 'settings', 'rocket'])` ended on the
+rocket loader, `done('download')` never stopped).
+
+Presets live in `forge/loaders/_morphs.mjs` (name `morph-…`, title, icons, effect, hold, intent, aliases) and are
+pre-rendered like loaders. Preset items are plain library icon names only (the build draws them with `icon(name)`).
+`check-loaders` checks them like loaders: every item is an icon in `forge/icons/`, 2..8 items, a known effect, hold
+0.5..3 s, cycle 0.6..8 s, aliases unique, 64 KB cap in every style.
 
 ## Tools
 
 ```bash
-node forge/tools/check-loaders.mjs [names] [--styles line,glass]   # validate, compile every style, size, determinism
+node forge/tools/check-loaders.mjs [names] [--styles line,glass]   # validate loaders + morph presets, compile every style,
+                                                                     # size, determinism (2nd compile with empty caches)
 node forge/tools/preview-loaders.mjs --loaders orbit,spinner --styles line,glass,pixel --frames 8 --size 56 [--dark]
 node forge/tools/preview-loaders.mjs --loaders all --styles all --grid --t 0.3   # one frame of everything
 ```
-Output: `node forge/lib/emit-loaders.mjs` → `packages/loaders/dist/**` (`@withicons/loaders`) and the site data
-(`site/data/loaders*.js`) used by the Loader Studio (`site/loaders.html`).
+Output: `node forge/lib/emit-loaders.mjs` → `packages/loaders/dist/**` (`@withicons/loaders`), its package.json and
+README, `packages/mcp/src/loaders-data.mjs`, and the site files (`site/vendor/loaders/`, `site/loaders/svg/`,
+`site/data/loaders.js`) used by the Loader Studio (`site/loaders.html`). `--no-site` (also `forge/build.mjs --no-site`)
+skips the site files. `--styles a,b` is a quick partial run: it redraws those styles (plus line, which the runtime
+carries built in), keeps every other style's files, and leaves package.json, README and the MCP data alone.
+
+**Names and aliases.** A loader name may equal an icon name (morph items are icons unless written `loader:<name>`).
+An alias may not: `check-loaders` fails when an alias equals an icon name or another loader's name or alias.
+
+**Accessibility.** `<with-loader>` is `role="progressbar"` (aria-busy) while it runs; `done()` makes it `role="img"`
+named by its label ("Done") and writes that label into one shared, visually hidden `role="status"` (polite) live
+region, created when the first labelled loader connects, so screen readers announce the finish.

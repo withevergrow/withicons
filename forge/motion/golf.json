@@ -1,0 +1,64 @@
+{
+  "name": "golf",
+  "intent": "the flag on the pin flutters in the breeze above the hole",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      8,
+      19.5
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      8,
+      19.5
+    ],
+    "amount": 0.9,
+    "duration": 1
+  },
+  "parts": {
+    "A": {
+      "preset": "bounce",
+      "amount": 0.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "tada",
+      "origin": [
+        8,
+        19.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "rock",
+      "origin": [
+        8,
+        19.5
+      ]
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "flag",
+      "effect": "fade"
+    },
+    {
+      "to": "trophy",
+      "effect": "slide-up"
+    },
+    {
+      "to": "golf@solid",
+      "effect": "scale"
+    }
+  ]
+}

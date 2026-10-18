@@ -1,0 +1,57 @@
+{
+  "name": "message-circle-question",
+  "intent": "the question mark tilts in wonder, asking for help",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "tilt",
+    "origin": [
+      12.5,
+      20.5
+    ],
+    "amount": 0.9,
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "wiggle",
+      "origin": [
+        12.5,
+        16.5
+      ],
+      "amount": 0.6,
+      "duration": 2.4,
+      "delay": 0.15
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12.5,
+        20.5
+      ]
+    },
+    {
+      "preset": "nod"
+    }
+  ],
+  "swap": [
+    {
+      "to": "help-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "message-circle",
+      "effect": "fade"
+    },
+    {
+      "to": "message-circle-more",
+      "effect": "scale"
+    }
+  ]
+}

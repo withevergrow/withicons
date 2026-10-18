@@ -1,0 +1,48 @@
+{
+  "name": "house-wifi",
+  "intent": "the home breathes softly while its wifi waves light up",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.25,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "pop"
+  },
+  "parts": {
+    "A": {
+      "preset": "fill",
+      "duration": 1.6
+    }
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21
+      ]
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "home",
+      "effect": "fade"
+    },
+    {
+      "to": "wifi",
+      "effect": "scale"
+    },
+    {
+      "to": "router",
+      "effect": "fade"
+    }
+  ]
+}

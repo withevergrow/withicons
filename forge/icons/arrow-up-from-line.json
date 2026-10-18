@@ -1,0 +1,59 @@
+{
+  "name": "arrow-up-from-line",
+  "category": "arrows",
+  "description": "An arrow rising up from a flat line, for upload, publish and send up.",
+  "aliases": [
+    "upload-from-line",
+    "arrow-up-from-bar",
+    "lift-off",
+    "publish-arrow",
+    "push-up",
+    "raise-up-arrow",
+    "arrow-up-line",
+    "raise-from-floor"
+  ],
+  "tags": [
+    "arrow",
+    "up",
+    "upload",
+    "publish",
+    "export",
+    "send"
+  ],
+  "paths": [
+    {
+      "d": "M12 15.5 V3.5",
+      "plate": "A"
+    },
+    {
+      "d": "M5.5 10 L12 3.5 L18.5 10",
+      "plate": "A"
+    },
+    {
+      "d": "M5 20.5 H19",
+      "plate": "K"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "upload",
+    "publish",
+    "export",
+    "share",
+    "send",
+    "push",
+    "deploy",
+    "launch",
+    "take off",
+    "lift",
+    "rise",
+    "raise",
+    "ascend",
+    "submit",
+    "from ground",
+    "level up",
+    "increase",
+    "post"
+  ]
+}

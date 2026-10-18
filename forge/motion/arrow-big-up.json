@@ -1,0 +1,40 @@
+{
+  "name": "arrow-big-up",
+  "intent": "springs up like a pressed Shift key",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.35,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.9,
+    "duration": 0.5
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "amount": 0.6
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "arrow-big-up@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "arrow-up",
+      "effect": "fade"
+    }
+  ]
+}

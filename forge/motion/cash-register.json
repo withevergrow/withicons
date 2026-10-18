@@ -1,0 +1,47 @@
+{
+  "name": "cash-register",
+  "intent": "the till pops open with a cheerful ka-ching",
+  "loop": {
+    "preset": "pop",
+    "amount": 0.5,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "tada",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "amount": 0.8,
+      "delay": 0.1
+    }
+  },
+  "alt": [
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ]
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "receipt",
+      "effect": "slide-up"
+    },
+    {
+      "to": "shopping-cart",
+      "effect": "fade"
+    },
+    {
+      "to": "credit-card",
+      "effect": "fade"
+    }
+  ]
+}

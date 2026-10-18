@@ -1,0 +1,9 @@
+{
+  "name": "japanese-yen",
+  "intent": "flips like a yen coin now and then",
+  "loop": { "preset": "flip", "duration": 4 },
+  "hover": { "preset": "flip", "duration": 0.9 },
+  "deco": "breathe",
+  "alt": [{ "preset": "tada", "amount": 0.8 }, { "preset": "glow" }, { "preset": "pop" }],
+  "swap": [{ "to": "dollar-sign", "effect": "flip" }, { "to": "euro", "effect": "flip" }, { "to": "indian-rupee", "effect": "flip" }, { "to": "coins", "effect": "fade" }]
+}

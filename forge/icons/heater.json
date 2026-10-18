@@ -1,0 +1,72 @@
+{
+  "name": "heater",
+  "category": "home",
+  "description": "A column radiator on feet with heat waves rising above it, for heating, warmth, climate control and winter.",
+  "aliases": [
+    "radiator",
+    "space-heater",
+    "room-heater",
+    "heating",
+    "oil-heater",
+    "warmer",
+    "heating-unit"
+  ],
+  "tags": [
+    "home",
+    "heating",
+    "climate",
+    "warm",
+    "appliance",
+    "winter"
+  ],
+  "paths": [
+    {
+      "d": "M3 10.25 A2.25 2.25 0 0 1 7.5 10.25 A2.25 2.25 0 0 1 12 10.25 A2.25 2.25 0 0 1 16.5 10.25 A2.25 2.25 0 0 1 21 10.25 V16.75 A2.25 2.25 0 0 1 16.5 16.75 A2.25 2.25 0 0 1 12 16.75 A2.25 2.25 0 0 1 7.5 16.75 A2.25 2.25 0 0 1 3 16.75 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 10.25 V16.75 M12 10.25 V16.75 M16.5 10.25 V16.75",
+      "plate": "A"
+    },
+    {
+      "d": "M5.25 19 V21 M18.75 19 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M7.5 5.5 Q6.5 4.5 7.5 3.5 Q8.5 2.5 7.5 1.5 M12 5.5 Q11 4.5 12 3.5 Q13 2.5 12 1.5 M16.5 5.5 Q15.5 4.5 16.5 3.5 Q17.5 2.5 16.5 1.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M3 10.25 A2.25 2.25 0 0 1 7.5 10.25 A2.25 2.25 0 0 1 12 10.25 A2.25 2.25 0 0 1 16.5 10.25 A2.25 2.25 0 0 1 21 10.25 V16.75 A2.25 2.25 0 0 1 16.5 16.75 A2.25 2.25 0 0 1 12 16.75 A2.25 2.25 0 0 1 7.5 16.75 A2.25 2.25 0 0 1 3 16.75 Z"
+  ],
+  "cutouts": [
+    "M7.5 10.25 V16.75",
+    "M12 10.25 V16.75",
+    "M16.5 10.25 V16.75"
+  ],
+  "synonyms": [
+    "heat",
+    "warm",
+    "warmth",
+    "warm up",
+    "hot",
+    "central heating",
+    "boiler",
+    "convector",
+    "oil filled radiator",
+    "electric heater",
+    "climate",
+    "temperature",
+    "thermostat",
+    "cold",
+    "winter",
+    "cozy",
+    "cosy",
+    "smart home",
+    "appliance",
+    "energy",
+    "heater on",
+    "heator"
+  ]
+}

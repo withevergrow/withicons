@@ -1,0 +1,65 @@
+{
+  "name": "waves",
+  "category": "weather",
+  "description": "Three rolling wave lines, for water, the sea, beaches, swimming and anything that flows.",
+  "aliases": [
+    "wave",
+    "sea",
+    "ocean",
+    "tide",
+    "surf",
+    "ripple",
+    "water-waves",
+    "wavy"
+  ],
+  "tags": [
+    "water",
+    "sea",
+    "ocean",
+    "beach",
+    "liquid"
+  ],
+  "paths": [
+    {
+      "d": "M3 6.5 C4 4.5 5 4.5 6 6.5 S8 8.5 9 6.5 S11 4.5 12 6.5 S14 8.5 15 6.5 S17 4.5 18 6.5 S20 8.5 21 6.5",
+      "plate": "A"
+    },
+    {
+      "d": "M3 12 C4 10 5 10 6 12 S8 14 9 12 S11 10 12 12 S14 14 15 12 S17 10 18 12 S20 14 21 12",
+      "plate": "K"
+    },
+    {
+      "d": "M3 17.5 C4 15.5 5 15.5 6 17.5 S8 19.5 9 17.5 S11 15.5 12 17.5 S14 19.5 15 17.5 S17 15.5 18 17.5 S20 19.5 21 17.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "water",
+    "beach",
+    "swim",
+    "swimming",
+    "lake",
+    "river",
+    "flood",
+    "tsunami",
+    "coast",
+    "seaside",
+    "surfing",
+    "marine",
+    "nautical",
+    "flow",
+    "liquid",
+    "sound waves",
+    "vibration",
+    "heat waves",
+    "aquatic",
+    "holiday",
+    "tides",
+    "current",
+    "sea level",
+    "rough sea",
+    "squiggle"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "message-square-dot",
+  "intent": "the unread dot pulses at the corner until you open the chat",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      10.5
+    ],
+    "amount": 0.25,
+    "duration": 2.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ],
+    "duration": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "pulse",
+      "origin": [
+        18.5,
+        5.5
+      ],
+      "amount": 1.2,
+      "duration": 1.1,
+      "delay": 0.1
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "message-square",
+      "effect": "fade"
+    },
+    {
+      "to": "message-square-text",
+      "effect": "scale"
+    }
+  ]
+}

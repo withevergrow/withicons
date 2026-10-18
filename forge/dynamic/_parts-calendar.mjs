@@ -69,11 +69,13 @@ export function tile({ rings = true } = {}) {
   }
 }
 // split the tile interior into a small line (cap height `cap`) and a big area, small on top or at the bottom
-export function split({ cap = 3.75, smallOnTop = true, box = INNER } = {}) {
+// The small line is a quiet header (cap 3.75) and the gap 2.5u, so the big number keeps 5.75u: the LARGE, bold
+// drawings, the date as the hero of the tile
+export function split({ cap = 3.75, gap = 2.5, smallOnTop = true, box = INNER } = {}) {
   const wide = { x0: box.x0 - 0.25, x1: box.x1 + 0.25 }
   return smallOnTop
-    ? { small: { ...box, ...wide, y1: box.y0 + cap }, big: { ...box, y0: box.y0 + cap + 3 } }
-    : { small: { ...box, ...wide, y0: box.y1 - cap }, big: { ...box, y1: box.y1 - cap - 3 } }
+    ? { small: { ...box, ...wide, y1: box.y0 + cap }, big: { ...box, y0: box.y0 + cap + gap } }
+    : { small: { ...box, ...wide, y0: box.y1 - cap }, big: { ...box, y1: box.y1 - cap - gap } }
 }
 
 // ── text ────────────────────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,67 @@
+{
+  "name": "search-x",
+  "category": "actions",
+  "description": "A magnifier with an x in the lens for clearing a search or showing no results.",
+  "aliases": [
+    "clear-search",
+    "search-clear",
+    "no-results",
+    "search-remove",
+    "cancel-search",
+    "search-off",
+    "nothing-found",
+    "search-cancel",
+    "no-matches"
+  ],
+  "synonyms": [
+    "no matches",
+    "zero results",
+    "empty search",
+    "no search results",
+    "reset search",
+    "close search",
+    "remove query",
+    "search failed",
+    "could not find",
+    "cannot find",
+    "missing",
+    "lost",
+    "nothing here",
+    "dismiss search",
+    "clear query",
+    "delete search",
+    "not found"
+  ],
+  "tags": [
+    "search",
+    "magnifier",
+    "clear",
+    "no results",
+    "x"
+  ],
+  "paths": [
+    {
+      "d": "M17.5 10.5 A7 7 0 1 1 3.5 10.5 A7 7 0 1 1 17.5 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M15.6 15.6 L20.5 20.5",
+      "plate": "A"
+    },
+    {
+      "d": "M8.5 8.5 L12.5 12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12.5 8.5 L8.5 12.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17.5 10.5 A7 7 0 1 1 3.5 10.5 A7 7 0 1 1 17.5 10.5 Z"
+  ],
+  "cutouts": [
+    "M8.5 8.5 L12.5 12.5",
+    "M12.5 8.5 L8.5 12.5"
+  ]
+}

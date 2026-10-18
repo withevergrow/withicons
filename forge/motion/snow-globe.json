@@ -16,8 +16,12 @@
   },
   "parts": {
     "A": {
-      "preset": "float",
-      "amount": 0.6,
+      "preset": "sway",
+      "origin": [
+        12,
+        14
+      ],
+      "amount": 0.4,
       "duration": 2.4
     }
   },

@@ -1,0 +1,49 @@
+{
+  "name": "text-search",
+  "intent": "the magnifier tilts across the lines, reading for a match",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      15.5,
+      15
+    ],
+    "amount": 0.6,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "zoom",
+    "origin": [
+      15.5,
+      15
+    ],
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 180,
+      "amount": 0.5,
+      "duration": 2.4
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "tilt"
+    }
+  ],
+  "swap": [
+    {
+      "to": "search",
+      "effect": "morph"
+    },
+    {
+      "to": "file-search",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "name": "scan",
   "category": "layout",
-  "description": "Four scan corners framing a space, for scanning, capture frames and focus.",
+  "description": "Four scan corners with a scan line across the middle, for scanning, capture frames and focus.",
   "aliases": [
     "scan-corners",
     "scan-frame",
@@ -34,6 +34,10 @@
     {
       "d": "M7.5 21 H5 A2 2 0 0 1 3 19 V16.5",
       "plate": "K"
+    },
+    {
+      "d": "M7.5 12 H16.5",
+      "plate": "A"
     }
   ],
   "fills": [],

@@ -331,6 +331,9 @@ node data for `toSvg` from the core companion.
 
 | style | SVG files + IconNode data | prebuilt SVG + sprites | CSS class files |
 |---|---|---|---|
+| `glass` | `@withicons/core` (`dist/svg/glass/<name>.svg`, import `@withicons/core/nodes/glass`) | `@withicons/static` (`dist/svg/glass/<name>.svg`, `dist/sprite-glass.svg`) | `@withicons/classes-plus` (`dist/glass/<name>.css`) |
+| `skeuo` | `@withicons/core` (`dist/svg/skeuo/<name>.svg`, import `@withicons/core/nodes/skeuo`) | `@withicons/static` (`dist/svg/skeuo/<name>.svg`, `dist/sprite-skeuo.svg`) | `@withicons/classes-plus` (`dist/skeuo/<name>.css`) |
+| `gothic` | `@withicons/core` (`dist/svg/gothic/<name>.svg`, import `@withicons/core/nodes/gothic`) | `@withicons/static` (`dist/svg/gothic/<name>.svg`, `dist/sprite-gothic.svg`) | `@withicons/classes-plus` (`dist/gothic/<name>.css`) |
 | `clay` | `@withicons/core-plus` (`dist/svg/clay/<name>.svg`, import `@withicons/core-plus/nodes/clay`) | `@withicons/static-plus` (`dist/svg/clay/<name>.svg`, `dist/sprite-clay.svg`) | `@withicons/classes-plus` (`dist/clay/<name>.css`) |
 | `bento` | `@withicons/core-plus` (`dist/svg/bento/<name>.svg`, import `@withicons/core-plus/nodes/bento`) | `@withicons/static-plus` (`dist/svg/bento/<name>.svg`, `dist/sprite-bento.svg`) | `@withicons/classes-plus` (`dist/bento/<name>.css`) |
 | `suite` | `@withicons/core-plus` (`dist/svg/suite/<name>.svg`, import `@withicons/core-plus/nodes/suite`) | `@withicons/static-plus` (`dist/svg/suite/<name>.svg`, `dist/sprite-suite.svg`) | `@withicons/classes-plus` (`dist/suite/<name>.css`) |
@@ -354,7 +357,7 @@ In short, by package (every other style is in `@withicons/core`, `@withicons/sta
 - `@withicons/soft3d`: SVG files and node data of `soft3d`
 - `@withicons/holiday`: SVG files and node data of `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`
 - `@withicons/static-plus`: prebuilt SVGs and sprites (`dist/sprite-<style>.svg`) of `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `soft3d`, `brutal`, `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`
-- `@withicons/classes-plus`: CSS class files of `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal`
+- `@withicons/classes-plus`: CSS class files of `glass`, `skeuo`, `gothic`, `clay`, `bento`, `suite`, `dock`, `liquid`, `chrome`, `brutal`
 - `@withicons/soft3d` also: CSS class files of `soft3d` (`dist/classes/`)
 - `@withicons/holiday` also: CSS class files of `utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine` (`dist/classes/`)
 

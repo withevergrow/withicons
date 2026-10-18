@@ -1,0 +1,58 @@
+{
+  "name": "tree-deciduous",
+  "intent": "the leafy crown bends gently in the breeze over a steady trunk",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.45,
+    "duration": 3.8
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 1.1,
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "sway",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.25,
+      "delay": 0.06
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.4
+    },
+    {
+      "preset": "breathe",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "tree-deciduous@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "tree-pine",
+      "effect": "fade"
+    }
+  ]
+}

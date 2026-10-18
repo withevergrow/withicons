@@ -1,0 +1,66 @@
+{
+  "name": "user-heart",
+  "category": "users",
+  "description": "A person with a heart, for followers, friends, favourite people and caring communities.",
+  "aliases": [
+    "follower",
+    "user-love",
+    "friend",
+    "liked-user",
+    "user-fan",
+    "supporter",
+    "user-like",
+    "beloved",
+    "person-heart"
+  ],
+  "tags": [
+    "person",
+    "heart",
+    "follower",
+    "friend",
+    "love",
+    "care"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M 17.5 20.22 C 17.5 20.22 13.72 17.99 13.72 15.34 C 13.72 14.21 14.6 13.29 15.74 13.29 C 16.49 13.29 17.12 13.71 17.5 14.34 C 17.88 13.71 18.51 13.29 19.26 13.29 C 20.4 13.29 21.28 14.21 21.28 15.34 C 21.28 17.99 17.5 20.22 17.5 20.22 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5 V21 Z",
+    "M 17.5 20.22 C 17.5 20.22 13.72 17.99 13.72 15.34 C 13.72 14.21 14.6 13.29 15.74 13.29 C 16.49 13.29 17.12 13.71 17.5 14.34 C 17.88 13.71 18.51 13.29 19.26 13.29 C 20.4 13.29 21.28 14.21 21.28 15.34 C 21.28 17.99 17.5 20.22 17.5 20.22 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "follow",
+    "following",
+    "followers",
+    "fans",
+    "friendship",
+    "favourite person",
+    "liked",
+    "love",
+    "caring",
+    "care",
+    "patient care",
+    "volunteer",
+    "donor",
+    "support",
+    "dating",
+    "match",
+    "crush",
+    "partner",
+    "kindness",
+    "community"
+  ]
+}

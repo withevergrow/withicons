@@ -1,0 +1,49 @@
+{
+  "name": "cloud-check",
+  "intent": "the cloud drifts while its check pops, all synced",
+  "loop": {
+    "preset": "float",
+    "amount": 0.3,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "draw",
+    "duration": 0.9
+  },
+  "parts": {
+    "S": {
+      "preset": "pop",
+      "origin": [
+        12,
+        16
+      ],
+      "amount": 0.7,
+      "duration": 2.6,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "nod",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud",
+      "effect": "fade"
+    },
+    {
+      "to": "cloud-upload",
+      "effect": "slide-up"
+    },
+    {
+      "to": "cloud-alert",
+      "effect": "rotate"
+    }
+  ]
+}

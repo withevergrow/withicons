@@ -1,33 +1,33 @@
 {
   "name": "lasso",
-  "intent": "the loop swings like a lasso about to be thrown",
+  "intent": "the pointer tilts as it sweeps the selection loop around",
   "loop": {
-    "preset": "sway",
+    "preset": "tilt",
     "origin": [
-      5.5,
-      21
+      14,
+      15.5
     ],
-    "amount": 1.2,
+    "amount": 0.8,
     "duration": 2.6
   },
   "hover": {
     "preset": "wiggle",
     "origin": [
-      5.5,
-      21
+      14,
+      15.5
     ],
     "duration": 0.7
   },
   "alt": [
     {
-      "preset": "rock",
-      "origin": [
-        5.5,
-        21
-      ]
+      "preset": "draw"
     },
     {
-      "preset": "draw"
+      "preset": "sway",
+      "origin": [
+      14,
+      15.5
+    ]
     }
   ],
   "swap": [

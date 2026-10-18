@@ -1,0 +1,47 @@
+{
+  "name": "wifi-low",
+  "intent": "the single arc flickers like a weak signal fading in and out",
+  "loop": {
+    "preset": "fill",
+    "origin": [
+      12,
+      18.5
+    ],
+    "amount": 0.7,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "flicker",
+    "amount": 0.7,
+    "duration": 0.8
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "origin": [
+        12,
+        18.5
+      ],
+      "amount": 0.4
+    },
+    {
+      "preset": "shake",
+      "amount": 0.3
+    }
+  ],
+  "swap": [
+    {
+      "to": "wifi",
+      "effect": "fade"
+    },
+    {
+      "to": "wifi-off",
+      "effect": "fade"
+    },
+    {
+      "to": "signal",
+      "effect": "blur"
+    }
+  ]
+}

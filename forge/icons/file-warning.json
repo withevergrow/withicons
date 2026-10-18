@@ -1,0 +1,70 @@
+{
+  "name": "file-warning",
+  "category": "files",
+  "description": "A page with an exclamation mark for a file with a problem, warning or important notice.",
+  "aliases": [
+    "file-alert",
+    "file-exclamation",
+    "document-warning",
+    "file-error-alert",
+    "important-file",
+    "file-issue",
+    "document-alert",
+    "file-attention",
+    "corrupt-file"
+  ],
+  "tags": [
+    "file",
+    "warning",
+    "alert",
+    "error",
+    "important",
+    "problem"
+  ],
+  "paths": [
+    {
+      "d": "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+      "plate": "A"
+    },
+    {
+      "d": "M12 10.5 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 17.75 V18.25",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M14 2.5 H7 A2 2 0 0 0 5 4.5 V19.5 A2 2 0 0 0 7 21.5 H17 A2 2 0 0 0 19 19.5 V7.5 Z"
+  ],
+  "cutouts": [
+    "M14 2.5 V6 A1.5 1.5 0 0 0 15.5 7.5 H19",
+    "M12 10.5 V14.5",
+    "M13 18 A1 1 0 1 1 11 18 A1 1 0 1 1 13 18 Z"
+  ],
+  "synonyms": [
+    "alert",
+    "caution",
+    "attention",
+    "important",
+    "exclamation",
+    "problem",
+    "issue",
+    "corrupted",
+    "damaged file",
+    "invalid",
+    "missing data",
+    "needs attention",
+    "notice",
+    "urgent document",
+    "unsafe file",
+    "virus",
+    "failed upload",
+    "compatibility"
+  ]
+}

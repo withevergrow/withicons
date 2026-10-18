@@ -1,0 +1,50 @@
+{
+  "name": "folder-lock",
+  "intent": "rests sealed and safe, the padlock jiggles when you try it",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.55
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        12,
+        17
+      ],
+      "amount": 0.5,
+      "duration": 3.4,
+      "delay": 0.15
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pulse",
+      "amount": 0.5
+    },
+    {
+      "preset": "nod",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder",
+      "effect": "fade"
+    },
+    {
+      "to": "lock",
+      "effect": "flip"
+    },
+    {
+      "to": "unlock",
+      "effect": "morph"
+    }
+  ]
+}

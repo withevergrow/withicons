@@ -1,0 +1,67 @@
+{
+  "name": "remote-control",
+  "category": "devices",
+  "description": "A TV remote sending signal waves from its tip, with a round select button and keys, for remote control, TV and media playback.",
+  "aliases": [
+    "remote",
+    "tv-remote",
+    "remote-controller",
+    "clicker",
+    "ir-remote",
+    "television-remote",
+    "media-remote",
+    "zapper"
+  ],
+  "tags": [
+    "devices",
+    "tv",
+    "control",
+    "media",
+    "home"
+  ],
+  "paths": [
+    {
+      "d": "M9 9 H15 A2 2 0 0 1 17 11 V20 A2 2 0 0 1 15 22 H9 A2 2 0 0 1 7 20 V11 A2 2 0 0 1 9 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M13.5 13.5 A1.5 1.5 0 1 1 10.5 13.5 A1.5 1.5 0 1 1 13.5 13.5 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M10 18.5 V18.51 M14 18.5 V18.51",
+      "plate": "A"
+    },
+    {
+      "d": "M9.42 6.31 A4.5 4.5 0 0 1 14.58 6.31 M7.41 3.45 A8 8 0 0 1 16.59 3.45",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M9 9 H15 A2 2 0 0 1 17 11 V20 A2 2 0 0 1 15 22 H9 A2 2 0 0 1 7 20 V11 A2 2 0 0 1 9 9 Z"
+  ],
+  "cutouts": [
+    "M14.25 13.5 A2.25 2.25 0 1 1 9.75 13.5 A2.25 2.25 0 1 1 14.25 13.5 Z M12.75 13.5 A0.75 0.75 0 1 1 11.25 13.5 A0.75 0.75 0 1 1 12.75 13.5 Z",
+    "M11 18.5 A1 1 0 1 1 9 18.5 A1 1 0 1 1 11 18.5 Z",
+    "M15 18.5 A1 1 0 1 1 13 18.5 A1 1 0 1 1 15 18.5 Z"
+  ],
+  "synonyms": [
+    "tv",
+    "television",
+    "channel",
+    "change channel",
+    "buttons",
+    "smart tv",
+    "set top box",
+    "media control",
+    "infrared",
+    "presentation clicker",
+    "couch",
+    "binge watch",
+    "netflix",
+    "streaming",
+    "remote control",
+    "universal remote",
+    "rmeote"
+  ]
+}

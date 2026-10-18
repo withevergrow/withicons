@@ -6,6 +6,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import vm from 'node:vm'
 import { fileURLToPath, pathToFileURL } from 'node:url'
+import { BUDGET } from '../../../scripts/package-budget.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const dist = path.join(root, 'dist')
@@ -57,9 +58,9 @@ test('no file a CDN would refuse (jsDelivr: 20 MB per file, 150 MB per package)'
   const pkgs = [...new Set([root, ...Object.values(H).map(p => path.join(root, '..', p))])]
   for (const p of pkgs) {
     const files = walk(path.join(p, 'dist'))
-    assert.deepEqual(files.filter(f => fs.statSync(f).size > 20 * 1024 * 1024), [])
+    assert.deepEqual(files.filter(f => fs.statSync(f).size > BUDGET.file), [])
     const total = files.reduce((a, f) => a + fs.statSync(f).size, 0)
-    assert.ok(total < 120 * 1024 * 1024, `${path.basename(p)}/dist is ${(total / 1048576).toFixed(1)} MB`)
+    assert.ok(total < BUDGET.total, `${path.basename(p)}/dist is ${(total / 1048576).toFixed(1)} MB`)
   }
 })
 

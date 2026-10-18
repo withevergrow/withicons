@@ -9,6 +9,7 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 export const ICON_DIR = path.join(ROOT, 'forge', 'icons')
 export const STYLE_DIR = path.join(ROOT, 'forge', 'styles')
 export const MANIFEST = path.join(ROOT, 'forge', 'manifest.json')
+export const HAND_DIR = path.join(ROOT, 'forge', 'hand')
 
 export const readManifest = () => JSON.parse(fs.readFileSync(MANIFEST, 'utf8'))
 
@@ -47,11 +48,43 @@ export async function loadStyles(only) {
     // a style under construction must never break everyone else's tooling
     try {
       const mod = await import(pathToFileURL(path.join(STYLE_DIR, f)).href)
-      if (mod.default && typeof mod.default.render === 'function') out[name] = mod.default
+      if (mod.default && typeof mod.default.render === 'function') out[name] = withHand(mod.default, await loadHand(name))
       else console.warn(`[load] styles/${f}: no default export with render() — skipped`)
     } catch (e) { console.warn(`[load] styles/${f} failed to import — skipped: ${String(e.message).split(/\r?\n/)[0]}`) }
   }
   return out
+}
+
+// Hand-drawn overrides (forge/HAND.md): forge/hand/<style>/<icon>.mjs default-exports render(icon) -> IconNode[] and
+// replaces the style's renderer for that one static icon (live icons carry params and always use the style).
+// A file that fails to import is skipped; an override that throws or returns nothing falls back to the style.
+export async function loadHand(style) {
+  const dir = path.join(HAND_DIR, style)
+  if (!fs.existsSync(dir)) return null
+  const hand = Object.create(null)
+  for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).sort()) {
+    try {
+      const mod = await import(pathToFileURL(path.join(dir, f)).href)
+      const fn = typeof mod.default === 'function' ? mod.default : mod.default && mod.default.render
+      if (typeof fn === 'function') hand[f.slice(0, -4)] = fn
+      else console.warn(`[load] hand/${style}/${f}: no default render function — skipped`)
+    } catch (e) { console.warn(`[load] hand/${style}/${f} failed to import — skipped: ${String(e.message).split(/\r?\n/)[0]}`) }
+  }
+  return Object.keys(hand).length ? hand : null
+}
+function withHand(style, hand) {
+  if (!hand) return style
+  return {
+    ...style, hand: Object.keys(hand),
+    render(icon) {
+      const fn = icon && !icon.params ? hand[icon.name] : null
+      if (fn) {
+        try { const nodes = fn(icon); if (Array.isArray(nodes) && nodes.length) return nodes }
+        catch (e) { if (typeof process !== 'undefined' && process.env && process.env.HAND_DEBUG) console.error(`[hand] ${style.name}/${icon.name} threw:`, e) }
+      }
+      return style.render(icon)
+    },
+  }
 }
 
 // IconNode -> SVG markup. nodes: [[tag, attrs], ...]

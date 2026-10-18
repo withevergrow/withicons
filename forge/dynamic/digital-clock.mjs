@@ -1,26 +1,21 @@
-// Live icon: a digital clock — hours stacked over minutes, lock-screen style, on a portrait display
-// (forge/DYNAMIC.md).
+// Live icon: a digital clock: a desk display on two short feet with the hours stacked over the minutes, or the bare
+// digits at a bold cap 7 (forge/DYNAMIC.md).
 //
-// Why stacked: "09:41" in one row is 18–20u wide even at cap 4, so no framed display on the 24 grid can hold it
-// legibly. Two rows of two digits fit a portrait display (the CONTRACT portrait keyline 4..20 x 2..22) at cap
-// 4.75 with 1.5u of white between the rows, and frameless at a bold cap 7.
-import { text, measure, asCutouts, live } from './_font.mjs'
+// Why stacked: "09:41" on one line is 18-20u wide at cap 4; no display on the 24 grid holds every time of day legibly
+// on one line at ONE size (a clock whose digits change size with the time is wrong). Two rows of two digits fit a
+// 17 x 17.5 display at cap 4.75 for every time in both formats, in the regular cut; the feet make it a clock.
+import { text, asCutouts, live } from './_font.mjs'
 import { rr } from './_layout.mjs'
 import { clockDigits } from './_parts-time.mjs'
 
-const DISPLAY = rr(4, 2, 20, 22, 3)
-// centreline boxes for the two rows inside the display (wall 1u ink + 1.5u white + 1u text ink = 3.5u inset)
-const ROWS = [{ x0: 7.5, y0: 5.5, x1: 16.5, y1: 10.25 }, { x0: 7.5, y0: 13.75, x1: 16.5, y1: 18.5 }]
-
-// one cap for both rows: the largest (<= row height, >= 4) at which both strings fit the row width
-function rowCap(strs, w, hMax) {
-  for (let cap = hMax; cap >= 4; cap -= 0.25) if (strs.every(s => measure(s, { size: cap }).width <= w)) return cap
-  return 4
-}
+const DISPLAY = rr(3.5, 2, 20.5, 19.5, 3)
+const FEET = ['M7 19.5 V21.5', 'M17 19.5 V21.5']
+// row centres: caps 4.75 with 2.5u (centreline) between the rows, 2.75u inside the walls
+const CAP = 4.75, TRACK = -0.25, ROWS = [7.125, 14.375]
 
 export default live({
   name: 'digital-clock', title: 'Digital clock', category: 'time',
-  description: 'A digital clock with the hours stacked over the minutes, in 24- or 12-hour format, framed or bare.',
+  description: 'A digital clock with the hours stacked over the minutes, on a desk display or bare, in 24- or 12-hour format.',
   aliases: ['digital-time', 'clock-display', 'led-clock', 'lcd-clock', 'time-readout', 'lock-screen-clock', 'stacked-clock'],
   tags: ['time', 'clock', 'digital', 'display', 'screen'],
   synonyms: ['digital watch', 'clock radio', 'bedside clock', 'lock screen', 'current time', 'what time', 'hh mm',
@@ -41,10 +36,9 @@ export default live({
   build({ time, format, frame }) {
     const { hh, mm } = clockDigits(time, format)
     if (frame) {
-      const cap = rowCap([hh, mm], ROWS[0].x1 - ROWS[0].x0, ROWS[0].y1 - ROWS[0].y0)
-      const g = [hh, mm].flatMap((s, i) => text(s, { x: 12, y: (ROWS[i].y0 + ROWS[i].y1) / 2, size: cap }).paths)
+      const g = [hh, mm].flatMap((str, i) => text(str, { x: 12, y: ROWS[i], size: CAP, tracking: TRACK }).paths)
       return {
-        paths: [{ d: DISPLAY, plate: 'K' }, ...g.map(d => ({ d, plate: 'A' }))],
+        paths: [{ d: DISPLAY, plate: 'K' }, ...FEET.map(d => ({ d, plate: 'K' })), ...g.map(d => ({ d, plate: 'A' }))],
         fills: [DISPLAY],
         cutouts: asCutouts(g),
       }

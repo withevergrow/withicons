@@ -1,0 +1,47 @@
+{
+  "name": "trees",
+  "intent": "the small grove sways together in a light wind",
+  "loop": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.35,
+    "duration": 3.8
+  },
+  "hover": {
+    "preset": "sway",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 1,
+    "duration": 0.9
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.35
+    },
+    {
+      "preset": "breathe",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "trees@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "tree-deciduous",
+      "effect": "fade"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "name": "paint-roller",
+  "category": "objects",
+  "description": "A paint roller on a bent frame with a handle, for painting walls, redecorating, themes and fill or background tools.",
+  "aliases": [
+    "roller",
+    "paint-roll",
+    "wall-roller",
+    "roller-brush",
+    "decorate",
+    "redecorate",
+    "repaint"
+  ],
+  "tags": [
+    "paint",
+    "decorate",
+    "tool",
+    "wall",
+    "design",
+    "theme"
+  ],
+  "paths": [
+    {
+      "d": "M5 2.5 H16 A2 2 0 0 1 18 4.5 V6.5 A2 2 0 0 1 16 8.5 H5 A2 2 0 0 1 3 6.5 V4.5 A2 2 0 0 1 5 2.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M18 5.5 H19.5 A1.5 1.5 0 0 1 21 7 V10 A1.5 1.5 0 0 1 19.5 11.5 H13.5 A1.5 1.5 0 0 0 12 13 V14.5",
+      "plate": "A"
+    },
+    {
+      "d": "M10.5 16 A1.5 1.5 0 0 1 12 14.5 A1.5 1.5 0 0 1 13.5 16 V20 A1.5 1.5 0 0 1 12 21.5 A1.5 1.5 0 0 1 10.5 20 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M5 2.5 H16 A2 2 0 0 1 18 4.5 V6.5 A2 2 0 0 1 16 8.5 H5 A2 2 0 0 1 3 6.5 V4.5 A2 2 0 0 1 5 2.5 Z",
+    "M10.5 16 A1.5 1.5 0 0 1 12 14.5 A1.5 1.5 0 0 1 13.5 16 V20 A1.5 1.5 0 0 1 12 21.5 A1.5 1.5 0 0 1 10.5 20 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "painting",
+    "painter",
+    "decorator",
+    "decorating",
+    "wall paint",
+    "interior",
+    "renovation",
+    "home improvement",
+    "diy",
+    "makeover",
+    "color",
+    "colour",
+    "coat",
+    "fill",
+    "background",
+    "theme",
+    "appearance",
+    "customize",
+    "style",
+    "brand colors",
+    "roll",
+    "paint roler",
+    "paintroller"
+  ]
+}

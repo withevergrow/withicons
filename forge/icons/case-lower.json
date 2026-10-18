@@ -1,0 +1,55 @@
+{
+  "name": "case-lower",
+  "category": "text",
+  "description": "Small letters a and b, for turning text into lowercase.",
+  "aliases": [
+    "lowercase",
+    "lower-case",
+    "small-letters",
+    "minuscule",
+    "text-lowercase",
+    "no-caps",
+    "to-lower",
+    "make-lowercase"
+  ],
+  "tags": [
+    "text",
+    "case",
+    "lowercase",
+    "letters",
+    "typography",
+    "format"
+  ],
+  "paths": [
+    {
+      "d": "M9.5 15.5 A3.5 3.5 0 1 1 2.5 15.5 A3.5 3.5 0 1 1 9.5 15.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M9.5 12 V19",
+      "plate": "K"
+    },
+    {
+      "d": "M14.5 4.5 V19",
+      "plate": "A"
+    },
+    {
+      "d": "M21.5 15.5 A3.5 3.5 0 1 1 14.5 15.5 A3.5 3.5 0 1 1 21.5 15.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [],
+  "cutouts": [],
+  "synonyms": [
+    "make lowercase",
+    "text transform",
+    "tolowercase",
+    "decapitalize",
+    "uncapitalize",
+    "minuscules",
+    "small text",
+    "lower letters",
+    "small ab",
+    "quiet text"
+  ]
+}

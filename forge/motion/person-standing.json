@@ -1,0 +1,63 @@
+{
+  "name": "person-standing",
+  "intent": "stands still and breathes calmly, waves hello on hover",
+  "loop": {
+    "preset": "breathe",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.5,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.8,
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "nod",
+      "origin": [
+        12,
+        9.5
+      ],
+      "amount": 0.5,
+      "duration": 3.2,
+      "delay": 0.15
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.5
+    }
+  ],
+  "swap": [
+    {
+      "to": "person-running",
+      "effect": "morph"
+    },
+    {
+      "to": "user",
+      "effect": "fade"
+    },
+    {
+      "to": "accessibility",
+      "effect": "scale"
+    }
+  ]
+}

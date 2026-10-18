@@ -1,0 +1,61 @@
+{
+  "name": "file-question",
+  "intent": "tilts its head at you, wondering what this file is",
+  "loop": {
+    "preset": "tilt",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.4,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "tilt",
+      "origin": [
+        12,
+        18.5
+      ],
+      "amount": 0.8,
+      "duration": 3,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "jelly",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "help-circle",
+      "effect": "morph"
+    },
+    {
+      "to": "file-check",
+      "effect": "rotate"
+    },
+    {
+      "to": "file",
+      "effect": "fade"
+    }
+  ]
+}

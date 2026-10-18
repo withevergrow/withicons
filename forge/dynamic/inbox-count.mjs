@@ -12,6 +12,8 @@ const BASE = {
   cutouts: [],
 }
 
+const OPT = { scales: { two: { min: 0.72, keep: 0.7 }, three: { min: 0.72, keep: 0.7 } } }
+
 export default live({
   name: 'inbox-count', title: 'Inbox with count', category: 'communication',
   description: 'An inbox tray with the number of new items: a number, "99+", a dot, or an empty tray at zero.',
@@ -20,6 +22,7 @@ export default live({
   synonyms: ['inbox zero', 'new messages', 'to do count', 'queue length', 'pending items', 'unread items', 'incoming'],
   params: countParams({ count: 8 }),
   examples: countExamples(),
-  shows: p => countShows(BASE, p), kept: p => keptRatio(BASE, p),
-  build(p) { return countIcon(BASE, p) },
+  shows: p => countShows(BASE, p, OPT), kept: p => keptRatio(BASE, p, OPT),
+  // a flat, wide tray: it keeps its size under a wide tag and gives up its upper-right corner instead
+  build(p) { return countIcon(BASE, { ...p, ...OPT }) },
 })

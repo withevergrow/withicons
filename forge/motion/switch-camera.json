@@ -1,0 +1,56 @@
+{
+  "name": "switch-camera",
+  "intent": "the arrows turn inside the camera as it flips to the other lens",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      13.5
+    ],
+    "amount": 0.25,
+    "duration": 3
+  },
+  "hover": {
+    "preset": "flip",
+    "duration": 0.9
+  },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 1,
+      "duration": 2.4,
+      "delay": 0.05
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "spin-once",
+      "origin": [
+        12,
+        13.5
+      ]
+    },
+    {
+      "preset": "turn-once"
+    }
+  ],
+  "swap": [
+    {
+      "to": "camera",
+      "effect": "flip"
+    },
+    {
+      "to": "refresh",
+      "effect": "rotate"
+    },
+    {
+      "to": "video-camera",
+      "effect": "fade"
+    }
+  ]
+}

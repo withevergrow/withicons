@@ -1,0 +1,74 @@
+{
+  "name": "fan",
+  "category": "home",
+  "description": "An electric desk fan with a round guard, three blades and a stand, for cooling, airflow, fan speed and climate.",
+  "aliases": [
+    "electric-fan",
+    "desk-fan",
+    "table-fan",
+    "cooling-fan",
+    "pedestal-fan",
+    "fan-speed",
+    "ventilator",
+    "air-fan"
+  ],
+  "tags": [
+    "home",
+    "cooling",
+    "air",
+    "appliance",
+    "summer",
+    "climate"
+  ],
+  "paths": [
+    {
+      "d": "M20 10.5 A8 8 0 1 1 4 10.5 A8 8 0 1 1 20 10.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 18.5 V21 M8 21 H16",
+      "plate": "K"
+    },
+    {
+      "d": "M12 10.5 C10.25 9.5 9.5 7 11.25 6 C13 5 14.75 6.75 12 10.5 Z M12 10.5 C13.74 9.48 16.28 10.08 16.27 12.1 C16.26 14.12 13.87 14.76 12 10.5 Z M12 10.5 C12.01 12.52 10.22 14.42 8.48 13.4 C6.74 12.38 7.38 9.99 12 10.5 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M20 10.5 A8 8 0 1 1 4 10.5 A8 8 0 1 1 20 10.5 Z",
+    "M8 20 H16 V22 H8 Z"
+  ],
+  "cutouts": [
+    "M18.25 10.5 A6.25 6.25 0 1 1 5.75 10.5 A6.25 6.25 0 1 1 18.25 10.5 Z M12 10.5 C10.25 9.5 9.5 7 11.25 6 C13 5 14.75 6.75 12 10.5 Z M12 10.5 C13.74 9.48 16.28 10.08 16.27 12.1 C16.26 14.12 13.87 14.76 12 10.5 Z M12 10.5 C12.01 12.52 10.22 14.42 8.48 13.4 C6.74 12.38 7.38 9.99 12 10.5 Z"
+  ],
+  "synonyms": [
+    "cool",
+    "cooling",
+    "cool down",
+    "air",
+    "airflow",
+    "breeze",
+    "wind",
+    "blow",
+    "fresh air",
+    "ventilation",
+    "hot",
+    "heat",
+    "summer",
+    "climate",
+    "temperature",
+    "air conditioning",
+    "ac",
+    "smart home",
+    "appliance",
+    "propeller",
+    "blades",
+    "spin",
+    "rotate",
+    "fan speed",
+    "oscillate",
+    "cpu fan",
+    "cooling system",
+    "fann"
+  ]
+}

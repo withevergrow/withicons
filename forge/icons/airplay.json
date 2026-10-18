@@ -1,0 +1,61 @@
+{
+  "name": "airplay",
+  "category": "devices",
+  "description": "A screen with a triangle rising into its lower edge, for streaming or mirroring video to a TV or speaker.",
+  "aliases": [
+    "airplay-video",
+    "airplay-screen",
+    "screen-stream",
+    "wireless-display",
+    "tv-stream",
+    "mirror-display",
+    "play-on-screen",
+    "stream-screen"
+  ],
+  "tags": [
+    "media",
+    "stream",
+    "screen",
+    "wireless",
+    "tv"
+  ],
+  "paths": [
+    {
+      "d": "M6.25 16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20 16.5 H17.75",
+      "plate": "K"
+    },
+    {
+      "d": "M12 15 L17 21 H7 Z",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4 3.5 H20 A2 2 0 0 1 22 5.5 V14.5 A2 2 0 0 1 20 16.5 H17.5 L12 11 L6.5 16.5 H4 A2 2 0 0 1 2 14.5 V5.5 A2 2 0 0 1 4 3.5 Z",
+    "M12 15 L17 21 H7 Z"
+  ],
+  "cutouts": [
+    "M5 5.5 H19 A1 1 0 0 1 20 6.5 V12.5 A1 1 0 0 1 19 13.5 H17.33 L12 8.17 L6.67 13.5 H5 A1 1 0 0 1 4 12.5 V6.5 A1 1 0 0 1 5 5.5 Z"
+  ],
+  "synonyms": [
+    "mirror",
+    "mirroring",
+    "screen mirroring",
+    "stream",
+    "streaming",
+    "tv",
+    "apple tv",
+    "smart tv",
+    "external display",
+    "cast",
+    "casting",
+    "send to tv",
+    "play on tv",
+    "big screen",
+    "projector",
+    "wireless streaming",
+    "screen share",
+    "display output",
+    "air play",
+    "airplay icon"
+  ]
+}

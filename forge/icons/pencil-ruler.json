@@ -1,0 +1,71 @@
+{
+  "name": "pencil-ruler",
+  "category": "education",
+  "description": "A pencil lying above a ruler with tick marks for design tools, drafting, geometry and stationery.",
+  "aliases": [
+    "design-tools",
+    "drafting",
+    "ruler-pencil",
+    "drawing-tools",
+    "stationery",
+    "design",
+    "measure-and-draw",
+    "architect-tools",
+    "sketch-tools"
+  ],
+  "tags": [
+    "pencil",
+    "ruler",
+    "design",
+    "drafting",
+    "tools",
+    "school"
+  ],
+  "paths": [
+    {
+      "d": "M4.5 13 H19.5 A1.5 1.5 0 0 1 21 14.5 V18.5 A1.5 1.5 0 0 1 19.5 20 H4.5 A1.5 1.5 0 0 1 3 18.5 V14.5 A1.5 1.5 0 0 1 4.5 13 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M8 13 V15 M12 13 V16 M16 13 V15",
+      "plate": "K"
+    },
+    {
+      "d": "M3 6.5 L8 4 H18.5 A2.5 2.5 0 0 1 18.5 9 H8 Z",
+      "plate": "A"
+    },
+    {
+      "d": "M8 4 V9",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M4.5 13 H19.5 A1.5 1.5 0 0 1 21 14.5 V18.5 A1.5 1.5 0 0 1 19.5 20 H4.5 A1.5 1.5 0 0 1 3 18.5 V14.5 A1.5 1.5 0 0 1 4.5 13 Z",
+    "M3 6.5 L8 4 H18.5 A2.5 2.5 0 0 1 18.5 9 H8 Z"
+  ],
+  "cutouts": [
+    "M8 12.5 V15",
+    "M12 12.5 V16",
+    "M16 12.5 V15",
+    "M8 4 V9"
+  ],
+  "synonyms": [
+    "drawing",
+    "architecture",
+    "blueprint",
+    "technical drawing",
+    "geometry",
+    "math class",
+    "school supplies",
+    "craft",
+    "layout",
+    "wireframe",
+    "measure",
+    "plan",
+    "engineering",
+    "art class",
+    "create",
+    "ux design",
+    "tools"
+  ]
+}

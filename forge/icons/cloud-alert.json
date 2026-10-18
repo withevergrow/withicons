@@ -1,0 +1,65 @@
+{
+  "name": "cloud-alert",
+  "category": "files",
+  "description": "A cloud with an exclamation mark inside for a sync error, failed backup or cloud service problem.",
+  "aliases": [
+    "cloud-warning",
+    "sync-error",
+    "cloud-exclamation",
+    "sync-problem",
+    "cloud-issue",
+    "backup-failed",
+    "cloud-attention",
+    "upload-failed"
+  ],
+  "tags": [
+    "cloud",
+    "alert",
+    "error",
+    "sync",
+    "warning",
+    "storage"
+  ],
+  "paths": [
+    {
+      "d": "M7 19 A4.5 4.5 0 0 1 6.2 10.1 A6.2 6.2 0 0 1 18.1 10.6 A4.25 4.25 0 0 1 17.25 19 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12 9.5 V12.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 15.75 V16",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M7 19 A4.5 4.5 0 0 1 6.2 10.1 A6.2 6.2 0 0 1 18.1 10.6 A4.25 4.25 0 0 1 17.25 19 Z"
+  ],
+  "cutouts": [
+    "M12 9.5 V12.5",
+    "M13 15.9 A1 1 0 1 1 11 15.9 A1 1 0 1 1 13 15.9 Z"
+  ],
+  "synonyms": [
+    "sync error",
+    "sync failed",
+    "not synced",
+    "backup failed",
+    "upload failed",
+    "connection problem",
+    "offline",
+    "outage",
+    "service down",
+    "server error",
+    "storage full",
+    "quota exceeded",
+    "warning",
+    "attention",
+    "icloud",
+    "google drive",
+    "dropbox",
+    "onedrive",
+    "incident"
+  ]
+}

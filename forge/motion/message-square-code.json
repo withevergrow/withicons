@@ -1,0 +1,52 @@
+{
+  "name": "message-square-code",
+  "intent": "code taps out inside the bubble, an AI writing code for you",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      10.5
+    ],
+    "amount": 0.25,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "origin": [
+      12,
+      21
+    ],
+    "duration": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.8,
+      "duration": 0.9,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "type"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "message-square",
+      "effect": "fade"
+    },
+    {
+      "to": "code",
+      "effect": "morph"
+    },
+    {
+      "to": "bot-message-square",
+      "effect": "flip"
+    }
+  ]
+}

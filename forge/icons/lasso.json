@@ -1,7 +1,7 @@
 {
   "name": "lasso",
   "category": "layout",
-  "description": "A looping lasso line, for free-form selection.",
+  "description": "An open selection loop drawn by a pointer, for free-form lasso selection.",
   "aliases": [
     "lasso-select",
     "lasso-tool",
@@ -19,19 +19,17 @@
   ],
   "paths": [
     {
-      "d": "M7.25 15.5 A9 6 -18 1 0 4.1 13.55",
+      "d": "M12 15.5 C10 15.5 8.25 13 7 11.5 C5.75 10 3.5 9.25 3.5 7 C3.5 4.5 7.5 2.5 12 2.5 C16.5 2.5 20.5 4.5 20.5 7 C20.5 9.5 16.5 11 12 11 C9.5 11 8.25 11 7 11.5 L5 12.5",
       "plate": "K"
     },
     {
-      "d": "M7.25 14.75 A1.75 1.75 0 1 1 3.75 14.75 A1.75 1.75 0 1 1 7.25 14.75 Z",
-      "plate": "A"
-    },
-    {
-      "d": "M5.5 16.5 C5.5 19 7 21 9.5 21.5",
+      "d": "M14 15.5 L20 19.5 L17 20 L15.5 21.5 Z",
       "plate": "A"
     }
   ],
-  "fills": [],
+  "fills": [
+    "M14 15.5 L20 19.5 L17 20 L15.5 21.5 Z"
+  ],
   "cutouts": [],
   "synonyms": [
     "free form selection",

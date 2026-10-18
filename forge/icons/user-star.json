@@ -1,0 +1,64 @@
+{
+  "name": "user-star",
+  "category": "users",
+  "description": "A person with a star, for favourite contacts, VIP customers, top members and starred users.",
+  "aliases": [
+    "favorite-user",
+    "favourite-user",
+    "starred-user",
+    "top-user",
+    "featured-user",
+    "star-member",
+    "favorite-contact",
+    "user-favorite",
+    "vip-user"
+  ],
+  "tags": [
+    "person",
+    "star",
+    "favorite",
+    "vip",
+    "member",
+    "featured"
+  ],
+  "paths": [
+    {
+      "d": "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5",
+      "plate": "K"
+    },
+    {
+      "d": "M 17.25 12.7 L 18.42 15.29 L 21.24 15.6 L 19.15 17.52 L 19.72 20.3 L 17.25 18.89 L 14.78 20.3 L 15.35 17.52 L 13.26 15.6 L 16.08 15.29 Z",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M12.25 7.5 A3.75 3.75 0 1 1 4.75 7.5 A3.75 3.75 0 1 1 12.25 7.5 Z",
+    "M2 21 V19.5 A4.5 4.5 0 0 1 6.5 15 H9.5 V21 Z",
+    "M 17.25 12.7 L 18.42 15.29 L 21.24 15.6 L 19.15 17.52 L 19.72 20.3 L 17.25 18.89 L 14.78 20.3 L 15.35 17.52 L 13.26 15.6 L 16.08 15.29 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "favourite",
+    "favorite",
+    "starred",
+    "vip",
+    "premium member",
+    "top rated",
+    "best customer",
+    "featured",
+    "highlight",
+    "rating",
+    "ambassador",
+    "influencer",
+    "expert",
+    "pro member",
+    "favourite contact",
+    "special",
+    "priority",
+    "loyal customer"
+  ]
+}

@@ -1,6 +1,6 @@
 # @withicons/holiday
 
-6 styles (`utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`) of with icons for all 750 icons:
+6 styles (`utsav`, `rangoli`, `halloween`, `christmas`, `lunar`, `valentine`) of with icons for all 1000 icons:
 standalone SVG files and IconNode data, plus their CSS class icons, laid out like [`@withicons/core`](https://www.npmjs.com/package/@withicons/core),
 which holds the older styles and the shared API (`toSvg`, `resolve`, `search`, metadata, palettes; its `styles.json`
 says which package holds each style). The newest styles have packages of their own because jsDelivr serves at most 150 MB per package.

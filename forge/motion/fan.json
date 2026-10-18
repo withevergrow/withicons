@@ -1,0 +1,57 @@
+{
+  "name": "fan",
+  "intent": "the blades whirl while the fan sweeps gently side to side",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "wiggle",
+    "origin": [
+      12,
+      21
+    ],
+    "amount": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "spin",
+      "origin": [
+        12,
+        10.5
+      ],
+      "duration": 0.7
+    }
+  },
+  "alt": [
+    {
+      "preset": "spin",
+      "origin": [
+        12,
+        10.5
+      ]
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "wind",
+      "effect": "fade"
+    },
+    {
+      "to": "air-vent",
+      "effect": "slide-up"
+    },
+    {
+      "to": "snowflake",
+      "effect": "spin"
+    }
+  ]
+}

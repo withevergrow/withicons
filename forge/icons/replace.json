@@ -1,0 +1,65 @@
+{
+  "name": "replace",
+  "category": "actions",
+  "description": "A dashed old box and a solid new box joined by an arching arrow, for find and replace or swapping one item for another.",
+  "aliases": [
+    "find-replace",
+    "find-and-replace",
+    "replace-all",
+    "substitute",
+    "swap-item",
+    "replace-item",
+    "exchange-item",
+    "overwrite",
+    "switch-out"
+  ],
+  "synonyms": [
+    "search and replace",
+    "swap",
+    "exchange",
+    "change",
+    "substitute text",
+    "rename all",
+    "overwrite file",
+    "update",
+    "convert",
+    "transform",
+    "move",
+    "transfer",
+    "switch",
+    "trade",
+    "ctrl h",
+    "ctrl+h",
+    "find replace",
+    "replace text"
+  ],
+  "tags": [
+    "replace",
+    "swap",
+    "find",
+    "edit",
+    "text"
+  ],
+  "paths": [
+    {
+      "d": "M2.5 15.5 A1.5 1.5 0 0 1 4 14 M8 14 A1.5 1.5 0 0 1 9.5 15.5 M9.5 19.5 A1.5 1.5 0 0 1 8 21 M4 21 A1.5 1.5 0 0 1 2.5 19.5",
+      "plate": "K"
+    },
+    {
+      "d": "M16.5 14 H19.5 A2 2 0 0 1 21.5 16 V19 A2 2 0 0 1 19.5 21 H16.5 A2 2 0 0 1 14.5 19 V16 A2 2 0 0 1 16.5 14 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 10.5 V5.5 A2 2 0 0 1 8 3.5 H16 A2 2 0 0 1 18 5.5 V10.5",
+      "plate": "A"
+    },
+    {
+      "d": "M15.5 8 L18 10.5 L20.5 8",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M16.5 14 H19.5 A2 2 0 0 1 21.5 16 V19 A2 2 0 0 1 19.5 21 H16.5 A2 2 0 0 1 14.5 19 V16 A2 2 0 0 1 16.5 14 Z"
+  ],
+  "cutouts": []
+}

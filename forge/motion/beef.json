@@ -1,0 +1,36 @@
+{
+  "name": "beef",
+  "intent": "the steak swells softly like it is sizzling on the grill",
+  "loop": {
+    "preset": "breathe",
+    "amount": 0.5,
+    "duration": 2.6
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.9
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "flip"
+    }
+  ],
+  "swap": [
+    {
+      "to": "beef@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "drumstick",
+      "effect": "slide-left"
+    }
+  ]
+}

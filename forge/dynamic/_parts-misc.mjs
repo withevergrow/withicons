@@ -32,28 +32,55 @@ function capList(minCap, maxCap) {
   return out
 }
 
+// The widest the outline is (nearest wall left and right of cx) anywhere between rows y0 and y1. Every glyph point
+// on that band must sit that far inside both walls, so text wider than this minus 2 x clearance can never fit: the
+// row test skips it without drawing it (text() is the slow part of fitInside). The span is piecewise linear in y
+// between the outline's vertices, so its maximum is at y0, y1 or a vertex row.
+function bandSpan(rings, cx, y0, y1) {
+  const rows = [y0, y1]
+  for (const r of rings) for (const p of r) if (p[1] > y0 && p[1] < y1) rows.push(p[1])
+  let best = 0
+  for (const y of rows) {
+    let l = -Infinity, rt = Infinity
+    for (const r of rings) for (let i = 0; i < r.length; i++) {
+      const a = r[i], b = r[(i + 1) % r.length]
+      if (a[1] === b[1] || (y < Math.min(a[1], b[1])) || (y > Math.max(a[1], b[1]))) continue
+      const x = a[0] + (b[0] - a[0]) * (y - a[1]) / (b[1] - a[1])
+      if (x <= cx && x > l) l = x
+      if (x >= cx && x < rt) rt = x
+    }
+    if (rt - l > best) best = rt - l
+  }
+  return best
+}
+
 function glyphPoints(paths) {
   const pts = []
   for (const d of paths) for (const s of parsePath(d, 0.5)) for (const p of s.pts) pts.push(p)
   return pts
 }
 
-export function fitInside(str, { outline, obstacles = [], cx = 12, ys = [12], minCap = 4, maxCap = 7, clearance = 3.5, tracking } = {}) {
+export function fitInside(str, { outline, obstacles = [], cx = 12, ys = [12], minCap = 4, maxCap = 7, clearance = 3.5, tracking, condense = [1, 0.88, 0.8] } = {}) {
   const s = String(str ?? '')
   if (!s.trim()) return null
   const rings = ringsOf(outline)
   let xs = Infinity, xe = -Infinity
   for (const r of rings) for (const p of r) { if (p[0] < xs) xs = p[0]; if (p[0] > xe) xe = p[0] }
   const maxW = xe - xs - 2 * clearance
+  const spans = new Map()
+  const rowW = (y, cap) => { const k = y + '/' + cap; let v = spans.get(k); if (v === undefined) spans.set(k, v = bandSpan(rings, cx, y - cap / 2, y + cap / 2) - 2 * clearance); return v }
   // the text shrinks to minCap, and the smallest sizes are tried a quarter and half a unit tighter, before the
   // caller ever shortens it
   // (only the smallest sizes are tried tighter: above them a word fits better one size down, and it keeps
   // build() well under 5 ms)
   const tracks = cap => tracking !== undefined ? [tracking] : cap <= minCap + 0.5 + 1e-9 ? [0, -0.25, -0.5] : [0]
-  for (const cap of capList(minCap, maxCap)) for (const tr of tracks(cap)) {
-    if (measure(s, { size: cap, tracking: tr }).width > maxW + 1e-9) continue
+  // at each cap: the regular cut, then the condensed cuts (_font.mjs), before a size is given up
+  for (const cap of capList(minCap, maxCap)) for (const k of condense.filter(k => cap < 5.6 || k === 1)) for (const tr of tracks(cap)) {
+    const w = measure(s, { size: cap, tracking: tr, condense: k }).width
+    if (w > maxW + 1e-9) continue
     for (const y of ys) {
-      const t = text(s, { x: snap(cx), y: snap(y), size: cap, tracking: tr })
+      if (w > rowW(y, cap) + 0.25 + 1e-9) continue   // (0.25 slack: the measured width may run past the centrelines)
+      const t = text(s, { x: snap(cx), y: snap(y), size: cap, tracking: tr, condense: k })
       if (!t.paths.length) return null
       const pts = glyphPoints(t.paths)
       let ok = true

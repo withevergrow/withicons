@@ -1,0 +1,61 @@
+{
+  "name": "lollipop",
+  "category": "food",
+  "description": "A round swirl lollipop on a stick, for sweets, candy shops, kids and treats.",
+  "aliases": [
+    "lolly",
+    "sucker",
+    "swirl-lollipop",
+    "lollypop",
+    "candy-on-a-stick",
+    "rainbow-lollipop"
+  ],
+  "tags": [
+    "food",
+    "sweet",
+    "candy",
+    "kids",
+    "treat"
+  ],
+  "paths": [
+    {
+      "d": "M21.5 10 A7.5 7.5 0 1 1 6.5 10 A7.5 7.5 0 1 1 21.5 10 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M14 10 A2 2 0 0 1 18 10 A4 4 0 0 1 10 10",
+      "plate": "K"
+    },
+    {
+      "d": "M8.75 15.25 L3 21",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M21.5 10 A7.5 7.5 0 1 1 6.5 10 A7.5 7.5 0 1 1 21.5 10 Z"
+  ],
+  "cutouts": [
+    "M14 10 A2 2 0 0 1 18 10 A4 4 0 0 1 10 10"
+  ],
+  "synonyms": [
+    "sweets",
+    "sweet",
+    "candy",
+    "candy shop",
+    "sweet shop",
+    "treat",
+    "reward",
+    "kids",
+    "party favor",
+    "birthday",
+    "sugar",
+    "sugary",
+    "carnival",
+    "fair",
+    "swirl",
+    "spiral",
+    "dessert",
+    "loli pop",
+    "lollipops"
+  ]
+}

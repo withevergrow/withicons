@@ -1,0 +1,64 @@
+{
+  "name": "clock-check",
+  "category": "time",
+  "description": "A clock with a check mark beside it, for on-time tasks, approved timesheets and confirmed times.",
+  "aliases": [
+    "on-time",
+    "time-check",
+    "clock-done",
+    "time-confirmed",
+    "clock-complete",
+    "timesheet-approved",
+    "time-approved"
+  ],
+  "tags": [
+    "time",
+    "clock",
+    "check",
+    "done",
+    "schedule",
+    "complete"
+  ],
+  "paths": [
+    {
+      "d": "M13 21.45 A9.5 9.5 0 1 1 21.49 11.5",
+      "plate": "K"
+    },
+    {
+      "d": "M12 6.5 V12 L16 14",
+      "plate": "A"
+    },
+    {
+      "d": "M14.5 17.5 L17 20 L21.5 15",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M13 21.45 A9.5 9.5 0 1 1 21.49 11.5 A18 18 0 0 0 13 21.45 Z"
+  ],
+  "cutouts": [
+    "M12 6.5 V12 L16 14"
+  ],
+  "synonyms": [
+    "on schedule",
+    "done on time",
+    "completed",
+    "complete",
+    "approved",
+    "confirmed",
+    "timesheet",
+    "clocked in",
+    "clock in",
+    "attendance",
+    "shift done",
+    "hours logged",
+    "time tracked",
+    "verified",
+    "success",
+    "finished",
+    "scheduled",
+    "met deadline",
+    "punctual",
+    "in time"
+  ]
+}

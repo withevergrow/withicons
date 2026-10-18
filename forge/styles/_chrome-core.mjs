@@ -218,7 +218,20 @@ export function model(icon0, opts = {}) {
   const sil = F.copy(fK); F.union(sil, fAf); F.union(sil, fAb); if (hasS) F.union(sil, fS)
   F.subtract(sil, minus(rec, inset(fAf, 0)))
   // printed text keeps a clear field: the horizon and the dark ground stay out from under it
-  const txt = opts.glyphs && opts.glyphs.length ? F.strokes(opts.glyphs.map(l => ({ ...l, pts: l.pts.map(tf) })), 3.2, K.M) : null
+  // (the field covers each text ROW across the whole body, not just the strokes: a horizon left between and
+  // beside the letters reads as a strike-through, "-NEW-")
+  let txt = opts.glyphs && opts.glyphs.length ? F.strokes(opts.glyphs.map(l => ({ ...l, pts: l.pts.map(tf) })), 3.2, K.M) : null
+  if (txt) {
+    const rows = []
+    for (const l of opts.glyphs) {
+      const P = l.pts.map(tf), b = [Math.min(...P.map(q => q[0])), Math.min(...P.map(q => q[1])), Math.max(...P.map(q => q[0])), Math.max(...P.map(q => q[1]))]
+      const r = rows.find(o => b[1] < o[3] + 0.5 && b[3] > o[1] - 0.5)
+      if (r) { r[0] = Math.min(r[0], b[0]); r[1] = Math.min(r[1], b[1]); r[2] = Math.max(r[2], b[2]); r[3] = Math.max(r[3], b[3]) }
+      else rows.push(b)
+    }
+    // a row's band runs edge to edge: stubs of horizon left beside a full-width word read as dashes
+    for (const [, y0, , y1] of rows) F.union(txt, F.region([[[0, y0 - 1.6], [24, y0 - 1.6], [24, y1 + 1.6], [0, y1 + 1.6]]], K.M))
+  }
   return { T, K: round(K0), Af: round(Af), Ab: round(Ab), S: S0, sil, txt, seam }
 }
 

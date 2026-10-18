@@ -1,0 +1,10 @@
+{
+  "name": "timer-reset",
+  "intent": "winds back once to zero, then the crown clicks to start again",
+  "loop": { "preset": "rock", "origin": [12, 13.5], "amount": 0.35, "duration": 3.2 },
+  "hover": { "preset": "spin-once", "origin": [12, 13.5], "duration": 0.9 },
+  "parts": { "A": { "preset": "nod", "origin": [12, 13.5], "amount": 0.5, "delay": 0.1 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "tick", "origin": [12, 13.5], "steps": 12, "duration": 6 }, { "preset": "nudge", "dir": 180, "amount": 0.5 }],
+  "swap": [{ "to": "timer", "effect": "rotate" }, { "to": "rotate-ccw", "effect": "spin" }, { "to": "timer-off", "effect": "fade" }]
+}

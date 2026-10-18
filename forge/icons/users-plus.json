@@ -1,0 +1,71 @@
+{
+  "name": "users-plus",
+  "category": "users",
+  "description": "Two people with a plus, for adding members to a group, inviting a team and growing a community.",
+  "aliases": [
+    "add-group",
+    "add-team",
+    "add-members",
+    "group-add",
+    "team-add",
+    "invite-team",
+    "invite-members",
+    "add-to-group",
+    "grow-team"
+  ],
+  "tags": [
+    "people",
+    "team",
+    "group",
+    "add",
+    "invite",
+    "members"
+  ],
+  "paths": [
+    {
+      "d": "M11 9 A3 3 0 1 1 5 9 A3 3 0 1 1 11 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M2.5 21 V20 A3.5 3.5 0 0 1 6 16.5 H10 A3.5 3.5 0 0 1 13.5 20 V21",
+      "plate": "K"
+    },
+    {
+      "d": "M12.73 4.54 A3 3 0 1 1 15 9.5",
+      "plate": "A"
+    },
+    {
+      "d": "M19 15 V20",
+      "plate": "S"
+    },
+    {
+      "d": "M16.5 17.5 H21.5",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M11 9 A3 3 0 1 1 5 9 A3 3 0 1 1 11 9 Z",
+    "M2.5 21 V20 A3.5 3.5 0 0 1 6 16.5 H10 A3.5 3.5 0 0 1 13.5 20 V21 Z",
+    "M12.19 5.44 A3 3 0 1 1 13.5 9.1 A5.5 5.5 0 0 0 12.19 5.44 Z"
+  ],
+  "cutouts": [],
+  "synonyms": [
+    "invite people",
+    "new group",
+    "create group",
+    "new team",
+    "add colleagues",
+    "team members",
+    "add participants",
+    "community",
+    "add friends",
+    "join group",
+    "collaborators",
+    "share with team",
+    "recruit",
+    "team onboarding",
+    "membership",
+    "crowd",
+    "group invite"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "name": "drill",
+  "intent": "buzzes with a quick vibration as if drilling into the wall",
+  "loop": {
+    "preset": "type",
+    "amount": 0.6,
+    "duration": 1.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.5,
+    "duration": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.5,
+      "duration": 0.4
+    }
+  },
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 0,
+      "amount": 0.8
+    },
+    {
+      "preset": "wiggle",
+      "origin": [
+        9.5,
+        21
+      ]
+    }
+  ],
+  "swap": [
+    {
+      "to": "screwdriver",
+      "effect": "rotate"
+    },
+    {
+      "to": "hammer",
+      "effect": "fade"
+    },
+    {
+      "to": "toolbox",
+      "effect": "slide-up"
+    }
+  ]
+}

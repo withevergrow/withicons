@@ -1,0 +1,60 @@
+{
+  "name": "martini",
+  "intent": "swirls gently on its stem, the olive bobbing a beat behind",
+  "loop": {
+    "preset": "rock",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "tada",
+    "origin": [
+      12,
+      21.5
+    ],
+    "amount": 0.6
+  },
+  "parts": {
+    "A": {
+      "preset": "rock",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6,
+      "delay": 0.08
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "sway",
+      "origin": [
+        12,
+        21.5
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "twinkle",
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "martini@solid",
+      "effect": "scale"
+    },
+    {
+      "to": "wine",
+      "effect": "fade"
+    }
+  ]
+}

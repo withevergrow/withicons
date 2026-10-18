@@ -1,0 +1,69 @@
+{
+  "name": "timer-reset",
+  "category": "time",
+  "description": "A stopwatch whose dial loops back as an arrow and whose hand points to zero, for resetting a timer or starting a lap over.",
+  "aliases": [
+    "reset-timer",
+    "restart-timer",
+    "stopwatch-reset",
+    "timer-restart",
+    "reset-stopwatch",
+    "lap-reset",
+    "countdown-reset",
+    "clear-timer"
+  ],
+  "tags": [
+    "timer",
+    "reset",
+    "restart",
+    "stopwatch",
+    "time",
+    "repeat"
+  ],
+  "paths": [
+    {
+      "d": "M8 20.43 A8 8 0 1 0 4 13.5",
+      "plate": "K"
+    },
+    {
+      "d": "M2 12.5 H6 L4 14.5 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M10 2 H14 M12 2 V5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M18 7.5 L20 5.5",
+      "plate": "A"
+    },
+    {
+      "d": "M12 13.5 V9.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M17.5 13.5 A5.5 5.5 0 1 1 6.5 13.5 A5.5 5.5 0 1 1 17.5 13.5 Z",
+    "M2 12.5 H6 L4 14.5 Z"
+  ],
+  "cutouts": [
+    "M12 13.5 V9.5"
+  ],
+  "synonyms": [
+    "restart",
+    "zero",
+    "back to zero",
+    "new lap",
+    "lap",
+    "repeat",
+    "redo",
+    "rewind",
+    "replay",
+    "again",
+    "reload",
+    "pomodoro",
+    "workout",
+    "interval",
+    "reset clock"
+  ]
+}

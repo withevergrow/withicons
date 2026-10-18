@@ -1,5 +1,5 @@
 // Size budget of a publishable package. jsDelivr serves at most 150 MB per package version and about 20 MB per file,
-// so every @withicons package stays under BUDGET.total unpacked (headroom for new icons) and every file under
+// so every @withicons package stays under BUDGET.total (145 MB: a 5 MB margin under the 150 MB hard limit) unpacked and every file under
 // BUDGET.file. Used by each package's test/size.test.mjs and by scripts/publish.mjs (which refuses an oversized pack).
 //
 //   import { measure, overBudget } from '../../scripts/package-budget.mjs'
@@ -14,7 +14,7 @@ export const MB = 1024 * 1024
 // files: npm's registry refuses a publish with too many files (E415 "Unsupported Media Type ... Too many files"):
 // @withicons/svelte at 0.4.0 had 75,018 files and failed, angular with 50,022 was accepted. Stay at or under 50,000.
 export const MAX_FILES = 50000
-export const BUDGET = { total: 120 * MB, file: 20 * MB, files: MAX_FILES }
+export const BUDGET = { total: 145 * MB, file: 20 * MB, files: MAX_FILES }
 
 /** { total, files, largest: [[bytes, relPath], ...top 5], name } for the package at `dir` */
 export function measure(dir) {

@@ -1,0 +1,41 @@
+{
+  "name": "heater",
+  "intent": "warm heat waves rise while the radiator glows",
+  "loop": {
+    "preset": "glow",
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "pulse",
+    "amount": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "rise",
+      "amount": 0.6,
+      "duration": 1.8
+    }
+  },
+  "alt": [
+    {
+      "preset": "flicker"
+    },
+    {
+      "preset": "breathe"
+    }
+  ],
+  "swap": [
+    {
+      "to": "flame",
+      "effect": "fade"
+    },
+    {
+      "to": "thermometer-sun",
+      "effect": "fade"
+    },
+    {
+      "to": "air-vent",
+      "effect": "fade"
+    }
+  ]
+}

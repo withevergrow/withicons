@@ -3,19 +3,28 @@
   "intent": "swells with savings as the gold coin drops in; pops as a coin goes in",
   "loop": {
     "preset": "pulse",
-    "origin": [11.75, 21],
+    "origin": [
+      12,
+      21.25
+    ],
     "amount": 0.35,
     "duration": 3.2
   },
   "hover": {
     "preset": "pop",
-    "origin": [11.75, 21],
+    "origin": [
+      12,
+      21.25
+    ],
     "amount": 0.8
   },
   "parts": {
     "S": {
       "preset": "drop",
-      "origin": [9.5, 4],
+      "origin": [
+        11.5,
+        4.5
+      ],
       "amount": 0.6,
       "duration": 1.6
     }
@@ -24,16 +33,25 @@
   "alt": [
     {
       "preset": "rock",
-      "origin": [11.75, 21.5],
+      "origin": [
+        12,
+        21.25
+      ],
       "amount": 0.5
     },
     {
       "preset": "wiggle",
-      "origin": [11.75, 21.5]
+      "origin": [
+        12,
+        21.25
+      ]
     },
     {
       "preset": "jelly",
-      "origin": [11.75, 21.5]
+      "origin": [
+        12,
+        21.25
+      ]
     }
   ],
   "swap": [

@@ -1,0 +1,76 @@
+{
+  "name": "grip-horizontal",
+  "category": "actions",
+  "description": "Two rows of three dots for a horizontal drag handle on cards, panels and sheets.",
+  "aliases": [
+    "drag-handle-horizontal",
+    "grip-dots",
+    "handle-horizontal",
+    "drag-horizontal",
+    "dots-handle",
+    "gripper-horizontal",
+    "move-handle-horizontal",
+    "sheet-handle"
+  ],
+  "synonyms": [
+    "drag",
+    "reorder",
+    "sort",
+    "move",
+    "sortable",
+    "rearrange",
+    "drag and drop",
+    "drag & drop",
+    "handle",
+    "six dots",
+    "dots",
+    "grabber",
+    "grab bar",
+    "bottom sheet",
+    "resize handle",
+    "panel handle",
+    "dot grid"
+  ],
+  "tags": [
+    "drag",
+    "grip",
+    "handle",
+    "dots",
+    "reorder"
+  ],
+  "paths": [
+    {
+      "d": "M5.88 9 A0.875 0.875 0 1 1 4.13 9 A0.875 0.875 0 1 1 5.88 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.88 15 A0.875 0.875 0 1 1 4.13 15 A0.875 0.875 0 1 1 5.88 15 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.88 9 A0.875 0.875 0 1 1 11.13 9 A0.875 0.875 0 1 1 12.88 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M12.88 15 A0.875 0.875 0 1 1 11.13 15 A0.875 0.875 0 1 1 12.88 15 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.88 9 A0.875 0.875 0 1 1 18.13 9 A0.875 0.875 0 1 1 19.88 9 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M19.88 15 A0.875 0.875 0 1 1 18.13 15 A0.875 0.875 0 1 1 19.88 15 Z",
+      "plate": "K"
+    }
+  ],
+  "fills": [
+    "M5.88 9 A0.875 0.875 0 1 1 4.13 9 A0.875 0.875 0 1 1 5.88 9 Z",
+    "M5.88 15 A0.875 0.875 0 1 1 4.13 15 A0.875 0.875 0 1 1 5.88 15 Z",
+    "M12.88 9 A0.875 0.875 0 1 1 11.13 9 A0.875 0.875 0 1 1 12.88 9 Z",
+    "M12.88 15 A0.875 0.875 0 1 1 11.13 15 A0.875 0.875 0 1 1 12.88 15 Z",
+    "M19.88 9 A0.875 0.875 0 1 1 18.13 9 A0.875 0.875 0 1 1 19.88 9 Z",
+    "M19.88 15 A0.875 0.875 0 1 1 18.13 15 A0.875 0.875 0 1 1 19.88 15 Z"
+  ],
+  "cutouts": []
+}

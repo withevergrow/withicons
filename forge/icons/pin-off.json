@@ -1,0 +1,65 @@
+{
+  "name": "pin-off",
+  "category": "actions",
+  "description": "A pushpin split in two by a slash for unpinning a message, tab or note.",
+  "aliases": [
+    "unpin",
+    "unpinned",
+    "pin-remove",
+    "remove-pin",
+    "pin-slash",
+    "unstick",
+    "unpin-item",
+    "no-pin",
+    "pushpin-off"
+  ],
+  "synonyms": [
+    "un-pin",
+    "take off board",
+    "unfix",
+    "release",
+    "not pinned",
+    "remove from top",
+    "drop pin",
+    "unpin message",
+    "unpin chat",
+    "unpin tab",
+    "unpin post",
+    "unattach",
+    "detach",
+    "thumbtack off",
+    "unfavourite",
+    "unfavorite",
+    "loose"
+  ],
+  "tags": [
+    "pin",
+    "unpin",
+    "slash",
+    "board",
+    "off"
+  ],
+  "paths": [
+    {
+      "d": "M16.9 12.3 L18.67 10.53 A1.57 1.57 0 0 0 20.89 8.31 L15.69 3.11 A1.57 1.57 0 0 0 13.47 5.33 L11.7 7.1",
+      "plate": "K"
+    },
+    {
+      "d": "M12.3 16.9 L12.49 17.91 A1.05 1.05 0 0 1 10.71 18.84 L5.16 13.29 A1.05 1.05 0 0 1 6.09 11.51 L7.1 11.7",
+      "plate": "K"
+    },
+    {
+      "d": "M7.93 16.07 L3.42 20.58",
+      "plate": "A"
+    },
+    {
+      "d": "M3 3 L21 21",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M16.3 12.9 L18.67 10.53 A1.57 1.57 0 0 0 20.89 8.31 L15.69 3.11 A1.57 1.57 0 0 0 13.47 5.33 L11.1 7.7 Z",
+    "M12.03 15.42 L12.49 17.91 A1.05 1.05 0 0 1 10.71 18.84 L5.16 13.29 A1.05 1.05 0 0 1 6.09 11.51 L8.58 11.97 Z"
+  ],
+  "cutouts": []
+}

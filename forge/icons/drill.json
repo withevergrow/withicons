@@ -1,0 +1,69 @@
+{
+  "name": "drill",
+  "category": "objects",
+  "description": "A cordless power drill with a chuck, bit and battery pack, for DIY, building, repairs and drilling down.",
+  "aliases": [
+    "power-drill",
+    "cordless-drill",
+    "electric-drill",
+    "drill-driver",
+    "power-tool",
+    "drilling",
+    "drill-down"
+  ],
+  "tags": [
+    "tool",
+    "diy",
+    "construction",
+    "repair",
+    "power",
+    "hardware"
+  ],
+  "paths": [
+    {
+      "d": "M5 4 H15 A2 2 0 0 1 17 6 V9 A2 2 0 0 1 15 11 H11.5 V17 H7.5 V11 H5 A2 2 0 0 1 3 9 V6 A2 2 0 0 1 5 4 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M6 17 H13 A1.5 1.5 0 0 1 14.5 18.5 V19.5 A1.5 1.5 0 0 1 13 21 H6 A1.5 1.5 0 0 1 4.5 19.5 V18.5 A1.5 1.5 0 0 1 6 17 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M17 5.5 H19 V9.5 H17 M19 7.5 H21.5",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 4 H15 A2 2 0 0 1 17 6 V9 A2 2 0 0 1 15 11 H11.5 V17 H7.5 V11 H5 A2 2 0 0 1 3 9 V6 A2 2 0 0 1 5 4 Z",
+    "M6 17 H13 A1.5 1.5 0 0 1 14.5 18.5 V19.5 A1.5 1.5 0 0 1 13 21 H6 A1.5 1.5 0 0 1 4.5 19.5 V18.5 A1.5 1.5 0 0 1 6 17 Z",
+    "M17 5.5 H19 V9.5 H17 Z"
+  ],
+  "cutouts": [
+    "M6.5 7.5 H10.5",
+    "M4.5 17 H14.5"
+  ],
+  "synonyms": [
+    "bore",
+    "hole",
+    "screw",
+    "driver",
+    "diy",
+    "do it yourself",
+    "build",
+    "builder",
+    "construction",
+    "repair",
+    "fix",
+    "renovation",
+    "home improvement",
+    "handyman",
+    "workshop",
+    "hardware store",
+    "tools",
+    "drill down",
+    "deep dive",
+    "details",
+    "battery tool",
+    "dril"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "glass-water",
+  "category": "objects",
+  "description": "A tumbler glass filled with water, for drinks, hydration reminders, water intake and beverages.",
+  "aliases": [
+    "water-glass",
+    "glass-of-water",
+    "tumbler",
+    "hydration",
+    "hydrate",
+    "drinking-glass",
+    "water-tumbler"
+  ],
+  "tags": [
+    "drink",
+    "water",
+    "health",
+    "glass",
+    "beverage",
+    "food"
+  ],
+  "paths": [
+    {
+      "d": "M5 3 H19 L17.6 19.65 A2 2 0 0 1 15.6 21.5 H8.4 A2 2 0 0 1 6.4 19.65 Z",
+      "plate": "K"
+    },
+    {
+      "d": "M5.6 10 C7.5 9 9.75 9 12 10 C14.25 11 16.5 11 18.4 10",
+      "plate": "A"
+    }
+  ],
+  "fills": [
+    "M5 3 H19 L17.6 19.65 A2 2 0 0 1 15.6 21.5 H8.4 A2 2 0 0 1 6.4 19.65 Z"
+  ],
+  "cutouts": [
+    "M5.6 10 C7.5 9 9.75 9 12 10 C14.25 11 16.5 11 18.4 10"
+  ],
+  "synonyms": [
+    "drink water",
+    "drinking",
+    "stay hydrated",
+    "water intake",
+    "water tracker",
+    "thirst",
+    "thirsty",
+    "refill",
+    "beverage",
+    "tap water",
+    "mineral water",
+    "cup",
+    "liquid",
+    "refreshment",
+    "glas",
+    "watter"
+  ]
+}

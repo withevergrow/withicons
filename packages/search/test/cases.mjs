@@ -22,7 +22,7 @@ export const CASES = [
   ['Café', 'coffee', 3],
 
   // plurals, -ing, -ed, -er
-  ['folders', 'folder', 1],
+  ['folders', ['folders', 'folder'], 1], // 2026-10: a dedicated folders icon joined the set
   ['users', 'users', 1],
   ['deleting', 'trash', 1],
   ['deleted', 'trash', 3],
@@ -31,7 +31,7 @@ export const CASES = [
   ['downloading', 'download', 1],
   ['uploaded', 'upload', 1],
   ['messages', ['messages', 'message-square', 'message-circle'], 1],
-  ['charts', ['chart-bar', 'chart-line', 'chart-pie', 'chart-area', 'chart-scatter', 'chart-candlestick', 'chart-column-stacked', 'chart-funnel'], 1],
+  ['charts', ['chart-bar', 'chart-line', 'chart-pie', 'chart-area', 'chart-scatter', 'chart-candlestick', 'chart-column-stacked', 'chart-funnel', 'chart-spline', 'chart-donut'], 1], // 2026-10: chart-spline / chart-donut joined (any chart answers)
   ['batteries', 'battery', 1],
   ['bookmarks', ['bookmark', 'bookmark-plus'], 1], // 2026-10: bookmark-plus joined the set
 

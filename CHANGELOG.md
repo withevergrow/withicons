@@ -6,6 +6,38 @@ in [docs/LAUNCH.md](docs/LAUNCH.md#3-versioning-and-changelog).
 
 ## Unreleased
 
+Planned as 0.6.0.
+
+### Added
+- 250 icons (1,000 in all), each with motion and palettes: the everyday UI, file, chart, text-editing, weather, food and sport
+  icons people reach for most (for example `airplay`, `calendar-search`, `chart-spline`, `clipboard-pen`, `file-diff`,
+  `git-graph`, `list-tree`, `panel-right-close`, `spell-check`, `wifi-low`).
+- `@withicons/loaders`: 50 animated loaders (common, creative, festival) and 15 icon morph sequences, drawn in every style.
+  One self-contained SVG each (pure CSS animation, `prefers-reduced-motion` respected): `<img>`, inline, `<with-loader>`,
+  React and Vue. The Loader Studio is on the site (`loaders.html`), and the MCP has `get_loader`.
+- Hand-drawn overrides: about 3,300 icons are now drawn by hand in the styles where the generated drawing read badly
+  (`forge/hand/<style>/<icon>.mjs`, contract in `forge/HAND.md`, checked in CI by `node forge/tools/hand.mjs check --all`).
+
+### Changed
+- The class files of `glass`, `skeuo` and `gothic` moved from `@withicons/classes` to `@withicons/classes-plus` to keep every package under
+  jsDelivr's 150 MB limit (one 145 MB budget everywhere). `with-loader.js` finds them automatically; direct CSS links change package.
+- 85 icons redrawn (skeleton reworks), among them the avatars, `black-cat`, `salad`, `oven`, `firecracker`, `jalebi`,
+  `rose-bouquet`, `zap-off` and `camera-off`. Names and aliases are unchanged (`firecracker` keeps `anar`, `anaar`,
+  `flowerpot-cracker`, `fountain-cracker`, `cone-firecracker`).
+- Pixel is drawn on the 24 grid (one pixel per unit, pixel-perfect at 24, 48 and 72px); live icons keep their 16 × 16 sprites.
+- Brutal's outlines and hard shadow are a fixed near-black, `var(--with-brutal-ink, #16130F)`, instead of `currentColor`
+  (white outlines on dark pages lost the icons). Set `--with-brutal-ink` to recolour them.
+- Live icons: `battery-percent` draws the number without "%" by default; pass `percent: true` for the sign. `badge-text`
+  and `sale-sticker` keep their outline closed and set the text inside it (condensed when long), so `"-50%"`, `"100%"`
+  and `"DOCX"` are written in full.
+- Morphs (`morph()`, `morphAsync()`, `<with-loader morph>`, `Morph`, MCP `get_loader({ morph })`): a plain name is always an
+  icon; a loader in a sequence is written `loader:<name>` (or `{ loader }`). `done(name)` always ends on the icon.
+
+### Fixed
+- Dock: the keyline around the glyph moves with the glyph when animated instead of lagging with the shadow.
+- Live icons lay out text faster (kerning pairs are remembered), with the same output.
+- `scripts/publish.mjs`: a bad `--wait` is an error, and a CI re-run that meets a version npm is still processing skips it.
+
 ## 0.5.0 - 2026-10-12
 
 Result of an agent evaluation: five agents built pitch decks with the MCP and reported what stopped them

@@ -1,0 +1,9 @@
+// forge/hand/pixel/files.mjs — hand-drawn pixel files: a front sheet with a folded corner and two text lines over a clearly offset second sheet whose top and left edges show as a filled, outlined strip.
+export default function render() {
+  return [
+    ["path",{"d":"M9 6h6v1h-6zM8 7h7v1h-7zM7 8h8v1h-8zM7 9h8v1h-8zM7 10h8v1h-8zM7 11h12v1h-12zM7 12h12v1h-12zM7 13h2v1h-2zM17 13h2v1h-2zM7 14h12v1h-12zM7 15h12v1h-12zM7 16h2v1h-2zM14 16h5v1h-5zM7 17h12v1h-12zM7 18h12v1h-12zM7 19h12v1h-12zM7 20h1v1h-1z","fill":"var(--with-pixel-fill, currentColor)","fill-opacity":"0.28"}],
+    ["path",{"d":"M4 3h11v1h-11zM4 4h11v1h-11zM4 5h2v1h-2zM4 6h2v1h-2zM4 7h2v1h-2zM16 7h1v1h-1zM4 8h2v1h-2zM16 8h2v1h-2zM4 9h2v1h-2zM16 9h3v1h-3zM4 10h2v1h-2zM4 11h2v1h-2zM19 11h1v1h-1zM4 12h2v1h-2zM19 12h1v1h-1zM4 13h2v1h-2zM19 13h1v1h-1zM4 14h2v1h-2zM19 14h1v1h-1zM4 15h2v1h-2zM19 15h1v1h-1zM4 16h2v1h-2zM19 16h1v1h-1zM4 17h2v1h-2zM19 17h1v1h-1zM19 18h1v1h-1zM19 19h1v1h-1zM8 20h12v1h-12z","fill":"var(--with-pixel-fill, currentColor)","fill-opacity":"0.55"}],
+    ["path",{"d":"M3 2h13v1h-13zM3 3h1v1h-1zM15 3h1v1h-1zM3 4h1v1h-1zM15 4h1v1h-1zM3 5h1v1h-1zM6 5h10v1h-10zM3 6h1v1h-1zM6 6h1v1h-1zM15 6h2v1h-2zM3 7h1v1h-1zM6 7h1v1h-1zM15 7h1v1h-1zM17 7h1v1h-1zM3 8h1v1h-1zM6 8h1v1h-1zM15 8h1v1h-1zM18 8h1v1h-1zM3 9h1v1h-1zM6 9h1v1h-1zM15 9h1v1h-1zM19 9h1v1h-1zM3 10h1v1h-1zM6 10h1v1h-1zM15 10h6v1h-6zM3 11h1v1h-1zM6 11h1v1h-1zM20 11h1v1h-1zM3 12h1v1h-1zM6 12h1v1h-1zM20 12h1v1h-1zM3 13h1v1h-1zM6 13h1v1h-1zM9 13h8v1h-8zM20 13h1v1h-1zM3 14h1v1h-1zM6 14h1v1h-1zM20 14h1v1h-1zM3 15h1v1h-1zM6 15h1v1h-1zM20 15h1v1h-1zM3 16h1v1h-1zM6 16h1v1h-1zM9 16h5v1h-5zM20 16h1v1h-1zM3 17h1v1h-1zM6 17h1v1h-1zM20 17h1v1h-1zM3 18h4v1h-4zM20 18h1v1h-1zM6 19h1v1h-1zM20 19h1v1h-1zM6 20h1v1h-1zM20 20h1v1h-1zM6 21h15v1h-15z"}],
+    ["path",{"d":"M7 6h2v1h-2zM7 7h1v1h-1z","fill":"var(--with-pixel-shine, #FFFFFF)","class":"wm-shine"}],
+  ]
+}

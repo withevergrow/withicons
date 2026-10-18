@@ -1,0 +1,53 @@
+{
+  "name": "folder-x",
+  "intent": "rests quietly, shakes no when a folder is rejected",
+  "loop": {
+    "preset": "float",
+    "amount": 0.25,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "origin": [
+        12,
+        13.5
+      ],
+      "amount": 0.6,
+      "duration": 3.4,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "wiggle",
+      "origin": [
+        12,
+        20
+      ],
+      "amount": 0.6
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "folder-check",
+      "effect": "rotate"
+    },
+    {
+      "to": "folder",
+      "effect": "fade"
+    },
+    {
+      "to": "folder-x@solid",
+      "effect": "scale"
+    }
+  ]
+}

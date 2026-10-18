@@ -1,0 +1,46 @@
+{
+  "name": "smartphone-charging",
+  "intent": "the bolt flickers with current while the phone charges",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "glow",
+    "amount": 1,
+    "duration": 0.8
+  },
+  "parts": {
+    "S": {
+      "preset": "flicker",
+      "amount": 0.8,
+      "duration": 2.4
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "fill",
+      "duration": 1.8
+    },
+    {
+      "preset": "wiggle",
+      "amount": 0.3
+    }
+  ],
+  "swap": [
+    {
+      "to": "smartphone",
+      "effect": "fade"
+    },
+    {
+      "to": "battery-charging",
+      "effect": "scale"
+    },
+    {
+      "to": "plug",
+      "effect": "slide-up"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "scan-barcode",
+  "intent": "the frame focuses while the bars blink like a scanner reading them",
+  "loop": { "preset": "pulse", "amount": 0.5, "duration": 1.8 },
+  "hover": { "preset": "zoom", "amount": 0.6, "duration": 0.6 },
+  "parts": { "A": { "preset": "fill", "duration": 1.8, "delay": 0.1 } },
+  "deco": "still",
+  "alt": [{ "preset": "flicker", "amount": 0.6 }, { "preset": "breathe" }],
+  "swap": [{ "to": "barcode", "effect": "fade" }, { "to": "check", "effect": "morph" }, { "to": "scan", "effect": "fade" }]
+}

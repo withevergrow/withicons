@@ -213,7 +213,7 @@
       txt = 'Loaders: with icons (' + LOADERS.length + ' animated loaders + ' + MORPHS.length + ' morph sequences, ' + D.styles.length + ' styles, MIT, no JS needed).\n' +
         'Use: <img src="' + CDN + 'svg/<style>/<name>.svg" width="32" height="32" alt="Loading">\n' +
         'This one: ' + (named ? preset : 'morph of ' + S.morph.items.join(',')) + ' in ' + S.style + '.\n' +
-        'Themeable: <script src="' + CDN + 'cdn/loaders.js"></script> then <with-loader name="<name>" variant="<style>" color="#hex" speed="1"></with-loader>; morph="icon,icon,icon" chains library icons; el.done() shows a check.\n' +
+        'Themeable: <script src="' + CDN + 'cdn/loaders.js"></script> then <with-loader name="<name>" variant="<style>" color="#hex" speed="1"></with-loader>; morph="icon,icon,icon" chains library icons (a plain name is always an icon; loader:<name> puts a loader in the chain); el.done() shows a check.\n' +
         'Names: ' + names + '.\nMorphs: ' + MORPHS.map(function (l) { return l.name }).join(', ') + '.\nStyles: ' + D.styles.join(', ') + '.\nCatalogue (descriptions, aliases): ' + CDN + 'catalog.json'
       lang = 'text'
       msg = 'Paste this into your AI assistant or agent instructions: everything it needs, in a few lines, so it never has to read the docs.'
@@ -261,8 +261,9 @@
         (S.morph.items.length > 1 ? '<button type="button" data-del="' + i + '" aria-label="Remove ' + esc(n) + '" title="Remove">×</button>' : '') + '</li>'
     }).join('')
     $$('[data-seq-icon]', seq).forEach(function (el) {
-      var n = el.getAttribute('data-seq-icon')
-      var p = BY[n] ? draw(n, 'line', { size: 20, label: '' }) : L.iconSvg(n, 'line')
+      // the same reading as the runtime (0.6.0): a plain name is an icon, "loader:<name>" a loader
+      var it = L.morphItem(el.getAttribute('data-seq-icon'))
+      var p = !it ? Promise.reject(new Error('empty')) : it.kind === 'loader' ? draw(it.name, 'line', { size: 20, label: '' }) : L.iconSvg(it.name, 'line')
       p.then(function (svg) { el.innerHTML = svg.replace(/width="24" height="24"/, 'width="20" height="20"') }, function () { el.textContent = '?' })
     })
     effects.innerHTML = D.effects.map(function (e) { return '<button type="button" role="radio" data-fx="' + e.name + '" aria-checked="' + (S.morph.effect === e.name) + '" title="' + esc(e.say) + '">' + esc(e.title) + '</button>' }).join('')
@@ -281,8 +282,16 @@
     e.preventDefault()
     var inp = $('[data-ld-addname]'), n = (inp.value || '').trim().toLowerCase().replace(/\s+/g, '-')
     if (!n) return
-    var w = WI(), ok = BY[n] || (w && w.icons().some(function (i) { return i.name === n }))
-    if (!ok && w && w.resolve) { var r = w.resolve(n); if (r) n = r.name || r; ok = !!r }
+    // an icon by default; a loader only as "loader:<name>" (typed so, or a name that is a loader and no icon)
+    var w = WI(), isIcon = function (x) { return !!(w && w.icons().some(function (i) { return i.name === x })) }
+    var lm = /^loader:[\s-]*(.+)$/.exec(n), ok = false
+    if (lm) { var ld = L.get(lm[1]); if (ld) { n = 'loader:' + ld.name; ok = true } }
+    else {
+      n = n.replace(/^icon:[\s-]*/, '')
+      ok = isIcon(n)
+      if (!ok && w && w.resolve) { var r = w.resolve(n); if (r) n = r.name || r; ok = !!r }
+      if (!ok && L.get(n)) { n = 'loader:' + L.get(n).name; ok = true }
+    }
     if (!ok) { if (w) w.toast('No icon called “' + n + '”'); return }
     if (S.morph.items.length >= 8) { if (w) w.toast('Up to 8 steps'); return }
     S.morph.items.push(n); S.morph.preset = null; inp.value = ''; renderMorphPanel(); paint()

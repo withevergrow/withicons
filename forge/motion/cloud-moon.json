@@ -1,0 +1,49 @@
+{
+  "name": "cloud-moon",
+  "intent": "cloud drifts past a softly glowing moon",
+  "loop": {
+    "preset": "float",
+    "amount": 0.6,
+    "duration": 3.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 0,
+    "amount": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "breathe",
+      "origin": [
+        8,
+        9
+      ],
+      "amount": 0.8,
+      "duration": 3.4,
+      "delay": 0.2
+    }
+  },
+  "deco": "twinkle",
+  "alt": [
+    {
+      "preset": "breathe"
+    },
+    {
+      "preset": "glow"
+    }
+  ],
+  "swap": [
+    {
+      "to": "cloud-sun",
+      "effect": "fade"
+    },
+    {
+      "to": "moon",
+      "effect": "slide-up"
+    },
+    {
+      "to": "cloud",
+      "effect": "fade"
+    }
+  ]
+}

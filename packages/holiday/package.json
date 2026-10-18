@@ -1,7 +1,7 @@
 {
   "name": "@withicons/holiday",
-  "version": "0.5.0",
-  "description": "The holiday styles (utsav, rangoli, halloween, christmas, lunar, valentine) of with icons (750 icons): standalone SVGs, IconNode data and CSS class icons. Companion of @withicons/core.",
+  "version": "0.6.0",
+  "description": "The holiday styles (utsav, rangoli, halloween, christmas, lunar, valentine) of with icons (1000 icons): standalone SVGs, IconNode data and CSS class icons. Companion of @withicons/core.",
   "license": "MIT",
   "author": {
     "name": "with icons — powered by Evergrow",
@@ -133,7 +133,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@withicons/core": "0.5.0"
+    "@withicons/core": "0.6.0"
   },
   "scripts": {
     "test": "node --test test/*.test.mjs"

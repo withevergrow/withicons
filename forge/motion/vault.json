@@ -1,0 +1,10 @@
+{
+  "name": "vault",
+  "intent": "the dial clicks round like a combination being dialled",
+  "loop": { "preset": "pulse", "origin": [12, 21], "amount": 0.25, "duration": 4 },
+  "hover": { "preset": "shake", "amount": 0.4, "duration": 0.5 },
+  "parts": { "A": { "preset": "tick", "origin": [13, 11], "steps": 8, "duration": 4 } },
+  "deco": "breathe",
+  "alt": [{ "preset": "pop" }, { "preset": "rock", "origin": [12, 21], "amount": 0.4 }],
+  "swap": [{ "to": "lock", "effect": "fade" }, { "to": "piggy-bank", "effect": "fade" }, { "to": "vault@solid", "effect": "scale" }]
+}

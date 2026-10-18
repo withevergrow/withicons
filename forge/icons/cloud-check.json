@@ -1,0 +1,59 @@
+{
+  "name": "cloud-check",
+  "category": "files",
+  "description": "A cloud with a check mark for files saved, synced or backed up online.",
+  "aliases": [
+    "cloud-done",
+    "cloud-synced",
+    "cloud-saved",
+    "cloud-ok",
+    "synced",
+    "backed-up",
+    "cloud-success",
+    "saved-to-cloud",
+    "upload-complete"
+  ],
+  "tags": [
+    "cloud",
+    "check",
+    "synced",
+    "backup",
+    "storage",
+    "sync"
+  ],
+  "paths": [
+    {
+      "d": "M4.89 14.97 A4.5 4.5 0 0 1 6.2 6.6 A6.2 6.2 0 0 1 18.1 7.1 A4.25 4.25 0 0 1 19.25 15",
+      "plate": "K"
+    },
+    {
+      "d": "M8.25 16.25 L11 19 L16.25 13.25",
+      "plate": "S"
+    }
+  ],
+  "fills": [
+    "M4.89 14.97 A4.5 4.5 0 0 1 6.2 6.6 A6.2 6.2 0 0 1 18.1 7.1 A4.25 4.25 0 0 1 19.25 15 Z"
+  ],
+  "cutouts": [
+    "M8.25 16.25 L11 19 L16.25 13.25"
+  ],
+  "synonyms": [
+    "in sync",
+    "saved online",
+    "backed up",
+    "backup complete",
+    "upload complete",
+    "all changes saved",
+    "up to date",
+    "online",
+    "available offline",
+    "icloud",
+    "google drive",
+    "dropbox",
+    "onedrive",
+    "cloud storage",
+    "success",
+    "connected",
+    "deployed"
+  ]
+}

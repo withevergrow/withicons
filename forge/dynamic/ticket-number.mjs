@@ -24,7 +24,7 @@ export default live({
   ],
   build({ number, hash }) {
     const n = String(number)
-    const opts = { outline: TICKET, cx: 12, ys: [12, 11.75, 12.25], minCap: 4 }
+    const opts = { outline: TICKET, cx: 12, ys: [12, 11.75, 12.25], minCap: 4, maxCap: 6 }
     // 1-2 digits print large; 3 shrink; "#" is dropped before the digits shrink below legibility. The widest
     // 3-digit numbers (999, 866...) need the last 0.5u of white: still 1u clear of the wall, never touching.
     const hit = (hash && fitChain(['#' + n], { ...opts, minCap: 5 })) || fitChain([n], opts) || fitChain([n], { ...opts, clearance: 3 })

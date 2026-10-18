@@ -1,0 +1,46 @@
+{
+  "name": "table-of-contents",
+  "intent": "its headings tick down the page like a reader jumping to a section",
+  "loop": {
+    "preset": "pulse",
+    "amount": 0.25,
+    "duration": 2.8
+  },
+  "hover": {
+    "preset": "nod",
+    "amount": 0.7
+  },
+  "parts": {
+    "A": {
+      "preset": "pop",
+      "amount": 0.8,
+      "duration": 2.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "nudge",
+      "dir": 90,
+      "amount": 0.4
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "list-tree",
+      "effect": "morph"
+    },
+    {
+      "to": "list",
+      "effect": "fade"
+    },
+    {
+      "to": "book-open",
+      "effect": "fade"
+    }
+  ]
+}

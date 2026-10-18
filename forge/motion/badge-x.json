@@ -1,0 +1,49 @@
+{
+  "name": "badge-x",
+  "intent": "the seal shakes no: the badge has been revoked",
+  "loop": {
+    "preset": "pulse",
+    "origin": [
+      12,
+      12
+    ],
+    "amount": 0.3,
+    "duration": 3.2
+  },
+  "hover": {
+    "preset": "shake",
+    "amount": 0.8,
+    "duration": 0.5
+  },
+  "parts": {
+    "A": {
+      "preset": "pulse",
+      "origin": [
+        12,
+        12
+      ],
+      "amount": 0.8,
+      "duration": 3.2,
+      "delay": 0.1
+    }
+  },
+  "deco": "breathe",
+  "alt": [
+    {
+      "preset": "spin-once"
+    },
+    {
+      "preset": "pop"
+    }
+  ],
+  "swap": [
+    {
+      "to": "badge-check",
+      "effect": "morph"
+    },
+    {
+      "to": "badge-alert",
+      "effect": "fade"
+    }
+  ]
+}

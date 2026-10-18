@@ -1,0 +1,49 @@
+{
+  "name": "arrow-up-from-line",
+  "intent": "the arrow lifts off the line, sending something up",
+  "loop": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.25,
+    "duration": 2.4
+  },
+  "hover": {
+    "preset": "nudge",
+    "dir": 270,
+    "amount": 0.8,
+    "duration": 0.55
+  },
+  "parts": {
+    "A": {
+      "preset": "rise",
+      "amount": 0.6,
+      "duration": 2.4,
+      "delay": 0.05
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pass",
+      "dir": 270
+    },
+    {
+      "preset": "bounce",
+      "amount": 0.6
+    }
+  ],
+  "swap": [
+    {
+      "to": "arrow-down-to-line",
+      "effect": "rotate"
+    },
+    {
+      "to": "upload",
+      "effect": "fade"
+    },
+    {
+      "to": "check",
+      "effect": "slide-up"
+    }
+  ]
+}

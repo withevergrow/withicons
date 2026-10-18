@@ -1,0 +1,40 @@
+{
+  "name": "case-sensitive",
+  "intent": "the capital and small letters tap in turn like keys being typed",
+  "loop": {
+    "preset": "type",
+    "amount": 0.5,
+    "duration": 1.8
+  },
+  "hover": {
+    "preset": "jelly",
+    "amount": 0.8
+  },
+  "parts": {
+    "A": {
+      "preset": "type",
+      "amount": 0.7,
+      "duration": 1.8,
+      "delay": 0.1
+    }
+  },
+  "deco": "float",
+  "alt": [
+    {
+      "preset": "pop"
+    },
+    {
+      "preset": "draw"
+    }
+  ],
+  "swap": [
+    {
+      "to": "case-upper",
+      "effect": "flip"
+    },
+    {
+      "to": "case-lower",
+      "effect": "flip"
+    }
+  ]
+}
