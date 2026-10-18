@@ -1,4 +1,4 @@
-import { p, h2, h3, ul, figure, iconGrid, styleRow, table, yes, no, meh, verdict, cta, doDont, faceOff, prosCons, L, N_ICONS, N_STYLES, N_SVGS } from '../lib/blocks.mjs'
+import { p, h2, h3, ul, figure, iconGrid, styleRow, table, yes, no, meh, verdict, cta, doDont, faceOff, prosCons, L, N_ICONS, N_STYLES, N_SVGS, timesOurs } from '../lib/blocks.mjs'
 
 export default {
   slug: 'with-icons-vs-lucide',
@@ -110,7 +110,7 @@ ${p('Both sets are free, well made and easy to use, so the choice comes down to 
 ${prosCons('Lucide', {
   lib: 'lucide',
   pros: [
-    ['Huge range', `Over 1,600 icons (the site listed 1,857), almost four times our ${N_ICONS}. If you need something niche, Lucide is far more likely to have the exact icon.`],
+    ['Huge range', `Over 1,600 icons (the site listed 1,857), about ${timesOurs(1857)} times our ${N_ICONS}. If you need something niche, Lucide is far more likely to have the exact icon.`],
     ['Ready in almost every framework', 'There are official packages for React, Vue, Svelte, Solid, Preact, Angular, Astro, React Native and plain JavaScript, and you can install them today.'],
     ['Already in shadcn/ui', 'If your app uses shadcn/ui, Lucide is there from day one and every example uses it. Zero setup.'],
     ['Consistent by design', 'A written rulebook (24 × 24 grid, 2px lines, rounded ends) keeps every icon looking like part of the same family.'],

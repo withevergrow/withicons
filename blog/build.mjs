@@ -26,7 +26,7 @@ const HUBS = {
     lede: 'Side-by-side comparisons of with icons and the most popular icon sets, with the real icons next to each other, plain-English pros and cons, prices and licences checked against official sources.',
     desc: 'Honest comparisons of with icons vs Font Awesome, Hugeicons, Lucide, Heroicons, Phosphor, Material Symbols, Tabler and Flaticon, with real icons side by side.' },
   guides: { file: 'guides.html', title: 'Icon guides: slides, websites, licences and landing pages', h1: 'Practical <em>icon</em> guides',
-    lede: 'Step-by-step help for using icons in PowerPoint, Google Slides, Keynote, website builders and landing pages, plus icon licences explained in plain English.',
+    lede: 'Step-by-step help for using icons in PowerPoint, Google Slides, Keynote, website builders and landing pages, free icons for every holiday and festival, plus icon licences explained in plain English.',
     desc: 'Practical, plain-English icon guides: icons in presentations, adding icons to a website without code, landing pages, and free icon licences explained.' },
   basics: { file: 'design-basics.html', title: 'Icon design basics: styles, sizes, accessibility and meaning', h1: 'Icon design, <em>the basics</em>',
     lede: 'The ideas behind good icons, explained without jargon: styles, sizes, SVG vs PNG, accessibility, consistency, picking the right symbol and the trends of 2026.',
@@ -76,7 +76,9 @@ const ORDER = ['best-free-icon-libraries', 'with-icons-vs-font-awesome', 'with-i
   'consistent-icons', 'choosing-the-right-icon', 'with-icons-vs-flaticon', 'icon-design-trends-2026',
   // 2026-10-03 GEO supporting posts
   'what-is-an-icon-library', 'how-to-change-icon-color', '3d-icons-vs-flat-icons', 'icon-glossary', 'playful-icon-styles', 'how-many-icons-does-a-website-need',
-  'dark-mode-icons', 'animated-icons', 'app-icon-vs-ui-icon', 'icons-on-a-resume']
+  'dark-mode-icons', 'animated-icons', 'app-icon-vs-ui-icon', 'icons-on-a-resume',
+  // 2026-10-12 holiday and festival posts (the hub first)
+  'free-holiday-icons', 'free-halloween-icons', 'free-diwali-icons', 'free-christmas-icons', 'free-lunar-new-year-icons', 'free-valentines-day-icons']
 const FEATURED = 'best-free-icon-libraries' // the index hero story, whatever the dates
 const rank = s => (ORDER.indexOf(s) + 1 || 999)
 posts.sort((a, b) => b.date.localeCompare(a.date) || rank(a.slug) - rank(b.slug) || a.slug.localeCompare(b.slug))
@@ -95,7 +97,7 @@ for (const p of posts) {
     if (VS[p.slug] && !p.html.includes('class="b-face"')) w('comparison post should show the real rival icons with faceOff()')
     if (!p.html.includes('class="b-pc"')) w('comparison post should explain pros and cons in words with prosCons()')
   }
-  const stale = (p.html.replace(/<svg[\s\S]*?<\/svg>/g, ' ') + p.tldr.join(" ") + p.description + p.dek + JSON.stringify(p.faq)).match(/\b300 (free |everyday |hand-drawn |carefully |curated )?icons\b|\b2,100\b|\bseven (matching |different )?styles\b|\b(7|12|13|15) (matching |free |different )?styles\b|\bour 300\b|\ball 7\b/i)
+  const stale = (p.html.replace(/<svg[\s\S]*?<\/svg>/g, ' ') + p.tldr.join(" ") + p.description + p.dek + JSON.stringify(p.faq)).match(/\b300 (free |everyday |hand-drawn |carefully |curated )?icons\b|\b2,100\b|\bseven (matching |different )?styles\b|\b(7|12|13|15|17|20) (matching |free |different |creative )?styles\b|\b(17|20) creative ones\b|\b19 categories\b|\b(10|15),000 SVGs\b|\bour 300\b|\ball 7\b/i)
   if (stale) w(`stale number "${stale[0]}": we now have ${N_ICONS} icons in ${N_STYLES} styles (use N_ICONS / N_STYLES / N_SVGS)`)
   const firstP = (p.html.match(/<p>([\s\S]*?)<\/p>/) || [, ''])[1].replace(/<[^>]+>/g, '')
   if (firstP.length < 120) w('the first paragraph should answer the question directly in 2-3 sentences')

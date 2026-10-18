@@ -90,7 +90,7 @@ ${styleRow('lightbulb')}
 ${p('Choose one style for the deck and use it on every slide.')}
 
 ${h2('Which icon styles look best on slides?')}
-${p(`Slides are where the creative styles really earn their keep. Three of the ${N_STYLES} styles (line, solid and duo) are made for small interface sizes. The other 17 are made for big, expressive moments at 32 px and up, which is exactly how icons are shown on a slide. A few that suit decks especially well:`)}
+${p(`Slides are where the creative styles really earn their keep. Three of the ${N_STYLES} styles (line, solid and duo) are made for small interface sizes. The other ${N_STYLES - 3} are made for big, expressive moments at 32 px and up, which is exactly how icons are shown on a slide. A few that suit decks especially well:`)}
 ${ul([
   `<strong>${L.style('glass')}</strong>: frosted glass with a vivid colour glowing through. Modern and techy, great for product and software decks.`,
   `<strong>${L.style('luxe')}</strong>: polished gold, jewel enamel and soft 3D shadows. Made for premium brands, finance and awards slides.`,

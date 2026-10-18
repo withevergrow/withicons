@@ -111,7 +111,7 @@ ${ul([
   '<strong>A calm style for the interface, a bold one for marketing.</strong> Line icons in the app, glossy or hand-drawn icons in the hero section of the landing page.',
   '<strong>Different styles in different places.</strong> Duo icons on a friendly dashboard, kawaii or sticker icons on a kids’ worksheet. Each area stays consistent inside itself.',
 ])}
-${p(`This only works when every style comes from the same drawings. That is the idea behind with icons: each icon is drawn once and rendered into ${N_STYLES} styles (three everyday interface styles and 17 creative ones, from glass and pixel art to retro and luxe gold), so the house is the same house whether it is a thin outline or a glossy illustration. Read more in ${L.post('icon-styles-explained', 'icon styles explained')}.`)}
+${p(`This only works when every style comes from the same drawings. That is the idea behind with icons: each icon is drawn once and rendered into ${N_STYLES} styles (three everyday interface styles and ${N_STYLES - 3} creative ones, from glass and pixel art to retro and luxe gold), so the house is the same house whether it is a thin outline or a glossy illustration. Read more in ${L.post('icon-styles-explained', 'icon styles explained')}.`)}
 ${styleRow('folder')}
 ${p('Different moods, same shape, so they still feel like one family.')}
 ${iconGrid(['rocket', 'shield-check', 'chart-line', 'users'], 'gloss', 'A feature section in gloss, while the menu above it stays in line. Same family, different job.')}

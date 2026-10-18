@@ -101,7 +101,7 @@ ${p(`with icons is MIT licensed, one of the most relaxed licences there is: use,
 
 ${h2('Why do Flaticon icons sometimes look mismatched?')}
 ${p('Because a marketplace is many artists, and every artist draws a little differently: line thickness, corner shapes, colours, even perspective. If you grab a rocket from one artist and a chart from another, the slide can look patchy without anyone quite knowing why. Flaticon helps by grouping icons into packs by the same artist, so picking from one pack is the trick.')}
-${p(`with icons is a single family. All ${N_ICONS} icons were drawn on the same grid with the same rules, then rendered into ${N_STYLES} styles: line, solid and duo for everyday use, plus 17 creative ones such as glass, sticker, pixel, retro and kawaii. Any icon goes with any other icon in the same style.`)}
+${p(`with icons is a single family. All ${N_ICONS} icons were drawn on the same grid with the same rules, then rendered into ${N_STYLES} styles: line, solid and duo for everyday use, plus ${N_STYLES - 3} creative ones such as glass, sticker, pixel, retro and kawaii. Any icon goes with any other icon in the same style.`)}
 ${iconGrid(['rocket', 'chart-line', 'users', 'lightbulb', 'target', 'trophy'], 'sketch', 'A pitch-deck set in the sketch style. Every icon comes from the same family, so they look like they belong together.')}
 ${styleRow('gift')}
 ${doDont('<p>Pick one style for a whole deck: gloss for a bold pitch, line for a clean report, sketch for a friendly workshop, retro or sticker for a playful talk.</p>', '<p>Mix a 3D icon, a flat coloured one and a thin line one on the same slide. It reads as cluttered.</p>')}
@@ -136,13 +136,13 @@ ${prosCons('with icons', {
   pros: [
     ['No credit, ever', 'The MIT licence lets you use every icon in personal and commercial work without a credit line, and there is no account to create.'],
     ['Free PNG and SVG', 'Every icon page has Copy image, PNG downloads in any size and colour, and an SVG download, all free.'],
-    [`One family, ${N_STYLES} styles`, `All ${N_ICONS} icons share one grid, then come in line, solid and duo plus 17 creative styles such as glass, sticker, pixel and luxe. Any icon matches any other in the same style.`],
+    [`One family, ${N_STYLES} styles`, `All ${N_ICONS} icons share one grid, then come in line, solid and duo plus ${N_STYLES - 3} creative styles such as glass, sticker, pixel and luxe. Any icon matches any other in the same style.`],
     ['Search in everyday words', 'Type “bin” and you get trash, type “gear” and you get settings, so you find icons the way you talk.'],
   ],
   cons: [
     ['A much smaller catalogue', `With ${N_ICONS} everyday icons, rare objects and one-off illustrations are not there, and there are no brand logos.`],
     ['Newer, with a smaller community', 'Flaticon is a long-running, widely used site. with icons is young, so there is less written about it so far.'],
-    ['Creative styles need room', 'The 17 creative styles, such as gloss, glass, pixel and luxe, look best at 32px or larger. For tiny icons in an app, use line, solid or duo.'],
+    ['Creative styles need room', `The ${N_STYLES - 3} creative styles, such as gloss, glass, pixel and luxe, look best at 32px or larger. For tiny icons in an app, use line, solid or duo.`],
   ],
 })}
 ${p('Who each suits: Flaticon suits designers and content makers who need rare, coloured or illustrated icons and are happy to add credits or pay for Premium. with icons suits anyone making slides, docs, websites or apps who mostly needs everyday icons that match and never wants to think about a credit line.')}

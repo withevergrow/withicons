@@ -1,4 +1,4 @@
-import { p, h2, h3, ul, figure, iconGrid, styleRow, sizeRamp, table, yes, no, meh, verdict, callout, stats, cta, faceOff, rivalStyles, prosCons, L, N_ICONS, N_STYLES, N_SVGS } from '../lib/blocks.mjs'
+import { p, h2, h3, ul, figure, iconGrid, styleRow, sizeRamp, table, yes, no, meh, verdict, callout, stats, cta, faceOff, rivalStyles, prosCons, L, N_ICONS, N_STYLES, N_CATEGORIES, N_SVGS } from '../lib/blocks.mjs'
 
 const N_CREATIVE = N_STYLES - 3 // everything beyond line, solid and duo
 const HERO_COUNT = 316 // heroicons.com, checked October 2026
@@ -38,7 +38,7 @@ export default {
     { title: 'npm: @heroicons/react (latest release 2.2.0)', url: 'https://www.npmjs.com/package/@heroicons/react' },
     { title: 'Heroicons Figma file', url: 'https://www.figma.com/community/file/1143911270904274171' },
     { title: 'Lucide website (icon count, checked October 2026)', url: 'https://lucide.dev' },
-    { title: `with icons library (${N_ICONS} icons, ${N_STYLES} styles, 19 categories)`, url: 'https://withicons.com/icons.html' },
+    { title: `with icons library (${N_ICONS} icons, ${N_STYLES} styles, ${N_CATEGORIES} categories)`, url: 'https://withicons.com/icons.html' },
     { title: 'with icons license (MIT)', url: 'https://withicons.com/license.html' },
   ],
   body: () => `

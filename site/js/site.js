@@ -213,7 +213,7 @@
   ;['line', 'solid', 'duo'].forEach(function (n) { INFO[n].group = 'everyday' })
   ;['gloss', 'engrave', 'blueprint', 'sketch'].forEach(function (n) { INFO[n].group = 'crafted' })
   // live counts: from data/meta.js once loaded, otherwise the published totals
-  var FALLBACK_TOTAL = 734
+  var FALLBACK_TOTAL = 750
   var FALLBACK_LIVE = 50
   function counts() {
     var d = W.WITH || W.EGI

@@ -6,19 +6,26 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { listIcons, loadIcon, renderIcon, toSvg, readManifest } from '../../forge/lib/load.mjs'
 import { specVars } from '../../packages/motion/src/meta.js'
+import { STYLE_ORDER } from '../../forge/lib/emit-core.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 export const IMAGES = JSON.parse(fs.readFileSync(path.join(HERE, '..', 'images.json'), 'utf8'))
-// Every with icons style in display order: the 3 everyday interface styles, then the creative ones.
+// Every with icons style in display order, straight from the library's one STYLE_ORDER (forge/lib/emit-core.mjs):
+// the 3 everyday interface styles, then the creative ones. Never list styles by hand here, so counts can't go stale.
 // STYLES holds the ones this checkout can render (filled by useStyles); a style still being built simply isn't drawn yet.
-export const ALL_STYLES = ['line', 'solid', 'duo', 'gloss', 'engrave', 'blueprint', 'sketch', 'glass', 'kawaii', 'sticker', 'pixel', 'retro',
-  'bauhaus', 'luxe', 'skeuo', 'anime', 'coquette', 'gothic', 'pastel', 'plush']
+export const ALL_STYLES = [...STYLE_ORDER]
 export const STYLES = []
-export const STYLE_LABEL = Object.fromEntries(ALL_STYLES.map(s => [s, s[0].toUpperCase() + s.slice(1)]))
+const LABEL_FIX = { soft3d: 'Soft 3D', lunar: 'Lunar' }
+export const STYLE_LABEL = Object.fromEntries(ALL_STYLES.map(s => [s, LABEL_FIX[s] || s[0].toUpperCase() + s.slice(1)]))
 // The headline numbers, in one place. Use these in copy instead of typing numbers.
-export const N_ICONS = readManifest().count                // 500
-export const N_STYLES = ALL_STYLES.length                  // 20
-export const N_SVGS = (N_ICONS * N_STYLES).toLocaleString('en-US') // "10,000"
+export const N_ICONS = readManifest().count                // from forge/manifest.json
+export const N_STYLES = ALL_STYLES.length                  // from STYLE_ORDER
+export const N_CREATIVE = N_STYLES - 3                     // everything beyond line, solid and duo
+export const N_CATEGORIES = readManifest().categories.length // from forge/manifest.json
+export const N_SVGS = (N_ICONS * N_STYLES).toLocaleString('en-US') // icons x styles, formatted
+// "about N times as many": a rival's icon count against ours, as a word, so ratios never go stale ("three")
+const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty']
+export const timesOurs = theirs => { const n = Math.round(theirs / N_ICONS); return WORDS[n] ?? String(n) }
 const ICON_SET = new Set(listIcons())
 export const MANIFEST = readManifest()
 

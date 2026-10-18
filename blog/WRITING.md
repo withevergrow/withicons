@@ -21,7 +21,7 @@ only adds article components, using the site's tokens; each section gets one sty
   nothing extra. Loops get a Pause button, and everything stays still under reduced motion or the site's Pause animations.
   Keep it to one looping demo per post; prefer hover and swap demos. CDN URLs in `code()` samples are text only.
 - `blog/images.json`: the photo registry (Unsplash, free licence; credit is added automatically). Images are source files in `blog/images/<key>-{800,1600}.webp` (+ `-og.jpg` 1200x630 for heroes); the build copies them into `site/blog/assets/img/` (generated, gitignored) and never deletes them.
-- Icon names: `forge/manifest.json` (300 icons). Styles: line, solid, duo, gloss, engrave, blueprint, sketch. An unknown name fails the build.
+- Icon names: `forge/manifest.json`. Styles: `ALL_STYLES` (from STYLE_ORDER). An unknown name or style fails the build.
 
 ## Post fields
 
@@ -50,14 +50,17 @@ keywords [], about [], related [3 slugs], tldr [4-5 answer-first bullets, HTML a
 
 ## Facts about with icons (use these, don't embellish)
 
-Use the constants from blocks.mjs in copy (`${N_ICONS}`, `${N_STYLES}`, `${N_SVGS}`) so numbers never go stale again.
+Use the constants from blocks.mjs in copy (`${N_ICONS}`, `${N_STYLES}`, `${N_CREATIVE}`, `${N_SVGS}`, `${N_CATEGORIES}`, and
+`timesOurs(n)` for "about N times as many icons") so numbers never go stale again. Never type an icon, style or category count.
 
-- **500 icons**, each drawn once on a 24 x 24 grid and rendered into **20 styles** = **10,000 SVGs**. 19 categories. 50 "Live" icons with built-in motion.
+- `N_ICONS` icons (forge/manifest.json), each drawn once on a 24 x 24 grid and rendered into `N_STYLES` styles (STYLE_ORDER in
+  forge/lib/emit-core.mjs; `ALL_STYLES` in blocks.mjs is derived from it) = `N_SVGS` SVGs, in `N_CATEGORIES` categories. "Live" icons with built-in motion.
 - Everyday interface styles (3): **line** (1.75px outline, the default), **solid** (filled; active states, small sizes), **duo** (line over a soft tint).
-- Creative styles (17), for illustrations, hero sections, slides and marketing at 32px or larger: gloss, engrave, blueprint, sketch, glass, kawaii,
-  sticker, pixel, retro, bauhaus, luxe, skeuo, anime, coquette, gothic, pastel, plush. (A few of the newest may not render in this checkout yet;
-  `styleRow()` shows whatever is available and says "N of its 20 styles".) Describe them from the `description` in `forge/styles/<style>.mjs`
-  (main checkout for the newest). Each icon also has 20-30 hand-picked colour palettes that recolour every multi-colour style, and optional motion.
+- Creative styles (`N_CREATIVE`), for illustrations, hero sections, slides and marketing at 32px or larger, in six families: shiny and 3D (gloss, glass,
+  luxe, skeuo), product and trend (clay, bento, suite, dock, liquid, chrome, soft3d, brutal), printed and hand-made (engrave, blueprint, sketch, gothic),
+  retro and graphic (retro, bauhaus, pixel), cute (kawaii, sticker, plush, pastel, anime, coquette) and holidays (utsav, rangoli, halloween, christmas,
+  lunar, valentine). Describe them from `INFO` in `site/js/site.js` or the `description` in `forge/styles/<style>.mjs`.
+  Each icon also has 20-30 hand-picked colour palettes that recolour every multi-colour style, and optional motion.
 - MIT licence: free for personal and commercial use, no attribution required.
 - Every icon page: Copy image, PNG download (choose size and colour), SVG download, Copy SVG code. Guides for PowerPoint, Google Slides, Keynote, Canva,
   Figma, Notion, Word/Google Docs, WordPress, Webflow, Framer, Wix/Squarespace, email signatures, HTML.
