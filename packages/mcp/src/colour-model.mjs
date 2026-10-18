@@ -213,13 +213,40 @@ function gradAt(g, t) {
   return [a.key, 1 - u, b.key, u, a.op * (1 - u) + b.op * u]
 }
 
+// circle / ellipse / rect (hand-drawn overrides may use them) -> the same element as a <path>, other attributes kept
+const SHAPE_KEYS = new Set(['cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'width', 'height'])
+const f = v => Math.round(v * 1000) / 1000
+function shapeD(tag, a) {
+  const n = k => Number(a[k] || 0)
+  if (tag === 'circle' || tag === 'ellipse') {
+    const rx = tag === 'circle' ? n('r') : n('rx'), ry = tag === 'circle' ? n('r') : n('ry'), cx = n('cx'), cy = n('cy')
+    if (!(rx > 0 && ry > 0)) return null
+    return `M${f(cx - rx)} ${f(cy)}A${f(rx)} ${f(ry)} 0 1 0 ${f(cx + rx)} ${f(cy)}A${f(rx)} ${f(ry)} 0 1 0 ${f(cx - rx)} ${f(cy)}Z`
+  }
+  const x = n('x'), y = n('y'), w = n('width'), h = n('height')
+  if (!(w > 0 && h > 0)) return null
+  let rx = a.rx != null ? n('rx') : a.ry != null ? n('ry') : 0, ry = a.ry != null ? n('ry') : rx
+  rx = Math.min(rx, w / 2); ry = Math.min(ry, h / 2)
+  if (!(rx > 0 && ry > 0)) return `M${f(x)} ${f(y)}H${f(x + w)}V${f(y + h)}H${f(x)}Z`
+  return `M${f(x + rx)} ${f(y)}H${f(x + w - rx)}A${f(rx)} ${f(ry)} 0 0 1 ${f(x + w)} ${f(y + ry)}V${f(y + h - ry)}A${f(rx)} ${f(ry)} 0 0 1 ${f(x + w - rx)} ${f(y + h)}` +
+    `H${f(x + rx)}A${f(rx)} ${f(ry)} 0 0 1 ${f(x)} ${f(y + h - ry)}V${f(y + ry)}A${f(rx)} ${f(ry)} 0 0 1 ${f(x + rx)} ${f(y)}Z`
+}
+export function shapesToPaths(svg) {
+  return String(svg).replace(/<(circle|ellipse|rect)\b([^>]*?)(\/?)>/g, (m, tag, body, close) => {
+    const a = attrs(body), d = shapeD(tag, a)
+    if (!d) return m
+    const rest = String(body).replace(/\s([\w:-]+)="[^"]*"/g, (s, k) => SHAPE_KEYS.has(k) ? '' : s)
+    return `<path d="${d}"${rest}${close}>`
+  })
+}
+
 /**
  * Paint model of one rendered icon (SVG markup as the renderers emit it). Returns
  *   { area: { role: share of the 24x24 box it visibly paints }, pure: { role: share it paints unmixed }, drawn: share painted at all }
  * keyed by palette role (ink, c1-c4, tint, accent, shadow, shine, edge; 'other' for literal colours).
  */
 export function paintModel(svg) {
-  svg = String(svg)
+  svg = shapesToPaths(svg)
   const roles = rolesFor(svg)
   const grads = parseGradients(svg, roles)
   const root = attrs((/^<svg\b([^>]*)>/.exec(svg) || [])[1] || '')
@@ -367,7 +394,7 @@ export function roleShares(model) {
 /** how each role is painted in this markup: { role: { solid, tone, gradient, fill, stroke (counts), opacity (the most opaque solid / tone use) } } */
 export function paintsOf(svg) {
   const roles = rolesFor(svg), out = {}
-  for (const m of String(svg).matchAll(/<(path|stop)\b([^>]*?)\/?>/g)) {
+  for (const m of shapesToPaths(svg).matchAll(/<(path|stop)\b([^>]*?)\/?>/g)) {
     const a = attrs(m[2])
     for (const at of ['fill', 'stroke', 'stop-color', 'color']) {
       const v = /var\(\s*(--with-[\w-]+)/.exec(a[at] || '')
