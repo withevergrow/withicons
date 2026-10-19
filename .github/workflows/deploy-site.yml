@@ -41,7 +41,7 @@ jobs:
     # AWS_DEPLOY_ROLE_ARN lives on the production environment; a job-level if: can't read environment variables
     # (it is evaluated before the environment loads), so there is no guard here. See docs/LAUNCH.md §6.5.
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120   # build (~45-60 min at 1,000 icons) + upload of ~2.8 GB
     environment:
       name: production   # OIDC subject repo:withevergrow@274390516/withicons@1400616361:environment:production
       url: https://withicons.com

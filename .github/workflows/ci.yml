@@ -17,7 +17,7 @@ jobs:
   build:
     name: Build, lint icons, test packages
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120   # 1,000 icons x 34 styles: the full build alone is ~45-60 min on a hosted runner
     steps:
       - uses: actions/checkout@v5
 
