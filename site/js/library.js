@@ -102,7 +102,7 @@
     loading[st] = new Promise(function (res) {
       var el = D.querySelector('script[data-with-style="' + st + '"]')
       if (el && el.hasAttribute('data-done')) { res(); return }
-      if (!el) { el = D.createElement('script'); el.src = 'data/style-' + st + '.js'; el.async = true; el.setAttribute('data-with-style', st); D.head.appendChild(el) }
+      if (!el) { el = D.createElement('script'); el.src = 'data/style-' + st + '.js' + (WI() && WI().styleV ? WI().styleV(st) : ''); el.async = true; el.setAttribute('data-with-style', st); D.head.appendChild(el) }
       el.addEventListener('load', function () { el.setAttribute('data-done', ''); res() }); el.addEventListener('error', function () { el.setAttribute('data-done', ''); res() })
     }).then(function () { var ok = !!svgMap(st); if (ok) onStyleLoaded(st); return ok })
     return loading[st]

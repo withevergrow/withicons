@@ -10,6 +10,7 @@
 // forge/build.mjs calls build(ctx) with the renders it already has. Run directly
 // (`node forge/tools/site-data.mjs`) it renders everything itself.
 import fs from 'fs'
+import crypto from 'crypto'
 import path from 'path'
 import { pathToFileURL } from 'url'
 import { ROOT, listIcons, loadIcon, loadStyles, renderIcon, nodesToMarkup, readManifest } from '../lib/load.mjs'
@@ -99,6 +100,9 @@ function styleChunks(meta, maps) {
     delete s.chunks
     const map = maps[s.name]; if (!map) continue
     const bytes = JSON.stringify(map).length
+    // content version: style and chunk URLs carry ?v=<it>, so a browser that cached an older release's file (data/*.js
+    // is cached for a day) never mixes it with a newer meta.js (new icons stuck on their placeholder)
+    s.v = crypto.createHash('sha1').update(JSON.stringify(map)).digest('hex').slice(0, 8)
     if (bytes < CHUNK_MIN) continue
     const n = Math.ceil(order.length / CHUNK_SIZE)
     for (let k = 0; k < n; k++) {
@@ -116,7 +120,7 @@ function styleChunks(meta, maps) {
   // style names and the chunked ones from this one line
   const lib = path.join(ROOT, 'site', 'icons.html')
   if (fs.existsSync(lib)) {
-    const h = fs.readFileSync(lib, 'utf8'), ch = { dir: meta.chunks.dir, all: meta.styles.map(s => s.name), chunked: done }
+    const h = fs.readFileSync(lib, 'utf8'), ch = { dir: meta.chunks.dir, all: meta.styles.map(s => s.name), chunked: done, v: Object.fromEntries(meta.styles.filter(s => s.v).map(s => [s.name, s.v])) }
     const next = h.replace(/var CH = \{[^\n]*?\} \/\* STYLE-CHUNKS \*\//, () => `var CH = ${JSON.stringify(ch)} /* STYLE-CHUNKS */`)
     if (next !== h) fs.writeFileSync(lib, next)
   }

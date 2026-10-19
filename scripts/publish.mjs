@@ -36,7 +36,9 @@ const isWin = process.platform === 'win32'
 // deprecates as DEP0190); the arguments are package names, versions and flags, quoted when they hold anything else.
 const winArg = a => /^[\w@./:=^-]+$/.test(a) ? a : `"${String(a).replace(/"/g, '\\"')}"`
 const npm = (args, cwd, capture) => {
-  const o = { cwd, encoding: 'utf8', stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit' }
+  // maxBuffer: npm lists every file of the tarball ("npm notice ..."); at 1,000 icons that is far over spawnSync's 1 MB
+  // default, which kills npm mid-list (CI showed the listing cut off, then exit 1)
+  const o = { cwd, encoding: 'utf8', stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit', maxBuffer: 512 * 1024 * 1024 }
   return isWin ? spawnSync(['npm', ...args].map(winArg).join(' '), { ...o, shell: true }) : spawnSync('npm', args, o)
 }
 const git = args => { const r = spawnSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); return r.status === 0 ? r.stdout.trim() : '' }

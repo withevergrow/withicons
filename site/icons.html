@@ -41,7 +41,7 @@
        with meta.js). A heavy style comes in chunks of icons in browse order (site.js loadStyleFor): the first screen
        needs chunk 0. */
     (function () {
-      var CH = {"dir":"data/chunks/","all":["line","solid","duo","gloss","engrave","blueprint","sketch","glass","kawaii","sticker","pixel","retro","luxe","bauhaus","skeuo","anime","gothic","pastel","coquette","plush","clay","bento","suite","dock","liquid","chrome","soft3d","brutal","utsav","rangoli","halloween","christmas","lunar","valentine"],"chunked":["solid","gloss","engrave","blueprint","sketch","glass","kawaii","sticker","retro","luxe","bauhaus","skeuo","anime","gothic","pastel","coquette","plush","clay","bento","suite","dock","liquid","chrome","soft3d","brutal","utsav","rangoli","halloween","christmas","lunar","valentine"]} /* STYLE-CHUNKS */
+      var CH = {"dir":"data/chunks/","all":["line","solid","duo","gloss","engrave","blueprint","sketch","glass","kawaii","sticker","pixel","retro","luxe","bauhaus","skeuo","anime","gothic","pastel","coquette","plush","clay","bento","suite","dock","liquid","chrome","soft3d","brutal","utsav","rangoli","halloween","christmas","lunar","valentine"],"chunked":["solid","gloss","engrave","blueprint","sketch","glass","kawaii","sticker","retro","luxe","bauhaus","skeuo","anime","gothic","pastel","coquette","plush","clay","bento","suite","dock","liquid","chrome","soft3d","brutal","utsav","rangoli","halloween","christmas","lunar","valentine"],"v":{"line":"3a57dc55","solid":"314d3dc7","duo":"9f950d10","gloss":"1fd7fbfe","engrave":"e4831c19","blueprint":"c3f93c01","sketch":"e1495449","glass":"5890a356","kawaii":"9afeb949","sticker":"901973fb","pixel":"0cb8494c","retro":"b8780fd6","luxe":"8e1315c2","bauhaus":"b6de7d14","skeuo":"92c01d52","anime":"04fc0482","gothic":"c063a095","pastel":"02cccd2d","coquette":"9963b1ce","plush":"fbd4802e","clay":"9bb3099c","bento":"036e3baa","suite":"8478e3ef","dock":"69afed3b","liquid":"78a4bc3f","chrome":"cefb91b5","soft3d":"9ee1f034","brutal":"3f02d05d","utsav":"19842a06","rangoli":"e9c88280","halloween":"cbbd4cfb","christmas":"1eca2b4b","lunar":"a3988710","valentine":"e821fb74"}} /* STYLE-CHUNKS */
       var q = location.search, m = /[?&]style=([a-z0-9-]+)/.exec(q), s = m ? m[1] : null, list
       if (!s) { try { s = JSON.parse(localStorage.getItem('with-lib:style')) } catch (e) {} }
       var all = CH.all || [], ok = function (n) { return all.indexOf(n) >= 0 }
@@ -52,8 +52,9 @@
         var chunked = (CH.chunked || []).indexOf(n) >= 0
         if (chunked && !first) return
         var e = document.createElement('script'); e.async = true
-        if (chunked) { e.src = CH.dir + n + '.0.js'; e.setAttribute('data-with-chunk', n + '.0') }
-        else { e.src = 'data/style-' + n + '.js'; e.setAttribute('data-with-style', n) }
+        var v = (CH.v || {})[n] ? '?v=' + CH.v[n] : ''
+        if (chunked) { e.src = CH.dir + n + '.0.js' + v; e.setAttribute('data-with-chunk', n + '.0') }
+        else { e.src = 'data/style-' + n + '.js' + v; e.setAttribute('data-with-style', n) }
         e.onload = e.onerror = function () { this.setAttribute('data-done', '') }
         document.head.appendChild(e)
       })

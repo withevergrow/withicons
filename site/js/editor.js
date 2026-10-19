@@ -294,7 +294,7 @@
     if (svgStore(style)) return Promise.resolve(true)
     // site.js knows the chunked heavy styles (data/chunks/*) and puts them together
     if (W.WI && W.WI.loadStyle) return W.WI.loadStyle(style).then(function () { return !!svgStore(style) })
-    return loadScript(siteUrl('data/style-' + style + '.js')).then(function () { return !!svgStore(style) })
+    return loadScript(siteUrl('data/style-' + style + '.js' + (W.WI && W.WI.styleV ? W.WI.styleV(style) : ''))).then(function () { return !!svgStore(style) })
   }
   // One icon in every style, cheaply: its own page (site/icons/<name>.html, ~110 KB) carries every style as a
   // <symbol>, while a style's data file holds all 500 icons (up to 1.5 MB). Used for "Turn into" targets. Needs http(s):

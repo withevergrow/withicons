@@ -255,6 +255,8 @@
   function DATA() { return W.WITH || W.EGI || { version: '1.0.0', total: FALLBACK_TOTAL, categories: [], styles: [], icons: [] } }
   function svgStore() { return W.WITH_SVG || W.EGI_SVG || null }
   function svgMap(style) { var s = svgStore(); return (s && s[style]) || (W.EGI_SVG && W.EGI_SVG[style]) || (W.WITH_SVG && W.WITH_SVG[style]) || null }
+  // ?v=<content version> for a style's data files (forge/tools/site-data.mjs): never a cached file from another release
+  function styleV(name) { var m = styleMeta(name); return m && m.v ? '?v=' + m.v : '' }
   function styleMeta(name) {
     var list = DATA().styles || []
     for (var i = 0; i < list.length; i++) if (list[i].name === name) return list[i]
@@ -472,7 +474,7 @@
     var tag = doc.querySelector('script[data-with-chunk="' + key + '"]')
     var fetch = tag && !tag.hasAttribute('data-done')
       ? new Promise(function (r) { tag.addEventListener('load', r); tag.addEventListener('error', r) })
-      : loadScript(scriptBase + ((DATA().chunks || {}).dir || 'data/chunks/') + key + '.js')
+      : loadScript(scriptBase + ((DATA().chunks || {}).dir || 'data/chunks/') + key + '.js' + styleV(style))
     pending[key] = fetch.then(function () {
       var ok = !!partOf(style, k)
       if (!ok) { delete pending[key]; return false }
@@ -513,7 +515,7 @@
       })
       return pending[name]
     }
-    pending[name] = loadScript(scriptBase + 'data/style-' + name + '.js').then(function () {
+    pending[name] = loadScript(scriptBase + 'data/style-' + name + '.js' + styleV(name)).then(function () {
       var ok = !!svgMap(name); if (ok) emit('style', name); return ok
     })
     return pending[name]
@@ -2226,7 +2228,7 @@
   var API = {
     version: function () { return DATA().version },
     data: DATA, svg: svg, svgFrom: svgFrom, svgFile: svgFile, uniqIds: uniqIds, fixIds: fixIds, isRich: isRich, has: hasIcon, icon: icon, icons: icons, styles: styles, styleInfo: INFO, ORDER: ORDER,
-    loadStyle: loadStyle, loadStyleFor: loadStyleFor, chunkOf: chunkOf, chunkCount: chunkCount, inner: innerOf, loadAllStyles: loadAllStyles, loadMeta: loadMeta, loadScript: loadScript,
+    loadStyle: loadStyle, loadStyleFor: loadStyleFor, chunkOf: chunkOf, chunkCount: chunkCount, styleV: styleV, inner: innerOf, loadAllStyles: loadAllStyles, loadMeta: loadMeta, loadScript: loadScript,
     resolve: resolve, suggest: suggest, search: search, ensureSearch: ensureSearch, whyMatched: whyMatched,
     copy: copyText, copyWithToast: copy, toast: toast, download: download, svgToPng: svgToPng, announce: announce,
     highlight: highlight, codeBlock: codeBlock, copyButton: copyButton, esc: esc,
