@@ -1,16 +1,17 @@
 <div align="center">
 
-<a href="https://withicons.com"><img src="https://withicons.com/media/github/banner.png?v=0.4.0" alt="with icons: 734 icons, 34 styles, all animated. Over 25,000 free, open-source icons." width="100%"></a>
+<a href="https://withicons.com"><img src="https://withicons.com/media/github/banner.png?v=0.6.0" alt="with icons: 1,000 icons, 34 styles, all animated. Over 35,000 free, open-source icons." width="100%"></a>
 
 <h3>Free, open-source icons that can’t sit still.</h3>
 
-**734 icons x 34 styles = 24,956 icons.** Every one animated. Plus 50 live icons in every style: over 25,000 free icons. MIT, no sign-up.<br>
+**1,000 icons x 34 styles = 34,000 icons.** Every one animated. Plus 50 live icons in every style: over 35,000 free icons. MIT, no sign-up.<br>
 For slides, Canva, Figma, websites, apps and AI agents.
 
 [![npm](https://img.shields.io/npm/v/@withicons/react?label=npm&color=2F5BFF&logo=npm)](https://www.npmjs.com/package/@withicons/react)
 [![License: MIT](https://img.shields.io/badge/license-MIT-22A861)](LICENSE)
 [![npm provenance](https://img.shields.io/badge/npm-provenance-7252FF?logo=githubactions&logoColor=white)](https://www.npmjs.com/package/@withicons/react#provenance)
-[![Icons](https://img.shields.io/badge/icons-25%2C000%2B-FF5A36)](https://withicons.com/icons.html)
+[![Icons](https://img.shields.io/badge/icons-35%2C000%2B-FF5A36)](https://withicons.com/icons.html)
+[![Iconify](https://img.shields.io/badge/Iconify-11%20sets-1769AA)](https://icon-sets.iconify.design/?query=withicons)
 [![Web component](https://img.shields.io/badge/web%20component-7%20KB%20gzipped-FF4FA3)](https://withicons.com/developers.html)
 [![MCP](https://img.shields.io/badge/MCP-ready-111318)](https://withicons.com/ai.html)
 
@@ -27,10 +28,11 @@ For slides, Canva, Figma, websites, apps and AI agents.
 
 </div>
 
-> **New in v0.4.0:** 14 new styles (34 in all): soft 3D (`clay`, `soft3d`), clear and metal (`liquid`, `chrome`), product
-> looks (`bento`, `suite`, `dock`, `brutal`) and six holiday styles (`utsav`, `rangoli`, `halloween`, `christmas`, `lunar`,
-> `valentine`); a redrawn `glass` and a duo accent; 234 new icons (734 in all), among them 39 avatars with six skin tones
-> and 95 festival icons. [Full changelog](CHANGELOG.md)
+> **Now on Iconify:** with icons is on [Iconify](https://icon-sets.iconify.design/?query=withicons) as 11 icon sets, so it works
+> in every Iconify tool (`<iconify-icon>`, unplugin-icons, UnoCSS, Tailwind, Figma). [How to use them](#iconify).
+>
+> **New in v0.6.0:** 250 new icons (1,000 in all), 50 animated loaders in every style (`@withicons/loaders`), and about 3,300
+> hand-drawn touch-ups where a generated drawing read badly. [Full changelog](CHANGELOG.md)
 
 ## Why with icons
 
@@ -43,9 +45,56 @@ For slides, Canva, Figma, websites, apps and AI agents.
 - **Free means free.** MIT. Commercial use, no credit needed.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://withicons.com/media/github/styles-dark.png?v=0.4.0">
-  <img src="https://withicons.com/media/github/styles-light.png?v=0.4.0" alt="The rocket icon in all 34 styles, in six groups: Essentials (line, solid, duo, suite), Product and brand (bento, dock, brutal, bauhaus), 3D and glass (clay, glass, liquid, chrome, soft 3D, luxe, skeuo), Playful (kawaii, plush, sticker, gloss, pastel, pixel, retro), Artistic (sketch, engrave, blueprint, anime, gothic, coquette) and Holidays (utsav, rangoli, halloween, christmas, lunar, valentine)." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://withicons.com/media/github/styles-dark.png?v=0.6.0">
+  <img src="https://withicons.com/media/github/styles-light.png?v=0.6.0" alt="The rocket icon in all 34 styles, in six groups: Essentials (line, solid, duo, suite), Product and brand (bento, dock, brutal, bauhaus), 3D and glass (clay, glass, liquid, chrome, soft 3D, luxe, skeuo), Playful (kawaii, plush, sticker, gloss, pastel, pixel, retro), Artistic (sketch, engrave, blueprint, anime, gothic, coquette) and Holidays (utsav, rangoli, halloween, christmas, lunar, valentine)." width="100%">
 </picture>
+
+## The 34 styles, one poster each
+
+Every style has its own poster: the style's hero icon and twelve more, all moving with their real animation.
+Each is a still PNG and a looping GIF in [`site/media/github/posters/`](site/media/github/posters), free to share.
+
+<p align="center">
+  <img src="https://withicons.com/media/github/posters/clay.gif" alt="Clay style poster: a sculpted clay rocket and twelve more clay icons, all animated." width="32%">
+  <img src="https://withicons.com/media/github/posters/anime.gif" alt="Anime style poster: a cel-shaded sun and twelve more anime icons, all animated." width="32%">
+  <img src="https://withicons.com/media/github/posters/halloween.gif" alt="Halloween style poster: a jack-o'-lantern and twelve more Halloween icons, all animated." width="32%">
+</p>
+
+<details>
+<summary><b>All 34 animated posters</b> (click a poster for the full-size PNG)</summary>
+<br>
+
+<p align="center"><img src="https://withicons.com/media/github/posters/wall.png" alt="All 34 style posters on one sheet, in site order." width="100%"></p>
+
+<table>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/line.png"><img src="https://withicons.com/media/github/posters/line.gif" alt="Line style poster: Clean outlines. The safe choice for websites, apps and slides." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/solid.png"><img src="https://withicons.com/media/github/posters/solid.gif" alt="Solid style poster: Bold, filled shapes that read from across the room." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/duo.png"><img src="https://withicons.com/media/github/posters/duo.gif" alt="Duo style poster: An outline with a soft tint inside and one small accent detail. Friendly and calm." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/suite.png"><img src="https://withicons.com/media/github/posters/suite.gif" alt="Suite style poster: Polished full-colour icons, like the ones in an office or cloud suite." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/bento.png"><img src="https://withicons.com/media/github/posters/bento.gif" alt="Bento style poster: Each icon sits in its own soft tinted tile, like a bento-grid feature card." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/dock.png"><img src="https://withicons.com/media/github/posters/dock.gif" alt="Dock style poster: Glossy rounded app tiles, like the icons in a desktop dock." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/brutal.png"><img src="https://withicons.com/media/github/posters/brutal.gif" alt="Brutal style poster: Thick black outlines, loud flat colour and a hard offset shadow." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/bauhaus.png"><img src="https://withicons.com/media/github/posters/bauhaus.gif" alt="Bauhaus style poster: Circles, squares and triangles in red, yellow and blue. Bold modernist design." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/clay.png"><img src="https://withicons.com/media/github/posters/clay.gif" alt="Clay style poster: Soft, rounded 3D objects that look sculpted from matte clay." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/glass.png"><img src="https://withicons.com/media/github/posters/glass.gif" alt="Glass style poster: Soft, luxurious frosted glass with gentle light and depth. Modern and airy." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/liquid.png"><img src="https://withicons.com/media/github/posters/liquid.gif" alt="Liquid style poster: Clear liquid glass that bends the light, with bright rims and soft reflections." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/chrome.png"><img src="https://withicons.com/media/github/posters/chrome.gif" alt="Chrome style poster: Polished liquid chrome with mirror highlights. Y2K and futuristic." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/soft3d.png"><img src="https://withicons.com/media/github/posters/soft3d.gif" alt="Soft 3D style poster: Soft, studio-lit 3D objects with real depth. Physical things sit at a gentle angle; people look like friendly 3D avatars." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/luxe.png"><img src="https://withicons.com/media/github/posters/luxe.gif" alt="Luxe style poster: Rich, layered 3D with gold trim and soft studio light. Premium." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/skeuo.png"><img src="https://withicons.com/media/github/posters/skeuo.gif" alt="Skeuo style poster: Real materials, bevels and shadows, like objects you could pick up." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/kawaii.png"><img src="https://withicons.com/media/github/posters/kawaii.gif" alt="Kawaii style poster: Chubby, soft and cute, with a tiny smiling face and rosy cheeks." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/plush.png"><img src="https://withicons.com/media/github/posters/plush.gif" alt="Plush style poster: Soft stuffed toys in felt, with stitched seams. Made for kids." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/sticker.png"><img src="https://withicons.com/media/github/posters/sticker.gif" alt="Sticker style poster: Shiny die-cut stickers with a puffy white border and sparkles." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/gloss.png"><img src="https://withicons.com/media/github/posters/gloss.gif" alt="Gloss style poster: Puffy and shiny, like glossy stickers. Playful and fun." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/pastel.png"><img src="https://withicons.com/media/github/posters/pastel.gif" alt="Pastel style poster: Soft, airy pastel colours with gentle shading. Calm and dreamy." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/pixel.png"><img src="https://withicons.com/media/github/posters/pixel.gif" alt="Pixel style poster: Crisp pixel art, like an old video game." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/retro.png"><img src="https://withicons.com/media/github/posters/retro.gif" alt="Retro style poster: Chunky 70s shapes with warm sunset stripes." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/sketch.png"><img src="https://withicons.com/media/github/posters/sketch.gif" alt="Sketch style poster: Hand-drawn marker lines, like a whiteboard doodle." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/engrave.png"><img src="https://withicons.com/media/github/posters/engrave.gif" alt="Engrave style poster: Fine engraved lines, like a banknote or an old book." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/blueprint.png"><img src="https://withicons.com/media/github/posters/blueprint.gif" alt="Blueprint style poster: Technical drawings with guide lines and measurements." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/anime.png"><img src="https://withicons.com/media/github/posters/anime.gif" alt="Anime style poster: Anime cel shading: bold ink, bright colour, hard shadows and starry highlights." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/gothic.png"><img src="https://withicons.com/media/github/posters/gothic.gif" alt="Gothic style poster: Old-world Gothic detail: pointed arches, carved stone and jewel-toned stained glass." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/coquette.png"><img src="https://withicons.com/media/github/posters/coquette.gif" alt="Coquette style poster: Romantic and feminine: blush pink, satin bows, pearls and lace." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/utsav.png"><img src="https://withicons.com/media/github/posters/utsav.gif" alt="Utsav style poster: Warm marigold and saffron shapes with a plum outline, a fine gold inner line and rangoli dot-work." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/rangoli.png"><img src="https://withicons.com/media/github/posters/rangoli.gif" alt="Rangoli style poster: Clean objects in a warm festive glow, each with one Indian festival motif: petals, a lotus, a toran or a diya." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/halloween.png"><img src="https://withicons.com/media/github/posters/halloween.gif" alt="Halloween style poster: Spooky-cute pumpkin, witch-purple and midnight shapes with candle-lit carvings, slime drips and a tiny bat." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/christmas.png"><img src="https://withicons.com/media/github/posters/christmas.gif" alt="Christmas style poster: Cosy cranberry, pine and gold shapes with a snow cap on every top edge, candy-cane stripes and a sprig of holly." width="100%"></a></td></tr>
+<tr><td width="25%"><a href="https://withicons.com/media/github/posters/lunar.png"><img src="https://withicons.com/media/github/posters/lunar.gif" alt="Lunar New Year style poster: Lucky red lacquer with a gold-foil rim, jade details, paper-cut cloud scrolls, silk tassels and plum blossoms." width="100%"></a></td><td width="25%"><a href="https://withicons.com/media/github/posters/valentine.png"><img src="https://withicons.com/media/github/posters/valentine.gif" alt="Valentine style poster: Cute pink-to-red cartoon shapes with a warm berry outline, polka dots, tiny blushing faces and floating hearts." width="100%"></a></td><td width="25%"></td><td width="25%"></td></tr>
+</table>
+</details>
+
+## See it in action
+
+<a href="https://withicons.com/media/github/shots/home.png"><img src="https://withicons.com/media/github/shots/home.gif" alt="with icons home page: Free icons for your website, slides and apps, with a search box and a card showing one icon in a different style each time." width="100%"></a>
+
+<table>
+<tr>
+<td width="50%"><a href="https://withicons.com/media/github/shots/library.png"><picture><source media="(prefers-color-scheme: dark)" srcset="https://withicons.com/media/github/shots/library-dark.gif"><img src="https://withicons.com/media/github/shots/library.gif" alt="The with icons library: searching for heart and switching the results through Solid, Duo, Clay, Glass, Suite, Soft 3D and Kawaii." width="100%"></picture></a><br><sub><b><a href="https://withicons.com/icons.html">Library</a></b>: search by meaning, switch every result to any style.</sub></td>
+<td width="50%"><a href="https://withicons.com/media/github/shots/icon-page.png"><img src="https://withicons.com/media/github/shots/icon-page.gif" alt="The Rocket icon page switching between Line, Solid, Duo, Clay, Glass, Suite, Soft 3D and Kawaii." width="100%"></a><br><sub><b><a href="https://withicons.com/icons/rocket.html">Icon pages</a></b>: every style, its animation, downloads and code.</sub></td>
+</tr>
+<tr>
+<td width="50%"><a href="https://withicons.com/media/github/shots/live.png"><img src="https://withicons.com/media/github/shots/live.gif" alt="Live icons: calendar, battery, bell, weather, clock and progress-ring icons that show your own numbers." width="100%"></a><br><sub><b><a href="https://withicons.com/live.html">Live icons</a></b>: dates, times, counts and levels, in every style.</sub></td>
+<td width="50%"><a href="https://withicons.com/media/github/shots/loaders.png"><img src="https://withicons.com/media/github/shots/loaders.gif" alt="Animated loaders in many styles, including AI thinking, spinner, orbit, diya, ghost, hearts, Christmas tree and lantern." width="100%"></a><br><sub><b><a href="https://withicons.com/loaders.html">Loader Studio</a></b>: 50 animated loaders, drawn in every style.</sub></td>
+</tr>
+</table>
+
+Click any recording for a full-size screenshot.
 
 ## Quick start
 
@@ -138,6 +187,27 @@ npm i @withicons/solid     # import { Home } from '@withicons/solid'
 ```
 
 The loader (about 6 KB gzipped) links just the CSS of the icons on the page. Zero JavaScript: link one stylesheet per style, such as `with-line.css`.
+</details>
+
+<details>
+<summary><b>Iconify</b> (<code>iconify-icon</code>, unplugin-icons, UnoCSS, Tailwind, Figma)</summary>
+
+<a id="iconify"></a>with icons is on [Iconify](https://icon-sets.iconify.design/?query=withicons) as 11 icon sets, 15,000 icons in all.
+`withicons` holds six styles as suffixes (`rocket`, `rocket-solid`, `rocket-duo`, `rocket-blueprint`, `rocket-sketch`,
+`rocket-engrave`); each of the other ten sets is one style: `withicons-suite`, `withicons-skeuo`, `withicons-sticker`,
+`withicons-pastel`, `withicons-plush`, `withicons-anime`, `withicons-gothic`, `withicons-bauhaus`, `withicons-halloween`
+and `withicons-christmas`.
+
+```html
+<script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+<iconify-icon icon="withicons:rocket"></iconify-icon>
+<iconify-icon icon="withicons:rocket-solid"></iconify-icon>
+<iconify-icon icon="withicons-anime:rocket"></iconify-icon>
+```
+
+With unplugin-icons, `import Rocket from '~icons/withicons-anime/rocket'`; with UnoCSS or Tailwind (`@iconify/tailwind4`),
+`class="i-withicons-rocket"` or `class="icon-[withicons--rocket]"`. All 34 styles and the animations are in the
+`@withicons/*` packages above.
 </details>
 
 <details>
@@ -259,7 +329,7 @@ or package, with pure CSS. Every icon has a tuned continuous loop and hover effe
 ```
 
 `motion.css` (the presets) is about 10 KB gzipped and each icon's own moves are a 0.3 KB file; in a bundled app,
-`import '@withicons/motion/icons.css'` has all 734. With `<with-icon motion="loop">` the element
+`import '@withicons/motion/icons.css'` has all 1,000. With `<with-icon motion="loop">` the element
 links each icon's file for you. `prefers-reduced-motion` switches everything off. Agents get exact code from the MCP tool `animate_icon` or
 `npx withicons animate bell --trigger hover --format react`. Spec: [`forge/MOTION.md`](forge/MOTION.md).
 
