@@ -111,7 +111,7 @@ ${table(['Library', 'Free icons', 'Free styles', 'Licence', 'Read more'], [
   ['with icons', `${N_ICONS} (${N_SVGS} SVGs)`, `${N_STYLES}`, 'MIT', L.page('license.html', 'Our licence')],
   ['Font Awesome', 'Over 2,000', '3 (Solid, Regular, Brands)', 'CC BY 4.0 (icons)', L.post('with-icons-vs-font-awesome', 'vs Font Awesome')],
   ['Material Symbols', 'Over 2,500', '3 + adjustable weight and fill', 'Apache 2.0', L.post('with-icons-vs-material-symbols', 'vs Material Symbols')],
-  ['Lucide', 'Over 1,600', '1 (adjustable stroke)', 'ISC', L.post('with-icons-vs-lucide', 'vs Lucide')],
+  ['Lucide', 'Over 2,000', '1 (adjustable stroke)', 'ISC', L.post('with-icons-vs-lucide', 'vs Lucide')],
   ['Heroicons', '316', 'Outline, solid, mini, micro', 'MIT', L.post('with-icons-vs-heroicons', 'vs Heroicons')],
   ['Phosphor', 'About 1,500', '6 weights', 'MIT', L.post('with-icons-vs-phosphor', 'vs Phosphor')],
   ['Tabler Icons', 'Over 6,000', '2 (outline, filled)', 'MIT', L.post('with-icons-vs-tabler-icons', 'vs Tabler')],

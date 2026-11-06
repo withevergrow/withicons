@@ -347,7 +347,7 @@
   },
   "remix-icon": {
    "version": "4.9.1",
-   "license": "Apache License 2.0",
+   "license": "Remix Icon License v1.0",
    "credit": "Remix Design",
    "icons": {
     "ri-add-line": "ri-add-line",

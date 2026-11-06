@@ -161,12 +161,12 @@ export const OPEN_LIBS = [
   /* ───────────────────────── Lucide ───────────────────────── */
   {
     slug: 'lucide', name: 'Lucide', kind: 'open', color: 'sketch', mark: 'Lu', url: 'https://lucide.dev', searchQ: 'funnel',
-    known: 'a community-built, consistent stroke icon set (a fork of Feather) with over 1,600 icons and official packages for almost every framework; popular with shadcn/ui.',
-    hub: { license: 'ISC', price: 'Free', count: 'over 1,600', styles: '1 (stroke, adjustable)', classes: 'Icon font (not for heavy production)', ai: 'llms.txt' },
+    known: 'a community-built, consistent stroke icon set (a fork of Feather) with over 2,000 icons and official packages for almost every framework; popular with shadcn/ui.',
+    hub: { license: 'ISC', price: 'Free', count: 'over 2,000', styles: '1 (stroke, adjustable)', classes: 'Icon font (not for heavy production)', ai: 'llms.txt' },
     facts: {
       license: ['ISC; icons that came from Feather are also MIT', [3]],
       price: ['Free', [1]],
-      count: ['Over 1,600 (“1600+” in the README; the site search listed 1,857 when checked)', [2, 1]],
+      count: ['Over 2,000 (the site search listed 2,029 when checked in November 2026; the README still says “1600+”)', [1, 2]],
       styles: ['One stroke style on a 24 × 24 canvas; size, colour and stroke width are adjustable', [4]],
       frameworks: ['Official packages for React, Vue, Svelte, Solid, Angular, Preact, Astro, React Native and vanilla JS', [5]],
       classes: ['An icon font via <code>lucide-static</code> (<code>&lt;i class="icon-house"&gt;</code>), which the docs don’t recommend for high-traffic production', [6]],
@@ -186,7 +186,7 @@ export const OPEN_LIBS = [
       ['Lucide icons folder (names and aliases)', 'https://github.com/lucide-icons/lucide/tree/main/icons'],
     ],
     them: [
-      'You need a big stroke set (over 1,600 icons) with first-party packages for nearly every framework.',
+      'You need a big stroke set (over 2,000 icons) with first-party packages for nearly every framework.',
       'You use shadcn/ui, where Lucide is the default.',
       'You want a single, adjustable outline style and a very active community.',
     ],

@@ -34,7 +34,7 @@ const SRC = {
     urls: t => [`${U}/@tabler/icons@3.48.0/icons/outline/${t.replace(/^ti-/, '')}.svg`] },
   ionicons: { v: '8.1.0', lic: `${U}/ionicons@8.1.0/LICENSE`, license: 'MIT License', credit: 'Ionic',
     urls: t => [`${U}/ionicons@8.1.0/dist/svg/${t}.svg`] },
-  'remix-icon': { v: '4.9.1', lic: `${U}/remixicon@4.9.1/License`, license: 'Apache License 2.0', credit: 'Remix Design', urls: null }, // resolved via the package file list
+  'remix-icon': { v: '4.9.1', lic: `${U}/remixicon@4.9.1/License`, license: 'Remix Icon License v1.0', credit: 'Remix Design', urls: null }, // resolved via the package file list
   boxicons: { v: '2.1.4', lic: `${U}/boxicons@2.1.4/LICENSE`, license: 'MIT License', credit: 'Aniket Suvarna',
     urls: t => { const n = t.replace(/^bx[sl]?-/, ''); return [`${U}/boxicons@2.1.4/svg/regular/bx-${n}.svg`, `${U}/boxicons@2.1.4/svg/solid/bxs-${n}.svg`] } },
   iconify: { v: '7.4.47', lic: `${U}/@mdi/svg@7.4.47/LICENSE`, license: 'Apache License 2.0', credit: 'Pictogrammers (Material Design Icons)',

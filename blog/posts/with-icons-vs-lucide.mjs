@@ -15,7 +15,7 @@ export default {
   about: ['Lucide', 'with icons', 'Icon library'],
   related: ['with-icons-vs-heroicons', 'icon-styles-explained', 'consistent-icons'],
   tldr: [
-    '<strong>Stay with Lucide</strong> if one clean outline style is all you need: it has over 1,600 icons, packages for almost every framework, and it is the default in shadcn/ui.',
+    '<strong>Stay with Lucide</strong> if one clean outline style is all you need: it has over 2,000 icons, packages for almost every framework, and it is the default in shadcn/ui.',
     `<strong>Try with icons</strong> if you want the same tidy outline look plus filled, tinted and illustrated styles: ${N_ICONS} icons in ${N_STYLES} matching styles, ${N_SVGS} SVGs in total.`,
     'Both are free for commercial use. Lucide uses the ISC licence (icons that came from Feather are MIT). with icons is MIT. Neither asks for a visible credit.',
     'Lucide strokes are 2px wide; the with icons line style uses 1.75px, so it reads a touch lighter. Both use a 24 × 24 grid.',
@@ -27,8 +27,8 @@ export default {
     { q: 'What is the best alternative to Lucide?', a: `It depends on what you miss. If you want the same tidy outline look plus filled, tinted and illustrated versions of every icon, with icons gives you ${N_ICONS} icons in ${N_STYLES} matching styles under MIT. If you simply need more outline icons, Hugeicons Free is bigger (over 6,000 icons). Feather, where Lucide came from, is smaller (287 icons) and rarely changes.` },
     { q: 'Why does shadcn/ui use Lucide?', a: 'shadcn/ui sets “lucide” as the default icon library in its components.json file and installs lucide-react during setup. Lucide fits well because it is a clean, consistent outline set with a strong React package.' },
     { q: 'Can I use with icons with shadcn/ui?', a: 'Yes. You can keep Lucide for the built-in components and use with icons elsewhere, or swap icons one by one. The with icons components use currentColor and accept className, size and strokeWidth, so Tailwind classes keep working. Install them with <code>npm i @withicons/react</code>, or copy SVG code from any icon page.' },
-    { q: 'Lucide vs Feather: what is the difference?', a: 'Lucide started as a community fork of Feather and kept its 24 × 24, 2px outline look. Feather lists 287 icons and rarely changes; Lucide has grown to over 1,600 icons and ships new releases often.' },
-    { q: 'Lucide vs Hugeicons: which should I pick?', a: 'Both are free outline sets. Hugeicons Free is larger (over 6,000 Stroke Rounded icons, MIT) and sells more styles in Pro. Lucide (over 1,600 icons, ISC) is fully free and is the shadcn/ui default. Pick by which look you prefer and which icons you need.' },
+    { q: 'Lucide vs Feather: what is the difference?', a: 'Lucide started as a community fork of Feather and kept its 24 × 24, 2px outline look. Feather lists 287 icons and rarely changes; Lucide has grown to over 2,000 icons and ships new releases often.' },
+    { q: 'Lucide vs Hugeicons: which should I pick?', a: 'Both are free outline sets. Hugeicons Free is larger (over 6,000 Stroke Rounded icons, MIT) and sells more styles in Pro. Lucide (over 2,000 icons, ISC) is fully free and is the shadcn/ui default. Pick by which look you prefer and which icons you need.' },
   ],
   sources: [
     { title: 'Lucide website (icon count, packages, checked October 2026)', url: 'https://lucide.dev' },
@@ -44,14 +44,14 @@ export default {
     { title: 'with icons license (MIT)', url: 'https://withicons.com/license.html' },
   ],
   body: () => `
-${p(`<span class="lede">Pick Lucide if you want one clean outline style and the widest choice: over 1,600 icons, packages for almost every framework, and it is already the default in shadcn/ui. Pick ${L.icons('with icons')} if you want that same tidy outline look plus filled, tinted and illustrated versions of every icon: ${N_ICONS} icons in ${N_STYLES} matching styles. Both are free for commercial use, and neither asks for a visible credit.</span>`)}
+${p(`<span class="lede">Pick Lucide if you want one clean outline style and the widest choice: over 2,000 icons, packages for almost every framework, and it is already the default in shadcn/ui. Pick ${L.icons('with icons')} if you want that same tidy outline look plus filled, tinted and illustrated versions of every icon: ${N_ICONS} icons in ${N_STYLES} matching styles. Both are free for commercial use, and neither asks for a visible credit.</span>`)}
 ${p('Here is a fun fact: if you have built anything with shadcn/ui, you are already using Lucide. It is the icon set that comes in the box. So this is less “which icon set should I discover?” and more “is the default still the best choice for me?” Let’s look.')}
 
 ${h2('How do Lucide and with icons compare?')}
 ${table(['', 'with icons', 'Lucide'], [
   ['Price', yes('Free'), yes('Free')],
   ['Licence', yes('MIT, no visible credit'), yes('ISC (Feather-derived icons MIT), no visible credit')],
-  ['Number of icons', `${N_ICONS} icons × ${N_STYLES} styles = ${N_SVGS} SVGs`, yes('Over 1,600 (the site listed 1,857)')],
+  ['Number of icons', `${N_ICONS} icons × ${N_STYLES} styles = ${N_SVGS} SVGs`, yes('Over 2,000 (the site listed 2,029)')],
   ['Styles', yes(`${N_STYLES}: line, solid and duo for interfaces, plus ${N_STYLES - 3} creative styles such as gloss, glass, pixel, retro and luxe`), meh('1 outline style (stroke width adjustable)')],
   ['Default stroke', '1.75px on a 24 × 24 grid', '2px on a 24 × 24 grid'],
   ['Framework packages', yes('React, Vue, Svelte, Angular, Solid, web component'), yes('React, Vue, Svelte, Solid, Preact, Angular, Astro, React Native, plain JS')],
@@ -110,7 +110,7 @@ ${p('Both sets are free, well made and easy to use, so the choice comes down to 
 ${prosCons('Lucide', {
   lib: 'lucide',
   pros: [
-    ['Huge range', `Over 1,600 icons (the site listed 1,857), about ${timesOurs(1857)} times our ${N_ICONS}. If you need something niche, Lucide is far more likely to have the exact icon.`],
+    ['Huge range', `Over 2,000 icons (the site listed 2,029), about ${timesOurs(1857)} times our ${N_ICONS}. If you need something niche, Lucide is far more likely to have the exact icon.`],
     ['Ready in almost every framework', 'There are official packages for React, Vue, Svelte, Solid, Preact, Angular, Astro, React Native and plain JavaScript, and you can install them today.'],
     ['Already in shadcn/ui', 'If your app uses shadcn/ui, Lucide is there from day one and every example uses it. Zero setup.'],
     ['Consistent by design', 'A written rulebook (24 × 24 grid, 2px lines, rounded ends) keeps every icon looking like part of the same family.'],
@@ -143,7 +143,7 @@ ${p('Who does each one suit? Lucide is a great fit for developers building a bus
 ${h2('So, should you use Lucide or with icons?')}
 ${verdict({
   a: ['with icons', ['You want filled, tinted and illustrated versions of the same icons.', 'You want a slightly lighter 1.75px line.', 'You make slides and docs, not just apps.', 'You want an MCP server so AI assistants find real icon names.']],
-  b: ['Lucide', ['You only need one clean outline style.', 'You need more than 1,600 icons to choose from.', 'You use shadcn/ui and want zero setup.', 'You need React Native or Astro packages.']],
+  b: ['Lucide', ['You only need one clean outline style.', 'You need more than 2,000 icons to choose from.', 'You use shadcn/ui and want zero setup.', 'You need React Native or Astro packages.']],
 })}
 ${p(`Lucide is a brilliant default, and there is no shame in keeping it. with icons is for the moment you want more than outlines: a solid active state, a warm duo dashboard, a glossy hero, a pixel-art game screen, a sketchy slide, all from one family. Curious how other popular sets compare? Read ${L.post('with-icons-vs-heroicons', 'with icons vs Heroicons')} or our explainer on ${L.post('icon-styles-explained', 'icon styles')}.`)}
 ${cta('See the bell in every style', `Search ${N_ICONS} icons, flip between ${N_STYLES} styles, and copy SVG code or a PNG in one click. Free and MIT licensed.`, ['bell', 'home', 'search', 'settings', 'palette', 'sparkles'])}

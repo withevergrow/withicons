@@ -217,7 +217,8 @@ composes with motion's transforms and a nudge follows the mirrored direction:
 
 ## SSR, Server Components and module formats
 
-- Components are plain `forwardRef` components with no hooks, state or effects. They render in React Server Components
+- Components are plain `forwardRef` components with no state, effects or context (the gradient styles call `useId` and
+  `useMemo` for unique gradient ids, which Server Components allow). They render in React Server Components
   (Next.js App Router, no `'use client'` needed), with `react-dom/server`, and hydrate without mismatches.
   Works with React 16.8 and later; SSR and hydration are tested on React 18 and 19.
 - The root and every style subpath ship ESM (`import`) and CommonJS (`require`) with matching types.

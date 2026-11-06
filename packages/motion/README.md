@@ -7,7 +7,7 @@ an arrow that nudges the way it points, a play button that flips into pause.
 - **Pure CSS at its core.** Add a class and the icon moves. The small JavaScript helper is optional.
 - **Works with every icon, in every style, from every package.** It animates the element that holds the icon: an inline `<svg>`,
   a `<with-icon>`, an `<i class="with ...">` or any wrapper.
-- **Every icon already knows how to move.** Each of the 500 has its own continuous loop and hover animation, tuned by hand.
+- **Every icon already knows how to move.** Every icon in the library has its own continuous loop and hover animation, tuned by hand.
 - **Respects people.** When someone asks their system for reduced motion, everything stops (unless you opt in with `wm-force`).
 
 ## Install
@@ -18,7 +18,7 @@ npm i @withicons/motion
 
 ```js
 import '@withicons/motion/motion.css'   // the presets (about 10 KB gzipped)
-import '@withicons/motion/icons.css'    // each icon's own loop and hover, all 500 (about 18 KB gzipped)
+import '@withicons/motion/icons.css'    // each icon's own loop and hover, every icon (about 60 KB gzipped)
 ```
 
 From a CDN, with no build step, load the presets and only the icons you animate. Each icon's defaults are also a file of
