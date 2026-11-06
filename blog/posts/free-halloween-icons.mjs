@@ -8,7 +8,7 @@ export default {
   slug: 'free-halloween-icons',
   category: 'guides',
   date: '2026-10-12',
-  hero: 'xdark4',
+  hero: 'h-free-halloween-icons',
   stickers: [['jack-o-lantern', 'halloween'], ['ghost', 'halloween'], ['bat', 'halloween']],
   title: `Free Halloween icons: ${N} spooky SVGs plus ${N_ICONS} in a Halloween style`,
   cardTitle: 'Free Halloween icons',

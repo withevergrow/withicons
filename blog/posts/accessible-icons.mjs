@@ -4,7 +4,7 @@ export default {
   slug: 'accessible-icons',
   category: 'basics',
   date: '2026-10-02',
-  hero: 'a11y0',
+  hero: 'h-accessible-icons',
   stickers: [['eye', 'duo'], ['check-circle', 'solid'], ['heart', 'gloss']],
   title: 'Accessible icons: a friendly guide to icons everyone can understand',
   cardTitle: 'Accessible icons, made simple',

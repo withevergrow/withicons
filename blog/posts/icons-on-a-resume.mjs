@@ -4,7 +4,7 @@ export default {
   slug: 'icons-on-a-resume',
   category: 'guides',
   date: '2026-10-03',
-  hero: 'xcv2',
+  hero: 'h-icons-on-a-resume',
   stickers: [['briefcase', 'duo'], ['graduation-cap', 'solid'], ['mail', 'gloss']],
   title: 'Should you use icons on a resume? How to do it well',
   cardTitle: 'Icons on a resume',

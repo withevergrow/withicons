@@ -6,7 +6,7 @@ export default {
   slug: 'icons-on-landing-pages',
   category: 'guides',
   date: '2026-10-02',
-  hero: 'landing5',
+  hero: 'h-icons-on-landing-pages',
   stickers: [['rocket', 'gloss'], ['layout-grid', 'blueprint'], ['sparkles', 'duo']],
   title: 'How to use icons on a landing page (without making it look cheap)',
   cardTitle: 'Icons on landing pages',

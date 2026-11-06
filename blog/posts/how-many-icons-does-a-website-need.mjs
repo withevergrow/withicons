@@ -4,7 +4,7 @@ export default {
   slug: 'how-many-icons-does-a-website-need',
   category: 'guides',
   date: '2026-10-03',
-  hero: 'xcount0',
+  hero: 'h-how-many-icons-does-a-website-need',
   stickers: [['layout-grid', 'duo'], ['list-checks', 'gloss'], ['puzzle-piece', 'sticker']],
   title: 'How many icons does a website need? A practical answer',
   cardTitle: 'How many icons does a website need?',

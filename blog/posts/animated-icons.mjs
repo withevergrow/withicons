@@ -4,7 +4,7 @@ export default {
   slug: 'animated-icons',
   category: 'basics',
   date: '2026-10-03',
-  hero: 'xanim5',
+  hero: 'h-animated-icons',
   stickers: [['sparkles', 'glass'], ['bell-ring', 'gloss'], ['loader', 'duo']],
   title: 'Animated icons: when they help, when they hurt, and how to use them',
   cardTitle: 'Animated icons: help or hurt?',

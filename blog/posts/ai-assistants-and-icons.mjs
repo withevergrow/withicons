@@ -4,7 +4,7 @@ export default {
   slug: 'ai-assistants-and-icons',
   category: 'ai',
   date: '2026-10-02',
-  hero: 'ai1',
+  hero: 'h-ai-assistants-and-icons',
   stickers: [['bot', 'duo'], ['sparkles', 'gloss'], ['search', 'sketch']],
   title: 'How to get great icons from ChatGPT, Claude and other AI assistants',
   cardTitle: 'Great icons from AI assistants',

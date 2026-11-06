@@ -6,7 +6,7 @@ export default {
   slug: 'playful-icon-styles',
   category: 'basics',
   date: '2026-10-03',
-  hero: 'xplay0',
+  hero: 'h-playful-icon-styles',
   stickers: [['cat', 'kawaii'], ['gamepad', 'pixel'], ['heart', 'sticker']],
   title: 'Cute and playful icon styles: kawaii, pixel, sticker, retro and more',
   cardTitle: 'Cute and playful icon styles',

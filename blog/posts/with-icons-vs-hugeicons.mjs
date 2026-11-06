@@ -4,7 +4,7 @@ export default {
   slug: 'with-icons-vs-hugeicons',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'huge2',
+  hero: 'h-with-icons-vs-hugeicons',
   stickers: [['layers', 'gloss'], ['coins', 'duo'], ['sparkles', 'sketch']],
   title: `with icons vs Hugeicons: 6,000 free icons or ${N_STYLES} free styles?`,
   cardTitle: 'with icons vs Hugeicons',

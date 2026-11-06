@@ -7,7 +7,7 @@ export default {
   slug: 'how-to-change-icon-color',
   category: 'guides',
   date: '2026-10-03',
-  hero: 'xcolor0',
+  hero: 'h-how-to-change-icon-color',
   stickers: [['palette', 'sticker'], ['paintbrush', 'gloss'], ['droplet', 'duo']],
   title: 'How to change the colour of an icon (SVG, PNG, slides, websites)',
   cardTitle: 'How to change icon colour',

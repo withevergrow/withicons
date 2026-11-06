@@ -4,7 +4,7 @@ export default {
   slug: 'choosing-the-right-icon',
   category: 'basics',
   date: '2026-10-02',
-  hero: 'meaning2',
+  hero: 'h-choosing-the-right-icon',
   stickers: [['help-circle', 'duo'], ['lightbulb', 'gloss'], ['check', 'sketch']],
   title: 'How to pick the right icon: meaning, labels and common mix-ups',
   cardTitle: 'How to pick the right icon',

@@ -7,7 +7,7 @@ export default {
   slug: 'with-icons-vs-heroicons',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'hero2',
+  hero: 'h-with-icons-vs-heroicons',
   stickers: [['zap', 'solid'], ['ruler', 'blueprint'], ['star', 'gloss']],
   title: 'with icons vs Heroicons: two small icon sets, compared honestly',
   cardTitle: 'with icons vs Heroicons',

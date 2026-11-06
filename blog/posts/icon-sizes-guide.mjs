@@ -4,7 +4,7 @@ export default {
   slug: 'icon-sizes-guide',
   category: 'basics',
   date: '2026-10-02',
-  hero: 'sizes0',
+  hero: 'h-icon-sizes-guide',
   stickers: [['ruler', 'duo'], ['maximize', 'solid'], ['layout-grid', 'gloss']],
   title: 'What size should icons be? A simple guide for web, apps and slides',
   cardTitle: 'What size should icons be?',

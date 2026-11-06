@@ -7,7 +7,7 @@ export default {
   slug: '3d-icons-vs-flat-icons',
   category: 'basics',
   date: '2026-10-03',
-  hero: 'xd31',
+  hero: 'h-3d-icons-vs-flat-icons',
   stickers: [['gem', 'luxe'], ['rocket', 'glass'], ['star', 'gloss']],
   title: '3D icons vs flat icons: which should you use in 2026?',
   cardTitle: '3D icons vs flat icons',

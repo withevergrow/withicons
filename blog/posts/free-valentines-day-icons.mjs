@@ -8,7 +8,7 @@ export default {
   slug: 'free-valentines-day-icons',
   category: 'guides',
   date: '2026-10-12',
-  hero: 'dark1',
+  hero: 'h-free-valentines-day-icons',
   stickers: [['heart-pair', 'valentine'], ['love-letter', 'valentine'], ['rose', 'valentine']],
   title: `Free Valentine’s Day icons: ${N} cute SVGs and a Valentine style`,
   cardTitle: 'Free Valentine’s Day icons',

@@ -9,7 +9,7 @@ export default {
   slug: 'free-holiday-icons',
   category: 'guides',
   date: '2026-10-12',
-  hero: 'best4',
+  hero: 'h-free-holiday-icons',
   stickers: [['jack-o-lantern', 'halloween'], ['diya', 'rangoli'], ['christmas-tree', 'christmas']],
   title: 'Free holiday and festival icons for every celebration',
   cardTitle: 'Free holiday and festival icons',

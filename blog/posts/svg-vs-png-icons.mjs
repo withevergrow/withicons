@@ -4,7 +4,7 @@ export default {
   slug: 'svg-vs-png-icons',
   category: 'basics',
   date: '2026-10-02',
-  hero: 'svg5',
+  hero: 'h-svg-vs-png-icons',
   stickers: [['image', 'duo'], ['file-image', 'gloss'], ['download', 'solid']],
   title: 'SVG vs PNG icons: which should you use?',
   cardTitle: 'SVG vs PNG icons',

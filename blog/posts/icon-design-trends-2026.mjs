@@ -4,7 +4,7 @@ export default {
   slug: 'icon-design-trends-2026',
   category: 'basics',
   date: '2026-10-02',
-  hero: 'trends1',
+  hero: 'h-icon-design-trends-2026',
   stickers: [['sparkles', 'glass'], ['heart', 'kawaii'], ['gamepad', 'pixel']],
   title: 'Icon design trends for 2026: what’s in, what’s out',
   cardTitle: 'Icon design trends for 2026',

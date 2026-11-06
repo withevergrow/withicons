@@ -6,7 +6,7 @@ export default {
   slug: 'with-icons-vs-material-symbols',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'mat0',
+  hero: 'h-with-icons-vs-material-symbols',
   stickers: [['smartphone', 'solid'], ['sliders', 'duo'], ['palette', 'gloss']],
   title: 'with icons vs Material Symbols: which free icon set fits you?',
   cardTitle: 'with icons vs Material Symbols',

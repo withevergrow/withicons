@@ -4,7 +4,7 @@ export default {
   slug: 'consistent-icons',
   category: 'basics',
   date: '2026-10-02',
-  hero: 'cons4',
+  hero: 'h-consistent-icons',
   stickers: [['check-circle', 'solid'], ['layers', 'duo'], ['sparkles', 'gloss']],
   title: 'Why mixing icon sets looks cheap (and how to fix it in an afternoon)',
   cardTitle: 'Why mixing icon sets looks cheap',

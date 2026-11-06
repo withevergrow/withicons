@@ -4,7 +4,7 @@ export default {
   slug: 'with-icons-vs-flaticon',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'flat0',
+  hero: 'h-with-icons-vs-flaticon',
   stickers: [['image', 'solid'], ['tag', 'duo'], ['gift', 'gloss']],
   title: 'with icons vs Flaticon: free icons with or without the credit line',
   cardTitle: 'with icons vs Flaticon',

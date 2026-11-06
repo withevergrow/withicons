@@ -131,7 +131,7 @@ export function img(key, { sizes = '(min-width: 1100px) 760px, 100vw', eager = f
   used.images.add(key)
   return `<img class="${cls}" src="assets/img/${key}-1600.webp" srcset="assets/img/${key}-800.webp 800w, assets/img/${key}-1600.webp 1600w" sizes="${sizes}" width="1600" height="1000" alt="${esc(m.alt)}" ${eager ? (priority ? 'fetchpriority="high"' : 'loading="eager"') : 'loading="lazy"'} decoding="async">`
 }
-export const credit = key => { const m = IMAGES[key]; return `Photo: <a href="${m.profile}?utm_source=withicons&amp;utm_medium=referral" rel="noopener">${esc(m.by)}</a> on <a href="${m.source}?utm_source=withicons&amp;utm_medium=referral" rel="noopener">Unsplash</a>` }
+export const credit = key => { const m = IMAGES[key]; if (!m.by) return 'Artwork: with icons'; const site = /pexels/i.test(m.source) ? 'Pexels' : 'Unsplash'; return `Photo: <a href="${m.profile}?utm_source=withicons&amp;utm_medium=referral" rel="noopener">${esc(m.by)}</a> on <a href="${m.source}?utm_source=withicons&amp;utm_medium=referral" rel="noopener">${site}</a>` }
 
 /** A photo with caption and photographer credit. alt overrides the registry alt text. */
 export function figure(key, caption = '', { wide = false } = {}) {

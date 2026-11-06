@@ -4,7 +4,7 @@ export default {
   slug: 'free-icons-commercial-use',
   category: 'guides',
   date: '2026-10-02',
-  hero: 'lic0',
+  hero: 'h-free-icons-commercial-use',
   stickers: [['shield-check', 'gloss'], ['file-check', 'duo'], ['badge-check', 'engrave']],
   title: 'Can I use free icons commercially? Icon licenses in plain English',
   cardTitle: 'Free icons and commercial use',

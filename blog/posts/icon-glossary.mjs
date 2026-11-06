@@ -115,7 +115,7 @@ export default {
   slug: 'icon-glossary',
   category: 'basics',
   date: '2026-10-03',
-  hero: 'xgloss3',
+  hero: 'h-icon-glossary',
   stickers: [['book-open', 'gloss'], ['type', 'duo'], ['bookmark', 'solid']],
   title: 'Icon design glossary: the terms you need, in plain English',
   cardTitle: 'Icon design glossary',

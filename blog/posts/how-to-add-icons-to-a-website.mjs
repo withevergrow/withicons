@@ -4,7 +4,7 @@ export default {
   slug: 'how-to-add-icons-to-a-website',
   category: 'guides',
   date: '2026-10-02',
-  hero: 'startup1',
+  hero: 'h-how-to-add-icons-to-a-website',
   stickers: [['globe', 'gloss'], ['upload', 'duo'], ['code', 'blueprint']],
   title: 'How to add icons to your website (no coding needed)',
   cardTitle: 'Add icons to your website',

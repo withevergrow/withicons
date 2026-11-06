@@ -9,7 +9,7 @@ export default {
   slug: 'dark-mode-icons',
   category: 'basics',
   date: '2026-10-03',
-  hero: 'xdark5',
+  hero: 'h-dark-mode-icons',
   stickers: [['moon', 'glass'], ['sun-moon', 'duo'], ['lamp', 'solid']],
   title: 'Icons in dark mode: what changes and how to get it right',
   cardTitle: 'Icons in dark mode',

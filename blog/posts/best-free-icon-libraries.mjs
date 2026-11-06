@@ -4,14 +4,14 @@ export default {
   slug: 'best-free-icon-libraries',
   category: 'guides',
   date: '2026-10-02',
-  hero: 'best4',
+  hero: 'h-best-free-icon-libraries',
   stickers: [['award', 'gloss'], ['layout-grid', 'duo'], ['star', 'solid']],
-  title: 'The best free icon libraries in 2026, compared',
+  title: 'The best icon libraries in 2026: 10 free sets, compared',
   cardTitle: 'The best free icon libraries in 2026',
   h1: 'The best free icon libraries in 2026, <em>compared</em>',
   dek: 'Ten popular icon libraries, one honest table. What each one is best for, what it costs, whether you need to give credit, and a simple way to choose.',
   description: 'A fair, plain-English look at 10 free icon libraries in 2026: Font Awesome, Material Symbols, Lucide, Tabler, with icons and more, plus how to choose.',
-  keywords: ['best free icon libraries', 'free icon sets 2026', 'icon library comparison', 'free icons for commercial use', 'Lucide vs Heroicons vs Tabler', 'open source icons'],
+  keywords: ['best icon library', 'best free icon libraries', 'best icon library 2026', 'best icon library for react', 'best animated icon library', 'free icon sets 2026', 'icon library comparison', 'free icons for commercial use', 'Lucide vs Heroicons vs Tabler', 'open source icons'],
   about: ['Icon library', 'Open-source software', 'Font Awesome', 'Material Symbols', 'Lucide', 'Tabler Icons'],
   related: ['free-icons-commercial-use', 'icon-styles-explained', 'with-icons-vs-font-awesome'],
   tldr: [
@@ -22,7 +22,7 @@ export default {
     'Marketplaces like Flaticon and Icons8 have millions of icons, but their free plans ask for a credit or a link back.',
   ],
   faq: [
-    { q: 'What is the best free icon library?', a: `It depends on the job. Tabler Icons and Hugeicons offer the most free MIT icons, Lucide is the favourite for React and shadcn/ui, Material Symbols suits Android and Material Design, and with icons is best if you want one matching set for websites, slides and docs in ${N_STYLES} styles with no credit.` },
+    { q: 'What is the best icon library?', a: `There is no single winner. For React and shadcn/ui most teams pick Lucide, for Tailwind Heroicons, for Android Material Symbols, for the most free icons Tabler or Hugeicons, and for one matching set across code, slides and docs in ${N_STYLES} styles with no credit, with icons. The best one is the one that fits your toolkit and covers the icons you need.` },
     { q: 'Which free icon libraries do not require attribution?', a: 'Lucide (ISC), Heroicons, Phosphor, Tabler, Bootstrap Icons, Hugeicons’ free set and with icons (all MIT) need no visible credit. Material Symbols (Apache 2.0) says credit is appreciated but not required. Font Awesome Free is CC BY 4.0, but the credit already inside its files counts. Flaticon and Icons8 free plans do require a credit or link.' },
     { q: 'What is the largest free icon library?', a: 'Among open-source sets in this list, Tabler Icons (over 6,200 counting filled versions) and Hugeicons (6,000+ free icons) are the largest. Marketplaces like Flaticon (over 18 million icons and stickers) are far bigger, but their free use comes with attribution.' },
     { q: 'Can I use free icon libraries for commercial projects?', a: 'All ten libraries in this guide allow commercial use. The differences are in the conditions: some need no credit at all, some ask for a credit or link on the free plan, and paid plans usually remove that requirement.' },
@@ -137,6 +137,17 @@ ${figure('startup4', 'Most teams pick a library once and live with it for years.
 ${h2('Which free icon library is best for slides and documents?')}
 ${p(`Most of this list was made for developers, so getting an icon into PowerPoint can mean downloading an SVG, recolouring it in another tool and then inserting it. Material Symbols, Tabler and the marketplaces all offer downloads. with icons adds a <strong>Copy image</strong> button and PNG downloads in any size and colour, so you can paste straight into a slide. Our post on ${L.post('icons-in-presentations', 'icons in presentations')} has tips on sizes and layout.`)}
 ${iconGrid(['rocket', 'target', 'users', 'trending-up', 'lightbulb', 'trophy'], 'gloss', 'A pitch-deck row in the gloss style, ready to copy into a slide.')}
+
+${h2('What is the best icon library for your job?')}
+${p('This guide is the overview. When you already know where the icons will live, these deeper guides compare the options for that one job, with the same honest approach:')}
+${ul([
+  `${L.post('best-react-icon-libraries', 'The best icon libraries for React')}: lucide-react, react-icons, Heroicons, Phosphor, Tabler and more, by import style and size.`,
+  `${L.post('shadcn-ui-icons', 'Icons in shadcn/ui')}: why it ships Lucide, and how to switch if you want to.`,
+  `${L.post('best-animated-icon-libraries', 'The best animated icon libraries')}: Lottie, GIF and CSS motion, compared.`,
+  `${L.post('best-figma-icon-libraries', 'The best icon libraries for Figma')}: plugins, community files and copy-paste SVG.`,
+  `${L.post('where-to-get-free-svg-icons', 'Where to get free SVG icons')} and ${L.post('free-icons-no-attribution', 'free icons with no attribution')}: the catch with each source.`,
+  `${L.post('free-3d-icons', 'Free 3D icons')}, ${L.post('aesthetic-icons', 'aesthetic icons')} and ${L.post('icons-for-ai-app-builders', 'icons for AI app builders')} like Lovable, v0 and Cursor.`,
+])}
 
 ${h2('Our picks, in one sentence each')}
 ${ul([

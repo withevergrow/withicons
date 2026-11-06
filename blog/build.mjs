@@ -22,9 +22,9 @@ const CATS = { comparisons: 'Comparisons', guides: 'Guides', basics: 'Design bas
 const CAT_ICON = { comparisons: ['swap', 'duo'], guides: ['book-open', 'duo'], basics: ['palette', 'duo'], ai: ['bot', 'duo'] }
 // one hub page per category: a crawlable, linkable home for each topic (the index filters are only a JS shortcut)
 const HUBS = {
-  comparisons: { file: 'comparisons.html', title: 'with icons vs other icon libraries: honest comparisons', h1: 'with icons <em>vs</em> the rest',
-    lede: 'Side-by-side comparisons of with icons and the most popular icon sets, with the real icons next to each other, plain-English pros and cons, prices and licences checked against official sources.',
-    desc: 'Honest comparisons of with icons vs Font Awesome, Hugeicons, Lucide, Heroicons, Phosphor, Material Symbols, Tabler and Flaticon, with real icons side by side.' },
+  comparisons: { file: 'comparisons.html', title: 'Best icon libraries and honest comparisons', h1: 'with icons <em>vs</em> the rest',
+    lede: 'Side-by-side comparisons of with icons and the most popular icon sets, plus the best icon libraries for React, Figma, animation and 3D, with real icons next to each other, plain-English pros and cons, prices and licences checked against official sources.',
+    desc: 'The best icon libraries for React, Figma, animation and 3D, and honest comparisons of with icons vs Font Awesome, Lucide, Heroicons, Phosphor and more.' },
   guides: { file: 'guides.html', title: 'Icon guides: slides, websites, licences and landing pages', h1: 'Practical <em>icon</em> guides',
     lede: 'Step-by-step help for using icons in PowerPoint, Google Slides, Keynote, website builders and landing pages, free icons for every holiday and festival, plus icon licences explained in plain English.',
     desc: 'Practical, plain-English icon guides: icons in presentations, adding icons to a website without code, landing pages, and free icon licences explained.' },
@@ -78,7 +78,10 @@ const ORDER = ['best-free-icon-libraries', 'with-icons-vs-font-awesome', 'with-i
   'what-is-an-icon-library', 'how-to-change-icon-color', '3d-icons-vs-flat-icons', 'icon-glossary', 'playful-icon-styles', 'how-many-icons-does-a-website-need',
   'dark-mode-icons', 'animated-icons', 'app-icon-vs-ui-icon', 'icons-on-a-resume',
   // 2026-10-12 holiday and festival posts (the hub first)
-  'free-holiday-icons', 'free-halloween-icons', 'free-diwali-icons', 'free-christmas-icons', 'free-lunar-new-year-icons', 'free-valentines-day-icons']
+  'free-holiday-icons', 'free-halloween-icons', 'free-diwali-icons', 'free-christmas-icons', 'free-lunar-new-year-icons', 'free-valentines-day-icons',
+  // 2026-11-06 "best / free" keyword cluster (blog/STRATEGY.md)
+  'where-to-get-free-svg-icons', 'best-react-icon-libraries', 'best-animated-icon-libraries', 'free-icons-no-attribution', 'icons-for-ai-app-builders',
+  'best-figma-icon-libraries', 'shadcn-ui-icons', 'free-3d-icons', 'aesthetic-icons', 'icon-fonts-vs-svg']
 const FEATURED = 'best-free-icon-libraries' // the index hero story, whatever the dates
 const rank = s => (ORDER.indexOf(s) + 1 || 999)
 posts.sort((a, b) => b.date.localeCompare(a.date) || rank(a.slug) - rank(b.slug) || a.slug.localeCompare(b.slug))
@@ -177,7 +180,8 @@ const hl = h => h.replace(/<em>([\s\S]*?)<\/em>/g, '<span class="g-hl">$1</span>
 
 // photos live only in site/blog/assets/img (the source of truth, committed once); the build never deletes them
 const IMG = path.join(OUT, 'assets', 'img')
-const ogImage = key => fs.existsSync(path.join(IMG, `${key}-og.jpg`)) ? `${BASE}/assets/img/${key}-og.jpg` : `${BASE}/assets/img/${key}-1600.webp`
+const SRC_IMG = path.join(HERE, 'images')
+const ogImage = key => fs.existsSync(path.join(SRC_IMG, `${key}-og.jpg`)) || fs.existsSync(path.join(IMG, `${key}-og.jpg`)) ? `${BASE}/assets/img/${key}-og.jpg` : `${BASE}/assets/img/${key}-1600.webp`
 const stickerFor = p => p.stickers || [[...CAT_ICON[p.category]], ['sparkles', 'gloss'], ['star', 'sketch']]
 
 function card(p, { eager = false } = {}) {
@@ -403,12 +407,6 @@ if (DRY) {
 for (const f of fs.existsSync(OUT) ? fs.readdirSync(OUT) : []) if (f !== 'assets') fs.rmSync(path.join(OUT, f), { recursive: true, force: true })
 for (const f of ['blog.css', 'blog.js', 'fonts', 'licenses']) fs.rmSync(path.join(OUT, 'assets', f), { recursive: true, force: true })
 fs.mkdirSync(IMG, { recursive: true })
-// photos are source files in blog/images/ (registry: blog/images.json); copy any new or changed ones into the output
-{ const SRC_IMG = path.join(HERE, 'images')
-  if (fs.existsSync(SRC_IMG)) for (const f of fs.readdirSync(SRC_IMG)) {
-    const a = path.join(SRC_IMG, f), b = path.join(IMG, f)
-    if (!fs.existsSync(b) || fs.statSync(b).size !== fs.statSync(a).size) fs.copyFileSync(a, b)
-  } }
 for (const p of posts) fs.writeFileSync(path.join(OUT, `${p.slug}.html`), article(p))
 if (posts.some(p => needsMotion(p.html))) for (const f of [MOTION_CSS, MOTION_JS]) if (!fs.existsSync(path.join(OUT, f))) warnings.push(`missing motion runtime site/blog/${f} (run node forge/build.mjs)`)
 fs.writeFileSync(path.join(OUT, 'index.html'), index())
@@ -419,6 +417,16 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemap())
 fs.writeFileSync(path.join(OUT, 'llms.txt'), llms())
 fs.writeFileSync(path.join(OUT, 'llms-full.txt'), llmsFull())
 for (const f of ['blog.css', 'blog.js']) fs.copyFileSync(path.join(HERE, 'assets', f), path.join(OUT, 'assets', f))
+// images are source files in blog/images/ (registry: blog/images.json; designed heroes come from blog/tools/hero-art.mjs).
+// Copy the ones the pages use (new or changed), and drop output copies nothing uses any more when blog/images still has
+// the source (so nothing is ever lost: a designed hero's base photo stays in blog/images).
+const imgKey = f => f.replace(/-(1600|800).webp$|-og.jpg$/, '')
+if (fs.existsSync(SRC_IMG)) for (const f of fs.readdirSync(SRC_IMG)) {
+  if (!used.images.has(imgKey(f))) continue
+  const a = path.join(SRC_IMG, f), b = path.join(IMG, f)
+  if (!fs.existsSync(b) || fs.statSync(b).size !== fs.statSync(a).size) fs.copyFileSync(a, b)
+}
+if (!ONLY.length) for (const f of fs.readdirSync(IMG)) if (!used.images.has(imgKey(f)) && fs.existsSync(path.join(SRC_IMG, f))) fs.rmSync(path.join(IMG, f))
 for (const k of [...used.images].sort()) for (const v of ['1600.webp', '800.webp'])
   if (!fs.existsSync(path.join(IMG, `${k}-${v}`))) warnings.push(`missing image file site/blog/assets/img/${k}-${v}`)
 // photo weight: blog/tools/cap-images.py squeezes anything over these caps (a few very detailed photos stay above at q65)

@@ -4,7 +4,7 @@ export default {
   slug: 'what-is-an-icon-library',
   category: 'basics',
   date: '2026-10-03',
-  hero: 'xlib5',
+  hero: 'h-what-is-an-icon-library',
   stickers: [['library', 'gloss'], ['layout-grid', 'duo'], ['search', 'solid']],
   title: 'What is an icon library? A plain-English guide for non-designers',
   cardTitle: 'What is an icon library?',

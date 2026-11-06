@@ -9,7 +9,7 @@ export default {
   slug: 'with-icons-vs-font-awesome',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'fa2',
+  hero: 'h-with-icons-vs-font-awesome',
   stickers: [['flag', 'solid'], ['swap', 'duo'], ['heart', 'gloss']],
   title: 'with icons vs Font Awesome: which free icon set should you use?',
   cardTitle: 'with icons vs Font Awesome',

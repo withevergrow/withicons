@@ -4,7 +4,7 @@ export default {
   slug: 'app-icon-vs-ui-icon',
   category: 'basics',
   date: '2026-10-03',
-  hero: 'xapp5',
+  hero: 'h-app-icon-vs-ui-icon',
   stickers: [['smartphone', 'glass'], ['app-window', 'duo'], ['sparkles', 'sticker']],
   title: 'App icon vs UI icon: what’s the difference?',
   cardTitle: 'App icon vs UI icon',

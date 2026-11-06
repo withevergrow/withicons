@@ -9,7 +9,7 @@ export default {
   slug: 'with-icons-vs-phosphor',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'phos1',
+  hero: 'h-with-icons-vs-phosphor',
   stickers: [['sliders', 'duo'], ['heart', 'gloss'], ['compass', 'blueprint']],
   title: `with icons vs Phosphor: 6 weights or ${N_STYLES} styles, which suits you?`,
   cardTitle: 'with icons vs Phosphor',

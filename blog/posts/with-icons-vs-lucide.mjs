@@ -4,7 +4,7 @@ export default {
   slug: 'with-icons-vs-lucide',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'lucide0',
+  hero: 'h-with-icons-vs-lucide',
   stickers: [['pen-tool', 'line'], ['swap', 'duo'], ['palette', 'gloss']],
   title: 'with icons vs Lucide: should you switch from the default icons?',
   cardTitle: 'with icons vs Lucide',

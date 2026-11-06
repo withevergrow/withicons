@@ -9,7 +9,7 @@ export default {
   slug: 'free-diwali-icons',
   category: 'guides',
   date: '2026-10-12',
-  hero: 'xanim3',
+  hero: 'h-free-diwali-icons',
   stickers: [['diya', 'utsav'], ['rangoli-pattern', 'rangoli'], ['sky-lantern', 'utsav']],
   title: 'Free Diwali icons: diyas, rangoli, sweets and fireworks as SVG',
   cardTitle: 'Free Diwali icons',

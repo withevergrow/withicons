@@ -495,5 +495,380 @@
   "profile": "https://unsplash.com/@ooneiroslyl",
   "source": "https://unsplash.com/photos/G2RM3fk7VQ8",
   "license": "Unsplash License"
+ },
+ "h-3d-icons-vs-flat-icons": {
+  "alt": "Artwork of two isometric slabs on a lilac gradient: a violet rocket printed flat on the left slab and the same rocket standing up in glossy 3D on the right",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-accessible-icons": {
+  "alt": "Artwork of a black high-contrast poster with a giant violet braille cell and a grid of big white icons, one bell icon wearing a yellow focus ring, a 7:1 badge and a 44 px tag",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-aesthetic-icons": {
+  "alt": "Soft pastel spheres on a gradient behind a phone home screen whose app icons are all in the with icons pastel style, next to a mood picker with Pastel selected over Coquette and Kawaii",
+  "by": "Milad Fakurian",
+  "profile": "https://unsplash.com/@fakurian",
+  "source": "https://unsplash.com/photos/PGdW_bHDbpI",
+  "license": "Unsplash License",
+  "base": "trends3",
+  "designed": true
+ },
+ "h-ai-assistants-and-icons": {
+  "alt": "A robot hand and a human hand reaching toward glowing AI letters, with a chat in front: a question about a refund icon, a made-up icon name crossed out, and three real pink gloss icons marked as real",
+  "by": "Igor Omilaev",
+  "profile": "https://unsplash.com/@omilaev",
+  "source": "https://unsplash.com/photos/FHgWFzDDAOs",
+  "license": "Unsplash License",
+  "base": "ai1",
+  "designed": true
+ },
+ "h-animated-icons": {
+  "alt": "Golden light trails behind a stroboscopic sequence of a violet heart hopping along a dotted arc and landing as a 3D heart, with 0, 150 and 300 ms timing marks",
+  "by": "Maxime VALCARCE",
+  "profile": "https://unsplash.com/@maximevalcarce",
+  "source": "https://unsplash.com/photos/mAj8xn5zXsk",
+  "license": "Unsplash License",
+  "base": "xanim3",
+  "designed": true
+ },
+ "h-app-icon-vs-ui-icon": {
+  "alt": "A hand holding a phone against a grey wall behind a dock of four big colourful app icons and, below it, a slim toolbar of small line UI icons, tagged 180 px and 24 px",
+  "by": "Oliur",
+  "profile": "https://unsplash.com/@ultralinx",
+  "source": "https://unsplash.com/photos/_8S9nEmCZK0",
+  "license": "Unsplash License",
+  "base": "xapp4",
+  "designed": true
+ },
+ "h-best-animated-icon-libraries": {
+  "alt": "Pink and orange light trails behind a frosted player card of with icons in motion, with Lottie, CSS and GIF format chips",
+  "by": "Genessa Panainte",
+  "profile": "https://unsplash.com/@genessapana",
+  "source": "https://unsplash.com/photos/sBvK15KlpYk",
+  "license": "Unsplash License",
+  "base": "xanim5",
+  "designed": true
+ },
+ "h-best-figma-icon-libraries": {
+  "alt": "Artwork of a design canvas: a dotted grey canvas with a layers panel showing a selected vector, a frame where a big blue palette icon sits in a selection box with handles and a 24 by 24 badge, and a frame of icon instances in other styles",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-best-free-icon-libraries": {
+  "alt": "A sweep of coloured pencils behind a shelf of ten colourful book spines named after free icon libraries, the first one, with icons, leaning out with a star, under an orange 10 free sets chip",
+  "by": "Lucas George Wendt",
+  "profile": "https://unsplash.com/@lucasgwendt",
+  "source": "https://unsplash.com/photos/ddPQgDMEIpw",
+  "license": "Unsplash License",
+  "base": "best4",
+  "designed": true
+ },
+ "h-best-react-icon-libraries": {
+  "alt": "A laptop full of code, blurred far behind a dark code editor with a neon blue glow: a file tree, an App.jsx file importing with icons for React, and a preview pane showing a chrome rocket and a liquid rocket",
+  "by": "Arnold Francisca",
+  "profile": "https://unsplash.com/@clark_fransa",
+  "source": "https://unsplash.com/photos/f77Bh3inUpE",
+  "license": "Unsplash License",
+  "base": "hero1",
+  "designed": true
+ },
+ "h-choosing-the-right-icon": {
+  "alt": "Artwork of a signpost against a violet to peach dusk sky with three arrow signs: a violet Save sign with a floppy disk, a white Download sign and a green Upload sign",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-consistent-icons": {
+  "alt": "Artwork of a glowing light table on a dark desk with two film strips: a mismatched row of icons in five styles crossed out, and a matching violet row circled yes in grease pencil, beside a loupe magnifying a violet heart",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-dark-mode-icons": {
+  "alt": "A hard split image, paper white on the left and a dark desk with glowing monitors on the right, with two violet icons cut down the seam into light and dark halves",
+  "by": "Jannis Brandt",
+  "profile": "https://unsplash.com/@jannisbrandt",
+  "source": "https://unsplash.com/photos/4mHaSX8zvJI",
+  "license": "Unsplash License",
+  "base": "xdark5",
+  "designed": true
+ },
+ "h-free-3d-icons": {
+  "alt": "A bright lilac studio with an arched niche where 3D-style with icons float at different heights: a soft 3D rocket, clay heart, chrome star, glass cube, skeuo gem and liquid droplet, each casting a long soft shadow across the floor",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-free-christmas-icons": {
+  "alt": "A cosy knit sweater and laptop blurred deep into pine green behind falling snow, with an open Christmas greeting card showing a snowy wreath and a kraft gift tag on a red string holding a gingerbread man, all with icons in the Christmas style",
+  "by": "Christin Hume",
+  "profile": "https://unsplash.com/@christinhumephoto",
+  "source": "https://unsplash.com/photos/mfB1B1s4sMc",
+  "license": "Unsplash License",
+  "base": "student0",
+  "designed": true
+ },
+ "h-free-diwali-icons": {
+  "alt": "Golden long-exposure light trails behind a rangoli of magenta, gold and teal petals drawn around with icons: a glowing diya in a white circle, ringed by marigold, sparkler, lotus, sweets and lantern icons in the utsav and rangoli styles",
+  "by": "Maxime VALCARCE",
+  "profile": "https://unsplash.com/@maximevalcarce",
+  "source": "https://unsplash.com/photos/mAj8xn5zXsk",
+  "license": "Unsplash License",
+  "base": "xanim3",
+  "designed": true
+ },
+ "h-free-halloween-icons": {
+  "alt": "A desk lamp glowing at night over a wooden desk where a jack-o-lantern, black cat and candy bucket in the with icons Halloween style sit, while bats fly up to a big moon",
+  "by": "Beth Stevenson",
+  "profile": "https://unsplash.com/@bthstvn",
+  "source": "https://unsplash.com/photos/okUB5th8QtQ",
+  "license": "Unsplash License",
+  "base": "xdark4",
+  "designed": true
+ },
+ "h-free-holiday-icons": {
+  "alt": "Open pots of bright paint under a dark wash, with five calendar pages from October to February, each holding a festive with icon in its own holiday style",
+  "by": "Keiron Crasktellanos",
+  "profile": "https://unsplash.com/@crasktellanos",
+  "source": "https://unsplash.com/photos/cnLY9WFR2JI",
+  "license": "Unsplash License",
+  "base": "xcolor2",
+  "designed": true
+ },
+ "h-free-icons-commercial-use": {
+  "alt": "A man signing papers, overlaid with a row of with icons business tiles, an orange $0 price tag hanging from them and a green OK for business stamp",
+  "by": "Scott Graham",
+  "profile": "https://unsplash.com/@amstram",
+  "source": "https://unsplash.com/photos/OQMZwNd3ThU",
+  "license": "Unsplash License",
+  "base": "lic0",
+  "designed": true
+ },
+ "h-free-icons-no-attribution": {
+  "alt": "A paper receipt on a peach background with a big orange arch, listing free with icons for business use, with the credit line struck out in orange marker",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-free-lunar-new-year-icons": {
+  "alt": "Flowing wallpaper waves washed in red and gold, with lunar-style red lanterns hanging on gold cords over a large red envelope with a gold seal and mandarin, dumpling and lion head tiles",
+  "by": "Milad Fakurian",
+  "profile": "https://unsplash.com/@fakurian",
+  "source": "https://unsplash.com/photos/E8Ufcyxz514",
+  "license": "Unsplash License",
+  "base": "trends0",
+  "designed": true
+ },
+ "h-free-valentines-day-icons": {
+  "alt": "A glowing laptop washed into a pink duotone behind an open love-letter envelope, its letter showing a pair of hearts and a handwritten be mine, with Valentine-style heart icons floating up",
+  "by": "Martin Sanchez",
+  "profile": "https://unsplash.com/@martinsanchez",
+  "source": "https://unsplash.com/photos/G78c3DPmD_A",
+  "license": "Unsplash License",
+  "base": "dark1",
+  "designed": true
+ },
+ "h-how-many-icons-does-a-website-need": {
+  "alt": "Greyed watercolour website wireframes with a black poster taped over them, showing a huge orange 30 and the 30 everyday with icons a site needs",
+  "by": "Hal Gatewood",
+  "profile": "https://unsplash.com/@halacious",
+  "source": "https://unsplash.com/photos/tZc3vjPCk-Q",
+  "license": "Unsplash License",
+  "base": "xcount0",
+  "designed": true
+ },
+ "h-how-to-add-icons-to-a-website": {
+  "alt": "A woman working on a laptop at a small desk, behind a bakery website in a browser window and an icon picker: an orange solid croissant icon is dragged along a dotted arc into the empty slot of the feature row",
+  "by": "Omar Lopez",
+  "profile": "https://unsplash.com/@omarlopez1",
+  "source": "https://unsplash.com/photos/4HhmpfsI5yk",
+  "license": "Unsplash License",
+  "base": "startup1",
+  "designed": true
+ },
+ "h-how-to-change-icon-color": {
+  "alt": "Open paint pots behind a fan of paint-chip cards that each show the same with icons star in another colour, with the orange chip pulled out",
+  "by": "Ximena Balderas",
+  "profile": "https://unsplash.com/@ximenaphoto",
+  "source": "https://unsplash.com/photos/XwCMpO5TkRc",
+  "license": "Unsplash License",
+  "base": "xcolor0",
+  "designed": true
+ },
+ "h-icon-fonts-vs-svg": {
+  "alt": "An open book duotoned in violet behind a typographic poster: a giant serif Aa with an empty missing-glyph box, a handwritten vs, and one crisp violet duo star SVG on a white tile with its vector points showing",
+  "by": "Olga Tutunaru",
+  "profile": "https://unsplash.com/@otutunaru",
+  "source": "https://unsplash.com/photos/JMATuFkXeHU",
+  "license": "Unsplash License",
+  "base": "xgloss0",
+  "designed": true
+ },
+ "h-icon-glossary": {
+  "alt": "An open dictionary on a wooden table behind a tilted cream glossary page with three serif entries, glyph, keyline and viewBox, each beside an engraved icon",
+  "by": "Pisit Heng",
+  "profile": "https://unsplash.com/@pisitheng",
+  "source": "https://unsplash.com/photos/FQvadXmA524",
+  "license": "Unsplash License",
+  "base": "xgloss3",
+  "designed": true
+ },
+ "h-icon-sizes-guide": {
+  "alt": "Artwork of a yellow tape measure running into a violet case on dotted paper, with one violet bell icon standing on it at 16, 24, 32, 48 and 64 pixels",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-icon-styles-explained": {
+  "alt": "A colour chart of the same with icons coffee cup running from plain line to rich 3D styles, each cell tinted, with a loupe enlarging the kawaii cup",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-icons-for-ai-app-builders": {
+  "alt": "A teal circuit board with big 3D letters Ai, sunk into a pink and violet aurora, with a glass prompt bar asking for app icons and four pink gloss icons fanning out of it on glass tiles, plus Lovable, v0, Bolt and Cursor chips",
+  "by": "Numan Ali",
+  "profile": "https://unsplash.com/@king_designer99",
+  "source": "https://unsplash.com/photos/llNtovr7ctk",
+  "license": "Unsplash License",
+  "base": "ai3",
+  "designed": true
+ },
+ "h-icons-in-presentations": {
+  "alt": "A man presenting to a seated team in a brick office, with a slide mockup of three orange with icons in circles and a filmstrip of slides below it",
+  "by": "Austin Distel",
+  "profile": "https://unsplash.com/@austindistel",
+  "source": "https://unsplash.com/photos/rxpThOwuVgE",
+  "license": "Unsplash License",
+  "base": "slides2",
+  "designed": true
+ },
+ "h-icons-on-a-resume": {
+  "alt": "A printed resume on a clipboard beside a laptop on marble, with a paper CV on top showing small orange with icons next to email, phone, place and link",
+  "by": "Markus Winkler",
+  "profile": "https://unsplash.com/@markuswinkler",
+  "source": "https://unsplash.com/photos/7iSEHWsxPLw",
+  "license": "Unsplash License",
+  "base": "xcv2",
+  "designed": true
+ },
+ "h-icons-on-landing-pages": {
+  "alt": "An open notebook on a wooden desk with a landing page sketched in ink on the right page, three sketch-style with icons in a row and orange handwritten notes",
+  "by": "Mike Tinnion",
+  "profile": "https://unsplash.com/@m15ky",
+  "source": "https://unsplash.com/photos/3ym6i13Y9LU",
+  "license": "Unsplash License",
+  "base": "sketch0",
+  "designed": true
+ },
+ "h-playful-icon-styles": {
+  "alt": "Pixel-grid arcade artwork: a violet-framed character select screen where the fighters are one cat icon in six playful with icons styles, kawaii picked by the P1 cursor, above glowing arcade buttons and a joystick",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-shadcn-ui-icons": {
+  "alt": "A laptop on a wooden desk, cropped into a tall arch, behind an isometric stack of three layers: components.json at the bottom, UI components in the middle and a top layer of orange solid icons from with icons",
+  "by": "Sincerely Media",
+  "profile": "https://unsplash.com/@sincerelymedia",
+  "source": "https://unsplash.com/photos/OOHsoUNRxt8",
+  "license": "Unsplash License",
+  "base": "landing1",
+  "designed": true
+ },
+ "h-svg-vs-png-icons": {
+  "alt": "A split poster: on the left, red, green and blue screen pixels behind a blocky pixelated white heart labelled PNG; on the right, flat violet behind the same heart as a crisp SVG",
+  "by": "Gyula Jónás",
+  "profile": "https://unsplash.com/@gyula2001",
+  "source": "https://unsplash.com/photos/dzjfnSneOxU",
+  "license": "Unsplash License",
+  "base": "svg5",
+  "designed": true
+ },
+ "h-where-to-get-free-svg-icons": {
+  "alt": "A long library, blurred far behind a drawn bookshelf whose books are SVG icon files in several styles; one file, rocket.svg, is pulled out with an MIT licence tag hanging from it, above an orange Download SVG button",
+  "by": "Jayanth Muppaneni",
+  "profile": "https://unsplash.com/@jay_5",
+  "source": "https://unsplash.com/photos/GxCLXVWAJMY",
+  "license": "Unsplash License",
+  "base": "xlib2",
+  "designed": true
+ },
+ "h-with-icons-vs-flaticon": {
+  "alt": "A Bauhaus-style poster on cream: a designer drawing on a tablet cropped into a circle over a red disc and blue bar, Bauhaus cake, cookie and heart icons, a stacked Bake sale headline whose credit line is struck through in blue, a No credit line stamp and a blue vs Flaticon pill",
+  "by": "Kelly Sikkema",
+  "profile": "https://unsplash.com/@kellysikkema",
+  "source": "https://unsplash.com/photos/Dx1b5ucschA",
+  "license": "Unsplash License",
+  "base": "flat0",
+  "designed": true
+ },
+ "h-with-icons-vs-font-awesome": {
+  "alt": "Artwork on sunny yellow: a huge monospace i tag with the i in blue, a row of with icons home icons in line, glass, clay, sticker and luxe styles printed beneath it, a class name chip and a blue vs Font Awesome pill",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-with-icons-vs-heroicons": {
+  "alt": "A blurred laptop on a sunlit desk behind a bento grid of rounded tiles: a big clay rocket, outline and solid bells, a dark Tailwind size-6 class tile, a strip of four styles, a row of line icons and kawaii, sticker and anime icons, with a blue vs Heroicons pill",
+  "by": "Emile Perron",
+  "profile": "https://unsplash.com/@emilep",
+  "source": "https://unsplash.com/photos/xrVDYZRGdw4",
+  "license": "Unsplash License",
+  "base": "hero2",
+  "designed": true
+ },
+ "h-with-icons-vs-hugeicons": {
+  "alt": "Glowing blue and purple metallic cubes behind a level balance scale: a heap of small white outline icons on one pan and six with icons in bold 3D, kawaii and retro styles on the other, with a blue vs Hugeicons pill",
+  "by": "Milad Fakurian",
+  "profile": "https://unsplash.com/@fakurian",
+  "source": "https://unsplash.com/photos/rPdxh2xl2-E",
+  "license": "Unsplash License",
+  "base": "huge2",
+  "designed": true
+ },
+ "h-with-icons-vs-lucide": {
+  "alt": "Editorial layout on cream: a white desk with a monitor cropped into a tall arch, overlapped by a dark shadcn-style command menu with with icons in line, clay and gloss styles, a serif the default label and a blue vs Lucide pill",
+  "by": "Piotr Wilk",
+  "profile": "https://unsplash.com/@teddygraphics",
+  "source": "https://unsplash.com/photos/K-YcSC3Fvrg",
+  "license": "Unsplash License",
+  "base": "lucide0",
+  "designed": true
+ },
+ "h-with-icons-vs-material-symbols": {
+  "alt": "Artwork on blue grid paper: a large blueprint-style camera icon measured with dimension lines for weight and fill, and a callout to the same camera in anime, skeuo and pastel styles, with an Android chip and a blue vs Material Symbols pill",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-with-icons-vs-phosphor": {
+  "alt": "A blue duotone photo of a phone in a hand behind one giant retro-style star, a white rail of the same star from hairline to filled, a 34 styles chip and a blue vs Phosphor pill",
+  "by": "Balázs Kétyi",
+  "profile": "https://unsplash.com/@balazsketyi",
+  "source": "https://unsplash.com/photos/sScmok4Iq1o",
+  "license": "Unsplash License",
+  "base": "phos1",
+  "designed": true
+ },
+ "h-with-icons-vs-tabler-icons": {
+  "alt": "A paper wallpaper of tiny ink outline icons over a faint analytics laptop photo, with a magnifier lifting out one glossy 3D rocket from with icons, a curated chip and a blue vs Tabler Icons pill",
+  "by": "Luke Chesser",
+  "profile": "https://unsplash.com/@lukechesser",
+  "source": "https://unsplash.com/photos/JKUTrJ4vK00",
+  "license": "Unsplash License",
+  "base": "tabler0",
+  "designed": true
+ },
+ "h-icon-design-trends-2026": {
+  "alt": "Blue and violet flowing shapes behind a magazine cover with a big serif 2026 masthead, a glass sparkle icon as cover star and lines for glass, pixel, Bauhaus and cute trends",
+  "by": "Richard Horvath",
+  "profile": "https://unsplash.com/@ricvath",
+  "source": "https://unsplash.com/photos/_nWaeTF6qo0",
+  "license": "Unsplash License",
+  "base": "trends1",
+  "designed": true
+ },
+ "h-what-is-an-icon-library": {
+  "alt": "A blurred violet library behind a wooden card-catalogue cabinet whose drawers are labelled with with icons, one drawer pulled out full of weather icon cards",
+  "by": "Zoshua Colah",
+  "profile": "https://unsplash.com/@zoshuacolah",
+  "source": "https://unsplash.com/photos/sdD9aUgSl2U",
+  "license": "Unsplash License",
+  "base": "xlib5",
+  "designed": true
  }
 }

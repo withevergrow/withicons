@@ -21,6 +21,12 @@ only adds article components, using the site's tokens; each section gets one sty
   nothing extra. Loops get a Pause button, and everything stays still under reduced motion or the site's Pause animations.
   Keep it to one looping demo per post; prefer hover and swap demos. CDN URLs in `code()` samples are text only.
 - `blog/images.json`: the photo registry (Unsplash, free licence; credit is added automatically). Images are source files in `blog/images/<key>-{800,1600}.webp` (+ `-og.jpg` 1200x630 for heroes); the build copies them into `site/blog/assets/img/` (generated, gitignored) and never deletes them.
+- **Featured images (heroes) are designed, not plain photos.** Each post's `hero` is `h-<slug>`: an Unsplash photo from
+  `blog/images.json` as the base, with a topic composition of real with icons on top. Write `blog/heroes/<slug>.mjs`
+  (helpers and safe zones: `blog/tools/hero-kit.mjs`; example: `blog/heroes/best-animated-icon-libraries.mjs`), look at it
+  with `node blog/tools/hero-art.mjs --only=<slug> --preview --guides` (`.preview/heroes/`), then run it without `--preview`
+  to write `blog/images/h-<slug>-{1600,800}.webp` + `-og.jpg` (the social card, title added automatically) and register it
+  in images.json with the base photo's credit. Short labels only in the art, never the post title, no third-party logos.
 - Icon names: `forge/manifest.json`. Styles: `ALL_STYLES` (from STYLE_ORDER). An unknown name or style fails the build.
 
 ## Post fields

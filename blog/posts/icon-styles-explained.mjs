@@ -11,7 +11,7 @@ export default {
   slug: 'icon-styles-explained',
   category: 'basics',
   date: '2026-10-02',
-  hero: 'styles4',
+  hero: 'h-icon-styles-explained',
   stickers: [['star', 'gloss'], ['heart', 'kawaii'], ['rocket', 'retro']],
   title: 'Line, solid, duotone and more: icon styles explained with pictures',
   cardTitle: 'Icon styles explained',

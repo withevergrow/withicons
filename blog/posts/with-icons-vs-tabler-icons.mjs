@@ -9,7 +9,7 @@ export default {
   slug: 'with-icons-vs-tabler-icons',
   category: 'comparisons',
   date: '2026-10-02',
-  hero: 'tabler0',
+  hero: 'h-with-icons-vs-tabler-icons',
   stickers: [['layout-grid', 'solid'], ['target', 'duo'], ['chart-bar', 'gloss']],
   title: `with icons vs Tabler Icons: ${N_ICONS} curated icons or 6,000+?`,
   cardTitle: 'with icons vs Tabler Icons',

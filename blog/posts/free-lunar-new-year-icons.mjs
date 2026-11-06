@@ -8,7 +8,7 @@ export default {
   slug: 'free-lunar-new-year-icons',
   category: 'guides',
   date: '2026-10-12',
-  hero: 'trends0',
+  hero: 'h-free-lunar-new-year-icons',
   stickers: [['red-lantern', 'lunar'], ['red-envelope', 'lunar'], ['mandarin-orange', 'lunar']],
   title: 'Free Lunar New Year icons: lanterns, red envelopes and lucky gold',
   cardTitle: 'Free Lunar New Year icons',

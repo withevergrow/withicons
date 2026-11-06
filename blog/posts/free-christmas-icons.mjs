@@ -8,7 +8,7 @@ export default {
   slug: 'free-christmas-icons',
   category: 'guides',
   date: '2026-10-12',
-  hero: 'trends3',
+  hero: 'h-free-christmas-icons',
   stickers: [['christmas-tree', 'christmas'], ['snowman', 'christmas'], ['bauble', 'christmas']],
   title: `Free Christmas icons: ${N} festive SVGs and a cosy Christmas style`,
   cardTitle: 'Free Christmas icons',

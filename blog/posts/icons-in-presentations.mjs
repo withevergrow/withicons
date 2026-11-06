@@ -4,7 +4,7 @@ export default {
   slug: 'icons-in-presentations',
   category: 'guides',
   date: '2026-10-02',
-  hero: 'slides2',
+  hero: 'h-icons-in-presentations',
   stickers: [['chart-bar', 'gloss'], ['lightbulb', 'duo'], ['target', 'sketch']],
   title: 'How to use icons in PowerPoint, Google Slides and Keynote',
   cardTitle: 'Icons in PowerPoint, Slides and Keynote',
