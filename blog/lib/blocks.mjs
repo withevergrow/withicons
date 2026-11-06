@@ -138,6 +138,19 @@ export function figure(key, caption = '', { wide = false } = {}) {
   return `<figure class="b-photo${wide ? ' b-photo--wide' : ''}">${img(key)}<figcaption>${caption ? `<span>${caption}</span>` : ''}<small>${credit(key)}</small></figcaption></figure>`
 }
 
+/**
+ * A designed in-post image (blog/media/<slug>/<name>.mjs, rendered by blog/tools/hero-art.mjs to m-<slug>-<name>).
+ *   art('m-favicon-sizes-chart', 'Caption', { brief: 'what the image should show, for the designer' })
+ * Until the image is rendered it shows a placeholder and the build lists it as pending (fatal only with --check).
+ */
+export const pending = []
+export function art(key, caption = '', { brief = '' } = {}) {
+  if (!/^m-[a-z0-9-]+$/.test(key)) throw new Error(`blog: art() key "${key}" must look like m-<slug>-<name>`)
+  if (IMAGES[key]) return figure(key, caption)
+  pending.push({ key, brief })
+  return `<figure class="b-photo b-pending"><div class="b-pending__box"><strong>Designed image coming</strong><span>${esc(brief)}</span></div>${caption ? `<figcaption><span>${caption}</span></figcaption>` : ''}</figure>`
+}
+
 // ---------------------------------------------------------------- text blocks
 export const p = html => `<p>${html}</p>`
 export const h2 = (text, id) => `<h2 id="${id || slugify(text)}">${text}</h2>`

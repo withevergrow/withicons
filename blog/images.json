@@ -870,5 +870,653 @@
   "license": "Unsplash License",
   "base": "xlib5",
   "designed": true
+ },
+ "h-align-icon-with-text": {
+  "alt": "A white desk with a pink ruler and paper, with the giant word Home and the with icons home icon on it, and cyan cap height, x-height and baseline guide lines running across the whole picture",
+  "by": "Jess Bailey Designs",
+  "profile": "https://www.pexels.com/@jessbaileydesign/",
+  "source": "https://www.pexels.com/photo/minimalist-workspace-with-pencils-and-ruler-34918669/",
+  "license": "Pexels License",
+  "photoFile": "align-icon-with-text-desk.jpg",
+  "designed": true
+ },
+ "h-animate-svg-icons": {
+  "alt": "Red and gold light trails from a long-exposure night photo behind a flip-book of five white pages fanned out from one pinned corner, each page showing one frame of a violet bell icon swinging as it rings",
+  "by": "Egor Litvinov",
+  "profile": "https://unsplash.com/@litvinov",
+  "source": "https://unsplash.com/photos/nighttime-traffic-light-trails-captured-with-long-exposure-6-QINjM3DSM",
+  "license": "Unsplash License",
+  "photoFile": "animate-svg-icons-trails2.jpg",
+  "designed": true
+ },
+ "h-canva-transparent-png": {
+  "alt": "A top-down craft table with a green cutting mat: a white sheet of paper with a star-shaped hole cut out, the star cut-out lying beside it with no paper around it, plus heart and sparkle cut-outs and scissors",
+  "by": "Volodymyr Proskurovskyi",
+  "profile": "https://unsplash.com/@proskurovskiy",
+  "source": "https://unsplash.com/photos/flat-lay-photo-of-school-supplies-ZlPeHjYoAdU",
+  "license": "Unsplash License",
+  "photoFile": "canva-transparent-png-craft.jpg",
+  "designed": true
+ },
+ "h-change-app-icons-android": {
+  "alt": "Overhead photo of a phone on a round wooden table under palm leaves, its screen a home screen with empty slots, while glossy dock-style icon tiles lie around it like puzzle pieces and a camera tile flies along an orange dotted arc into a glowing empty slot",
+  "by": "Katrin Bolovtsova",
+  "profile": "https://www.pexels.com/@ekaterina-bolovtsova/",
+  "source": "https://www.pexels.com/photo/a-smartphone-with-a-blank-screen-on-a-round-wooden-table-6373209/",
+  "license": "Pexels License",
+  "photoFile": "change-app-icons-android-desk.jpg",
+  "designed": true
+ },
+ "h-change-folder-icon-mac-windows": {
+  "alt": "A close photo of an old card-index drawer full of manila tabs, the nearest ones dyed bright colours and printed with white icons: an orange front tab with a camera and the word Photos, a violet briefcase tab, a teal Music tab and a blue plane tab, with small colour stickers on the tabs behind",
+  "by": "George Diamanto",
+  "profile": "https://www.pexels.com/@george-diamanto-3416903/",
+  "source": "https://www.pexels.com/photo/rows-of-folders-11176866/",
+  "license": "Pexels License",
+  "photoFile": "change-folder-icon-mac-windows-drawer.jpg",
+  "designed": true
+ },
+ "h-change-svg-icon-color-css": {
+  "alt": "A rainbow fan of paint swatch cards behind a big white card with the with icons home outline sliced into green, blue, purple, red and orange bands, next to a dark code pill reading stroke: currentColor",
+  "by": "Peter Olexa",
+  "profile": "https://www.pexels.com/@peter-olexa-2214257/",
+  "source": "https://www.pexels.com/photo/palette-of-colors-14299950/",
+  "license": "Pexels License",
+  "photoFile": "change-svg-icon-color-css-swatches.jpg",
+  "designed": true
+ },
+ "h-custom-app-icons-iphone": {
+  "alt": "Two hands hold a phone up against a peach desert sunset; its dusk-coloured screen shows a home screen of matching tiles, and a fan of seven cream app tiles with soft 3D camera, music, book, heart, pin, mail and calendar icons rises from it in an arc",
+  "by": "Jana Al Mubaslat",
+  "profile": "https://www.pexels.com/@jana-al-mubaslat-257095383/",
+  "source": "https://www.pexels.com/photo/close-up-photo-of-person-taking-photo-using-iphone-13926637/",
+  "license": "Pexels License",
+  "photoFile": "custom-app-icons-iphone-sunset.jpg",
+  "designed": true
+ },
+ "h-custom-emoji-and-stickers": {
+  "alt": "A sticker sheet of cute with icons on a pink desk with pens and a coffee cup: two stickers have a corner peeled up, and a smiling face sticker floats above the empty slot it came from",
+  "by": "Jilly Noble",
+  "profile": "https://www.pexels.com/@jillyjillystudio/",
+  "source": "https://www.pexels.com/photo/pink-themed-office-desk-flat-lay-with-stationery-29765805/",
+  "license": "Pexels License",
+  "photoFile": "custom-emoji-and-stickers-desk.jpg",
+  "designed": true
+ },
+ "h-emoji-vs-icons": {
+  "alt": "A split pastel face-off: on the yellow side one smiley drawn three different ways, round, flat outlined and glossy; on the violet side one duo smile icon on a white tile with three identical small copies below, and a vs badge between them",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-favicon-not-showing-in-google": {
+  "alt": "A magnifying glass on a dark desk rests over a generic list of search results where grey globe icons mark every row but one, which now shows a green leaf favicon, enlarged in the lens",
+  "by": "RDNE Stock project",
+  "profile": "https://www.pexels.com/@rdne/",
+  "source": "https://www.pexels.com/photo/black-magnifying-glass-on-black-table-7948043/",
+  "license": "Pexels License",
+  "photoFile": "favicon-not-showing-in-google-lens.jpg",
+  "designed": true
+ },
+ "h-favicon-sizes-and-files": {
+  "alt": "A wooden picture ledge on a pale grey wall holding five oversized browser tabs standing like books, each wearing a favicon and a file label: a rocket for .ico, a cyan leaf tab for .svg, then a heart, a star and a coffee cup for 180, 192 and 512, beside the words 5 files",
+  "by": "Annie Spratt",
+  "profile": "https://unsplash.com/@anniespratt",
+  "source": "https://unsplash.com/photos/brown-wooden-floating-shelf-on-white-wall-ax-KPVfTYAs",
+  "license": "Unsplash License",
+  "photoFile": "favicon-sizes-and-files-shelf.jpg",
+  "designed": true
+ },
+ "h-free-icon-in-logo": {
+  "alt": "A blank shop sign hanging from a building now shows a green leaf icon above the made-up name Meadow with an orange registered tag, while two business cards on the right carry the very same leaf, joined by a dashed orange line and a handwritten note asking same icon?",
+  "by": "Farhad Ibrahimzade",
+  "profile": "https://unsplash.com/@ferhadd",
+  "source": "https://unsplash.com/photos/a-white-sign-hanging-from-the-side-of-a-building-vcXLCpRhtD4",
+  "license": "Unsplash License",
+  "photoFile": "free-icon-in-logo-sign.jpg",
+  "designed": true
+ },
+ "h-how-to-design-an-icon": {
+  "alt": "A paint-flecked wooden drafting desk with a set square and pencils, and on it a sheet with a 24 by 24 grid, shaded padding and four red keylines, where a violet pencil is drawing the outline of a bell icon",
+  "by": "Skylar Kang",
+  "profile": "https://www.pexels.com/@skylar-kang/",
+  "source": "https://www.pexels.com/photo/measuring-triangle-ruler-and-pencils-on-table-6368897/",
+  "license": "Pexels License",
+  "photoFile": "how-to-design-an-icon-desk.jpg",
+  "designed": true
+ },
+ "h-icon-black-or-white-background": {
+  "alt": "A grey and white transparency checkerboard torn away to reveal a purple dusk sea, with a 3D rocket icon across the tear: its left half sits in a black box, its right half floats cleanly over the photo",
+  "by": "은 하 (galaxim)",
+  "profile": "https://unsplash.com/@galaxim",
+  "source": "https://unsplash.com/photos/purple-and-blue-sky-over-the-sea-ZDOd2UNl1TQ",
+  "license": "Unsplash License",
+  "photoFile": "icon-black-or-white-background-sea.jpg",
+  "designed": true
+ },
+ "h-icon-button-size-and-labels": {
+  "alt": "A finger in a dark room reaching for a glowing blue tablet screen, where a small white settings icon button sits inside concentric target rings marked 24 px and 44 px, like a bullseye",
+  "by": "Towfiqu Barbhuiya",
+  "profile": "https://www.pexels.com/@towfiqu-barbhuiya-3440682/",
+  "source": "https://www.pexels.com/photo/person-using-a-touchscreen-device-11337254/",
+  "license": "Pexels License",
+  "photoFile": "icon-button-size-and-labels-tap4.jpg",
+  "designed": true
+ },
+ "h-icon-inside-input-field": {
+  "alt": "A blue-lit laptop keyboard close up, with an oversized white search field floating over it: the with icons search icon sits inside a dashed cyan padding box at its start, before the placeholder Search icons and a text caret",
+  "by": "Eric Feng",
+  "profile": "https://www.pexels.com/@erix07/",
+  "source": "https://www.pexels.com/photo/close-up-shot-of-black-laptop-keyboard-10843996/",
+  "license": "Pexels License",
+  "photoFile": "icon-inside-input-field-keys.jpg",
+  "designed": true
+ },
+ "h-icon-resolution-for-print": {
+  "alt": "A darkened offset printing press with a proof sheet floating over it: crop marks at its corners, registration targets on its edges, a CMYK colour bar along the bottom and a big retro printer icon in the middle",
+  "by": "Bank Phrom",
+  "profile": "https://unsplash.com/@bank_phrom",
+  "source": "https://unsplash.com/photos/printing-machine-Tzm3Oyu_6sk",
+  "license": "Unsplash License",
+  "photoFile": "icon-resolution-for-print-press.jpg",
+  "designed": true
+ },
+ "h-icons-in-excel-and-google-sheets": {
+  "alt": "Artwork of a spreadsheet grid where each row has a status icon in a cell and a bar of orange people icons, one per cell with the last cut in half, inside an orange selection",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "h-icons-in-react-server-components": {
+  "alt": "A desk with a notebook and a laptop, split down the middle: the left half washed to paper holds a printed page of ink icons labelled Server, the right half darkened to a screen holds an app window with a glowing search box labelled Client, divided by a dashed use client line",
+  "by": "Mikhail Nilov",
+  "profile": "https://www.pexels.com/@mikhail-nilov/",
+  "source": "https://www.pexels.com/photo/laptop-notebook-office-pen-7594479/",
+  "license": "Pexels License",
+  "photoFile": "icons-in-react-server-components-desk2.jpg",
+  "designed": true
+ },
+ "h-icons-showing-as-squares": {
+  "alt": "A cream type-specimen poster over dark drawers of vintage letterpress type: its grid of serif letters has four empty tofu boxes with hex codes, and one cell fixed with a crisp cyan home icon, beside a giant tofu box",
+  "by": "Erik Mclean",
+  "profile": "https://www.pexels.com/@introspectivedsgn/",
+  "source": "https://www.pexels.com/photo/cabinet-drawers-with-various-vintage-letterpress-4140925/",
+  "license": "Pexels License",
+  "photoFile": "icons-showing-as-squares-typecase.jpg",
+  "designed": true
+ },
+ "h-instagram-highlight-covers": {
+  "alt": "A hand holds a phone against a pink and violet wall while a curved row of five matching orange highlight covers, with white shopping bag, star, help, utensils and mail icons, floats out of its screen",
+  "by": "MART PRODUCTION",
+  "profile": "https://www.pexels.com/@mart-production/",
+  "source": "https://www.pexels.com/photo/hand-holding-a-smartphone-with-blank-screen-8217517/",
+  "license": "Pexels License",
+  "photoFile": "instagram-highlight-covers-phone.jpg",
+  "designed": true
+ },
+ "h-migrate-icon-font-to-svg": {
+  "alt": "A bright room full of moving boxes behind one big open cardboard box with cyan tape and an SVG shipping label, packed with home, heart, star and bell icon tiles while a rocket tile is lowered in, and a struck-out font.woff tag left behind",
+  "by": "SHVETS production",
+  "profile": "https://www.pexels.com/@shvets-production/",
+  "source": "https://www.pexels.com/photo/pile-of-cardboard-boxes-scattered-on-floor-during-relocation-7203788/",
+  "license": "Pexels License",
+  "photoFile": "migrate-icon-font-to-svg-boxes.jpg",
+  "designed": true
+ },
+ "h-optimize-svg-icons-svgo": {
+  "alt": "Hands pressing the air out of a vacuum storage bag, with a puffy plush bell in an inflated clear pouch tagged 1,112 bytes and a cyan arrow to the same bell as a neat line icon sealed flat in a tight pouch tagged 281 bytes",
+  "by": "Timur Weber",
+  "profile": "https://www.pexels.com/@timur-weber/",
+  "source": "https://www.pexels.com/photo/a-woman-packing-using-a-vacuum-bag-9186215/",
+  "license": "Pexels License",
+  "photoFile": "optimize-svg-icons-svgo-c4.jpg",
+  "designed": true
+ },
+ "h-png-to-svg": {
+  "alt": "A monstera leaf photo whose left side is a coarse pixel mosaic that turns into smooth orange vector outlines with pen anchors and handles, next to a clean leaf icon tagged .svg",
+  "by": "Hayley Maxwell",
+  "profile": "https://unsplash.com/@hayleymaxwell",
+  "source": "https://unsplash.com/photos/green-leaf-with-white-background-Z-yBoorc158",
+  "license": "Unsplash License",
+  "photoFile": "png-to-svg-leaf.jpg",
+  "designed": true
+ },
+ "h-powerpoint-icons-missing": {
+  "alt": "A top-down desk with a laptop, tablet and mouse under a floating white ribbon of icon buttons with one puzzle-shaped gap, its orange Icons piece lying on the tablet below",
+  "by": "Jakub Zerdzicki",
+  "profile": "https://www.pexels.com/@jakubzerdzicki/",
+  "source": "https://www.pexels.com/photo/laptop-empty-tablet-screen-mockup-top-view-office-desk-28347996/",
+  "license": "Pexels License",
+  "photoFile": "powerpoint-icons-missing-desk.jpg",
+  "designed": true
+ },
+ "h-sell-products-with-free-icons": {
+  "alt": "A canvas tote bag and two white mugs on a table against a yellow wall, with icons printed on them: a retro cat on the tote, a sun and a heart on the mugs, a planner page in the bag, a sheet of icon stickers taped to the wall, a kraft price tag and an orange OK to sell chip",
+  "by": "Bach Hanzo",
+  "profile": "https://www.pexels.com/@bach-hanzo-1922634/",
+  "source": "https://www.pexels.com/photo/two-white-ceramic-mugs-and-a-white-bag-on-wooden-table-3551355/",
+  "license": "Pexels License",
+  "photoFile": "sell-products-with-free-icons-table.jpg",
+  "designed": true
+ },
+ "h-svg-icon-cut-off-or-blurry": {
+  "alt": "A silver picture frame on a grey wall with a cream mat cut into two windows: in the left one a cyan blueprint home icon fits on its grid, in the smaller right one the same icon is cut off at a red dashed edge",
+  "by": "Pict4life",
+  "profile": "https://unsplash.com/@pict4life",
+  "source": "https://unsplash.com/photos/empty-silver-picture-frame-on-a-wall-MgUVqNIo04Q",
+  "license": "Unsplash License",
+  "photoFile": "svg-icon-cut-off-or-blurry-c1.jpg",
+  "designed": true
+ },
+ "h-svg-icons-in-css": {
+  "alt": "Blurred spray paint cans behind a kraft paper stencil with a lightning bolt cut out of it, lifted off a white sheet where the same with icons bolt has been sprayed in bright cyan, with tags reading mask and background-color",
+  "by": "Felicity Tai",
+  "profile": "https://www.pexels.com/@felicity-tai/",
+  "source": "https://www.pexels.com/photo/spray-paints-without-caps-7952069/",
+  "license": "Pexels License",
+  "photoFile": "svg-icons-in-css-cans.jpg",
+  "designed": true
+ },
+ "h-svg-icons-in-email": {
+  "alt": "A wall of numbered wooden post office boxes, with white envelopes spilling out of one stuffed box, each stamped with a contact icon: mail, phone, globe, calendar and map pin, under a cyan 2x PNG label",
+  "by": "Hassan Bouamoud",
+  "profile": "https://www.pexels.com/@hassan-bouamoud-1857973307/",
+  "source": "https://www.pexels.com/photo/vintage-wooden-mailbox-with-letters-inside-32598664/",
+  "license": "Pexels License",
+  "photoFile": "svg-icons-in-email-mailbox3.jpg",
+  "designed": true
+ },
+ "h-svg-icons-in-react-and-nextjs": {
+  "alt": "A dark circuit board under a glowing cyan React component tree: a logo.svg file card is imported into a Logo node, and App branches to Logo, Nav and Page, whose leaves are home, search, bell and settings icons on white tiles",
+  "by": "ClickerHappy",
+  "profile": "https://www.pexels.com/@clickerhappy/",
+  "source": "https://www.pexels.com/photo/shallow-focus-photography-of-black-circuit-board-1448561/",
+  "license": "Pexels License",
+  "photoFile": "svg-icons-in-react-and-nextjs-circuit.jpg",
+  "designed": true
+ },
+ "h-svg-in-google-slides": {
+  "alt": "A projector on a flight case in a dark blue room beams a slide onto the wall: the same heart icon twice, one with jagged straight-line curves and one smooth and crisp",
+  "by": "Natasha Latinovska",
+  "profile": "https://www.pexels.com/@natasha-latinovska-1052962659/",
+  "source": "https://www.pexels.com/photo/light-of-projector-20728625/",
+  "license": "Pexels License",
+  "photoFile": "svg-in-google-slides-beam.jpg",
+  "designed": true
+ },
+ "h-svg-sprites": {
+  "alt": "Soft-focus sticker sheets behind a white with icons sticker sheet labelled sprite.svg with eleven icon stickers and their ids; the rocket sticker has been peeled off and floats along a dotted path into the empty slot of a small web page",
+  "by": "Mohamed hamdi",
+  "profile": "https://www.pexels.com/@mohamed-hamdi-510308652/",
+  "source": "https://www.pexels.com/photo/close-up-of-a-sheet-of-stickers-16605272/",
+  "license": "Pexels License",
+  "photoFile": "svg-sprites-c4.jpg",
+  "designed": true
+ },
+ "h-visual-schedule-icons": {
+  "alt": "A bright empty classroom with a laminated picture schedule strip on the wall: an orange Today tab, an empty slot showing its hook-and-loop dot, colourful sticker-style cards for reading, snack, play and lunch, and a Done pocket below holding a circle time card",
+  "by": "RDNE Stock project",
+  "profile": "https://www.pexels.com/@rdne/",
+  "source": "https://www.pexels.com/photo/wooden-tables-and-chairs-inside-a-classroom-8499580/",
+  "license": "Pexels License",
+  "photoFile": "visual-schedule-icons-classroom.jpg",
+  "designed": true
+ },
+ "m-align-icon-with-text-metrics": {
+  "alt": "Diagram of the word Settings with guide lines for line box top, cap height, x-height, baseline, descender and line box bottom, tinted empty space above the capitals and below the baseline, and two settings icons: one sitting on the baseline marked with a red cross, one centred between cap height and baseline marked with a green tick",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-align-icon-with-text-trim": {
+  "alt": "Before and after: two large Download buttons with the with icons download icon. The first, centred with align-items: center, shows a dashed text box taller than the letters and the icon sitting slightly low; the second adds text-box: trim-both cap alphabetic, so the dashed box hugs the letters and equal measures show the icon visually centred",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-animate-svg-icons-draw": {
+  "alt": "Three frames of a check circle icon drawing itself on a navy blueprint grid: at dashoffset 1 only a dotted ghost shows, at 0.5 half the circle is drawn with an arrow showing its direction, at 0 the full icon; below, one bar split into an equal dash and gap with a slider",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-animate-svg-icons-smil-timeline": {
+  "alt": "A timeline on a navy blueprint grid: an orange warning in April 2015 for Chrome’s intent to deprecate SMIL, a pause in August 2016 when the plan was suspended, and a big cyan tick in November 2026 for SMIL working in every major browser, with a spinning loader icon above",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-canva-transparent-png-download-panel": {
+  "alt": "A generic download panel set to PNG with a size slider and a greyed-out Transparent background switch locked with a violet lock and a Paid plans pill, beside a note card showing a star icon exported on a white box on the Free plan",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-canva-transparent-png-workaround": {
+  "alt": "Three steps: a star sticker and the word Sale exported on bright green, the same image in a generic editor with Remove background pressed, and the result on a dark sea photo with a magnifier showing a faint green fringe on the star edge",
+  "by": "은 하 (galaxim)",
+  "profile": "https://unsplash.com/@galaxim",
+  "source": "https://unsplash.com/photos/purple-and-blue-sky-over-the-sea-ZDOd2UNl1TQ",
+  "license": "Unsplash License",
+  "photoFile": "icon-black-or-white-background-sea.jpg",
+  "designed": true
+ },
+ "m-change-app-icons-android-before-after": {
+  "alt": "Two phone outlines side by side: on the left, labelled auto-themed, twelve one-colour green line icons on pale circles over a sage wallpaper; on the right, labelled your own set, the same twelve apps as soft clay icons on cream tiles over a peach and lilac wallpaper, joined by an orange arrow reading 512 px PNGs",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-change-app-icons-android-routes": {
+  "alt": "A decision diagram: a phone asking which phone you have branches to three cards, Pixel (Wallpaper and style, Icons: style and shape, no own pictures), Samsung (Themes, Icons or Good Lock, Theme Park: your own picture) and any phone (launcher app, edit icon: per-app PNG), each ending in camera, music and mail tiles",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-change-folder-icon-mac-windows-ico-sizes": {
+  "alt": "An exploded diagram of a real .ico file: a projects.ico card listing a size index of 16, 32, 48, 64 and 256, joined by lines to five cards holding a clay folder icon at each of those sizes; beside it, a crossed-out card showing photo.png renamed to photo.ico, with the note no size index inside",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-change-folder-icon-mac-windows-tahoe": {
+  "alt": "A plain blue folder beside a generic Customize Folder popover with three sections, Colour (seven circles, coral selected), Symbol (heart, book, briefcase, camera, music and star symbols, star selected) and an Emoji button, with dotted arrows leading to the same folder turned coral with a star pressed into it",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-change-svg-icon-color-css-mask": {
+  "alt": "Diagram: a cyan swatch labelled background-color: currentColor, plus the with icons home icon as a black stencil labelled mask: url(home.svg), equals the home icon in cyan, with the same icon below in slate, rose and white on dark",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-change-svg-icon-color-css-variables": {
+  "alt": "Three white cards with the same with icons clay heart: the default red one, a lavender one and a mint one, each labelled with the single CSS variable line that changed its body colour while the shine and shadow stay the same",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-custom-app-icons-iphone-steps": {
+  "alt": "A generic phone showing an Add to Home Screen sheet with a soft 3D music-note tile, a name field reading Music with the keyboard open and an Add button, annotated with three orange callouts: 1 tap the icon, 2 choose Photo or Choose File from a menu listing Take Photo, Choose Photo and Choose File, 3 tap Add",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-custom-app-icons-iphone-tinted": {
+  "alt": "Two phone home screens side by side: on the left, labelled default, eight full-colour tiles; on the right, labelled tinted, six of those tiles turned into amber one-colour glass on a dark wallpaper while a pink camera and a pink music-note tile stay in full colour, each tagged your picture, with a note reading as reported",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-custom-emoji-and-stickers-canvas-sizes": {
+  "alt": "Four transparent checkerboard canvases drawn to scale with the same kawaii rocket icon: 128 px for Slack and Discord emoji, 280 px for a Notion page icon, 320 px for a Discord sticker and 512 px with a 16 px margin for a WhatsApp sticker, each with its file limit",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-custom-emoji-and-stickers-gif-edges": {
+  "alt": "Two dark panels with the same kawaii heart icon: a GIF blended for white shows a pale halo around its edge, while a GIF blended for dark or a PNG has clean edges, each with a zoomed circle of its edge pixels",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-emoji-vs-icons-screen-reader": {
+  "alt": "Two cards with the same three-line list: with emoji bullets a screen reader says rocket, check mark and sparkles before each line, while with decorative line icon bullets it reads only Faster setup, Free forever, New styles",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-emoji-vs-icons-three-devices": {
+  "alt": "A phone, a tablet and a laptop each show a Launch day! chat bubble whose smiley is drawn three different ways, while the duo rocket icon below each bubble looks exactly the same on all three screens",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-favicon-not-showing-in-google-before-after": {
+  "alt": "Two search result rows for Fern and Pine Plants: before, with a grey globe placeholder, and after, with a round green leaf favicon, joined by a days to weeks clock label",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-favicon-not-showing-in-google-checklist": {
+  "alt": "A flowchart of five favicon checks with line icons (home page, fetchable, square, PNG or ICO, recrawl), each no leading to a fix, ending at a search result with a green leaf favicon",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-favicon-sizes-and-files-dark-tabs": {
+  "alt": "Light and dark browser tab bars compared: a dark outline rocket favicon shows on the light tab but almost disappears on the dark one, while the same rocket in white on an orange plate stays clear on both",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-favicon-sizes-and-files-safe-zone": {
+  "alt": "A maskable icon drawn large: an orange square with a white heart, a dashed circle marking the safe zone at 80 percent and a hatched outer edge that may be cropped, beside the same icon cut into a circle, a squircle and a rounded square",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-favicon-sizes-and-files-set": {
+  "alt": "Five white cards showing the favicon files to ship, each with an orange rocket: favicon.ico at 16, 32 and 48 px, favicon.svg with a sun and moon, a 180 px Apple touch icon, 192 and 512 px manifest icons, and an optional maskable icon in a dashed circle; below, mstile, browserconfig.xml and old Apple sizes are crossed out",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-free-icon-in-logo-make-it-yours": {
+  "alt": "Three steps on cream: a plain leaf icon labelled Free icon, a new green mark where two leaves form the letter M labelled Redrawn, and that mark beside the made-up name Meadow Studio labelled Your logo, joined by thin arrows",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-free-icon-in-logo-same-icon": {
+  "alt": "Three made-up businesses side by side, a café called Morning Co., a candle shop called Wick and Wax and a podcast called Slow Sips, all using the exact same coffee icon, joined by a dashed orange line under the heading Same icon, three businesses and a chip saying Nobody owns it",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-how-to-design-an-icon-anatomy": {
+  "alt": "The calendar-clock line icon drawn large on a faint 24 pixel grid, with callouts for one stroke with round caps, radius 2 corners, the 2 pixel padding, the square 18 keyline, the radius 4 badge centred at 17.5, 17.5, and the body trimmed back from the badge",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-how-to-design-an-icon-figma-setup": {
+  "alt": "A generic design tool mockup: a selected Continue button with an arrow-right icon, and a properties panel with an instance swap icon property, a preferred list of arrow-right, check, plus and download, a show icon toggle, and icon size, stroke and color variables",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-how-to-design-an-icon-keylines": {
+  "alt": "A 24 by 24 pixel grid with the 2 pixel padding shaded and four red keylines, a circle, a square, a portrait and a landscape rectangle, beside four panels where check-circle, calendar, file and monitor line icons sit on each keyline",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-black-or-white-background-fake-png": {
+  "alt": "Two heart icon downloads that look identical on a white download page; on a dark navy slide the fake PNG shows a grey and white checkerboard square behind the heart while the real PNG shows only the heart",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-black-or-white-background-four-causes": {
+  "alt": "Four cards with the same orange rocket icon on a peach slide: in a black square when pasted, in a white square when saved as JPG, on a baked-in checkerboard as a fake PNG, and floating cleanly as a real PNG or SVG, each with its fix",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-black-or-white-background-set-transparent": {
+  "alt": "Three panels on a peach slide: a blue check-circle icon on a white square; after Set Transparent Color the square is gone but the white tick is now a hole, marked with a red arrow; and a see-through download with the white tick intact",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-button-size-and-labels-spacing": {
+  "alt": "Two toolbars of four 20 pixel icon buttons, bold, italic, link and trash, drawn large on blueprint paper: packed 2 pixels apart their dashed 24 pixel circles overlap and fail WCAG 2.5.8, spaced 8 pixels apart the circles touch nothing and pass",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-button-size-and-labels-target": {
+  "alt": "A diagram of an icon button cut open: a cursor clicks the lid of a trash icon inside an svg inside a button, and an arrow bubbles up from the path, labelled event.target, through the svg to the button, labelled event.currentTarget, beside a green note reading svg pointer-events none",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-inside-input-field-anatomy": {
+  "alt": "Blueprint diagram of a search field pulled apart into three tilted layers: the dashed wrapper with position relative at the bottom, the input with a hatched start padding in the middle, and the with icons search icon on top with pointer-events none, a cursor arrow passing straight through it to the input",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-inside-input-field-dark-mode": {
+  "alt": "A two by two grid of the same search field with the with icons search icon: as a background-image and as inline SVG with currentColor, in a light and a dark theme. In dark mode the background-image icon is dark grey and barely visible, marked with a cross, while the inline SVG icon is light and clear, marked with a tick",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-resolution-for-print-business-card": {
+  "alt": "A business card drawn to scale with an orange side panel, placeholder contact lines and small solid phone, mail, globe and map pin icons, overlaid with dashed bleed, solid trim and dotted safe area guides and a callout on the phone icon",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-resolution-for-print-rgb-cmyk": {
+  "alt": "Two panels: a laptop screen in a dim room shows a rocket icon glowing in vivid electric blue, labelled RGB light, and a paper card shows the same rocket printed in a slightly deeper blue with cyan, magenta, yellow and black ink dots, labelled CMYK ink",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icon-resolution-for-print-vector-vs-png": {
+  "alt": "The same line printer icon enlarged in two big circles: on the left from an SVG or PDF with perfectly crisp lines, on the right from a 64 px PNG with visible square pixels, each with a magnifier on one rounded corner",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icons-in-excel-and-google-sheets-pictograph": {
+  "alt": "A chart with three bars of the same 4,500 value: a plain orange bar, one people icon stretched along the bar, and four and a half crisp people icons stacked in a row",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icons-in-excel-and-google-sheets-status-cells": {
+  "alt": "Two copies of a five-row task tracker: on the left the Status column shows plain traffic-light dots, on the right it shows a green tick, amber clock, red warning and grey cross icon",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icons-in-react-server-components-boundary": {
+  "alt": "A two-zone diagram: on the paper Server Components side, layout, nav and page cards with home, search and bell icons send HTML only with 0 KB icon JS to the browser; on the dark use client side, a search box component ships its search icon as JavaScript",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icons-in-react-server-components-pass-icon": {
+  "alt": "Two lanes crossing a dashed server and client boundary: icon={Search} passes a function and its arrow is stopped at the line by a red x, while icon={<Search />} passes an element whose arrow crosses into a client button showing the search icon, marked with a green check",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icons-showing-as-squares-before-after": {
+  "alt": "The same app toolbar twice: before, labelled Icon font failed, the word home and four empty tofu boxes; after an arrow, labelled SVG icons, crisp home, search, bell, settings and user line icons",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-icons-showing-as-squares-three-states": {
+  "alt": "Three browser frames showing the same toolbar button: a clean house icon labelled Font loaded, an empty box with the hex code F015 labelled Font missing: a box, and the plain word home labelled Ligature font missing: the word",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-instagram-highlight-covers-before-after": {
+  "alt": "Two rows of five highlight circles named Shop, Reviews, FAQ, Menu and Contact: the before row mixes photo crops and five icon styles at odd sizes, the after row uses white solid icons on one orange, centred and the same size",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-instagram-highlight-covers-safe-circle": {
+  "alt": "A square orange 1080 by 1080 cover with a white shopping bag icon inside a dotted safe circle, a dashed circle showing what Instagram displays, hatched corners that get cropped, and the same set of five covers shown tiny in a profile row",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-migrate-icon-font-to-svg-class-swap": {
+  "alt": "A before and after strip on warm paper: an i tag with fa-solid fa-house fa-fw classes drawn from a font file in one colour, and the same i tag with with with-home with-solid with-fw classes showing a real solid home SVG, joined by a curved arrow reading change the class names only",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-optimize-svg-icons-svgo-before-after": {
+  "alt": "Two code cards: on the left the bell icon SVG as a design tool exports it, 1,112 bytes, with its comment, metadata, empty groups, ids and long decimals marked red; on the right the same icon after SVGO, 281 bytes, and between them the two render identically",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-optimize-svg-icons-svgo-svgomg": {
+  "alt": "A generic SVG optimiser window: a bell icon preview with a size readout of 1.09 KB to 0.27 KB, and settings where Remove viewBox, Remove title and Prefer viewBox to width/height are highlighted as kept off, precision is set to 2 and multipass is on",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-optimize-svg-icons-svgo-what-breaks": {
+  "alt": "Four tiles of before and after pairs: removeViewBox leaves a home icon small in the corner of its frame, convertColors with currentColor turns a two-tone home icon flat navy, cleanupIds empties a sprite file, and precision 0 makes a bell outline drift",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-png-to-svg-real-vs-fake": {
+  "alt": "Two cards with the same small orange heart icon and a big magnifier on its edge: the traced SVG shows a smooth curve with pen anchor points, the fake SVG with a PNG inside shows a jagged staircase of pixels",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-png-to-svg-trace-results": {
+  "alt": "Three rows of input PNG to traced SVG with an orange rocket icon: a large flat rocket traces cleanly, a tiny blurry rocket traces into a lumpy shape with melted corners, and a glossy 3D rocket traces into blotchy flat patches",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-powerpoint-icons-missing-flowchart": {
+  "alt": "A flowchart starting at No Icons button, splitting into three questions with violet icons (grey button, no button, opens but fails), each with its fix, all ending at bring your own icons",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-powerpoint-icons-missing-privacy-settings": {
+  "alt": "A generic Account privacy settings panel with three toggles; the switch for experiences that download online content is off and ringed in orange, with a callout showing a greyed-out Icons button",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-sell-products-with-free-icons-cricut-stroke": {
+  "alt": "Three panels on a green cutting mat: a line-style heart as it looks on screen, the same heart as the blade sees it with only a thin red dashed hairline cut down the middle of its stroke, and a solid heart with a red dashed cut running cleanly round its outer edge",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-sell-products-with-free-icons-product-vs-file": {
+  "alt": "Two panels: on the left, under a green tick and Selling a product, a laptop with a cat sticker, a mug printed with small icons and a planner page; on the right, under a red cross and Selling the icons, a ZIP of 50 icon PNGs, fanned PNG files and a clipart bundle tag, noting that most licences forbid this",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icon-cut-off-or-blurry-blur": {
+  "alt": "Zoomed pixel grids: a wall line on whole pixels makes one solid dark column (crisp), shifted half a pixel it becomes two grey columns (soft); below, the home icon rendered at 24 px and 19.2 px, blown up to show its pixels",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icon-cut-off-or-blurry-clipped": {
+  "alt": "Three cards on graph paper with a dashed red viewBox edge: a circle whose stroke spills over the edge, a bell icon whose right side is cut by a shifted viewBox, and a gear icon clipped top and bottom by a short button, each with a fixed version and a green check",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icon-cut-off-or-blurry-viewbox": {
+  "alt": "Three cards: a home icon on a 24 by 24 cyan grid labelled viewBox, the same icon filling picture frames of 16, 24 and 48 px labelled width and height, and a 48 px frame with the icon stuck small in its corner labelled no viewBox",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icons-in-css-class-anatomy": {
+  "alt": "Code diagram: the tag i class with with-home points to two rule cards, the shared .with rule with a 1em box, vertical-align -0.125em and an ::after painted with currentColor through a mask, and the .with-home rule holding one data URI variable, above the home icon beside the word Home in slate, teal and white on navy",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icons-in-css-mask-anatomy": {
+  "alt": "Exploded isometric diagram of a CSS mask icon: an empty ::before box at the bottom, the same box filled with currentColor in the middle and the with icons external-link icon as a black stencil on top, beside the result: Read the docs with the icon in the link colour",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icons-in-email-clients": {
+  "alt": "The same newsletter open in three generic email windows: in Apple Mail its four blue contact icons show crisply, in Gmail they show but are tagged PNG, and in Outlook 2016 only empty boxes appear where the icons should be",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icons-in-email-dark-mode": {
+  "alt": "An email footer split into a light half and a dark half: black outline phone, mail, globe and calendar icons are clear on light but almost vanish on dark, while the same icons in white on blue circles stay clear on both halves",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icons-in-react-and-nextjs-config-before-after": {
+  "alt": "Two code editor cards on a pale blueprint grid: a faded Next 15 webpack config rule for SVGR with a red fails next build in 16 tag, and the Next 16 turbopack rules config for svg files with a green works tag",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-icons-in-react-and-nextjs-four-ways": {
+  "alt": "A flowchart on a pale blueprint grid: from I have an SVG icon, part of a full icon set leads to an icon component package, otherwise needing CSS colour leads to SVGR and not needing it leads to an img tag, with a side note on sprites",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-in-google-slides-size-guide": {
+  "alt": "A white 16:9 slide with an orange lightbulb icon by a bullet, a rocket in a row of three and a big target, each measured and labelled 256-512 px, 1024 px and 2048 px",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-in-google-slides-wmf-vs-png": {
+  "alt": "Two white panels compare one heart icon zoomed in: after the WMF round trip its curves are straight segments with dots at each corner, while the large PNG version is smooth",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-sprites-how-it-works": {
+  "alt": "A tall card labelled sprite-line.svg listing four symbols, home, search, bell and settings, with their ids, and cyan arrows from the matching icons in a web page sidebar back to each symbol, with a callout reading use href #with-bell",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-svg-sprites-recolour": {
+  "alt": "The same duo home icon from one sprite symbol in three colour sets: navy with sky tint and amber door, green with mint tint and coral door, and white on a dark tile with violet tint and pink door, each with a legend of its CSS values",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-visual-schedule-icons-card-sheet": {
+  "alt": "A printable landscape sheet of twelve square visual schedule cards in a four by three grid, each with a violet duo icon and a bold label from Wake up to Home, dashed cut lines round every card and a bracket showing each card is 2.5 in or 6.4 cm",
+  "license": "with icons artwork (MIT)",
+  "designed": true
+ },
+ "m-visual-schedule-icons-first-then": {
+  "alt": "A laminated First and Then board on a wooden table, with a kawaii pencil card labelled Writing under First, an arrow, a kawaii playground card labelled Playtime under Then, hook-and-loop dots showing, and a finished envelope with a check mark beside the board",
+  "license": "with icons artwork (MIT)",
+  "designed": true
  }
 }

@@ -87,7 +87,7 @@
 
 /* photo */
 .b-photo { margin-block: 2em; }
-.b-photo img { display: block; border-radius: var(--radius); width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: var(--paper-2); border: 1px solid var(--rule); }
+.b-photo img { display: block; border-radius: var(--radius); width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; background: var(--paper-2); border: 1px solid var(--rule); }
 .b-photo figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; font-size: var(--step--1); color: var(--muted); margin-top: 10px; line-height: 1.5; }
 .b-photo figcaption small { font-size: 12.5px; } .b-photo figcaption a { color: inherit; }
 
@@ -423,3 +423,6 @@ button.b-tile { appearance: none; font: 500 11.5px/1.2 var(--font-mono); cursor:
 .pg main .toc a:hover { color: var(--ink); }
 .pg main .toc a.is-active { color: var(--gt); }
 .prose a.btn, .prose a.btn:hover { color: var(--btn-fg, #111318); text-decoration: none; }
+/* placeholder for a designed in-post image that is not rendered yet (blocks.mjs art()); never ships: --check fails on it */
+.b-pending__box { aspect-ratio: 16 / 10; display: grid; place-content: center; gap: 8px; padding: 32px; text-align: center; border-radius: var(--radius); border: 2px dashed var(--rule-strong); background: var(--paper-2); color: var(--ink-2); }
+.b-pending__box strong { font-family: var(--font-display); }

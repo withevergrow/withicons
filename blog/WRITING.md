@@ -27,6 +27,12 @@ only adds article components, using the site's tokens; each section gets one sty
   with `node blog/tools/hero-art.mjs --only=<slug> --preview --guides` (`.preview/heroes/`), then run it without `--preview`
   to write `blog/images/h-<slug>-{1600,800}.webp` + `-og.jpg` (the social card, title added automatically) and register it
   in images.json with the base photo's credit. Short labels only in the art, never the post title, no third-party logos.
+- **Designed in-post images** use the same system: `art('m-<slug>-<name>', caption, { brief })` in the body, drawn by a spec
+  at `blog/media/<slug>/<name>.mjs` (rendered by the same `hero-art.mjs --only=<slug>`; whole 16:10 frame shows, keep a 64 px
+  margin). Until it is rendered the post shows a placeholder and `--check` fails, so nothing half-done ships. Prefer them to
+  plain photos: a chart, a before/after, an annotated screenshot-style mockup, a do/don't pair.
+- **New photos**: `python blog/tools/get-photo.py <unsplash.com/photos/… or pexels.com/photo/… URL> <name>` saves
+  `blog/media/photos/<name>.jpg`; use it as `photoFile` with `credit: { by, profile, source, license }` in a hero or in-post spec.
 - Icon names: `forge/manifest.json`. Styles: `ALL_STYLES` (from STYLE_ORDER). An unknown name or style fails the build.
 
 ## Post fields

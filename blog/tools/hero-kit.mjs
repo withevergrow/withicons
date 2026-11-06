@@ -8,9 +8,11 @@
 //   cards: 16:10 (all of it). Social card (og.jpg): y 80..920, with a title card over the bottom-left.
 //   RESERVED: the bottom-left corner (x < 700 and y > 600) holds the floating stickers on the article page and the
 //   title card on the social image. Keep it to photo / background only.
-//   BASE (pick one): base: "<key>" a photo from blog/images.json | photoFile: "<file>" a new photo saved in blog/heroes/assets/
+//   BASE (pick one): base: "<key>" a photo from blog/images.json | photoFile: "<file>" a new photo in blog/media/photos/ (python blog/tools/get-photo.py <page URL> <name>)
 //   with credit: { by, profile, source, license } (Unsplash or Pexels, free licence) | neither: pure artwork, set bg (CSS).
 //   => put the focal art inside x 160..1440, y 120..880, and keep it out of the reserved corner.
+//   IN-POST IMAGES (blog/media/<slug>/<name>.mjs, same spec format): shown whole at 16:10, no stickers, no social card,
+//   so the only rule is a 64 px clear margin. Explain one idea per image; readers see it about 760 px wide.
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -46,7 +48,11 @@ export function at(html, o = {}) {
 
 // ---------------------------------------------------------------- icons
 /** A real with icons SVG (any style in STYLE_ORDER), at any size. */
-export const icon = (name, style = 'line', size = 64, color) => `<span class="hk-icon" style="${color ? `color:${color};` : ''}width:${size}px;height:${size}px">${blockIcon(name, style, size)}</span>`
+// every call gets its own gradient ids (rich styles use ids like wg-clay-heart-0): two copies of one icon on a stage
+// would otherwise share the first copy's gradients, so per-copy --with-* colours would be ignored. Deterministic counter.
+let uid = 0
+const uniq = svg => { const n = ++uid; return svg.replace(/(id="|#)wg-/g, `$1wg${n}-`) }
+export const icon = (name, style = 'line', size = 64, color) => `<span class="hk-icon" style="${color ? `color:${color};` : ''}width:${size}px;height:${size}px">${uniq(blockIcon(name, style, size))}</span>`
 
 /**
  * A sticker-like icon tile (the site's rounded square). o: { size = 180, tone: 'soft' | 'card' | 'glass' | 'ink' | 'color', ring, shadow = true, label, ...at }

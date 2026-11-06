@@ -1,7 +1,11 @@
-// Renders the designed Journal heroes: blog/heroes/<slug>.mjs -> blog/images/h-<slug>-{1600,800}.webp + h-<slug>-og.jpg,
-// and registers each one in blog/images.json (credited to the Unsplash photographer of its base photo).
+// Renders the Journal's designed images and registers each one in blog/images.json (credited to the photographer of its
+// base photo, or "Artwork: with icons"):
+//   featured images  blog/heroes/<slug>.mjs        -> blog/images/h-<slug>-{1600,800}.webp + h-<slug>-og.jpg (social card)
+//   in-post images   blog/media/<slug>/<name>.mjs  -> blog/images/m-<slug>-<name>-{1600,800}.webp, used in a post as
+//                                                    art('m-<slug>-<name>', caption) (blocks.mjs)
+// New Unsplash / Pexels photos live in blog/media/photos/ (fetch them with blog/tools/get-photo.py), used as photoFile.
 //
-//   node blog/tools/hero-art.mjs --only=slug,slug --preview   look first: writes .preview/heroes/<slug>.jpg (+ -og.jpg)
+//   node blog/tools/hero-art.mjs --only=slug,slug --preview   look first: .preview/heroes/<slug>.jpg (+ -og.jpg, m-*.jpg)
 //   node blog/tools/hero-art.mjs --only=slug --preview --guides    the same with the crop / reserved zones drawn on
 //   node blog/tools/hero-art.mjs [--only=...]                   final files + images.json (one writer at a time)
 //
@@ -24,18 +28,28 @@ const args = process.argv.slice(2)
 const ONLY = (args.find(a => a.startsWith('--only=')) || '').slice(7).split(',').filter(Boolean)
 const PREV = args.includes('--preview'), GUIDES = args.includes('--guides')
 const CHROME = process.env.CHROME || ['C:/Program Files/Google/Chrome/Application/chrome.exe', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', '/usr/bin/google-chrome'].find(p => fs.existsSync(p))
-const CATS = { comparisons: 'Comparison', guides: 'Guide', basics: 'Design basics', ai: 'AI & tools' }
-const CAT_STYLE = { comparisons: 'line', guides: 'solid', basics: 'duo', ai: 'gloss' }
+const CATS = { comparisons: 'Comparison', guides: 'Guide', basics: 'Design basics', code: 'Icons in code', ai: 'AI & tools' }
+const CAT_STYLE = { comparisons: 'line', guides: 'solid', basics: 'duo', code: 'blueprint', ai: 'gloss' }
 const reg = JSON.parse(fs.readFileSync(REGISTRY, 'utf8'))
 const url = f => pathToFileURL(f).href
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
-const slugs = fs.readdirSync(SPECS).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).map(f => f.slice(0, -4)).filter(s => !ONLY.length || ONLY.includes(s)).sort()
-if (!slugs.length) { console.error('hero-art: no specs matched'); process.exit(1) }
+const MEDIA = path.join(BLOG, 'media')
+const PHOTOS = path.join(MEDIA, 'photos')
+const want = s => !ONLY.length || ONLY.includes(s)
+const jobs = fs.readdirSync(SPECS).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).map(f => f.slice(0, -4)).filter(want).sort()
+  .map(slug => ({ kind: 'hero', slug, file: path.join(SPECS, `${slug}.mjs`), key: `h-${slug}` }))
+if (fs.existsSync(MEDIA)) for (const slug of fs.readdirSync(MEDIA).sort()) {
+  const dir = path.join(MEDIA, slug)
+  if (slug === 'photos' || !want(slug) || !fs.statSync(dir).isDirectory()) continue
+  for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mjs') && !f.startsWith('_')).sort())
+    jobs.push({ kind: 'media', slug, file: path.join(dir, f), key: `m-${slug}-${f.slice(0, -4)}` })
+}
+if (!jobs.length) { console.error('hero-art: no specs matched'); process.exit(1) }
 fs.mkdirSync(TMP, { recursive: true }); fs.mkdirSync(PREVIEW, { recursive: true })
 
-// the photo under the art: a registered photo key (base), a new file in blog/heroes/assets/ (photoFile + credit), or none
-const photoPath = spec => spec.photoFile ? path.join(SPECS, 'assets', spec.photoFile) : spec.base ? path.join(IMAGES, `${spec.base}-1600.webp`) : null
+// the photo under the art: a registered photo key (base), a new file in blog/media/photos/ (photoFile + credit), or none
+const photoPath = spec => spec.photoFile ? path.join(PHOTOS, spec.photoFile) : spec.base ? path.join(IMAGES, `${spec.base}-1600.webp`) : null
 function page(spec, inner, w, h, extraCss = '') {
   const photo = photoPath(spec)
   if (photo && !fs.existsSync(photo)) throw new Error(`photo not found: ${photo}`)
@@ -51,7 +65,9 @@ ${spec.css || ''}
 ${extraCss}
 </style></head><body>${inner}</body></html>`
 }
-const stage = spec => `<div class="stage">${photoPath(spec) ? `<img class="stage__photo" src="${url(photoPath(spec))}" alt="">` : ''}<div class="stage__overlay"></div><div class="stage__art">${spec.art()}</div>${GUIDES ? guides() : ''}</div>`
+const stage = (spec, kind = 'hero') => `<div class="stage">${photoPath(spec) ? `<img class="stage__photo" src="${url(photoPath(spec))}" alt="">` : ''}<div class="stage__overlay"></div><div class="stage__art">${spec.art()}</div>${GUIDES ? (kind === 'hero' ? guides() : mediaGuides()) : ''}</div>`
+// in-post images show whole (16:10), so only a 64 px margin is kept clear
+const mediaGuides = () => ['left:0;right:0;top:0;height:64px', 'left:0;right:0;bottom:0;height:64px', 'top:0;bottom:0;left:0;width:64px', 'top:0;bottom:0;right:0;width:64px'].map(p => `<div style="position:absolute;pointer-events:none;z-index:99;${p};background:rgba(255,0,0,.25)"></div>`).join('')
 function guides() {
   const z = 'position:absolute;pointer-events:none;z-index:99;'
   return `<div style="${z}left:0;right:0;top:0;height:100px;background:rgba(255,0,0,.25)"></div><div style="${z}left:0;right:0;bottom:0;height:100px;background:rgba(255,0,0,.25)"></div>
@@ -89,36 +105,39 @@ async function fit(html, name, w, h, dpr, cap) {
 }
 
 const posts = new Map()
-for (const slug of slugs) {
+for (const slug of new Set(jobs.map(j => j.slug))) {
   const f = path.join(BLOG, 'posts', `${slug}.mjs`)
   if (fs.existsSync(f)) posts.set(slug, (await import(url(f))).default)
 }
+const made = {}
 let n = 0
-for (const slug of slugs) {
-  const spec = (await import(url(path.join(SPECS, `${slug}.mjs`)) + `?t=${Date.now()}`)).default
+for (const job of jobs) {
+  const { slug, key, kind } = job
+  const spec = (await import(url(job.file) + `?t=${Date.now()}`)).default
   const post = posts.get(slug) || { title: slug, category: 'guides' }
-  if (spec.base && !reg[spec.base]) throw new Error(`${slug}: base "${spec.base}" is not a photo in blog/images.json`)
-  if (spec.photoFile && !(spec.credit?.by && spec.credit?.source)) throw new Error(`${slug}: a new photo (photoFile) needs credit { by, profile, source, license }`)
-  if (!spec.alt || spec.alt.length < 40) throw new Error(`${slug}: alt text should describe the artwork (40+ chars)`)
-  const hero = page(spec, stage(spec), 1600, 1000)
-  const og = ogPage(spec, post)
+  if (spec.base && !reg[spec.base]) throw new Error(`${key}: base "${spec.base}" is not a photo in blog/images.json`)
+  if (spec.photoFile && !(spec.credit?.by && spec.credit?.source)) throw new Error(`${key}: a new photo (photoFile) needs credit { by, profile, source, license }`)
+  if (!spec.alt || spec.alt.length < 40) throw new Error(`${key}: alt text should describe the artwork (40+ chars)`)
+  const html = page(spec, stage(spec, kind), 1600, 1000)
+  const og = kind === 'hero' ? ogPage(spec, post) : null
+  const name = kind === 'hero' ? slug : key
   if (PREV) {
-    fs.writeFileSync(path.join(PREVIEW, `${slug}.jpg`), await shot(hero, slug, 1600, 1000, { type: 'jpeg', quality: 86 }))
-    fs.writeFileSync(path.join(PREVIEW, `${slug}-og.jpg`), await shot(og, slug + '-og', 1200, 630, { type: 'jpeg', quality: 86 }))
-    console.log(`  preview ${slug}: .preview/heroes/${slug}.jpg, ${slug}-og.jpg`)
+    fs.writeFileSync(path.join(PREVIEW, `${name}.jpg`), await shot(html, name, 1600, 1000, { type: 'jpeg', quality: 86 }))
+    if (og) fs.writeFileSync(path.join(PREVIEW, `${name}-og.jpg`), await shot(og, name + '-og', 1200, 630, { type: 'jpeg', quality: 86 }))
+    console.log(`  preview ${key}: .preview/heroes/${name}.jpg${og ? `, ${name}-og.jpg` : ''}`)
   } else {
-    const key = `h-${slug}`
-    const big = await fit(hero, slug, 1600, 1000, 1, 300_000)
-    const small = await fit(hero, slug + '-800', 1600, 1000, 0.5, 120_000)
+    const big = await fit(html, name, 1600, 1000, 1, 300_000)
+    const small = await fit(html, name + '-800', 1600, 1000, 0.5, 120_000)
     fs.writeFileSync(path.join(IMAGES, `${key}-1600.webp`), big)
     fs.writeFileSync(path.join(IMAGES, `${key}-800.webp`), small)
-    fs.writeFileSync(path.join(IMAGES, `${key}-og.jpg`), await shot(og, slug + '-og', 1200, 630, { type: 'jpeg', quality: 84 }))
+    if (og) fs.writeFileSync(path.join(IMAGES, `${key}-og.jpg`), await shot(og, name + '-og', 1200, 630, { type: 'jpeg', quality: 84 }))
     const b = spec.base ? reg[spec.base] : spec.credit || {}
-    reg[key] = { alt: spec.alt, ...(b.by ? { by: b.by, profile: b.profile, source: b.source, license: b.license } : { license: 'with icons artwork (MIT)' }), ...(spec.base ? { base: spec.base } : spec.photoFile ? { photoFile: spec.photoFile } : {}), designed: true }
+    made[key] = { alt: spec.alt, ...(b.by ? { by: b.by, profile: b.profile, source: b.source, license: b.license } : { license: 'with icons artwork (MIT)' }), ...(spec.base ? { base: spec.base } : spec.photoFile ? { photoFile: spec.photoFile } : {}), designed: true }
     console.log(`  ${key}: ${Math.round(big.length / 1000)} KB / ${Math.round(small.length / 1000)} KB`)
   }
   n++
 }
 await browser.close()
-if (!PREV) fs.writeFileSync(REGISTRY, JSON.stringify(reg, null, 1) + '\n')
-console.log(`hero-art: ${n} hero${n === 1 ? '' : 's'} ${PREV ? 'previewed' : 'written'}`)
+// re-read the registry just before writing, so entries added meanwhile are kept
+if (!PREV) { const now = JSON.parse(fs.readFileSync(REGISTRY, 'utf8')); fs.writeFileSync(REGISTRY, JSON.stringify({ ...now, ...made }, null, 1) + '\n') }
+console.log(`hero-art: ${n} image${n === 1 ? '' : 's'} ${PREV ? 'previewed' : 'written'}`)

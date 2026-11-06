@@ -127,3 +127,51 @@ These are not done in this round, because the pages belong to other owners (see 
   redirect any post that competes with its own /free lander.
 - **GEO:** track Bing AI Performance citations per page, and ask ChatGPT, Perplexity, Copilot and Gemini the 10 commercial
   questions monthly. Note whether with icons is named, and which page is cited.
+
+## 7. Round 2 (2026-11-06): questions with stale answers
+
+Research (`.tmp/questions-dev.md`, `.tmp/questions-everyday.md`, not committed) looked for questions people keep asking where
+the top answers are years old or now wrong. Developer demand comes from Stack Overflow view counts (for example 3.5M views
+on "change an SVG's colour with CSS"). Everyday demand comes from support-forum threads (Microsoft, Google, Apple, Canva,
+Squarespace, Wix). Each post below opens with the answer for **today** and says plainly what changed and when.
+
+Developer questions go in a new **Icons in code** section (hub `blog/icons-in-code.html`, blueprint accent).
+
+| Post | Question it answers | What the old answers get wrong |
+|---|---|---|
+| change-svg-icon-color-css | How do I change an SVG icon's colour with CSS? | Modernizr, `<object>`, jQuery inlining, filter hacks. `mask-image` has been Baseline since Dec 2023 |
+| svg-icons-in-css | Can I use an SVG in `::before` or `background`? | "Not possible", base64 "for IE"; mask + `currentColor` is the answer now |
+| align-icon-with-text | How do I vertically align an icon with text? | Magic `top: .15em`; CSS `text-box` became Baseline in Aug 2026 |
+| svg-icon-cut-off-or-blurry | Why is my SVG icon cut off, blurry or the wrong size? | "Delete width/height"; SVGO v4 (June 2025) keeps viewBox; `vector-effect` for strokes |
+| svg-sprites | How do SVG sprites work in 2026? | `xlink:href`, svg4everybody; cross-origin `<use>` still fails; CSS variables now style inside `<use>` |
+| optimize-svg-icons-svgo | How do I optimise SVG icons without breaking them? | SVGO v3 defaults removed viewBox; v4 changed the defaults |
+| svg-icons-in-react-and-nextjs | How do I import SVG icons in React and Next.js? | CRA's ReactComponent import; webpack configs that fail under Next 16's default Turbopack |
+| icons-in-react-server-components | Why are my icons huge / client-only in Next.js? | `"use client"` on the root layout, `import *` lookups, `@react-icons/all-files` |
+| migrate-icon-font-to-svg | How do I move from an icon font to SVG? | FontForge scripting, Batik |
+| favicon-sizes-and-files | Which favicon files do I need in 2026? | "Safari ignores SVG favicons" (Safari 26 supports them); `"any maskable"` |
+| svg-icons-in-email | Can I use SVG icons in email? | "Gmail will never support SVG"; Gmail now renders it, rasterised |
+| icons-showing-as-squares | Why do my icons show as squares or text? | Retired CDN links, mixed Font Awesome versions, Material Icons ligatures |
+| icon-inside-input-field | How do I put an icon inside an input? | 2009 background-GIF answer |
+| icon-button-size-and-labels | How big should an icon button be, and how do I label it? | "44 px is the WCAG rule" (WCAG 2.2 AA is 24 px); `event.target` is the SVG |
+| animate-svg-icons | Is SMIL deprecated? How should I animate icons? | "SMIL is deprecated" (2015-16) |
+| how-to-design-an-icon (basics) | How do I draw an icon on a 24 px grid with keylines? | Guides that predate Figma component properties and variables |
+| emoji-vs-icons (basics) | Emoji or icons? Can I use Apple emoji commercially? | Emojipedia 2017 lists of "free" sets |
+| icon-resolution-for-print | What resolution do icons need for print? | Generic "300 DPI" with nothing about vectors |
+| svg-in-google-slides | Can I put SVG icons in Google Slides? | The 2016 convert-to-WMF trick |
+| powerpoint-icons-missing | Why is Insert > Icons missing or greyed out? | Contradicting forum answers; "connected experiences" buried |
+| icons-in-excel-and-google-sheets | How do I make icon charts or put icons in cells? | Excel 2016-era tutorials; add-ons for what Sheets does natively |
+| icon-black-or-white-background | Why does my transparent icon get a black or white background? | "Use Paint 3D" (removed Nov 2024) |
+| png-to-svg | How do I convert a PNG icon to SVG? | Converters that return fake SVGs |
+| canva-transparent-png | Can I download a transparent PNG from Canva for free? | Trial pushes, green-screen tricks |
+| change-app-icons-android | How do I change app icons on Android now? | "Use Nova or Apex" (Nova changed hands in 2025) |
+| custom-app-icons-iphone | Custom iPhone app icons on iOS 26: does the banner still show? | Contradicting answers |
+| change-folder-icon-mac-windows | How do I change a folder icon on Mac or Windows? | Pre-Tahoe guides; "rename .png to .ico" |
+| instagram-highlight-covers | Instagram highlight cover size, and how to add covers without posting? | Contradicting 2026 pages |
+| custom-emoji-and-stickers | How do I make custom emoji and stickers for Slack, Discord and WhatsApp? | Strict 128 x 128 charts; third-party sticker apps |
+| favicon-not-showing-in-google | Why isn't my favicon showing in Google? | 8-bit BMP from Paint, duplicate tags |
+| free-icon-in-logo | Can I use a free icon in my logo, and trademark it? | Canva-only answers |
+| sell-products-with-free-icons | Can I sell stickers, shirts or printables made with free icons? | "Email us" answers; nothing about Cricut |
+| visual-schedule-icons | Free icons for classroom visual schedules? | Link lists of dead sites |
+
+Every post gets a designed featured image and 1 to 3 designed in-post images (`art()`), built from real with icons over
+Unsplash or Pexels photos or as pure artwork.
